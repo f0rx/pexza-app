@@ -73,7 +73,7 @@ jobs:
           artifacts: "build/app/outputs/apk/prod/release/*.apk,build/app/outputs/apk/release/*.apk,build/app/outputs/apk/*"
           name: ${{ env.APP_NAME }}-${{ steps.bump_tag.outputs.new_version }}
           tag: ${{ steps.bump_tag.outputs.new_tag }}
-          token: ${{ env.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           allowUpdates: true
           omitName: false
           omitBody: false
