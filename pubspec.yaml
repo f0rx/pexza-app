@@ -12,11 +12,141 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.0
+  # Contains utility classes in the style of
+  # dart:async to work with asynchronous computations.
+  async: any
+  # Provides an easy way to retry asynchronous functions.
+  retry: ^3.1.0
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  # Draw SVG files on a Flutter Widget.
+  flutter_svg: any
+  # A Flutter plugin for finding commonly used locations on the filesystem.
+  path_provider: ^2.0.1
+  # A comprehensive, cross-platform path manipulation library for Dart.
+  path: ^1.8.0
+  ###
+  ### Firebase Packages ###
+  ###
+  firebase_core: ^1.0.1
+  # FlutterFire Firebase authentication
+  firebase_auth: ^1.0.1
+  # Google services & Authentication
+  google_sign_in: ^5.0.0
+  # Customize App font
+  google_fonts: ^2.0.0
+  # A FlutterFire plugin for Cloud Firestore API.
+  cloud_firestore: ^1.0.1
+  # A FlutterFire plugin for Cloud functions
+  cloud_functions: ^1.0.0
+  # A Flutter plugin to use the Firebase Cloud Storage API.
+  firebase_storage: ^8.0.0
+  # For Facebook authentication
+  flutter_login_facebook: ^1.0.1
+  # Check Internet connectivity
+  data_connection_checker: ^0.3.4
+  # Service locator
+  get_it: ^6.0.0
+  # Flutter BloC for state management
+  flutter_bloc: ^6.1.1
+  # Automatically persists and restores bloc states
+  hydrated_bloc: ^6.1.0
+  # A lightweight and blazing fast key-value database written in pure Dart.
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
+  # Provides:
+  # - Immutable value types
+  # - EnumClass, classes that behave like enums
+  # - JSON serialization
+  built_value: ^7.1.0
+  # Provides: Immutable collections
+  built_collection: ^4.3.2
+  # Functional Programming
+  dartz: ^0.9.2
+  # For regular Unions
+  freezed_annotation: ^0.12.0
+  # For generating unique UUIDs
+  uuid: ^2.2.2
+  # Flutter widget that automatically resizes text to fit perfectly within its bounds
+  auto_size_text: ^2.1.0
+  # simplifies dependency injection
+  injectable: ^1.0.7
+  # provides internationalization
+  # and localization facilities
+  intl: ^0.16.1
+  # A declarative routing solution
+  auto_route: ^1.0.0
+  # Helpful package for manipulating "overlays":
+  flutter_portal: ^0.3.0
+  # A flutter navigation observer that adds access to lists
+  # that track the navigation stack both forwards and backwards.
+  navigation_history_observer: ^1.0.3+1
+  # Use this package if you need more
+  # customization when notifying your user.
+  flushbar: ^1.10.4
+  # Toast Library for Flutter
+  fluttertoast: ^7.1.4
+  # Shimmer Skeleton Library.
+  shimmer: ^1.1.2
+  # A Flutter package for easy implementation of fluid navigation bar.
+  curved_navigation_bar: ^0.3.7
+  # A port of Kotlin's Kotlin Standard library for Dart/Flutter projects.
+  kt_dart: ^0.8.0
+  # Customizable rating bar for flutter
+  flutter_rating_bar: ^3.2.0+1
+  # A port of the Rails/ActiveSupport inflector library to Dart.
+  inflection2: ^0.4.3
+  # Wraps an existing Flutter widget and fires a callback when the widget's visibility changes
+  visibility_detector: ^0.1.5
+  # Flick Video Player is a video player for flutter
+  flick_video_player: ^0.1.1
+  # A Flutter plugin for iOS, Android and Web for playing back video on a Widget surface.
+  video_player: ">=0.10.0 <2.0.0"
+  # This package provides visually beautiful UX
+  # through animation of credit card information input form.
+  credit_card_input_form: ^2.1.4
+  # Defines the annotations used by json_serializable
+  # to create code for JSON serialization and deserialization.
+  json_annotation: ^3.1.1
+  # RxDart adds additional capabilities to Dart Streams and StreamControllers.
+  rxdart: any
+  # A collection of loading indicators animated with flutter.
+  flutter_spinkit: ^4.1.2+1
+  # A library for generating fake data
+  faker: ^1.3.0
+  # A flutter input widget built atop flutter_portal for Mentions (Chat screens)
+  flutter_mentions: ^1.0.11
+  # A flutter library to show images from the internet and keep them in the cache directory.
+  cached_network_image: ^2.5.0
+  # A Flutter plugin for iOS and Android for picking images from the image library,
+  # and taking new pictures with the camera.
+  image_picker: ^0.6.7+17
+  # A flutter plugin to crop image on iOS and Android.
+  image_crop_widget: ^0.0.6
+  # This library is an animation library for Flutter
+  animator: ^2.0.2
+  # Plugin for permission management on runtime.
+  permissions_plugin: ^1.1.4
+
+# dependency_overrides:
+#   analyzer: ^0.41.1
 
 dev_dependencies:
-  flutter_test:
+  flutter_driver:
     sdk: flutter
+  test: any
+  bloc_test: ^7.1.0
+  logger: ^0.9.4
+  flutter_launcher_icons: any
+  # Code Generators
+  build_runner: ^1.12.1
+  freezed: ^0.14.1
+  injectable_generator: ^1.0.7
+  built_value_generator: ^8.0.2
+  auto_route_generator: ^1.0.0
+  json_serializable: ^3.5.1
+  json_serializable_generator: ^1.0.1
 
 flutter:
   uses-material-design: true
