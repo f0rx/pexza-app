@@ -58,7 +58,7 @@ jobs:
 
       - run: flutter pub get
       - run: flutter test
-      - run: flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod
+      - run: flutter build apk -t lib/main_dev.dart --debug --target-platform android-arm,android-arm64 --split-per-abi --flavor=dev
 
       - name: Bump version and push tag
         id: bump_tag
@@ -77,19 +77,3 @@ jobs:
           allowUpdates: true
           omitName: false
           omitBody: false
-
-  notify:
-    runs-on: ubuntu-latest
-    needs: build
-    env:
-      APP_NAME: "Pexza App"
-      REPOSITORY_NAME: "pexza-app"
-      ZAPIER_PUSH_API_KEY: ${{ secrets.ZAPIER_PUSH_API_KEY }}
-    steps:
-      - name: Send Push Notification
-        uses: techulus/push-github-action@1.0.0
-        env:
-          API_KEY: ${{ env.ZAPIER_TEAM_API_KEY }}
-          TITLE: Version Bump Notification
-          MESSAGE: Version ${{ needs.build.outputs.bump_tag_version }} of ${{ env.APP_NAME }} is available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
-          LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
