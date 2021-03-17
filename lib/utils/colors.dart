@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  static Color fromHex(String hex) => Color(int.parse(hex.substring(1, 7), radix: 16) + 0xFF000000);
+  static Color fromHex(String hex) =>
+      Color(int.parse(hex.substring(1, 7), radix: 16) + 0xFF000000);
 
-  static get random => Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0).withOpacity(1.0);
+  static get random =>
+      Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
+          .withOpacity(1.0);
 
   // App Colors
   static const _primaryPrivate = 0xffE5E5E5;
   static const _secondaryPrivate = 0xff333333;
-  static const _accentPrivate = 0xffFF8845;
+  static const _accentPrivate = 0xff0099CC;
 
   static const MaterialColor primaryColor = const MaterialColor(
     _primaryPrivate,
@@ -49,16 +52,16 @@ class AppColors {
   static const MaterialColor accentColor = const MaterialColor(
     _accentPrivate,
     const <int, Color>{
-      50: const Color(0xFFffcfb3),
-      100: const Color(0xFFffbe99),
-      200: const Color(0xFFffae80),
-      300: const Color(0xFFff9e66),
-      400: const Color(0xFFff8e4d),
+      50: const Color(0xFFccf2ff),
+      100: const Color(0xFF99e6ff),
+      200: const Color(0xFF66d9ff),
+      300: const Color(0xFF33ccff),
+      400: const Color(0xFF00bfff),
       500: const Color(_accentPrivate),
-      600: const Color(0xFFff7e33),
-      700: const Color(0xFFff6e1a),
-      800: const Color(0xFFff5e00),
-      900: const Color(0xFFe65400),
+      600: const Color(0xFF0086b3),
+      700: const Color(0xFF007399),
+      800: const Color(0xFF006080),
+      900: const Color(0xFF004d66),
     },
   );
 

@@ -70,6 +70,8 @@ dependencies:
   flushbar: ^1.10.4
   # Toast Library for Flutter
   fluttertoast: ^7.1.4
+  # A collection of loading indicators animated with flutter.
+  flutter_spinkit: ^4.1.2+1
   # Shimmer Skeleton Library.
   shimmer: ^1.1.2
   # A Flutter package for easy implementation of fluid navigation bar.
@@ -104,11 +106,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
+    - assets/svgs/on_boarding/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
+
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
   # fonts:

@@ -98,16 +98,7 @@ class Helpers {
 
   static Future<void> precache(BuildContext context) async {
     context ??= App.context;
-    await precachePicture(
-        ExactAssetPicture(
-            SvgPicture.svgStringDecoder, "${AppAssets.SVG_DIR}/doodle.svg"),
-        context);
-    await precacheImage(AssetImage(AppAssets.anonymous), context);
-    await precacheImage(AssetImage(AppAssets.courseFrame1), context);
-    await precacheImage(AssetImage(AppAssets.courseFrame2), context);
-    await precacheImage(AssetImage(AppAssets.courseFrame3), context);
-    await precacheImage(AssetImage(AppAssets.courseFrame4), context);
-    await precacheImage(AssetImage(AppAssets.playback), context);
+    // await precacheImage(AssetImage(AppAssets.anonymous), context);
   }
 
   static String hhmmss([Duration duration = Duration.zero]) {

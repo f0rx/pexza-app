@@ -9,36 +9,36 @@ mixin AppAssets {
   static const IMAGES_DIR = "$ASSETS_DIR/images";
   static const AUTH_SVG_DIR = "$SVG_DIR/auth";
   static const HOME_SVG_DIR = "$SVG_DIR/home";
-  static const STUDENT_SVG_DIR = "$HOME_SVG_DIR/student";
-  static const PROFILE_SVG_DIR = "$HOME_SVG_DIR/profile";
-  static const HOME_IMAGES_DIR = "$IMAGES_DIR/home";
-  static const STUDENT_IMAGES_DIR = "$HOME_IMAGES_DIR/student";
 
-  static String anonymous = "$HOME_IMAGES_DIR/default-user.png";
-  static String onlineAnonymous =
-      "https://firebasestorage.googleapis.com/v0/b/smartlets-x.appspot.com/o/assets%2Fdefault-user.png"
-      "?alt=media&token=82e08454-1786-4f0f-989a-03605e489a64";
+  static const logo = "$IMAGES_DIR/logo.png";
 
-  static String courseFrame1 = "$STUDENT_IMAGES_DIR/frame_1.jpg";
-  static String courseFrame2 = "$STUDENT_IMAGES_DIR/frame_2.png";
-  static String courseFrame3 = "$STUDENT_IMAGES_DIR/frame_3.png";
-  static String courseFrame4 = "$STUDENT_IMAGES_DIR/frame_4.jpg";
-  static String playback = "$STUDENT_IMAGES_DIR/playback.png";
+  // On Boarding Assets
+  static SvgPicture onBoarding1 = SvgPicture.asset(
+    '$SVG_DIR/on_boarding_1.svg',
+    height: App.width / 0.8,
+    width: App.width / 0.8,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture onBoarding2 = SvgPicture.asset(
+    '$SVG_DIR/on_boarding_2.svg',
+    height: App.width / 0.8,
+    width: App.width / 0.8,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture onBoarding3 = SvgPicture.asset(
+    '$SVG_DIR/on_boarding_3.svg',
+    height: App.width / 0.8,
+    width: App.width / 0.8,
+    fit: BoxFit.contain,
+  );
 
   static SvgPicture mailTo = SvgPicture.asset(
     '$AUTH_SVG_DIR/mail_to.svg',
     height: 23,
     width: 23,
     fit: BoxFit.contain,
-  );
-
-  static SvgPicture doodle = SvgPicture.asset(
-    '$SVG_DIR/doodle.svg',
-    fit: BoxFit.cover,
-    height: App.height,
-    width: App.width,
-    clipBehavior: Clip.antiAliasWithSaveLayer,
-    allowDrawingOutsideViewBox: true,
   );
 
   static SvgPicture unlockPassword = SvgPicture.asset(
@@ -152,56 +152,10 @@ mixin AppAssets {
     fit: BoxFit.contain,
   );
 
-  static SvgPicture skip = SvgPicture.asset(
-    '$STUDENT_SVG_DIR/reply.svg',
-    color: Colors.white.withOpacity(0.8),
-    fit: BoxFit.contain,
-    height: 30,
-    width: 30,
-  );
-
   static SvgPicture cardChip = SvgPicture.asset(
     '$HOME_SVG_DIR/card_chip.svg',
     clipBehavior: Clip.antiAlias,
     fit: BoxFit.contain,
     width: 50,
-  );
-
-  static SvgPicture coursesSvg = SvgPicture.asset(
-    '$STUDENT_SVG_DIR/book_filled.svg',
-    fit: BoxFit.contain,
-    color: Colors.white,
-    height: 25,
-    width: 25,
-  );
-
-  static SvgPicture projectsSvg = SvgPicture.asset(
-    '$STUDENT_SVG_DIR/project-management.svg',
-    fit: BoxFit.contain,
-    color: Colors.white,
-    height: 25,
-    width: 25,
-  );
-
-  static SvgPicture awardsSvg = SvgPicture.asset(
-    '$STUDENT_SVG_DIR/trophy.svg',
-    fit: BoxFit.contain,
-    color: Colors.white,
-    height: 27.5,
-    width: 27.5,
-  );
-
-  static SvgPicture camera = SvgPicture.asset(
-    '$PROFILE_SVG_DIR/camera_colored.svg',
-    fit: BoxFit.contain,
-    height: 30,
-    width: 30,
-  );
-
-  static SvgPicture gallery = SvgPicture.asset(
-    '$PROFILE_SVG_DIR/gallery_colored_filled.svg',
-    fit: BoxFit.contain,
-    height: 30,
-    width: 30,
   );
 }
