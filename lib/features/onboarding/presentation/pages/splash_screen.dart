@@ -24,15 +24,17 @@ class _SplashScreenState extends State<SplashScreen>
               alignment: Alignment.center,
               child: Image.asset(
                 "${AppAssets.logo}",
-                width: App.width * 0.6,
-                height: App.width * 0.6,
+                width: App.width * 0.35,
+                height: App.width * 0.35,
                 fit: BoxFit.contain,
               ),
             ),
           ),
           //
           Positioned(
-            bottom: App.height * 0.02,
+            left: 0.0,
+            right: 0.0,
+            bottom: App.height * 0.05,
             child: SpinKitWave(
               color: Theme.of(context).accentColor,
               size: 30.0,
