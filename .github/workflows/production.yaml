@@ -70,7 +70,7 @@ jobs:
       - name: Push APK to Release Tags
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/prod/release/*.apk,build/app/outputs/apk/release/*.apk,build/app/outputs/apk/*"
+          artifacts: "build/app/outputs/apk/dev/debug/*.apk,build/app/outputs/apk/debug/*.apk,build/app/outputs/apk/*"
           name: ${{ env.APP_NAME }}-${{ steps.bump_tag.outputs.new_version }}
           tag: ${{ steps.bump_tag.outputs.new_tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
