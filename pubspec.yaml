@@ -2,7 +2,7 @@ name: pexza
 
 description: A new Flutter application.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -12,25 +12,109 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.0
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  # Draw SVG files on a Flutter Widget.
+  flutter_svg: any
+  ###
+  ### Firebase Packages ###
+  ###
+  firebase_core: ^0.5.3
+  # FlutterFire Firebase authentication
+  firebase_auth: ^0.18.4+1
+  # Google services & Authentication
+  google_sign_in: ^4.5.6
+  # Customize App font
+  google_fonts: ^1.1.1
+  # Check Internet connectivity
+  data_connection_checker: ^0.3.4
+  # Service locator
+  get_it: ^5.0.3
+  # Flutter BloC for state management
+  flutter_bloc: ^6.1.1
+  # Automatically persists and restores bloc states
+  hydrated_bloc: ^6.1.0
+  # A lightweight and blazing fast key-value database written in pure Dart.
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
+  # Provides:
+  # - Immutable value types
+  # - EnumClass, classes that behave like enums
+  # - JSON serialization
+  built_value: ^7.1.0
+  # Provides: Immutable collections
+  built_collection: ^4.3.2
+  # Functional Programming
+  dartz: ^0.9.2
+  # For regular Unions
+  freezed_annotation: ^0.12.0
+  # For generating unique UUIDs
+  uuid: ^2.2.2
+  # Flutter widget that automatically resizes text to fit perfectly within its bounds
+  auto_size_text: ^2.1.0
+  # simplifies dependency injection
+  injectable: ^1.0.7
+  # provides internationalization
+  # and localization facilities
+  intl: ^0.16.1
+  # A declarative routing solution
+  auto_route: ^0.6.9
+  # Helpful package for manipulating "overlays":
+  flutter_portal: ^0.3.0
+  # A flutter navigation observer that adds access to lists
+  # that track the navigation stack both forwards and backwards.
+  navigation_history_observer: ^1.0.3+1
+  # Use this package if you need more
+  # customization when notifying your user.
+  flushbar: ^1.10.4
+  # Toast Library for Flutter
+  fluttertoast: ^7.1.4
+  # A collection of loading indicators animated with flutter.
+  flutter_spinkit: ^4.1.2+1
+  # Shimmer Skeleton Library.
+  shimmer: ^1.1.2
+  # A Flutter package for easy implementation of fluid navigation bar.
+  curved_navigation_bar: ^0.3.7
+  # A port of Kotlin's Kotlin Standard library for Dart/Flutter projects.
+  kt_dart: ^0.8.0
+  # A port of the Rails/ActiveSupport inflector library to Dart.
+  inflection2: ^0.4.3
+  # Defines the annotations used by json_serializable
+  # to create code for JSON serialization and deserialization.
+  json_annotation: ^3.1.1
+
+dependency_overrides:
+  analyzer: ^0.41.1
 
 dev_dependencies:
-  flutter_test:
+  flutter_driver:
     sdk: flutter
+  test: any
+  bloc_test: any
+  logger: ^0.9.4
+  flutter_launcher_icons: any
+  # Code Generators
+  build_runner: ^1.10.11
+  freezed: ^0.12.6
+  injectable_generator: ^1.0.7
+  built_value_generator: ^7.1.0
+  auto_route_generator: ^0.6.10
+  json_serializable: ^3.5.1
+  json_serializable_generator: ^1.0.1
 
 flutter:
   uses-material-design: true
-  
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+
+  assets:
+    - assets/images/
+    - assets/svgs/on_boarding/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # fonts:
   #   - family: Schyler
   #     fonts:
