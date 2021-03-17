@@ -84,12 +84,12 @@ jobs:
     env:
       APP_NAME: "Pexza App"
       REPOSITORY_NAME: "pexza-app"
-      ZAPIER_PUSH_API_KEY: ${{ secrets.ZAPIER_PUSH_API_KEY }}
+      API_KEY: ${{ secrets.ZAPIER_TEAM_API_KEY }}
     steps:
       - name: Send Push Notification
         uses: techulus/push-github-action@1.0.0
         env:
-          API_KEY: ${{ env.ZAPIER_PUSH_API_KEY }}
+          API_KEY: ${{ env.API_KEY }}
           TITLE: Version Bump Notification
           MESSAGE: Version ${{ needs.build.outputs.bump_tag_version }} of ${{ env.APP_NAME }} is available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
           LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
