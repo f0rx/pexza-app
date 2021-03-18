@@ -27,10 +27,16 @@ dependencies:
   google_sign_in: ^4.5.6
   # Customize App font
   google_fonts: ^1.1.1
+  # This plugin allows Flutter apps to discover network connectivity
+  # and configure themselves accordingly.
+  connectivity: ^2.0.2
   # Check Internet connectivity
   data_connection_checker: ^0.3.4
   # Service locator
   get_it: ^5.0.3
+  # Can be considered as a rewrite of provider
+  # to make improvements that would be otherwise impossible.
+  # flutter_riverpod: ^0.12.4
   # Flutter BloC for state management
   flutter_bloc: ^6.1.1
   # Automatically persists and restores bloc states

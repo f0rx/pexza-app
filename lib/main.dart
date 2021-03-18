@@ -36,5 +36,5 @@ void main() async {
     log.e("Error initializing HydratedStorage", e, trace);
   }
 
-  runApp(Pexza());
+  runApp(const Pexza());
 }
