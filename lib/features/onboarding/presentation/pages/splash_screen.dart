@@ -1,3 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,12 +12,22 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<OnBoardingCubit>(),
+      create: (_) => getIt<OnBoardingCubit>()..init(),
       child: BlocListener<OnBoardingCubit, OnBoardingState>(
         listener: (context, state) {
           state.status.fold(
-            (l) => print(l),
-            (r) => print("You are connected"),
+            (failure) => Flushbar(
+              duration: const Duration(seconds: 5),
+              icon: Icon(Icons.error, color: Colors.red),
+              messageText: AutoSizeText(failure.message),
+              borderRadius: 8,
+              dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+              margin: EdgeInsets.all(8),
+              flushbarPosition: FlushbarPosition.BOTTOM,
+              shouldIconPulse: true,
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
+            (r) => navigator.pushOnBoardingScreen(),
           );
         },
         child: Scaffold(
