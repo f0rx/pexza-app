@@ -15,10 +15,10 @@ abstract class OnBoardingFailure implements _$OnBoardingFailure, Failure {
   }) = _OnBoardingFailure;
 
   factory OnBoardingFailure.noInternetConnection() => OnBoardingFailure(
-        message: "Your device has no Internet Connection!",
+        message: "You're not connected to the internet!",
       );
 
   factory OnBoardingFailure.poorInternet() => OnBoardingFailure(
-        message: "Poor Internet Connection!",
+        message: "Device has poor internet connection!",
       );
 }
