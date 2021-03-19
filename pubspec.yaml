@@ -89,6 +89,11 @@ dependencies:
   # Defines the annotations used by json_serializable
   # to create code for JSON serialization and deserialization.
   json_annotation: ^3.1.1
+  # Customizable animated page indicator with a set of built-in effects.
+  smooth_page_indicator: ^0.2.1
+  # A flutter package which will help you to
+  # generate pin code fields with beautiful design and animations.
+  #pin_code_fields: ^6.1.0
 
 dependency_overrides:
   analyzer: ^0.41.1
@@ -114,7 +119,9 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/svgs/on_boarding/
+    - assets/svgs/
+    - assets/images/onboarding/
+    - assets/svgs/onboarding/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

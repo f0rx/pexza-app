@@ -7,32 +7,18 @@ mixin AppAssets {
   static const ASSETS_DIR = "assets";
   static const SVG_DIR = "$ASSETS_DIR/svgs";
   static const IMAGES_DIR = "$ASSETS_DIR/images";
+  // Sub-folders
   static const AUTH_SVG_DIR = "$SVG_DIR/auth";
   static const HOME_SVG_DIR = "$SVG_DIR/home";
+  static const ONBOARDING_IMAGES_DIR = "$IMAGES_DIR/onboarding";
+  static const ONBOARDING_SVG_DIR = "$SVG_DIR/onboarding";
 
   static const logo = "$IMAGES_DIR/logo.png";
 
   // On Boarding Assets
-  static SvgPicture onBoarding1 = SvgPicture.asset(
-    '$SVG_DIR/on_boarding_1.svg',
-    height: App.width / 0.8,
-    width: App.width / 0.8,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture onBoarding2 = SvgPicture.asset(
-    '$SVG_DIR/on_boarding_2.svg',
-    height: App.width / 0.8,
-    width: App.width / 0.8,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture onBoarding3 = SvgPicture.asset(
-    '$SVG_DIR/on_boarding_3.svg',
-    height: App.width / 0.8,
-    width: App.width / 0.8,
-    fit: BoxFit.contain,
-  );
+  static String onBoarding1 = '$ONBOARDING_IMAGES_DIR/onboarding_1.png';
+  static String onBoarding2 = '$ONBOARDING_IMAGES_DIR/onboarding_2.png';
+  static String onBoarding3 = '$ONBOARDING_IMAGES_DIR/onboarding_3.png';
 
   static SvgPicture mailTo = SvgPicture.asset(
     '$AUTH_SVG_DIR/mail_to.svg',

@@ -98,7 +98,9 @@ class Helpers {
 
   static Future<void> precache(BuildContext context) async {
     context ??= App.context;
-    // await precacheImage(AssetImage(AppAssets.anonymous), context);
+    await precacheImage(AssetImage(AppAssets.onBoarding1), context);
+    await precacheImage(AssetImage(AppAssets.onBoarding2), context);
+    await precacheImage(AssetImage(AppAssets.onBoarding3), context);
   }
 
   static String hhmmss([Duration duration = Duration.zero]) {

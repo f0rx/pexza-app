@@ -8,16 +8,25 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:pexza/features/_404.dart';
+import 'package:pexza/features/auth/presentation/pages/login.dart';
+import 'package:pexza/features/auth/presentation/pages/profile_setup_screen.dart';
+import 'package:pexza/features/auth/presentation/pages/signup.dart';
 import 'package:pexza/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/splash_screen.dart';
 
 class Routes {
   static const String splashScreen = '/';
   static const String onBoardingScreen = '/on-boarding-screen';
+  static const String profileSetupScreen = '/profile-setup-screen';
+  static const String loginScreen = '/login-screen';
+  static const String signupScreen = '/signup-screen';
   static const String unknownRoute = '*';
   static const all = <String>{
     splashScreen,
     onBoardingScreen,
+    profileSetupScreen,
+    loginScreen,
+    signupScreen,
     unknownRoute,
   };
 }
@@ -28,6 +37,9 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.onBoardingScreen, page: OnBoardingScreen),
+    RouteDef(Routes.profileSetupScreen, page: ProfileSetupScreen),
+    RouteDef(Routes.loginScreen, page: LoginScreen),
+    RouteDef(Routes.signupScreen, page: SignupScreen),
     RouteDef(Routes.unknownRoute, page: UnknownRoute),
   ];
   @override
@@ -43,6 +55,27 @@ class Router extends RouterBase {
     OnBoardingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => OnBoardingScreen(),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    ProfileSetupScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ProfileSetupScreen(),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    LoginScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LoginScreen(),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    SignupScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SignupScreen(),
         settings: data,
         maintainState: true,
       );
@@ -67,6 +100,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushOnBoardingScreen() =>
       push<dynamic>(Routes.onBoardingScreen);
+
+  Future<dynamic> pushProfileSetupScreen() =>
+      push<dynamic>(Routes.profileSetupScreen);
+
+  Future<dynamic> pushLoginScreen() => push<dynamic>(Routes.loginScreen);
+
+  Future<dynamic> pushSignupScreen() => push<dynamic>(Routes.signupScreen);
 
   Future<dynamic> pushUnknownRoute() => push<dynamic>(Routes.unknownRoute);
 }
