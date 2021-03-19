@@ -94,7 +94,7 @@ class AppElevatedButton extends StatelessWidget {
       onLongPress: onLongPress,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(backgroundColor),
-        alignment: alignment,
+        // alignment: alignment,
         elevation: MaterialStateProperty.all(elevation),
         padding: MaterialStateProperty.all(padding),
         shape: MaterialStateProperty.all(
