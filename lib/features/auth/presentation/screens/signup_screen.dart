@@ -12,7 +12,9 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Text("Signup"),
+        child: Center(
+           Text("Signup"),
+        ),
       ),
     );
   }
