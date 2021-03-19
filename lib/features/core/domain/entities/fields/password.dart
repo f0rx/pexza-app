@@ -5,7 +5,8 @@ import 'package:pexza/features/core/domain/failures/field_object/field_object_ex
 import 'package:pexza/features/core/domain/validator/validator.dart';
 
 class Password extends FieldObject<String> {
-  @override
+  static const Password DEFAULT = Password._(Right(''));
+
   final Either<FieldObjectException<String>, String> value;
 
   factory Password(String password, {FIELD_VALIDATION mode}) {

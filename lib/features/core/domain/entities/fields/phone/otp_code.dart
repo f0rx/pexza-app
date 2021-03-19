@@ -5,6 +5,7 @@ import 'package:pexza/features/core/domain/validator/validator.dart';
 
 class OTPCode extends FieldObject<String> {
   static const PHONE_VERIFICATION_LENGTH = 6;
+
   final Either<FieldObjectException<String>, String> value;
 
   factory OTPCode(String input) {
