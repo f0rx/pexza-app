@@ -1,11 +1,22 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-// import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/auth/presentation/widgets/pin_input_widget.dart';
+import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 
-class ProfileSetupScreen extends StatelessWidget {
+class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<TokenVerificationCubit>(),
+      child: this,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +66,13 @@ class ProfileSetupScreen extends StatelessWidget {
               PinInputWidget(),
             ],
           ),
+        ),
+      ),
+      floatingActionButton: ElevatedButton(
+        onPressed: () {},
+        child: AutoSizeText("Continue"),
+        style: ButtonStyle(
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
       ),
     );

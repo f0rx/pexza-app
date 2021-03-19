@@ -61,21 +61,21 @@ class Router extends RouterBase {
     },
     ProfileSetupScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => ProfileSetupScreen(),
+        builder: (context) => ProfileSetupScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
     },
     LoginScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LoginScreen(),
+        builder: (context) => LoginScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
     },
     SignupScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => SignupScreen(),
+        builder: (context) => SignupScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );

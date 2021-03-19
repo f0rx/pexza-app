@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
+import 'package:pexza/features/core/domain/validator/validator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,8 +9,8 @@ import 'package:flutter/cupertino.dart';
 class PinInputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: PinCodeTextField(
+    return BlocBuilder<TokenVerificationCubit, TokenVerificationState>(
+      builder: (context, state) => PinCodeTextField(
         appContext: context,
         length: 6,
         pinTheme: PinTheme(
@@ -32,11 +35,15 @@ class PinInputWidget extends StatelessWidget {
         animationType: AnimationType.scale,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         keyboardType: TextInputType.number,
-        // beforeTextPaste: (String clipboard) =>
-        //     RegExp(onlyNumbersPattern).hasMatch(clipboard.trim()),
-        onCompleted: (String value) {},
-        onSubmitted: (String value) {},
-        onChanged: (String value) {},
+        beforeTextPaste: (String clipboard) =>
+            RegExp(onlyNumbersPattern).hasMatch(clipboard.trim()),
+        onCompleted: context.read<TokenVerificationCubit>().onCompleted,
+        onSubmitted: context.read<TokenVerificationCubit>().onSubmitted,
+        onChanged: context.read<TokenVerificationCubit>().onChanged,
+        textInputAction: TextInputAction.go,
+        validator: (string) {
+          return null;
+        },
       ),
     );
   }
