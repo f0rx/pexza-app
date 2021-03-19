@@ -1,7 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:kt_dart/kt.dart';
-import 'package:pexza/features/auth/domain/auth.dart';
+import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/domain/failures/field_object/field_object_exception.dart';
 import 'package:pexza/utils/utils.dart';

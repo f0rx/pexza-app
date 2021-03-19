@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pexza/features/auth/domain/auth.dart';
+import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/utils/utils.dart';
 
 part 'auth_provider.freezed.dart';

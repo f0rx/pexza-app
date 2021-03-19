@@ -13,12 +13,12 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:pexza/features/auth/presentation/manager/auth/auth_cubit.dart'
     as _i3;
 import 'package:pexza/features/auth/presentation/manager/token_verification/token_verification_cubit.dart'
-    as _i9;
+    as _i10;
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart'
     as _i8;
 import 'package:pexza/manager/locator/modules/modules.dart' as _i11;
 import 'package:pexza/manager/theme/manager/theme_cubit.dart'
-    as _i10; // ignore_for_file: unnecessary_lambdas
+    as _i9; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// an extension to register the provided dependencies inside of [GetIt]
@@ -37,8 +37,9 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i7.GoogleSignIn>(() => modules.googleSignIn);
     gh.factory<_i8.OnBoardingCubit>(
         () => _i8.OnBoardingCubit(get<_i4.DataConnectionChecker>()));
-    gh.factory<_i9.TokenVerificationCubit>(() => _i9.TokenVerificationCubit());
-    gh.singleton<_i10.ThemeCubit>(_i10.ThemeCubit());
+    gh.factory<_i9.ThemeCubit>(() => _i9.ThemeCubit());
+    gh.factory<_i10.TokenVerificationCubit>(
+        () => _i10.TokenVerificationCubit());
     return this;
   }
 }

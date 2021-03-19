@@ -40,7 +40,6 @@ class PinInputWidget extends StatelessWidget {
         onCompleted: context.read<TokenVerificationCubit>().onCompleted,
         onSubmitted: context.read<TokenVerificationCubit>().onSubmitted,
         onChanged: context.read<TokenVerificationCubit>().onChanged,
-        textInputAction: TextInputAction.go,
         validator: (string) {
           return null;
         },

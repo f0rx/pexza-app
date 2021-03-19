@@ -42,7 +42,8 @@ class Helpers {
 
   static Helpers get I => Helpers._();
   static double buttonRadius = 12.0;
-  static double appPadding = App.width * 0.04;
+  static double appPadding = App.width * 0.06;
+  static double descriptionPadding = App.width * 0.035;
   static Future<Directory> get rootDir async =>
       await getExternalStorageDirectory();
   static Future<Directory> get cacheDir async => await getTemporaryDirectory();

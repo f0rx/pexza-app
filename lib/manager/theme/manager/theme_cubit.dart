@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pexza/manager/theme/theme.dart';
 import 'package:pexza/utils/strings.dart';
 
-@singleton
+@injectable
 class ThemeCubit extends HydratedCubit<AppTheme> {
   static const String _THEME_KEY = "${AppStrings.appName}-style";
 

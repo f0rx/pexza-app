@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
+import 'package:pexza/widgets/widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:pexza/features/onboarding/domain/entities/on_boarding_model.dart';
 import 'package:pexza/utils/utils.dart';
@@ -103,7 +104,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   Widget _onBoardingScreens(OnBoarding item, PageController controller) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: App.width * 0.04),
+      padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -132,11 +133,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                 ),
                 //
-                SizedBox(height: App.height * 0.035),
+                VerticalSpace(height: App.height * 0.035),
                 //
                 Flexible(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: App.width * 0.05),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Helpers.descriptionPadding),
                     child: AutoSizeText(
                       "${item.description}",
                       textAlign: TextAlign.center,
