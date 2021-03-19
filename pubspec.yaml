@@ -93,7 +93,7 @@ dependencies:
   smooth_page_indicator: ^0.2.1
   # A flutter package which will help you to
   # generate pin code fields with beautiful design and animations.
-  pin_code_fields: ^7.0.0
+  pin_code_fields: ^6.1.0
 
 dependency_overrides:
   analyzer: ^0.41.1
