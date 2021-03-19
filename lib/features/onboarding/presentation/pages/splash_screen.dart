@@ -27,7 +27,7 @@ class SplashScreen extends StatelessWidget {
               shouldIconPulse: true,
               backgroundColor: Theme.of(context).primaryColor,
             ),
-            (r) => navigator.pushOnBoardingScreen(),
+            (r) => navigator.popAndPush(Routes.onBoardingScreen),
           );
         },
         child: Scaffold(

@@ -25,9 +25,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
     controller.addListener(() {
       if (controller.page.round() != currentIndex) {
-        setState(() {
-          currentIndex = controller.page.round();
-        });
+        setState(() => currentIndex = controller.page.round());
       }
     });
   }
@@ -159,7 +157,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               maintainSize: true,
               maintainState: true,
               child: ElevatedButton(
-                onPressed: () => navigator.pushProfileSetupScreen(),
+                onPressed: () =>
+                    navigator.popAndPush(Routes.profileSetupScreen),
                 child: AutoSizeText(
                   "GET STARTED!",
                   style: TextStyle(fontSize: 16.0),
