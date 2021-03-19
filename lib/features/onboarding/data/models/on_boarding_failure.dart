@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/core/domain/failures/failure.dart';
 
 part 'on_boarding_failure.freezed.dart';
 
