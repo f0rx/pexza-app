@@ -1,3 +1,5 @@
+import 'package:another_flushbar/flushbar.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,47 +12,73 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<OnBoardingCubit>(),
-      child: BlocListener<OnBoardingCubit, OnBoardingState>(
-        listener: (context, state) {
-          state.status.fold(
-            (l) => print(l),
-            (r) => print("You are connected"),
-          );
-        },
-        child: Scaffold(
-          body: Stack(
-            children: [
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    "${AppAssets.logo}",
-                    width: App.width * 0.3,
-                    height: App.width * 0.3,
-                    fit: BoxFit.contain,
+      create: (_) => getIt<OnBoardingCubit>()..init(),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Align(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  "${AppAssets.logo}",
+                  width: App.width * 0.3,
+                  height: App.width * 0.3,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            //
+            Positioned(
+              left: 0.0,
+              right: 0.0,
+              bottom: App.height * 0.05,
+              child: SpinKitWave(
+                color: Theme.of(context).accentColor,
+                size: 30.0,
+                duration: Duration(milliseconds: 1200),
+                type: SpinKitWaveType.center,
+                itemCount: 7,
+              ),
+            ),
+          ],
+        ),
+        //
+        bottomSheet: BlocConsumer<OnBoardingCubit, OnBoardingState>(
+          listener: (context, state) {
+            state.status.fold(
+              (__) => null,
+              (_) => navigator.popAndPush(Routes.onBoardingScreen),
+            );
+          },
+          builder: (context, state) {
+            return Visibility(
+              visible: !state.isLoading,
+              child: Container(
+                height: 23,
+                decoration: BoxDecoration(
+                  color: state.status.fold(
+                    (failure) => Colors.grey,
+                    (_) => AppColors.successGreen,
+                  ),
+                ),
+                child: Center(
+                  child: AutoSizeText(
+                    state.status.fold(
+                      (failure) => failure.message,
+                      (_) => "Back online",
+                    ),
+                    minFontSize: 13.0,
+                    maxLines: 1,
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
-              //
-              Positioned(
-                left: 0.0,
-                right: 0.0,
-                bottom: App.height * 0.05,
-                child: SpinKitWave(
-                  color: Theme.of(context).accentColor,
-                  size: 30.0,
-                  duration: Duration(milliseconds: 1200),
-                  type: SpinKitWaveType.center,
-                  itemCount: 7,
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
