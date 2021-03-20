@@ -97,7 +97,7 @@ dependencies:
   # Use this package if you need more customization when notifying your user.
   another_flushbar: ^1.10.11
   # A flag Flutter package for Android / iOS / Web.
-  flag: ^2.0.4
+  flag: ^3.0.0
 
 dependency_overrides:
   analyzer: ^0.41.1
