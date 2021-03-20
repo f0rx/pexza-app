@@ -79,13 +79,13 @@ jobs:
           omitName: false
           omitBody: false
 
-  notify:
-    runs-on: ubuntu-latest
-    needs: build
-    env:
-      APP_NAME: "Pexza App"
-      REPOSITORY_NAME: "pexza-app"
-      API_KEY: ${{ secrets.ZAPIER_TEAM_API_KEY }}
+#  notify:
+#    runs-on: ubuntu-latest
+ #   needs: build
+ #   env:
+   #   APP_NAME: "Pexza App"
+   #   REPOSITORY_NAME: "pexza-app"
+   #   API_KEY: ${{ secrets.ZAPIER_TEAM_API_KEY }}
   #  steps:
      # - name: Send Push Notification
      #   uses: techulus/push-github-action@1.0.0
