@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:pexza/features/_404.dart';
+import 'package:pexza/features/auth/presentation/screens/login_screen.dart';
+import 'package:pexza/features/auth/presentation/screens/profile_setup_screen.dart';
+import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dart';
+import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/splash_screen.dart';
 
@@ -13,6 +17,22 @@ import 'package:pexza/features/onboarding/presentation/pages/splash_screen.dart'
     //
     AdaptiveRoute(
       page: OnBoardingScreen,
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: ProfileSetupScreen,
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: RentDetailsScreen,
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: LoginScreen,
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: SignupScreen,
       maintainState: true,
     ),
     //
