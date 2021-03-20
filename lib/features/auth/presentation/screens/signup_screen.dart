@@ -80,7 +80,7 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
 class _SignUpForm extends StatelessWidget {
   static double inputSpacing = App.height * 0.015;
   final List<Country> _countries = Country.list;
-  final TapGestureRecognizer recognizer = GestureRecognizer();
+ // final TapGestureRecognizer recognizer = GestureRecognizer();
   final _displayNameFocus = FocusNode();
   final _emailAddressFocus = FocusNode();
   final _passwordFocus = FocusNode();
@@ -311,8 +311,8 @@ class _SignUpForm extends StatelessWidget {
                 text: "Already have an account?",
                 children: [
                   TextSpan(
-                    text: " Sign in.",
-                    // recognizer: ,
+                    text: " Login.",
+                    recognizer: TapGestureRecognizer()..onTap = () => navigator.popAndPush(Routes.loginScreen),
                     style: TextStyle(
                       color: App.theme.accentColor,
                       fontSize: 17.0,
