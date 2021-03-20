@@ -22,9 +22,10 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
   void init() async {
     Stream<ConnectivityResult> _connectivityStream =
-        Connectivity().onConnectivityChanged;
+        LazyStream(() async => Connectivity().onConnectivityChanged);
+
     Stream<DataConnectionStatus> _internetConnectionStream =
-        _connectionChecker.onStatusChange;
+        LazyStream(() async => _connectionChecker.onStatusChange);
 
     // Merge both streams
     Stream _merge =

@@ -9,7 +9,7 @@ abstract class AuthState with _$AuthState {
     @required EmailAddress emailAddress,
     @required Phone phone,
     @required Password password,
-    @required Password newPassword,
+    // @required Password confirmation,
     Role subscription,
     @Default(false) bool isLoading,
     @Default(false) bool validate,
@@ -22,6 +22,5 @@ abstract class AuthState with _$AuthState {
         emailAddress: EmailAddress(""),
         phone: Phone("", Country.NG),
         password: Password(""),
-        newPassword: Password(""),
       );
 }

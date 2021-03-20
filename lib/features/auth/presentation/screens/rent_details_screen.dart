@@ -134,7 +134,7 @@ class RentDetailsScreen extends StatelessWidget with AutoRouteWrapper {
               VerticalSpace(height: App.height * 0.08),
               //
               AppElevatedButton(
-                onPressed: () => navigator.popAndPush(Routes.signupScreen),
+                onPressed: () => navigator.popAndPush(Routes.loginScreen),
                 text: "Confirm Details",
                 width: App.width,
                 height: App.height * 0.05,

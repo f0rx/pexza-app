@@ -19,7 +19,6 @@ class _$AuthStateTearOff {
       @required EmailAddress emailAddress,
       @required Phone phone,
       @required Password password,
-      @required Password newPassword,
       Role subscription,
       bool isLoading = false,
       bool validate = false,
@@ -30,7 +29,6 @@ class _$AuthStateTearOff {
       emailAddress: emailAddress,
       phone: phone,
       password: password,
-      newPassword: newPassword,
       subscription: subscription,
       isLoading: isLoading,
       validate: validate,
@@ -49,8 +47,7 @@ mixin _$AuthState {
   DisplayName get displayName;
   EmailAddress get emailAddress;
   Phone get phone;
-  Password get password;
-  Password get newPassword;
+  Password get password; // @required Password confirmation,
   Role get subscription;
   bool get isLoading;
   bool get validate;
@@ -70,7 +67,6 @@ abstract class $AuthStateCopyWith<$Res> {
       EmailAddress emailAddress,
       Phone phone,
       Password password,
-      Password newPassword,
       Role subscription,
       bool isLoading,
       bool validate,
@@ -92,7 +88,6 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
     Object emailAddress = freezed,
     Object phone = freezed,
     Object password = freezed,
-    Object newPassword = freezed,
     Object subscription = freezed,
     Object isLoading = freezed,
     Object validate = freezed,
@@ -108,8 +103,6 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
           : emailAddress as EmailAddress,
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
-      newPassword:
-          newPassword == freezed ? _value.newPassword : newPassword as Password,
       subscription:
           subscription == freezed ? _value.subscription : subscription as Role,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
@@ -135,7 +128,6 @@ abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       EmailAddress emailAddress,
       Phone phone,
       Password password,
-      Password newPassword,
       Role subscription,
       bool isLoading,
       bool validate,
@@ -158,7 +150,6 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
     Object emailAddress = freezed,
     Object phone = freezed,
     Object password = freezed,
-    Object newPassword = freezed,
     Object subscription = freezed,
     Object isLoading = freezed,
     Object validate = freezed,
@@ -174,8 +165,6 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           : emailAddress as EmailAddress,
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
-      newPassword:
-          newPassword == freezed ? _value.newPassword : newPassword as Password,
       subscription:
           subscription == freezed ? _value.subscription : subscription as Role,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
@@ -197,7 +186,6 @@ class _$_AuthState extends _AuthState {
       @required this.emailAddress,
       @required this.phone,
       @required this.password,
-      @required this.newPassword,
       this.subscription,
       this.isLoading = false,
       this.validate = false,
@@ -207,7 +195,6 @@ class _$_AuthState extends _AuthState {
         assert(emailAddress != null),
         assert(phone != null),
         assert(password != null),
-        assert(newPassword != null),
         assert(isLoading != null),
         assert(validate != null),
         assert(passwordHidden != null),
@@ -222,9 +209,7 @@ class _$_AuthState extends _AuthState {
   final Phone phone;
   @override
   final Password password;
-  @override
-  final Password newPassword;
-  @override
+  @override // @required Password confirmation,
   final Role subscription;
   @JsonKey(defaultValue: false)
   @override
@@ -241,7 +226,7 @@ class _$_AuthState extends _AuthState {
 
   @override
   String toString() {
-    return 'AuthState(displayName: $displayName, emailAddress: $emailAddress, phone: $phone, password: $password, newPassword: $newPassword, subscription: $subscription, isLoading: $isLoading, validate: $validate, passwordHidden: $passwordHidden, authStatus: $authStatus)';
+    return 'AuthState(displayName: $displayName, emailAddress: $emailAddress, phone: $phone, password: $password, subscription: $subscription, isLoading: $isLoading, validate: $validate, passwordHidden: $passwordHidden, authStatus: $authStatus)';
   }
 
   @override
@@ -259,9 +244,6 @@ class _$_AuthState extends _AuthState {
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
-            (identical(other.newPassword, newPassword) ||
-                const DeepCollectionEquality()
-                    .equals(other.newPassword, newPassword)) &&
             (identical(other.subscription, subscription) ||
                 const DeepCollectionEquality()
                     .equals(other.subscription, subscription)) &&
@@ -286,7 +268,6 @@ class _$_AuthState extends _AuthState {
       const DeepCollectionEquality().hash(emailAddress) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(password) ^
-      const DeepCollectionEquality().hash(newPassword) ^
       const DeepCollectionEquality().hash(subscription) ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(validate) ^
@@ -306,7 +287,6 @@ abstract class _AuthState extends AuthState {
       @required EmailAddress emailAddress,
       @required Phone phone,
       @required Password password,
-      @required Password newPassword,
       Role subscription,
       bool isLoading,
       bool validate,
@@ -321,9 +301,7 @@ abstract class _AuthState extends AuthState {
   Phone get phone;
   @override
   Password get password;
-  @override
-  Password get newPassword;
-  @override
+  @override // @required Password confirmation,
   Role get subscription;
   @override
   bool get isLoading;

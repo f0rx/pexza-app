@@ -45,7 +45,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                 ),
               ),
               //
-              SizedBox(height: App.height * 0.035),
+              VerticalSpace(height: App.height * 0.035),
               //
               Flexible(
                 child: Padding(
@@ -62,7 +62,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                 ),
               ),
               //
-              SizedBox(height: App.height * .04),
+              VerticalSpace(height: App.height * .04),
               //
               PinInputWidget(),
             ],
