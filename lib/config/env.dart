@@ -13,7 +13,7 @@ class BuildEnvironment {
 
   BuildEnvironment._init({
     this.flavor,
-    this.splashDuration = const Duration(seconds: 2),
+    this.splashDuration,
   });
 
   /// Sets up the top-level [env] getter on the first call only.
@@ -21,7 +21,7 @@ class BuildEnvironment {
     _env ??= BuildEnvironment._init(
       flavor: flavor,
       splashDuration: flavor == BuildFlavor.dev
-          ? Duration.zero
+          ? const Duration(milliseconds: 600)
           : const Duration(milliseconds: 1500),
     );
 

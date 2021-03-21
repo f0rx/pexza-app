@@ -14,6 +14,7 @@ class AppColors {
 
   // App Colors
   static const _primaryPrivate = 0xffE5E5E5;
+  static const _primary2Private = 0xffF5F5F5;
   static const _secondaryPrivate = 0xff333333;
   static const _accentPrivate = 0xff0099CC;
 
@@ -23,7 +24,7 @@ class AppColors {
       50: const Color(0xFFFFFFFF),
       100: const Color(0xFFFFFFFF),
       200: const Color(0xFFFFFFFF),
-      300: const Color(0xFFFFFFFF),
+      300: const Color(_primary2Private),
       400: const Color(0xFFf2f2f2),
       500: const Color(_primaryPrivate),
       600: const Color(0xFFe6e6e6),
