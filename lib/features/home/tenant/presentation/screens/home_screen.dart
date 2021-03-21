@@ -23,7 +23,7 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding)
-            .copyWith(top: App.height * 0.02),
+            .copyWith(top: App.shortest * 0.02),
         child: Column(
           children: [
             SafeArea(
@@ -35,10 +35,23 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
                     style: TextStyle(fontSize: 16.0),
                   ),
                   CircleAvatar(
-                    backgroundColor: Colors.white,
                     maxRadius: 22.0,
                     minRadius: 18.0,
-                    child: Text("DA"),
+                    // backgroundImage: AssetImage("${AppAssets.owner}"),
+                    backgroundColor: Colors.transparent,
+                    child: Material(
+                      shape: CircleBorder(),
+                      clipBehavior: Clip.hardEdge,
+                      color: AppColors.accentColor.shade50,
+                      child: InkWell(
+                        onTap: () => navigator.pushAccountScreen(),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: Center(child: Text("DA")),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -57,13 +70,6 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
               style: TextStyle(fontSize: 17.0),
               decoration: const InputDecoration(
                 hintText: "What do you want to do?",
-                // border: OutlineInputBorder(
-                //   borderSide: BorderSide(
-                //     color: Colors.transparent,
-                //     style: BorderStyle.none,
-                //     width: 0.0,
-                //   ),
-                // ),
                 contentPadding: EdgeInsets.only(top: 14.0, bottom: 14.0),
                 prefixIcon: Icon(
                   Icons.search_sharp,
@@ -95,8 +101,9 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
                 child: Hero(
                   tag: props.elementAt(i).id.value,
                   child: Container(
-                    height: App.height * 0.09,
-                    padding: EdgeInsets.symmetric(horizontal: App.width * 0.05),
+                    height: App.longest * 0.09,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
                     decoration: BoxDecoration(
                       color: props.elementAt(i).color.getOrNull,
                       borderRadius: BorderRadius.circular(8.0),

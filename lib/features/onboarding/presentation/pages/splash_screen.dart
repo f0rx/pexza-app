@@ -22,10 +22,8 @@ class SplashScreen extends StatelessWidget {
               bottom: 0,
               child: Align(
                 alignment: Alignment.center,
-                child: Image.asset(
-                  "${AppAssets.logo}",
-                  width: App.width * 0.3,
-                  height: App.width * 0.3,
+                child: Image(
+                  image: AssetImage("${AppAssets.logo}"),
                   fit: BoxFit.contain,
                 ),
               ),
@@ -47,12 +45,16 @@ class SplashScreen extends StatelessWidget {
         ),
         //
         bottomSheet: BlocConsumer<OnBoardingCubit, OnBoardingState>(
-          listener: (context, state) {
-            state.status.fold(
-              (__) => null,
-              (_) => navigator.popAndPush(Routes.onBoardingScreen),
-            );
-          },
+          listenWhen: (p, c) => c.status.isRight(),
+          listener: (context, state) => context
+              .read<OnBoardingCubit>()
+              .state
+              .status
+              .fold(
+                (_) => null,
+                (conn) =>
+                    conn ? navigator.popAndPush(Routes.onBoardingScreen) : null,
+              ),
           builder: (context, state) {
             return Visibility(
               visible: !state.isLoading,

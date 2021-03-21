@@ -4,18 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/utils/utils.dart';
 
-class PasswordInputField extends StatelessWidget {
+class PasswordConfirmationField extends StatelessWidget {
   final FocusNode focus;
   final FocusNode next;
   final bool hasLabel;
-  final String hintText;
 
-  const PasswordInputField({
+  const PasswordConfirmationField({
     Key key,
     @required this.focus,
     this.next,
     this.hasLabel = true,
-    this.hintText = "secret",
   }) : super(key: key);
 
   @override
@@ -42,16 +40,16 @@ class PasswordInputField extends StatelessWidget {
                   ? AutovalidateMode.always
                   : AutovalidateMode.disabled,
               decoration: InputDecoration(
-                labelText: hasLabel ? "Password" : null,
-                hintText: hintText,
+                labelText: hasLabel ? "Password Confirmation" : null,
+                hintText: "Confirm New Password",
                 contentPadding: const EdgeInsets.only(left: 12.0, right: 45.0)
                     .copyWith(bottom: 30.0),
               ),
-              onChanged: context.read<AuthCubit>().passwordChanged,
+              onChanged: context.read<AuthCubit>().passwordConfirmationChanged,
               validator: (value) => context
                   .read<AuthCubit>()
                   .state
-                  .password
+                  .passwordConfirmation
                   .value
                   .fold((error) => error.message, (r) => null),
               onFieldSubmitted: (_) => next == null

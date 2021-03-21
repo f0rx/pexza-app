@@ -6,11 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/utils/utils.dart';
+import 'package:pexza/widgets/vertical_spacer.dart';
 
 class PhoneNumberField extends StatelessWidget {
   final FocusNode focus;
+  final FocusNode next;
 
-  PhoneNumberField({Key key, this.focus}) : super(key: key);
+  PhoneNumberField({Key key, this.focus, this.next}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class PhoneNumberField extends StatelessWidget {
                 flex: 2,
                 child: DropdownButtonHideUnderline(
                   child: ButtonTheme(
-                    alignedDropdown: false,
+                    alignedDropdown: true,
                     layoutBehavior: ButtonBarLayoutBehavior.constrained,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     child: DropdownButton<Country>(
@@ -59,7 +61,9 @@ class PhoneNumberField extends StatelessWidget {
                   enableSuggestions: true,
                   keyboardType: TextInputType.phone,
                   textCapitalization: TextCapitalization.none,
-                  textInputAction: TextInputAction.done,
+                  textInputAction: next == null
+                      ? TextInputAction.done
+                      : TextInputAction.next,
                   focusNode: focus,
                   autofillHints: [
                     AutofillHints.telephoneNumberLocal,
@@ -74,7 +78,7 @@ class PhoneNumberField extends StatelessWidget {
                     isDense: true,
                     isCollapsed: true,
                     contentPadding:
-                        EdgeInsets.symmetric(vertical: App.height * 0.018),
+                        EdgeInsets.symmetric(vertical: App.shortest * 0.036),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.zero,
                       borderSide: BorderSide.none,
@@ -93,6 +97,9 @@ class PhoneNumberField extends StatelessWidget {
                       .phone
                       .value
                       .fold((error) => error.message, (r) => null),
+                  onFieldSubmitted: (_) => next == null
+                      ? FocusScope.of(context).unfocus()
+                      : FocusScope.of(context).requestFocus(next),
                 ),
               ),
               //
@@ -119,6 +126,9 @@ class PhoneNumberField extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                 ),
+                //
+                VerticalSpace(height: App.shortest * 0.05),
+                //
                 Flexible(
                   child: AutoSizeText(
                     item.dialCode,

@@ -78,7 +78,7 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
 }
 
 class _SignUpForm extends StatelessWidget {
-  static double inputSpacing = App.height * 0.015;
+  static double inputSpacing = App.longest * 0.015;
   final _displayNameFocus = FocusNode();
   final _emailAddressFocus = FocusNode();
   final _passwordFocus = FocusNode();

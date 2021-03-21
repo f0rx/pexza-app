@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:pexza/features/_404.dart';
 import 'package:pexza/features/auth/presentation/screens/login_screen.dart';
+import 'package:pexza/features/auth/presentation/screens/profile_select_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/profile_setup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
+import 'package:pexza/features/core/presentation/screens/export.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_detail_screen.dart';
@@ -26,6 +29,11 @@ import 'package:pexza/manager/router/export.dart';
       maintainState: true,
     ),
     AdaptiveRoute(
+      page: ProfileSelectScreen,
+      maintainState: true,
+    ),
+    /////////////// Authentication Routes ////////////////////
+    AdaptiveRoute(
       page: ProfileSetupScreen,
       maintainState: true,
     ),
@@ -33,7 +41,6 @@ import 'package:pexza/manager/router/export.dart';
       page: RentDetailsScreen,
       maintainState: true,
     ),
-    /////////////// Authentication Routes ////////////////////
     AdaptiveRoute(
       page: LoginScreen,
       maintainState: true,
@@ -66,6 +73,28 @@ import 'package:pexza/manager/router/export.dart';
     AdaptiveRoute(
       page: ServiceRequestScreen,
       guards: [AuthGuard],
+      maintainState: true,
+    ),
+    //////////////// Landlord Routes ////////////////////////
+    AdaptiveRoute(
+      page: LandlordHomeScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    //////
+    AdaptiveRoute(
+      cupertinoPageTitle: "Profile",
+      page: AccountScreen,
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      cupertinoPageTitle: "Profile",
+      page: EditAccountScreen,
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      cupertinoPageTitle: "App Settings",
+      page: SettingsScreen,
       maintainState: true,
     ),
     AdaptiveRoute(

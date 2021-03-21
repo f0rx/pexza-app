@@ -100,6 +100,8 @@ dependencies:
   flag: ^2.0.4
   # A simple API to format dates.
   date_format: ^1.0.4
+  # A flutter package to easily added dotted borders around widgets.
+  dotted_border: ^1.0.7
 
 dependency_overrides:
   analyzer: ^0.41.1
@@ -126,9 +128,19 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/logo/
+    - assets/images/logo/2.0x/
+    - assets/images/logo/3.0x/
+    - assets/images/onboarding/main/
+    - assets/images/onboarding/main/2.0x/
+    - assets/images/onboarding/main/3.0x/
+    - assets/images/onboarding/profile/
+    - assets/images/onboarding/profile/2.0x/
+    - assets/images/onboarding/profile/3.0x/
     - assets/svgs/
-    - assets/images/onboarding/
+    - assets/svgs/auth/
     - assets/svgs/onboarding/
+    - assets/svgs/landlord/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

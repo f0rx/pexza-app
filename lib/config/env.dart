@@ -21,7 +21,7 @@ class BuildEnvironment {
     _env ??= BuildEnvironment._init(
       flavor: flavor,
       splashDuration: flavor == BuildFlavor.dev
-          ? Duration.zero
+          ? const Duration(milliseconds: 600)
           : const Duration(milliseconds: 1500),
     );
 

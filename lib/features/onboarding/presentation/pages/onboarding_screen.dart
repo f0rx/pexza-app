@@ -109,8 +109,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Flexible(
-            child: Image.asset(
-              item.asset,
+            child: Image(
+              image: AssetImage(item.asset),
               fit: BoxFit.contain,
             ),
           ),
@@ -160,7 +160,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               maintainState: true,
               child: AppElevatedButton(
                 onPressed: () =>
-                    navigator.popAndPush(Routes.profileSetupScreen),
+                    navigator.popAndPush(Routes.profileSelectScreen),
                 text: "Get Started!",
                 width: App.width * 0.28,
                 height: App.height * 0.05,

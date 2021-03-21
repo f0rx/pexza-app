@@ -7,12 +7,15 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pexza/features/_404.dart';
 import 'package:pexza/features/auth/presentation/screens/login_screen.dart';
+import 'package:pexza/features/auth/presentation/screens/profile_select_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/profile_setup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
+import 'package:pexza/features/core/presentation/screens/export.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
@@ -26,6 +29,7 @@ import 'package:pexza/manager/router/export.dart';
 class Routes {
   static const String splashScreen = '/';
   static const String onBoardingScreen = '/on-boarding-screen';
+  static const String profileSelectScreen = '/profile-select-screen';
   static const String profileSetupScreen = '/profile-setup-screen';
   static const String rentDetailsScreen = '/rent-details-screen';
   static const String loginScreen = '/login-screen';
@@ -36,10 +40,15 @@ class Routes {
   static const String tenantRentDetailScreen = '/tenant-rent-detail-screen';
   static const String tenantRentPaymentScreen = '/tenant-rent-payment-screen';
   static const String serviceRequestScreen = '/service-request-screen';
+  static const String landlordHomeScreen = '/landlord-home-screen';
+  static const String accountScreen = '/account-screen';
+  static const String editAccountScreen = '/edit-account-screen';
+  static const String settingsScreen = '/settings-screen';
   static const String unknownRoute = '*';
   static const all = <String>{
     splashScreen,
     onBoardingScreen,
+    profileSelectScreen,
     profileSetupScreen,
     rentDetailsScreen,
     loginScreen,
@@ -49,6 +58,10 @@ class Routes {
     tenantRentDetailScreen,
     tenantRentPaymentScreen,
     serviceRequestScreen,
+    landlordHomeScreen,
+    accountScreen,
+    editAccountScreen,
+    settingsScreen,
     unknownRoute,
   };
 }
@@ -59,6 +72,7 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.onBoardingScreen, page: OnBoardingScreen),
+    RouteDef(Routes.profileSelectScreen, page: ProfileSelectScreen),
     RouteDef(Routes.profileSetupScreen, page: ProfileSetupScreen),
     RouteDef(Routes.rentDetailsScreen, page: RentDetailsScreen),
     RouteDef(Routes.loginScreen, page: LoginScreen),
@@ -73,6 +87,11 @@ class Router extends RouterBase {
         page: TenantRentPaymentScreen, guards: [AuthGuard]),
     RouteDef(Routes.serviceRequestScreen,
         page: ServiceRequestScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordHomeScreen,
+        page: LandlordHomeScreen, guards: [AuthGuard]),
+    RouteDef(Routes.accountScreen, page: AccountScreen),
+    RouteDef(Routes.editAccountScreen, page: EditAccountScreen),
+    RouteDef(Routes.settingsScreen, page: SettingsScreen),
     RouteDef(Routes.unknownRoute, page: UnknownRoute),
   ];
   @override
@@ -88,6 +107,13 @@ class Router extends RouterBase {
     OnBoardingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => OnBoardingScreen(),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    ProfileSelectScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ProfileSelectScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -173,6 +199,37 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
+    LandlordHomeScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordHomeScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    AccountScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => AccountScreen().wrappedRoute(context),
+        settings: data,
+        cupertinoTitle: 'Profile',
+        maintainState: true,
+      );
+    },
+    EditAccountScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => EditAccountScreen().wrappedRoute(context),
+        settings: data,
+        cupertinoTitle: 'Profile',
+        maintainState: true,
+      );
+    },
+    SettingsScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SettingsScreen().wrappedRoute(context),
+        settings: data,
+        cupertinoTitle: 'App Settings',
+        maintainState: true,
+      );
+    },
     UnknownRoute: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => UnknownRoute(),
@@ -193,6 +250,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushOnBoardingScreen() =>
       push<dynamic>(Routes.onBoardingScreen);
+
+  Future<dynamic> pushProfileSelectScreen() =>
+      push<dynamic>(Routes.profileSelectScreen);
 
   Future<dynamic> pushProfileSetupScreen() =>
       push<dynamic>(Routes.profileSetupScreen);
@@ -236,6 +296,16 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushServiceRequestScreen() =>
       push<dynamic>(Routes.serviceRequestScreen);
+
+  Future<dynamic> pushLandlordHomeScreen() =>
+      push<dynamic>(Routes.landlordHomeScreen);
+
+  Future<dynamic> pushAccountScreen() => push<dynamic>(Routes.accountScreen);
+
+  Future<dynamic> pushEditAccountScreen() =>
+      push<dynamic>(Routes.editAccountScreen);
+
+  Future<dynamic> pushSettingsScreen() => push<dynamic>(Routes.settingsScreen);
 
   Future<dynamic> pushUnknownRoute() => push<dynamic>(Routes.unknownRoute);
 }

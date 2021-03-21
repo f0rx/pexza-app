@@ -11,6 +11,8 @@ abstract class AuthState with _$AuthState {
     @required Phone phone,
     @required Country region,
     @required Password password,
+    @required Password passwordConfirmation,
+    @required Gender gender,
     Role subscription,
     @Default(false) bool isLoading,
     @Default(false) bool validate,
@@ -24,5 +26,7 @@ abstract class AuthState with _$AuthState {
         phone: Phone("", Country.NG),
         password: Password(""),
         region: Country.NG,
+        passwordConfirmation: Password(""),
+        gender: Gender(GenderType.Male),
       );
 }

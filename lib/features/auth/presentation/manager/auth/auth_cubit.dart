@@ -22,6 +22,12 @@ class AuthCubit extends Cubit<AuthState> {
   void passwordChanged(String value) =>
       emit(state.copyWith(password: Password(value)));
 
+  void passwordConfirmationChanged(String value) =>
+      emit(state.copyWith(passwordConfirmation: Password(value)));
+
+  void genderChanged(GenderType value) =>
+      emit(state.copyWith(gender: Gender(value)));
+
   void phoneNumberChanged(String value, {FIELD_VALIDATION mode}) =>
       emit(state.copyWith(
         phone: Phone(

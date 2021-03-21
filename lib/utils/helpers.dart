@@ -42,9 +42,9 @@ class Helpers {
 
   static Helpers get I => Helpers._();
   static double buttonRadius = 12.0;
-  static double appPadding = App.width * 0.06;
+  static double appPadding = App.shortest * 0.06;
   static double inputBorderRadius = 16.0;
-  static double descriptionPadding = App.width * 0.035;
+  static double descriptionPadding = App.shortest * 0.035;
   static Future<Directory> get rootDir async =>
       await getExternalStorageDirectory();
   static Future<Directory> get cacheDir async => await getTemporaryDirectory();
@@ -194,6 +194,12 @@ class Helpers {
 
   /// give access to Immutable MediaQuery.of(context).size.width
   double get width => MediaQuery.of(context).size.width;
+
+  /// give access to Immutable MediaQuery.of(context).size.shortestSide
+  double get shortest => MediaQuery.of(context).size.shortestSide;
+
+  /// give access to Immutable MediaQuery.of(context).size.shortestSide
+  double get longest => MediaQuery.of(context).size.longestSide;
 
   /// Check if dark mode theme is enable on platform on android Q+
   bool get isPlatformDarkMode =>

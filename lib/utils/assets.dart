@@ -8,114 +8,32 @@ mixin AppAssets {
   static const SVG_DIR = "$ASSETS_DIR/svgs";
   static const IMAGES_DIR = "$ASSETS_DIR/images";
   // Sub-folders
+  //////////////  IMAGES  ////////////
+  static const LOGO_IMAGES_DIR = "$IMAGES_DIR/logo";
+  static const ONBOARDING_MAIN_IMAGES_DIR = "$IMAGES_DIR/onboarding/main";
+  static const ONBOARDING_PROFILE_IMAGES_DIR = "$IMAGES_DIR/onboarding/profile";
+
+  /////////////  SVGS /////////////
   static const AUTH_SVG_DIR = "$SVG_DIR/auth";
-  static const HOME_SVG_DIR = "$SVG_DIR/home";
-  static const ONBOARDING_IMAGES_DIR = "$IMAGES_DIR/onboarding";
+  static const LANDLORD_SVG_DIR = "$SVG_DIR/landlord";
   static const ONBOARDING_SVG_DIR = "$SVG_DIR/onboarding";
 
-  static const logo = "$IMAGES_DIR/logo.png";
+  /////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
+
+  static const logo = "$LOGO_IMAGES_DIR/logo.png";
 
   // On Boarding Assets
-  static String onBoarding1 = '$ONBOARDING_IMAGES_DIR/onboarding_1.png';
-  static String onBoarding2 = '$ONBOARDING_IMAGES_DIR/onboarding_2.png';
-  static String onBoarding3 = '$ONBOARDING_IMAGES_DIR/onboarding_3.png';
+  static const String onBoarding1 = '$ONBOARDING_MAIN_IMAGES_DIR/1.png';
+  static const String onBoarding2 = '$ONBOARDING_MAIN_IMAGES_DIR/2.png';
+  static const String onBoarding3 = '$ONBOARDING_MAIN_IMAGES_DIR/3.png';
 
-  static SvgPicture mailTo = SvgPicture.asset(
-    '$AUTH_SVG_DIR/mail_to.svg',
-    height: 23,
-    width: 23,
-    fit: BoxFit.contain,
-  );
+  // Profile Select Assets
+  static const String owner = '$ONBOARDING_PROFILE_IMAGES_DIR/owner.png';
+  static const String tenant = '$ONBOARDING_PROFILE_IMAGES_DIR/tenant.png';
 
-  static SvgPicture unlockPassword = SvgPicture.asset(
-    '$AUTH_SVG_DIR/unlock_password.svg',
-    height: App.height * 0.35,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture emailSent = SvgPicture.asset(
-    '$AUTH_SVG_DIR/letter.svg',
-    height: App.height * 0.35,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture upgrade = SvgPicture.asset(
-    '$HOME_SVG_DIR/upgrade.svg',
-    height: App.width * 0.38,
-    width: App.width * 0.38,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture joyride = SvgPicture.asset(
-    '$HOME_SVG_DIR/joyride.svg',
-    height: App.width * 0.35,
-    width: App.width * 0.35,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture friendsOnline = SvgPicture.asset(
-    '$HOME_SVG_DIR/friends_online.svg',
-    height: App.width * 0.55,
-    width: App.width * 0.55,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture notify = SvgPicture.asset(
-    '$HOME_SVG_DIR/notify.svg',
-    height: App.width * 0.35,
-    width: App.width * 0.35,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture newsLetter = SvgPicture.asset(
-    '$HOME_SVG_DIR/newsletter.svg',
-    height: App.width * 0.35,
-    width: App.width * 0.35,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture creditCard = SvgPicture.asset(
-    '$HOME_SVG_DIR/credit_card.svg',
-    height: 22,
-    width: 22,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture exit = SvgPicture.asset(
-    '$HOME_SVG_DIR/exit.svg',
-    height: 22,
-    width: 22,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture info = SvgPicture.asset(
-    '$HOME_SVG_DIR/info.svg',
-    height: 22,
-    width: 22,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture notification = SvgPicture.asset(
-    '$HOME_SVG_DIR/notification.svg',
-    height: 22,
-    width: 22,
-    fit: BoxFit.contain,
-  );
-
-  static SvgPicture night = SvgPicture.asset(
-    '$HOME_SVG_DIR/night.svg',
-    height: 24,
-    width: 24,
-    fit: BoxFit.contain,
-    color: App.theme.accentColor,
-  );
-
-  static SvgPicture user = SvgPicture.asset(
-    '$HOME_SVG_DIR/user.svg',
-    height: 22,
-    width: 22,
-    fit: BoxFit.contain,
-  );
+  /////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
 
   static SvgPicture google = SvgPicture.asset(
     '$AUTH_SVG_DIR/google.svg',

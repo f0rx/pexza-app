@@ -39,17 +39,12 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
       emit(state.copyWith(
         status: event != ConnectivityResult.none &&
-                event != DataConnectionStatus.disconnected
+                event == DataConnectionStatus.connected
             ? right(true)
             : left(OnBoardingFailure.noInternetConnection()),
       ));
 
       emit(state.copyWith(isLoading: false));
-
-      event != ConnectivityResult.none &&
-              event != DataConnectionStatus.disconnected
-          ? print("You are back online!")
-          : print(OnBoardingFailure.noInternetConnection().message);
     });
   }
 
