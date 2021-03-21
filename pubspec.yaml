@@ -97,10 +97,13 @@ dependencies:
   # Use this package if you need more customization when notifying your user.
   another_flushbar: ^1.10.11
   # A flag Flutter package for Android / iOS / Web.
-  flag: ^3.0.0
+  flag: ^2.0.4
+  # A simple API to format dates.
+  date_format: ^1.0.4
 
 dependency_overrides:
   analyzer: ^0.41.1
+  flutter_svg: "0.18.0"
 
 dev_dependencies:
   flutter_driver:

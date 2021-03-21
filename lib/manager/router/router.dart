@@ -4,8 +4,14 @@ import 'package:pexza/features/auth/presentation/screens/login_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/profile_setup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/rent_detail_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/rent_payment_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/service_request_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/splash_screen.dart';
+import 'package:pexza/manager/router/export.dart';
 
 @AdaptiveAutoRouter(
   routes: <AutoRoute>[
@@ -27,6 +33,7 @@ import 'package:pexza/features/onboarding/presentation/pages/splash_screen.dart'
       page: RentDetailsScreen,
       maintainState: true,
     ),
+    /////////////// Authentication Routes ////////////////////
     AdaptiveRoute(
       page: LoginScreen,
       maintainState: true,
@@ -35,7 +42,32 @@ import 'package:pexza/features/onboarding/presentation/pages/splash_screen.dart'
       page: SignupScreen,
       maintainState: true,
     ),
-    //
+    //////////////// Tenant Routes ////////////////////////
+    AdaptiveRoute(
+      page: TenantHomeScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: TenantPropertyDetailScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: TenantRentDetailScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: TenantRentPaymentScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: ServiceRequestScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
     AdaptiveRoute(
       path: "*",
       cupertinoPageTitle: "Error 404",

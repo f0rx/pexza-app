@@ -92,7 +92,9 @@ class RentDetailsScreen extends StatelessWidget with AutoRouteWrapper {
                                           AutoSizeText(
                                             i.item,
                                             style: TextStyle(
-                                              color: Colors.grey.shade600,
+                                              color: Helpers.computeLuminance(
+                                                  Theme.of(context)
+                                                      .backgroundColor),
                                               fontSize: 16.0,
                                             ),
                                             wrapWords: false,
@@ -134,7 +136,7 @@ class RentDetailsScreen extends StatelessWidget with AutoRouteWrapper {
               VerticalSpace(height: App.height * 0.08),
               //
               AppElevatedButton(
-                onPressed: () => navigator.popAndPush(Routes.loginScreen),
+                onPressed: () => navigator.popAndPush(Routes.signupScreen),
                 text: "Confirm Details",
                 width: App.width,
                 height: App.height * 0.05,

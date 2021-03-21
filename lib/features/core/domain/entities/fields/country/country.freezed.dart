@@ -19,6 +19,7 @@ class _$CountryTearOff {
       @required String codeName,
       @required String dialCode,
       @required String language,
+      CountryCurrency currency = CountryCurrency.USD,
       String prefix = Country.DEFAULT_PREFIX,
       String hintText = Country.DEFAULT_HINT_TEXT,
       int digitsCount = Country.DEFAULT_DIGITS_COUNT}) {
@@ -27,6 +28,7 @@ class _$CountryTearOff {
       codeName: codeName,
       dialCode: dialCode,
       language: language,
+      currency: currency,
       prefix: prefix,
       hintText: hintText,
       digitsCount: digitsCount,
@@ -44,6 +46,7 @@ mixin _$Country {
   String get codeName;
   String get dialCode;
   String get language;
+  CountryCurrency get currency;
   String get prefix;
   String get hintText;
   int get digitsCount;
@@ -61,6 +64,7 @@ abstract class $CountryCopyWith<$Res> {
       String codeName,
       String dialCode,
       String language,
+      CountryCurrency currency,
       String prefix,
       String hintText,
       int digitsCount});
@@ -80,6 +84,7 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
     Object codeName = freezed,
     Object dialCode = freezed,
     Object language = freezed,
+    Object currency = freezed,
     Object prefix = freezed,
     Object hintText = freezed,
     Object digitsCount = freezed,
@@ -89,6 +94,8 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
       codeName: codeName == freezed ? _value.codeName : codeName as String,
       dialCode: dialCode == freezed ? _value.dialCode : dialCode as String,
       language: language == freezed ? _value.language : language as String,
+      currency:
+          currency == freezed ? _value.currency : currency as CountryCurrency,
       prefix: prefix == freezed ? _value.prefix : prefix as String,
       hintText: hintText == freezed ? _value.hintText : hintText as String,
       digitsCount:
@@ -107,6 +114,7 @@ abstract class _$CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
       String codeName,
       String dialCode,
       String language,
+      CountryCurrency currency,
       String prefix,
       String hintText,
       int digitsCount});
@@ -127,6 +135,7 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
     Object codeName = freezed,
     Object dialCode = freezed,
     Object language = freezed,
+    Object currency = freezed,
     Object prefix = freezed,
     Object hintText = freezed,
     Object digitsCount = freezed,
@@ -136,6 +145,8 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
       codeName: codeName == freezed ? _value.codeName : codeName as String,
       dialCode: dialCode == freezed ? _value.dialCode : dialCode as String,
       language: language == freezed ? _value.language : language as String,
+      currency:
+          currency == freezed ? _value.currency : currency as CountryCurrency,
       prefix: prefix == freezed ? _value.prefix : prefix as String,
       hintText: hintText == freezed ? _value.hintText : hintText as String,
       digitsCount:
@@ -151,6 +162,7 @@ class _$_Country extends _Country {
       @required this.codeName,
       @required this.dialCode,
       @required this.language,
+      this.currency = CountryCurrency.USD,
       this.prefix = Country.DEFAULT_PREFIX,
       this.hintText = Country.DEFAULT_HINT_TEXT,
       this.digitsCount = Country.DEFAULT_DIGITS_COUNT})
@@ -158,6 +170,7 @@ class _$_Country extends _Country {
         assert(codeName != null),
         assert(dialCode != null),
         assert(language != null),
+        assert(currency != null),
         assert(prefix != null),
         assert(hintText != null),
         assert(digitsCount != null),
@@ -171,6 +184,9 @@ class _$_Country extends _Country {
   final String dialCode;
   @override
   final String language;
+  @JsonKey(defaultValue: CountryCurrency.USD)
+  @override
+  final CountryCurrency currency;
   @JsonKey(defaultValue: Country.DEFAULT_PREFIX)
   @override
   final String prefix;
@@ -183,7 +199,7 @@ class _$_Country extends _Country {
 
   @override
   String toString() {
-    return 'Country(name: $name, codeName: $codeName, dialCode: $dialCode, language: $language, prefix: $prefix, hintText: $hintText, digitsCount: $digitsCount)';
+    return 'Country(name: $name, codeName: $codeName, dialCode: $dialCode, language: $language, currency: $currency, prefix: $prefix, hintText: $hintText, digitsCount: $digitsCount)';
   }
 
   @override
@@ -201,6 +217,9 @@ class _$_Country extends _Country {
             (identical(other.language, language) ||
                 const DeepCollectionEquality()
                     .equals(other.language, language)) &&
+            (identical(other.currency, currency) ||
+                const DeepCollectionEquality()
+                    .equals(other.currency, currency)) &&
             (identical(other.prefix, prefix) ||
                 const DeepCollectionEquality().equals(other.prefix, prefix)) &&
             (identical(other.hintText, hintText) ||
@@ -218,6 +237,7 @@ class _$_Country extends _Country {
       const DeepCollectionEquality().hash(codeName) ^
       const DeepCollectionEquality().hash(dialCode) ^
       const DeepCollectionEquality().hash(language) ^
+      const DeepCollectionEquality().hash(currency) ^
       const DeepCollectionEquality().hash(prefix) ^
       const DeepCollectionEquality().hash(hintText) ^
       const DeepCollectionEquality().hash(digitsCount);
@@ -235,6 +255,7 @@ abstract class _Country extends Country {
       @required String codeName,
       @required String dialCode,
       @required String language,
+      CountryCurrency currency,
       String prefix,
       String hintText,
       int digitsCount}) = _$_Country;
@@ -247,6 +268,8 @@ abstract class _Country extends Country {
   String get dialCode;
   @override
   String get language;
+  @override
+  CountryCurrency get currency;
   @override
   String get prefix;
   @override

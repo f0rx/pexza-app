@@ -32,7 +32,7 @@ class AppElevatedButton extends StatelessWidget {
   AppElevatedButton({
     Key key,
     this.width,
-    this.height,
+    this.height = 48.0,
     this.text = '',
     this.fontSize = 16.0,
     this.textAlignment = Alignment.center,

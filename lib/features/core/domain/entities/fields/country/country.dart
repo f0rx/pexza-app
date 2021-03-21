@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
-import 'package:pexza/features/core/domain/entities/fields/country/country_name.dart';
+import 'package:pexza/features/core/domain/entities/fields/country/country_name/country_name.dart';
+import 'package:pexza/features/core/domain/entities/fields/country/currency/country_currency.dart';
 
 part 'country.freezed.dart';
 
@@ -18,6 +19,7 @@ abstract class Country implements _$Country {
     @required String codeName,
     @required String dialCode,
     @required String language,
+    @Default(CountryCurrency.USD) CountryCurrency currency,
     @Default(Country.DEFAULT_PREFIX) String prefix,
     @Default(Country.DEFAULT_HINT_TEXT) String hintText,
     @Default(Country.DEFAULT_DIGITS_COUNT) int digitsCount,
@@ -28,6 +30,7 @@ abstract class Country implements _$Country {
     dialCode: "+234",
     language: "English - UK",
     name: CountryName.Nigeria,
+    currency: CountryCurrency.NGN,
     digitsCount: 10,
   );
 

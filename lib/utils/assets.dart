@@ -137,11 +137,4 @@ mixin AppAssets {
     width: App.width * 0.35,
     fit: BoxFit.contain,
   );
-
-  static SvgPicture cardChip = SvgPicture.asset(
-    '$HOME_SVG_DIR/card_chip.svg',
-    clipBehavior: Clip.antiAlias,
-    fit: BoxFit.contain,
-    width: 50,
-  );
 }

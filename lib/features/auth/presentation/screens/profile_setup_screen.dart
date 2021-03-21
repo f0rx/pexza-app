@@ -7,6 +7,7 @@ import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/auth/presentation/widgets/pin_input_widget.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
+import 'package:pexza/widgets/icon_button.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
@@ -69,11 +70,16 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
           ),
         ),
       ),
-      floatingActionButton: AppElevatedButton(
-        onPressed: () => navigator.popAndPush(Routes.rentDetailsScreen),
-        text: "Continue",
-        width: App.width * 0.34,
-        height: App.height * 0.05,
+      floatingActionButton: AppIconButton(
+        onPressed: () => navigator.pushRentDetailsScreen(),
+        child: RotatedBox(
+          quarterTurns: 2,
+          child: Icon(
+            Icons.keyboard_backspace_rounded,
+            color: Colors.white,
+            size: 28.0,
+          ),
+        ),
       ),
     );
   }

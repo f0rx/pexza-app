@@ -281,6 +281,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.4"
+  date_format:
+    dependency: "direct main"
+    description:
+      name: date_format
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.9"
   fake_async:
     dependency: transitive
     description:
@@ -357,7 +364,7 @@ packages:
       name: flag
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.2"
+    version: "2.0.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -402,7 +409,7 @@ packages:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.19.3"
+    version: "0.18.0"
   flutter_test:
     dependency: transitive
     description: flutter
@@ -1069,4 +1076,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.12.0-0.0 <3.0.0"
-  flutter: ">=1.24.0-10.1.pre <2.0.0"
+  flutter: ">=1.22.0 <2.0.0"

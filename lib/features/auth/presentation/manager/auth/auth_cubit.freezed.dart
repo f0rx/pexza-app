@@ -18,6 +18,7 @@ class _$AuthStateTearOff {
       {@required DisplayName displayName,
       @required EmailAddress emailAddress,
       @required Phone phone,
+      @required Country region,
       @required Password password,
       Role subscription,
       bool isLoading = false,
@@ -28,6 +29,7 @@ class _$AuthStateTearOff {
       displayName: displayName,
       emailAddress: emailAddress,
       phone: phone,
+      region: region,
       password: password,
       subscription: subscription,
       isLoading: isLoading,
@@ -47,7 +49,8 @@ mixin _$AuthState {
   DisplayName get displayName;
   EmailAddress get emailAddress;
   Phone get phone;
-  Password get password; // @required Password confirmation,
+  Country get region;
+  Password get password;
   Role get subscription;
   bool get isLoading;
   bool get validate;
@@ -66,12 +69,15 @@ abstract class $AuthStateCopyWith<$Res> {
       {DisplayName displayName,
       EmailAddress emailAddress,
       Phone phone,
+      Country region,
       Password password,
       Role subscription,
       bool isLoading,
       bool validate,
       bool passwordHidden,
       Option<Either<AuthFailure, Unit>> authStatus});
+
+  $CountryCopyWith<$Res> get region;
 }
 
 /// @nodoc
@@ -87,6 +93,7 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
     Object displayName = freezed,
     Object emailAddress = freezed,
     Object phone = freezed,
+    Object region = freezed,
     Object password = freezed,
     Object subscription = freezed,
     Object isLoading = freezed,
@@ -102,6 +109,7 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
           ? _value.emailAddress
           : emailAddress as EmailAddress,
       phone: phone == freezed ? _value.phone : phone as Phone,
+      region: region == freezed ? _value.region : region as Country,
       password: password == freezed ? _value.password : password as Password,
       subscription:
           subscription == freezed ? _value.subscription : subscription as Role,
@@ -115,6 +123,16 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
           : authStatus as Option<Either<AuthFailure, Unit>>,
     ));
   }
+
+  @override
+  $CountryCopyWith<$Res> get region {
+    if (_value.region == null) {
+      return null;
+    }
+    return $CountryCopyWith<$Res>(_value.region, (value) {
+      return _then(_value.copyWith(region: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -127,12 +145,16 @@ abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       {DisplayName displayName,
       EmailAddress emailAddress,
       Phone phone,
+      Country region,
       Password password,
       Role subscription,
       bool isLoading,
       bool validate,
       bool passwordHidden,
       Option<Either<AuthFailure, Unit>> authStatus});
+
+  @override
+  $CountryCopyWith<$Res> get region;
 }
 
 /// @nodoc
@@ -149,6 +171,7 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
     Object displayName = freezed,
     Object emailAddress = freezed,
     Object phone = freezed,
+    Object region = freezed,
     Object password = freezed,
     Object subscription = freezed,
     Object isLoading = freezed,
@@ -164,6 +187,7 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           ? _value.emailAddress
           : emailAddress as EmailAddress,
       phone: phone == freezed ? _value.phone : phone as Phone,
+      region: region == freezed ? _value.region : region as Country,
       password: password == freezed ? _value.password : password as Password,
       subscription:
           subscription == freezed ? _value.subscription : subscription as Role,
@@ -185,6 +209,7 @@ class _$_AuthState extends _AuthState {
       {@required this.displayName,
       @required this.emailAddress,
       @required this.phone,
+      @required this.region,
       @required this.password,
       this.subscription,
       this.isLoading = false,
@@ -194,6 +219,7 @@ class _$_AuthState extends _AuthState {
       : assert(displayName != null),
         assert(emailAddress != null),
         assert(phone != null),
+        assert(region != null),
         assert(password != null),
         assert(isLoading != null),
         assert(validate != null),
@@ -208,8 +234,10 @@ class _$_AuthState extends _AuthState {
   @override
   final Phone phone;
   @override
+  final Country region;
+  @override
   final Password password;
-  @override // @required Password confirmation,
+  @override
   final Role subscription;
   @JsonKey(defaultValue: false)
   @override
@@ -226,7 +254,7 @@ class _$_AuthState extends _AuthState {
 
   @override
   String toString() {
-    return 'AuthState(displayName: $displayName, emailAddress: $emailAddress, phone: $phone, password: $password, subscription: $subscription, isLoading: $isLoading, validate: $validate, passwordHidden: $passwordHidden, authStatus: $authStatus)';
+    return 'AuthState(displayName: $displayName, emailAddress: $emailAddress, phone: $phone, region: $region, password: $password, subscription: $subscription, isLoading: $isLoading, validate: $validate, passwordHidden: $passwordHidden, authStatus: $authStatus)';
   }
 
   @override
@@ -241,6 +269,8 @@ class _$_AuthState extends _AuthState {
                     .equals(other.emailAddress, emailAddress)) &&
             (identical(other.phone, phone) ||
                 const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.region, region) ||
+                const DeepCollectionEquality().equals(other.region, region)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
@@ -267,6 +297,7 @@ class _$_AuthState extends _AuthState {
       const DeepCollectionEquality().hash(displayName) ^
       const DeepCollectionEquality().hash(emailAddress) ^
       const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(region) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(subscription) ^
       const DeepCollectionEquality().hash(isLoading) ^
@@ -286,6 +317,7 @@ abstract class _AuthState extends AuthState {
       {@required DisplayName displayName,
       @required EmailAddress emailAddress,
       @required Phone phone,
+      @required Country region,
       @required Password password,
       Role subscription,
       bool isLoading,
@@ -300,8 +332,10 @@ abstract class _AuthState extends AuthState {
   @override
   Phone get phone;
   @override
+  Country get region;
+  @override
   Password get password;
-  @override // @required Password confirmation,
+  @override
   Role get subscription;
   @override
   bool get isLoading;

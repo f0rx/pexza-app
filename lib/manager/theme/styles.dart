@@ -83,6 +83,7 @@ class AppTheme extends HiveObject {
       splashColor: Colors.white24,
       splashFactory: InkRipple.splashFactory,
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      scaffoldBackgroundColor: AppColors.primaryColor.shade300,
       inputTheme: InputDecorationTheme(
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -133,6 +134,7 @@ class AppTheme extends HiveObject {
       indicatorColor: Colors.white,
       accentColor: AppColors.accentColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      // scaffoldBackgroundColor: AppColors.primaryColor.shade600,
       inputTheme: InputDecorationTheme(
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.auto,

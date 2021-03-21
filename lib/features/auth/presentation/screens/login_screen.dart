@@ -4,9 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flag/flag.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
-import 'package:pexza/features/core/core.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/vertical_spacer.dart';
@@ -79,7 +77,6 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
 
 class _LoginForm extends StatelessWidget {
   static double inputSpacing = App.height * 0.015;
- // final TapGestureRecognizer recognizer = TapGestureRecognizer()..onTap = () => print('Tap Here onTap')
 
   final _emailAddressFocus = FocusNode();
   final _passwordFocus = FocusNode();
@@ -96,7 +93,7 @@ class _LoginForm extends StatelessWidget {
             children: [
               TextFormField(
                 maxLines: 1,
-                enableSuggestions: false,
+                enableSuggestions: true,
                 autocorrect: false,
                 cursorColor: Theme.of(context).accentColor,
                 keyboardType: TextInputType.emailAddress,
@@ -134,10 +131,10 @@ class _LoginForm extends StatelessWidget {
                     obscureText:
                         context.watch<AuthCubit>().state.passwordHidden,
                     textCapitalization: TextCapitalization.none,
-                    textInputAction: TextInputAction.next,
+                    textInputAction: TextInputAction.done,
                     focusNode: _passwordFocus,
                     autofillHints: [
-                      AutofillHints.newPassword,
+                      AutofillHints.password,
                     ],
                     decoration: InputDecoration(
                       labelText: "Password",
@@ -146,15 +143,13 @@ class _LoginForm extends StatelessWidget {
                           const EdgeInsets.only(left: 12.0, right: 45.0)
                               .copyWith(bottom: 30.0),
                     ),
-                    onChanged: context.read<AuthCubit>().emailAddressChanged,
+                    onChanged: context.read<AuthCubit>().passwordChanged,
                     validator: (value) => context
                         .read<AuthCubit>()
                         .state
                         .password
                         .value
                         .fold((error) => error.message, (r) => null),
-                    // onFieldSubmitted: (_) =>
-                    //     FocusScope.of(context).requestFocus(_childNameFieldFocus),
                   ),
                   //
                   Positioned(
@@ -179,10 +174,28 @@ class _LoginForm extends StatelessWidget {
                 ],
               ),
               //
-              VerticalSpace(height: inputSpacing),
+              VerticalSpace(height: App.height * .01),
+              //
+              Align(
+                alignment: Alignment.centerRight,
+                child: AutoSizeText(
+                  "Forgot Password?",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: AppColors.accentColor,
+                  ),
+                ),
+              ),
+              //
+              VerticalSpace(height: App.height * .04),
               //
               AppElevatedButton(
-                onPressed: () => navigator.popAndPush(Routes.signupScreen),
+                // TODO: Replace with actual implementation
+                onPressed: () => navigator.pushAndRemoveUntil(
+                  Routes.tenantHomeScreen,
+                  (route) => false,
+                ),
                 text: "Login",
                 width: App.width,
                 height: App.height * 0.05,
@@ -190,19 +203,22 @@ class _LoginForm extends StatelessWidget {
               //
               VerticalSpace(height: App.height * .04),
               //
-              AutoSizeText.rich(TextSpan(
-                text: "Dont have an account?",
-                children: [
-                  TextSpan(
-                    text: " Sign up.",
-                    recognizer: TapGestureRecognizer()..onTap = () => navigator.popAndPush(Routes.signupScreen),
-                    style: TextStyle(
-                      color: App.theme.accentColor,
-                      fontSize: 17.0,
+              AutoSizeText.rich(
+                TextSpan(
+                  text: "Dont have an account?",
+                  children: [
+                    TextSpan(
+                      text: " Sign up.",
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => navigator.pop(),
+                      style: TextStyle(
+                        color: App.theme.accentColor,
+                        fontSize: 17.0,
+                      ),
                     ),
-                  ),
-                ],
-              ))
+                  ],
+                ),
+              )
             ],
           ),
         ),

@@ -158,28 +158,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               maintainAnimation: true,
               maintainSize: true,
               maintainState: true,
-              child: ElevatedButton(
+              child: AppElevatedButton(
                 onPressed: () =>
                     navigator.popAndPush(Routes.profileSetupScreen),
-                child: AutoSizeText(
-                  "GET STARTED!",
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateColor.resolveWith(
-                    (states) => AppColors.accentColor.shade600,
-                  ),
-                  textStyle: MaterialStateProperty.all(
-                    TextStyle(color: Colors.white),
-                  ),
-                  elevation: MaterialStateProperty.all(1.0),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                  ),
-                ),
+                text: "Get Started!",
+                width: App.width * 0.28,
+                height: App.height * 0.05,
               ),
             ),
           ),
