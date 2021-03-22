@@ -28,9 +28,9 @@ class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         controller: ScrollController(),
-        physics: BouncingScrollPhysics(),
+        physics: Helpers.physics,
         padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding)
-            .copyWith(top: App.height * 0.015),
+            .copyWith(top: App.longest * 0.015),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

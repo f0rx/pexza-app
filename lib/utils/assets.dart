@@ -10,6 +10,7 @@ mixin AppAssets {
   // Sub-folders
   //////////////  IMAGES  ////////////
   static const LOGO_IMAGES_DIR = "$IMAGES_DIR/logo";
+  static const LANDLORD_IMAGES_DIR = "$IMAGES_DIR/landlord";
   static const ONBOARDING_MAIN_IMAGES_DIR = "$IMAGES_DIR/onboarding/main";
   static const ONBOARDING_PROFILE_IMAGES_DIR = "$IMAGES_DIR/onboarding/profile";
 
@@ -32,8 +33,19 @@ mixin AppAssets {
   static const String owner = '$ONBOARDING_PROFILE_IMAGES_DIR/owner.png';
   static const String tenant = '$ONBOARDING_PROFILE_IMAGES_DIR/tenant.png';
 
+  // Landlord Assets
+  static const String emptyProps = '$LANDLORD_IMAGES_DIR/empty_props.png';
+
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
+
+  static SvgPicture wavingHand = SvgPicture.asset(
+    '$SVG_DIR/waving-hand.svg',
+    height: 18,
+    width: 18,
+    color: Colors.amberAccent,
+    fit: BoxFit.contain,
+  );
 
   static SvgPicture google = SvgPicture.asset(
     '$AUTH_SVG_DIR/google.svg',

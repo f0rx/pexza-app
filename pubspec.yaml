@@ -137,6 +137,9 @@ flutter:
     - assets/images/onboarding/profile/
     - assets/images/onboarding/profile/2.0x/
     - assets/images/onboarding/profile/3.0x/
+    - assets/images/landlord/
+    - assets/images/landlord/2.0x/
+    - assets/images/landlord/3.0x/
     - assets/svgs/
     - assets/svgs/auth/
     - assets/svgs/onboarding/

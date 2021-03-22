@@ -22,17 +22,26 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        controller: ScrollController(),
+        physics: Helpers.physics,
         padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding)
-            .copyWith(top: App.shortest * 0.02),
+            .copyWith(top: App.longest * 0.02),
         child: Column(
           children: [
             SafeArea(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AutoSizeText(
-                    "Hi, Dammy",
-                    style: TextStyle(fontSize: 16.0),
+                  Row(
+                    children: [
+                      AutoSizeText(
+                        "Hi, Dammy",
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      //
+                      AppAssets.wavingHand,
+                    ],
                   ),
                   CircleAvatar(
                     maxRadius: 22.0,

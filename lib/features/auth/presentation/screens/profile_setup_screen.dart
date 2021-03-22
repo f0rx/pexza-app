@@ -26,7 +26,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           controller: ScrollController(),
-          physics: BouncingScrollPhysics(),
+          physics: Helpers.physics,
           padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
