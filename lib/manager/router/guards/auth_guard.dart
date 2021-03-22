@@ -6,6 +6,7 @@ class AuthGuard extends RouteGuard {
   Future<bool> canNavigate(ExtendedNavigatorState<RouterBase> navigator,
       String routeName, Object arguments) async {
     print("Printing from [AuthGuard.dart], RouteName: $routeName");
+    return true;
     // return getIt<AuthFacade>().currentUser.isSome();
   }
 }
