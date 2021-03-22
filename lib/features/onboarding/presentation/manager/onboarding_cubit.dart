@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:async/async.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -13,22 +16,41 @@ part 'onboarding_cubit.freezed.dart';
 @injectable
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   final DataConnectionChecker _connectionChecker;
+  StreamSubscription _subscription;
 
   OnBoardingCubit(this._connectionChecker) : super(OnBoardingState());
 
   void init() async {
-    await Future.delayed(env.splashDuration);
+    Stream<ConnectivityResult> _connectivityStream =
+        LazyStream(() async => Connectivity().onConnectivityChanged);
 
-    final ConnectivityResult isConnected =
-        await (Connectivity().checkConnectivity());
-    final bool hasInternetConnection = await _connectionChecker.hasConnection;
+    Stream<DataConnectionStatus> _internetConnectionStream =
+        LazyStream(() async => _connectionChecker.onStatusChange);
 
-    emit(state.copyWith(
-      status: isConnected != ConnectivityResult.none
-          ? hasInternetConnection
-              ? right(true)
-              : left(OnBoardingFailure.poorInternet())
-          : left(OnBoardingFailure.noInternetConnection()),
-    ));
+    // Merge both streams
+    Stream _merge =
+        StreamGroup.merge([_connectivityStream, _internetConnectionStream]);
+
+    // Cancel any previous subscription
+    await _subscription?.cancel();
+
+    _subscription = _merge.listen((event) {
+      emit(state.copyWith(isLoading: true));
+
+      emit(state.copyWith(
+        status: event != ConnectivityResult.none &&
+                event == DataConnectionStatus.connected
+            ? right(true)
+            : left(OnBoardingFailure.noInternetConnection()),
+      ));
+
+      emit(state.copyWith(isLoading: false));
+    });
+  }
+
+  @override
+  Future<void> close() async {
+    await _subscription?.cancel();
+    return super.close();
   }
 }

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/core/domain/failures/failure.dart';
 
 part 'on_boarding_failure.freezed.dart';
 
@@ -15,10 +15,10 @@ abstract class OnBoardingFailure implements _$OnBoardingFailure, Failure {
   }) = _OnBoardingFailure;
 
   factory OnBoardingFailure.noInternetConnection() => OnBoardingFailure(
-        message: "Your device has no Internet Connection!",
+        message: "You're not connected to the internet!",
       );
 
   factory OnBoardingFailure.poorInternet() => OnBoardingFailure(
-        message: "Poor Internet Connection!",
+        message: "Device has poor internet connection!",
       );
 }
