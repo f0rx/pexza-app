@@ -35,8 +35,7 @@ class TenantPropertyDetailScreen extends StatelessWidget with AutoRouteWrapper {
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(
                   horizontal: Helpers.appPadding,
-                  vertical: Helpers.appPadding,
-                ),
+                ).copyWith(top: Helpers.appPadding),
                 decoration: BoxDecoration(
                   color: property.color.getOrNull,
                   borderRadius: BorderRadius.circular(8.0),

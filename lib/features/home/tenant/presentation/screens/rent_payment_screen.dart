@@ -27,7 +27,7 @@ class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
         controller: ScrollController(),
         physics: BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding)
-            .copyWith(top: App.height * 0.015),
+            .copyWith(top: App.longest * 0.015),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,7 +41,7 @@ class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
               maxLines: 1,
             ),
             //
-            VerticalSpace(height: App.height * 0.02),
+            VerticalSpace(height: App.longest * 0.02),
             //
             Container(
               decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
               ),
             ),
             //
-            VerticalSpace(height: App.height * 0.04),
+            VerticalSpace(height: App.longest * 0.04),
             //
             AutoSizeText(
               "Renewal Duration",
@@ -78,14 +78,14 @@ class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
               maxLines: 1,
             ),
             //
-            VerticalSpace(height: App.height * 0.02),
+            VerticalSpace(height: App.longest * 0.02),
             //
             Placeholder(
               fallbackHeight: 60,
               strokeWidth: 1.0,
             ),
             //
-            VerticalSpace(height: App.height * 0.04),
+            VerticalSpace(height: App.longest * 0.04),
             //
             AppElevatedButton(
               onPressed: () {},
