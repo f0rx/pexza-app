@@ -92,6 +92,7 @@ class TenantPropertyDetailScreen extends StatelessWidget with AutoRouteWrapper {
                 ),
               ),
             ),
+            //
             Positioned(
               left: 0,
               right: 0,

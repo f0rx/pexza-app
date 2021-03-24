@@ -94,11 +94,13 @@ class SettingsScreen extends StatelessWidget with AutoRouteWrapper {
                         ListTile(
                           title: AutoSizeText("Terms of Use"),
                           trailing: Icon(Icons.navigate_next_rounded),
+                          onTap: () {},
                         ),
                         //
                         ListTile(
                           title: AutoSizeText("Privacy Policy"),
                           trailing: Icon(Icons.navigate_next_rounded),
+                          onTap: () {},
                         ),
                       ],
                     ).toList(),
@@ -119,6 +121,7 @@ class SettingsScreen extends StatelessWidget with AutoRouteWrapper {
                       style: TextStyle(color: AppColors.accentColor),
                     ),
                     trailing: Icon(Icons.exit_to_app),
+                    onTap: () {},
                   ),
                 ),
               ],
