@@ -21,6 +21,7 @@ const INVALID_CARD_NUMBER = "Provide a valid Card Number.";
 const INVALID_CARDHOLDER_NAME = "Provide a Cardholder Name.";
 const INVALID_EXPIRY_DATE = "Provide a valid Date.";
 const INVALID_CVV = "Provide a valid Card Verification Value.";
+const INVALID_DATE_OF_BIRTH = "Provide a valid Date of Birth!";
 
 @freezed
 abstract class FieldObjectException<T> with _$FieldObjectException<T> {

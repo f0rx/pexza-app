@@ -1,23 +1,57 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
-import 'package:pexza/features/auth/presentation/widgets/password_field.dart';
-import 'package:pexza/features/auth/presentation/widgets/phone_number_field.dart';
+import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/vertical_spacer.dart';
 import 'package:pexza/widgets/widgets.dart';
 
+part 'package:pexza/features/auth/presentation/widgets/signup_form.dart';
+
 class SignupScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
+      lazy: true,
       create: (_) => getIt<AuthCubit>(),
-      child: this,
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listenWhen: (c, p) => p.authStatus.isSome() && c.authStatus.isSome(),
+        listener: (context, state) {
+          context.read<AuthCubit>().state.authStatus.fold(
+                () => null,
+                (option) => option.fold(
+                  (failure) => Flushbar(
+                    duration: const Duration(seconds: 5),
+                    icon: Icon(Icons.error, color: Colors.red),
+                    messageText: AutoSizeText(failure.message),
+                    borderRadius: 8,
+                    dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+                    margin: EdgeInsets.all(8),
+                    flushbarPosition:
+                        MediaQuery.of(context).viewInsets.bottom == 0
+                            ? FlushbarPosition.BOTTOM
+                            : FlushbarPosition.TOP,
+                    shouldIconPulse: true,
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ).show(context),
+                  (_) => null,
+                ),
+              );
+        },
+        builder: (context, state) => PortalEntry(
+          visible: context.watch<AuthCubit>().state.isLoading,
+          portal: App.waveLoadingBar,
+          child: this,
+        ),
+      ),
     );
   }
 
@@ -67,146 +101,12 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
                 //
                 VerticalSpace(height: App.height * 0.04),
                 //
-                Flexible(child: _SignUpForm()),
+                Flexible(
+                  child: _SignUpForm(),
+                ),
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SignUpForm extends StatelessWidget {
-  static double inputSpacing = App.longest * 0.015;
-  final _displayNameFocus = FocusNode();
-  final _emailAddressFocus = FocusNode();
-  final _passwordFocus = FocusNode();
-  final _phoneNumberFocus = FocusNode();
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      child: AutofillGroup(
-        child: Column(
-          children: [
-            BlocBuilder<AuthCubit, AuthState>(
-              builder: (context, state) {
-                return TextFormField(
-                  maxLines: 1,
-                  enableSuggestions: true,
-                  autocorrect: false,
-                  cursorColor: Theme.of(context).accentColor,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.words,
-                  textInputAction: TextInputAction.next,
-                  focusNode: _displayNameFocus,
-                  decoration: const InputDecoration(
-                    labelText: "Your Full Name",
-                    hintText: "John Doe Jnr.",
-                  ),
-                  autofillHints: [
-                    AutofillHints.name,
-                    AutofillHints.givenName,
-                    AutofillHints.middleName,
-                    AutofillHints.nickname,
-                    AutofillHints.familyName,
-                  ],
-                  autovalidateMode: context.watch<AuthCubit>().state.validate
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
-                  onChanged: context.read<AuthCubit>().displayNameChanged,
-                  validator: (value) => context
-                      .read<AuthCubit>()
-                      .state
-                      .displayName
-                      .value
-                      .fold((error) => error.message, (r) => null),
-                  onFieldSubmitted: (_) =>
-                      FocusScope.of(context).requestFocus(_emailAddressFocus),
-                );
-              },
-            ),
-            //
-            VerticalSpace(height: inputSpacing),
-            //
-            BlocBuilder<AuthCubit, AuthState>(
-              builder: (context, state) {
-                return TextFormField(
-                  maxLines: 1,
-                  enableSuggestions: true,
-                  autocorrect: false,
-                  cursorColor: Theme.of(context).accentColor,
-                  keyboardType: TextInputType.emailAddress,
-                  textCapitalization: TextCapitalization.none,
-                  focusNode: _emailAddressFocus,
-                  textInputAction: TextInputAction.next,
-                  autofillHints: [
-                    AutofillHints.email,
-                  ],
-                  autovalidateMode: context.watch<AuthCubit>().state.validate
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
-                  decoration: const InputDecoration(
-                    labelText: "Email address",
-                    hintText: "janedoe@email.com",
-                  ),
-                  onChanged: context.read<AuthCubit>().emailAddressChanged,
-                  validator: (value) => context
-                      .read<AuthCubit>()
-                      .state
-                      .emailAddress
-                      .value
-                      .fold((error) => error.message, (r) => null),
-                  onFieldSubmitted: (_) =>
-                      FocusScope.of(context).requestFocus(_passwordFocus),
-                );
-              },
-            ),
-            //
-            VerticalSpace(height: inputSpacing),
-            //
-            PasswordInputField(
-              focus: _passwordFocus,
-              next: _phoneNumberFocus,
-            ),
-            //
-            VerticalSpace(height: inputSpacing),
-            //
-            PhoneNumberField(focus: _phoneNumberFocus),
-            //
-            VerticalSpace(height: App.height * .04),
-            //
-            AppElevatedButton(
-              // TODO: Replace with actual implementation
-              onPressed: () => navigator.pushAndRemoveUntil(
-                Routes.tenantHomeScreen,
-                (route) => false,
-              ),
-              text: "Create Your Account",
-              width: App.width,
-              height: App.height * 0.05,
-            ),
-            //
-            VerticalSpace(height: App.height * .04),
-            //
-            AutoSizeText.rich(
-              TextSpan(
-                text: "Already have an account?",
-                children: [
-                  TextSpan(
-                    text: " Login.",
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => navigator.pushLoginScreen(),
-                    style: TextStyle(
-                      color: App.theme.accentColor,
-                      fontSize: 17.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
     );

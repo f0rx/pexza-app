@@ -16,10 +16,12 @@ class _$OnBoardingStateTearOff {
 // ignore: unused_element
   _OnBoardingState call(
       {bool isLoading = false,
-      Either<OnBoardingFailure, bool> status = const Right(false)}) {
+      Either<OnBoardingFailure, bool> status = const Right(false),
+      Option<User> authStatus = const None()}) {
     return _OnBoardingState(
       isLoading: isLoading,
       status: status,
+      authStatus: authStatus,
     );
   }
 }
@@ -32,6 +34,7 @@ const $OnBoardingState = _$OnBoardingStateTearOff();
 mixin _$OnBoardingState {
   bool get isLoading;
   Either<OnBoardingFailure, bool> get status;
+  Option<User> get authStatus;
 
   @JsonKey(ignore: true)
   $OnBoardingStateCopyWith<OnBoardingState> get copyWith;
@@ -42,7 +45,10 @@ abstract class $OnBoardingStateCopyWith<$Res> {
   factory $OnBoardingStateCopyWith(
           OnBoardingState value, $Res Function(OnBoardingState) then) =
       _$OnBoardingStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, Either<OnBoardingFailure, bool> status});
+  $Res call(
+      {bool isLoading,
+      Either<OnBoardingFailure, bool> status,
+      Option<User> authStatus});
 }
 
 /// @nodoc
@@ -58,12 +64,16 @@ class _$OnBoardingStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object status = freezed,
+    Object authStatus = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       status: status == freezed
           ? _value.status
           : status as Either<OnBoardingFailure, bool>,
+      authStatus: authStatus == freezed
+          ? _value.authStatus
+          : authStatus as Option<User>,
     ));
   }
 }
@@ -75,7 +85,10 @@ abstract class _$OnBoardingStateCopyWith<$Res>
           _OnBoardingState value, $Res Function(_OnBoardingState) then) =
       __$OnBoardingStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isLoading, Either<OnBoardingFailure, bool> status});
+  $Res call(
+      {bool isLoading,
+      Either<OnBoardingFailure, bool> status,
+      Option<User> authStatus});
 }
 
 /// @nodoc
@@ -93,12 +106,16 @@ class __$OnBoardingStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object status = freezed,
+    Object authStatus = freezed,
   }) {
     return _then(_OnBoardingState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       status: status == freezed
           ? _value.status
           : status as Either<OnBoardingFailure, bool>,
+      authStatus: authStatus == freezed
+          ? _value.authStatus
+          : authStatus as Option<User>,
     ));
   }
 }
@@ -106,9 +123,12 @@ class __$OnBoardingStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_OnBoardingState implements _OnBoardingState {
   const _$_OnBoardingState(
-      {this.isLoading = false, this.status = const Right(false)})
+      {this.isLoading = false,
+      this.status = const Right(false),
+      this.authStatus = const None()})
       : assert(isLoading != null),
-        assert(status != null);
+        assert(status != null),
+        assert(authStatus != null);
 
   @JsonKey(defaultValue: false)
   @override
@@ -116,10 +136,13 @@ class _$_OnBoardingState implements _OnBoardingState {
   @JsonKey(defaultValue: const Right(false))
   @override
   final Either<OnBoardingFailure, bool> status;
+  @JsonKey(defaultValue: const None())
+  @override
+  final Option<User> authStatus;
 
   @override
   String toString() {
-    return 'OnBoardingState(isLoading: $isLoading, status: $status)';
+    return 'OnBoardingState(isLoading: $isLoading, status: $status, authStatus: $authStatus)';
   }
 
   @override
@@ -130,14 +153,18 @@ class _$_OnBoardingState implements _OnBoardingState {
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
             (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)));
+                const DeepCollectionEquality().equals(other.status, status)) &&
+            (identical(other.authStatus, authStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.authStatus, authStatus)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(status);
+      const DeepCollectionEquality().hash(status) ^
+      const DeepCollectionEquality().hash(authStatus);
 
   @JsonKey(ignore: true)
   @override
@@ -148,12 +175,15 @@ class _$_OnBoardingState implements _OnBoardingState {
 abstract class _OnBoardingState implements OnBoardingState {
   const factory _OnBoardingState(
       {bool isLoading,
-      Either<OnBoardingFailure, bool> status}) = _$_OnBoardingState;
+      Either<OnBoardingFailure, bool> status,
+      Option<User> authStatus}) = _$_OnBoardingState;
 
   @override
   bool get isLoading;
   @override
   Either<OnBoardingFailure, bool> get status;
+  @override
+  Option<User> get authStatus;
   @override
   @JsonKey(ignore: true)
   _$OnBoardingStateCopyWith<_OnBoardingState> get copyWith;

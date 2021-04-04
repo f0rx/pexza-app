@@ -1,7 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_portal/flutter_portal.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/icon_button.dart';
 import 'package:pexza/widgets/widgets.dart';
@@ -9,7 +13,13 @@ import 'package:pexza/widgets/widgets.dart';
 class AccountScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
-    return this;
+    return BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+      builder: (context, state) => PortalEntry(
+        visible: context.watch<AuthWatcherCubit>().state.isLoading,
+        portal: App.waveLoadingBar,
+        child: this,
+      ),
+    );
   }
 
   @override
@@ -70,7 +80,8 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               AutoSizeText(
-                                "Brendan Ejike",
+                                "${context.read<AuthWatcherCubit>().currentUser.firstName.getOrEmpty} "
+                                "${context.read<AuthWatcherCubit>().currentUser.lastName.getOrEmpty}",
                                 style: TextStyle(
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.w600),
@@ -80,7 +91,7 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                               VerticalSpace(height: App.shortest * 0.01),
                               //
                               AutoSizeText(
-                                "ejike.br@gmail.com",
+                                "${context.read<AuthWatcherCubit>().currentUser.email.getOrEmpty}",
                                 maxLines: 1,
                                 style: TextStyle(fontSize: 15.0),
                               ),
@@ -91,7 +102,8 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                           top: 0,
                           right: 0,
                           child: Chip(
-                            label: AutoSizeText("Tenant"),
+                            label: AutoSizeText(
+                                "${context.read<AuthWatcherCubit>().currentUser.role.name.capitalizeFirst()}"),
                             padding: EdgeInsets.zero,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,

@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
@@ -46,15 +47,34 @@ class SplashScreen extends StatelessWidget {
         //
         bottomSheet: BlocConsumer<OnBoardingCubit, OnBoardingState>(
           listenWhen: (p, c) => c.status.isRight(),
-          listener: (context, state) => context
-              .read<OnBoardingCubit>()
-              .state
-              .status
-              .fold(
-                (_) => null,
-                (conn) =>
-                    conn ? navigator.popAndPush(Routes.onBoardingScreen) : null,
-              ),
+          listener: (context, state) {
+            context.read<OnBoardingCubit>().state.status.fold(
+                  (_) => null,
+                  (conn) => conn
+                      ? BlocProvider.of<AuthWatcherCubit>(App.context)
+                          .listenToAuthChanges(
+                          (option) {
+                            option.fold(
+                              () => navigator.pushAndRemoveUntil(
+                                Routes.onBoardingScreen,
+                                (route) => false,
+                              ),
+                              (user) => user?.role?.fold(
+                                tenant: () => navigator.pushAndRemoveUntil(
+                                  Routes.tenantHomeScreen,
+                                  (route) => false,
+                                ),
+                                landlord: () => navigator.pushAndRemoveUntil(
+                                  Routes.landlordHomeScreen,
+                                  (route) => false,
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                      : null,
+                );
+          },
           builder: (context, state) {
             return Visibility(
               visible: !state.isLoading,

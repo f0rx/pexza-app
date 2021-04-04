@@ -24,6 +24,8 @@ mixin AppAssets {
 
   static const logo = "$LOGO_IMAGES_DIR/logo.png";
 
+  static const user = "$IMAGES_DIR/user.png";
+
   // On Boarding Assets
   static const String onBoarding1 = '$ONBOARDING_MAIN_IMAGES_DIR/1.png';
   static const String onBoarding2 = '$ONBOARDING_MAIN_IMAGES_DIR/2.png';

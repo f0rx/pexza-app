@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/utils/utils.dart';
 
@@ -9,6 +10,7 @@ class PasswordInputField extends StatelessWidget {
   final FocusNode next;
   final bool hasLabel;
   final String hintText;
+  final FIELD_VALIDATION mode;
 
   const PasswordInputField({
     Key key,
@@ -16,6 +18,7 @@ class PasswordInputField extends StatelessWidget {
     this.next,
     this.hasLabel = true,
     this.hintText = "secret",
+    this.mode,
   }) : super(key: key);
 
   @override
@@ -47,13 +50,19 @@ class PasswordInputField extends StatelessWidget {
                 contentPadding: const EdgeInsets.only(left: 12.0, right: 45.0)
                     .copyWith(bottom: 30.0),
               ),
-              onChanged: context.read<AuthCubit>().passwordChanged,
-              validator: (value) => context
-                  .read<AuthCubit>()
-                  .state
-                  .password
-                  .value
-                  .fold((error) => error.message, (r) => null),
+              onChanged: (value) =>
+                  context.read<AuthCubit>().passwordChanged(value, mode: mode),
+              validator: (value) =>
+                  context.read<AuthCubit>().state.password.value.fold(
+                        (error) => error.message,
+                        (r) => context.read<AuthCubit>().state.authStatus.fold(
+                              () => null,
+                              (_) => _.fold(
+                                (f) => f.errors.password.firstOrNull,
+                                (r) => null,
+                              ),
+                            ),
+                      ),
               onFieldSubmitted: (_) => next == null
                   ? FocusScope.of(context).unfocus()
                   : FocusScope.of(context).requestFocus(next),
@@ -62,7 +71,9 @@ class PasswordInputField extends StatelessWidget {
             Positioned(
               top: 2,
               right: 0,
-              bottom: 2,
+              bottom: context.read<AuthCubit>().state.password.value.fold(
+                  (l) => context.read<AuthCubit>().state.validate ? 20 : 2,
+                  (r) => 2),
               child: Material(
                 color: Colors.transparent,
                 shape: CircleBorder(),

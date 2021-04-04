@@ -4,26 +4,42 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/auth/domain/domain.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/auth/data/models/auth_failure.dart';
+import 'package:pexza/manager/locator/locator.dart';
+import 'package:pexza/utils/utils.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
 
 @injectable
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthState.initial());
+  final AuthFacade _auth;
 
-  void displayNameChanged(String value) =>
-      emit(state.copyWith(displayName: DisplayName(value)));
+  AuthCubit(this._auth) : super(AuthState.initial());
+
+  void toggleLoadingIndicator([isLoading]) => emit(state.copyWith(
+        isLoading: isLoading ?? !state.isLoading,
+      ));
+
+  void firstNameChanged(String value) =>
+      emit(state.copyWith(firstName: DisplayName(value)));
+
+  void lastNameChanged(String value) =>
+      emit(state.copyWith(lastName: DisplayName(value)));
 
   void emailAddressChanged(String value) =>
       emit(state.copyWith(emailAddress: EmailAddress(value)));
 
-  void passwordChanged(String value) =>
-      emit(state.copyWith(password: Password(value)));
+  void passwordChanged(String value, {FIELD_VALIDATION mode}) =>
+      emit(state.copyWith(password: Password(value, mode: mode)));
 
   void passwordConfirmationChanged(String value) =>
       emit(state.copyWith(passwordConfirmation: Password(value)));
+
+  void dateOfBirthChanged(DateTime value) =>
+      emit(state.copyWith(dateOfBirth: DateTimeField(value)));
 
   void genderChanged(GenderType value) =>
       emit(state.copyWith(gender: Gender(value)));
@@ -42,4 +58,84 @@ class AuthCubit extends Cubit<AuthState> {
   void togglePasswordVisibility() => emit(state.copyWith(
         passwordHidden: !state.passwordHidden,
       ));
+
+  void createAccount() async {
+    toggleLoadingIndicator();
+
+    DisplayName firstName = state.firstName;
+    DisplayName lastName = state.lastName;
+    EmailAddress emailAddress = state.emailAddress;
+    Phone phone = state.phone;
+    Gender gender = state.gender;
+    DateTimeField dateOfBirth = state.dateOfBirth;
+    Password password = state.password;
+    Either<AuthFailure, Unit> failureOrUnit;
+
+    if (firstName.isValid &&
+        lastName.isValid &&
+        emailAddress.isValid &&
+        phone.isValid &&
+        gender.isValid &&
+        dateOfBirth.isValid &&
+        password.isValid) {
+      // Attempt Authentication
+      failureOrUnit = await _auth.createAccount(
+        role: getIt<RoleCubit>().role,
+        firstName: firstName,
+        lastName: lastName,
+        emailAddress: emailAddress,
+        phone: phone,
+        gender: gender,
+        dateOfBirth: dateOfBirth,
+        password: password,
+      );
+
+      // emit auth_status whether authentication fails or not
+      emit(state.copyWith(
+        validate: false,
+        authStatus: optionOf(failureOrUnit),
+      ));
+    }
+
+    // Form has errors or Attempt failed
+    // in which case, i'll inform the user
+    emit(state.copyWith(
+      validate: true,
+      authStatus: none(),
+    ));
+
+    toggleLoadingIndicator();
+  }
+
+  void login() async {
+    toggleLoadingIndicator();
+
+    Phone phone = state.phone;
+    Password password = state.password;
+    Either<AuthFailure, Unit> failureOrUnit;
+
+    if (phone.isValid && password.isValid) {
+      // Attempt Authentication
+      failureOrUnit = await _auth.login(
+        role: getIt<RoleCubit>().role,
+        phone: phone,
+        password: password,
+      );
+
+      // emit auth_status whether authentication fails or not
+      emit(state.copyWith(
+        validate: false,
+        authStatus: optionOf(failureOrUnit),
+      ));
+    }
+
+    // Form has errors or Attempt failed
+    // in which case, i'll inform the user
+    emit(state.copyWith(
+      validate: true,
+      authStatus: none(),
+    ));
+
+    toggleLoadingIndicator();
+  }
 }

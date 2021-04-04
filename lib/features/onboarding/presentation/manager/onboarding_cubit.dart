@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:pexza/features/core/domain/entities/entities.dart';
 import 'package:pexza/features/onboarding/data/models/on_boarding_failure.dart';
 import 'package:pexza/utils/utils.dart';
 
@@ -16,13 +17,24 @@ part 'onboarding_cubit.freezed.dart';
 @injectable
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   final DataConnectionChecker _connectionChecker;
+  final Connectivity _connectivity;
   StreamSubscription _subscription;
 
-  OnBoardingCubit(this._connectionChecker) : super(OnBoardingState());
+  OnBoardingCubit(
+    this._connectionChecker,
+    this._connectivity,
+  ) : super(OnBoardingState());
 
   void init() async {
+    emit(state.copyWith(isLoading: true));
+
+    // Open all Hive Boxes
+    await HiveBoxes.box();
+    await HiveBoxes.userDTOBox();
+    await HiveBoxes.accessTokenBox();
+
     Stream<ConnectivityResult> _connectivityStream =
-        LazyStream(() async => Connectivity().onConnectivityChanged);
+        LazyStream(() async => _connectivity.onConnectivityChanged);
 
     Stream<DataConnectionStatus> _internetConnectionStream =
         LazyStream(() async => _connectionChecker.onStatusChange);
@@ -34,9 +46,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     // Cancel any previous subscription
     await _subscription?.cancel();
 
-    _subscription = _merge.listen((event) {
-      emit(state.copyWith(isLoading: true));
-
+    _subscription = _merge.listen((event) async {
       emit(state.copyWith(
         status: event != ConnectivityResult.none &&
                 event == DataConnectionStatus.connected

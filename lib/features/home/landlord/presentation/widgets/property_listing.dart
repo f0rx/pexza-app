@@ -29,7 +29,7 @@ class LandlordPropertyListing extends StatelessWidget {
           children: [
             appBar,
             //
-            VerticalSpace(height: App.height * 0.03),
+            VerticalSpace(height: App.longest * 0.03),
             //
             Flexible(
               child: TextFormField(
@@ -43,7 +43,7 @@ class LandlordPropertyListing extends StatelessWidget {
                 style: TextStyle(fontSize: 17.0),
                 decoration: const InputDecoration(
                   hintText: "What do you want to do?",
-                  contentPadding: EdgeInsets.only(top: 14.0, bottom: 14.0),
+                  contentPadding: EdgeInsets.only(top: 12.0, bottom: 12.0),
                   prefixIcon: Icon(
                     Icons.search_sharp,
                     size: 20.0,
@@ -55,7 +55,7 @@ class LandlordPropertyListing extends StatelessWidget {
               ),
             ),
             //
-            VerticalSpace(height: App.height * 0.03),
+            VerticalSpace(height: App.longest * 0.03),
             //
             Flexible(
               child: ListView.separated(
@@ -64,7 +64,7 @@ class LandlordPropertyListing extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: props.length,
                 separatorBuilder: (_, __) =>
-                    VerticalSpace(height: App.height * 0.01),
+                    VerticalSpace(height: App.longest * 0.01),
                 itemBuilder: (context, i) => InkWell(
                   splashColor: Colors.grey.shade300,
                   onTap: () => navigator.pushLandlordPropertyDetailScreen(),
@@ -91,9 +91,9 @@ class LandlordPropertyListing extends StatelessWidget {
                                 children: [
                                   AutoSizeText(
                                     props.elementAt(i).type.getOrEmpty,
-                                    style: TextStyle(
+                                    style: Theme.of(context).textTheme.headline6.copyWith(
                                       color: AppColors.accentColor,
-                                      fontSize: 18.0,
+                                      // fontSize: 17.0,
                                     ),
                                     maxLines: 1,
                                   ),
@@ -105,7 +105,7 @@ class LandlordPropertyListing extends StatelessWidget {
                                     style: TextStyle(
                                       color: Helpers.computeLuminance(
                                           props.elementAt(i).color.getOrNull),
-                                      fontSize: 16.0,
+                                      fontSize: 15.0,
                                     ),
                                     maxLines: 1,
                                   ),
@@ -134,7 +134,7 @@ class LandlordPropertyListing extends StatelessWidget {
               ),
             ),
             //
-            VerticalSpace(height: App.height * 0.02),
+            VerticalSpace(height: App.longest * 0.02),
             //
             Flexible(
               child: Center(
@@ -147,7 +147,7 @@ class LandlordPropertyListing extends StatelessWidget {
                     child: AutoSizeText(
                       "See all",
                       style: TextStyle(
-                        fontSize: 15.0,
+                        fontSize: 14.5,
                         color: App.theme.accentColor,
                       ),
                     ),
@@ -156,14 +156,14 @@ class LandlordPropertyListing extends StatelessWidget {
               ),
             ),
             //
-            VerticalSpace(height: App.height * 0.03),
+            VerticalSpace(height: App.longest * 0.03),
             //
-            SubtitledHeader(
+            const SubtitledHeader(
               text: "Tools",
-              fontSize: 18.0,
+              fontSize: 17.0,
             ),
             //
-            VerticalSpace(height: App.height * 0.02),
+            VerticalSpace(height: App.longest * 0.02),
             //
             Container(
               width: double.infinity,
@@ -180,7 +180,7 @@ class LandlordPropertyListing extends StatelessWidget {
                         splashColor: AppColors.primaryColor.shade500,
                         borderRadius: BorderRadius.circular(8.0),
                         child: SizedBox(
-                          height: App.height * 0.25,
+                          height: App.longest * 0.21,
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: Column(
@@ -192,9 +192,10 @@ class LandlordPropertyListing extends StatelessWidget {
                                   child: AutoSizeText(
                                     "Maintenance Requests",
                                     softWrap: true,
+                                    wrapWords: true,
                                     style: TextStyle(
                                       color: App.theme.accentColor,
-                                      fontSize: 20.0,
+                                      fontSize: 18.0,
                                     ),
                                   ),
                                 ),
@@ -205,7 +206,7 @@ class LandlordPropertyListing extends StatelessWidget {
                                     softWrap: true,
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
-                                      fontSize: 15.0,
+                                      fontSize: 14.5,
                                     ),
                                   ),
                                 ),
@@ -228,7 +229,7 @@ class LandlordPropertyListing extends StatelessWidget {
                         splashColor: AppColors.primaryColor.shade500,
                         borderRadius: BorderRadius.circular(8.0),
                         child: SizedBox(
-                          height: App.height * 0.25,
+                          height: App.longest * 0.21,
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: Column(
@@ -240,9 +241,10 @@ class LandlordPropertyListing extends StatelessWidget {
                                   child: AutoSizeText(
                                     "Add Property",
                                     softWrap: true,
+                                    wrapWords: true,
                                     style: TextStyle(
                                       color: App.theme.accentColor,
-                                      fontSize: 20.0,
+                                      fontSize: 18.0,
                                     ),
                                   ),
                                 ),
@@ -251,9 +253,10 @@ class LandlordPropertyListing extends StatelessWidget {
                                   child: AutoSizeText(
                                     "Check Rent due date and pay rent your rent.",
                                     softWrap: true,
+                                    wrapWords: true,
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
-                                      fontSize: 15.0,
+                                      fontSize: 14.5,
                                     ),
                                   ),
                                 ),

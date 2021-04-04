@@ -14,6 +14,8 @@ const Pattern upperCasePattern = "(.*[A-Z].*)";
 const Pattern numberPattern = "[0-9]+";
 const Pattern symbolPattern = r"[-!$@%^&#*()_+|~=`{}\[\]:\;'<>?\\,.\/]";
 const Pattern onlyNumbersPattern = "^[0-9]*\$";
+const Pattern datePattern =
+    r"(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)[0-9]{2}";
 
 class Validator {
   Validator._();
@@ -111,6 +113,13 @@ class Validator {
       case FIELD_VALIDATION.BASIC:
         if (clean == null || clean.isEmpty || clean.length < 1)
           return left(FieldObjectException.empty());
+        if (clean.length != country.digitsCount)
+          return left(FieldObjectException.invalid(
+              message:
+                  "Required: ${country.digitsCount - clean.length} digits."));
+        if (!containsOnlyDigits)
+          return left(
+              FieldObjectException.invalid(message: INVALID_PHONE_NUMBER));
         break;
       case FIELD_VALIDATION.DEEP:
       default:
@@ -224,5 +233,26 @@ class Validator {
     // if (val)
 
     return right(input);
+  }
+
+  static Either<FieldObjectException<String>, DateTime> isValidDate(
+    DateTime date,
+  ) {
+    if (!date.isNull) {
+      String day = date.day < 10 ? '0${date.day}' : date.day.toString();
+      String month = date.month < 10 ? '0${date.month}' : date.month.toString();
+      String _date = "$day/$month/${date.year}";
+
+      bool isValid = RegExp(
+              r"(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)[0-9]{2}")
+          .hasMatch(_date);
+
+      if (!isValid)
+        return left(
+          FieldObjectException.invalid(message: INVALID_DATE_OF_BIRTH),
+        );
+    }
+
+    return right(date);
   }
 }

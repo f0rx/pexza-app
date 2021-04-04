@@ -31,7 +31,7 @@ abstract class Country implements _$Country {
     language: "English - UK",
     name: CountryName.Nigeria,
     currency: CountryCurrency.NGN,
-    digitsCount: 10,
+    digitsCount: 11,
   );
 
   static List<Country> get list {
