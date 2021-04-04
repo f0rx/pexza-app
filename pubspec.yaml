@@ -18,6 +18,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  # A powerful Http client for Dart, which supports Interceptors,
+  # Global configuration, FormData, Request
+  # Cancellation, File downloading, Timeout etc.
+  dio: ^3.0.10
   # Draw SVG files on a Flutter Widget.
   flutter_svg: any
   ###
@@ -102,6 +106,13 @@ dependencies:
   date_format: ^1.0.4
   # A flutter package to easily added dotted borders around widgets.
   dotted_border: ^1.0.7
+  # A type conversion dio client
+  # generator using source_gen and inspired by Chopper and Retrofit.
+  retrofit: ^1.3.4+1
+  # Pretty Dio logger is a Dio interceptor that logs network calls in a pretty, easy to read format.
+  pretty_dio_logger: ^1.1.1
+  # Dio-http-cache is a cache library for Dio
+  dio_http_cache: ^0.2.11
 
 dependency_overrides:
   analyzer: ^0.41.1
@@ -117,6 +128,7 @@ dev_dependencies:
   # Code Generators
   build_runner: ^1.10.11
   freezed: ^0.12.6
+  hive_generator: ^0.8.2
   injectable_generator: ^1.0.7
   built_value_generator: ^7.1.0
   auto_route_generator: ^0.6.10

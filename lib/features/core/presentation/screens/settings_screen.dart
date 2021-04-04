@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:date_format/date_format.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/home/tenant/presentation/widgets/property_info_widget.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
@@ -94,11 +96,13 @@ class SettingsScreen extends StatelessWidget with AutoRouteWrapper {
                         ListTile(
                           title: AutoSizeText("Terms of Use"),
                           trailing: Icon(Icons.navigate_next_rounded),
+                          onTap: () {},
                         ),
                         //
                         ListTile(
                           title: AutoSizeText("Privacy Policy"),
                           trailing: Icon(Icons.navigate_next_rounded),
+                          onTap: () {},
                         ),
                       ],
                     ).toList(),
@@ -119,6 +123,7 @@ class SettingsScreen extends StatelessWidget with AutoRouteWrapper {
                       style: TextStyle(color: AppColors.accentColor),
                     ),
                     trailing: Icon(Icons.exit_to_app),
+                    onTap: () => context.read<AuthWatcherCubit>().signOut,
                   ),
                 ),
               ],

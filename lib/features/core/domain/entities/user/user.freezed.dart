@@ -17,27 +17,33 @@ class _$UserTearOff {
   _User call(
       {@nullable UniqueId id,
       @nullable Role role,
-      @nullable DisplayName displayName,
+      @nullable DisplayName firstName,
+      @nullable DisplayName lastName,
       @nullable EmailAddress email,
+      @nullable Gender gender,
+      @nullable DateTimeField age,
       @nullable bool isEmailVerified,
-      @nullable AuthProviders providers,
       @nullable Phone phone,
-      @nullable String photoURL,
+      @nullable Password password,
+      @nullable String photo,
       @nullable DateTime createdAt,
-      @nullable DateTime lastSeenAt,
-      @nullable DateTime updatedAt}) {
+      @nullable DateTime updatedAt,
+      @nullable DateTime deletedAt}) {
     return _User(
       id: id,
       role: role,
-      displayName: displayName,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
+      gender: gender,
+      age: age,
       isEmailVerified: isEmailVerified,
-      providers: providers,
       phone: phone,
-      photoURL: photoURL,
+      password: password,
+      photo: photo,
       createdAt: createdAt,
-      lastSeenAt: lastSeenAt,
       updatedAt: updatedAt,
+      deletedAt: deletedAt,
     );
   }
 }
@@ -53,23 +59,29 @@ mixin _$User {
   @nullable
   Role get role;
   @nullable
-  DisplayName get displayName;
+  DisplayName get firstName;
+  @nullable
+  DisplayName get lastName;
   @nullable
   EmailAddress get email;
   @nullable
-  bool get isEmailVerified;
+  Gender get gender;
   @nullable
-  AuthProviders get providers;
+  DateTimeField get age;
+  @nullable
+  bool get isEmailVerified; //  @nullable AuthProviders providers,
   @nullable
   Phone get phone;
   @nullable
-  String get photoURL;
+  Password get password;
+  @nullable
+  String get photo;
   @nullable
   DateTime get createdAt;
   @nullable
-  DateTime get lastSeenAt;
-  @nullable
   DateTime get updatedAt;
+  @nullable
+  DateTime get deletedAt;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith;
@@ -82,15 +94,18 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {@nullable UniqueId id,
       @nullable Role role,
-      @nullable DisplayName displayName,
+      @nullable DisplayName firstName,
+      @nullable DisplayName lastName,
       @nullable EmailAddress email,
+      @nullable Gender gender,
+      @nullable DateTimeField age,
       @nullable bool isEmailVerified,
-      @nullable AuthProviders providers,
       @nullable Phone phone,
-      @nullable String photoURL,
+      @nullable Password password,
+      @nullable String photo,
       @nullable DateTime createdAt,
-      @nullable DateTime lastSeenAt,
-      @nullable DateTime updatedAt});
+      @nullable DateTime updatedAt,
+      @nullable DateTime deletedAt});
 }
 
 /// @nodoc
@@ -105,36 +120,40 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object role = freezed,
-    Object displayName = freezed,
+    Object firstName = freezed,
+    Object lastName = freezed,
     Object email = freezed,
+    Object gender = freezed,
+    Object age = freezed,
     Object isEmailVerified = freezed,
-    Object providers = freezed,
     Object phone = freezed,
-    Object photoURL = freezed,
+    Object password = freezed,
+    Object photo = freezed,
     Object createdAt = freezed,
-    Object lastSeenAt = freezed,
     Object updatedAt = freezed,
+    Object deletedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId,
       role: role == freezed ? _value.role : role as Role,
-      displayName: displayName == freezed
-          ? _value.displayName
-          : displayName as DisplayName,
+      firstName:
+          firstName == freezed ? _value.firstName : firstName as DisplayName,
+      lastName: lastName == freezed ? _value.lastName : lastName as DisplayName,
       email: email == freezed ? _value.email : email as EmailAddress,
+      gender: gender == freezed ? _value.gender : gender as Gender,
+      age: age == freezed ? _value.age : age as DateTimeField,
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
-      providers:
-          providers == freezed ? _value.providers : providers as AuthProviders,
       phone: phone == freezed ? _value.phone : phone as Phone,
-      photoURL: photoURL == freezed ? _value.photoURL : photoURL as String,
+      password: password == freezed ? _value.password : password as Password,
+      photo: photo == freezed ? _value.photo : photo as String,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
-      lastSeenAt:
-          lastSeenAt == freezed ? _value.lastSeenAt : lastSeenAt as DateTime,
       updatedAt:
           updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 }
@@ -147,15 +166,18 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {@nullable UniqueId id,
       @nullable Role role,
-      @nullable DisplayName displayName,
+      @nullable DisplayName firstName,
+      @nullable DisplayName lastName,
       @nullable EmailAddress email,
+      @nullable Gender gender,
+      @nullable DateTimeField age,
       @nullable bool isEmailVerified,
-      @nullable AuthProviders providers,
       @nullable Phone phone,
-      @nullable String photoURL,
+      @nullable Password password,
+      @nullable String photo,
       @nullable DateTime createdAt,
-      @nullable DateTime lastSeenAt,
-      @nullable DateTime updatedAt});
+      @nullable DateTime updatedAt,
+      @nullable DateTime deletedAt});
 }
 
 /// @nodoc
@@ -171,36 +193,40 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object role = freezed,
-    Object displayName = freezed,
+    Object firstName = freezed,
+    Object lastName = freezed,
     Object email = freezed,
+    Object gender = freezed,
+    Object age = freezed,
     Object isEmailVerified = freezed,
-    Object providers = freezed,
     Object phone = freezed,
-    Object photoURL = freezed,
+    Object password = freezed,
+    Object photo = freezed,
     Object createdAt = freezed,
-    Object lastSeenAt = freezed,
     Object updatedAt = freezed,
+    Object deletedAt = freezed,
   }) {
     return _then(_User(
       id: id == freezed ? _value.id : id as UniqueId,
       role: role == freezed ? _value.role : role as Role,
-      displayName: displayName == freezed
-          ? _value.displayName
-          : displayName as DisplayName,
+      firstName:
+          firstName == freezed ? _value.firstName : firstName as DisplayName,
+      lastName: lastName == freezed ? _value.lastName : lastName as DisplayName,
       email: email == freezed ? _value.email : email as EmailAddress,
+      gender: gender == freezed ? _value.gender : gender as Gender,
+      age: age == freezed ? _value.age : age as DateTimeField,
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
-      providers:
-          providers == freezed ? _value.providers : providers as AuthProviders,
       phone: phone == freezed ? _value.phone : phone as Phone,
-      photoURL: photoURL == freezed ? _value.photoURL : photoURL as String,
+      password: password == freezed ? _value.password : password as Password,
+      photo: photo == freezed ? _value.photo : photo as String,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
-      lastSeenAt:
-          lastSeenAt == freezed ? _value.lastSeenAt : lastSeenAt as DateTime,
       updatedAt:
           updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 }
@@ -210,15 +236,18 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   const _$_User(
       {@nullable this.id,
       @nullable this.role,
-      @nullable this.displayName,
+      @nullable this.firstName,
+      @nullable this.lastName,
       @nullable this.email,
+      @nullable this.gender,
+      @nullable this.age,
       @nullable this.isEmailVerified,
-      @nullable this.providers,
       @nullable this.phone,
-      @nullable this.photoURL,
+      @nullable this.password,
+      @nullable this.photo,
       @nullable this.createdAt,
-      @nullable this.lastSeenAt,
-      @nullable this.updatedAt})
+      @nullable this.updatedAt,
+      @nullable this.deletedAt})
       : super._();
 
   @override
@@ -229,35 +258,44 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final Role role;
   @override
   @nullable
-  final DisplayName displayName;
+  final DisplayName firstName;
+  @override
+  @nullable
+  final DisplayName lastName;
   @override
   @nullable
   final EmailAddress email;
   @override
   @nullable
-  final bool isEmailVerified;
+  final Gender gender;
   @override
   @nullable
-  final AuthProviders providers;
+  final DateTimeField age;
   @override
+  @nullable
+  final bool isEmailVerified;
+  @override //  @nullable AuthProviders providers,
   @nullable
   final Phone phone;
   @override
   @nullable
-  final String photoURL;
+  final Password password;
+  @override
+  @nullable
+  final String photo;
   @override
   @nullable
   final DateTime createdAt;
   @override
   @nullable
-  final DateTime lastSeenAt;
+  final DateTime updatedAt;
   @override
   @nullable
-  final DateTime updatedAt;
+  final DateTime deletedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, displayName: $displayName, email: $email, isEmailVerified: $isEmailVerified, providers: $providers, phone: $phone, photoURL: $photoURL, createdAt: $createdAt, lastSeenAt: $lastSeenAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, role: $role, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, age: $age, isEmailVerified: $isEmailVerified, phone: $phone, password: $password, photo: $photo, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -267,15 +305,18 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'User'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('role', role))
-      ..add(DiagnosticsProperty('displayName', displayName))
+      ..add(DiagnosticsProperty('firstName', firstName))
+      ..add(DiagnosticsProperty('lastName', lastName))
       ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('gender', gender))
+      ..add(DiagnosticsProperty('age', age))
       ..add(DiagnosticsProperty('isEmailVerified', isEmailVerified))
-      ..add(DiagnosticsProperty('providers', providers))
       ..add(DiagnosticsProperty('phone', phone))
-      ..add(DiagnosticsProperty('photoURL', photoURL))
+      ..add(DiagnosticsProperty('password', password))
+      ..add(DiagnosticsProperty('photo', photo))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('lastSeenAt', lastSeenAt))
-      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
+      ..add(DiagnosticsProperty('deletedAt', deletedAt));
   }
 
   @override
@@ -286,31 +327,37 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.role, role) ||
                 const DeepCollectionEquality().equals(other.role, role)) &&
-            (identical(other.displayName, displayName) ||
+            (identical(other.firstName, firstName) ||
                 const DeepCollectionEquality()
-                    .equals(other.displayName, displayName)) &&
+                    .equals(other.firstName, firstName)) &&
+            (identical(other.lastName, lastName) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastName, lastName)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.gender, gender) ||
+                const DeepCollectionEquality().equals(other.gender, gender)) &&
+            (identical(other.age, age) ||
+                const DeepCollectionEquality().equals(other.age, age)) &&
             (identical(other.isEmailVerified, isEmailVerified) ||
                 const DeepCollectionEquality()
                     .equals(other.isEmailVerified, isEmailVerified)) &&
-            (identical(other.providers, providers) ||
-                const DeepCollectionEquality()
-                    .equals(other.providers, providers)) &&
             (identical(other.phone, phone) ||
                 const DeepCollectionEquality().equals(other.phone, phone)) &&
-            (identical(other.photoURL, photoURL) ||
+            (identical(other.password, password) ||
                 const DeepCollectionEquality()
-                    .equals(other.photoURL, photoURL)) &&
+                    .equals(other.password, password)) &&
+            (identical(other.photo, photo) ||
+                const DeepCollectionEquality().equals(other.photo, photo)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
-            (identical(other.lastSeenAt, lastSeenAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastSeenAt, lastSeenAt)) &&
             (identical(other.updatedAt, updatedAt) ||
                 const DeepCollectionEquality()
-                    .equals(other.updatedAt, updatedAt)));
+                    .equals(other.updatedAt, updatedAt)) &&
+            (identical(other.deletedAt, deletedAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.deletedAt, deletedAt)));
   }
 
   @override
@@ -318,15 +365,18 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(role) ^
-      const DeepCollectionEquality().hash(displayName) ^
+      const DeepCollectionEquality().hash(firstName) ^
+      const DeepCollectionEquality().hash(lastName) ^
       const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(gender) ^
+      const DeepCollectionEquality().hash(age) ^
       const DeepCollectionEquality().hash(isEmailVerified) ^
-      const DeepCollectionEquality().hash(providers) ^
       const DeepCollectionEquality().hash(phone) ^
-      const DeepCollectionEquality().hash(photoURL) ^
+      const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(createdAt) ^
-      const DeepCollectionEquality().hash(lastSeenAt) ^
-      const DeepCollectionEquality().hash(updatedAt);
+      const DeepCollectionEquality().hash(updatedAt) ^
+      const DeepCollectionEquality().hash(deletedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -339,15 +389,18 @@ abstract class _User extends User {
   const factory _User(
       {@nullable UniqueId id,
       @nullable Role role,
-      @nullable DisplayName displayName,
+      @nullable DisplayName firstName,
+      @nullable DisplayName lastName,
       @nullable EmailAddress email,
+      @nullable Gender gender,
+      @nullable DateTimeField age,
       @nullable bool isEmailVerified,
-      @nullable AuthProviders providers,
       @nullable Phone phone,
-      @nullable String photoURL,
+      @nullable Password password,
+      @nullable String photo,
       @nullable DateTime createdAt,
-      @nullable DateTime lastSeenAt,
-      @nullable DateTime updatedAt}) = _$_User;
+      @nullable DateTime updatedAt,
+      @nullable DateTime deletedAt}) = _$_User;
 
   @override
   @nullable
@@ -357,31 +410,40 @@ abstract class _User extends User {
   Role get role;
   @override
   @nullable
-  DisplayName get displayName;
+  DisplayName get firstName;
+  @override
+  @nullable
+  DisplayName get lastName;
   @override
   @nullable
   EmailAddress get email;
   @override
   @nullable
-  bool get isEmailVerified;
+  Gender get gender;
   @override
   @nullable
-  AuthProviders get providers;
+  DateTimeField get age;
   @override
+  @nullable
+  bool get isEmailVerified;
+  @override //  @nullable AuthProviders providers,
   @nullable
   Phone get phone;
   @override
   @nullable
-  String get photoURL;
+  Password get password;
+  @override
+  @nullable
+  String get photo;
   @override
   @nullable
   DateTime get createdAt;
   @override
   @nullable
-  DateTime get lastSeenAt;
+  DateTime get updatedAt;
   @override
   @nullable
-  DateTime get updatedAt;
+  DateTime get deletedAt;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith;

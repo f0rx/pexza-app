@@ -101,7 +101,8 @@ class EditAccountScreen extends StatelessWidget with AutoRouteWrapper {
 
 class _EditAccountForm extends StatelessWidget {
   static double inputSpacing = App.longest * 0.015;
-  final _displayNameFocus = FocusNode();
+  final _firstNameFocus = FocusNode();
+  final _lastNameFocus = FocusNode();
   final _emailAddressFocus = FocusNode();
   final _passwordFocus = FocusNode();
   final _phoneNumberFocus = FocusNode();
@@ -119,7 +120,7 @@ class _EditAccountForm extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AutoSizeText(
-                      "Display Name: ",
+                      "First Name: ",
                       style: TextStyle(fontSize: 16.5),
                       maxLines: 1,
                     ),
@@ -134,9 +135,9 @@ class _EditAccountForm extends StatelessWidget {
                       keyboardType: TextInputType.text,
                       textCapitalization: TextCapitalization.words,
                       textInputAction: TextInputAction.next,
-                      focusNode: _displayNameFocus,
+                      focusNode: _firstNameFocus,
                       decoration: const InputDecoration(
-                        hintText: "John Doe Jnr.",
+                        hintText: "John Snr.",
                       ),
                       autofillHints: [
                         AutofillHints.name,
@@ -149,11 +150,60 @@ class _EditAccountForm extends StatelessWidget {
                           context.watch<AuthCubit>().state.validate
                               ? AutovalidateMode.always
                               : AutovalidateMode.disabled,
-                      onChanged: context.read<AuthCubit>().displayNameChanged,
+                      onChanged: context.read<AuthCubit>().firstNameChanged,
                       validator: (value) => context
                           .read<AuthCubit>()
                           .state
-                          .displayName
+                          .firstName
+                          .value
+                          .fold((error) => error.message, (r) => null),
+                      onFieldSubmitted: (_) =>
+                          FocusScope.of(context).requestFocus(_lastNameFocus),
+                    ),
+                  ],
+                );
+              },
+            ),
+            //
+            VerticalSpace(height: inputSpacing),
+            //
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      "Last Name: ",
+                      style: TextStyle(fontSize: 16.5),
+                      maxLines: 1,
+                    ),
+                    //
+                    VerticalSpace(height: App.shortest * 0.015),
+                    //
+                    TextFormField(
+                      maxLines: 1,
+                      enableSuggestions: true,
+                      autocorrect: false,
+                      cursorColor: Theme.of(context).accentColor,
+                      keyboardType: TextInputType.text,
+                      textCapitalization: TextCapitalization.words,
+                      textInputAction: TextInputAction.next,
+                      focusNode: _firstNameFocus,
+                      decoration: const InputDecoration(
+                        hintText: "Doe",
+                      ),
+                      autofillHints: [
+                        AutofillHints.familyName,
+                      ],
+                      autovalidateMode:
+                          context.watch<AuthCubit>().state.validate
+                              ? AutovalidateMode.always
+                              : AutovalidateMode.disabled,
+                      onChanged: context.read<AuthCubit>().lastNameChanged,
+                      validator: (value) => context
+                          .read<AuthCubit>()
+                          .state
+                          .lastName
                           .value
                           .fold((error) => error.message, (r) => null),
                       onFieldSubmitted: (_) => FocusScope.of(context)

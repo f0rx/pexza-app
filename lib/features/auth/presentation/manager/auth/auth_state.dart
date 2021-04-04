@@ -3,16 +3,19 @@ part of 'auth_cubit.dart';
 @freezed
 abstract class AuthState with _$AuthState {
   static KtList<Country> countries = KtList.from(Country.list);
+  static DateTime firstYear = DateTime(1910);
   const AuthState._();
 
   const factory AuthState({
-    @required DisplayName displayName,
+    @required DisplayName firstName,
+    @required DisplayName lastName,
     @required EmailAddress emailAddress,
     @required Phone phone,
     @required Country region,
     @required Password password,
     @required Password passwordConfirmation,
     @required Gender gender,
+    @required DateTimeField dateOfBirth,
     Role subscription,
     @Default(false) bool isLoading,
     @Default(false) bool validate,
@@ -21,11 +24,13 @@ abstract class AuthState with _$AuthState {
   }) = _AuthState;
 
   factory AuthState.initial() => AuthState(
-        displayName: DisplayName(""),
+        firstName: DisplayName(""),
+        lastName: DisplayName(""),
         emailAddress: EmailAddress(""),
         phone: Phone("", Country.NG),
         password: Password(""),
         region: Country.NG,
+        dateOfBirth: DateTimeField(null),
         passwordConfirmation: Password(""),
         gender: Gender(GenderType.Male),
       );
