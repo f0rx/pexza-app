@@ -1,23 +1,27 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/gestures.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
+import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:pexza/features/auth/presentation/widgets/confirm_password_field.dart';
 import 'package:pexza/features/auth/presentation/widgets/password_field.dart';
 import 'package:pexza/features/auth/presentation/widgets/phone_number_field.dart';
 import 'package:pexza/features/core/core.dart';
+import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
-import 'package:pexza/manager/locator/locator.dart';
 
 class EditAccountScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
+    final User user = BlocProvider.of<AuthWatcherCubit>(context).state.user;
+
     return BlocProvider(
-      create: (_) => getIt<AuthCubit>(),
+      create: (_) => getIt<AuthCubit>()..init(user),
       child: this,
     );
   }
@@ -35,7 +39,7 @@ class EditAccountScreen extends StatelessWidget with AutoRouteWrapper {
         child: Column(
           children: [
             VerticalSpace(
-              height: App.shortest * 0.18,
+              height: App.shortest * 0.16,
               child: Row(
                 children: [
                   Material(
@@ -44,13 +48,32 @@ class EditAccountScreen extends StatelessWidget with AutoRouteWrapper {
                     ),
                     clipBehavior: Clip.hardEdge,
                     color: Colors.white,
-                    child: Ink.image(
-                      image: AssetImage('${AppAssets.owner}'),
+                    child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      width: App.shortest * 0.18,
-                      height: double.infinity,
-                      child: InkWell(
-                        onTap: () => navigator.pushEditAccountScreen(),
+                      placeholderFadeInDuration: Duration(milliseconds: 300),
+                      imageUrl:
+                          context.read<AuthWatcherCubit>().state.user?.photo,
+                      imageBuilder: (context, provider) => Ink.image(
+                        image: provider,
+                        fit: BoxFit.cover,
+                        width: App.shortest * 0.16,
+                        height: double.infinity,
+                        child: InkWell(
+                          splashColor: Colors.black12,
+                          onTap: () {},
+                        ),
+                      ),
+                      placeholder: (_, url) => Center(
+                        child: CircularProgressBar.adaptive(
+                          width: App.width * 0.06,
+                          height: App.width * 0.06,
+                          strokeWidth: 2.5,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => CircleAvatar(
+                        backgroundImage: AssetImage('${AppAssets.owner}'),
+                        backgroundColor: Theme.of(context).accentColor,
+                        radius: 15.0,
                       ),
                     ),
                   ),
@@ -101,7 +124,8 @@ class EditAccountScreen extends StatelessWidget with AutoRouteWrapper {
 
 class _EditAccountForm extends StatelessWidget {
   static double inputSpacing = App.longest * 0.015;
-  final _displayNameFocus = FocusNode();
+  final _firstNameFocus = FocusNode();
+  final _lastNameFocus = FocusNode();
   final _emailAddressFocus = FocusNode();
   final _passwordFocus = FocusNode();
   final _phoneNumberFocus = FocusNode();
@@ -119,45 +143,40 @@ class _EditAccountForm extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AutoSizeText(
-                      "Display Name: ",
+                      "First Name: ",
                       style: TextStyle(fontSize: 16.5),
                       maxLines: 1,
                     ),
                     //
                     VerticalSpace(height: App.shortest * 0.015),
                     //
-                    TextFormField(
+                    FirstNameField(
+                      focus: _firstNameFocus,
+                      next: _lastNameFocus,
+                    ),
+                  ],
+                );
+              },
+            ),
+            //
+            VerticalSpace(height: inputSpacing),
+            //
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      "Last Name: ",
+                      style: TextStyle(fontSize: 16.5),
                       maxLines: 1,
-                      enableSuggestions: true,
-                      autocorrect: false,
-                      cursorColor: Theme.of(context).accentColor,
-                      keyboardType: TextInputType.text,
-                      textCapitalization: TextCapitalization.words,
-                      textInputAction: TextInputAction.next,
-                      focusNode: _displayNameFocus,
-                      decoration: const InputDecoration(
-                        hintText: "John Doe Jnr.",
-                      ),
-                      autofillHints: [
-                        AutofillHints.name,
-                        AutofillHints.givenName,
-                        AutofillHints.middleName,
-                        AutofillHints.nickname,
-                        AutofillHints.familyName,
-                      ],
-                      autovalidateMode:
-                          context.watch<AuthCubit>().state.validate
-                              ? AutovalidateMode.always
-                              : AutovalidateMode.disabled,
-                      onChanged: context.read<AuthCubit>().displayNameChanged,
-                      validator: (value) => context
-                          .read<AuthCubit>()
-                          .state
-                          .displayName
-                          .value
-                          .fold((error) => error.message, (r) => null),
-                      onFieldSubmitted: (_) => FocusScope.of(context)
-                          .requestFocus(_emailAddressFocus),
+                    ),
+                    //
+                    VerticalSpace(height: App.shortest * 0.015),
+                    //
+                    LastNameField(
+                      focus: _lastNameFocus,
+                      next: _emailAddressFocus,
                     ),
                   ],
                 );
@@ -179,34 +198,9 @@ class _EditAccountForm extends StatelessWidget {
                     //
                     VerticalSpace(height: App.shortest * 0.015),
                     //
-                    TextFormField(
-                      maxLines: 1,
-                      enableSuggestions: true,
-                      autocorrect: false,
-                      cursorColor: Theme.of(context).accentColor,
-                      keyboardType: TextInputType.emailAddress,
-                      textCapitalization: TextCapitalization.none,
-                      focusNode: _emailAddressFocus,
-                      textInputAction: TextInputAction.next,
-                      autofillHints: [
-                        AutofillHints.email,
-                      ],
-                      autovalidateMode:
-                          context.watch<AuthCubit>().state.validate
-                              ? AutovalidateMode.always
-                              : AutovalidateMode.disabled,
-                      decoration: const InputDecoration(
-                        hintText: "janedoe@email.com",
-                      ),
-                      onChanged: context.read<AuthCubit>().emailAddressChanged,
-                      validator: (value) => context
-                          .read<AuthCubit>()
-                          .state
-                          .emailAddress
-                          .value
-                          .fold((error) => error.message, (r) => null),
-                      onFieldSubmitted: (_) => FocusScope.of(context)
-                          .requestFocus(_phoneNumberFocus),
+                    EmailAddressField(
+                      focus: _emailAddressFocus,
+                      next: _phoneNumberFocus,
                     ),
                   ],
                 );

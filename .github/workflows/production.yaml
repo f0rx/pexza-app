@@ -35,18 +35,6 @@ jobs:
         with:
           java-version: 1.8
 
-      #- name: Prepare NDK dir for caching
-      #run: |
-      #sudo mkdir -p /usr/local/lib/android/sdk/ndk
-      #sudo chmod -R 777 /usr/local/lib/android/sdk/ndk
-      #sudo chown -R $USER:$USER /usr/local/lib/android/sdk/ndk
-      #- name: NDK Cache
-      #id: ndk_cache
-      #uses: actions/cache@v2
-      #with:
-      #path: /usr/local/lib/android/sdk/ndk
-      #key: ${{ runner.os }}-ndk_cache-21.0.6113669
-
       - name: Install NDK
         if: steps.ndk_cache.outputs.cache-hit != 'true'
         run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
@@ -59,7 +47,7 @@ jobs:
 
       - run: flutter pub get
       #- run: flutter test
-      - run: flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod
+      - run: flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation
 
       - name: Bump version and push tag
         id: bump_tag
@@ -92,5 +80,5 @@ jobs:
         env:
           API_KEY: ${{ env.API_KEY }}
           TITLE: Version Bump Notification
-          MESSAGE: Version ${{ needs.build.outputs.bump_tag_version }} of ${{ env.APP_NAME }} is available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
+          MESSAGE: Bump Version ${{ needs.build.outputs.bump_tag_version }} available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
           LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}

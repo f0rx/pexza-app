@@ -1,15 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/utils/utils.dart';
-import 'package:pexza/widgets/icon_button.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 class AccountScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
-    return this;
+    return BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+      builder: (context, state) => this,
+    );
   }
 
   @override
@@ -35,7 +39,7 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
         child: Column(
           children: [
             VerticalSpace(
-              height: App.shortest * 0.18,
+              height: App.shortest * 0.16,
               child: Row(
                 children: [
                   Material(
@@ -44,13 +48,32 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                     ),
                     clipBehavior: Clip.hardEdge,
                     color: Colors.white,
-                    child: Ink.image(
-                      image: AssetImage('${AppAssets.owner}'),
+                    child: CachedNetworkImage(
                       fit: BoxFit.cover,
-                      width: App.shortest * 0.18,
-                      height: double.infinity,
-                      child: InkWell(
-                        onTap: () => navigator.pushEditAccountScreen(),
+                      placeholderFadeInDuration: Duration(milliseconds: 300),
+                      imageUrl:
+                          context.read<AuthWatcherCubit>().state.user?.photo,
+                      imageBuilder: (context, provider) => Ink.image(
+                        image: provider,
+                        fit: BoxFit.cover,
+                        width: App.shortest * 0.16,
+                        height: double.infinity,
+                        child: InkWell(
+                          splashColor: Colors.black12,
+                          onTap: () => navigator.pushEditAccountScreen(),
+                        ),
+                      ),
+                      placeholder: (_, url) => Center(
+                        child: CircularProgressBar.adaptive(
+                          width: App.width * 0.06,
+                          height: App.width * 0.06,
+                          strokeWidth: 2.5,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => CircleAvatar(
+                        backgroundImage: AssetImage('${AppAssets.owner}'),
+                        backgroundColor: Theme.of(context).accentColor,
+                        radius: 15.0,
                       ),
                     ),
                   ),
@@ -70,19 +93,23 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               AutoSizeText(
-                                "Brendan Ejike",
-                                style: TextStyle(
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.w600),
+                                "${context.read<AuthWatcherCubit>().state.user?.firstName?.getOrEmpty} "
+                                "${context.read<AuthWatcherCubit>().state.user?.lastName?.getOrEmpty}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                 maxLines: 1,
                               ),
                               //
                               VerticalSpace(height: App.shortest * 0.01),
                               //
                               AutoSizeText(
-                                "ejike.br@gmail.com",
+                                "${context.read<AuthWatcherCubit>().state.user?.email?.getOrEmpty}",
                                 maxLines: 1,
-                                style: TextStyle(fontSize: 15.0),
+                                style: Theme.of(context).textTheme.subtitle2,
                               ),
                             ],
                           ),
@@ -91,7 +118,8 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                           top: 0,
                           right: 0,
                           child: Chip(
-                            label: AutoSizeText("Tenant"),
+                            label: AutoSizeText(
+                                "${context.read<AuthWatcherCubit>().state.user?.role?.name?.capitalizeFirst()}"),
                             padding: EdgeInsets.zero,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,

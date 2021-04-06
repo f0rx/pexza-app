@@ -9,7 +9,7 @@ part 'country.freezed.dart';
 @immutable
 abstract class Country implements _$Country {
   static const String DEFAULT_PREFIX = "0";
-  static const String DEFAULT_HINT_TEXT = "9013844580";
+  static const String DEFAULT_HINT_TEXT = "(081X) XXXX XXXX";
   static const int DEFAULT_DIGITS_COUNT = 10;
 
   const Country._();
@@ -31,7 +31,7 @@ abstract class Country implements _$Country {
     language: "English - UK",
     name: CountryName.Nigeria,
     currency: CountryCurrency.NGN,
-    digitsCount: 10,
+    digitsCount: 11,
   );
 
   static List<Country> get list {

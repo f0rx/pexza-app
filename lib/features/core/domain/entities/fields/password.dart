@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:pexza/features/auth/domain/auth_provider_type.dart';
+import 'package:pexza/features/auth/domain/entities/auth_provider_type.dart';
 import 'package:pexza/features/core/domain/entities/field_object.dart';
 import 'package:pexza/features/core/domain/failures/field_object/field_object_exception.dart';
 import 'package:pexza/features/core/domain/validator/validator.dart';

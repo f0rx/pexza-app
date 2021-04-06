@@ -14,11 +14,14 @@
 *.ipr
 *.iws
 .idea/
+
+# The .run folder contains launch configuration and tasks you configure in
+# IntelliJ or Android Studio which you may wish to be included in version control.
+.run/
 .runs/
 
 # The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
+# VS Code which you may wish to be included in version control.
 .vscode/
 
 # Flutter/Dart/Pub related

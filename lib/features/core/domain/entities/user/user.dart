@@ -24,63 +24,46 @@ abstract class User implements _$User, BaseUser {
   const factory User({
     @nullable UniqueId id,
     @nullable Role role,
-    @nullable DisplayName displayName,
+    @nullable DisplayName firstName,
+    @nullable DisplayName lastName,
     @nullable EmailAddress email,
+    @nullable Gender gender,
+    @nullable AgeField age,
     @nullable bool isEmailVerified,
-    @nullable AuthProviders providers,
+    //  @nullable AuthProviders providers,
     @nullable Phone phone,
-    @nullable String photoURL,
+    @nullable Password password,
+    @nullable String photo,
     @nullable DateTime createdAt,
-    @nullable DateTime lastSeenAt,
     @nullable DateTime updatedAt,
+    @nullable DateTime deletedAt,
   }) = _User;
-
-  factory User.firebaseAuth({
-    String id,
-    @nullable String displayName,
-    String email,
-    @nullable bool isEmailVerified,
-    @nullable List<_.UserInfo> providers,
-    @nullable String phone,
-    @nullable String photoURL,
-    DateTime createdAt,
-    DateTime lastSeenAt,
-  }) =>
-      User(
-        id: UniqueId.fromExternal(id),
-        displayName: DisplayName(displayName ?? ''),
-        email: EmailAddress(email),
-        providers: mapProvidersToDomain(providers ?? []),
-        isEmailVerified: isEmailVerified,
-        phone: Phone(phone ?? '', Country.NG),
-        photoURL: photoURL,
-        createdAt: createdAt,
-        lastSeenAt: lastSeenAt,
-      );
 
   factory User.guest() => User(
         id: UniqueId.v4(),
-        displayName: DisplayName("Guest"),
+        firstName: DisplayName("Guest"),
+        lastName: DisplayName("User"),
         email: EmailAddress("name@email.com"),
         isEmailVerified: false,
-        providers: AuthProviders.EMPTY,
         phone: Phone("8100000002", Country.NG),
-        // photoURL: AppAssets.onlineAnonymous,
-        createdAt: Helpers.I.today,
-        lastSeenAt: Helpers.I.today,
+        photo: AppAssets.user,
+        createdAt: App.today,
+        deletedAt: App.today,
       );
 
   static AuthProviders mapProvidersToDomain(List<_.UserInfo> providers) =>
-      AuthProviders(providers
-          .map((el) => AuthProvider(
-                id: el.uid,
-                displayName: el.displayName,
-                email: el.email,
-                providerId: el.providerId,
-                phoneNumber: el.phoneNumber,
-                photoURL: el.photoURL,
-              ))
-          .toImmutableList());
+      AuthProviders(
+        providers
+            .map((el) => AuthProvider(
+                  id: el.uid,
+                  displayName: el.displayName,
+                  email: el.email,
+                  providerId: el.providerId,
+                  phoneNumber: el.phoneNumber,
+                  photoURL: el.photoURL,
+                ))
+            .toImmutableList(),
+      );
 
   // Student asStudent({
   //   UniqueId id,
