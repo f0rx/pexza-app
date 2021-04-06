@@ -1,4 +1,4 @@
-extension ListX<T extends dynamic> on Iterable<T> {
+extension ListX<T> on Iterable<T> {
   String foldWithSeparator([String initialValue = "", String separator = ","]) {
     // Assert T is of type String
     assert(T is String);
@@ -13,6 +13,14 @@ extension ListX<T extends dynamic> on Iterable<T> {
       return this.first;
     } catch (e) {
       return null;
+    }
+  }
+
+  T get firstOrEmpty {
+    try {
+      return this.first;
+    } catch (e) {
+      return "" as T;
     }
   }
 }

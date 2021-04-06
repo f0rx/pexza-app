@@ -16,20 +16,38 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
         String code,
+    //
     @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         String message,
-    String details,
+    //
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String error,
+    //
     @nullable
     @JsonKey(includeIfNull: false)
     @ServerFieldErrorsSerializer()
         ServerFieldErrors errors,
+    //
+    String details,
   }) = _AuthFailure;
+
+  factory AuthFailure.unAuthenticated({
+    String code,
+    String message,
+  }) =>
+      AuthFailure(code: code, message: message);
+
+  bool get is401 => this.code == "401" || (this.error == "Unauthenticated");
 
   factory AuthFailure.cancelledAction() => AuthFailure(
         message: "Aborted!",
       );
+
+  factory AuthFailure.poorInternetConnection() =>
+      AuthFailure(message: "Poor internet connection!");
+
+  factory AuthFailure.timeout() => AuthFailure(message: "Connection Timeout!");
 
   factory AuthFailure.unknownFailure({
     String code,

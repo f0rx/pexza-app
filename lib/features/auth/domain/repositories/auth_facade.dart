@@ -1,15 +1,16 @@
 import 'package:dartz/dartz.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/foundation.dart';
-import 'package:pexza/features/auth/data/models/token_response/token_response.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/auth/data/models/auth_failure.dart';
+import 'package:pexza/manager/locator/locator.dart';
 
 abstract class AuthFacade extends Facade {
-  Option<User> get currentUser;
+  Future<Option<User>> get currentUser;
 
   Stream<Option<User>> get onAuthStateChanged;
 
-  void sink([Option<User> user]);
+  Future<void> sink([Option<User> user]);
 
   Future<Either<AuthFailure, Unit>> login({
     @required Role role,
@@ -24,11 +25,11 @@ abstract class AuthFacade extends Facade {
     @required EmailAddress emailAddress,
     @required Phone phone,
     @required Gender gender,
-    @required DateTimeField dateOfBirth,
+    @required AgeField age,
     @required Password password,
   });
 
-  Future<Either<AuthFailure, TokenResponse>> refreshAccessToken();
+  Future<void> refreshAccessToken();
 
   // Future<Either<AuthFailure, Unit>> updateProfile({
   //   DisplayName name,
@@ -42,14 +43,14 @@ abstract class AuthFacade extends Facade {
   //   Password newPassword,
   // });
 
-  // Future<Either<AuthFailure, Unit>> googleAuthentication(
-  //     [Object pendingCredentials]);
+  Future<Either<AuthFailure, Unit>> googleAuthentication(
+      [Object pendingCredentials]);
 
-  // Future<Either<AuthFailure, Unit>> facebookAuthentication(
-  //     [Object pendingCredentials]);
+  Future<Either<AuthFailure, Unit>> facebookAuthentication(
+      [Object pendingCredentials]);
 
-  // Future<Either<AuthFailure, Unit>> twitterAuthentication(
-  //     [Object pendingCredentials]);
+  Future<Either<AuthFailure, Unit>> twitterAuthentication(
+      [Object pendingCredentials]);
 
   Future<Either<AuthFailure, Unit>> sendPasswordResetEmail(EmailAddress email);
 
@@ -57,4 +58,14 @@ abstract class AuthFacade extends Facade {
       {String code, Password newPassword});
 
   Future<void> signOut();
+
+  Future<Either<AuthFailure, bool>> checkHasGoodInternet() async {
+    try {
+      final _conn = await getIt<DataConnectionChecker>().hasConnection;
+      if (!_conn) throw AuthFailure.poorInternetConnection();
+      return right(_conn);
+    } on AuthFailure catch (e) {
+      return left(e);
+    }
+  }
 }

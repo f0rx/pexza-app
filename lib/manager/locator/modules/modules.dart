@@ -84,10 +84,10 @@ class _DioInstance {
               dio.interceptors.requestLock.lock();
               dio.interceptors.responseLock.lock();
 
-              final _facade = getIt<AuthFacade>();
+              // final _facade = getIt<AuthFacade>();
 
-              await _facade.refreshAccessToken();
-              await _facade.retry(error.request);
+              // await _facade.refreshAccessToken();
+              // await _facade.retry(error.request);
 
               dio.interceptors.requestLock.unlock();
               dio.interceptors.responseLock.unlock();

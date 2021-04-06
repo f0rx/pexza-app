@@ -28,7 +28,7 @@ abstract class User implements _$User, BaseUser {
     @nullable DisplayName lastName,
     @nullable EmailAddress email,
     @nullable Gender gender,
-    @nullable DateTimeField age,
+    @nullable AgeField age,
     @nullable bool isEmailVerified,
     //  @nullable AuthProviders providers,
     @nullable Phone phone,

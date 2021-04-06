@@ -22,17 +22,26 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
       lazy: true,
       create: (_) => getIt<AuthCubit>(),
       child: BlocConsumer<AuthCubit, AuthState>(
+        listenWhen: (p, c) => p.isLoading && !c.isLoading,
         listener: (context, state) {
           context.read<AuthCubit>().state.authStatus.fold(
                 () => null,
                 (option) => option.fold(
                   (failure) => Flushbar(
-                    duration: const Duration(seconds: 5),
-                    icon: Icon(Icons.error, color: Colors.red),
-                    messageText: AutoSizeText(failure.message),
+                    duration: failure.is401
+                        ? const Duration(seconds: 15)
+                        : const Duration(seconds: 5),
+                    icon: failure.is401
+                        ? const Icon(Icons.warning, color: Colors.amber)
+                        : const Icon(Icons.error, color: Colors.red),
+                    messageText: AutoSizeText(
+                      !failure.message.isNullOrBlank
+                          ? failure.message
+                          : failure.error,
+                    ),
                     borderRadius: 8,
                     dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                    margin: EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
                     flushbarPosition:
                         MediaQuery.of(context).viewInsets.bottom == 0
                             ? FlushbarPosition.BOTTOM

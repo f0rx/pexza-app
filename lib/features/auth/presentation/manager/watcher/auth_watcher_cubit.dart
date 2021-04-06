@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
@@ -13,29 +11,24 @@ import 'package:pexza/utils/utils.dart';
 part 'auth_watcher_state.dart';
 part 'auth_watcher_cubit.freezed.dart';
 
-typedef Tasks = void Function(Option<User> option);
+typedef Task = void Function(Option<User> option);
 
 @injectable
 class AuthWatcherCubit extends Cubit<AuthWatcherState> {
   final AuthFacade _facade;
-  final DataConnectionChecker _connectionChecker;
-  final Connectivity _connectivity;
   StreamSubscription<Option<User>> _authStateChanges;
 
-  AuthWatcherCubit(
-    this._facade,
-    this._connectionChecker,
-    this._connectivity,
-  ) : super(AuthWatcherState.initial());
+  AuthWatcherCubit(this._facade) : super(AuthWatcherState.initial());
 
-  User get currentUser => _facade.currentUser.getOrElse(() => null);
+  Future<User> get currentUser async =>
+      (await _facade.currentUser).getOrElse(() => null);
 
-  void listenToAuthChanges(Tasks actions) async {
-    emit(state.copyWith(
-      isLoading: true,
-      isAuthenticated: _facade.currentUser.isSome(),
-      user: _facade.currentUser?.getOrElse(() => null),
-    ));
+  void listenToAuthChanges(Task actions) async {
+    emit(state.copyWith(isLoading: true));
+    // Get current user
+    final user = await _facade.currentUser;
+
+    // log.wtf(user);
 
     // Cancel previous subscription
     await unsubscribeAuthChanges;
@@ -43,9 +36,13 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
     _authStateChanges ??= _facade.onAuthStateChanged.listen(actions);
 
     // Sink authenticated user if available
-    _facade.sink();
+    await _facade.sink();
 
-    emit(state.copyWith(isLoading: false));
+    emit(state.copyWith(
+      isLoading: false,
+      isAuthenticated: user.isSome(),
+      user: user?.getOrElse(() => null),
+    ));
   }
 
   Future<void> get unsubscribeAuthChanges async =>
@@ -54,12 +51,17 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
   Future<void> get signOut async {
     emit(state.copyWith(isLoading: true));
 
+    final user = await _facade.currentUser;
+
     await _facade.signOut();
+
+    // Sink authenticated user if available
+    await _facade.sink();
 
     emit(state.copyWith(
       isLoading: false,
-      isAuthenticated: _facade.currentUser.isSome(),
-      user: _facade.currentUser?.getOrElse(() => null),
+      isAuthenticated: user.isSome(),
+      user: user?.getOrElse(() => null),
     ));
   }
 

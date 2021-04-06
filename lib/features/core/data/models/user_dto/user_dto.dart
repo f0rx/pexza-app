@@ -26,37 +26,30 @@ abstract class UserDTO implements _$UserDTO {
     @RoleConverter()
         String role,
     @HiveField(2)
-    @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "first_name")
         String firstName,
     @HiveField(3)
-    @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "last_name")
         String lastName,
     @HiveField(4)
-    @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         String email,
     @HiveField(5)
-    @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         String gender,
     @HiveField(6)
-    @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         String age,
     @HiveField(7)
-    @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         String phone,
     @HiveField(8)
-    @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         String password,
@@ -81,12 +74,12 @@ abstract class UserDTO implements _$UserDTO {
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
-        String deletedAt,
+        String updatedAt,
     @HiveField(13)
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
-        String updatedAt,
+        String deletedAt,
   }) = _UserDTO;
 
   factory UserDTO.fromDomain(User instance) {
@@ -95,9 +88,7 @@ abstract class UserDTO implements _$UserDTO {
       lastName: instance.lastName?.getOrNull,
       email: instance.email?.getOrNull,
       gender: instance.gender?.getOrNull?.name,
-      age: instance.age?.getOrNull != null
-          ? App.calculateAge(instance.age.getOrNull).toString()
-          : null,
+      age: instance.age?.getOrNull,
       phone: instance.phone?.getOrNull,
       password: instance.password?.getOrNull,
     );
@@ -119,9 +110,10 @@ abstract class UserDTO implements _$UserDTO {
       gender: gender != null
           ? Gender(GenderType.valueOf(gender.capitalizeFirst()))
           : null,
-      age: age != null ? DateTimeField(DateTime.tryParse(age)) : null,
+      age: age != null ? AgeField(age) : null,
       isEmailVerified: isEmailVerified,
       phone: phone != null ? Phone(phone, Country.NG) : null,
+      password: Password.DEFAULT,
       photo: photo,
       createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
       updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,

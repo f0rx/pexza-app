@@ -19,30 +19,56 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(this._auth) : super(AuthState.initial());
 
+  void init(User user) {
+    emit(state.copyWith(
+      firstName: user.firstName,
+      lastName: user.lastName,
+      emailAddress: user.email,
+      phone: user.phone,
+      gender: user.gender,
+      dateOfBirth: !user.age.isNullOrBlank
+          ? DateTimeField(
+              DateTime(
+                DateTime.now().year - int.parse(user.age.getOrNull),
+              ),
+            )
+          : DateTimeField.DEFAULT,
+      password: user.password,
+    ));
+  }
+
   void toggleLoadingIndicator([isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
       ));
 
-  void firstNameChanged(String value) =>
-      emit(state.copyWith(firstName: DisplayName(value)));
+  void firstNameChanged(String value) => emit(state.copyWith(
+        firstName: DisplayName(value),
+      ));
 
-  void lastNameChanged(String value) =>
-      emit(state.copyWith(lastName: DisplayName(value)));
+  void lastNameChanged(String value) => emit(state.copyWith(
+        lastName: DisplayName(value),
+      ));
 
-  void emailAddressChanged(String value) =>
-      emit(state.copyWith(emailAddress: EmailAddress(value)));
+  void emailAddressChanged(String value) => emit(state.copyWith(
+        emailAddress: EmailAddress(value),
+      ));
 
   void passwordChanged(String value, {FIELD_VALIDATION mode}) =>
-      emit(state.copyWith(password: Password(value, mode: mode)));
+      emit(state.copyWith(
+        password: Password(value, mode: mode),
+      ));
 
-  void passwordConfirmationChanged(String value) =>
-      emit(state.copyWith(passwordConfirmation: Password(value)));
+  void passwordConfirmationChanged(String value) => emit(state.copyWith(
+        passwordConfirmation: Password(value),
+      ));
 
-  void dateOfBirthChanged(DateTime value) =>
-      emit(state.copyWith(dateOfBirth: DateTimeField(value)));
+  void dateOfBirthChanged(DateTime value) => emit(state.copyWith(
+        dateOfBirth: DateTimeField(value),
+      ));
 
-  void genderChanged(GenderType value) =>
-      emit(state.copyWith(gender: Gender(value)));
+  void genderChanged(GenderType value) => emit(state.copyWith(
+        gender: Gender(value),
+      ));
 
   void phoneNumberChanged(String value, {FIELD_VALIDATION mode}) =>
       emit(state.copyWith(
@@ -53,7 +79,9 @@ class AuthCubit extends Cubit<AuthState> {
         ),
       ));
 
-  void countryChanged(Country value) => emit(state.copyWith(region: value));
+  void countryChanged(Country value) => emit(state.copyWith(
+        region: value,
+      ));
 
   void togglePasswordVisibility() => emit(state.copyWith(
         passwordHidden: !state.passwordHidden,
@@ -67,16 +95,24 @@ class AuthCubit extends Cubit<AuthState> {
     EmailAddress emailAddress = state.emailAddress;
     Phone phone = state.phone;
     Gender gender = state.gender;
-    DateTimeField dateOfBirth = state.dateOfBirth;
+    AgeField age = state.dateOfBirth.isValid
+        ? AgeField(App.calculateAge(state.dateOfBirth.getOrNull).toString())
+        : AgeField('');
     Password password = state.password;
     Either<AuthFailure, Unit> failureOrUnit;
+
+    // Enable form validation
+    emit(state.copyWith(
+      validate: true,
+      authStatus: none(),
+    ));
 
     if (firstName.isValid &&
         lastName.isValid &&
         emailAddress.isValid &&
         phone.isValid &&
         gender.isValid &&
-        dateOfBirth.isValid &&
+        age.isValid &&
         password.isValid) {
       // Attempt Authentication
       failureOrUnit = await _auth.createAccount(
@@ -86,23 +122,15 @@ class AuthCubit extends Cubit<AuthState> {
         emailAddress: emailAddress,
         phone: phone,
         gender: gender,
-        dateOfBirth: dateOfBirth,
+        age: age,
         password: password,
       );
 
       // emit auth_status whether authentication fails or not
       emit(state.copyWith(
-        validate: false,
         authStatus: optionOf(failureOrUnit),
       ));
     }
-
-    // Form has errors or Attempt failed
-    // in which case, i'll inform the user
-    emit(state.copyWith(
-      validate: true,
-      authStatus: none(),
-    ));
 
     toggleLoadingIndicator();
   }
@@ -114,6 +142,12 @@ class AuthCubit extends Cubit<AuthState> {
     Password password = state.password;
     Either<AuthFailure, Unit> failureOrUnit;
 
+    // Start form  validation
+    emit(state.copyWith(
+      validate: true,
+      authStatus: none(),
+    ));
+
     if (phone.isValid && password.isValid) {
       // Attempt Authentication
       failureOrUnit = await _auth.login(
@@ -124,17 +158,9 @@ class AuthCubit extends Cubit<AuthState> {
 
       // emit auth_status whether authentication fails or not
       emit(state.copyWith(
-        validate: false,
         authStatus: optionOf(failureOrUnit),
       ));
     }
-
-    // Form has errors or Attempt failed
-    // in which case, i'll inform the user
-    emit(state.copyWith(
-      validate: true,
-      authStatus: none(),
-    ));
 
     toggleLoadingIndicator();
   }

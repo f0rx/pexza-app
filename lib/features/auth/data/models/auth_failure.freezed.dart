@@ -25,16 +25,20 @@ class _$AuthFailureTearOff {
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
-      String details,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String error,
       @nullable
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
-          ServerFieldErrors errors}) {
+          ServerFieldErrors errors,
+      String details}) {
     return _AuthFailure(
       code: code,
       message: message,
-      details: details,
+      error: error,
       errors: errors,
+      details: details,
     );
   }
 
@@ -52,15 +56,18 @@ const $AuthFailure = _$AuthFailureTearOff();
 mixin _$AuthFailure {
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-  String get code;
+  String get code; //
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
-  String get message;
-  String get details;
+  String get message; //
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  String get error; //
   @nullable
   @JsonKey(includeIfNull: false)
   @ServerFieldErrorsSerializer()
-  ServerFieldErrors get errors;
+  ServerFieldErrors get errors; //
+  String get details;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -79,11 +86,14 @@ abstract class $AuthFailureCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
-      String details,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String error,
       @nullable
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
-          ServerFieldErrors errors});
+          ServerFieldErrors errors,
+      String details});
 
   $ServerFieldErrorsCopyWith<$Res> get errors;
 }
@@ -100,14 +110,16 @@ class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
   $Res call({
     Object code = freezed,
     Object message = freezed,
-    Object details = freezed,
+    Object error = freezed,
     Object errors = freezed,
+    Object details = freezed,
   }) {
     return _then(_value.copyWith(
       code: code == freezed ? _value.code : code as String,
       message: message == freezed ? _value.message : message as String,
-      details: details == freezed ? _value.details : details as String,
+      error: error == freezed ? _value.error : error as String,
       errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
+      details: details == freezed ? _value.details : details as String,
     ));
   }
 
@@ -136,11 +148,14 @@ abstract class _$AuthFailureCopyWith<$Res>
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
-      String details,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String error,
       @nullable
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
-          ServerFieldErrors errors});
+          ServerFieldErrors errors,
+      String details});
 
   @override
   $ServerFieldErrorsCopyWith<$Res> get errors;
@@ -160,14 +175,16 @@ class __$AuthFailureCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
   $Res call({
     Object code = freezed,
     Object message = freezed,
-    Object details = freezed,
+    Object error = freezed,
     Object errors = freezed,
+    Object details = freezed,
   }) {
     return _then(_AuthFailure(
       code: code == freezed ? _value.code : code as String,
       message: message == freezed ? _value.message : message as String,
-      details: details == freezed ? _value.details : details as String,
+      error: error == freezed ? _value.error : error as String,
       errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
+      details: details == freezed ? _value.details : details as String,
     ));
   }
 }
@@ -184,11 +201,14 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.message,
-      this.details,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          this.error,
       @nullable
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
-          this.errors})
+          this.errors,
+      this.details})
       : super._();
 
   factory _$_AuthFailure.fromJson(Map<String, dynamic> json) =>
@@ -198,21 +218,25 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
   final String code;
-  @override
+  @override //
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   final String message;
-  @override
-  final String details;
-  @override
+  @override //
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  final String error;
+  @override //
   @nullable
   @JsonKey(includeIfNull: false)
   @ServerFieldErrorsSerializer()
   final ServerFieldErrors errors;
+  @override //
+  final String details;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthFailure(code: $code, message: $message, details: $details, errors: $errors)';
+    return 'AuthFailure(code: $code, message: $message, error: $error, errors: $errors, details: $details)';
   }
 
   @override
@@ -222,8 +246,9 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'AuthFailure'))
       ..add(DiagnosticsProperty('code', code))
       ..add(DiagnosticsProperty('message', message))
-      ..add(DiagnosticsProperty('details', details))
-      ..add(DiagnosticsProperty('errors', errors));
+      ..add(DiagnosticsProperty('error', error))
+      ..add(DiagnosticsProperty('errors', errors))
+      ..add(DiagnosticsProperty('details', details));
   }
 
   @override
@@ -235,11 +260,12 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
-            (identical(other.details, details) ||
-                const DeepCollectionEquality()
-                    .equals(other.details, details)) &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)) &&
             (identical(other.errors, errors) ||
-                const DeepCollectionEquality().equals(other.errors, errors)));
+                const DeepCollectionEquality().equals(other.errors, errors)) &&
+            (identical(other.details, details) ||
+                const DeepCollectionEquality().equals(other.details, details)));
   }
 
   @override
@@ -247,8 +273,9 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(message) ^
-      const DeepCollectionEquality().hash(details) ^
-      const DeepCollectionEquality().hash(errors);
+      const DeepCollectionEquality().hash(error) ^
+      const DeepCollectionEquality().hash(errors) ^
+      const DeepCollectionEquality().hash(details);
 
   @JsonKey(ignore: true)
   @override
@@ -271,11 +298,14 @@ abstract class _AuthFailure extends AuthFailure {
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
-      String details,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String error,
       @nullable
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
-          ServerFieldErrors errors}) = _$_AuthFailure;
+          ServerFieldErrors errors,
+      String details}) = _$_AuthFailure;
 
   factory _AuthFailure.fromJson(Map<String, dynamic> json) =
       _$_AuthFailure.fromJson;
@@ -284,17 +314,21 @@ abstract class _AuthFailure extends AuthFailure {
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
   String get code;
-  @override
+  @override //
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get message;
-  @override
-  String get details;
-  @override
+  @override //
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  String get error;
+  @override //
   @nullable
   @JsonKey(includeIfNull: false)
   @ServerFieldErrorsSerializer()
   ServerFieldErrors get errors;
+  @override //
+  String get details;
   @override
   @JsonKey(ignore: true)
   _$AuthFailureCopyWith<_AuthFailure> get copyWith;

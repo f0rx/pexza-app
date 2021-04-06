@@ -113,21 +113,12 @@ class Validator {
       case FIELD_VALIDATION.BASIC:
         if (clean == null || clean.isEmpty || clean.length < 1)
           return left(FieldObjectException.empty());
-        if (clean.length != country.digitsCount)
-          return left(FieldObjectException.invalid(
-              message:
-                  "Required: ${country.digitsCount - clean.length} digits."));
-        if (!containsOnlyDigits)
-          return left(
-              FieldObjectException.invalid(message: INVALID_PHONE_NUMBER));
+        ;
         break;
       case FIELD_VALIDATION.DEEP:
       default:
         if (clean == null || clean.isEmpty || clean.length < 1)
           return left(FieldObjectException.empty());
-        if (clean.first == country.prefix)
-          return left(FieldObjectException.invalid(
-              message: "Remove prefix: ${country.prefix}"));
         if (clean.length != country.digitsCount)
           return left(FieldObjectException.invalid(
               message:

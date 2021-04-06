@@ -29,10 +29,22 @@ class PhoneNumberField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                   border: Border.all(
                     color: context.read<AuthCubit>().state.phone.value.fold(
-                        (l) => context.read<AuthCubit>().state.validate
-                            ? AppColors.errorRed
-                            : Colors.grey,
-                        (r) => Colors.grey),
+                          (_) => context.read<AuthCubit>().state.validate
+                              ? AppColors.errorRed
+                              : Colors.grey,
+                          (_) =>
+                              context.read<AuthCubit>().state.authStatus.fold(
+                                    () => Colors.grey,
+                                    (_) => _.fold(
+                                      (f) => !f.errors.isNull &&
+                                              !f.errors.phone.isNull &&
+                                              f.errors.phone.isNotEmpty
+                                          ? AppColors.errorRed
+                                          : Colors.grey,
+                                      (_) => Colors.grey,
+                                    ),
+                                  ),
+                        ),
                   ),
                 ),
                 child: Row(
@@ -73,6 +85,7 @@ class PhoneNumberField extends StatelessWidget {
                         maxLines: 1,
                         autocorrect: false,
                         enableSuggestions: true,
+                        initialValue: state.phone?.getOrNull,
                         keyboardType: TextInputType.phone,
                         textCapitalization: TextCapitalization.none,
                         textInputAction: next == null
@@ -109,21 +122,6 @@ class PhoneNumberField extends StatelessWidget {
                                   value,
                                   mode: FIELD_VALIDATION.BASIC,
                                 ),
-                        validator: (value) =>
-                            context.read<AuthCubit>().state.phone.value.fold(
-                                  (error) => error.message,
-                                  (r) => context
-                                      .read<AuthCubit>()
-                                      .state
-                                      .authStatus
-                                      .fold(
-                                        () => null,
-                                        (_) => _.fold(
-                                          (f) => f.errors.phone.firstOrNull,
-                                          (r) => null,
-                                        ),
-                                      ),
-                                ),
                         onFieldSubmitted: (_) => next == null
                             ? FocusScope.of(context).unfocus()
                             : FocusScope.of(context).requestFocus(next),
@@ -136,18 +134,22 @@ class PhoneNumberField extends StatelessWidget {
             ),
             //
             Visibility(
-              visible: context.read<AuthCubit>().state.phone.value.fold(
-                    (l) =>
-                        context.read<AuthCubit>().state.validate ? true : false,
-                    (r) => false,
-                  ),
+              visible: context.read<AuthCubit>().state.validate,
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0, left: 12.0),
                 child: AutoSizeText(
-                  context.read<AuthCubit>().state.phone.value.fold(
-                        (l) => l.message,
-                        (r) => "",
-                      ),
+                  state.phone.value.fold(
+                    (l) => l.message,
+                    (r) => context.watch<AuthCubit>().state.authStatus.fold(
+                          () => "",
+                          (_) => _.fold(
+                            (f) => !f.errors.isNull
+                                ? f.errors.phone.firstOrEmpty
+                                : "",
+                            (_) => "",
+                          ),
+                        ),
+                  ),
                   style: TextStyle(
                     fontSize: 12.0,
                     color: AppColors.errorRed,

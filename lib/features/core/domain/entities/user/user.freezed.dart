@@ -21,7 +21,7 @@ class _$UserTearOff {
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
       @nullable Gender gender,
-      @nullable DateTimeField age,
+      @nullable AgeField age,
       @nullable bool isEmailVerified,
       @nullable Phone phone,
       @nullable Password password,
@@ -67,7 +67,7 @@ mixin _$User {
   @nullable
   Gender get gender;
   @nullable
-  DateTimeField get age;
+  AgeField get age;
   @nullable
   bool get isEmailVerified; //  @nullable AuthProviders providers,
   @nullable
@@ -98,7 +98,7 @@ abstract class $UserCopyWith<$Res> {
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
       @nullable Gender gender,
-      @nullable DateTimeField age,
+      @nullable AgeField age,
       @nullable bool isEmailVerified,
       @nullable Phone phone,
       @nullable Password password,
@@ -141,7 +141,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       lastName: lastName == freezed ? _value.lastName : lastName as DisplayName,
       email: email == freezed ? _value.email : email as EmailAddress,
       gender: gender == freezed ? _value.gender : gender as Gender,
-      age: age == freezed ? _value.age : age as DateTimeField,
+      age: age == freezed ? _value.age : age as AgeField,
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
@@ -170,7 +170,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
       @nullable Gender gender,
-      @nullable DateTimeField age,
+      @nullable AgeField age,
       @nullable bool isEmailVerified,
       @nullable Phone phone,
       @nullable Password password,
@@ -214,7 +214,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       lastName: lastName == freezed ? _value.lastName : lastName as DisplayName,
       email: email == freezed ? _value.email : email as EmailAddress,
       gender: gender == freezed ? _value.gender : gender as Gender,
-      age: age == freezed ? _value.age : age as DateTimeField,
+      age: age == freezed ? _value.age : age as AgeField,
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
@@ -270,7 +270,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final Gender gender;
   @override
   @nullable
-  final DateTimeField age;
+  final AgeField age;
   @override
   @nullable
   final bool isEmailVerified;
@@ -393,7 +393,7 @@ abstract class _User extends User {
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
       @nullable Gender gender,
-      @nullable DateTimeField age,
+      @nullable AgeField age,
       @nullable bool isEmailVerified,
       @nullable Phone phone,
       @nullable Password password,
@@ -422,7 +422,7 @@ abstract class _User extends User {
   Gender get gender;
   @override
   @nullable
-  DateTimeField get age;
+  AgeField get age;
   @override
   @nullable
   bool get isEmailVerified;

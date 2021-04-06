@@ -29,8 +29,8 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
       photo: fields[9] as String,
       isEmailVerified: fields[10] as bool,
       createdAt: fields[11] as String,
-      deletedAt: fields[12] as String,
-      updatedAt: fields[13] as String,
+      updatedAt: fields[12] as String,
+      deletedAt: fields[13] as String,
     );
   }
 
@@ -63,9 +63,9 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
       ..writeByte(11)
       ..write(obj.createdAt)
       ..writeByte(12)
-      ..write(obj.deletedAt)
+      ..write(obj.updatedAt)
       ..writeByte(13)
-      ..write(obj.updatedAt);
+      ..write(obj.deletedAt);
   }
 
   @override
@@ -97,8 +97,8 @@ _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
     isEmailVerified:
         UserDTO.isEmailVerifiedFromJson(json['email_verified_at'] as String),
     createdAt: json['created_at'] as String,
-    deletedAt: json['updated_at'] as String,
-    updatedAt: json['deleted_at'] as String,
+    updatedAt: json['updated_at'] as String,
+    deletedAt: json['deleted_at'] as String,
   );
 }
 
@@ -122,7 +122,7 @@ Map<String, dynamic> _$_$_UserDTOToJson(_$_UserDTO instance) {
   writeNotNull('photo', instance.photo);
   writeNotNull('email_verified_at', instance.isEmailVerified);
   writeNotNull('created_at', instance.createdAt);
-  writeNotNull('updated_at', instance.deletedAt);
-  writeNotNull('deleted_at', instance.updatedAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('deleted_at', instance.deletedAt);
   return val;
 }

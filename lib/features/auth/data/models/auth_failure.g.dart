@@ -9,9 +9,10 @@ part of 'auth_failure.dart';
 _$_AuthFailure _$_$_AuthFailureFromJson(Map<String, dynamic> json) {
   return _$_AuthFailure(
     message: json['message'] as String ?? '',
-    details: json['details'] as String,
+    error: json['error'] as String ?? '',
     errors: const ServerFieldErrorsSerializer()
         .fromJson(json['errors'] as Map<String, dynamic>),
+    details: json['details'] as String,
   );
 }
 
@@ -25,8 +26,9 @@ Map<String, dynamic> _$_$_AuthFailureToJson(_$_AuthFailure instance) {
   }
 
   writeNotNull('message', instance.message);
-  val['details'] = instance.details;
+  writeNotNull('error', instance.error);
   writeNotNull(
       'errors', const ServerFieldErrorsSerializer().toJson(instance.errors));
+  val['details'] = instance.details;
   return val;
 }

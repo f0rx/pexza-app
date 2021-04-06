@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:async/async.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:pexza/features/core/domain/entities/entities.dart';
+import 'package:pexza/features/core/domain/failures/failure.dart';
 import 'package:pexza/features/onboarding/data/models/on_boarding_failure.dart';
 import 'package:pexza/utils/utils.dart';
 
@@ -18,7 +17,8 @@ part 'onboarding_cubit.freezed.dart';
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   final DataConnectionChecker _connectionChecker;
   final Connectivity _connectivity;
-  StreamSubscription _subscription;
+  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  StreamSubscription<DataConnectionStatus> _internetConnectionSuscription;
 
   OnBoardingCubit(
     this._connectionChecker,
@@ -33,34 +33,39 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     await HiveBoxes.userDTOBox();
     await HiveBoxes.accessTokenBox();
 
-    Stream<ConnectivityResult> _connectivityStream =
-        LazyStream(() async => _connectivity.onConnectivityChanged);
+    _connectivitySubscription?.cancel();
 
-    Stream<DataConnectionStatus> _internetConnectionStream =
-        LazyStream(() async => _connectionChecker.onStatusChange);
+    _connectivitySubscription ??= _connectivity.onConnectivityChanged.listen(
+      (result) {
+        emit(state.copyWith(
+          isConnected: result == ConnectivityResult.none
+              ? left(OnBoardingFailure.notConnected())
+              : right(result == ConnectivityResult.none),
+        ));
+      },
+    );
 
-    // Merge both streams
-    Stream _merge =
-        StreamGroup.merge([_connectivityStream, _internetConnectionStream]);
+    _internetConnectionSuscription?.cancel();
 
-    // Cancel any previous subscription
-    await _subscription?.cancel();
+    _internetConnectionSuscription ??= _connectionChecker.onStatusChange.listen(
+      (result) async {
+        emit(state.copyWith(
+          hasInternet: result == DataConnectionStatus.disconnected
+              ? left(OnBoardingFailure.poorInternet())
+              : right((await _connectivity.checkConnectivity()) !=
+                      ConnectivityResult.none &&
+                  result == DataConnectionStatus.connected),
+        ));
+      },
+    );
 
-    _subscription = _merge.listen((event) async {
-      emit(state.copyWith(
-        status: event != ConnectivityResult.none &&
-                event == DataConnectionStatus.connected
-            ? right(true)
-            : left(OnBoardingFailure.noInternetConnection()),
-      ));
-
-      emit(state.copyWith(isLoading: false));
-    });
+    emit(state.copyWith(isLoading: false));
   }
 
   @override
   Future<void> close() async {
-    await _subscription?.cancel();
+    await _connectivitySubscription?.cancel();
+    await _internetConnectionSuscription?.cancel();
     return super.close();
   }
 }

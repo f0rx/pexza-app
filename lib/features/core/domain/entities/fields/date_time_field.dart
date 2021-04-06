@@ -4,7 +4,7 @@ import 'package:pexza/features/core/domain/failures/field_object/field_object_ex
 import 'package:pexza/features/core/domain/validator/validator.dart';
 
 class DateTimeField extends FieldObject<DateTime> {
-  // static const DateTimeField DEFAULT = DateTimeField._(DateTime.august);
+  static const DateTimeField DEFAULT = DateTimeField._(null);
   final Either<FieldObjectException<String>, DateTime> value;
 
   factory DateTimeField(DateTime input) {

@@ -16,18 +16,22 @@ import 'package:pexza/features/auth/data/repositories/access_token_manager.dart'
     as _i13;
 import 'package:pexza/features/auth/data/repositories/auth_facade_impl.dart'
     as _i15;
+import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart'
+    as _i17;
+import 'package:pexza/features/auth/data/sources/remote/auth_remote_datasource.dart'
+    as _i16;
 import 'package:pexza/features/auth/domain/domain.dart' as _i14;
 import 'package:pexza/features/auth/presentation/manager/auth/auth_cubit.dart'
-    as _i17;
+    as _i19;
 import 'package:pexza/features/auth/presentation/manager/role/role_cubit.dart'
     as _i10;
 import 'package:pexza/features/auth/presentation/manager/token_verification/token_verification_cubit.dart'
     as _i12;
 import 'package:pexza/features/auth/presentation/manager/watcher/auth_watcher_cubit.dart'
-    as _i16;
+    as _i18;
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart'
     as _i9;
-import 'package:pexza/manager/locator/modules/modules.dart' as _i18;
+import 'package:pexza/manager/locator/modules/modules.dart' as _i20;
 import 'package:pexza/manager/theme/manager/theme_cubit.dart'
     as _i11; // ignore_for_file: unnecessary_lambdas
 
@@ -56,19 +60,19 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i12.TokenVerificationCubit());
     gh.lazySingleton<_i13.AccessTokenManager>(
         () => _i13.AccessTokenManager(get<_i5.Dio>()));
-    gh.lazySingleton<_i14.AuthFacade>(() => _i15.AuthFacadeImplementation(
-        get<_i4.DataConnectionChecker>(),
-        get<_i5.Dio>(),
-        get<_i13.AccessTokenManager>()));
-    gh.factory<_i16.AuthWatcherCubit>(() => _i16.AuthWatcherCubit(
-        get<_i14.AuthFacade>(),
-        get<_i4.DataConnectionChecker>(),
-        get<_i3.Connectivity>()));
-    gh.factory<_i17.AuthCubit>(() => _i17.AuthCubit(get<_i14.AuthFacade>()));
+    gh.lazySingleton<_i14.AuthFacade>(() => _i15.AuthFacadeImpl(
+        get<_i16.AuthRemoteDatasource>(), get<_i17.AuthLocalDatasource>()));
+    gh.factory<_i18.AuthWatcherCubit>(
+        () => _i18.AuthWatcherCubit(get<_i14.AuthFacade>()));
+    gh.factory<_i19.AuthCubit>(() => _i19.AuthCubit(get<_i14.AuthFacade>()));
+    gh.singleton<_i17.AuthLocalDatasource>(
+        _i17.AuthLocalDatasource(get<_i13.AccessTokenManager>()));
+    gh.singleton<_i16.AuthRemoteDatasource>(
+        _i16.AuthRemoteDatasource(get<_i5.Dio>()));
     return this;
   }
 }
 
-class _$ServiceModules extends _i18.ServiceModules {}
+class _$ServiceModules extends _i20.ServiceModules {}
 
-class _$Modules extends _i18.Modules {}
+class _$Modules extends _i20.Modules {}

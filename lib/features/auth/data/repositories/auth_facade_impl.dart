@@ -5,8 +5,8 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pexza/features/auth/data/models/token_response/token_response.dart';
-import 'package:pexza/features/auth/data/repositories/access_token_manager.dart';
+import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart';
+import 'package:pexza/features/auth/data/sources/remote/auth_remote_datasource.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/auth/data/models/auth_failure.dart';
 import 'package:pexza/features/core/core.dart';
@@ -21,28 +21,40 @@ import 'package:pexza/features/core/domain/entities/fields/date_time_field.dart'
 import 'package:pexza/utils/utils.dart';
 
 @LazySingleton(as: AuthFacade)
-class AuthFacadeImplementation extends AuthFacade {
-  final DataConnectionChecker _connectionChecker;
-  final Dio _dio;
-  final AccessTokenManager _tokenManager;
+class AuthFacadeImpl extends AuthFacade {
+  final AuthRemoteDatasource _remote;
+  final AuthLocalDatasource _local;
   StreamController<Option<User>> __controller;
 
-  AuthFacadeImplementation(
-    this._connectionChecker,
-    this._dio,
-    this._tokenManager,
+  AuthFacadeImpl(
+    this._remote,
+    this._local,
   ) : __controller = StreamController.broadcast();
 
   @override
-  void sink([Option<User> user]) {
-    __controller.sink.add(user ?? currentUser);
-  }
+  Future<void> sink([Option<User> user]) async =>
+      __controller.sink.add(user ?? await currentUser);
 
   @override
-  Option<User> get currentUser {
-    final box = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
-    if (box.isNotEmpty) return some(box.get(Keys.HIVE_USER_KEY)?.domain);
-    return none();
+  Future<Option<User>> get currentUser async {
+    // Check if device has good connection
+    final _checkConn = await this.checkHasGoodInternet();
+
+    return _checkConn.fold(
+      // If no internet, return cached user
+      (_) => _local.getCachedUserInfo().fold(
+            () => none(),
+            (dto) => some(dto.domain),
+          ),
+      // Fetch fresh user data from remote
+      (_) async => (await _remote.fetchUserInfo()).fold(
+        (f) => _local.getCachedUserInfo().fold(
+              () => none(),
+              (dto) => some(dto.domain),
+            ),
+        (dto) => some(dto.domain),
+      ),
+    );
   }
 
   @override
@@ -56,44 +68,42 @@ class AuthFacadeImplementation extends AuthFacade {
     @required EmailAddress emailAddress,
     @required Phone phone,
     @required Gender gender,
-    @required DateTimeField dateOfBirth,
+    @required AgeField age,
     @required Password password,
   }) async {
-    final UserDTO newUser = UserDTO.fromDomain(User(
-      firstName: firstName,
-      lastName: lastName,
-      email: emailAddress,
-      phone: phone,
-      gender: gender,
-      age: dateOfBirth,
-      password: password,
-    ));
-    // Prepare form data
-    FormData data = FormData.fromMap(newUser.toJson());
-
     try {
-      // Register a new Landlord / Tenant
-      await role.fold(
-        landlord: () => _dio.post(EndPoints.LANDLORD_REGISTER, data: data),
-        tenant: () => _dio.post(EndPoints.TENANT_REGISTER, data: data),
+      // Check if device has good connection
+      final _result = await this.checkHasGoodInternet();
+
+      await _result.fold(
+        // Re-Throw Exception
+        (f) => throw f,
+        // Attempt Registration
+        (_) async => await _remote.createUserAccount(
+          role: role,
+          firstName: firstName.getOrNull,
+          lastName: lastName.getOrNull,
+          emailAddress: emailAddress.getOrNull,
+          phone: phone.getOrNull,
+          gender: gender.getOrNull?.name,
+          age: age.getOrNull,
+          password: password.getOrNull,
+        ),
       );
 
       // Automatically Login new User
-      await this.login(phone: phone, password: password, role: role);
+      await this.login(role: role, phone: phone, password: password);
 
       return right(unit);
+    } on AuthFailure catch (ex) {
+      return left(ex);
     } on DioError catch (ex) {
       switch (ex.type) {
         case DioErrorType.CONNECT_TIMEOUT:
-          log.e(ex);
-          // retry(ex.request);
+          return left(AuthFailure.timeout());
           break;
         default:
-          return left(
-            AuthFailure.fromJson(ex.response.data).copyWith(
-              code: ex.response.statusCode.toString(),
-            ),
-          );
+          return handleDioAuthException(ex);
       }
     }
   }
@@ -104,31 +114,43 @@ class AuthFacadeImplementation extends AuthFacade {
     @required Phone phone,
     @required Password password,
   }) async {
-    final UserDTO dto = UserDTO.fromDomain(User(
-      phone: phone,
-      password: password,
-    ));
-
-    FormData data = FormData.fromMap(dto.toJson());
-
     try {
-      // Attempt Authentication
-      final _response = await role.fold(
-        landlord: () => _dio.post(EndPoints.LANDLORD_LOGIN, data: data),
-        tenant: () => _dio.post(EndPoints.TENANT_LOGIN, data: data),
+      // Check if device has good connection
+      final _result = await this.checkHasGoodInternet();
+
+      final _response = await _result.fold(
+        // Re-Throw Exception
+        (f) => throw f,
+        // Attempt Authentication
+        (r) async => await _remote.login(
+          role: role,
+          phone: phone.getOrNull,
+          password: password.getOrNull,
+        ),
       );
 
-      // Save Token to Box
-      _tokenManager.save(responseToken: TokenResponse.fromJson(_response.data));
+      //// Cache Access token
+      _local.cacheUserAccessToken(_response.data);
 
-      final box = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
+      // Check if device has good connection
+      final _checkConn = await this.checkHasGoodInternet();
+      // Fetch Updated user info from remote source
+      final UserDTO dto = await _checkConn.fold(
+        (f) => throw f,
+        (r) async => (await _remote.fetchUserInfo()).fold(
+          (f) => throw f,
+          id,
+        ),
+      );
 
-      // Retrieve updated user data from source
-      final _freshUserData = (await this.fetchUser()).getOrElse(() => null);
+      // Cache updated user info
+      await _local.cacheAuthenticatedUser(
+        dto,
+        loginResponse: _response.data,
+      );
 
-      box.put(Keys.HIVE_USER_KEY, _freshUserData);
-
-      sink(currentUser);
+      // Notify listeners
+      await sink();
 
       return right(unit);
     } on AuthFailure catch (ex) {
@@ -136,54 +158,38 @@ class AuthFacadeImplementation extends AuthFacade {
     } on DioError catch (ex) {
       switch (ex.type) {
         case DioErrorType.CONNECT_TIMEOUT:
-          log.e(ex);
-          // retry(ex.request);
+          return left(AuthFailure.timeout());
           break;
         default:
-          return left(
-            AuthFailure.fromJson(ex.response.data).copyWith(
-              code: ex.response.statusCode.toString(),
-            ),
-          );
+          return handleDioAuthException(ex, role: role);
       }
     }
   }
 
   @override
-  Future<Either<AuthFailure, TokenResponse>> refreshAccessToken() async {
-    // Get User Box
-    final box = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
-    // Get stored data
-    UserDTO stored = box.get(Keys.HIVE_USER_KEY);
+  Future<void> refreshAccessToken() async {
+    // Check if device has good connection
+    final _checkConn = await this.checkHasGoodInternet();
 
-    try {
-      final _response = await _dio.post(
-        EndPoints.TENANT_LOGIN,
-        data: FormData.fromMap(stored.toJson()),
-      );
+    // Refresh Access token
+    final _response = await _checkConn.fold(
+      (f) async => throw f,
+      (_) async => await _local.getCachedUserInfo().fold(
+        () async {
+          // This piece of code has errors
+          return null;
+        },
+        (dto) async => await _remote.refreshUserAccessToken(
+          role: Role.valueOf(dto.role),
+          userDTO: dto,
+        ),
+      ),
+    );
 
-      final _token = TokenResponse.fromJson(_response.data);
+    // Store new Access token
+    _local.cacheUserAccessToken(_response.data);
 
-      // Save Token to Box
-      _tokenManager.save(
-        responseToken: _token,
-      );
-
-      return right(_token);
-    } on DioError catch (ex) {
-      switch (ex.type) {
-        case DioErrorType.CONNECT_TIMEOUT:
-          log.e(ex);
-          // retry(ex.request);
-          break;
-        default:
-          return left(
-            AuthFailure.fromJson(ex.response.data).copyWith(
-              code: ex.response.statusCode.toString(),
-            ),
-          );
-      }
-    }
+    await sink();
   }
 
   @override
@@ -203,52 +209,62 @@ class AuthFacadeImplementation extends AuthFacade {
   @override
   Future<void> signOut() async {
     try {
-      await _dio.post(EndPoints.LOGOUT);
+      // Sign user-out of remote source
+      await _remote.signOut();
+      // Delete local user--auth cache
+      _local.signOut();
 
-      final box = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
-      final accessTokenBox = App.box<String>(Keys.HIVE_BOX_ACCESS_TOKEN_KEY);
-
-      // box.clear();
-      box.delete(Keys.HIVE_USER_KEY);
-      accessTokenBox.delete(Keys.HIVE_ACCESS_TOKEN_KEY);
-      accessTokenBox.clear();
-
-      sink();
+      // Notify listeners
+      await sink();
     } on DioError catch (ex) {
       switch (ex.type) {
         case DioErrorType.CONNECT_TIMEOUT:
-          log.e(ex);
+          return left(AuthFailure.timeout());
           break;
         default:
-          return left(
-            AuthFailure.fromJson(ex.response.data).copyWith(
-              code: ex.response.statusCode.toString(),
-            ),
-          );
+          return handleDioAuthException(ex);
       }
     }
   }
 
-  Future<Either<AuthFailure, UserDTO>> fetchUser() async {
-    try {
-      final _response = await _dio.get(EndPoints.GET_USER);
+  @override
+  Future<Either<AuthFailure, Unit>> facebookAuthentication(
+      [Object pendingCredentials]) {
+    // TODO: implement facebookAuthentication
+    throw UnimplementedError();
+  }
 
-      return right(UserDTO.fromJson(_response.data['data']).copyWith(
-        id: "${_response.data['data']['id']}",
+  @override
+  Future<Either<AuthFailure, Unit>> googleAuthentication(
+      [Object pendingCredentials]) {
+    // TODO: implement googleAuthentication
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> twitterAuthentication(
+      [Object pendingCredentials]) {
+    // TODO: implement twitterAuthentication
+    throw UnimplementedError();
+  }
+
+  Future<Either<AuthFailure, R>> handleDioAuthException<R>(
+    DioError ex, {
+    Role role,
+  }) async {
+    final _exception = AuthFailure.fromJson(ex.response.data).copyWith(
+      code: ex.response.statusCode.toString(),
+    );
+
+    if (_exception.is401)
+      return left(AuthFailure.unAuthenticated(
+        code: ex.response.statusCode.toString(),
+        message: role.fold(
+          landlord: () => "This account is registered as a Tenant!",
+          tenant: () => "This account is registered as a Landlord!",
+        ),
       ));
-    } on DioError catch (ex) {
-      switch (ex.type) {
-        case DioErrorType.CONNECT_TIMEOUT:
-          log.e(ex);
-          // retry(ex.request);
-          break;
-        default:
-          return left(
-            AuthFailure.fromJson(ex.response.data).copyWith(
-              code: ex.response.statusCode.toString(),
-            ),
-          );
-      }
-    }
+
+    return left(_exception);
   }
 }

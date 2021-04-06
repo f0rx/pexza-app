@@ -8,7 +8,7 @@ abstract class Facade {
       headers: requestOptions.headers,
     );
 
-    return getIt<Dio>().request<dynamic>(
+    return await getIt<Dio>().request<dynamic>(
       requestOptions.path,
       data: requestOptions.data,
       queryParameters: requestOptions.queryParameters,

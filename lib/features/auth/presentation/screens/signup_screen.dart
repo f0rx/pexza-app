@@ -8,7 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
-import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/auth/presentation/widgets/date_of_birth_field.dart';
+import 'package:pexza/features/auth/presentation/widgets/gender_field.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/vertical_spacer.dart';
@@ -23,18 +24,22 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
       lazy: true,
       create: (_) => getIt<AuthCubit>(),
       child: BlocConsumer<AuthCubit, AuthState>(
-        listenWhen: (c, p) => p.authStatus.isSome() && c.authStatus.isSome(),
+        listenWhen: (p, c) => p.isLoading && !c.isLoading,
         listener: (context, state) {
           context.read<AuthCubit>().state.authStatus.fold(
                 () => null,
                 (option) => option.fold(
                   (failure) => Flushbar(
                     duration: const Duration(seconds: 5),
-                    icon: Icon(Icons.error, color: Colors.red),
-                    messageText: AutoSizeText(failure.message),
+                    icon: const Icon(Icons.error, color: Colors.red),
+                    messageText: AutoSizeText(
+                      !failure.message.isNullOrBlank
+                          ? failure.message
+                          : failure.error,
+                    ),
                     borderRadius: 8,
                     dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                    margin: EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
                     flushbarPosition:
                         MediaQuery.of(context).viewInsets.bottom == 0
                             ? FlushbarPosition.BOTTOM

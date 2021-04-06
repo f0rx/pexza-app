@@ -58,7 +58,9 @@ class PasswordInputField extends StatelessWidget {
                         (r) => context.read<AuthCubit>().state.authStatus.fold(
                               () => null,
                               (_) => _.fold(
-                                (f) => f.errors.password.firstOrNull,
+                                (f) => !f.errors.isNull
+                                    ? f.errors.password.firstOrNull
+                                    : null,
                                 (r) => null,
                               ),
                             ),
@@ -72,8 +74,19 @@ class PasswordInputField extends StatelessWidget {
               top: 2,
               right: 0,
               bottom: context.read<AuthCubit>().state.password.value.fold(
-                  (l) => context.read<AuthCubit>().state.validate ? 20 : 2,
-                  (r) => 2),
+                    (l) => context.read<AuthCubit>().state.validate ? 20 : 2,
+                    (r) => context.read<AuthCubit>().state.authStatus.fold(
+                          () => 2,
+                          (_) => _.fold(
+                            (f) => !f.errors.isNull &&
+                                    !f.errors.password.isNull &&
+                                    f.errors.password.isNotEmpty
+                                ? 20
+                                : 2,
+                            (_) => 2,
+                          ),
+                        ),
+                  ),
               child: Material(
                 color: Colors.transparent,
                 shape: CircleBorder(),

@@ -7,6 +7,7 @@ import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:pexza/widgets/widgets.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -34,45 +35,48 @@ class SplashScreen extends StatelessWidget {
               left: 0.0,
               right: 0.0,
               bottom: App.height * 0.05,
-              child: SpinKitWave(
-                color: Theme.of(context).accentColor,
-                size: 30.0,
-                duration: Duration(milliseconds: 1200),
-                type: SpinKitWaveType.center,
-                itemCount: 7,
+              child: BlocBuilder<OnBoardingCubit, OnBoardingState>(
+                builder: (context, state) => Visibility(
+                  visible: state.isConnected.isRight() == true,
+                  child: SpinKitWave(
+                    color: Theme.of(context).accentColor,
+                    size: 30.0,
+                    duration: Duration(milliseconds: 1200),
+                    type: SpinKitWaveType.center,
+                    itemCount: 7,
+                  ),
+                ),
               ),
             ),
           ],
         ),
         //
         bottomSheet: BlocConsumer<OnBoardingCubit, OnBoardingState>(
-          listenWhen: (p, c) => c.status.isRight(),
           listener: (context, state) {
-            context.read<OnBoardingCubit>().state.status.fold(
+            context.read<OnBoardingCubit>().state.isConnected.fold(
                   (_) => null,
-                  (conn) => conn
-                      ? BlocProvider.of<AuthWatcherCubit>(App.context)
-                          .listenToAuthChanges(
-                          (option) {
-                            option.fold(
-                              () => navigator.pushAndRemoveUntil(
-                                Routes.onBoardingScreen,
+                  (_) => context.read<OnBoardingCubit>().state.hasInternet.fold(
+                        (_) => null,
+                        (_) => BlocProvider.of<AuthWatcherCubit>(App.context)
+                            .listenToAuthChanges(
+                          (option) => option.fold(
+                            () => navigator.pushAndRemoveUntil(
+                              Routes.onBoardingScreen,
+                              (route) => false,
+                            ),
+                            (user) => user?.role?.fold(
+                              tenant: () => navigator.pushAndRemoveUntil(
+                                Routes.tenantHomeScreen,
                                 (route) => false,
                               ),
-                              (user) => user?.role?.fold(
-                                tenant: () => navigator.pushAndRemoveUntil(
-                                  Routes.tenantHomeScreen,
-                                  (route) => false,
-                                ),
-                                landlord: () => navigator.pushAndRemoveUntil(
-                                  Routes.landlordHomeScreen,
-                                  (route) => false,
-                                ),
+                              landlord: () => navigator.pushAndRemoveUntil(
+                                Routes.landlordHomeScreen,
+                                (route) => false,
                               ),
-                            );
-                          },
-                        )
-                      : null,
+                            ),
+                          ),
+                        ),
+                      ),
                 );
           },
           builder: (context, state) {
@@ -81,20 +85,51 @@ class SplashScreen extends StatelessWidget {
               child: Container(
                 height: 23,
                 decoration: BoxDecoration(
-                  color: state.status.fold(
-                    (failure) => Colors.grey,
-                    (_) => AppColors.successGreen,
+                  color: state.isConnected.fold(
+                    (failure) => Helpers.optionOf(
+                      Colors.grey,
+                      Colors.grey.shade700,
+                      context: context,
+                    ),
+                    (_) => state.hasInternet.fold(
+                      (failure) => Helpers.optionOf(
+                        Colors.grey,
+                        Colors.grey.shade700,
+                        context: context,
+                      ),
+                      (_) => AppColors.successGreen,
+                    ),
                   ),
                 ),
                 child: Center(
-                  child: AutoSizeText(
-                    state.status.fold(
-                      (failure) => failure.message,
-                      (_) => "Back online",
-                    ),
-                    minFontSize: 13.0,
-                    maxLines: 1,
-                    style: TextStyle(color: Colors.white),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      state.isConnected.fold(
+                        (failure) => Icon(Icons.error,
+                            size: 20.0, color: Colors.white54),
+                        (_) => state.hasInternet.fold(
+                          (failure) => Icon(Icons.error,
+                              size: 20.0, color: Colors.white54),
+                          (_) => SizedBox(),
+                        ),
+                      ),
+                      //
+                      HorizontalSpace(width: App.shortest * 0.01),
+                      //
+                      AutoSizeText(
+                        state.isConnected.fold(
+                          (failure) => failure.message,
+                          (_) => state.hasInternet.fold(
+                            (failure) => failure.message,
+                            (_) => "Back online",
+                          ),
+                        ),
+                        minFontSize: 13.0,
+                        maxLines: 1,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
               ),

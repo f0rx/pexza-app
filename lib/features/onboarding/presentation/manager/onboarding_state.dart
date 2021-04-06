@@ -5,7 +5,9 @@ part of 'onboarding_cubit.dart';
 abstract class OnBoardingState with _$OnBoardingState {
   const factory OnBoardingState({
     @Default(false) bool isLoading,
-    @Default(Right(false)) Either<OnBoardingFailure, bool> status,
-    @Default(const None()) Option<User> authStatus,
+    @Default(Left(OnBoardingFailure.notConnected()))
+        Either<Failure, bool> isConnected,
+    @Default(Left(OnBoardingFailure.poorInternet()))
+        Either<Failure, bool> hasInternet,
   }) = _OnBoardingState;
 }
