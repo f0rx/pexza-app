@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/utils/colors.dart';
 import 'package:pexza/utils/helpers.dart';
+import 'package:pexza/widgets/home_app_bar.dart';
 import 'package:pexza/widgets/horizontal_spacer.dart';
 import 'package:pexza/widgets/icon_button.dart';
 import 'package:pexza/widgets/vertical_spacer.dart';
@@ -29,41 +30,10 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
             .copyWith(top: App.longest * 0.02),
         child: Column(
           children: [
-            SafeArea(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      AutoSizeText(
-                        "Hi, Dammy",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      //
-                      AppAssets.wavingHand,
-                    ],
-                  ),
-                  CircleAvatar(
-                    maxRadius: 22.0,
-                    minRadius: 18.0,
-                    // backgroundImage: AssetImage("${AppAssets.owner}"),
-                    backgroundColor: Colors.transparent,
-                    child: Material(
-                      shape: CircleBorder(),
-                      clipBehavior: Clip.hardEdge,
-                      color: AppColors.accentColor.shade50,
-                      child: InkWell(
-                        onTap: () => navigator.pushAccountScreen(),
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: Center(child: Text("DA")),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            HomeAppBar(
+              text: "Hi Dammy",
+              avatarText: "DA",
+              onPressed: () => navigator.pushAccountScreen(),
             ),
             //
             VerticalSpace(height: App.height * 0.03),

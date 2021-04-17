@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:pexza/features/auth/domain/auth_provider_type.dart';
+import 'package:pexza/features/auth/domain/entities/auth_provider_type.dart';
 import 'package:pexza/features/core/domain/entities/field_object.dart';
 import 'package:pexza/features/core/domain/entities/fields/country/country.dart';
 import 'package:pexza/features/core/domain/failures/field_object/field_object_exception.dart';
@@ -14,7 +14,9 @@ class Phone extends FieldObject<String> {
     assert(phone != null);
     assert(country != null);
     return Phone._(
-        Validator.phoneNumberValidator(phone, country, mode: mode), country);
+      Validator.phoneNumberValidator(phone, country, mode: mode),
+      country,
+    );
   }
 
   const Phone._(this.value, this.country);
