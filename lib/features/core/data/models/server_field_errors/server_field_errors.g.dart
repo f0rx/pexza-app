@@ -15,6 +15,7 @@ _$_ServerFieldErrors _$_$_ServerFieldErrorsFromJson(Map<String, dynamic> json) {
     age: json['age'] as List ?? '',
     phone: json['phone'] as List ?? '',
     password: json['password'] as List ?? '',
+    token: json['token'] as List ?? '',
   );
 }
 
@@ -35,5 +36,6 @@ Map<String, dynamic> _$_$_ServerFieldErrorsToJson(
   writeNotNull('age', instance.age);
   writeNotNull('phone', instance.phone);
   writeNotNull('password', instance.password);
+  writeNotNull('token', instance.token);
   return val;
 }

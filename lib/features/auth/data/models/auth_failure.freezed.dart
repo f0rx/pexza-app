@@ -19,8 +19,11 @@ class _$AuthFailureTearOff {
 // ignore: unused_element
   _AuthFailure call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-          String code,
+      @JsonKey(includeIfNull: false, defaultValue: 200)
+          int code,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String status,
       @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -35,6 +38,7 @@ class _$AuthFailureTearOff {
       String details}) {
     return _AuthFailure(
       code: code,
+      status: status,
       message: message,
       error: error,
       errors: errors,
@@ -55,8 +59,11 @@ const $AuthFailure = _$AuthFailureTearOff();
 /// @nodoc
 mixin _$AuthFailure {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-  String get code; //
+  @JsonKey(includeIfNull: false, defaultValue: 200)
+  int get code;
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  String get status; //
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get message; //
@@ -81,8 +88,11 @@ abstract class $AuthFailureCopyWith<$Res> {
       _$AuthFailureCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-          String code,
+      @JsonKey(includeIfNull: false, defaultValue: 200)
+          int code,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String status,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
@@ -109,13 +119,15 @@ class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
   @override
   $Res call({
     Object code = freezed,
+    Object status = freezed,
     Object message = freezed,
     Object error = freezed,
     Object errors = freezed,
     Object details = freezed,
   }) {
     return _then(_value.copyWith(
-      code: code == freezed ? _value.code : code as String,
+      code: code == freezed ? _value.code : code as int,
+      status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
@@ -143,8 +155,11 @@ abstract class _$AuthFailureCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-          String code,
+      @JsonKey(includeIfNull: false, defaultValue: 200)
+          int code,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String status,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
@@ -174,13 +189,15 @@ class __$AuthFailureCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
   @override
   $Res call({
     Object code = freezed,
+    Object status = freezed,
     Object message = freezed,
     Object error = freezed,
     Object errors = freezed,
     Object details = freezed,
   }) {
     return _then(_AuthFailure(
-      code: code == freezed ? _value.code : code as String,
+      code: code == freezed ? _value.code : code as int,
+      status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
@@ -195,8 +212,11 @@ class __$AuthFailureCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
 class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
   const _$_AuthFailure(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
+      @JsonKey(includeIfNull: false, defaultValue: 200)
           this.code,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          this.status,
       @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -216,8 +236,12 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-  final String code;
+  @JsonKey(includeIfNull: false, defaultValue: 200)
+  final int code;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  final String status;
   @override //
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -236,7 +260,7 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthFailure(code: $code, message: $message, error: $error, errors: $errors, details: $details)';
+    return 'AuthFailure(code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details)';
   }
 
   @override
@@ -245,6 +269,7 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'AuthFailure'))
       ..add(DiagnosticsProperty('code', code))
+      ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('message', message))
       ..add(DiagnosticsProperty('error', error))
       ..add(DiagnosticsProperty('errors', errors))
@@ -257,6 +282,8 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
         (other is _AuthFailure &&
             (identical(other.code, code) ||
                 const DeepCollectionEquality().equals(other.code, code)) &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
@@ -272,6 +299,7 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(error) ^
       const DeepCollectionEquality().hash(errors) ^
@@ -292,8 +320,11 @@ abstract class _AuthFailure extends AuthFailure {
   const _AuthFailure._() : super._();
   const factory _AuthFailure(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-          String code,
+      @JsonKey(includeIfNull: false, defaultValue: 200)
+          int code,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String status,
       @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -312,8 +343,12 @@ abstract class _AuthFailure extends AuthFailure {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-  String get code;
+  @JsonKey(includeIfNull: false, defaultValue: 200)
+  int get code;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  String get status;
   @override //
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')

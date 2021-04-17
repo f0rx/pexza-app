@@ -65,7 +65,14 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
               //
               VerticalSpace(height: App.height * .04),
               //
-              PinInputWidget(),
+              PinInputWidget<TokenVerificationCubit, TokenVerificationState>(
+                onChanged: context.read<TokenVerificationCubit>().onChanged,
+                onSubmitted: context.read<TokenVerificationCubit>().onSubmitted,
+                onCompleted: context.read<TokenVerificationCubit>().onCompleted,
+                validator: (string) {
+                  return null;
+                },
+              ),
             ],
           ),
         ),

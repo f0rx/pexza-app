@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:pexza/features/auth/presentation/widgets/confirm_password_field.dart';

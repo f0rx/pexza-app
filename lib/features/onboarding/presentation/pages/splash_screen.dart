@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
@@ -59,19 +60,30 @@ class SplashScreen extends StatelessWidget {
                         (_) => null,
                         (_) => BlocProvider.of<AuthWatcherCubit>(App.context)
                             .listenToAuthChanges(
-                          (option) => option.fold(
-                            () => navigator.pushAndRemoveUntil(
-                              Routes.onBoardingScreen,
-                              (route) => false,
+                          (either) => either.fold(
+                            (failure) => failure.fold(
+                              is1101: (email) => navigator.pushAndRemoveUntil(
+                                Routes.verifyEmailScreen,
+                                (route) => false,
+                                arguments: VerifyEmailScreenArguments(
+                                  email: EmailAddress(email ?? ""),
+                                ),
+                              ),
                             ),
-                            (user) => user?.role?.fold(
-                              tenant: () => navigator.pushAndRemoveUntil(
-                                Routes.tenantHomeScreen,
+                            (option) => option.fold(
+                              () => navigator.pushAndRemoveUntil(
+                                Routes.onBoardingScreen,
                                 (route) => false,
                               ),
-                              landlord: () => navigator.pushAndRemoveUntil(
-                                Routes.landlordHomeScreen,
-                                (route) => false,
+                              (user) => user?.role?.fold(
+                                tenant: () => navigator.pushAndRemoveUntil(
+                                  Routes.tenantHomeScreen,
+                                  (route) => false,
+                                ),
+                                landlord: () => navigator.pushAndRemoveUntil(
+                                  Routes.landlordHomeScreen,
+                                  (route) => false,
+                                ),
                               ),
                             ),
                           ),

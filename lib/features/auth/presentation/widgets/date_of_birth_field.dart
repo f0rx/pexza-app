@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
@@ -27,24 +28,27 @@ class DateOfBirthField extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AbsorbPointer(
-                    absorbing:
-                        !context.read<AuthCubit>().state.dateOfBirth.isValid,
-                    child: InputDatePickerFormField(
-                      fieldLabelText: "$labelText",
-                      fieldHintText: "mm/dd/yyyy",
-                      firstDate: AuthState.firstYear,
-                      lastDate: App.today,
-                      errorFormatText: "Invalid $labelText",
-                      errorInvalidText: "That's in the Future",
-                      onDateSubmitted:
-                          context.read<AuthCubit>().dateOfBirthChanged,
-                      initialDate: context
-                          .read<AuthCubit>()
-                          .state
-                          .dateOfBirth
-                          .value
-                          .getOrElse(() => null),
+                  GestureDetector(
+                    onTap: context.read<AuthCubit>().toggleGlow,
+                    child: AbsorbPointer(
+                      absorbing:
+                          !context.read<AuthCubit>().state.dateOfBirth.isValid,
+                      child: InputDatePickerFormField(
+                        fieldLabelText: "$labelText",
+                        fieldHintText: "mm/dd/yyyy",
+                        firstDate: AuthState.firstYear,
+                        lastDate: App.today,
+                        errorFormatText: "Invalid $labelText",
+                        errorInvalidText: "That's in the Future",
+                        onDateSubmitted:
+                            context.read<AuthCubit>().dateOfBirthChanged,
+                        initialDate: context
+                            .read<AuthCubit>()
+                            .state
+                            .dateOfBirth
+                            .value
+                            .getOrElse(() => null),
+                      ),
                     ),
                   ),
                   //
@@ -85,7 +89,7 @@ class DateOfBirthField extends StatelessWidget {
               ),
             ),
             //
-            HorizontalSpace(width: App.shortest * 0.04),
+            HorizontalSpace(width: App.shortest * 0.03),
             //
             Flexible(
               child: Container(
@@ -103,22 +107,40 @@ class DateOfBirthField extends StatelessWidget {
                         ),
                       ),
                 ),
-                child: AppIconButton(
-                  child: Icon(
-                    Icons.perm_contact_calendar,
-                    color: Colors.white,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: App.shortest * 0.12,
                   ),
-                  onPressed: () => App.showAdaptiveDatePicker(
-                    context,
-                    firstDate: AuthState.firstYear,
-                    currentDate: state.dateOfBirth.value.getOrElse(() => null),
-                    helpText: "Choose $labelText",
-                    fieldLabelText: "$labelText",
-                    fieldHintText: "mm/dd/yyyy",
-                    errorFormatText: "Invalid $labelText",
-                    errorInvalidText: "That's in the Future",
-                    selectedDate: state.dateOfBirth.value.getOrElse(() => null),
-                    onChanged: context.read<AuthCubit>().dateOfBirthChanged,
+                  child: Portal(
+                    child: PortalEntry(
+                      // visible: context.watch<AuthCubit>().state.shouldGlow,
+                      visible: false,
+                      portal: Text("Tap here"),
+                      portalAnchor: Alignment.center,
+                      childAnchor: Alignment.bottomCenter,
+                      child: AppIconButton(
+                        child: Icon(
+                          Icons.perm_contact_calendar,
+                          color: Colors.white,
+                          size: App.shortest * 0.06,
+                        ),
+                        onPressed: () => App.showAdaptiveDatePicker(
+                          context,
+                          firstDate: AuthState.firstYear,
+                          currentDate:
+                              state.dateOfBirth.value.getOrElse(() => null),
+                          helpText: "Choose $labelText",
+                          fieldLabelText: "$labelText",
+                          fieldHintText: "mm/dd/yyyy",
+                          errorFormatText: "Invalid $labelText",
+                          errorInvalidText: "That's in the Future",
+                          selectedDate:
+                              state.dateOfBirth.value.getOrElse(() => null),
+                          onChanged:
+                              context.read<AuthCubit>().dateOfBirthChanged,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

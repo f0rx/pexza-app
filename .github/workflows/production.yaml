@@ -47,7 +47,7 @@ jobs:
 
       - run: flutter pub get
       #- run: flutter test
-      - run: flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation
+      - run: flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
 
       - name: Bump version and push tag
         id: bump_tag

@@ -22,9 +22,13 @@ abstract class UserDTO implements _$UserDTO {
         String id,
     @HiveField(1)
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '', name: "user_type")
+    @JsonKey(includeIfNull: false, defaultValue: '')
     @RoleConverter()
         String role,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
+    @RoleConverter()
+        String token,
     @HiveField(2)
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "first_name")
@@ -43,21 +47,25 @@ abstract class UserDTO implements _$UserDTO {
         String gender,
     @HiveField(6)
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '')
-        String age,
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "dob")
+        String dateOfBirth,
     @HiveField(7)
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         String phone,
     @HiveField(8)
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '')
-        String password,
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "driver")
+        String provider,
     @HiveField(9)
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
-        String photo,
+        String password,
     @HiveField(10)
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
+        String photo,
+    @HiveField(11)
     @nullable
     @JsonKey(
       includeIfNull: false,
@@ -65,17 +73,17 @@ abstract class UserDTO implements _$UserDTO {
       fromJson: UserDTO.isEmailVerifiedFromJson,
     )
         bool isEmailVerified,
-    @HiveField(11)
+    @HiveField(12)
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
         String createdAt,
-    @HiveField(12)
+    @HiveField(13)
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
         String updatedAt,
-    @HiveField(13)
+    @HiveField(14)
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
@@ -84,11 +92,12 @@ abstract class UserDTO implements _$UserDTO {
 
   factory UserDTO.fromDomain(User instance) {
     return UserDTO(
+      role: instance.role?.name?.toLowerCase(),
       firstName: instance.firstName?.getOrNull,
       lastName: instance.lastName?.getOrNull,
       email: instance.email?.getOrNull,
-      gender: instance.gender?.getOrNull?.name,
-      age: instance.age?.getOrNull,
+      gender: instance.gender?.getOrNull?.name?.toLowerCase(),
+      dateOfBirth: instance.dateOfBirth?.getOrNull?.toIso8601String(),
       phone: instance.phone?.getOrNull,
       password: instance.password?.getOrNull,
     );
@@ -110,9 +119,12 @@ abstract class UserDTO implements _$UserDTO {
       gender: gender != null
           ? Gender(GenderType.valueOf(gender.capitalizeFirst()))
           : null,
-      age: age != null ? AgeField(age) : null,
+      dateOfBirth: dateOfBirth != null
+          ? DateTimeField(DateTime.parse(dateOfBirth))
+          : null,
       isEmailVerified: isEmailVerified,
       phone: phone != null ? Phone(phone, Country.NG) : null,
+      provider: provider != null ? AuthProvider.valueOf(provider) : null,
       password: Password.DEFAULT,
       photo: photo,
       createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,

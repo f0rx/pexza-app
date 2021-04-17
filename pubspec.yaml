@@ -116,6 +116,10 @@ dependencies:
   # A flutter library to show images from the internet
   # and keep them in the cache directory.
   cached_network_image: ^2.5.1
+  # This Flutter package provides a Avatar Glow Widget with cool background glowing animation.
+  avatar_glow: ^1.2.0
+  # Capture in-app user feedback, wishes, ratings and much more.
+  wiredash: ^0.5.0
 
 dependency_overrides:
   analyzer: ^0.41.1

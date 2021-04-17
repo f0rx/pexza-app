@@ -42,7 +42,7 @@ mixin AppAssets {
   /////////////////////////////////////////////////////
 
   static SvgPicture wavingHand = SvgPicture.asset(
-    '$SVG_DIR/waving-hand.svg',
+    '$SVG_DIR/waving_hand.svg',
     height: 18,
     width: 18,
     color: Colors.amberAccent,

@@ -15,7 +15,7 @@ class _$OnBoardingFailureTearOff {
 
 // ignore: unused_element
   _OnBoardingFailure call(
-      {String code, String message, String error, String details}) {
+      {int code, String message, String error, String details}) {
     return _OnBoardingFailure(
       code: code,
       message: message,
@@ -26,7 +26,7 @@ class _$OnBoardingFailureTearOff {
 
 // ignore: unused_element
   _NoInternetConnection notConnected(
-      {String code,
+      {int code,
       String message = OnBoardingFailure.kNotConnected,
       String error,
       String details}) {
@@ -40,7 +40,7 @@ class _$OnBoardingFailureTearOff {
 
 // ignore: unused_element
   _PoorInternetConnection poorInternet(
-      {String code,
+      {int code,
       String message = OnBoardingFailure.kPoorInternet,
       String error,
       String details}) {
@@ -59,30 +59,28 @@ const $OnBoardingFailure = _$OnBoardingFailureTearOff();
 
 /// @nodoc
 mixin _$OnBoardingFailure {
-  String get code;
+  int get code;
   String get message;
   String get error;
   String get details;
 
   @optionalTypeArgs
   TResult when<TResult extends Object>(
-    TResult $default(
-        String code, String message, String error, String details), {
+    TResult $default(int code, String message, String error, String details), {
     @required
         TResult notConnected(
-            String code, String message, String error, String details),
+            int code, String message, String error, String details),
     @required
         TResult poorInternet(
-            String code, String message, String error, String details),
+            int code, String message, String error, String details),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>(
-    TResult $default(
-        String code, String message, String error, String details), {
+    TResult $default(int code, String message, String error, String details), {
     TResult notConnected(
-        String code, String message, String error, String details),
+        int code, String message, String error, String details),
     TResult poorInternet(
-        String code, String message, String error, String details),
+        int code, String message, String error, String details),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -108,7 +106,7 @@ abstract class $OnBoardingFailureCopyWith<$Res> {
   factory $OnBoardingFailureCopyWith(
           OnBoardingFailure value, $Res Function(OnBoardingFailure) then) =
       _$OnBoardingFailureCopyWithImpl<$Res>;
-  $Res call({String code, String message, String error, String details});
+  $Res call({int code, String message, String error, String details});
 }
 
 /// @nodoc
@@ -128,7 +126,7 @@ class _$OnBoardingFailureCopyWithImpl<$Res>
     Object details = freezed,
   }) {
     return _then(_value.copyWith(
-      code: code == freezed ? _value.code : code as String,
+      code: code == freezed ? _value.code : code as int,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       details: details == freezed ? _value.details : details as String,
@@ -143,7 +141,7 @@ abstract class _$OnBoardingFailureCopyWith<$Res>
           _OnBoardingFailure value, $Res Function(_OnBoardingFailure) then) =
       __$OnBoardingFailureCopyWithImpl<$Res>;
   @override
-  $Res call({String code, String message, String error, String details});
+  $Res call({int code, String message, String error, String details});
 }
 
 /// @nodoc
@@ -165,7 +163,7 @@ class __$OnBoardingFailureCopyWithImpl<$Res>
     Object details = freezed,
   }) {
     return _then(_OnBoardingFailure(
-      code: code == freezed ? _value.code : code as String,
+      code: code == freezed ? _value.code : code as int,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       details: details == freezed ? _value.details : details as String,
@@ -180,7 +178,7 @@ class _$_OnBoardingFailure extends _OnBoardingFailure {
       : super._();
 
   @override
-  final String code;
+  final int code;
   @override
   final String message;
   @override
@@ -224,14 +222,13 @@ class _$_OnBoardingFailure extends _OnBoardingFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>(
-    TResult $default(
-        String code, String message, String error, String details), {
+    TResult $default(int code, String message, String error, String details), {
     @required
         TResult notConnected(
-            String code, String message, String error, String details),
+            int code, String message, String error, String details),
     @required
         TResult poorInternet(
-            String code, String message, String error, String details),
+            int code, String message, String error, String details),
   }) {
     assert($default != null);
     assert(notConnected != null);
@@ -242,12 +239,11 @@ class _$_OnBoardingFailure extends _OnBoardingFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>(
-    TResult $default(
-        String code, String message, String error, String details), {
+    TResult $default(int code, String message, String error, String details), {
     TResult notConnected(
-        String code, String message, String error, String details),
+        int code, String message, String error, String details),
     TResult poorInternet(
-        String code, String message, String error, String details),
+        int code, String message, String error, String details),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -289,13 +285,13 @@ class _$_OnBoardingFailure extends _OnBoardingFailure {
 abstract class _OnBoardingFailure extends OnBoardingFailure {
   const _OnBoardingFailure._() : super._();
   const factory _OnBoardingFailure(
-      {String code,
+      {int code,
       String message,
       String error,
       String details}) = _$_OnBoardingFailure;
 
   @override
-  String get code;
+  int get code;
   @override
   String get message;
   @override
@@ -314,7 +310,7 @@ abstract class _$NoInternetConnectionCopyWith<$Res>
           $Res Function(_NoInternetConnection) then) =
       __$NoInternetConnectionCopyWithImpl<$Res>;
   @override
-  $Res call({String code, String message, String error, String details});
+  $Res call({int code, String message, String error, String details});
 }
 
 /// @nodoc
@@ -336,7 +332,7 @@ class __$NoInternetConnectionCopyWithImpl<$Res>
     Object details = freezed,
   }) {
     return _then(_NoInternetConnection(
-      code: code == freezed ? _value.code : code as String,
+      code: code == freezed ? _value.code : code as int,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       details: details == freezed ? _value.details : details as String,
@@ -355,7 +351,7 @@ class _$_NoInternetConnection extends _NoInternetConnection {
         super._();
 
   @override
-  final String code;
+  final int code;
   @JsonKey(defaultValue: OnBoardingFailure.kNotConnected)
   @override
   final String message;
@@ -401,14 +397,13 @@ class _$_NoInternetConnection extends _NoInternetConnection {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>(
-    TResult $default(
-        String code, String message, String error, String details), {
+    TResult $default(int code, String message, String error, String details), {
     @required
         TResult notConnected(
-            String code, String message, String error, String details),
+            int code, String message, String error, String details),
     @required
         TResult poorInternet(
-            String code, String message, String error, String details),
+            int code, String message, String error, String details),
   }) {
     assert($default != null);
     assert(notConnected != null);
@@ -419,12 +414,11 @@ class _$_NoInternetConnection extends _NoInternetConnection {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>(
-    TResult $default(
-        String code, String message, String error, String details), {
+    TResult $default(int code, String message, String error, String details), {
     TResult notConnected(
-        String code, String message, String error, String details),
+        int code, String message, String error, String details),
     TResult poorInternet(
-        String code, String message, String error, String details),
+        int code, String message, String error, String details),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -466,13 +460,13 @@ class _$_NoInternetConnection extends _NoInternetConnection {
 abstract class _NoInternetConnection extends OnBoardingFailure {
   const _NoInternetConnection._() : super._();
   const factory _NoInternetConnection(
-      {String code,
+      {int code,
       String message,
       String error,
       String details}) = _$_NoInternetConnection;
 
   @override
-  String get code;
+  int get code;
   @override
   String get message;
   @override
@@ -491,7 +485,7 @@ abstract class _$PoorInternetConnectionCopyWith<$Res>
           $Res Function(_PoorInternetConnection) then) =
       __$PoorInternetConnectionCopyWithImpl<$Res>;
   @override
-  $Res call({String code, String message, String error, String details});
+  $Res call({int code, String message, String error, String details});
 }
 
 /// @nodoc
@@ -513,7 +507,7 @@ class __$PoorInternetConnectionCopyWithImpl<$Res>
     Object details = freezed,
   }) {
     return _then(_PoorInternetConnection(
-      code: code == freezed ? _value.code : code as String,
+      code: code == freezed ? _value.code : code as int,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       details: details == freezed ? _value.details : details as String,
@@ -532,7 +526,7 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
         super._();
 
   @override
-  final String code;
+  final int code;
   @JsonKey(defaultValue: OnBoardingFailure.kPoorInternet)
   @override
   final String message;
@@ -578,14 +572,13 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>(
-    TResult $default(
-        String code, String message, String error, String details), {
+    TResult $default(int code, String message, String error, String details), {
     @required
         TResult notConnected(
-            String code, String message, String error, String details),
+            int code, String message, String error, String details),
     @required
         TResult poorInternet(
-            String code, String message, String error, String details),
+            int code, String message, String error, String details),
   }) {
     assert($default != null);
     assert(notConnected != null);
@@ -596,12 +589,11 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>(
-    TResult $default(
-        String code, String message, String error, String details), {
+    TResult $default(int code, String message, String error, String details), {
     TResult notConnected(
-        String code, String message, String error, String details),
+        int code, String message, String error, String details),
     TResult poorInternet(
-        String code, String message, String error, String details),
+        int code, String message, String error, String details),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -643,13 +635,13 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
 abstract class _PoorInternetConnection extends OnBoardingFailure {
   const _PoorInternetConnection._() : super._();
   const factory _PoorInternetConnection(
-      {String code,
+      {int code,
       String message,
       String error,
       String details}) = _$_PoorInternetConnection;
 
   @override
-  String get code;
+  int get code;
   @override
   String get message;
   @override

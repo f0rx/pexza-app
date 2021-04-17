@@ -1,5 +1,3 @@
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/models/token_response/token_response.dart';
 import 'package:pexza/utils/utils.dart';
@@ -11,9 +9,7 @@ enum TOKEN_TYPE {
 
 @lazySingleton
 class AccessTokenManager {
-  final Dio _dio;
-
-  AccessTokenManager(this._dio);
+  AccessTokenManager();
 
   Future<void> save({
     String token,

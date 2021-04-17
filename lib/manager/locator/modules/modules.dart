@@ -7,7 +7,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:pexza/features/auth/data/repositories/access_token_manager.dart';
-import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -56,23 +55,21 @@ class _DioInstance {
       ).interceptor,
     );
 
-    dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 100,
-      ),
-    );
+    // dio.interceptors.add(
+    //   PrettyDioLogger(
+    //     requestHeader: true,
+    //     requestBody: true,
+    //     responseBody: true,
+    //     responseHeader: false,
+    //     error: true,
+    //     compact: true,
+    //     maxWidth: 100,
+    //   ),
+    // );
 
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options) async {
-          // log.wtf("Attach bearer token to every request");
-          log.i("Access token => ${getIt<AccessTokenManager>().fetch()}");
           options.headers["Authorization"] =
               getIt<AccessTokenManager>().fetch();
           return options;

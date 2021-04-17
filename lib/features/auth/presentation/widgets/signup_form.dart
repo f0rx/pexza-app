@@ -63,7 +63,7 @@ class _SignUpForm extends StatelessWidget {
               onPressed: context.read<AuthCubit>().createAccount,
               text: "Create Your Account",
               width: App.width,
-              height: App.height * 0.05,
+              height: App.shortest * 0.12,
             ),
             //
             VerticalSpace(height: App.height * .04),
@@ -87,6 +87,8 @@ class _SignUpForm extends StatelessWidget {
                 ),
               ),
             ),
+            //
+            VerticalSpace(height: App.height * .06),
           ],
         ),
       ),

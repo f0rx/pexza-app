@@ -1,20 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/foundation.dart';
+import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/auth/data/models/auth_failure.dart';
 import 'package:pexza/manager/locator/locator.dart';
 
 abstract class AuthFacade extends Facade {
-  Future<Option<User>> get currentUser;
+  Future<Either<AuthFailure, Option<User>>> get currentUser;
 
-  Stream<Option<User>> get onAuthStateChanged;
+  Stream<Either<AuthFailure, Option<User>>> get onAuthStateChanged;
 
-  Future<void> sink([Option<User> user]);
+  Future<void> sink([Either<AuthFailure, Option<User>> userOrFailure]);
 
   Future<Either<AuthFailure, Unit>> login({
-    @required Role role,
-    @required Phone phone,
+    @required EmailAddress email,
     @required Password password,
   });
 
@@ -25,7 +25,7 @@ abstract class AuthFacade extends Facade {
     @required EmailAddress emailAddress,
     @required Phone phone,
     @required Gender gender,
-    @required AgeField age,
+    @required DateTimeField dateOfBirth,
     @required Password password,
   });
 
@@ -51,6 +51,9 @@ abstract class AuthFacade extends Facade {
 
   Future<Either<AuthFailure, Unit>> twitterAuthentication(
       [Object pendingCredentials]);
+
+  Future<Either<AuthFailure, Unit>> verifyEmailAddress(
+      {EmailAddress email, EmailTokenField token});
 
   Future<Either<AuthFailure, Unit>> sendPasswordResetEmail(EmailAddress email);
 

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pexza/features/core/core.dart';
-import 'package:pexza/utils/boxes.dart';
 import 'package:pexza/utils/utils.dart';
 
 part 'role_state.dart';

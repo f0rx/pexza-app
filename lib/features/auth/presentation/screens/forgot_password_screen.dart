@@ -1,24 +1,15 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
-import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
-import 'package:pexza/features/auth/presentation/widgets/date_of_birth_field.dart';
-import 'package:pexza/features/auth/presentation/widgets/gender_field.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
-import 'package:pexza/widgets/vertical_spacer.dart';
-import 'package:pexza/widgets/widgets.dart';
-import 'package:wiredash/wiredash.dart';
 
-part 'package:pexza/features/auth/presentation/widgets/signup_form.dart';
-
-class SignupScreen extends StatelessWidget with AutoRouteWrapper {
+class ForgotPasswordScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
@@ -64,10 +55,9 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
+      body: Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
             controller: ScrollController(),
             physics: Helpers.physics,
             padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding),
@@ -77,7 +67,7 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
                 Flexible(
                   child: SafeArea(
                     child: AutoSizeText(
-                      "Sign Up",
+                      "Forgot Password",
                       textAlign: TextAlign.left,
                       maxLines: 1,
                       style: TextStyle(
@@ -90,31 +80,8 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
                     ),
                   ),
                 ),
-                //
-                VerticalSpace(height: App.height * 0.05),
-                //
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Helpers.descriptionPadding),
-                    child: AutoSizeText(
-                      "Please, enter your details to onboard yourself into our property management platform.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 17.0, wordSpacing: 2.0),
-                      softWrap: true,
-                      wrapWords: true,
-                    ),
-                  ),
-                ),
-                //
-                VerticalSpace(height: App.height * 0.04),
-                //
-                Flexible(
-                  child: _SignUpForm(),
-                ),
               ],
             ),
-          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 export 'package:pexza/config/env.dart';
+export 'package:pexza/config/secrets.dart';
 export 'package:pexza/manager/router/export.dart';
 
 export 'app_icons_icons.dart';

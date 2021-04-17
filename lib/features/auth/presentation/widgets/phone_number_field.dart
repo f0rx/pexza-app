@@ -12,8 +12,14 @@ import 'package:pexza/widgets/vertical_spacer.dart';
 class PhoneNumberField extends StatelessWidget {
   final FocusNode focus;
   final FocusNode next;
+  final FIELD_VALIDATION mode;
 
-  PhoneNumberField({Key key, this.focus, this.next}) : super(key: key);
+  PhoneNumberField({
+    Key key,
+    this.focus,
+    this.next,
+    this.mode,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +126,7 @@ class PhoneNumberField extends StatelessWidget {
                         onChanged: (value) =>
                             context.read<AuthCubit>().phoneNumberChanged(
                                   value,
-                                  mode: FIELD_VALIDATION.BASIC,
+                                  mode: mode,
                                 ),
                         onFieldSubmitted: (_) => next == null
                             ? FocusScope.of(context).unfocus()

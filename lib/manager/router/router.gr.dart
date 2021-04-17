@@ -9,11 +9,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pexza/features/_404.dart';
+import 'package:pexza/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/login_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/profile_select_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/profile_setup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
+import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
+import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_property_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_tenant_screen.dart';
@@ -40,6 +43,8 @@ class Routes {
   static const String rentDetailsScreen = '/rent-details-screen';
   static const String loginScreen = '/login-screen';
   static const String signupScreen = '/signup-screen';
+  static const String forgotPasswordScreen = '/forgot-password-screen';
+  static const String verifyEmailScreen = '/verify-email-screen';
   static const String tenantHomeScreen = '/tenant-home-screen';
   static const String tenantPropertyDetailScreen =
       '/tenant-property-detail-screen';
@@ -69,6 +74,8 @@ class Routes {
     rentDetailsScreen,
     loginScreen,
     signupScreen,
+    forgotPasswordScreen,
+    verifyEmailScreen,
     tenantHomeScreen,
     tenantPropertyDetailScreen,
     tenantRentDetailScreen,
@@ -99,6 +106,8 @@ class Router extends RouterBase {
     RouteDef(Routes.rentDetailsScreen, page: RentDetailsScreen),
     RouteDef(Routes.loginScreen, page: LoginScreen),
     RouteDef(Routes.signupScreen, page: SignupScreen),
+    RouteDef(Routes.forgotPasswordScreen, page: ForgotPasswordScreen),
+    RouteDef(Routes.verifyEmailScreen, page: VerifyEmailScreen),
     RouteDef(Routes.tenantHomeScreen,
         page: TenantHomeScreen, guards: [AuthGuard]),
     RouteDef(Routes.tenantPropertyDetailScreen,
@@ -176,6 +185,26 @@ class Router extends RouterBase {
     SignupScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => SignupScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    ForgotPasswordScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ForgotPasswordScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    VerifyEmailScreen: (data) {
+      final args = data.getArgs<VerifyEmailScreenArguments>(
+        orElse: () => VerifyEmailScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => VerifyEmailScreen(
+          key: args.key,
+          email: args.email,
+        ).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -343,6 +372,18 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushSignupScreen() => push<dynamic>(Routes.signupScreen);
 
+  Future<dynamic> pushForgotPasswordScreen() =>
+      push<dynamic>(Routes.forgotPasswordScreen);
+
+  Future<dynamic> pushVerifyEmailScreen({
+    Key key,
+    EmailAddress email,
+  }) =>
+      push<dynamic>(
+        Routes.verifyEmailScreen,
+        arguments: VerifyEmailScreenArguments(key: key, email: email),
+      );
+
   Future<dynamic> pushTenantHomeScreen() =>
       push<dynamic>(Routes.tenantHomeScreen);
 
@@ -410,6 +451,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// VerifyEmailScreen arguments holder class
+class VerifyEmailScreenArguments {
+  final Key key;
+  final EmailAddress email;
+  VerifyEmailScreenArguments({this.key, this.email});
+}
 
 /// TenantPropertyDetailScreen arguments holder class
 class TenantPropertyDetailScreenArguments {

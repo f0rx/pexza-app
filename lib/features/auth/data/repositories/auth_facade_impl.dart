@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -17,14 +16,13 @@ import 'package:pexza/features/core/domain/entities/fields/password.dart';
 import 'package:pexza/features/core/domain/entities/fields/gender/gender.dart';
 import 'package:pexza/features/core/domain/entities/fields/email_address.dart';
 import 'package:pexza/features/core/domain/entities/fields/display_name.dart';
-import 'package:pexza/features/core/domain/entities/fields/date_time_field.dart';
 import 'package:pexza/utils/utils.dart';
 
 @LazySingleton(as: AuthFacade)
 class AuthFacadeImpl extends AuthFacade {
   final AuthRemoteDatasource _remote;
   final AuthLocalDatasource _local;
-  StreamController<Option<User>> __controller;
+  StreamController<Either<AuthFailure, Option<User>>> __controller;
 
   AuthFacadeImpl(
     this._remote,
@@ -32,33 +30,42 @@ class AuthFacadeImpl extends AuthFacade {
   ) : __controller = StreamController.broadcast();
 
   @override
-  Future<void> sink([Option<User> user]) async =>
-      __controller.sink.add(user ?? await currentUser);
+  Future<void> sink([Either<AuthFailure, Option<User>> userOrFailure]) async =>
+      __controller.sink.add(userOrFailure ?? await currentUser);
 
   @override
-  Future<Option<User>> get currentUser async {
+  Future<Either<AuthFailure, Option<User>>> get currentUser async {
     // Check if device has good connection
     final _checkConn = await this.checkHasGoodInternet();
 
     return _checkConn.fold(
       // If no internet, return cached user
       (_) => _local.getCachedUserInfo().fold(
-            () => none(),
-            (dto) => some(dto.domain),
+            () => right(none()),
+            (dto) => right(some(dto.domain)),
           ),
       // Fetch fresh user data from remote
-      (_) async => (await _remote.fetchUserInfo()).fold(
+      (_) async => (await _remote.fetchUserInfo(() {
+        final cached = _local.getCachedUserInfo();
+        // log.wtf(cached?.getOrElse(() => null));
+        return cached.fold(
+          () => null,
+          (user) => log.w("[in get currentUser] ==> ${user.email}"),
+        );
+      }))
+          .fold(
         (f) => _local.getCachedUserInfo().fold(
-              () => none(),
-              (dto) => some(dto.domain),
+              () => right(none()),
+              (dto) => right(some(dto.domain)),
             ),
-        (dto) => some(dto.domain),
+        (dto) => right(some(dto.domain)),
       ),
     );
   }
 
   @override
-  Stream<Option<User>> get onAuthStateChanged => __controller.stream;
+  Stream<Either<AuthFailure, Option<User>>> get onAuthStateChanged =>
+      __controller.stream;
 
   @override
   Future<Either<AuthFailure, Unit>> createAccount({
@@ -68,7 +75,7 @@ class AuthFacadeImpl extends AuthFacade {
     @required EmailAddress emailAddress,
     @required Phone phone,
     @required Gender gender,
-    @required AgeField age,
+    @required DateTimeField dateOfBirth,
     @required Password password,
   }) async {
     try {
@@ -79,20 +86,20 @@ class AuthFacadeImpl extends AuthFacade {
         // Re-Throw Exception
         (f) => throw f,
         // Attempt Registration
-        (_) async => await _remote.createUserAccount(
+        (_) async => await _remote.createUserAccount(UserDTO.fromDomain(User(
           role: role,
-          firstName: firstName.getOrNull,
-          lastName: lastName.getOrNull,
-          emailAddress: emailAddress.getOrNull,
-          phone: phone.getOrNull,
-          gender: gender.getOrNull?.name,
-          age: age.getOrNull,
-          password: password.getOrNull,
-        ),
+          firstName: firstName,
+          lastName: lastName,
+          email: emailAddress,
+          phone: phone,
+          gender: gender,
+          dateOfBirth: dateOfBirth,
+          password: password,
+        ))),
       );
 
       // Automatically Login new User
-      await this.login(role: role, phone: phone, password: password);
+      await this.login(email: emailAddress, password: password);
 
       return right(unit);
     } on AuthFailure catch (ex) {
@@ -110,8 +117,7 @@ class AuthFacadeImpl extends AuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> login({
-    @required Role role,
-    @required Phone phone,
+    @required EmailAddress email,
     @required Password password,
   }) async {
     try {
@@ -123,8 +129,7 @@ class AuthFacadeImpl extends AuthFacade {
         (f) => throw f,
         // Attempt Authentication
         (r) async => await _remote.login(
-          role: role,
-          phone: phone.getOrNull,
+          email: email.getOrNull,
           password: password.getOrNull,
         ),
       );
@@ -132,22 +137,7 @@ class AuthFacadeImpl extends AuthFacade {
       //// Cache Access token
       _local.cacheUserAccessToken(_response.data);
 
-      // Check if device has good connection
-      final _checkConn = await this.checkHasGoodInternet();
-      // Fetch Updated user info from remote source
-      final UserDTO dto = await _checkConn.fold(
-        (f) => throw f,
-        (r) async => (await _remote.fetchUserInfo()).fold(
-          (f) => throw f,
-          id,
-        ),
-      );
-
-      // Cache updated user info
-      await _local.cacheAuthenticatedUser(
-        dto,
-        loginResponse: _response.data,
-      );
+      await getAndCacheUserInfo();
 
       // Notify listeners
       await sink();
@@ -161,7 +151,10 @@ class AuthFacadeImpl extends AuthFacade {
           return left(AuthFailure.timeout());
           break;
         default:
-          return handleDioAuthException(ex, role: role);
+          return handleDioAuthException(
+            ex,
+            info: UserDTO(email: email.getOrEmpty),
+          );
       }
     }
   }
@@ -180,7 +173,6 @@ class AuthFacadeImpl extends AuthFacade {
           return null;
         },
         (dto) async => await _remote.refreshUserAccessToken(
-          role: Role.valueOf(dto.role),
           userDTO: dto,
         ),
       ),
@@ -190,6 +182,39 @@ class AuthFacadeImpl extends AuthFacade {
     _local.cacheUserAccessToken(_response.data);
 
     await sink();
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> verifyEmailAddress({
+    EmailAddress email,
+    EmailTokenField token,
+  }) async {
+    try {
+      print("Arrived here");
+      // Check if device has good connection
+      final _checkConn = await this.checkHasGoodInternet();
+
+      await _checkConn.fold(
+        (f) async => throw f,
+        (_) async {
+          return await _remote.verifyUserEmailAddress(
+            email.getOrEmpty,
+            token.getOrEmpty,
+          );
+        },
+      );
+
+      await getAndCacheUserInfo();
+
+      // Here, it kinda looks like i'm fetching the user info twice!?
+      await sink();
+
+      return right(unit);
+    } on AuthFailure catch (ex) {
+      return left(ex);
+    } on DioError catch (ex) {
+      return handleDioAuthException(ex);
+    }
   }
 
   @override
@@ -248,22 +273,57 @@ class AuthFacadeImpl extends AuthFacade {
     throw UnimplementedError();
   }
 
-  Future<Either<AuthFailure, R>> handleDioAuthException<R>(
-    DioError ex, {
-    Role role,
-  }) async {
-    final _exception = AuthFailure.fromJson(ex.response.data).copyWith(
-      code: ex.response.statusCode.toString(),
+  Future<void> getAndCacheUserInfo() async {
+    // Check if device has good connection
+    final _checkConn = await this.checkHasGoodInternet();
+    // Fetch Updated user info from remote source
+    final UserDTO dto = await _checkConn.fold(
+      (f) {
+        throw f;
+      },
+      (r) async => (await _remote.fetchUserInfo()).fold(
+        (f) {
+          throw f;
+        },
+        id,
+      ),
     );
 
-    if (_exception.is401)
-      return left(AuthFailure.unAuthenticated(
-        code: ex.response.statusCode.toString(),
-        message: role.fold(
-          landlord: () => "This account is registered as a Tenant!",
-          tenant: () => "This account is registered as a Landlord!",
-        ),
-      ));
+    // Cache updated user info
+    await _local.cacheAuthenticatedUser(dto);
+  }
+
+  Future<Either<AuthFailure, R>> handleDioAuthException<R>(
+    DioError ex, {
+    UserDTO info,
+  }) async {
+    AuthFailure _exception;
+
+    switch (ex.type) {
+      case DioErrorType.CONNECT_TIMEOUT:
+        _exception = AuthFailure.timeout();
+        break;
+      case DioErrorType.RECEIVE_TIMEOUT:
+        _exception = AuthFailure.receiveTimeout();
+        break;
+      case DioErrorType.DEFAULT:
+      case DioErrorType.RESPONSE:
+        _exception = AuthFailure.fromJson(ex.response.data).copyWith(
+          code: ex.response?.data['code'] ?? ex.response.statusCode,
+        );
+        break;
+      case DioErrorType.SEND_TIMEOUT:
+        _exception = AuthFailure.timeout();
+        break;
+      default:
+        _exception = AuthFailure.unknownFailure();
+    }
+
+    // Sink all unrelated auth-failures
+    // propagate any necessary data upwards
+    await sink(
+      left(_exception.copyWith(details: info?.email)),
+    );
 
     return left(_exception);
   }

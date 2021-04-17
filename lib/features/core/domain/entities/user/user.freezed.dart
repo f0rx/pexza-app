@@ -21,8 +21,9 @@ class _$UserTearOff {
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
       @nullable Gender gender,
-      @nullable AgeField age,
+      @nullable DateTimeField dateOfBirth,
       @nullable bool isEmailVerified,
+      @nullable AuthProvider provider,
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
@@ -36,8 +37,9 @@ class _$UserTearOff {
       lastName: lastName,
       email: email,
       gender: gender,
-      age: age,
+      dateOfBirth: dateOfBirth,
       isEmailVerified: isEmailVerified,
+      provider: provider,
       phone: phone,
       password: password,
       photo: photo,
@@ -67,9 +69,11 @@ mixin _$User {
   @nullable
   Gender get gender;
   @nullable
-  AgeField get age;
+  DateTimeField get dateOfBirth;
   @nullable
-  bool get isEmailVerified; //  @nullable AuthProviders providers,
+  bool get isEmailVerified;
+  @nullable
+  AuthProvider get provider;
   @nullable
   Phone get phone;
   @nullable
@@ -98,8 +102,9 @@ abstract class $UserCopyWith<$Res> {
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
       @nullable Gender gender,
-      @nullable AgeField age,
+      @nullable DateTimeField dateOfBirth,
       @nullable bool isEmailVerified,
+      @nullable AuthProvider provider,
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
@@ -124,8 +129,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object lastName = freezed,
     Object email = freezed,
     Object gender = freezed,
-    Object age = freezed,
+    Object dateOfBirth = freezed,
     Object isEmailVerified = freezed,
+    Object provider = freezed,
     Object phone = freezed,
     Object password = freezed,
     Object photo = freezed,
@@ -141,10 +147,14 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       lastName: lastName == freezed ? _value.lastName : lastName as DisplayName,
       email: email == freezed ? _value.email : email as EmailAddress,
       gender: gender == freezed ? _value.gender : gender as Gender,
-      age: age == freezed ? _value.age : age as AgeField,
+      dateOfBirth: dateOfBirth == freezed
+          ? _value.dateOfBirth
+          : dateOfBirth as DateTimeField,
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
+      provider:
+          provider == freezed ? _value.provider : provider as AuthProvider,
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
       photo: photo == freezed ? _value.photo : photo as String,
@@ -170,8 +180,9 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
       @nullable Gender gender,
-      @nullable AgeField age,
+      @nullable DateTimeField dateOfBirth,
       @nullable bool isEmailVerified,
+      @nullable AuthProvider provider,
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
@@ -197,8 +208,9 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object lastName = freezed,
     Object email = freezed,
     Object gender = freezed,
-    Object age = freezed,
+    Object dateOfBirth = freezed,
     Object isEmailVerified = freezed,
+    Object provider = freezed,
     Object phone = freezed,
     Object password = freezed,
     Object photo = freezed,
@@ -214,10 +226,14 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       lastName: lastName == freezed ? _value.lastName : lastName as DisplayName,
       email: email == freezed ? _value.email : email as EmailAddress,
       gender: gender == freezed ? _value.gender : gender as Gender,
-      age: age == freezed ? _value.age : age as AgeField,
+      dateOfBirth: dateOfBirth == freezed
+          ? _value.dateOfBirth
+          : dateOfBirth as DateTimeField,
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
+      provider:
+          provider == freezed ? _value.provider : provider as AuthProvider,
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
       photo: photo == freezed ? _value.photo : photo as String,
@@ -240,8 +256,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       @nullable this.lastName,
       @nullable this.email,
       @nullable this.gender,
-      @nullable this.age,
+      @nullable this.dateOfBirth,
       @nullable this.isEmailVerified,
+      @nullable this.provider,
       @nullable this.phone,
       @nullable this.password,
       @nullable this.photo,
@@ -270,11 +287,14 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final Gender gender;
   @override
   @nullable
-  final AgeField age;
+  final DateTimeField dateOfBirth;
   @override
   @nullable
   final bool isEmailVerified;
-  @override //  @nullable AuthProviders providers,
+  @override
+  @nullable
+  final AuthProvider provider;
+  @override
   @nullable
   final Phone phone;
   @override
@@ -295,7 +315,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, age: $age, isEmailVerified: $isEmailVerified, phone: $phone, password: $password, photo: $photo, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'User(id: $id, role: $role, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, phone: $phone, password: $password, photo: $photo, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -309,8 +329,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('lastName', lastName))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('gender', gender))
-      ..add(DiagnosticsProperty('age', age))
+      ..add(DiagnosticsProperty('dateOfBirth', dateOfBirth))
       ..add(DiagnosticsProperty('isEmailVerified', isEmailVerified))
+      ..add(DiagnosticsProperty('provider', provider))
       ..add(DiagnosticsProperty('phone', phone))
       ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('photo', photo))
@@ -337,11 +358,15 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.gender, gender) ||
                 const DeepCollectionEquality().equals(other.gender, gender)) &&
-            (identical(other.age, age) ||
-                const DeepCollectionEquality().equals(other.age, age)) &&
+            (identical(other.dateOfBirth, dateOfBirth) ||
+                const DeepCollectionEquality()
+                    .equals(other.dateOfBirth, dateOfBirth)) &&
             (identical(other.isEmailVerified, isEmailVerified) ||
                 const DeepCollectionEquality()
                     .equals(other.isEmailVerified, isEmailVerified)) &&
+            (identical(other.provider, provider) ||
+                const DeepCollectionEquality()
+                    .equals(other.provider, provider)) &&
             (identical(other.phone, phone) ||
                 const DeepCollectionEquality().equals(other.phone, phone)) &&
             (identical(other.password, password) ||
@@ -369,8 +394,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(lastName) ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(gender) ^
-      const DeepCollectionEquality().hash(age) ^
+      const DeepCollectionEquality().hash(dateOfBirth) ^
       const DeepCollectionEquality().hash(isEmailVerified) ^
+      const DeepCollectionEquality().hash(provider) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(photo) ^
@@ -393,8 +419,9 @@ abstract class _User extends User {
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
       @nullable Gender gender,
-      @nullable AgeField age,
+      @nullable DateTimeField dateOfBirth,
       @nullable bool isEmailVerified,
+      @nullable AuthProvider provider,
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
@@ -422,11 +449,14 @@ abstract class _User extends User {
   Gender get gender;
   @override
   @nullable
-  AgeField get age;
+  DateTimeField get dateOfBirth;
   @override
   @nullable
   bool get isEmailVerified;
-  @override //  @nullable AuthProviders providers,
+  @override
+  @nullable
+  AuthProvider get provider;
+  @override
   @nullable
   Phone get phone;
   @override

@@ -24,8 +24,10 @@ class _$AuthStateTearOff {
       @required Password passwordConfirmation,
       @required Gender gender,
       @required DateTimeField dateOfBirth,
+      @required EmailTokenField emailToken,
       Role subscription,
       bool isLoading = false,
+      bool shouldGlow = false,
       bool validate = false,
       bool passwordHidden = true,
       Option<Either<AuthFailure, Unit>> authStatus = const None()}) {
@@ -39,8 +41,10 @@ class _$AuthStateTearOff {
       passwordConfirmation: passwordConfirmation,
       gender: gender,
       dateOfBirth: dateOfBirth,
+      emailToken: emailToken,
       subscription: subscription,
       isLoading: isLoading,
+      shouldGlow: shouldGlow,
       validate: validate,
       passwordHidden: passwordHidden,
       authStatus: authStatus,
@@ -63,8 +67,10 @@ mixin _$AuthState {
   Password get passwordConfirmation;
   Gender get gender;
   DateTimeField get dateOfBirth;
+  EmailTokenField get emailToken;
   Role get subscription;
   bool get isLoading;
+  bool get shouldGlow;
   bool get validate;
   bool get passwordHidden;
   Option<Either<AuthFailure, Unit>> get authStatus;
@@ -87,8 +93,10 @@ abstract class $AuthStateCopyWith<$Res> {
       Password passwordConfirmation,
       Gender gender,
       DateTimeField dateOfBirth,
+      EmailTokenField emailToken,
       Role subscription,
       bool isLoading,
+      bool shouldGlow,
       bool validate,
       bool passwordHidden,
       Option<Either<AuthFailure, Unit>> authStatus});
@@ -115,8 +123,10 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
     Object passwordConfirmation = freezed,
     Object gender = freezed,
     Object dateOfBirth = freezed,
+    Object emailToken = freezed,
     Object subscription = freezed,
     Object isLoading = freezed,
+    Object shouldGlow = freezed,
     Object validate = freezed,
     Object passwordHidden = freezed,
     Object authStatus = freezed,
@@ -138,9 +148,14 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
       dateOfBirth: dateOfBirth == freezed
           ? _value.dateOfBirth
           : dateOfBirth as DateTimeField,
+      emailToken: emailToken == freezed
+          ? _value.emailToken
+          : emailToken as EmailTokenField,
       subscription:
           subscription == freezed ? _value.subscription : subscription as Role,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
+      shouldGlow:
+          shouldGlow == freezed ? _value.shouldGlow : shouldGlow as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
       passwordHidden: passwordHidden == freezed
           ? _value.passwordHidden
@@ -178,8 +193,10 @@ abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       Password passwordConfirmation,
       Gender gender,
       DateTimeField dateOfBirth,
+      EmailTokenField emailToken,
       Role subscription,
       bool isLoading,
+      bool shouldGlow,
       bool validate,
       bool passwordHidden,
       Option<Either<AuthFailure, Unit>> authStatus});
@@ -208,8 +225,10 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
     Object passwordConfirmation = freezed,
     Object gender = freezed,
     Object dateOfBirth = freezed,
+    Object emailToken = freezed,
     Object subscription = freezed,
     Object isLoading = freezed,
+    Object shouldGlow = freezed,
     Object validate = freezed,
     Object passwordHidden = freezed,
     Object authStatus = freezed,
@@ -231,9 +250,14 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
       dateOfBirth: dateOfBirth == freezed
           ? _value.dateOfBirth
           : dateOfBirth as DateTimeField,
+      emailToken: emailToken == freezed
+          ? _value.emailToken
+          : emailToken as EmailTokenField,
       subscription:
           subscription == freezed ? _value.subscription : subscription as Role,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
+      shouldGlow:
+          shouldGlow == freezed ? _value.shouldGlow : shouldGlow as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
       passwordHidden: passwordHidden == freezed
           ? _value.passwordHidden
@@ -257,8 +281,10 @@ class _$_AuthState extends _AuthState {
       @required this.passwordConfirmation,
       @required this.gender,
       @required this.dateOfBirth,
+      @required this.emailToken,
       this.subscription,
       this.isLoading = false,
+      this.shouldGlow = false,
       this.validate = false,
       this.passwordHidden = true,
       this.authStatus = const None()})
@@ -271,7 +297,9 @@ class _$_AuthState extends _AuthState {
         assert(passwordConfirmation != null),
         assert(gender != null),
         assert(dateOfBirth != null),
+        assert(emailToken != null),
         assert(isLoading != null),
+        assert(shouldGlow != null),
         assert(validate != null),
         assert(passwordHidden != null),
         assert(authStatus != null),
@@ -296,10 +324,15 @@ class _$_AuthState extends _AuthState {
   @override
   final DateTimeField dateOfBirth;
   @override
+  final EmailTokenField emailToken;
+  @override
   final Role subscription;
   @JsonKey(defaultValue: false)
   @override
   final bool isLoading;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool shouldGlow;
   @JsonKey(defaultValue: false)
   @override
   final bool validate;
@@ -312,7 +345,7 @@ class _$_AuthState extends _AuthState {
 
   @override
   String toString() {
-    return 'AuthState(firstName: $firstName, lastName: $lastName, emailAddress: $emailAddress, phone: $phone, region: $region, password: $password, passwordConfirmation: $passwordConfirmation, gender: $gender, dateOfBirth: $dateOfBirth, subscription: $subscription, isLoading: $isLoading, validate: $validate, passwordHidden: $passwordHidden, authStatus: $authStatus)';
+    return 'AuthState(firstName: $firstName, lastName: $lastName, emailAddress: $emailAddress, phone: $phone, region: $region, password: $password, passwordConfirmation: $passwordConfirmation, gender: $gender, dateOfBirth: $dateOfBirth, emailToken: $emailToken, subscription: $subscription, isLoading: $isLoading, shouldGlow: $shouldGlow, validate: $validate, passwordHidden: $passwordHidden, authStatus: $authStatus)';
   }
 
   @override
@@ -343,12 +376,18 @@ class _$_AuthState extends _AuthState {
             (identical(other.dateOfBirth, dateOfBirth) ||
                 const DeepCollectionEquality()
                     .equals(other.dateOfBirth, dateOfBirth)) &&
+            (identical(other.emailToken, emailToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.emailToken, emailToken)) &&
             (identical(other.subscription, subscription) ||
                 const DeepCollectionEquality()
                     .equals(other.subscription, subscription)) &&
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
+            (identical(other.shouldGlow, shouldGlow) ||
+                const DeepCollectionEquality()
+                    .equals(other.shouldGlow, shouldGlow)) &&
             (identical(other.validate, validate) ||
                 const DeepCollectionEquality()
                     .equals(other.validate, validate)) &&
@@ -372,8 +411,10 @@ class _$_AuthState extends _AuthState {
       const DeepCollectionEquality().hash(passwordConfirmation) ^
       const DeepCollectionEquality().hash(gender) ^
       const DeepCollectionEquality().hash(dateOfBirth) ^
+      const DeepCollectionEquality().hash(emailToken) ^
       const DeepCollectionEquality().hash(subscription) ^
       const DeepCollectionEquality().hash(isLoading) ^
+      const DeepCollectionEquality().hash(shouldGlow) ^
       const DeepCollectionEquality().hash(validate) ^
       const DeepCollectionEquality().hash(passwordHidden) ^
       const DeepCollectionEquality().hash(authStatus);
@@ -396,8 +437,10 @@ abstract class _AuthState extends AuthState {
       @required Password passwordConfirmation,
       @required Gender gender,
       @required DateTimeField dateOfBirth,
+      @required EmailTokenField emailToken,
       Role subscription,
       bool isLoading,
+      bool shouldGlow,
       bool validate,
       bool passwordHidden,
       Option<Either<AuthFailure, Unit>> authStatus}) = _$_AuthState;
@@ -421,9 +464,13 @@ abstract class _AuthState extends AuthState {
   @override
   DateTimeField get dateOfBirth;
   @override
+  EmailTokenField get emailToken;
+  @override
   Role get subscription;
   @override
   bool get isLoading;
+  @override
+  bool get shouldGlow;
   @override
   bool get validate;
   @override

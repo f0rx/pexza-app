@@ -9,6 +9,7 @@ import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/manager/router/export.dart';
 import 'package:pexza/manager/theme/theme.dart';
 import 'package:pexza/utils/utils.dart';
+import 'package:wiredash/wiredash.dart';
 
 class Pexza extends StatelessWidget {
   /// This is the entry point for Pexza App
@@ -29,17 +30,22 @@ class Pexza extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeCubit, AppTheme>(
         builder: (context, app) => Portal(
-          child: MaterialApp(
-            title: AppStrings.appName.capitalizeFirst(),
-            debugShowCheckedModeBanner: false,
-            theme: app?.themeData() ?? AppTheme.light().themeData(),
-            darkTheme: AppTheme.dark().themeData(),
-            builder: ExtendedNavigator(
-              navigatorKey: App.key,
-              initialRoute: Routes.splashScreen,
-              observers: [NavigationHistoryObserver()],
-              router: Router(),
-              guards: [AuthGuard()],
+          child: Wiredash(
+            projectId: env.kWiredashProjectId,
+            secret: env.kWiredashSecret,
+            navigatorKey: App.key,
+            child: MaterialApp(
+              title: AppStrings.appName.capitalizeFirst(),
+              debugShowCheckedModeBanner: false,
+              theme: app?.themeData() ?? AppTheme.light().themeData(),
+              darkTheme: AppTheme.dark().themeData(),
+              builder: ExtendedNavigator(
+                navigatorKey: App.key,
+                initialRoute: Routes.splashScreen,
+                observers: [NavigationHistoryObserver()],
+                router: Router(),
+                guards: [AuthGuard()],
+              ),
             ),
           ),
         ),

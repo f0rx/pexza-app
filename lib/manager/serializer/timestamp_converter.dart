@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pexza/features/core/data/data.dart';
 
 class TimestampConverter implements JsonConverter<DateTime, String> {
   const TimestampConverter();

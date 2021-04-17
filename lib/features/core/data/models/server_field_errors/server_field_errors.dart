@@ -37,6 +37,10 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         List<dynamic> password,
+    @required
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
+        List<dynamic> token,
   }) = _ServerFieldErrors;
 
   factory ServerFieldErrors.fromJson(Map<String, dynamic> json) =>

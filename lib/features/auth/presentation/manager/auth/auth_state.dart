@@ -16,8 +16,10 @@ abstract class AuthState with _$AuthState {
     @required Password passwordConfirmation,
     @required Gender gender,
     @required DateTimeField dateOfBirth,
+    @required EmailTokenField emailToken,
     Role subscription,
     @Default(false) bool isLoading,
+    @Default(false) bool shouldGlow,
     @Default(false) bool validate,
     @Default(true) bool passwordHidden,
     @Default(const None()) Option<Either<AuthFailure, Unit>> authStatus,
@@ -33,5 +35,6 @@ abstract class AuthState with _$AuthState {
         dateOfBirth: DateTimeField(null),
         passwordConfirmation: Password(""),
         gender: Gender(GenderType.Male),
+        emailToken: EmailTokenField(""),
       );
 }

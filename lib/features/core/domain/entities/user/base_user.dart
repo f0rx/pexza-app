@@ -7,7 +7,7 @@ abstract class BaseUser {
   DisplayName get lastName;
   EmailAddress get email;
   Phone get phone;
-  AgeField get age;
+  DateTimeField get dateOfBirth;
   Gender get gender;
   Password get password;
   String get photo;

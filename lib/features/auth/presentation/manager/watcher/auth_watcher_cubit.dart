@@ -4,29 +4,31 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pexza/features/auth/data/models/auth_failure.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
-import 'package:pexza/utils/utils.dart';
 
 part 'auth_watcher_state.dart';
 part 'auth_watcher_cubit.freezed.dart';
 
-typedef Task = void Function(Option<User> option);
+typedef Task = void Function(Either<AuthFailure, Option<User>> option);
 
 @injectable
 class AuthWatcherCubit extends Cubit<AuthWatcherState> {
   final AuthFacade _facade;
-  StreamSubscription<Option<User>> _authStateChanges;
+  StreamSubscription<Either<AuthFailure, Option<User>>> _authStateChanges;
 
   AuthWatcherCubit(this._facade) : super(AuthWatcherState.initial());
 
-  Future<User> get currentUser async =>
-      (await _facade.currentUser).getOrElse(() => null);
+  Future<User> get currentUser async {
+    final user = await _facade.currentUser;
+    return user?.getOrElse(() => null)?.getOrElse(() => null);
+  }
 
   void listenToAuthChanges(Task actions) async {
     emit(state.copyWith(isLoading: true));
     // Get current user
-    final user = await _facade.currentUser;
+    final user = await currentUser;
 
     // log.wtf(user);
 
@@ -40,8 +42,8 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
 
     emit(state.copyWith(
       isLoading: false,
-      isAuthenticated: user.isSome(),
-      user: user?.getOrElse(() => null),
+      isAuthenticated: user != null,
+      user: user,
     ));
   }
 
@@ -51,7 +53,7 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
   Future<void> get signOut async {
     emit(state.copyWith(isLoading: true));
 
-    final user = await _facade.currentUser;
+    final user = await currentUser;
 
     await _facade.signOut();
 
@@ -60,8 +62,8 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
 
     emit(state.copyWith(
       isLoading: false,
-      isAuthenticated: user.isSome(),
-      user: user?.getOrElse(() => null),
+      isAuthenticated: user != null,
+      user: user,
     ));
   }
 

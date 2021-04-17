@@ -8,6 +8,7 @@ abstract class AuthWatcherState with _$AuthWatcherState {
     @Default(false) bool isLoading,
     @nullable User user,
     @Default(false) bool isAuthenticated,
+    @nullable AuthFailure failure, // Remove this later, not needed
   }) = _AuthWatcherState;
 
   factory AuthWatcherState.initial() => AuthWatcherState();

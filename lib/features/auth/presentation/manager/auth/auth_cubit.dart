@@ -21,25 +21,26 @@ class AuthCubit extends Cubit<AuthState> {
 
   void init(User user) {
     emit(state.copyWith(
-      firstName: user.firstName,
-      lastName: user.lastName,
-      emailAddress: user.email,
-      phone: user.phone,
-      gender: user.gender,
-      dateOfBirth: !user.age.isNullOrBlank
-          ? DateTimeField(
-              DateTime(
-                DateTime.now().year - int.parse(user.age.getOrNull),
-              ),
-            )
-          : DateTimeField.DEFAULT,
-      password: user.password,
+      firstName: user.firstName ?? state.firstName,
+      lastName: user.lastName ?? state.lastName,
+      emailAddress: user.email ?? state.emailAddress,
+      phone: user.phone ?? state.phone,
+      gender: user.gender ?? state.gender,
+      dateOfBirth: user.dateOfBirth ?? state.dateOfBirth,
+      password: user.password ?? state.password,
     ));
   }
 
   void toggleLoadingIndicator([isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
       ));
+
+  void toggleGlow() {
+    print(state.dateOfBirth.getOrNull.isNull);
+    emit(state.copyWith(
+      shouldGlow: state.dateOfBirth.getOrNull.isNull,
+    ));
+  }
 
   void firstNameChanged(String value) => emit(state.copyWith(
         firstName: DisplayName(value),
@@ -79,6 +80,20 @@ class AuthCubit extends Cubit<AuthState> {
         ),
       ));
 
+  void onTokenChanged(String value) => emit(state.copyWith(
+        emailToken: EmailTokenField(value),
+      ));
+
+  void onTokenSubmitted(String value) async {
+    // Update the state
+    emit(state.copyWith(
+      emailToken: EmailTokenField(value),
+    ));
+
+    // Perform token submit action
+    await verifyEmailAddress();
+  }
+
   void countryChanged(Country value) => emit(state.copyWith(
         region: value,
       ));
@@ -95,9 +110,7 @@ class AuthCubit extends Cubit<AuthState> {
     EmailAddress emailAddress = state.emailAddress;
     Phone phone = state.phone;
     Gender gender = state.gender;
-    AgeField age = state.dateOfBirth.isValid
-        ? AgeField(App.calculateAge(state.dateOfBirth.getOrNull).toString())
-        : AgeField('');
+    DateTimeField dateOfBirth = state.dateOfBirth;
     Password password = state.password;
     Either<AuthFailure, Unit> failureOrUnit;
 
@@ -112,7 +125,7 @@ class AuthCubit extends Cubit<AuthState> {
         emailAddress.isValid &&
         phone.isValid &&
         gender.isValid &&
-        age.isValid &&
+        dateOfBirth.isValid &&
         password.isValid) {
       // Attempt Authentication
       failureOrUnit = await _auth.createAccount(
@@ -122,7 +135,7 @@ class AuthCubit extends Cubit<AuthState> {
         emailAddress: emailAddress,
         phone: phone,
         gender: gender,
-        age: age,
+        dateOfBirth: dateOfBirth,
         password: password,
       );
 
@@ -138,21 +151,20 @@ class AuthCubit extends Cubit<AuthState> {
   void login() async {
     toggleLoadingIndicator();
 
-    Phone phone = state.phone;
+    EmailAddress email = state.emailAddress;
     Password password = state.password;
     Either<AuthFailure, Unit> failureOrUnit;
 
-    // Start form  validation
+    // Start form validation
     emit(state.copyWith(
       validate: true,
       authStatus: none(),
     ));
 
-    if (phone.isValid && password.isValid) {
+    if (email.isValid && password.isValid) {
       // Attempt Authentication
       failureOrUnit = await _auth.login(
-        role: getIt<RoleCubit>().role,
-        phone: phone,
+        email: email,
         password: password,
       );
 
@@ -161,6 +173,38 @@ class AuthCubit extends Cubit<AuthState> {
         authStatus: optionOf(failureOrUnit),
       ));
     }
+
+    toggleLoadingIndicator();
+  }
+
+  Future<void> verifyEmailAddress() async {
+    toggleLoadingIndicator();
+
+    EmailAddress emailAddress = state.emailAddress;
+    EmailTokenField token = state.emailToken;
+    Either<AuthFailure, Unit> failureOrUnit;
+
+    emit(state.copyWith(
+      validate: true,
+      authStatus: none(),
+    ));
+    print("PrRR. Notthing");
+    log.w(emailAddress);
+    log.w(token);
+
+    if (emailAddress.isValid && token.isValid) {
+      print("IS VALID");
+      failureOrUnit = await _auth.verifyEmailAddress(
+        email: emailAddress,
+        token: token,
+      );
+
+      // emit auth_status whether authentication fails or not
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit),
+      ));
+    }
+    print("Return all");
 
     toggleLoadingIndicator();
   }

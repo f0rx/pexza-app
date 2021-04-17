@@ -23,21 +23,22 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
       lastName: fields[3] as String,
       email: fields[4] as String,
       gender: fields[5] as String,
-      age: fields[6] as String,
+      dateOfBirth: fields[6] as String,
       phone: fields[7] as String,
-      password: fields[8] as String,
-      photo: fields[9] as String,
-      isEmailVerified: fields[10] as bool,
-      createdAt: fields[11] as String,
-      updatedAt: fields[12] as String,
-      deletedAt: fields[13] as String,
+      provider: fields[8] as String,
+      password: fields[9] as String,
+      photo: fields[10] as String,
+      isEmailVerified: fields[11] as bool,
+      createdAt: fields[12] as String,
+      updatedAt: fields[13] as String,
+      deletedAt: fields[14] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_UserDTO obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -51,20 +52,22 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
       ..writeByte(5)
       ..write(obj.gender)
       ..writeByte(6)
-      ..write(obj.age)
+      ..write(obj.dateOfBirth)
       ..writeByte(7)
       ..write(obj.phone)
       ..writeByte(8)
-      ..write(obj.password)
+      ..write(obj.provider)
       ..writeByte(9)
-      ..write(obj.photo)
+      ..write(obj.password)
       ..writeByte(10)
-      ..write(obj.isEmailVerified)
+      ..write(obj.photo)
       ..writeByte(11)
-      ..write(obj.createdAt)
+      ..write(obj.isEmailVerified)
       ..writeByte(12)
-      ..write(obj.updatedAt)
+      ..write(obj.createdAt)
       ..writeByte(13)
+      ..write(obj.updatedAt)
+      ..writeByte(14)
       ..write(obj.deletedAt);
   }
 
@@ -85,13 +88,15 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
 
 _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
   return _$_UserDTO(
-    role: json['user_type'] as String ?? '',
+    role: json['role'] as String ?? '',
+    token: json['token'] as String ?? '',
     firstName: json['first_name'] as String ?? '',
     lastName: json['last_name'] as String ?? '',
     email: json['email'] as String ?? '',
     gender: json['gender'] as String ?? '',
-    age: json['age'] as String ?? '',
+    dateOfBirth: json['dob'] as String ?? '',
     phone: json['phone'] as String ?? '',
+    provider: json['driver'] as String ?? '',
     password: json['password'] as String ?? '',
     photo: json['photo'] as String ?? '',
     isEmailVerified:
@@ -111,13 +116,15 @@ Map<String, dynamic> _$_$_UserDTOToJson(_$_UserDTO instance) {
     }
   }
 
-  writeNotNull('user_type', instance.role);
+  writeNotNull('role', instance.role);
+  writeNotNull('token', instance.token);
   writeNotNull('first_name', instance.firstName);
   writeNotNull('last_name', instance.lastName);
   writeNotNull('email', instance.email);
   writeNotNull('gender', instance.gender);
-  writeNotNull('age', instance.age);
+  writeNotNull('dob', instance.dateOfBirth);
   writeNotNull('phone', instance.phone);
+  writeNotNull('driver', instance.provider);
   writeNotNull('password', instance.password);
   writeNotNull('photo', instance.photo);
   writeNotNull('email_verified_at', instance.isEmailVerified);

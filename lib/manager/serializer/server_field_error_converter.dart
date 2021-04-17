@@ -14,6 +14,7 @@ class ServerFieldErrorsSerializer
         age: value != null ? value['age'] : null,
         phone: value != null ? value['phone'] : null,
         password: value != null ? value['password'] : null,
+        token: value != null ? value['token'] : null,
       );
 
   @override
@@ -25,5 +26,6 @@ class ServerFieldErrorsSerializer
         "age": instance.age,
         "phone": instance.phone,
         "password": instance.password,
+        "token": instance.token,
       };
 }

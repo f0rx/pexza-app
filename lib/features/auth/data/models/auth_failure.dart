@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pexza/features/core/data/models/server_field_errors/server_field_errors.dart';
 import 'package:pexza/features/core/domain/failures/failure.dart';
@@ -13,9 +14,8 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
   const AuthFailure._();
 
   const factory AuthFailure({
-    @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '', ignore: true)
-        String code,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: 200) int code,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     //
     @required
     @nullable
@@ -33,12 +33,25 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
   }) = _AuthFailure;
 
   factory AuthFailure.unAuthenticated({
-    String code,
+    int code,
     String message,
   }) =>
       AuthFailure(code: code, message: message);
 
-  bool get is401 => this.code == "401" || (this.error == "Unauthenticated");
+  T fold<T>({
+    T Function() is404,
+    T Function(String) is1101,
+    T Function() orElse,
+  }) {
+    switch (code) {
+      case 401:
+        return is404.call();
+      case 1101:
+        return is1101.call(details);
+      default:
+        return (T is Widget) ? SizedBox() as T : orElse?.call();
+    }
+  }
 
   factory AuthFailure.cancelledAction() => AuthFailure(
         message: "Aborted!",
@@ -47,10 +60,14 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
   factory AuthFailure.poorInternetConnection() =>
       AuthFailure(message: "Poor internet connection!");
 
-  factory AuthFailure.timeout() => AuthFailure(message: "Connection Timeout!");
+  factory AuthFailure.timeout() =>
+      AuthFailure(message: "Connection Timeout! Please try again.");
+
+  factory AuthFailure.receiveTimeout() =>
+      AuthFailure(message: "Connection Timeout! Please try again.");
 
   factory AuthFailure.unknownFailure({
-    String code,
+    int code,
     String message,
     ServerFieldErrors errors,
   }) =>
@@ -58,7 +75,7 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
         code: code ?? "unknown",
         message: message != null
             ? "Unknown: $message"
-            : "Unknown failure contact support.",
+            : "Unknown failure, please contact support.",
         errors: errors,
       );
 

@@ -11,21 +11,21 @@ abstract class OnBoardingFailure implements _$OnBoardingFailure, Failure {
   const OnBoardingFailure._();
 
   const factory OnBoardingFailure({
-    String code,
+    int code,
     String message,
     String error,
     String details,
   }) = _OnBoardingFailure;
 
   const factory OnBoardingFailure.notConnected({
-    String code,
+    int code,
     @Default(OnBoardingFailure.kNotConnected) String message,
     String error,
     String details,
   }) = _NoInternetConnection;
 
   const factory OnBoardingFailure.poorInternet({
-    String code,
+    int code,
     @Default(OnBoardingFailure.kPoorInternet) String message,
     String error,
     String details,

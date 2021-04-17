@@ -8,8 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/domain/entities/auth_provider_type.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
-import 'package:pexza/features/auth/presentation/widgets/password_field.dart';
-import 'package:pexza/features/auth/presentation/widgets/phone_number_field.dart';
+import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/vertical_spacer.dart';
@@ -28,12 +27,8 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
                 () => null,
                 (option) => option.fold(
                   (failure) => Flushbar(
-                    duration: failure.is401
-                        ? const Duration(seconds: 15)
-                        : const Duration(seconds: 5),
-                    icon: failure.is401
-                        ? const Icon(Icons.warning, color: Colors.amber)
-                        : const Icon(Icons.error, color: Colors.red),
+                    duration: const Duration(seconds: 10),
+                    icon: const Icon(Icons.error, color: Colors.red),
                     messageText: AutoSizeText(
                       !failure.message.isNullOrBlank
                           ? failure.message
@@ -76,17 +71,19 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Flexible(
-                  child: AutoSizeText(
-                    "Login",
-                    textAlign: TextAlign.left,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: App.theme.accentColor,
+                  child: SafeArea(
+                    child: AutoSizeText(
+                      "Login",
+                      textAlign: TextAlign.left,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: App.theme.accentColor,
+                      ),
+                      softWrap: true,
+                      wrapWords: true,
                     ),
-                    softWrap: true,
-                    wrapWords: true,
                   ),
                 ),
                 //
@@ -121,7 +118,7 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
 class _LoginForm extends StatelessWidget {
   static double inputSpacing = App.height * 0.015;
 
-  final _phoneNumberFocus = FocusNode();
+  final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
 
   @override
@@ -130,7 +127,10 @@ class _LoginForm extends StatelessWidget {
       child: AutofillGroup(
         child: Column(
           children: [
-            PhoneNumberField(focus: _phoneNumberFocus, next: _passwordFocus),
+            EmailAddressField(
+              focus: _emailFocus,
+              next: _passwordFocus,
+            ),
             //
             VerticalSpace(height: inputSpacing),
             //
@@ -160,7 +160,7 @@ class _LoginForm extends StatelessWidget {
               onPressed: context.read<AuthCubit>().login,
               text: "Login",
               width: App.width,
-              height: App.height * 0.05,
+              height: App.shortest * 0.12,
             ),
             //
             VerticalSpace(height: App.height * .04),
@@ -180,7 +180,9 @@ class _LoginForm extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            //
+            VerticalSpace(height: App.height * .07),
           ],
         ),
       ),

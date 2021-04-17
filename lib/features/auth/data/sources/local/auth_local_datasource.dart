@@ -16,7 +16,7 @@ class AuthLocalDatasource {
     Map<String, dynamic> loginResponse,
   }) async {
     // Cache Access Token, Token Type & Expiry date
-    cacheUserAccessToken(loginResponse);
+    if (!loginResponse.isNull) cacheUserAccessToken(loginResponse);
 
     final userBox = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
 

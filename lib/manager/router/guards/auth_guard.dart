@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:pexza/manager/locator/locator.dart';
 
 class AuthGuard extends RouteGuard {
   @override
