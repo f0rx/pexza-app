@@ -11,6 +11,8 @@ part 'auth_failure.g.dart';
 @freezed
 @immutable
 abstract class AuthFailure implements _$AuthFailure, Failure {
+  static const int UNVERIFIED = 1101;
+
   const AuthFailure._();
 
   const factory AuthFailure({
@@ -41,13 +43,13 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
   T fold<T>({
     T Function() is404,
     T Function(String) is1101,
-    T Function() orElse,
+    @required T Function() orElse,
   }) {
     switch (code) {
       case 401:
-        return is404.call();
-      case 1101:
-        return is1101.call(details);
+        return is404?.call();
+      case AuthFailure.UNVERIFIED:
+        return is1101?.call(details);
       default:
         return (T is Widget) ? SizedBox() as T : orElse?.call();
     }
@@ -72,7 +74,7 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
     ServerFieldErrors errors,
   }) =>
       AuthFailure(
-        code: code ?? "unknown",
+        code: code,
         message: message != null
             ? "Unknown: $message"
             : "Unknown failure, please contact support.",

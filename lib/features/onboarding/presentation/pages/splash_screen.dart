@@ -61,14 +61,20 @@ class SplashScreen extends StatelessWidget {
                         (_) => BlocProvider.of<AuthWatcherCubit>(App.context)
                             .listenToAuthChanges(
                           (either) => either.fold(
-                            (failure) => failure.fold(
-                              is1101: (email) => navigator.pushAndRemoveUntil(
-                                Routes.verifyEmailScreen,
+                            (failure) => failure?.fold(
+                              orElse: () => navigator.pushAndRemoveUntil(
+                                Routes.onBoardingScreen,
                                 (route) => false,
-                                arguments: VerifyEmailScreenArguments(
-                                  email: EmailAddress(email ?? ""),
-                                ),
                               ),
+                              is1101: (email) {
+                                return navigator.pushAndRemoveUntil(
+                                  Routes.verifyEmailScreen,
+                                  (route) => false,
+                                  arguments: VerifyEmailScreenArguments(
+                                    email: EmailAddress(email ?? ""),
+                                  ),
+                                );
+                              },
                             ),
                             (option) => option.fold(
                               () => navigator.pushAndRemoveUntil(
@@ -95,7 +101,7 @@ class SplashScreen extends StatelessWidget {
             return Visibility(
               visible: !state.isLoading,
               child: Container(
-                height: 23,
+                height: 20,
                 decoration: BoxDecoration(
                   color: state.isConnected.fold(
                     (failure) => Helpers.optionOf(
@@ -109,7 +115,7 @@ class SplashScreen extends StatelessWidget {
                         Colors.grey.shade700,
                         context: context,
                       ),
-                      (_) => AppColors.successGreen,
+                      (_) => AppColors.accentColor,
                     ),
                   ),
                 ),
@@ -121,9 +127,16 @@ class SplashScreen extends StatelessWidget {
                         (failure) => Icon(Icons.error,
                             size: 20.0, color: Colors.white54),
                         (_) => state.hasInternet.fold(
-                          (failure) => Icon(Icons.error,
-                              size: 20.0, color: Colors.white54),
-                          (_) => SizedBox(),
+                          (failure) => Icon(
+                            Icons.cloud_off_rounded,
+                            size: 20.0,
+                            color: Colors.white54,
+                          ),
+                          (_) => Icon(
+                            Icons.cloud_done_rounded,
+                            size: 20.0,
+                            color: Colors.white54,
+                          ),
                         ),
                       ),
                       //

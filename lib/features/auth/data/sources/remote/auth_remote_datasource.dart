@@ -53,7 +53,7 @@ class AuthRemoteDatasource {
     // Generate Form Data for request
     FormData data = FormData.fromMap(dto.toJson());
     // Perform POST request based on role / user_type
-    return await _dio.post(
+    return _dio.post(
       EndPoints.VERIFY,
       data: data,
     );
@@ -81,26 +81,25 @@ class AuthRemoteDatasource {
     return await _dio.post(EndPoints.LOGOUT);
   }
 
-  Future<Either<AuthFailure, UserDTO>> fetchUserInfo(
-      [VoidCallback callback]) async {
+  Future<Either<AuthFailure, UserDTO>> fetchUserInfo([
+    Future<void> Function() callback,
+  ]) async {
     try {
       final _response = await _dio.get(EndPoints.GET_USER);
 
-      return right(UserDTO.fromJson(_response.data['data']).copyWith(
-        id: "${_response.data['data']['id']}",
+      return right(UserDTO.fromJson(_response?.data).copyWith(
+        id: "${_response.data['id']}",
       ));
     } on DioError catch (e) {
       // If callback is not-null, call the method
-      callback?.call();
-
-      // log.wtf(e.response?.data);
+      await callback?.call();
 
       switch (e.type) {
         case DioErrorType.CONNECT_TIMEOUT:
           return left(AuthFailure.timeout());
         case DioErrorType.RECEIVE_TIMEOUT:
           return left(AuthFailure.receiveTimeout());
-        case DioErrorType.DEFAULT:
+        // case DioErrorType.DEFAULT:
         case DioErrorType.RESPONSE:
           return left(
             AuthFailure.fromJson(e.response.data).copyWith(

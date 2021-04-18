@@ -48,32 +48,33 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                     ),
                     clipBehavior: Clip.hardEdge,
                     color: Colors.white,
-                    child: CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      placeholderFadeInDuration: Duration(milliseconds: 300),
-                      imageUrl:
-                          context.read<AuthWatcherCubit>().state.user?.photo,
-                      imageBuilder: (context, provider) => Ink.image(
-                        image: provider,
+                    child: BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+                      builder: (context, state) => CachedNetworkImage(
                         fit: BoxFit.cover,
-                        width: App.shortest * 0.16,
-                        height: double.infinity,
-                        child: InkWell(
-                          splashColor: Colors.black12,
-                          onTap: () => navigator.pushEditAccountScreen(),
+                        placeholderFadeInDuration: Duration(milliseconds: 300),
+                        imageUrl: state.user?.photo,
+                        imageBuilder: (context, provider) => Ink.image(
+                          image: provider,
+                          fit: BoxFit.cover,
+                          width: App.shortest * 0.16,
+                          height: double.infinity,
+                          child: InkWell(
+                            splashColor: Colors.black12,
+                            onTap: () => navigator.pushEditAccountScreen(),
+                          ),
                         ),
-                      ),
-                      placeholder: (_, url) => Center(
-                        child: CircularProgressBar.adaptive(
-                          width: App.width * 0.06,
-                          height: App.width * 0.06,
-                          strokeWidth: 2.5,
+                        placeholder: (_, url) => Center(
+                          child: CircularProgressBar.adaptive(
+                            width: App.width * 0.06,
+                            height: App.width * 0.06,
+                            strokeWidth: 2.5,
+                          ),
                         ),
-                      ),
-                      errorWidget: (context, url, error) => CircleAvatar(
-                        backgroundImage: AssetImage('${AppAssets.owner}'),
-                        backgroundColor: Theme.of(context).accentColor,
-                        radius: 15.0,
+                        errorWidget: (context, url, error) => CircleAvatar(
+                          backgroundImage: AssetImage('${AppAssets.owner}'),
+                          backgroundColor: Theme.of(context).accentColor,
+                          radius: 15.0,
+                        ),
                       ),
                     ),
                   ),
@@ -92,24 +93,28 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              AutoSizeText(
-                                "${context.read<AuthWatcherCubit>().state.user?.firstName?.getOrEmpty} "
-                                "${context.read<AuthWatcherCubit>().state.user?.lastName?.getOrEmpty}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6
-                                    .copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                maxLines: 1,
+                              BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+                                builder: (context, state) => AutoSizeText(
+                                  "${state.user?.firstName?.getOrEmpty} "
+                                  "${state.user?.lastName?.getOrEmpty}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      .copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                  maxLines: 1,
+                                ),
                               ),
                               //
                               VerticalSpace(height: App.shortest * 0.01),
                               //
-                              AutoSizeText(
-                                "${context.read<AuthWatcherCubit>().state.user?.email?.getOrEmpty}",
-                                maxLines: 1,
-                                style: Theme.of(context).textTheme.subtitle2,
+                              BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+                                builder: (context, state) => AutoSizeText(
+                                  "${state.user?.email?.getOrEmpty}",
+                                  maxLines: 1,
+                                  style: Theme.of(context).textTheme.subtitle2,
+                                ),
                               ),
                             ],
                           ),
@@ -118,8 +123,12 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                           top: 0,
                           right: 0,
                           child: Chip(
-                            label: AutoSizeText(
-                                "${context.read<AuthWatcherCubit>().state.user?.role?.name?.capitalizeFirst()}"),
+                            label:
+                                BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+                              builder: (context, state) => AutoSizeText(
+                                "${state.user?.role?.name?.capitalizeFirst()}",
+                              ),
+                            ),
                             padding: EdgeInsets.zero,
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,

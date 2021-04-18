@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/models/auth_failure.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
+import 'package:pexza/utils/utils.dart';
 
 part 'auth_watcher_state.dart';
 part 'auth_watcher_cubit.freezed.dart';
@@ -30,14 +31,11 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
     // Get current user
     final user = await currentUser;
 
-    // log.wtf(user);
-
     // Cancel previous subscription
     await unsubscribeAuthChanges;
     // Install new subscription
     _authStateChanges ??= _facade.onAuthStateChanged.listen(actions);
 
-    // Sink authenticated user if available
     await _facade.sink();
 
     emit(state.copyWith(
@@ -56,9 +54,6 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
     final user = await currentUser;
 
     await _facade.signOut();
-
-    // Sink authenticated user if available
-    await _facade.sink();
 
     emit(state.copyWith(
       isLoading: false,

@@ -56,7 +56,8 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
               );
         },
         builder: (context, state) => PortalEntry(
-          visible: context.watch<AuthCubit>().state.isLoading,
+          visible: context.watch<AuthCubit>().state.isLoading ||
+              context.watch<AuthWatcherCubit>().state.isLoading,
           portal: App.waveLoadingBar,
           child: this,
         ),
@@ -99,14 +100,29 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: Helpers.descriptionPadding),
-                  child: AutoSizeText(
-                    "Thanks for signing up! \n\n Before getting started, could you verify your email "
-                    "address by clicking on the link we just emailed to you? If you didn't "
-                    "receive the email, we will gladly send you another.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 17.0, wordSpacing: 2.0),
-                    softWrap: true,
-                    wrapWords: true,
+                  child: BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) => AutoSizeText.rich(
+                      TextSpan(children: [
+                        TextSpan(text: "Thanks for signing up! \n\n"),
+                        TextSpan(
+                          text:
+                              "Before getting started, could you verify your email "
+                              "address by clicking on the link we just emailed to ",
+                        ),
+                        TextSpan(
+                          text: state.emailAddress.getOrEmpty,
+                          style: TextStyle(color: AppColors.accentColor),
+                        ),
+                        TextSpan(
+                          text: "? If you didn't "
+                              "receive the email, we will gladly send you another.",
+                        ),
+                      ]),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 17.0, wordSpacing: 2.0),
+                      softWrap: true,
+                      wrapWords: true,
+                    ),
                   ),
                 ),
               ),
@@ -129,7 +145,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
               VerticalSpace(height: App.height * 0.05),
               //
               AppElevatedButton(
-                onPressed: context.read<AuthCubit>().verifyEmailAddress,
+                onPressed: context.read<AuthCubit>().verify,
                 text: "Verify",
                 width: App.width,
                 height: App.shortest * 0.12,
@@ -152,6 +168,28 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                       ),
                     ),
                   ],
+                ),
+              ),
+              //
+              VerticalSpace(height: App.height * .03),
+              //
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) => AutoSizeText.rich(
+                  TextSpan(
+                    text: "Not ${state.emailAddress.getOrEmpty}?",
+                    children: [
+                      TextSpan(
+                        text: " Log Out!",
+                        recognizer: TapGestureRecognizer()
+                          ..onTap =
+                              () => context.read<AuthWatcherCubit>().signOut,
+                        style: TextStyle(
+                          color: App.theme.accentColor,
+                          fontSize: 17.0,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               //

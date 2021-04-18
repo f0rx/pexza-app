@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/utils/colors.dart';
 import 'package:pexza/utils/helpers.dart';
@@ -30,10 +32,12 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
             .copyWith(top: App.longest * 0.02),
         child: Column(
           children: [
-            HomeAppBar(
-              text: "Hi Dammy",
-              avatarText: "DA",
-              onPressed: () => navigator.pushAccountScreen(),
+            BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+              builder: (context, state) => HomeAppBar(
+                text: "Hi ${state.user?.firstName?.getOrEmpty}",
+                avatarText: "DA",
+                onPressed: () => navigator.pushAccountScreen(),
+              ),
             ),
             //
             VerticalSpace(height: App.height * 0.03),

@@ -12,6 +12,7 @@ class PinInputWidget<Reactive extends Cubit<State>, State>
   final int length;
   final FocusNode focus;
   final bool validate;
+  final bool autoFocus;
   final double height;
   final double width;
   final double borderWidth;
@@ -27,6 +28,7 @@ class PinInputWidget<Reactive extends Cubit<State>, State>
     this.length = 6,
     this.focus,
     this.validate = false,
+    this.autoFocus = false,
     this.height,
     this.width,
     this.borderWidth = 1.0,
@@ -60,7 +62,7 @@ class PinInputWidget<Reactive extends Cubit<State>, State>
         enableActiveFill: true,
         enablePinAutofill: true,
         enabled: true,
-        autoFocus: true,
+        autoFocus: autoFocus,
         blinkWhenObscuring: true,
         textCapitalization: TextCapitalization.none,
         backgroundColor: Colors.transparent,

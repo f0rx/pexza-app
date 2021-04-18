@@ -91,7 +91,7 @@ class AuthCubit extends Cubit<AuthState> {
     ));
 
     // Perform token submit action
-    await verifyEmailAddress();
+    await verify();
   }
 
   void countryChanged(Country value) => emit(state.copyWith(
@@ -177,7 +177,7 @@ class AuthCubit extends Cubit<AuthState> {
     toggleLoadingIndicator();
   }
 
-  Future<void> verifyEmailAddress() async {
+  Future<void> verify() async {
     toggleLoadingIndicator();
 
     EmailAddress emailAddress = state.emailAddress;
@@ -188,12 +188,8 @@ class AuthCubit extends Cubit<AuthState> {
       validate: true,
       authStatus: none(),
     ));
-    print("PrRR. Notthing");
-    log.w(emailAddress);
-    log.w(token);
 
     if (emailAddress.isValid && token.isValid) {
-      print("IS VALID");
       failureOrUnit = await _auth.verifyEmailAddress(
         email: emailAddress,
         token: token,
@@ -204,7 +200,6 @@ class AuthCubit extends Cubit<AuthState> {
         authStatus: optionOf(failureOrUnit),
       ));
     }
-    print("Return all");
 
     toggleLoadingIndicator();
   }

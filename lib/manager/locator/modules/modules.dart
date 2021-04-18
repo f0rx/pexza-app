@@ -49,23 +49,24 @@ class _DioInstance {
 
     dio.options.receiveTimeout = 8000;
 
-    dio.interceptors.add(
-      DioCacheManager(
-        CacheConfig(baseUrl: env.baseUri.path),
-      ).interceptor,
-    );
-
     // dio.interceptors.add(
-    //   PrettyDioLogger(
-    //     requestHeader: true,
-    //     requestBody: true,
-    //     responseBody: true,
-    //     responseHeader: false,
-    //     error: true,
-    //     compact: true,
-    //     maxWidth: 100,
-    //   ),
+    //   DioCacheManager(
+    //     CacheConfig(baseUrl: env.baseUri.path),
+    //   ).interceptor,
     // );
+
+    if (env.flavor == BuildFlavor.dev)
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: false,
+          error: true,
+          compact: true,
+          maxWidth: 100,
+        ),
+      );
 
     dio.interceptors.add(
       InterceptorsWrapper(
