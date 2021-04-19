@@ -16,10 +16,14 @@ class _$OnBoardingStateTearOff {
 // ignore: unused_element
   _OnBoardingState call(
       {bool isLoading = false,
-      Either<OnBoardingFailure, bool> status = const Right(false)}) {
+      Either<Failure, bool> isConnected =
+          const Left(OnBoardingFailure.notConnected()),
+      Either<Failure, bool> hasInternet =
+          const Left(OnBoardingFailure.poorInternet())}) {
     return _OnBoardingState(
       isLoading: isLoading,
-      status: status,
+      isConnected: isConnected,
+      hasInternet: hasInternet,
     );
   }
 }
@@ -31,7 +35,8 @@ const $OnBoardingState = _$OnBoardingStateTearOff();
 /// @nodoc
 mixin _$OnBoardingState {
   bool get isLoading;
-  Either<OnBoardingFailure, bool> get status;
+  Either<Failure, bool> get isConnected;
+  Either<Failure, bool> get hasInternet;
 
   @JsonKey(ignore: true)
   $OnBoardingStateCopyWith<OnBoardingState> get copyWith;
@@ -42,7 +47,10 @@ abstract class $OnBoardingStateCopyWith<$Res> {
   factory $OnBoardingStateCopyWith(
           OnBoardingState value, $Res Function(OnBoardingState) then) =
       _$OnBoardingStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, Either<OnBoardingFailure, bool> status});
+  $Res call(
+      {bool isLoading,
+      Either<Failure, bool> isConnected,
+      Either<Failure, bool> hasInternet});
 }
 
 /// @nodoc
@@ -57,13 +65,17 @@ class _$OnBoardingStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoading = freezed,
-    Object status = freezed,
+    Object isConnected = freezed,
+    Object hasInternet = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      status: status == freezed
-          ? _value.status
-          : status as Either<OnBoardingFailure, bool>,
+      isConnected: isConnected == freezed
+          ? _value.isConnected
+          : isConnected as Either<Failure, bool>,
+      hasInternet: hasInternet == freezed
+          ? _value.hasInternet
+          : hasInternet as Either<Failure, bool>,
     ));
   }
 }
@@ -75,7 +87,10 @@ abstract class _$OnBoardingStateCopyWith<$Res>
           _OnBoardingState value, $Res Function(_OnBoardingState) then) =
       __$OnBoardingStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isLoading, Either<OnBoardingFailure, bool> status});
+  $Res call(
+      {bool isLoading,
+      Either<Failure, bool> isConnected,
+      Either<Failure, bool> hasInternet});
 }
 
 /// @nodoc
@@ -92,13 +107,17 @@ class __$OnBoardingStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoading = freezed,
-    Object status = freezed,
+    Object isConnected = freezed,
+    Object hasInternet = freezed,
   }) {
     return _then(_OnBoardingState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      status: status == freezed
-          ? _value.status
-          : status as Either<OnBoardingFailure, bool>,
+      isConnected: isConnected == freezed
+          ? _value.isConnected
+          : isConnected as Either<Failure, bool>,
+      hasInternet: hasInternet == freezed
+          ? _value.hasInternet
+          : hasInternet as Either<Failure, bool>,
     ));
   }
 }
@@ -106,20 +125,26 @@ class __$OnBoardingStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_OnBoardingState implements _OnBoardingState {
   const _$_OnBoardingState(
-      {this.isLoading = false, this.status = const Right(false)})
+      {this.isLoading = false,
+      this.isConnected = const Left(OnBoardingFailure.notConnected()),
+      this.hasInternet = const Left(OnBoardingFailure.poorInternet())})
       : assert(isLoading != null),
-        assert(status != null);
+        assert(isConnected != null),
+        assert(hasInternet != null);
 
   @JsonKey(defaultValue: false)
   @override
   final bool isLoading;
-  @JsonKey(defaultValue: const Right(false))
+  @JsonKey(defaultValue: const Left(OnBoardingFailure.notConnected()))
   @override
-  final Either<OnBoardingFailure, bool> status;
+  final Either<Failure, bool> isConnected;
+  @JsonKey(defaultValue: const Left(OnBoardingFailure.poorInternet()))
+  @override
+  final Either<Failure, bool> hasInternet;
 
   @override
   String toString() {
-    return 'OnBoardingState(isLoading: $isLoading, status: $status)';
+    return 'OnBoardingState(isLoading: $isLoading, isConnected: $isConnected, hasInternet: $hasInternet)';
   }
 
   @override
@@ -129,15 +154,20 @@ class _$_OnBoardingState implements _OnBoardingState {
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
-            (identical(other.status, status) ||
-                const DeepCollectionEquality().equals(other.status, status)));
+            (identical(other.isConnected, isConnected) ||
+                const DeepCollectionEquality()
+                    .equals(other.isConnected, isConnected)) &&
+            (identical(other.hasInternet, hasInternet) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasInternet, hasInternet)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(status);
+      const DeepCollectionEquality().hash(isConnected) ^
+      const DeepCollectionEquality().hash(hasInternet);
 
   @JsonKey(ignore: true)
   @override
@@ -148,12 +178,15 @@ class _$_OnBoardingState implements _OnBoardingState {
 abstract class _OnBoardingState implements OnBoardingState {
   const factory _OnBoardingState(
       {bool isLoading,
-      Either<OnBoardingFailure, bool> status}) = _$_OnBoardingState;
+      Either<Failure, bool> isConnected,
+      Either<Failure, bool> hasInternet}) = _$_OnBoardingState;
 
   @override
   bool get isLoading;
   @override
-  Either<OnBoardingFailure, bool> get status;
+  Either<Failure, bool> get isConnected;
+  @override
+  Either<Failure, bool> get hasInternet;
   @override
   @JsonKey(ignore: true)
   _$OnBoardingStateCopyWith<_OnBoardingState> get copyWith;

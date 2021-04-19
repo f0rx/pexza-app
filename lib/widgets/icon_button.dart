@@ -13,13 +13,13 @@ class AppIconButton extends StatelessWidget {
   final Function() onPressed;
   final Function() onLongPressed;
 
-  const AppIconButton({
+  AppIconButton({
     Key key,
     this.backgroundColor = AppColors.accentColor,
     this.elevation = 2.0,
     this.clipBehavior = Clip.antiAlias,
     this.type = MaterialType.circle,
-    this.padding = const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+    this.padding,
     this.borderRadius,
     this.onPressed,
     this.onLongPressed,
@@ -36,8 +36,8 @@ class AppIconButton extends StatelessWidget {
       type: type,
       child: InkWell(
         child: Padding(
-          padding: padding,
-          child: child,
+          child: Center(child: child),
+          padding: padding ?? EdgeInsets.all(App.shortest * 0.03),
         ),
         onTap: onPressed,
         onLongPress: onLongPressed,

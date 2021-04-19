@@ -1,10 +1,14 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_portal/flutter_portal.dart';
+import 'package:pexza/features/auth/domain/entities/auth_provider_type.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
+import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/vertical_spacer.dart';
@@ -14,8 +18,42 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
+      lazy: true,
       create: (_) => getIt<AuthCubit>(),
-      child: this,
+      child: BlocConsumer<AuthCubit, AuthState>(
+        listenWhen: (p, c) => p.isLoading && !c.isLoading,
+        listener: (context, state) {
+          context.read<AuthCubit>().state.authStatus.fold(
+                () => null,
+                (option) => option.fold(
+                  (failure) => Flushbar(
+                    duration: const Duration(seconds: 10),
+                    icon: const Icon(Icons.error, color: Colors.red),
+                    messageText: AutoSizeText(
+                      !failure.message.isNullOrBlank
+                          ? failure.message
+                          : failure.error,
+                    ),
+                    borderRadius: 8,
+                    dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+                    margin: const EdgeInsets.all(8),
+                    flushbarPosition:
+                        MediaQuery.of(context).viewInsets.bottom == 0
+                            ? FlushbarPosition.BOTTOM
+                            : FlushbarPosition.TOP,
+                    shouldIconPulse: true,
+                    backgroundColor: Theme.of(context).primaryColor,
+                  ).show(context),
+                  (_) => null,
+                ),
+              );
+        },
+        builder: (context, state) => PortalEntry(
+          visible: context.watch<AuthCubit>().state.isLoading,
+          portal: App.waveLoadingBar,
+          child: this,
+        ),
+      ),
     );
   }
 
@@ -33,17 +71,19 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Flexible(
-                  child: AutoSizeText(
-                    "Login",
-                    textAlign: TextAlign.left,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: App.theme.accentColor,
+                  child: SafeArea(
+                    child: AutoSizeText(
+                      "Login",
+                      textAlign: TextAlign.left,
+                      maxLines: 1,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: App.theme.accentColor,
+                      ),
+                      softWrap: true,
+                      wrapWords: true,
                     ),
-                    softWrap: true,
-                    wrapWords: true,
                   ),
                 ),
                 //
@@ -78,149 +118,72 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
 class _LoginForm extends StatelessWidget {
   static double inputSpacing = App.height * 0.015;
 
-  final _emailAddressFocus = FocusNode();
+  final _emailFocus = FocusNode();
   final _passwordFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
-      builder: (context, state) => Form(
-        autovalidateMode: context.watch<AuthCubit>().state.validate
-            ? AutovalidateMode.always
-            : AutovalidateMode.disabled,
-        child: AutofillGroup(
-          child: Column(
-            children: [
-              TextFormField(
-                maxLines: 1,
-                enableSuggestions: true,
-                autocorrect: false,
-                cursorColor: Theme.of(context).accentColor,
-                keyboardType: TextInputType.emailAddress,
-                textCapitalization: TextCapitalization.none,
-                focusNode: _emailAddressFocus,
-                textInputAction: TextInputAction.next,
-                autofillHints: [
-                  AutofillHints.email,
-                ],
-                decoration: const InputDecoration(
-                  labelText: "Email address",
-                  hintText: "janedoe@email.com",
+    return Form(
+      child: AutofillGroup(
+        child: Column(
+          children: [
+            EmailAddressField(
+              focus: _emailFocus,
+              next: _passwordFocus,
+            ),
+            //
+            VerticalSpace(height: inputSpacing),
+            //
+            PasswordInputField(
+              focus: _passwordFocus,
+              mode: FIELD_VALIDATION.BASIC,
+            ),
+            //
+            VerticalSpace(height: App.height * .01),
+            //
+            Align(
+              alignment: Alignment.centerRight,
+              child: AutoSizeText(
+                "Forgot Password?",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: AppColors.accentColor,
                 ),
-                onChanged: context.read<AuthCubit>().emailAddressChanged,
-                validator: (value) => context
-                    .read<AuthCubit>()
-                    .state
-                    .emailAddress
-                    .value
-                    .fold((error) => error.message, (r) => null),
-                onFieldSubmitted: (_) =>
-                    FocusScope.of(context).requestFocus(_passwordFocus),
               ),
-              //
-              VerticalSpace(height: inputSpacing),
-              //
-              Stack(
+            ),
+            //
+            VerticalSpace(height: App.height * .04),
+            //
+            AppElevatedButton(
+              // TODO: Replace with actual implementation
+              onPressed: context.read<AuthCubit>().login,
+              text: "Login",
+              width: App.width,
+              height: App.shortest * 0.12,
+            ),
+            //
+            VerticalSpace(height: App.height * .04),
+            //
+            AutoSizeText.rich(
+              TextSpan(
+                text: "Dont have an account?",
                 children: [
-                  TextFormField(
-                    maxLines: 1,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    cursorColor: Theme.of(context).accentColor,
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText:
-                        context.watch<AuthCubit>().state.passwordHidden,
-                    textCapitalization: TextCapitalization.none,
-                    textInputAction: TextInputAction.done,
-                    focusNode: _passwordFocus,
-                    autofillHints: [
-                      AutofillHints.password,
-                    ],
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      hintText: "secret",
-                      contentPadding:
-                          const EdgeInsets.only(left: 12.0, right: 45.0)
-                              .copyWith(bottom: 30.0),
-                    ),
-                    onChanged: context.read<AuthCubit>().passwordChanged,
-                    validator: (value) => context
-                        .read<AuthCubit>()
-                        .state
-                        .password
-                        .value
-                        .fold((error) => error.message, (r) => null),
-                  ),
-                  //
-                  Positioned(
-                    top: 2,
-                    right: 0,
-                    bottom: 2,
-                    child: Material(
-                      color: Colors.transparent,
-                      shape: CircleBorder(),
-                      clipBehavior: Clip.hardEdge,
-                      child: IconButton(
-                        icon: Icon(
-                          context.watch<AuthCubit>().state.passwordHidden
-                              ? AppIcons.eyelash_closed
-                              : AppIcons.eyelash_open,
-                        ),
-                        onPressed:
-                            context.watch<AuthCubit>().togglePasswordVisibility,
-                      ),
+                  TextSpan(
+                    text: " Sign up.",
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => navigator.pop(),
+                    style: TextStyle(
+                      color: App.theme.accentColor,
+                      fontSize: 17.0,
                     ),
                   ),
                 ],
               ),
-              //
-              VerticalSpace(height: App.height * .01),
-              //
-              Align(
-                alignment: Alignment.centerRight,
-                child: AutoSizeText(
-                  "Forgot Password?",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: AppColors.accentColor,
-                  ),
-                ),
-              ),
-              //
-              VerticalSpace(height: App.height * .04),
-              //
-              AppElevatedButton(
-                // TODO: Replace with actual implementation
-                onPressed: () => navigator.pushAndRemoveUntil(
-                  Routes.tenantHomeScreen,
-                  (route) => false,
-                ),
-                text: "Login",
-                width: App.width,
-                height: App.height * 0.05,
-              ),
-              //
-              VerticalSpace(height: App.height * .04),
-              //
-              AutoSizeText.rich(
-                TextSpan(
-                  text: "Dont have an account?",
-                  children: [
-                    TextSpan(
-                      text: " Sign up.",
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => navigator.pop(),
-                      style: TextStyle(
-                        color: App.theme.accentColor,
-                        fontSize: 17.0,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+            ),
+            //
+            VerticalSpace(height: App.height * .07),
+          ],
         ),
       ),
     );

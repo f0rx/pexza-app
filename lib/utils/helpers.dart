@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:path_provider/path_provider.dart';
@@ -128,15 +128,29 @@ class Helpers {
 
   Helpers._();
 
+  Widget get waveLoadingBar => Container(
+        color: App.theme.primaryColor.withOpacity(0.65),
+        child: Center(
+          child: SpinKitWave(
+            color: Theme.of(context).accentColor,
+            size: 30.0,
+            duration: Duration(milliseconds: 1200),
+            type: SpinKitWaveType.center,
+            itemCount: 7,
+          ),
+        ),
+      );
+
   Widget get circularLoadingOverlay => Container(
         color: App.theme.primaryColor.withOpacity(0.65),
         child: Center(
-            child: CircularProgressBar.adaptive(
-          width: width * 0.08,
-          height: width * 0.08,
-          strokeWidth: 3.5,
-          radius: 14,
-        )),
+          child: CircularProgressBar.adaptive(
+            width: width * 0.08,
+            height: width * 0.08,
+            strokeWidth: 3.5,
+            radius: 14,
+          ),
+        ),
       );
 
   GlobalKey<NavigatorState> addKey(GlobalKey<NavigatorState> newKey) {
@@ -147,6 +161,9 @@ class Helpers {
   GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
 
   Map<int, GlobalKey<NavigatorState>> _keys = {};
+
+  // Helper method to open a Hive Box
+  Box<E> box<E>(String name) => Hive.box(name);
 
   GlobalKey<NavigatorState> nestedKey(int key) {
     _keys.putIfAbsent(key, () => GlobalKey<NavigatorState>());
@@ -308,6 +325,122 @@ class Helpers {
           );
   }
 
+  Future<U> showAdaptiveDatePicker<U>(
+    BuildContext context, {
+    DateTime selectedDate,
+    DateTime firstDate,
+    DateTime lastDate,
+    DatePickerMode initialDatePickerMode = DatePickerMode.year,
+    String confirmText,
+    String cancelText,
+    String fieldHintText,
+    String fieldLabelText,
+    String helpText,
+    Locale locale,
+    DateTime currentDate,
+    String errorFormatText,
+    String errorInvalidText,
+    Function(BuildContext, Widget) builder,
+    bool Function(DateTime) selectableDayPredicate,
+    @required void Function(DateTime) onChanged,
+  }) async {
+    final ThemeData theme = Theme.of(context);
+    assert(theme.platform != null);
+
+    // Set defaults
+    firstDate ??= DateTime(1910);
+    lastDate ??= App.today;
+    selectedDate ??= App.today;
+
+    switch (theme.platform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        return showCupertinoDatePicker(
+          context,
+          selectedDate: selectedDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          confirmText: confirmText,
+          cancelText: cancelText,
+          fieldHintText: fieldHintText,
+          fieldLabelText: fieldLabelText,
+          helpText: helpText,
+          locale: locale,
+          currentDate: currentDate,
+          errorFormatText: errorFormatText,
+          errorInvalidText: errorInvalidText,
+          builder: builder,
+          onChanged: onChanged,
+        ) as U;
+        break;
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+      default:
+        final DateTime date = await showDatePicker(
+          context: context,
+          initialDate: selectedDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          confirmText: confirmText,
+          cancelText: cancelText,
+          fieldHintText: fieldHintText,
+          fieldLabelText: fieldLabelText,
+          initialDatePickerMode: initialDatePickerMode,
+          helpText: helpText,
+          locale: locale,
+          currentDate: currentDate,
+          errorFormatText: errorFormatText,
+          errorInvalidText: errorInvalidText,
+          builder: builder,
+          selectableDayPredicate: selectableDayPredicate,
+        );
+        // Fire callback after selection
+        return onChanged(date) as U;
+        break;
+    }
+  }
+
+  Future<DateTime> showCupertinoDatePicker(
+    BuildContext context, {
+    DateTime selectedDate,
+    DateTime firstDate,
+    DateTime lastDate,
+    String confirmText,
+    String cancelText,
+    String fieldHintText,
+    String fieldLabelText,
+    String helpText,
+    Locale locale,
+    DateTime currentDate,
+    String errorFormatText,
+    String errorInvalidText,
+    Color backgroundColor,
+    bool use24hFormat,
+    Function(BuildContext, Widget) builder,
+    @required void Function(DateTime) onChanged,
+  }) async {
+    return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext builder) {
+        return Container(
+          height: MediaQuery.of(context).copyWith().size.height / 3,
+          color: Theme.of(context).primaryColor,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.date,
+            backgroundColor: backgroundColor,
+            onDateTimeChanged: onChanged,
+            initialDateTime: selectedDate,
+            minimumDate: firstDate,
+            maximumDate: lastDate,
+            use24hFormat: use24hFormat,
+          ),
+        );
+      },
+    );
+  }
+
   Future<U> showAlertDialog<U>({
     BuildContext context,
     WidgetBuilder builder,
@@ -335,19 +468,21 @@ class Helpers {
       routeSettings: routeSettings,
     );
   }
-}
 
-class Log with LogMixin {
-  final String tag;
-  final String message;
-
-  Log({this.tag, @required this.message});
-}
-
-mixin LogMixin {
-  void d({String tag, String message, dynamic ex}) =>
-      print("debug: $tag: $message\n\n$ex");
-
-  void w({String tag, String message, dynamic ex}) =>
-      print("Warning!! $tag: $message\n\n$ex");
+  int calculateAge(DateTime birthDate) {
+    DateTime currentDate = today;
+    int age = currentDate.year - birthDate.year;
+    int month1 = currentDate.month;
+    int month2 = birthDate.month;
+    if (month2 > month1) {
+      age--;
+    } else if (month1 == month2) {
+      int day1 = currentDate.day;
+      int day2 = birthDate.day;
+      if (day2 > day1) {
+        age--;
+      }
+    }
+    return age;
+  }
 }

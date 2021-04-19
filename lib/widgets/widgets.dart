@@ -7,3 +7,4 @@ export 'app_elevated_button.dart';
 export 'subtitled_header.dart';
 export 'icon_button.dart';
 export 'app_elevated_button.dart';
+export 'home_app_bar.dart';

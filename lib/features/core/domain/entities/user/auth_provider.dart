@@ -1,29 +1,16 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pexza/features/auth/domain/domain.dart';
-import 'package:pexza/utils/utils.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
 
-part 'auth_provider.freezed.dart';
+part 'auth_provider.g.dart';
 
-@freezed
-@immutable
-abstract class AuthProvider implements _$AuthProvider {
-  const AuthProvider._();
+class AuthProvider extends EnumClass {
+  static const AuthProvider regular = _$regular;
+  static const AuthProvider google = _$google;
+  static const AuthProvider facebook = _$facebook;
 
-  const factory AuthProvider({
-    @required @nullable String id,
-    @required @nullable String displayName,
-    @required @nullable String email,
-    @required @nullable String phoneNumber,
-    @required @nullable String photoURL,
-    @required @nullable String providerId,
-  }) = _AuthProvider;
+  const AuthProvider._(String name) : super(name);
 
-  bool get isGoogleAuth =>
-      !providerId.isNullOrBlank && providerId == AuthProviderType.Google.name;
+  static BuiltSet<AuthProvider> get values => _$authProviderValues;
 
-  bool get isPasswordAuth =>
-      !providerId.isNullOrBlank && providerId == AuthProviderType.Password.name;
-
-  bool get isFacebookAuth =>
-      !providerId.isNullOrBlank && providerId == AuthProviderType.Facebook.name;
+  static AuthProvider valueOf(String name) => _$authProviderValueOf(name);
 }

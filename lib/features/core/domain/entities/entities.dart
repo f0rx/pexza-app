@@ -1,6 +1,5 @@
 export 'fields/fields.dart';
 export 'user/auth_provider.dart';
-export 'user/auth_providers.dart';
 export 'user/base_user.dart';
 export 'user/user.dart';
 export 'role/role.dart';

@@ -24,6 +24,8 @@ mixin AppAssets {
 
   static const logo = "$LOGO_IMAGES_DIR/logo.png";
 
+  static const user = "$IMAGES_DIR/user.png";
+
   // On Boarding Assets
   static const String onBoarding1 = '$ONBOARDING_MAIN_IMAGES_DIR/1.png';
   static const String onBoarding2 = '$ONBOARDING_MAIN_IMAGES_DIR/2.png';
@@ -40,7 +42,7 @@ mixin AppAssets {
   /////////////////////////////////////////////////////
 
   static SvgPicture wavingHand = SvgPicture.asset(
-    '$SVG_DIR/waving-hand.svg',
+    '$SVG_DIR/waving_hand.svg',
     height: 18,
     width: 18,
     color: Colors.amberAccent,
