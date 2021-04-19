@@ -34,7 +34,17 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
     // Cancel previous subscription
     await unsubscribeAuthChanges;
     // Install new subscription
-    _authStateChanges ??= _facade.onAuthStateChanged.listen(actions);
+    _authStateChanges ??= _facade.onAuthStateChanged.listen(
+      (data) {
+        final User _user = data?.getOrElse(() => null)?.getOrElse(() => null);
+        emit(state.copyWith(
+          isAuthenticated: _user != null,
+          user: _user,
+        ));
+
+        actions?.call(data);
+      },
+    );
 
     await _facade.sink();
 

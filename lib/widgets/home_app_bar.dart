@@ -49,39 +49,38 @@ class HomeAppBar extends StatelessWidget {
               BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
                 builder: (context, state) => ClipRRect(
                   borderRadius: BorderRadius.circular(100),
-                  child: Material(
-                    elevation: 0.0,
-                    color: Colors.transparent,
-                    child: CircleAvatar(
-                      maxRadius: 22.0,
-                      minRadius: 17.0,
-                      backgroundImage: CachedNetworkImageProvider(
-                        "${state.user?.photo}",
-                      ),
-                      backgroundColor: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {},
-                        splashColor: Colors.red,
-                        child: SizedBox(
-                          height: double.infinity,
-                          width: double.infinity,
-                          child: Visibility(
-                            visible: state.user?.photo == null,
-                            child: Material(
-                              shape: CircleBorder(),
-                              clipBehavior: Clip.hardEdge,
-                              color: avatarBgColor,
-                              child: InkWell(
-                                onTap: onPressed,
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  child: Center(
-                                      child: Text(
-                                    avatarText,
-                                    style: style,
-                                  )),
-                                ),
+                  child: CircleAvatar(
+                    maxRadius: 22.0,
+                    minRadius: 17.0,
+                    backgroundImage: CachedNetworkImageProvider(
+                      "${state.user?.photo}",
+                    ),
+                    backgroundColor: Colors.transparent,
+                    child: InkWell(
+                      onTap: state.user?.photo != null ? onPressed : null,
+                      splashColor: Colors.red,
+                      child: SizedBox(
+                        height: double.infinity,
+                        width: double.infinity,
+                        child: Visibility(
+                          visible: true,
+                          child: Material(
+                            shape: CircleBorder(),
+                            clipBehavior: Clip.hardEdge,
+                            color: avatarBgColor,
+                            child: InkWell(
+                              onTap: onPressed,
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: Center(
+                                    child: Text(
+                                  "${state.user?.firstName?.getOrNull} ${state.user?.lastName?.getOrNull}"
+                                          ?.onlyInitials(
+                                              pattern: " ", glue: "") ??
+                                      avatarText,
+                                  style: style,
+                                )),
                               ),
                             ),
                           ),

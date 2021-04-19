@@ -154,9 +154,11 @@ class AuthFacadeImpl extends AuthFacade {
       //// Cache Access token
       _local.cacheUserAccessToken(_response.data);
 
+      // Login was successful, so we get fresh server update
+      // It makes sense that this should be here
       await this.getAndCacheUserInfo();
 
-      // Notify listeners
+      // Sink new signin event
       await sink();
 
       return right(unit);
@@ -204,9 +206,12 @@ class AuthFacadeImpl extends AuthFacade {
     EmailTokenField token,
   }) async {
     try {
+      final UserDTO dto = _local.getCachedUserInfo()?.getOrElse(() => null);
       // Check if device has good connection
       final _checkConn = await this.checkHasGoodInternet();
 
+      // Delete stored TEMP data
+      // To prevent conflicts during Email verification
       _local.signOut();
 
       await _checkConn.fold(
@@ -217,10 +222,10 @@ class AuthFacadeImpl extends AuthFacade {
         ),
       );
 
-      await this.getAndCacheUserInfo();
-
-      // Here, it kinda looks like i'm fetching the user info twice!?
-      await sink();
+      await this.login(
+        email: EmailAddress(dto.email),
+        password: Password(dto.password),
+      );
 
       return right(unit);
     } on AuthFailure catch (ex) {

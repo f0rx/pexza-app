@@ -49,7 +49,7 @@ class AuthRemoteDatasource {
       email: email,
       token: token,
     );
-    log.wtf(dto);
+    // log.wtf(dto);
     // Generate Form Data for request
     FormData data = FormData.fromMap(dto.toJson());
     // Perform POST request based on role / user_type
