@@ -3,9 +3,13 @@ import 'package:pexza/features/core/domain/entities/unique_id.dart';
 
 abstract class BaseUser {
   UniqueId get id;
-  DisplayName get displayName;
+  DisplayName get firstName;
+  DisplayName get lastName;
   EmailAddress get email;
-  bool get isEmailVerified;
   Phone get phone;
-  String get photoURL;
+  DateTimeField get dateOfBirth;
+  Gender get gender;
+  Password get password;
+  String get photo;
+  bool get isEmailVerified;
 }

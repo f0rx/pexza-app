@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/painting.dart';
 import 'package:pexza/features/core/domain/entities/field_object.dart';
 import 'package:pexza/features/core/domain/failures/field_object/field_object_exception.dart';
-import 'package:pexza/features/core/domain/validator/validator.dart';
 
 class PropertyColor extends FieldObject<Color> {
   final Either<FieldObjectException<String>, Color> value;

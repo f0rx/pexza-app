@@ -2,9 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/utils/colors.dart';
 import 'package:pexza/utils/helpers.dart';
+import 'package:pexza/widgets/home_app_bar.dart';
 import 'package:pexza/widgets/horizontal_spacer.dart';
 import 'package:pexza/widgets/icon_button.dart';
 import 'package:pexza/widgets/vertical_spacer.dart';
@@ -29,40 +32,11 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
             .copyWith(top: App.longest * 0.02),
         child: Column(
           children: [
-            SafeArea(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      AutoSizeText(
-                        "Hi, Dammy",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      //
-                      AppAssets.wavingHand,
-                    ],
-                  ),
-                  CircleAvatar(
-                    maxRadius: 22.0,
-                    minRadius: 18.0,
-                    // backgroundImage: AssetImage("${AppAssets.owner}"),
-                    backgroundColor: Colors.transparent,
-                    child: Material(
-                      shape: CircleBorder(),
-                      clipBehavior: Clip.hardEdge,
-                      color: AppColors.accentColor.shade50,
-                      child: InkWell(
-                        onTap: () => navigator.pushAccountScreen(),
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: Center(child: Text("DA")),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+              builder: (context, state) => HomeAppBar(
+                text: "Hi ${state.user?.firstName?.getOrEmpty}",
+                avatarText: "DA",
+                onPressed: () => navigator.pushAccountScreen(),
               ),
             ),
             //
@@ -107,65 +81,62 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
                     print('Route Navigation rejected! ' + guard.toString());
                   },
                 ),
-                child: Hero(
-                  tag: props.elementAt(i).id.value,
-                  child: Container(
-                    height: App.longest * 0.09,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
-                    decoration: BoxDecoration(
-                      color: props.elementAt(i).color.getOrNull,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: HorizontalSpace(
-                            width: double.infinity,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                AutoSizeText(
-                                  props.elementAt(i).type.getOrEmpty,
-                                  style: TextStyle(
-                                    color: AppColors.accentColor,
-                                    fontSize: 18.0,
-                                  ),
-                                  maxLines: 1,
+                child: Container(
+                  height: App.longest * 0.09,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
+                  decoration: BoxDecoration(
+                    color: props.elementAt(i).color.getOrNull,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: HorizontalSpace(
+                          width: double.infinity,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AutoSizeText(
+                                props.elementAt(i).type.getOrEmpty,
+                                style: TextStyle(
+                                  color: AppColors.accentColor,
+                                  fontSize: 18.0,
                                 ),
-                                //
-                                VerticalSpace(height: 6.0),
-                                //
-                                AutoSizeText(
-                                  props.elementAt(i).location.getOrEmpty,
-                                  style: TextStyle(
-                                    color: Helpers.computeLuminance(
-                                        props.elementAt(i).color.getOrNull),
-                                    fontSize: 16.0,
-                                  ),
-                                  maxLines: 1,
+                                maxLines: 1,
+                              ),
+                              //
+                              VerticalSpace(height: 6.0),
+                              //
+                              AutoSizeText(
+                                props.elementAt(i).location.getOrEmpty,
+                                style: TextStyle(
+                                  color: Helpers.computeLuminance(
+                                      props.elementAt(i).color.getOrNull),
+                                  fontSize: 16.0,
                                 ),
-                              ],
-                            ),
+                                maxLines: 1,
+                              ),
+                            ],
                           ),
                         ),
-                        AppIconButton(
-                          padding: EdgeInsets.zero,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0.0,
-                          child: RotatedBox(
-                            quarterTurns: 2,
-                            child: Icon(
-                              Icons.keyboard_backspace_rounded,
-                              color: Helpers.computeLuminance(
-                                  props.elementAt(i).color.getOrNull),
-                            ),
+                      ),
+                      AppIconButton(
+                        padding: EdgeInsets.zero,
+                        backgroundColor: Colors.transparent,
+                        elevation: 0.0,
+                        child: RotatedBox(
+                          quarterTurns: 2,
+                          child: Icon(
+                            Icons.keyboard_backspace_rounded,
+                            color: Helpers.computeLuminance(
+                                props.elementAt(i).color.getOrNull),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),

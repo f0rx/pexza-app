@@ -9,13 +9,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pexza/features/_404.dart';
+import 'package:pexza/features/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/login_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/profile_select_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/profile_setup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
+import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
+import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/add_property_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/add_tenant_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/home_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
@@ -34,6 +43,8 @@ class Routes {
   static const String rentDetailsScreen = '/rent-details-screen';
   static const String loginScreen = '/login-screen';
   static const String signupScreen = '/signup-screen';
+  static const String forgotPasswordScreen = '/forgot-password-screen';
+  static const String verifyEmailScreen = '/verify-email-screen';
   static const String tenantHomeScreen = '/tenant-home-screen';
   static const String tenantPropertyDetailScreen =
       '/tenant-property-detail-screen';
@@ -41,6 +52,16 @@ class Routes {
   static const String tenantRentPaymentScreen = '/tenant-rent-payment-screen';
   static const String serviceRequestScreen = '/service-request-screen';
   static const String landlordHomeScreen = '/landlord-home-screen';
+  static const String landlordAddPropertyScreen =
+      '/landlord-add-property-screen';
+  static const String landlordPropertyDetailScreen =
+      '/landlord-property-detail-screen';
+  static const String landlordRentDetailScreen = '/landlord-rent-detail-screen';
+  static const String landlordAddTenantScreen = '/landlord-add-tenant-screen';
+  static const String landlordMaintenanceRequestScreen =
+      '/landlord-maintenance-request-screen';
+  static const String landlordTenantsListingScreen =
+      '/landlord-tenants-listing-screen';
   static const String accountScreen = '/account-screen';
   static const String editAccountScreen = '/edit-account-screen';
   static const String settingsScreen = '/settings-screen';
@@ -53,12 +74,20 @@ class Routes {
     rentDetailsScreen,
     loginScreen,
     signupScreen,
+    forgotPasswordScreen,
+    verifyEmailScreen,
     tenantHomeScreen,
     tenantPropertyDetailScreen,
     tenantRentDetailScreen,
     tenantRentPaymentScreen,
     serviceRequestScreen,
     landlordHomeScreen,
+    landlordAddPropertyScreen,
+    landlordPropertyDetailScreen,
+    landlordRentDetailScreen,
+    landlordAddTenantScreen,
+    landlordMaintenanceRequestScreen,
+    landlordTenantsListingScreen,
     accountScreen,
     editAccountScreen,
     settingsScreen,
@@ -77,6 +106,8 @@ class Router extends RouterBase {
     RouteDef(Routes.rentDetailsScreen, page: RentDetailsScreen),
     RouteDef(Routes.loginScreen, page: LoginScreen),
     RouteDef(Routes.signupScreen, page: SignupScreen),
+    RouteDef(Routes.forgotPasswordScreen, page: ForgotPasswordScreen),
+    RouteDef(Routes.verifyEmailScreen, page: VerifyEmailScreen),
     RouteDef(Routes.tenantHomeScreen,
         page: TenantHomeScreen, guards: [AuthGuard]),
     RouteDef(Routes.tenantPropertyDetailScreen,
@@ -89,6 +120,18 @@ class Router extends RouterBase {
         page: ServiceRequestScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordHomeScreen,
         page: LandlordHomeScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordAddPropertyScreen,
+        page: LandlordAddPropertyScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordPropertyDetailScreen,
+        page: LandlordPropertyDetailScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordRentDetailScreen,
+        page: LandlordRentDetailScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordAddTenantScreen,
+        page: LandlordAddTenantScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordMaintenanceRequestScreen,
+        page: LandlordMaintenanceRequestScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordTenantsListingScreen,
+        page: LandlordTenantsListingScreen, guards: [AuthGuard]),
     RouteDef(Routes.accountScreen, page: AccountScreen),
     RouteDef(Routes.editAccountScreen, page: EditAccountScreen),
     RouteDef(Routes.settingsScreen, page: SettingsScreen),
@@ -142,6 +185,26 @@ class Router extends RouterBase {
     SignupScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => SignupScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    ForgotPasswordScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ForgotPasswordScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    VerifyEmailScreen: (data) {
+      final args = data.getArgs<VerifyEmailScreenArguments>(
+        orElse: () => VerifyEmailScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => VerifyEmailScreen(
+          key: args.key,
+          email: args.email,
+        ).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -206,6 +269,51 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
+    LandlordAddPropertyScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordAddPropertyScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    LandlordPropertyDetailScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            LandlordPropertyDetailScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    LandlordRentDetailScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordRentDetailScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    LandlordAddTenantScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordAddTenantScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    LandlordMaintenanceRequestScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            LandlordMaintenanceRequestScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    LandlordTenantsListingScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            LandlordTenantsListingScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
     AccountScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => AccountScreen().wrappedRoute(context),
@@ -264,6 +372,18 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushSignupScreen() => push<dynamic>(Routes.signupScreen);
 
+  Future<dynamic> pushForgotPasswordScreen() =>
+      push<dynamic>(Routes.forgotPasswordScreen);
+
+  Future<dynamic> pushVerifyEmailScreen({
+    Key key,
+    EmailAddress email,
+  }) =>
+      push<dynamic>(
+        Routes.verifyEmailScreen,
+        arguments: VerifyEmailScreenArguments(key: key, email: email),
+      );
+
   Future<dynamic> pushTenantHomeScreen() =>
       push<dynamic>(Routes.tenantHomeScreen);
 
@@ -300,6 +420,24 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushLandlordHomeScreen() =>
       push<dynamic>(Routes.landlordHomeScreen);
 
+  Future<dynamic> pushLandlordAddPropertyScreen() =>
+      push<dynamic>(Routes.landlordAddPropertyScreen);
+
+  Future<dynamic> pushLandlordPropertyDetailScreen() =>
+      push<dynamic>(Routes.landlordPropertyDetailScreen);
+
+  Future<dynamic> pushLandlordRentDetailScreen() =>
+      push<dynamic>(Routes.landlordRentDetailScreen);
+
+  Future<dynamic> pushLandlordAddTenantScreen() =>
+      push<dynamic>(Routes.landlordAddTenantScreen);
+
+  Future<dynamic> pushLandlordMaintenanceRequestScreen() =>
+      push<dynamic>(Routes.landlordMaintenanceRequestScreen);
+
+  Future<dynamic> pushLandlordTenantsListingScreen() =>
+      push<dynamic>(Routes.landlordTenantsListingScreen);
+
   Future<dynamic> pushAccountScreen() => push<dynamic>(Routes.accountScreen);
 
   Future<dynamic> pushEditAccountScreen() =>
@@ -313,6 +451,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// VerifyEmailScreen arguments holder class
+class VerifyEmailScreenArguments {
+  final Key key;
+  final EmailAddress email;
+  VerifyEmailScreenArguments({this.key, this.email});
+}
 
 /// TenantPropertyDetailScreen arguments holder class
 class TenantPropertyDetailScreenArguments {

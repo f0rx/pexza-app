@@ -6,16 +6,16 @@ part of 'role.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-const Role _$parent = const Role._('parent');
-const Role _$student = const Role._('student');
+const Role _$landlord = const Role._('landlord');
+const Role _$tenant = const Role._('tenant');
 const Role _$admin = const Role._('admin');
 
 Role _$valueOf(String name) {
   switch (name) {
-    case 'parent':
-      return _$parent;
-    case 'student':
-      return _$student;
+    case 'landlord':
+      return _$landlord;
+    case 'tenant':
+      return _$tenant;
     case 'admin':
       return _$admin;
     default:
@@ -24,8 +24,8 @@ Role _$valueOf(String name) {
 }
 
 final BuiltSet<Role> _$values = new BuiltSet<Role>(const <Role>[
-  _$parent,
-  _$student,
+  _$landlord,
+  _$tenant,
   _$admin,
 ]);
 
