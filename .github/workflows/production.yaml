@@ -21,19 +21,11 @@ on:
       - synchronize
 
 jobs:
-  build:
-    name: Build & Deploy a release APK
-    env:
-      APP_NAME: "Pexza App"
-      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      RELEASE_TYPE: patch
-      FLUTTER_VERSION: "1.25.0-8.3.pre"
-      # BUMP_TAG:
-      # BUMP_VERSION:
+  setup:
+    name: Setup Environment
     runs-on: ubuntu-latest
-    outputs:
-      bump_tag: ${{ env.BUMP_TAG }}
-      bump_tag_version: ${{ env.BUMP_VERSION }}
+    env:
+      FLUTTER_VERSION: "1.25.0-8.3.pre"
     steps:
       - name: Fetch Repo HEAD
         uses: actions/checkout@v2
@@ -74,6 +66,18 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: "beta"
 
+  build:
+    name: Build & Deploy Production APK
+    needs: setup
+    runs-on: ubuntu-latest
+    env:
+      APP_NAME: "Pexza App"
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      RELEASE_TYPE: patch
+    outputs:
+      bump_tag: ${{ env.BUMP_TAG }}
+      bump_tag_version: ${{ env.BUMP_VERSION }}
+    steps:
       - name: Run Pre-build scipts
         run: |
           flutter pub get
@@ -120,14 +124,10 @@ jobs:
       REPOSITORY_NAME: "pexza-app"
       API_KEY: ${{ secrets.ZAPIER_TEAM_API_KEY }}
     steps:
-      - name: Test workflow_dispatch
-        run: |
-          echo "Android Home = ${ANDROID_HOME}"
-          echo "Android SDK Root = ${ANDROID_SDK_ROOT}"
-      # - name: Send Push Notification
-      #   uses: techulus/push-github-action@1.0.0
-      #   env:
-      #     API_KEY: ${{ env.API_KEY }}
-      #     TITLE: Version Bump Notification
-      #     MESSAGE: Bump Version ${{ needs.build.outputs.bump_tag_version }} available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
-      #     LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
+      - name: Send Push Notification
+        uses: techulus/push-github-action@1.0.0
+        env:
+          API_KEY: ${{ env.API_KEY }}
+          TITLE: Version Bump Notification
+          MESSAGE: Bump Version ${{ needs.build.outputs.bump_tag_version }} available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
+          LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
