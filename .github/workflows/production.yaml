@@ -1,5 +1,12 @@
 name: Release Production apk
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Bump version
+        required: false
+        default: 1.0.0
+
   push:
     branches:
       - master
@@ -20,10 +27,12 @@ jobs:
       APP_NAME: "Pexza App"
       GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       RELEASE_TYPE: patch
+      # BUMP_TAG:
+      # BUMP_VERSION:
     runs-on: ubuntu-latest
     outputs:
-      bump_tag: ${{ steps.bump_tag.outputs.new_tag }}
-      bump_tag_version: ${{ steps.bump_tag.outputs.new_version }}
+      bump_tag: ${{ env.BUMP_TAG }}
+      bump_tag_version: ${{ env.BUMP_VERSION }}
     steps:
       - name: Fetch Repo HEAD
         uses: actions/checkout@v2
@@ -35,37 +44,66 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Install NDK
-        if: steps.ndk_cache.outputs.cache-hit != 'true'
-        run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Prepare NDK dir for caching
+        run: |
+          sudo mkdir -p /usr/local/lib/android/sdk/ndk
+          sudo chmod -R 777 /usr/local/lib/android/sdk/ndk
+          sudo chown -R $USER:$USER /usr/local/lib/android/sdk/ndk
 
-      - name: Set up Flutter Environment
-        uses: subosito/flutter-action@v1
+      - name: NDK Cache
+        id: ndk-cache
+        uses: actions/cache@v2
         with:
-          flutter-version: "1.25.0-8.3.pre"
-          channel: "beta"
+          path: /usr/local/lib/android/sdk/ndk
+          key: ndk-cache-21.4.7075529-v2
 
-      - run: flutter pub get
-      #- run: flutter test
-      - run: flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
+      - name: Install NDK
+        if: steps.ndk-cache.outputs.cache-hit != 'true'
+        run: echo "y" | sudo ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;21.4.7075529"
+
+      # - name: Set up Flutter Environment
+      #   uses: subosito/flutter-action@v1
+      #   with:
+      #     flutter-version: "1.25.0-8.3.pre"
+      #     channel: "beta"
+
+      # - name: Run Pre-build scipts
+      #   run: |
+      #     flutter pub get
+      #     # flutter test
+
+      # - name: Build Flutter Apk
+      #   run: |
+      #     flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
 
       - name: Bump version and push tag
         id: bump_tag
+        if: ${{ github.event.inputs.version == '' }}
         uses: mathieudutour/github-tag-action@v4.5
         with:
           release_branches: .*
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push APK to Release Tags
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/prod/release/*.apk,build/app/outputs/apk/release/*.apk,build/app/outputs/apk/*"
-          name: ${{ env.APP_NAME }}-${{ steps.bump_tag.outputs.new_version }}
-          tag: ${{ steps.bump_tag.outputs.new_tag }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          allowUpdates: true
-          omitName: false
-          omitBody: false
+      - name: Update Environment variables
+        run: |
+          if ${{ github.event.inputs.version == '' }}; then
+            echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
+            echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
+          else
+            echo "BUMP_TAG=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
+            echo "BUMP_VERSION=${{ github.event.inputs.version}}" >> $GITHUB_ENV
+          fi
+
+      # - name: Push APK to Release Tags
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     artifacts: "build/app/outputs/apk/prod/release/*.apk,build/app/outputs/apk/release/*.apk,build/app/outputs/apk/*"
+      #     name: ${{ env.APP_NAME }}-${{ env.BUMP_VERSION }}
+      #     tag: ${{ env.BUMP_TAG }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     allowUpdates: true
+      #     omitName: false
+      #     omitBody: false
 
   notify:
     runs-on: ubuntu-latest
@@ -75,10 +113,14 @@ jobs:
       REPOSITORY_NAME: "pexza-app"
       API_KEY: ${{ secrets.ZAPIER_TEAM_API_KEY }}
     steps:
-      - name: Send Push Notification
-        uses: techulus/push-github-action@1.0.0
-        env:
-          API_KEY: ${{ env.API_KEY }}
-          TITLE: Version Bump Notification
-          MESSAGE: Bump Version ${{ needs.build.outputs.bump_tag_version }} available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
-          LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
+      - name: Test workflow_dispatch
+        run: |
+          echo "Android Home = ${ANDROID_HOME}"
+          echo "Android SDK Root = ${ANDROID_SDK_ROOT}"
+      # - name: Send Push Notification
+      #   uses: techulus/push-github-action@1.0.0
+      #   env:
+      #     API_KEY: ${{ env.API_KEY }}
+      #     TITLE: Version Bump Notification
+      #     MESSAGE: Bump Version ${{ needs.build.outputs.bump_tag_version }} available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
+      #     LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
