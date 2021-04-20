@@ -77,9 +77,6 @@ jobs:
           then
             echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
             echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
-          # else
-          #   echo "BUMP_TAG=${{ github.event.inputs.version}}" >> $GITHUB_ENV
-          #   echo "BUMP_VERSION=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
 
       # - name: Push APK to Release Tags
       #   uses: ncipollo/release-action@v1
