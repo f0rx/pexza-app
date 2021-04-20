@@ -39,14 +39,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Set up Java Environment
-      #   uses: actions/setup-java@v1
-      #   with:
-      #     java-version: 1.8
+      - name: Set up Java Environment
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
 
-      # - name: Install NDK
-      #   if: steps.ndk_cache.outputs.cache-hit != 'true'
-      #   run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
+      - name: Install NDK
+        if: steps.ndk_cache.outputs.cache-hit != 'true'
+        run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
 
       # - name: Set up Flutter Environment
       #   uses: subosito/flutter-action@v1
@@ -77,8 +77,8 @@ jobs:
             echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
             echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
           else
-            echo "BUMP_TAG=${{ github.event.inputs.version}}" >> $GITHUB_ENV
-            echo "BUMP_VERSION=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
+            echo "BUMP_TAG=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
+            echo "BUMP_VERSION=${{ github.event.inputs.version}}" >> $GITHUB_ENV
           fi
 
       # - name: Push APK to Release Tags
@@ -102,8 +102,8 @@ jobs:
     steps:
       - name: Test workflow_dispatch
         run: |
-          echo "New Tag = ${{ needs.build.outputs.bump_tag }}"
-          echo "Version = ${{ needs.build.outputs.bump_tag_version }}"
+          echo "Android Home = ${ANDROID_HOME}"
+          echo "Android SDK Root = ${ANDROID_SDK_ROOT}"
       # - name: Send Push Notification
       #   uses: techulus/push-github-action@1.0.0
       #   env:
