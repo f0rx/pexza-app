@@ -23,7 +23,6 @@ on:
 jobs:
   build:
     name: Build & Deploy Production APK
-    needs: setup
     runs-on: ubuntu-latest
     env:
       APP_NAME: "Pexza App"
