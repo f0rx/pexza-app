@@ -73,10 +73,8 @@ jobs:
 
       - name: Update Environment variables
         run: |
-          if ${{ github.event.inputs.version == '' }}
-          then
-            echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
-            echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
+          echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
+          echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
 
       # - name: Push APK to Release Tags
       #   uses: ncipollo/release-action@v1
