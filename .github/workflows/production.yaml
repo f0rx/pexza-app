@@ -39,29 +39,29 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Java Environment
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
+      # - name: Set up Java Environment
+      #   uses: actions/setup-java@v1
+      #   with:
+      #     java-version: 1.8
 
-      - name: Install NDK
-        if: steps.ndk_cache.outputs.cache-hit != 'true'
-        run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
+      # - name: Install NDK
+      #   if: steps.ndk_cache.outputs.cache-hit != 'true'
+      #   run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
 
-      - name: Set up Flutter Environment
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: "1.25.0-8.3.pre"
-          channel: "beta"
+      # - name: Set up Flutter Environment
+      #   uses: subosito/flutter-action@v1
+      #   with:
+      #     flutter-version: "1.25.0-8.3.pre"
+      #     channel: "beta"
 
-      - name: Run Pre-build scipts
-        run: |
-          flutter pub get
-          # flutter test
+      # - name: Run Pre-build scipts
+      #   run: |
+      #     flutter pub get
+      #     # flutter test
 
-      - name: Build Flutter Apk
-        run: |
-          flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
+      # - name: Build Flutter Apk
+      #   run: |
+      #     flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
 
       - name: Bump version and push tag
         id: bump_tag
@@ -77,20 +77,20 @@ jobs:
           then
             echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
             echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
-          else
-            echo "BUMP_TAG=${{ github.event.inputs.version}}" >> $GITHUB_ENV
-            echo "BUMP_VERSION=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
+          # else
+          #   echo "BUMP_TAG=${{ github.event.inputs.version}}" >> $GITHUB_ENV
+          #   echo "BUMP_VERSION=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
 
-      - name: Push APK to Release Tags
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/prod/release/*.apk,build/app/outputs/apk/release/*.apk,build/app/outputs/apk/*"
-          name: ${{ env.APP_NAME }}-${{ env.BUMP_VERSION }}
-          tag: ${{ env.BUMP_TAG }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          allowUpdates: true
-          omitName: false
-          omitBody: false
+      # - name: Push APK to Release Tags
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     artifacts: "build/app/outputs/apk/prod/release/*.apk,build/app/outputs/apk/release/*.apk,build/app/outputs/apk/*"
+      #     name: ${{ env.APP_NAME }}-${{ env.BUMP_VERSION }}
+      #     tag: ${{ env.BUMP_TAG }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     allowUpdates: true
+      #     omitName: false
+      #     omitBody: false
 
   notify:
     runs-on: ubuntu-latest
