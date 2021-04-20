@@ -21,11 +21,18 @@ on:
       - synchronize
 
 jobs:
-  setup:
-    name: Setup Environment
+  build:
+    name: Build & Deploy Production APK
+    needs: setup
     runs-on: ubuntu-latest
     env:
+      APP_NAME: "Pexza App"
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      RELEASE_TYPE: patch
       FLUTTER_VERSION: "1.25.0-8.3.pre"
+    outputs:
+      bump_tag: ${{ env.BUMP_TAG }}
+      bump_tag_version: ${{ env.BUMP_VERSION }}
     steps:
       - name: Fetch Repo HEAD
         uses: actions/checkout@v2
@@ -54,18 +61,6 @@ jobs:
         if: steps.ndk-cache.outputs.cache-hit != 'true'
         run: echo "y" | sudo ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;21.0.6113669"
 
-  build:
-    name: Build & Deploy Production APK
-    needs: setup
-    runs-on: ubuntu-latest
-    env:
-      APP_NAME: "Pexza App"
-      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      RELEASE_TYPE: patch
-    outputs:
-      bump_tag: ${{ env.BUMP_TAG }}
-      bump_tag_version: ${{ env.BUMP_VERSION }}
-    steps:
       - name: Cache Flutter dependencies
         uses: actions/cache@v2
         with:
