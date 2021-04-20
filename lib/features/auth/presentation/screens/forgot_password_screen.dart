@@ -6,10 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
+import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
+import 'package:pexza/widgets/widgets.dart';
 
 class ForgotPasswordScreen extends StatelessWidget with AutoRouteWrapper {
+  final _emailFocus = FocusNode();
+
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
@@ -39,7 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget with AutoRouteWrapper {
                     shouldIconPulse: true,
                     backgroundColor: Theme.of(context).primaryColor,
                   ).show(context),
-                  (_) => null,
+                  (_) => navigator.pop(),
                 ),
               );
         },
@@ -55,33 +59,76 @@ class ForgotPasswordScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: Toolbar(),
       body: Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-            controller: ScrollController(),
-            physics: Helpers.physics,
-            padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: SafeArea(
-                    child: AutoSizeText(
-                      "Forgot Password",
-                      textAlign: TextAlign.left,
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                        color: App.theme.accentColor,
-                      ),
-                      softWrap: true,
-                      wrapWords: true,
+          controller: ScrollController(),
+          physics: Helpers.physics,
+          padding: EdgeInsets.symmetric(horizontal: Helpers.appPadding),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: SafeArea(
+                  child: AutoSizeText(
+                    "Forgot Password",
+                    textAlign: TextAlign.left,
+                    maxLines: 1,
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: App.theme.accentColor,
                     ),
+                    softWrap: true,
+                    wrapWords: true,
                   ),
                 ),
-              ],
-            ),
+              ),
+              //
+              VerticalSpace(height: App.height * 0.02),
+              //
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Helpers.descriptionPadding),
+                  child: AutoSizeText(
+                    "Forgot your password? No problem. Just let us know your email address and we "
+                    "will email you a password reset link that will allow you to choose a new "
+                    "one.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 17.0, wordSpacing: 2.0),
+                    softWrap: true,
+                    wrapWords: true,
+                  ),
+                ),
+              ),
+              //
+              VerticalSpace(height: App.height * 0.04),
+              //
+              Form(
+                child: AutofillGroup(
+                  child: Column(
+                    children: [
+                      EmailAddressField(
+                        focus: _emailFocus,
+                      ),
+                      //
+                      VerticalSpace(height: App.longest * .04),
+                    ],
+                  ),
+                ),
+              ),
+              //
+              AppElevatedButton(
+                // TODO: Replace with actual implementation
+                onPressed: context.read<AuthCubit>().sendPasswordResetLink,
+                text: "Email Password Reset Link",
+                width: App.width,
+                height: App.shortest * 0.12,
+              ),
+            ],
+          ),
         ),
       ),
     );
