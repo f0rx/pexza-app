@@ -177,6 +177,32 @@ class AuthCubit extends Cubit<AuthState> {
     toggleLoadingIndicator();
   }
 
+  void sendPasswordResetLink() async {
+    toggleLoadingIndicator();
+
+    EmailAddress email = state.emailAddress;
+    Either<AuthResponse, AuthResponse> failureOrUnit;
+
+    // Start form validation
+    emit(state.copyWith(
+      validate: true,
+      authStatus: none(),
+    ));
+
+    if (email.isValid) {
+      // Send password reset link
+      failureOrUnit = await _auth.sendPasswordResetEmail(email);
+
+      // emit auth_status
+      emit(state.copyWith(
+        //////// TODO: Fix this later
+        authStatus: optionOf(failureOrUnit.map((r) => unit)),
+      ));
+    }
+
+    toggleLoadingIndicator();
+  }
+
   Future<void> verify() async {
     toggleLoadingIndicator();
 
