@@ -54,18 +54,6 @@ jobs:
         if: steps.ndk-cache.outputs.cache-hit != 'true'
         run: echo "y" | sudo ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;21.0.6113669"
 
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v2
-        with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.OS }}-flutter-install-cache-${{ env.FLUTTER_VERSION }}
-
-      - name: Set up Flutter Environment
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: "beta"
-
   build:
     name: Build & Deploy Production APK
     needs: setup
@@ -78,6 +66,18 @@ jobs:
       bump_tag: ${{ env.BUMP_TAG }}
       bump_tag_version: ${{ env.BUMP_VERSION }}
     steps:
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: ${{ runner.OS }}-flutter-install-cache-${{ env.FLUTTER_VERSION }}
+
+      - name: Set up Flutter Environment
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: "beta"
+
       - name: Run Pre-build scipts
         run: |
           flutter pub get
