@@ -62,10 +62,7 @@ class SplashScreen extends StatelessWidget {
                             .listenToAuthChanges(
                           (either) => either.fold(
                             (failure) => failure?.fold(
-                              orElse: () => navigator.pushAndRemoveUntil(
-                                Routes.onBoardingScreen,
-                                (route) => false,
-                              ),
+                              orElse: null,
                               is1101: (email) {
                                 return navigator.pushAndRemoveUntil(
                                   Routes.verifyEmailScreen,
@@ -147,7 +144,7 @@ class SplashScreen extends StatelessWidget {
                           (failure) => failure.message,
                           (_) => state.hasInternet.fold(
                             (failure) => failure.message,
-                            (_) => "Back online",
+                            (_) => "Online",
                           ),
                         ),
                         minFontSize: 13.0,

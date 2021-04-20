@@ -59,7 +59,7 @@ class PasswordInputField extends StatelessWidget {
                               () => null,
                               (_) => _.fold(
                                 (f) => !f.errors.isNull
-                                    ? f.errors.password.firstOrNull
+                                    ? f.errors?.password?.firstOrNull
                                     : null,
                                 (r) => null,
                               ),

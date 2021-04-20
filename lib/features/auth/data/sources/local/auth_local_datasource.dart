@@ -35,9 +35,11 @@ class AuthLocalDatasource {
   void cacheUserAccessToken(Map<String, dynamic> response) =>
       _tokenManager.save(responseToken: TokenResponse.fromJson(response));
 
-  void signOut([bool clearAccessToken = true]) {
-    final box = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
-    box.delete(Keys.HIVE_USER_KEY);
+  void signOut({bool clearAccessToken = true, bool clearUser = true}) {
+    if (clearUser) {
+      final box = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
+      box.delete(Keys.HIVE_USER_KEY);
+    }
 
     if (clearAccessToken) {
       final accessTokenBox = App.box<String>(Keys.HIVE_BOX_ACCESS_TOKEN_KEY);

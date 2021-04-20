@@ -5,10 +5,12 @@ extension StringX on String {
   /// Capitalize only first letter in string
   ///
   /// Example: your name => Your name
-  String capitalizeFirst() => "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
+  String capitalizeFirst() =>
+      "${this[0].toUpperCase()}${this.substring(1).toLowerCase()}";
 
   /// Checks if String contains b (Treating or interpreting upper- and lowercase letters as being the same).
-  bool caseInsensitiveContains(String b) => this.toLowerCase().contains(b.toLowerCase());
+  bool caseInsensitiveContains(String b) =>
+      this.toLowerCase().contains(b.toLowerCase());
 
   /// Checks if String contains b or b contains String (Treating or interpreting upper- and lowercase letters as being the same).
   bool containsAny(String b) {
@@ -18,7 +20,10 @@ extension StringX on String {
   }
 
   /// Erase occurrence of strings matching Patterns
-  String erase(List<Pattern> patterns, {bool recursive = true, Direction position = Direction.left, int startIndex = 0}) {
+  String erase(List<Pattern> patterns,
+      {bool recursive = true,
+      Direction position = Direction.left,
+      int startIndex = 0}) {
     String init = this;
     patterns.forEach((pattern) {
       if (pattern == null || pattern.toString().isEmpty) return;
@@ -28,10 +33,12 @@ extension StringX on String {
         } else {
           switch (position) {
             case Direction.left:
-              init = this.replaceFirst(RegExp(pattern), "", this.indexOf(pattern));
+              init =
+                  this.replaceFirst(RegExp(pattern), "", this.indexOf(pattern));
               break;
             case Direction.right:
-              init = this.replaceFirst(RegExp(pattern), "", this.lastIndexOf(pattern));
+              init = this
+                  .replaceFirst(RegExp(pattern), "", this.lastIndexOf(pattern));
               break;
             case Direction.none:
             default:
@@ -45,7 +52,8 @@ extension StringX on String {
     return init;
   }
 
-  NumberFormat asCurrencyFormat() => NumberFormat("#,##0.00", Intl.defaultLocale);
+  NumberFormat asCurrencyFormat() =>
+      NumberFormat("#,##0.00", Intl.defaultLocale);
 
   String pad([String pad = '', Direction start = Direction.right]) {
     switch (start) {
@@ -59,7 +67,10 @@ extension StringX on String {
     }
   }
 
-  String padIf([bool condition = true, String pad = '', Direction start = Direction.right]) {
+  String padIf(
+      [bool condition = true,
+      String pad = '',
+      Direction start = Direction.right]) {
     if (condition) return this.pad(pad, start);
     return this;
   }
@@ -71,8 +82,12 @@ extension StringX on String {
 
   /// Returns only the First character of every word matching _**[pattern]**_ separated by _**[separator]**_
   String onlyInitials({Pattern pattern = " ", String glue = "."}) {
+    if (this.trim() == null || this.trim().isEmpty) return this;
     var split = this.split(pattern);
-    var join = split.fold<String>("", (previousValue, element) => "$previousValue${element.substring(0, 1)}$glue");
+    var join = split.fold<String>(
+        "",
+        (previousValue, element) =>
+            "$previousValue${element.substring(0, 1)}$glue");
     return join.erase([glue], recursive: false, position: Direction.right);
   }
 
@@ -113,8 +128,12 @@ extension StringX on String {
       if (e.value.isNotEmpty &&
           e.key != 0 &&
           e.key != 1 &&
-          !RegExp(r'[A-Za-z0-9][@][A-Za-z]{1}').stringMatch(this).caseInsensitiveContains(e.value) &&
-          !RegExp(r'\.[A-Za-z]+$').stringMatch(this).caseInsensitiveContains(e.value)) {
+          !RegExp(r'[A-Za-z0-9][@][A-Za-z]{1}')
+              .stringMatch(this)
+              .caseInsensitiveContains(e.value) &&
+          !RegExp(r'\.[A-Za-z]+$')
+              .stringMatch(this)
+              .caseInsensitiveContains(e.value)) {
         return e.value.replaceFirst(e.value, '.');
       }
       return e.value;

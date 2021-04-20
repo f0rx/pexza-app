@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/home/landlord/presentation/widgets/empty_landlord_props.dart';
 import 'package:pexza/features/home/landlord/presentation/widgets/property_listing.dart';
 import 'package:pexza/utils/utils.dart';
@@ -24,31 +26,27 @@ class _LandlordHomeScreenState extends State<LandlordHomeScreen> {
     return Scaffold(
       body: Visibility(
         visible: isShowingEmpty,
-        replacement: LandlordPropertyListing(
-          appBar: HomeAppBar(
-            text: "Hi, Landlord",
+        replacement: BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+          builder: (context, state) => HomeAppBar(
+            text: "Hi ${state.user?.firstName?.getOrEmpty}",
             avatarText: "LL",
             onPressed: () => navigator.pushAccountScreen(),
           ),
         ),
-        child: EmptyLandlordProps(
-          appBar: HomeAppBar(
-            text: "Hi, Landlord",
-            avatarText: "LL",
-            onPressed: () => navigator.pushAccountScreen(),
+        child: BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+          builder: (context, state) => EmptyLandlordProps(
+            appBar: HomeAppBar(
+              text: "Hi ${state.user?.firstName?.getOrEmpty}",
+              avatarText: "LL",
+              onPressed: () => navigator.pushAccountScreen(),
+            ),
+            title: "No Property Listed",
+            description: "You have not listed a property yet. "
+                "Click the button below to add properties.",
+            buttonText: "Add Property",
+            onPressed: () => navigator.pushLandlordAddPropertyScreen(),
           ),
-          title: "No Property Listed",
-          description: "You have not listed a property yet. "
-              "Click the button below to add properties.",
-          buttonText: "Add Property",
-          onPressed: () => navigator.pushLandlordAddPropertyScreen(),
         ),
-      ),
-      floatingActionButton: AppElevatedButton(
-        width: App.shortest * 0.3,
-        backgroundColor: Colors.black38,
-        text: "Click to Switch",
-        onPressed: () => setState(() => isShowingEmpty = !isShowingEmpty),
       ),
     );
   }

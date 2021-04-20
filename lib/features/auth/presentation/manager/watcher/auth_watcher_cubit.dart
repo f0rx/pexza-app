@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pexza/features/auth/data/models/auth_failure.dart';
+import 'package:pexza/features/auth/data/models/auth_response.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
 import 'package:pexza/utils/utils.dart';
@@ -12,12 +12,12 @@ import 'package:pexza/utils/utils.dart';
 part 'auth_watcher_state.dart';
 part 'auth_watcher_cubit.freezed.dart';
 
-typedef Task = void Function(Either<AuthFailure, Option<User>> option);
+typedef Task = void Function(Either<AuthResponse, Option<User>> option);
 
 @injectable
 class AuthWatcherCubit extends Cubit<AuthWatcherState> {
   final AuthFacade _facade;
-  StreamSubscription<Either<AuthFailure, Option<User>>> _authStateChanges;
+  StreamSubscription<Either<AuthResponse, Option<User>>> _authStateChanges;
 
   AuthWatcherCubit(this._facade) : super(AuthWatcherState.initial());
 

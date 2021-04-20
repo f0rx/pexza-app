@@ -14,7 +14,6 @@ import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/vertical_spacer.dart';
 import 'package:pexza/widgets/widgets.dart';
-import 'package:wiredash/wiredash.dart';
 
 part 'package:pexza/features/auth/presentation/widgets/signup_form.dart';
 

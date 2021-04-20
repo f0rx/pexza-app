@@ -18,35 +18,27 @@ class _$ServerFieldErrorsTearOff {
 
 // ignore: unused_element
   _ServerFieldErrors call(
-      {@required
-      @nullable
+      {@nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
           List<dynamic> firstName,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
           List<dynamic> lastName,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> email,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> gender,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> age,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> phone,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> password,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> token}) {
@@ -249,35 +241,27 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
 /// @nodoc
 class _$_ServerFieldErrors extends _ServerFieldErrors {
   const _$_ServerFieldErrors(
-      {@required
-      @nullable
+      {@nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
           this.firstName,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
           this.lastName,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.email,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.gender,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.age,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.phone,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.password,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.token})
@@ -375,35 +359,27 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
 abstract class _ServerFieldErrors extends ServerFieldErrors {
   const _ServerFieldErrors._() : super._();
   const factory _ServerFieldErrors(
-      {@required
-      @nullable
+      {@nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
           List<dynamic> firstName,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
           List<dynamic> lastName,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> email,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> gender,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> age,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> phone,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> password,
-      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           List<dynamic> token}) = _$_ServerFieldErrors;

@@ -47,48 +47,55 @@ class HomeAppBar extends StatelessWidget {
               ),
               //
               BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
-                builder: (context, state) => ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: CircleAvatar(
-                    maxRadius: 22.0,
-                    minRadius: 17.0,
-                    backgroundImage: CachedNetworkImageProvider(
-                      "${state.user?.photo}",
-                    ),
-                    backgroundColor: Colors.transparent,
-                    child: InkWell(
-                      onTap: state.user?.photo != null ? onPressed : null,
-                      splashColor: Colors.red,
-                      child: SizedBox(
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Visibility(
-                          visible: true,
-                          child: Material(
-                            shape: CircleBorder(),
-                            clipBehavior: Clip.hardEdge,
-                            color: avatarBgColor,
-                            child: InkWell(
-                              onTap: onPressed,
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: double.infinity,
-                                child: Center(
-                                    child: Text(
-                                  "${state.user?.firstName?.getOrNull} ${state.user?.lastName?.getOrNull}"
-                                          ?.onlyInitials(
-                                              pattern: " ", glue: "") ??
-                                      avatarText,
-                                  style: style,
-                                )),
+                builder: (context, state) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: CircleAvatar(
+                      maxRadius: 22.0,
+                      minRadius: 17.0,
+                      backgroundImage: CachedNetworkImageProvider(
+                        "${state.user?.photo}",
+                      ),
+                      backgroundColor: Colors.transparent,
+                      child: InkWell(
+                        onTap: state.user?.photo != null ? onPressed : null,
+                        splashColor: Colors.red,
+                        child: SizedBox(
+                          height: double.infinity,
+                          width: double.infinity,
+                          child: Visibility(
+                            visible: true,
+                            child: Material(
+                              shape: CircleBorder(),
+                              clipBehavior: Clip.hardEdge,
+                              color: avatarBgColor,
+                              child: InkWell(
+                                onTap: onPressed,
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  child: Center(
+                                      child: Text(
+                                    !"${state.user?.firstName?.getOrEmpty} ${state.user?.lastName?.getOrEmpty}"
+                                            .trim()
+                                            .isNullOrBlank
+                                        ? "${state.user?.firstName?.getOrEmpty} ${state.user?.lastName?.getOrEmpty}"
+                                            .onlyInitials(
+                                            pattern: " ",
+                                            glue: "",
+                                          )
+                                        : avatarText,
+                                    style: style,
+                                  )),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             ],
           ),

@@ -18,7 +18,7 @@ class _$AuthWatcherStateTearOff {
       {bool isLoading = false,
       @nullable User user,
       bool isAuthenticated = false,
-      @nullable AuthFailure failure}) {
+      @nullable AuthResponse failure}) {
     return _AuthWatcherState(
       isLoading: isLoading,
       user: user,
@@ -39,7 +39,7 @@ mixin _$AuthWatcherState {
   User get user;
   bool get isAuthenticated;
   @nullable
-  AuthFailure get failure;
+  AuthResponse get failure;
 
   @JsonKey(ignore: true)
   $AuthWatcherStateCopyWith<AuthWatcherState> get copyWith;
@@ -54,10 +54,10 @@ abstract class $AuthWatcherStateCopyWith<$Res> {
       {bool isLoading,
       @nullable User user,
       bool isAuthenticated,
-      @nullable AuthFailure failure});
+      @nullable AuthResponse failure});
 
   $UserCopyWith<$Res> get user;
-  $AuthFailureCopyWith<$Res> get failure;
+  $AuthResponseCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -82,7 +82,7 @@ class _$AuthWatcherStateCopyWithImpl<$Res>
       isAuthenticated: isAuthenticated == freezed
           ? _value.isAuthenticated
           : isAuthenticated as bool,
-      failure: failure == freezed ? _value.failure : failure as AuthFailure,
+      failure: failure == freezed ? _value.failure : failure as AuthResponse,
     ));
   }
 
@@ -97,11 +97,11 @@ class _$AuthWatcherStateCopyWithImpl<$Res>
   }
 
   @override
-  $AuthFailureCopyWith<$Res> get failure {
+  $AuthResponseCopyWith<$Res> get failure {
     if (_value.failure == null) {
       return null;
     }
-    return $AuthFailureCopyWith<$Res>(_value.failure, (value) {
+    return $AuthResponseCopyWith<$Res>(_value.failure, (value) {
       return _then(_value.copyWith(failure: value));
     });
   }
@@ -118,12 +118,12 @@ abstract class _$AuthWatcherStateCopyWith<$Res>
       {bool isLoading,
       @nullable User user,
       bool isAuthenticated,
-      @nullable AuthFailure failure});
+      @nullable AuthResponse failure});
 
   @override
   $UserCopyWith<$Res> get user;
   @override
-  $AuthFailureCopyWith<$Res> get failure;
+  $AuthResponseCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -150,7 +150,7 @@ class __$AuthWatcherStateCopyWithImpl<$Res>
       isAuthenticated: isAuthenticated == freezed
           ? _value.isAuthenticated
           : isAuthenticated as bool,
-      failure: failure == freezed ? _value.failure : failure as AuthFailure,
+      failure: failure == freezed ? _value.failure : failure as AuthResponse,
     ));
   }
 }
@@ -177,7 +177,7 @@ class _$_AuthWatcherState extends _AuthWatcherState {
   final bool isAuthenticated;
   @override
   @nullable
-  final AuthFailure failure;
+  final AuthResponse failure;
 
   @override
   String toString() {
@@ -220,7 +220,7 @@ abstract class _AuthWatcherState extends AuthWatcherState {
       {bool isLoading,
       @nullable User user,
       bool isAuthenticated,
-      @nullable AuthFailure failure}) = _$_AuthWatcherState;
+      @nullable AuthResponse failure}) = _$_AuthWatcherState;
 
   @override
   bool get isLoading;
@@ -231,7 +231,7 @@ abstract class _AuthWatcherState extends AuthWatcherState {
   bool get isAuthenticated;
   @override
   @nullable
-  AuthFailure get failure;
+  AuthResponse get failure;
   @override
   @JsonKey(ignore: true)
   _$AuthWatcherStateCopyWith<_AuthWatcherState> get copyWith;

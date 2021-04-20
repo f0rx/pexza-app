@@ -52,7 +52,7 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                       builder: (context, state) => CachedNetworkImage(
                         fit: BoxFit.cover,
                         placeholderFadeInDuration: Duration(milliseconds: 300),
-                        imageUrl: state.user?.photo,
+                        imageUrl: "${state.user?.photo}",
                         imageBuilder: (context, provider) => Ink.image(
                           image: provider,
                           fit: BoxFit.cover,

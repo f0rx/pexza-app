@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_failure.dart';
+part of 'auth_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AuthFailure _$_$_AuthFailureFromJson(Map<String, dynamic> json) {
-  return _$_AuthFailure(
+_$_AuthResponse _$_$_AuthResponseFromJson(Map<String, dynamic> json) {
+  return _$_AuthResponse(
     code: json['code'] as int ?? 200,
     status: json['status'] as String ?? '',
     message: json['message'] as String ?? '',
@@ -18,7 +18,7 @@ _$_AuthFailure _$_$_AuthFailureFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$_AuthFailureToJson(_$_AuthFailure instance) {
+Map<String, dynamic> _$_$_AuthResponseToJson(_$_AuthResponse instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

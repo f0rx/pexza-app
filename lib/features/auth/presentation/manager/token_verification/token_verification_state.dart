@@ -9,7 +9,7 @@ abstract class TokenVerificationState implements _$TokenVerificationState {
     @required OTPCode code,
     @Default(false) bool isLoading,
     @Default(false) bool validate,
-    @Default(const None()) Option<Either<AuthFailure, Unit>> authStatus,
+    @Default(const None()) Option<Either<AuthResponse, Unit>> authStatus,
   }) = _TokenVerificationState;
 
   factory TokenVerificationState.initial() => TokenVerificationState(

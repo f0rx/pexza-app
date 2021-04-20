@@ -5,17 +5,17 @@ import 'package:pexza/features/core/data/models/server_field_errors/server_field
 import 'package:pexza/features/core/domain/failures/failure.dart';
 import 'package:pexza/manager/serializer/server_field_error_converter.dart';
 
-part 'auth_failure.freezed.dart';
-part 'auth_failure.g.dart';
+part 'auth_response.freezed.dart';
+part 'auth_response.g.dart';
 
 @freezed
 @immutable
-abstract class AuthFailure implements _$AuthFailure, Failure {
+abstract class AuthResponse implements _$AuthResponse, Failure {
   static const int UNVERIFIED = 1101;
 
-  const AuthFailure._();
+  const AuthResponse._();
 
-  const factory AuthFailure({
+  const factory AuthResponse({
     @nullable @JsonKey(includeIfNull: false, defaultValue: 200) int code,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     //
@@ -32,13 +32,7 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
         ServerFieldErrors errors,
     //
     String details,
-  }) = _AuthFailure;
-
-  factory AuthFailure.unAuthenticated({
-    int code,
-    String message,
-  }) =>
-      AuthFailure(code: code, message: message);
+  }) = _AuthResponse;
 
   T fold<T>({
     T Function() is404,
@@ -48,32 +42,54 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
     switch (code) {
       case 401:
         return is404?.call();
-      case AuthFailure.UNVERIFIED:
+      case AuthResponse.UNVERIFIED:
         return is1101?.call(details);
       default:
         return (T is Widget) ? SizedBox() as T : orElse?.call();
     }
   }
 
-  factory AuthFailure.cancelledAction() => AuthFailure(
+  T type<T>({
+    T Function() isError,
+    T Function() isSuccess,
+  }) {
+    switch (status) {
+      case "success":
+        return isSuccess?.call();
+      default:
+        return isError != null
+            ? isError?.call()
+            : (T is Widget)
+                ? SizedBox() as T
+                : null;
+    }
+  }
+
+  factory AuthResponse.unAuthenticated({
+    int code,
+    String message,
+  }) =>
+      AuthResponse(code: code, message: message);
+
+  factory AuthResponse.cancelledAction() => AuthResponse(
         message: "Aborted!",
       );
 
-  factory AuthFailure.poorInternetConnection() =>
-      AuthFailure(message: "Poor internet connection!");
+  factory AuthResponse.poorInternetConnection() =>
+      AuthResponse(message: "Poor internet connection!");
 
-  factory AuthFailure.timeout() =>
-      AuthFailure(message: "Connection Timeout! Please try again.");
+  factory AuthResponse.timeout() =>
+      AuthResponse(message: "Connection Timeout! Please try again.");
 
-  factory AuthFailure.receiveTimeout() =>
-      AuthFailure(message: "Connection Timeout! Please try again.");
+  factory AuthResponse.receiveTimeout() =>
+      AuthResponse(message: "Connection Timeout! Please try again.");
 
-  factory AuthFailure.unknownFailure({
+  factory AuthResponse.unknownFailure({
     int code,
     String message,
     ServerFieldErrors errors,
   }) =>
-      AuthFailure(
+      AuthResponse(
         code: code,
         message: message != null
             ? "Unknown: $message"
@@ -81,6 +97,6 @@ abstract class AuthFailure implements _$AuthFailure, Failure {
         errors: errors,
       );
 
-  factory AuthFailure.fromJson(Map<String, dynamic> json) =>
-      _$AuthFailureFromJson(json);
+  factory AuthResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthResponseFromJson(json);
 }

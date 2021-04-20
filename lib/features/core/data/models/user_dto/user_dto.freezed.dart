@@ -57,7 +57,7 @@ class _$UserDTOTearOff {
           String phone,
       @HiveField(8)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'driver')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'register_via')
           String provider,
       @HiveField(9)
       @nullable
@@ -157,7 +157,7 @@ mixin _$UserDTO {
   String get phone;
   @HiveField(8)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'driver')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'register_via')
   String get provider;
   @HiveField(9)
   @nullable
@@ -239,7 +239,7 @@ abstract class $UserDTOCopyWith<$Res> {
           String phone,
       @HiveField(8)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'driver')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'register_via')
           String provider,
       @HiveField(9)
       @nullable
@@ -366,7 +366,7 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
           String phone,
       @HiveField(8)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'driver')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'register_via')
           String provider,
       @HiveField(9)
       @nullable
@@ -494,7 +494,7 @@ class _$_UserDTO extends _UserDTO {
           this.phone,
       @HiveField(8)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'driver')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'register_via')
           this.provider,
       @HiveField(9)
       @nullable
@@ -577,7 +577,7 @@ class _$_UserDTO extends _UserDTO {
   @override
   @HiveField(8)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'driver')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'register_via')
   final String provider;
   @override
   @HiveField(9)
@@ -741,7 +741,7 @@ abstract class _UserDTO extends UserDTO {
           String phone,
       @HiveField(8)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'driver')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'register_via')
           String provider,
       @HiveField(9)
       @nullable
@@ -822,7 +822,7 @@ abstract class _UserDTO extends UserDTO {
   @override
   @HiveField(8)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'driver')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'register_via')
   String get provider;
   @override
   @HiveField(9)

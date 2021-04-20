@@ -1,23 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'auth_failure.dart';
+part of 'auth_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-AuthFailure _$AuthFailureFromJson(Map<String, dynamic> json) {
-  return _AuthFailure.fromJson(json);
+AuthResponse _$AuthResponseFromJson(Map<String, dynamic> json) {
+  return _AuthResponse.fromJson(json);
 }
 
 /// @nodoc
-class _$AuthFailureTearOff {
-  const _$AuthFailureTearOff();
+class _$AuthResponseTearOff {
+  const _$AuthResponseTearOff();
 
 // ignore: unused_element
-  _AuthFailure call(
+  _AuthResponse call(
       {@nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
           int code,
@@ -36,7 +36,7 @@ class _$AuthFailureTearOff {
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
       String details}) {
-    return _AuthFailure(
+    return _AuthResponse(
       code: code,
       status: status,
       message: message,
@@ -47,17 +47,17 @@ class _$AuthFailureTearOff {
   }
 
 // ignore: unused_element
-  AuthFailure fromJson(Map<String, Object> json) {
-    return AuthFailure.fromJson(json);
+  AuthResponse fromJson(Map<String, Object> json) {
+    return AuthResponse.fromJson(json);
   }
 }
 
 /// @nodoc
 // ignore: unused_element
-const $AuthFailure = _$AuthFailureTearOff();
+const $AuthResponse = _$AuthResponseTearOff();
 
 /// @nodoc
-mixin _$AuthFailure {
+mixin _$AuthResponse {
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: 200)
   int get code;
@@ -78,14 +78,14 @@ mixin _$AuthFailure {
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
-  $AuthFailureCopyWith<AuthFailure> get copyWith;
+  $AuthResponseCopyWith<AuthResponse> get copyWith;
 }
 
 /// @nodoc
-abstract class $AuthFailureCopyWith<$Res> {
-  factory $AuthFailureCopyWith(
-          AuthFailure value, $Res Function(AuthFailure) then) =
-      _$AuthFailureCopyWithImpl<$Res>;
+abstract class $AuthResponseCopyWith<$Res> {
+  factory $AuthResponseCopyWith(
+          AuthResponse value, $Res Function(AuthResponse) then) =
+      _$AuthResponseCopyWithImpl<$Res>;
   $Res call(
       {@nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
@@ -109,12 +109,12 @@ abstract class $AuthFailureCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
-  _$AuthFailureCopyWithImpl(this._value, this._then);
+class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
+  _$AuthResponseCopyWithImpl(this._value, this._then);
 
-  final AuthFailure _value;
+  final AuthResponse _value;
   // ignore: unused_field
-  final $Res Function(AuthFailure) _then;
+  final $Res Function(AuthResponse) _then;
 
   @override
   $Res call({
@@ -147,11 +147,11 @@ class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AuthFailureCopyWith<$Res>
-    implements $AuthFailureCopyWith<$Res> {
-  factory _$AuthFailureCopyWith(
-          _AuthFailure value, $Res Function(_AuthFailure) then) =
-      __$AuthFailureCopyWithImpl<$Res>;
+abstract class _$AuthResponseCopyWith<$Res>
+    implements $AuthResponseCopyWith<$Res> {
+  factory _$AuthResponseCopyWith(
+          _AuthResponse value, $Res Function(_AuthResponse) then) =
+      __$AuthResponseCopyWithImpl<$Res>;
   @override
   $Res call(
       {@nullable
@@ -177,14 +177,14 @@ abstract class _$AuthFailureCopyWith<$Res>
 }
 
 /// @nodoc
-class __$AuthFailureCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
-    implements _$AuthFailureCopyWith<$Res> {
-  __$AuthFailureCopyWithImpl(
-      _AuthFailure _value, $Res Function(_AuthFailure) _then)
-      : super(_value, (v) => _then(v as _AuthFailure));
+class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
+    implements _$AuthResponseCopyWith<$Res> {
+  __$AuthResponseCopyWithImpl(
+      _AuthResponse _value, $Res Function(_AuthResponse) _then)
+      : super(_value, (v) => _then(v as _AuthResponse));
 
   @override
-  _AuthFailure get _value => super._value as _AuthFailure;
+  _AuthResponse get _value => super._value as _AuthResponse;
 
   @override
   $Res call({
@@ -195,7 +195,7 @@ class __$AuthFailureCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
     Object errors = freezed,
     Object details = freezed,
   }) {
-    return _then(_AuthFailure(
+    return _then(_AuthResponse(
       code: code == freezed ? _value.code : code as int,
       status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
@@ -209,8 +209,8 @@ class __$AuthFailureCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
-  const _$_AuthFailure(
+class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
+  const _$_AuthResponse(
       {@nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
           this.code,
@@ -231,8 +231,8 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
       this.details})
       : super._();
 
-  factory _$_AuthFailure.fromJson(Map<String, dynamic> json) =>
-      _$_$_AuthFailureFromJson(json);
+  factory _$_AuthResponse.fromJson(Map<String, dynamic> json) =>
+      _$_$_AuthResponseFromJson(json);
 
   @override
   @nullable
@@ -260,14 +260,14 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthFailure(code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details)';
+    return 'AuthResponse(code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'AuthFailure'))
+      ..add(DiagnosticsProperty('type', 'AuthResponse'))
       ..add(DiagnosticsProperty('code', code))
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('message', message))
@@ -279,7 +279,7 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AuthFailure &&
+        (other is _AuthResponse &&
             (identical(other.code, code) ||
                 const DeepCollectionEquality().equals(other.code, code)) &&
             (identical(other.status, status) ||
@@ -307,18 +307,18 @@ class _$_AuthFailure extends _AuthFailure with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  _$AuthFailureCopyWith<_AuthFailure> get copyWith =>
-      __$AuthFailureCopyWithImpl<_AuthFailure>(this, _$identity);
+  _$AuthResponseCopyWith<_AuthResponse> get copyWith =>
+      __$AuthResponseCopyWithImpl<_AuthResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_AuthFailureToJson(this);
+    return _$_$_AuthResponseToJson(this);
   }
 }
 
-abstract class _AuthFailure extends AuthFailure {
-  const _AuthFailure._() : super._();
-  const factory _AuthFailure(
+abstract class _AuthResponse extends AuthResponse {
+  const _AuthResponse._() : super._();
+  const factory _AuthResponse(
       {@nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
           int code,
@@ -336,10 +336,10 @@ abstract class _AuthFailure extends AuthFailure {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details}) = _$_AuthFailure;
+      String details}) = _$_AuthResponse;
 
-  factory _AuthFailure.fromJson(Map<String, dynamic> json) =
-      _$_AuthFailure.fromJson;
+  factory _AuthResponse.fromJson(Map<String, dynamic> json) =
+      _$_AuthResponse.fromJson;
 
   @override
   @nullable
@@ -366,5 +366,5 @@ abstract class _AuthFailure extends AuthFailure {
   String get details;
   @override
   @JsonKey(ignore: true)
-  _$AuthFailureCopyWith<_AuthFailure> get copyWith;
+  _$AuthResponseCopyWith<_AuthResponse> get copyWith;
 }

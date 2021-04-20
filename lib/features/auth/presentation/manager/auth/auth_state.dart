@@ -22,7 +22,7 @@ abstract class AuthState with _$AuthState {
     @Default(false) bool shouldGlow,
     @Default(false) bool validate,
     @Default(true) bool passwordHidden,
-    @Default(const None()) Option<Either<AuthFailure, Unit>> authStatus,
+    @Default(const None()) Option<Either<AuthResponse, Unit>> authStatus,
   }) = _AuthState;
 
   factory AuthState.initial() => AuthState(

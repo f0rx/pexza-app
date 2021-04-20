@@ -96,7 +96,7 @@ _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
     gender: json['gender'] as String ?? '',
     dateOfBirth: json['dob'] as String ?? '',
     phone: json['phone'] as String ?? '',
-    provider: json['driver'] as String ?? '',
+    provider: json['register_via'] as String ?? '',
     password: json['password'] as String ?? '',
     photo: json['photo'] as String ?? '',
     isEmailVerified:
@@ -124,7 +124,7 @@ Map<String, dynamic> _$_$_UserDTOToJson(_$_UserDTO instance) {
   writeNotNull('gender', instance.gender);
   writeNotNull('dob', instance.dateOfBirth);
   writeNotNull('phone', instance.phone);
-  writeNotNull('driver', instance.provider);
+  writeNotNull('register_via', instance.provider);
   writeNotNull('password', instance.password);
   writeNotNull('photo', instance.photo);
   writeNotNull('email_verified_at', instance.isEmailVerified);

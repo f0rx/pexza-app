@@ -18,7 +18,7 @@ class _$TokenVerificationStateTearOff {
       {@required OTPCode code,
       bool isLoading = false,
       bool validate = false,
-      Option<Either<AuthFailure, Unit>> authStatus = const None()}) {
+      Option<Either<AuthResponse, Unit>> authStatus = const None()}) {
     return _TokenVerificationState(
       code: code,
       isLoading: isLoading,
@@ -37,7 +37,7 @@ mixin _$TokenVerificationState {
   OTPCode get code;
   bool get isLoading;
   bool get validate;
-  Option<Either<AuthFailure, Unit>> get authStatus;
+  Option<Either<AuthResponse, Unit>> get authStatus;
 
   @JsonKey(ignore: true)
   $TokenVerificationStateCopyWith<TokenVerificationState> get copyWith;
@@ -52,7 +52,7 @@ abstract class $TokenVerificationStateCopyWith<$Res> {
       {OTPCode code,
       bool isLoading,
       bool validate,
-      Option<Either<AuthFailure, Unit>> authStatus});
+      Option<Either<AuthResponse, Unit>> authStatus});
 }
 
 /// @nodoc
@@ -77,7 +77,7 @@ class _$TokenVerificationStateCopyWithImpl<$Res>
       validate: validate == freezed ? _value.validate : validate as bool,
       authStatus: authStatus == freezed
           ? _value.authStatus
-          : authStatus as Option<Either<AuthFailure, Unit>>,
+          : authStatus as Option<Either<AuthResponse, Unit>>,
     ));
   }
 }
@@ -93,7 +93,7 @@ abstract class _$TokenVerificationStateCopyWith<$Res>
       {OTPCode code,
       bool isLoading,
       bool validate,
-      Option<Either<AuthFailure, Unit>> authStatus});
+      Option<Either<AuthResponse, Unit>> authStatus});
 }
 
 /// @nodoc
@@ -120,7 +120,7 @@ class __$TokenVerificationStateCopyWithImpl<$Res>
       validate: validate == freezed ? _value.validate : validate as bool,
       authStatus: authStatus == freezed
           ? _value.authStatus
-          : authStatus as Option<Either<AuthFailure, Unit>>,
+          : authStatus as Option<Either<AuthResponse, Unit>>,
     ));
   }
 }
@@ -148,7 +148,7 @@ class _$_TokenVerificationState extends _TokenVerificationState {
   final bool validate;
   @JsonKey(defaultValue: const None())
   @override
-  final Option<Either<AuthFailure, Unit>> authStatus;
+  final Option<Either<AuthResponse, Unit>> authStatus;
 
   @override
   String toString() {
@@ -193,7 +193,7 @@ abstract class _TokenVerificationState extends TokenVerificationState {
           {@required OTPCode code,
           bool isLoading,
           bool validate,
-          Option<Either<AuthFailure, Unit>> authStatus}) =
+          Option<Either<AuthResponse, Unit>> authStatus}) =
       _$_TokenVerificationState;
 
   @override
@@ -203,7 +203,7 @@ abstract class _TokenVerificationState extends TokenVerificationState {
   @override
   bool get validate;
   @override
-  Option<Either<AuthFailure, Unit>> get authStatus;
+  Option<Either<AuthResponse, Unit>> get authStatus;
   @override
   @JsonKey(ignore: true)
   _$TokenVerificationStateCopyWith<_TokenVerificationState> get copyWith;

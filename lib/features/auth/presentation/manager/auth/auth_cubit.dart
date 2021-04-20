@@ -6,7 +6,7 @@ import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/core/core.dart';
-import 'package:pexza/features/auth/data/models/auth_failure.dart';
+import 'package:pexza/features/auth/data/models/auth_response.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 
@@ -112,7 +112,7 @@ class AuthCubit extends Cubit<AuthState> {
     Gender gender = state.gender;
     DateTimeField dateOfBirth = state.dateOfBirth;
     Password password = state.password;
-    Either<AuthFailure, Unit> failureOrUnit;
+    Either<AuthResponse, Unit> failureOrUnit;
 
     // Enable form validation
     emit(state.copyWith(
@@ -153,7 +153,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     EmailAddress email = state.emailAddress;
     Password password = state.password;
-    Either<AuthFailure, Unit> failureOrUnit;
+    Either<AuthResponse, Unit> failureOrUnit;
 
     // Start form validation
     emit(state.copyWith(
@@ -182,7 +182,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     EmailAddress emailAddress = state.emailAddress;
     EmailTokenField token = state.emailToken;
-    Either<AuthFailure, Unit> failureOrUnit;
+    Either<AuthResponse, Unit> failureOrUnit;
 
     emit(state.copyWith(
       validate: true,

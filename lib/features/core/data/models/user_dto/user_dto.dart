@@ -14,6 +14,9 @@ part 'user_dto.g.dart';
 abstract class UserDTO implements _$UserDTO {
   const UserDTO._();
 
+  static bool isEmailVerifiedFromJson(String dateTime) =>
+      dateTime != null && dateTime.isNotEmpty;
+
   @HiveType(typeId: 6, adapterName: 'UserDTOAdapter')
   const factory UserDTO({
     @HiveField(0)
@@ -55,7 +58,7 @@ abstract class UserDTO implements _$UserDTO {
         String phone,
     @HiveField(8)
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '', name: "driver")
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "register_via")
         String provider,
     @HiveField(9)
     @nullable
@@ -90,46 +93,39 @@ abstract class UserDTO implements _$UserDTO {
         String deletedAt,
   }) = _UserDTO;
 
-  factory UserDTO.fromDomain(User instance) {
-    return UserDTO(
-      role: instance.role?.name?.toLowerCase(),
-      firstName: instance.firstName?.getOrNull,
-      lastName: instance.lastName?.getOrNull,
-      email: instance.email?.getOrNull,
-      gender: instance.gender?.getOrNull?.name?.toLowerCase(),
-      dateOfBirth: instance.dateOfBirth?.getOrNull?.toIso8601String(),
-      phone: instance.phone?.getOrNull,
-      password: instance.password?.getOrNull,
-    );
-  }
-
-  static bool isEmailVerifiedFromJson(String dateTime) =>
-      dateTime != null && dateTime.isNotEmpty;
+  factory UserDTO.fromDomain(User instance) => UserDTO(
+        role: instance.role?.name?.toLowerCase(),
+        firstName: instance.firstName?.getOrNull,
+        lastName: instance.lastName?.getOrNull,
+        email: instance.email?.getOrNull,
+        gender: instance.gender?.getOrNull?.name?.toLowerCase(),
+        dateOfBirth: instance.dateOfBirth?.getOrNull?.toIso8601String(),
+        phone: instance.phone?.getOrNull,
+        password: instance.password?.getOrNull,
+      );
 
   factory UserDTO.fromJson(Map<String, dynamic> json) =>
       _$UserDTOFromJson(json);
 
-  User get domain {
-    return User(
-      id: UniqueId.fromExternal(id),
-      role: role != null ? Role.valueOf(role) : null,
-      firstName: firstName != null ? DisplayName(firstName) : null,
-      lastName: lastName != null ? DisplayName(lastName) : null,
-      email: email != null ? EmailAddress(email) : null,
-      gender: gender != null
-          ? Gender(GenderType.valueOf(gender.capitalizeFirst()))
-          : null,
-      dateOfBirth: dateOfBirth != null
-          ? DateTimeField(DateTime.parse(dateOfBirth))
-          : null,
-      isEmailVerified: isEmailVerified,
-      phone: phone != null ? Phone(phone, Country.NG) : null,
-      provider: provider != null ? AuthProvider.valueOf(provider) : null,
-      password: Password.DEFAULT,
-      photo: photo,
-      createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
-      updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
-      deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
-    );
-  }
+  User get domain => User(
+        id: UniqueId.fromExternal(id),
+        role: role != null ? Role.valueOf(role) : null,
+        firstName: firstName != null ? DisplayName(firstName) : null,
+        lastName: lastName != null ? DisplayName(lastName) : null,
+        email: email != null ? EmailAddress(email) : null,
+        gender: gender != null
+            ? Gender(GenderType.valueOf(gender.capitalizeFirst()))
+            : null,
+        dateOfBirth: dateOfBirth != null
+            ? DateTimeField(DateTime.parse(dateOfBirth))
+            : null,
+        isEmailVerified: isEmailVerified,
+        phone: phone != null ? Phone(phone, Country.NG) : null,
+        provider: provider != null ? AuthProvider.valueOf(provider) : null,
+        password: Password.DEFAULT,
+        photo: photo,
+        createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
+        updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
+        deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
+      );
 }

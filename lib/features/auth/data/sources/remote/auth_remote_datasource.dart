@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pexza/features/auth/data/models/auth_failure.dart';
+import 'package:pexza/features/auth/data/models/auth_response.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/utils/utils.dart';
 
@@ -14,7 +16,8 @@ class AuthRemoteDatasource {
 
   Future<Response<dynamic>> createUserAccount(UserDTO dto) async {
     // Generate Form Data for request
-    FormData data = FormData.fromMap(dto.toJson());
+    final FormData data = FormData.fromMap(dto.toJson());
+
     // Perform POST request based on role / user_type
     return await _dio.post(
       EndPoints.REGISTER,
@@ -31,8 +34,10 @@ class AuthRemoteDatasource {
       email: email,
       password: password,
     );
+
     // Generate Form Data for request
-    FormData data = FormData.fromMap(dto.toJson());
+    final FormData data = FormData.fromMap(dto.toJson());
+
     // Perform POST request based on role / user_type
     return await _dio.post(
       EndPoints.LOGIN,
@@ -50,8 +55,10 @@ class AuthRemoteDatasource {
       token: token,
     );
     // log.wtf(dto);
+
     // Generate Form Data for request
-    FormData data = FormData.fromMap(dto.toJson());
+    final FormData data = FormData.fromMap(dto.toJson());
+
     // Perform POST request based on role / user_type
     return _dio.post(
       EndPoints.VERIFY,
@@ -61,19 +68,66 @@ class AuthRemoteDatasource {
 
   Future<Response<dynamic>> sendPasswordResetEmail(
     String email,
-  ) async {}
+  ) async {
+    // Convert data to DTO
+    final UserDTO dto = UserDTO(email: email);
+
+    // Generate Form Data for request
+    final FormData data = FormData.fromMap(dto.toJson());
+
+    // Perform request to send password reset email
+    return _dio.post(
+      EndPoints.SEND_PASSWORD_RESET_EMAIL,
+      data: data,
+    );
+  }
 
   Future<Response<dynamic>> confirmPasswordReset({
     @required String code,
+    @required String email,
     @required String newPassword,
-  }) async {}
-
-  Future<Response<dynamic>> refreshUserAccessToken({
-    @required UserDTO userDTO,
   }) async {
-    return await _dio.post(
-      EndPoints.LOGIN,
-      data: FormData.fromMap(userDTO.toJson()),
+    // Convert data to DTO
+    final UserDTO dto = UserDTO(
+      email: email,
+      token: code,
+      password: newPassword,
+    );
+
+    // Generate Form Data for request
+    final FormData data = FormData.fromMap(dto.toJson());
+
+    // Perform request to reset user's password
+    return _dio.post(
+      EndPoints.CONFIRM_PASSWORD_RESET,
+      data: data,
+    );
+  }
+
+  Future<Response<dynamic>> updateProfile(UserDTO dto) {
+    // Generate Form Data for request
+    final FormData data = FormData.fromMap(dto.toJson());
+
+    // Perform PUT request to update user's profile
+    return _dio.put(
+      EndPoints.UPDATE_USER_PROFILE,
+      data: data,
+    );
+  }
+
+  Future<Response<dynamic>> updateProfilePhoto(File file) async {
+    // Create a new [MultipartFile].
+    final MultipartFile part = await MultipartFile.fromFile("${file?.path}");
+
+    // Generate Form Data for request
+    final FormData data = FormData.fromMap({
+      "image": part,
+    });
+
+    return _dio.post(
+      EndPoints.UPDATE_USER_PHOTO,
+      data: data,
+      options: Options(contentType: Headers.formUrlEncodedContentType),
     );
   }
 
@@ -81,14 +135,14 @@ class AuthRemoteDatasource {
     return await _dio.post(EndPoints.LOGOUT);
   }
 
-  Future<Either<AuthFailure, UserDTO>> fetchUserInfo([
+  Future<Either<AuthResponse, UserDTO>> fetchUserInfo([
     Future<void> Function() callback,
   ]) async {
     try {
       final _response = await _dio.get(EndPoints.GET_USER);
 
-      return right(UserDTO.fromJson(_response?.data).copyWith(
-        id: "${_response.data['id']}",
+      return right(UserDTO.fromJson(_response?.data['data']).copyWith(
+        id: "${_response.data['data']['id']}",
       ));
     } on DioError catch (e) {
       // If callback is not-null, call the method
@@ -96,21 +150,21 @@ class AuthRemoteDatasource {
 
       switch (e.type) {
         case DioErrorType.CONNECT_TIMEOUT:
-          return left(AuthFailure.timeout());
+          return left(AuthResponse.timeout());
         case DioErrorType.RECEIVE_TIMEOUT:
-          return left(AuthFailure.receiveTimeout());
-        // case DioErrorType.DEFAULT:
+          return left(AuthResponse.receiveTimeout());
         case DioErrorType.RESPONSE:
           return left(
-            AuthFailure.fromJson(e.response.data).copyWith(
-              code: e.response.statusCode,
-            ),
+            AuthResponse.fromJson(
+              e.response.data,
+            ).copyWith(code: e.response.statusCode),
           );
         case DioErrorType.SEND_TIMEOUT:
-          return left(AuthFailure.timeout());
+          return left(AuthResponse.timeout());
           break;
+        case DioErrorType.DEFAULT:
         default:
-          return left(AuthFailure.unknownFailure());
+          return left(AuthResponse.unknownFailure());
       }
     }
   }

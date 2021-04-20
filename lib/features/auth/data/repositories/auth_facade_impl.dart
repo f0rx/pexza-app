@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart';
 import 'package:pexza/features/auth/data/sources/remote/auth_remote_datasource.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
-import 'package:pexza/features/auth/data/models/auth_failure.dart';
+import 'package:pexza/features/auth/data/models/auth_response.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/data/data.dart';
 import 'package:pexza/features/core/domain/entities/user/user.dart';
@@ -22,7 +22,7 @@ import 'package:pexza/utils/utils.dart';
 class AuthFacadeImpl extends AuthFacade {
   final AuthRemoteDatasource _remote;
   final AuthLocalDatasource _local;
-  StreamController<Either<AuthFailure, Option<User>>> __controller;
+  StreamController<Either<AuthResponse, Option<User>>> __controller;
 
   AuthFacadeImpl(
     this._remote,
@@ -30,15 +30,15 @@ class AuthFacadeImpl extends AuthFacade {
   ) : __controller = StreamController.broadcast();
 
   @override
-  Future<void> sink([Either<AuthFailure, Option<User>> userOrFailure]) async =>
+  Future<void> sink([Either<AuthResponse, Option<User>> userOrFailure]) async =>
       __controller.sink.add(userOrFailure ?? await currentUser);
 
   @override
-  Future<Either<AuthFailure, Option<User>>> get currentUser async {
+  Future<Either<AuthResponse, Option<User>>> get currentUser async {
     // Check if device has good connection
     final _checkConn = await this.checkHasGoodInternet();
 
-    Future<Either<AuthFailure, Option<User>>> _left() async {
+    Future<Either<AuthResponse, Option<User>>> _left() async {
       return _local.getCachedUserInfo().fold(
         () => right(none()),
         (dto) {
@@ -46,9 +46,9 @@ class AuthFacadeImpl extends AuthFacade {
             return right(some(dto.domain));
           } catch (e) {
             return handleFailure(
-              authFailure: AuthFailure(
+              authResponse: AuthResponse(
                 message: "User account not verified!",
-                code: AuthFailure.UNVERIFIED,
+                code: AuthResponse.UNVERIFIED,
                 details: dto?.email,
               ),
             );
@@ -69,11 +69,11 @@ class AuthFacadeImpl extends AuthFacade {
   }
 
   @override
-  Stream<Either<AuthFailure, Option<User>>> get onAuthStateChanged =>
+  Stream<Either<AuthResponse, Option<User>>> get onAuthStateChanged =>
       __controller.stream;
 
   @override
-  Future<Either<AuthFailure, Unit>> createAccount({
+  Future<Either<AuthResponse, Unit>> createAccount({
     @required Role role,
     @required DisplayName firstName,
     @required DisplayName lastName,
@@ -107,12 +107,14 @@ class AuthFacadeImpl extends AuthFacade {
       await this.login(email: emailAddress, password: password);
 
       return right(unit);
-    } on AuthFailure catch (ex) {
-      return handleFailure(authFailure: ex);
+    } on AuthResponse catch (ex) {
+      return handleFailure(
+        authResponse: ex,
+      );
     } on DioError catch (ex) {
       switch (ex.type) {
         case DioErrorType.CONNECT_TIMEOUT:
-          return left(AuthFailure.timeout());
+          return left(AuthResponse.timeout());
           break;
         default:
           return handleFailure(dioError: ex);
@@ -121,7 +123,7 @@ class AuthFacadeImpl extends AuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> login({
+  Future<Either<AuthResponse, Unit>> login({
     @required EmailAddress email,
     @required Password password,
   }) async {
@@ -162,46 +164,17 @@ class AuthFacadeImpl extends AuthFacade {
       await sink();
 
       return right(unit);
-    } on AuthFailure catch (ex) {
-      return handleFailure(authFailure: ex);
+    } on AuthResponse catch (ex) {
+      return handleFailure(
+        authResponse: ex,
+      );
     } on DioError catch (ex) {
-      switch (ex.type) {
-        case DioErrorType.CONNECT_TIMEOUT:
-          return left(AuthFailure.timeout());
-          break;
-        default:
-          return handleFailure(dioError: ex);
-      }
+      return handleFailure(dioError: ex);
     }
   }
 
   @override
-  Future<void> refreshAccessToken() async {
-    // Check if device has good connection
-    final _checkConn = await this.checkHasGoodInternet();
-
-    // Refresh Access token
-    final _response = await _checkConn.fold(
-      (f) async => throw f,
-      (_) async => await _local.getCachedUserInfo().fold(
-        () async {
-          // This piece of code has errors
-          return null;
-        },
-        (dto) async => await _remote.refreshUserAccessToken(
-          userDTO: dto,
-        ),
-      ),
-    );
-
-    // Store new Access token
-    _local.cacheUserAccessToken(_response.data);
-
-    await sink();
-  }
-
-  @override
-  Future<Either<AuthFailure, Unit>> verifyEmailAddress({
+  Future<Either<AuthResponse, Unit>> verifyEmailAddress({
     EmailAddress email,
     EmailTokenField token,
   }) async {
@@ -210,17 +183,17 @@ class AuthFacadeImpl extends AuthFacade {
       // Check if device has good connection
       final _checkConn = await this.checkHasGoodInternet();
 
-      // Delete stored TEMP data
-      // To prevent conflicts during Email verification
-      _local.signOut();
+      _local.signOut(clearAccessToken: true, clearUser: false);
 
       await _checkConn.fold(
         (f) => throw f,
-        (_) async => await _remote.verifyUserEmailAddress(
+        (_) => _remote.verifyUserEmailAddress(
           email.getOrEmpty,
           token.getOrEmpty,
         ),
       );
+
+      _local.signOut();
 
       await this.login(
         email: EmailAddress(dto.email),
@@ -228,25 +201,108 @@ class AuthFacadeImpl extends AuthFacade {
       );
 
       return right(unit);
-    } on AuthFailure catch (ex) {
-      return handleFailure(authFailure: ex);
+    } on AuthResponse catch (ex) {
+      return handleFailure(
+        authResponse: ex,
+      );
     } on DioError catch (ex) {
       return handleFailure(dioError: ex);
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> sendPasswordResetEmail(EmailAddress email) {
-    throw UnimplementedError();
+  Future<Either<AuthResponse, Unit>> updateProfile({
+    DisplayName firstName,
+    DisplayName lastName,
+    Phone phone,
+    Gender gender,
+    DateTimeField dateOfBirth,
+  }) async {
+    try {
+      // Check if device has good connection
+      final _result = await this.checkHasGoodInternet();
+
+      await _result.fold(
+        // Re-Throw Exception
+        (f) => throw f,
+        // Update user profile
+        (_) => _remote.updateProfile(UserDTO.fromDomain(User(
+          firstName: firstName,
+          lastName: lastName,
+          phone: phone,
+          gender: gender,
+          dateOfBirth: dateOfBirth,
+        ))),
+      );
+
+      // Update was successful, fetch & cache fresh user data
+      await this.getAndCacheUserInfo();
+
+      return right(unit);
+    } on AuthResponse catch (ex) {
+      return handleFailure(
+        authResponse: ex,
+      );
+    } on DioError catch (ex) {
+      return handleFailure(dioError: ex);
+    }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> confirmPasswordReset({
+  Future<Either<AuthResponse, AuthResponse>> sendPasswordResetEmail(
+    EmailAddress email,
+  ) async {
+    try {
+      // Check if device has good connection
+      final _result = await this.checkHasGoodInternet();
+
+      final _response = await _result.fold(
+        // Re-Throw Exception
+        (f) => throw f,
+        // Update user profile
+        (_) => email.value?.fold(
+          (f) => throw AuthResponse(
+            message: f?.message,
+            errors: ServerFieldErrors(email: [f?.message]),
+          ),
+          (_email) => _remote.sendPasswordResetEmail(_email),
+        ),
+      );
+
+      return right(AuthResponse.fromJson(_response.data));
+    } on AuthResponse catch (ex) {
+      return handleFailure(authResponse: ex);
+    } on DioError catch (ex) {
+      return handleFailure(dioError: ex);
+    }
+  }
+
+  @override
+  Future<Either<AuthResponse, AuthResponse>> confirmPasswordReset({
     String code,
+    EmailAddress email,
     Password newPassword,
-  }) {
-    // TODO: implement confirmPasswordReset
-    throw UnimplementedError();
+  }) async {
+    try {
+      // Check if device has good connection
+      final _result = await this.checkHasGoodInternet();
+
+      // Reset user's password
+      final _response = await _result.fold(
+        (f) => throw f,
+        (_) => _remote.confirmPasswordReset(
+          code: code,
+          email: email.getOrEmpty,
+          newPassword: newPassword.getOrEmpty,
+        ),
+      );
+
+      return right(AuthResponse.fromJson(_response.data));
+    } on AuthResponse catch (ex) {
+      return handleFailure(authResponse: ex);
+    } on DioError catch (ex) {
+      return handleFailure(dioError: ex);
+    }
   }
 
   @override
@@ -263,26 +319,28 @@ class AuthFacadeImpl extends AuthFacade {
     } on DioError catch (ex) {
       // Delete local user--auth cache
       _local.signOut();
-      return handleFailure(authFailure: AuthFailure(message: "Signing out..."));
+      return handleFailure(
+        authResponse: AuthResponse(message: "Signing out..."),
+      );
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> facebookAuthentication(
+  Future<Either<AuthResponse, Unit>> facebookAuthentication(
       [Object pendingCredentials]) {
     // TODO: implement facebookAuthentication
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> googleAuthentication(
+  Future<Either<AuthResponse, Unit>> googleAuthentication(
       [Object pendingCredentials]) {
     // TODO: implement googleAuthentication
     throw UnimplementedError();
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> twitterAuthentication(
+  Future<Either<AuthResponse, Unit>> twitterAuthentication(
       [Object pendingCredentials]) {
     // TODO: implement twitterAuthentication
     throw UnimplementedError();
@@ -307,30 +365,31 @@ class AuthFacadeImpl extends AuthFacade {
     await _local.cacheAuthenticatedUser(dto);
   }
 
-  Future<Either<AuthFailure, R>> handleFailure<R>({
+  Future<Either<AuthResponse, R>> handleFailure<R>({
     DioError dioError,
-    AuthFailure authFailure,
+    AuthResponse authResponse,
   }) async {
-    AuthFailure _exception = authFailure;
+    AuthResponse _exception = authResponse;
 
     switch (dioError?.type) {
       case DioErrorType.CONNECT_TIMEOUT:
-        _exception = AuthFailure.timeout();
+        _exception = AuthResponse.timeout();
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
-        _exception = AuthFailure.receiveTimeout();
+        _exception = AuthResponse.receiveTimeout();
         break;
-      case DioErrorType.DEFAULT:
       case DioErrorType.RESPONSE:
-        _exception = AuthFailure.fromJson(dioError.response.data).copyWith(
+        _exception = AuthResponse.fromJson(dioError.response.data).copyWith(
           code: dioError.response?.data['code'] ?? dioError.response.statusCode,
         );
         break;
       case DioErrorType.SEND_TIMEOUT:
-        _exception = AuthFailure.timeout();
+        _exception = AuthResponse.timeout();
         break;
+      case DioErrorType.DEFAULT:
       default:
-        _exception = authFailure ?? AuthFailure.unknownFailure();
+        _exception = authResponse ??
+            AuthResponse.unknownFailure(message: dioError?.message);
     }
 
     // Sink all unrelated auth-failures

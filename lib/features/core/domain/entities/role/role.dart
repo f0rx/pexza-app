@@ -30,11 +30,11 @@ class Role extends EnumClass {
   }) {
     switch (name) {
       case "landlord":
-        return landlord != null ? landlord() : null;
+        return landlord?.call();
       case "tenant":
-        return tenant != null ? tenant() : null;
+        return tenant?.call();
       case "admin":
-        return admin != null ? admin() : null;
+        return admin?.call();
       default:
         return (T is Widget) ? SizedBox() as T : null;
     }
