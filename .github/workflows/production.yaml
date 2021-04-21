@@ -4,7 +4,7 @@ on:
     inputs:
       version:
         description: Bump version
-        required: false
+        required: true
         default: 1.0.0
 
   push:
@@ -21,6 +21,7 @@ on:
       - reopened
       - closed
       - synchronize
+      - closed
 
 jobs:
   build:
