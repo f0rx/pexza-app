@@ -4,12 +4,13 @@ on:
     inputs:
       version:
         description: Bump version
-        required: false
+        required: true
         default: 1.0.0
 
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
@@ -18,6 +19,7 @@ on:
     types:
       - opened
       - reopened
+      - closed
       - synchronize
       - closed
 
