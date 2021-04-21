@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
                   ),
                 ),
                 //
-                VerticalSpace(height: App.height * 0.05),
+                VerticalSpace(height: App.longest * 0.05),
                 //
                 Flexible(
                   child: Padding(
@@ -103,7 +103,7 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
                   ),
                 ),
                 //
-                VerticalSpace(height: App.height * 0.04),
+                VerticalSpace(height: App.longest * 0.04),
                 //
                 Flexible(child: _LoginForm()),
               ],
@@ -139,21 +139,24 @@ class _LoginForm extends StatelessWidget {
               mode: FIELD_VALIDATION.BASIC,
             ),
             //
-            VerticalSpace(height: App.height * .01),
+            VerticalSpace(height: App.longest * .01),
             //
-            Align(
-              alignment: Alignment.centerRight,
-              child: AutoSizeText(
-                "Forgot Password?",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: AppColors.accentColor,
+            GestureDetector(
+              onTap: () => navigator.pushForgotPasswordScreen(),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: AutoSizeText(
+                  "Forgot Password?",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: AppColors.accentColor,
+                  ),
                 ),
               ),
             ),
             //
-            VerticalSpace(height: App.height * .04),
+            VerticalSpace(height: App.longest * .04),
             //
             AppElevatedButton(
               // TODO: Replace with actual implementation
@@ -163,7 +166,7 @@ class _LoginForm extends StatelessWidget {
               height: App.shortest * 0.12,
             ),
             //
-            VerticalSpace(height: App.height * .04),
+            VerticalSpace(height: App.longest * .04),
             //
             AutoSizeText.rich(
               TextSpan(
@@ -182,7 +185,7 @@ class _LoginForm extends StatelessWidget {
               ),
             ),
             //
-            VerticalSpace(height: App.height * .07),
+            VerticalSpace(height: App.longest * .07),
           ],
         ),
       ),

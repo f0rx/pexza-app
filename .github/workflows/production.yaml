@@ -21,11 +21,17 @@ on:
       - synchronize
 
 jobs:
-  setup:
-    name: Setup Environment
+  build:
+    name: Build & Deploy Production APK
     runs-on: ubuntu-latest
     env:
+      APP_NAME: "Pexza App"
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      RELEASE_TYPE: patch
       FLUTTER_VERSION: "1.25.0-8.3.pre"
+    outputs:
+      bump_tag: ${{ env.BUMP_TAG }}
+      bump_tag_version: ${{ env.BUMP_VERSION }}
     steps:
       - name: Fetch Repo HEAD
         uses: actions/checkout@v2
@@ -66,18 +72,6 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: "beta"
 
-  build:
-    name: Build & Deploy Production APK
-    needs: setup
-    runs-on: ubuntu-latest
-    env:
-      APP_NAME: "Pexza App"
-      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      RELEASE_TYPE: patch
-    outputs:
-      bump_tag: ${{ env.BUMP_TAG }}
-      bump_tag_version: ${{ env.BUMP_VERSION }}
-    steps:
       - name: Run Pre-build scipts
         run: |
           flutter pub get
