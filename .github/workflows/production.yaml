@@ -9,16 +9,17 @@ on:
 
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
       - dev
       - release
     types:
       - opened
       - reopened
       - synchronize
+      - closed
 
 jobs:
   build:
