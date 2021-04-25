@@ -1,29 +1,31 @@
 name: Release Production apk
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Bump version
+        required: true
+        default: 1.0.0
+
   push:
     branches:
-      - master
+      - main
+      - dev
   pull_request:
     branches:
-      - master
+      - main
       - dev
       - release
     types:
       - opened
       - reopened
+      - closed
       - synchronize
-
-  workflow_dispatch:
-    inputs:
-      bumpVersion:
-        description: Bump version
-        required: false
-        default: 1.0.0
+      - closed
 
 jobs:
   build:
     name: Build & Deploy Production APK
-    needs: setup
     runs-on: ubuntu-latest
     env:
       APP_NAME: "Pexza App"
@@ -84,7 +86,7 @@ jobs:
 
       - name: Bump version and push tag
         id: bump_tag
-        if: ${{ github.event.inputs.bumpVersion == '' }}
+        if: ${{ github.event.inputs.version == '' }}
         uses: mathieudutour/github-tag-action@v4.5
         with:
           release_branches: .*
@@ -92,12 +94,12 @@ jobs:
 
       - name: Update Environment variables
         run: |
-          if ${{ github.event.inputs.bumpVersion == '' }}; then
+          if ${{ github.event.inputs.version == '' }}; then
             echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
             echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
           else
-            echo "BUMP_TAG=v${{ github.event.inputs.bumpVersion}}" >> $GITHUB_ENV
-            echo "BUMP_VERSION=${{ github.event.inputs.bumpVersion}}" >> $GITHUB_ENV
+            echo "BUMP_TAG=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
+            echo "BUMP_VERSION=${{ github.event.inputs.version}}" >> $GITHUB_ENV
           fi
 
       - name: Push APK to Release Tags

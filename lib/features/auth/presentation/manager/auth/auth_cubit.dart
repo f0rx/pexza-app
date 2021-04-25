@@ -3,12 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
-import 'package:pexza/features/auth/data/models/auth_status/auth_status.dart';
-import 'package:pexza/features/auth/data/models/auth_status/auth_status.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/core/core.dart';
-import 'package:pexza/features/auth/data/models/auth_response/auth_response.dart';
+import 'package:pexza/features/auth/data/models/auth_response.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 
@@ -114,7 +112,7 @@ class AuthCubit extends Cubit<AuthState> {
     Gender gender = state.gender;
     DateTimeField dateOfBirth = state.dateOfBirth;
     Password password = state.password;
-    AuthResponse failureOrUnit;
+    Either<AuthResponse, Unit> failureOrUnit;
 
     // Enable form validation
     emit(state.copyWith(
@@ -130,7 +128,7 @@ class AuthCubit extends Cubit<AuthState> {
         dateOfBirth.isValid &&
         password.isValid) {
       // Attempt Authentication
-      final _response = await _auth.createAccount(
+      failureOrUnit = await _auth.createAccount(
         role: getIt<RoleCubit>().role,
         firstName: firstName,
         lastName: lastName,
@@ -140,8 +138,6 @@ class AuthCubit extends Cubit<AuthState> {
         dateOfBirth: dateOfBirth,
         password: password,
       );
-
-      failureOrUnit = _response?.foldLeft(null, (left, _) => left);
 
       // emit auth_status whether authentication fails or not
       emit(state.copyWith(
@@ -157,7 +153,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     EmailAddress email = state.emailAddress;
     Password password = state.password;
-    AuthResponse failureOrUnit;
+    Either<AuthResponse, Unit> failureOrUnit;
 
     // Start form validation
     emit(state.copyWith(
@@ -167,12 +163,10 @@ class AuthCubit extends Cubit<AuthState> {
 
     if (email.isValid && password.isValid) {
       // Attempt Authentication
-      final _response = await _auth.login(
+      failureOrUnit = await _auth.login(
         email: email,
         password: password,
       );
-
-      failureOrUnit = _response?.foldLeft(null, (left, right) => left);
 
       // emit auth_status whether authentication fails or not
       emit(state.copyWith(
@@ -187,7 +181,7 @@ class AuthCubit extends Cubit<AuthState> {
     toggleLoadingIndicator();
 
     EmailAddress email = state.emailAddress;
-    AuthResponse failureOrUnit;
+    Either<AuthResponse, AuthResponse> failureOrUnit;
 
     // Start form validation
     emit(state.copyWith(
@@ -197,15 +191,12 @@ class AuthCubit extends Cubit<AuthState> {
 
     if (email.isValid) {
       // Send password reset link
-      final _response = await _auth.sendPasswordResetEmail(email);
-
-      failureOrUnit = _response
-          ?.getOrElse(() => _response?.foldLeft(null, (_, right) => right));
+      failureOrUnit = await _auth.sendPasswordResetEmail(email);
 
       // emit auth_status
       emit(state.copyWith(
         //////// TODO: Fix this later
-        authStatus: optionOf(failureOrUnit),
+        authStatus: optionOf(failureOrUnit.map((r) => unit)),
       ));
     }
 
@@ -217,7 +208,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     EmailAddress emailAddress = state.emailAddress;
     EmailTokenField token = state.emailToken;
-    AuthResponse failureOrUnit;
+    Either<AuthResponse, Unit> failureOrUnit;
 
     emit(state.copyWith(
       validate: true,
@@ -225,12 +216,10 @@ class AuthCubit extends Cubit<AuthState> {
     ));
 
     if (emailAddress.isValid && token.isValid) {
-      final _response = await _auth.verifyEmailAddress(
+      failureOrUnit = await _auth.verifyEmailAddress(
         email: emailAddress,
         token: token,
       );
-
-      failureOrUnit = _response?.foldLeft(null, (left, _) => left);
 
       // emit auth_status whether authentication fails or not
       emit(state.copyWith(
