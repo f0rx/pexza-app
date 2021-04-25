@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart';
 import 'package:pexza/features/auth/data/sources/remote/auth_remote_datasource.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
-import 'package:pexza/features/auth/data/models/auth_response.dart';
+import 'package:pexza/features/auth/data/models/auth_response/auth_response.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/data/data.dart';
 import 'package:pexza/features/core/domain/entities/user/user.dart';
@@ -316,7 +316,7 @@ class AuthFacadeImpl extends AuthFacade {
 
       // Notify listeners
       await sink();
-    } on DioError catch (ex) {
+    } on DioError catch (_) {
       // Delete local user--auth cache
       _local.signOut();
       return handleFailure(

@@ -45,10 +45,7 @@ class FirstNameField extends StatelessWidget {
             (error) => error.message,
             (_) => context.read<AuthCubit>().state.authStatus.fold(
                   () => null,
-                  (_) => _.fold(
-                    (f) => f.errors.firstName.firstOrNull,
-                    (_) => null,
-                  ),
+                  (v) => v.errors.firstName.firstOrNull,
                 ),
           ),
           onFieldSubmitted: (_) => FocusScope.of(context).requestFocus(next),

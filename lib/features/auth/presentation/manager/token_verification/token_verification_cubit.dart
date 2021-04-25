@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pexza/features/auth/data/models/auth_response.dart';
+import 'package:pexza/features/auth/data/models/auth_response/auth_response.dart';
 import 'package:pexza/features/core/core.dart';
 
 part 'token_verification_state.dart';

@@ -1,12 +1,5 @@
 name: Release Production apk
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: Bump version
-        required: false
-        default: 1.0.0
-
   push:
     branches:
       - master
@@ -20,12 +13,26 @@ on:
       - reopened
       - synchronize
 
+  workflow_dispatch:
+    inputs:
+      bumpVersion:
+        description: Bump version
+        required: false
+        default: 1.0.0
+
 jobs:
-  setup:
-    name: Setup Environment
+  build:
+    name: Build & Deploy Production APK
+    needs: setup
     runs-on: ubuntu-latest
     env:
+      APP_NAME: "Pexza App"
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      RELEASE_TYPE: patch
       FLUTTER_VERSION: "1.25.0-8.3.pre"
+    outputs:
+      bump_tag: ${{ env.BUMP_TAG }}
+      bump_tag_version: ${{ env.BUMP_VERSION }}
     steps:
       - name: Fetch Repo HEAD
         uses: actions/checkout@v2
@@ -54,18 +61,6 @@ jobs:
         if: steps.ndk-cache.outputs.cache-hit != 'true'
         run: echo "y" | sudo ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;21.0.6113669"
 
-  build:
-    name: Build & Deploy Production APK
-    needs: setup
-    runs-on: ubuntu-latest
-    env:
-      APP_NAME: "Pexza App"
-      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      RELEASE_TYPE: patch
-    outputs:
-      bump_tag: ${{ env.BUMP_TAG }}
-      bump_tag_version: ${{ env.BUMP_VERSION }}
-    steps:
       - name: Cache Flutter dependencies
         uses: actions/cache@v2
         with:
@@ -89,7 +84,7 @@ jobs:
 
       - name: Bump version and push tag
         id: bump_tag
-        if: ${{ github.event.inputs.version == '' }}
+        if: ${{ github.event.inputs.bumpVersion == '' }}
         uses: mathieudutour/github-tag-action@v4.5
         with:
           release_branches: .*
@@ -97,12 +92,12 @@ jobs:
 
       - name: Update Environment variables
         run: |
-          if ${{ github.event.inputs.version == '' }}; then
+          if ${{ github.event.inputs.bumpVersion == '' }}; then
             echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
             echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
           else
-            echo "BUMP_TAG=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
-            echo "BUMP_VERSION=${{ github.event.inputs.version}}" >> $GITHUB_ENV
+            echo "BUMP_TAG=v${{ github.event.inputs.bumpVersion}}" >> $GITHUB_ENV
+            echo "BUMP_VERSION=${{ github.event.inputs.bumpVersion}}" >> $GITHUB_ENV
           fi
 
       - name: Push APK to Release Tags

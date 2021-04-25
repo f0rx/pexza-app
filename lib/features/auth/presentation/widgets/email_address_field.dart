@@ -43,10 +43,7 @@ class EmailAddressField extends StatelessWidget {
             (error) => error.message,
             (_) => context.read<AuthCubit>().state.authStatus.fold(
                   () => null,
-                  (_) => _.fold(
-                    (f) => f.errors?.email?.firstOrNull,
-                    (_) => null,
-                  ),
+                  (v) => v.errors?.email?.firstOrNull,
                 ),
           ),
           onFieldSubmitted: (_) => FocusScope.of(context).requestFocus(next),

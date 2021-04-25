@@ -43,10 +43,7 @@ class LastNameField extends StatelessWidget {
             (error) => error.message,
             (_) => context.read<AuthCubit>().state.authStatus.fold(
                   () => null,
-                  (_) => _.fold(
-                    (f) => f.errors.lastName.firstOrNull,
-                    (_) => null,
-                  ),
+                  (v) => v.errors.lastName.firstOrNull,
                 ),
           ),
           onFieldSubmitted: (_) => FocusScope.of(context).requestFocus(next),

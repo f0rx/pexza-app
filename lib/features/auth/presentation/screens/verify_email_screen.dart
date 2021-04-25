@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
@@ -10,6 +9,7 @@ import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
 import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/domain/entities/user/user.dart';
+import 'package:pexza/features/core/presentation/manager/index.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
@@ -30,30 +30,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
       child: BlocConsumer<AuthCubit, AuthState>(
         listenWhen: (p, c) => p.isLoading && !c.isLoading,
         listener: (context, state) {
-          context.read<AuthCubit>().state.authStatus.fold(
-                () => null,
-                (option) => option.fold(
-                  (failure) => Flushbar(
-                    duration: const Duration(seconds: 10),
-                    icon: const Icon(Icons.error, color: Colors.red),
-                    messageText: AutoSizeText(
-                      !failure.message.isNullOrBlank
-                          ? failure.message
-                          : failure.error,
-                    ),
-                    borderRadius: 8,
-                    dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                    margin: const EdgeInsets.all(8),
-                    flushbarPosition:
-                        MediaQuery.of(context).viewInsets.bottom == 0
-                            ? FlushbarPosition.BOTTOM
-                            : FlushbarPosition.TOP,
-                    shouldIconPulse: true,
-                    backgroundColor: Theme.of(context).primaryColor,
-                  ).show(context),
-                  (_) => null,
-                ),
-              );
+          AlertPopupa.auth(context);
         },
         builder: (context, state) => PortalEntry(
           visible: context.watch<AuthCubit>().state.isLoading ||
@@ -141,10 +118,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                           (_) =>
                               context.read<AuthCubit>().state.authStatus.fold(
                                     () => null,
-                                    (_) => _.fold(
-                                      (f) => f.errors?.token?.firstOrNull,
-                                      (_) => null,
-                                    ),
+                                    (v) => v.errors?.token?.firstOrNull,
                                   ),
                         ),
               ),
