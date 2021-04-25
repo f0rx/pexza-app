@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:pexza/features/auth/data/repositories/access_token_manager.dart';
+import 'package:pexza/features/auth/domain/repositories/auth_facade.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -49,11 +50,11 @@ class _DioInstance {
 
     dio.options.receiveTimeout = 8000;
 
-    // dio.interceptors.add(
-    //   DioCacheManager(
-    //     CacheConfig(baseUrl: env.baseUri.path),
-    //   ).interceptor,
-    // );
+    dio.interceptors.add(
+      DioCacheManager(
+        CacheConfig(baseUrl: env.baseUri.path),
+      ).interceptor,
+    );
 
     if (env.flavor == BuildFlavor.dev)
       dio.interceptors.add(
@@ -84,7 +85,7 @@ class _DioInstance {
 
               // final _facade = getIt<AuthFacade>();
 
-              // await _facade.refreshAccessToken();
+              // await _faca
               // await _facade.retry(error.request);
 
               dio.interceptors.requestLock.unlock();

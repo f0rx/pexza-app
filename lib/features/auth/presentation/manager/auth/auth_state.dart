@@ -3,7 +3,7 @@ part of 'auth_cubit.dart';
 @freezed
 abstract class AuthState with _$AuthState {
   static KtList<Country> countries = KtList.from(Country.list);
-  static DateTime firstYear = DateTime(1910);
+  static DateTime firstYear = DateTime(DateTime.now().year - 18);
   const AuthState._();
 
   const factory AuthState({
@@ -22,7 +22,7 @@ abstract class AuthState with _$AuthState {
     @Default(false) bool shouldGlow,
     @Default(false) bool validate,
     @Default(true) bool passwordHidden,
-    @Default(const None()) Option<Either<AuthResponse, Unit>> authStatus,
+    @Default(const None()) Option<AuthResponse> authStatus,
   }) = _AuthState;
 
   factory AuthState.initial() => AuthState(

@@ -41,14 +41,17 @@ class PhoneNumberField extends StatelessWidget {
                           (_) =>
                               context.read<AuthCubit>().state.authStatus.fold(
                                     () => Colors.grey,
-                                    (_) => _.fold(
-                                      (f) => !f.errors.isNull &&
-                                              !f.errors.phone.isNull &&
-                                              f.errors.phone.isNotEmpty
-                                          ? AppColors.errorRed
-                                          : Colors.grey,
-                                      (_) => Colors.grey,
-                                    ),
+                                    (v) => v.errors?.phone?.firstOrNull == null
+                                        ? AppColors.errorRed
+                                        : Colors.grey,
+                                    // (_) => _.fold(
+                                    //   (f) => !f.errors.isNull &&
+                                    //           !f.errors.phone.isNull &&
+                                    //           f.errors.phone.isNotEmpty
+                                    //       ? AppColors.errorRed
+                                    //       : ,
+                                    //   (_) => Colors.grey,
+                                    // ),
                                   ),
                         ),
                   ),
@@ -148,12 +151,7 @@ class PhoneNumberField extends StatelessWidget {
                     (l) => l.message,
                     (r) => context.watch<AuthCubit>().state.authStatus.fold(
                           () => "",
-                          (_) => _.fold(
-                            (f) => !f.errors.isNull
-                                ? f.errors.phone.firstOrEmpty
-                                : "",
-                            (_) => "",
-                          ),
+                          (v) => v?.errors?.phone?.firstOrNull ?? "",
                         ),
                   ),
                   style: TextStyle(

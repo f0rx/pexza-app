@@ -57,12 +57,9 @@ class DateOfBirthField extends StatelessWidget {
                       (l) => state.validate ? true : false,
                       (_) => state.authStatus.fold(
                         () => false,
-                        (_) => _.fold(
-                          (f) => !f.errors.age.isNull && f.errors.age.isNotEmpty
-                              ? true
-                              : false,
-                          (_) => false,
-                        ),
+                        (v) => !v.errors.age.isNull && !v.errors.age.isNotEmpty
+                            ? true
+                            : false,
                       ),
                     ),
                     child: Padding(
@@ -72,10 +69,7 @@ class DateOfBirthField extends StatelessWidget {
                           (l) => l.message,
                           (r) => state.authStatus.fold(
                             () => "",
-                            (_) => _.fold(
-                              (f) => f.errors.age.firstOrEmpty,
-                              (_) => "",
-                            ),
+                            (v) => v.errors?.age?.firstOrNull,
                           ),
                         ),
                         style: TextStyle(
@@ -99,12 +93,9 @@ class DateOfBirthField extends StatelessWidget {
                       : EdgeInsets.zero,
                   (_) => context.read<AuthCubit>().state.authStatus.fold(
                         () => EdgeInsets.zero,
-                        (_) => _.fold(
-                          (f) => !f.errors.age.isNull && f.errors.age.isNotEmpty
-                              ? const EdgeInsets.only(bottom: 18.0)
-                              : EdgeInsets.zero,
-                          (_) => EdgeInsets.zero,
-                        ),
+                        (v) => !v.errors.age.isNull && !v.errors.age.isNotEmpty
+                            ? const EdgeInsets.only(bottom: 18.0)
+                            : EdgeInsets.zero,
                       ),
                 ),
                 child: ConstrainedBox(

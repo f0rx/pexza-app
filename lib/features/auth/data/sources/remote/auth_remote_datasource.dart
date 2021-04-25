@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pexza/features/auth/data/models/auth_response.dart';
+import 'package:pexza/features/auth/data/models/auth_response/auth_response.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/utils/utils.dart';
 

@@ -57,12 +57,7 @@ class PasswordInputField extends StatelessWidget {
                         (error) => error.message,
                         (r) => context.read<AuthCubit>().state.authStatus.fold(
                               () => null,
-                              (_) => _.fold(
-                                (f) => !f.errors.isNull
-                                    ? f.errors?.password?.firstOrNull
-                                    : null,
-                                (r) => null,
-                              ),
+                              (v) => v.errors?.password?.firstOrNull,
                             ),
                       ),
               onFieldSubmitted: (_) => next == null
@@ -77,14 +72,19 @@ class PasswordInputField extends StatelessWidget {
                     (l) => context.read<AuthCubit>().state.validate ? 20 : 2,
                     (r) => context.read<AuthCubit>().state.authStatus.fold(
                           () => 2,
-                          (_) => _.fold(
-                            (f) => !f.errors.isNull &&
-                                    !f.errors.password.isNull &&
-                                    f.errors.password.isNotEmpty
-                                ? 20
-                                : 2,
-                            (_) => 2,
-                          ),
+                          (v) => !v.errors.isNull &&
+                                  !v.errors.password.isNull &&
+                                  v.errors.password.isNotEmpty
+                              ? 20
+                              : 2,
+                          // (_) => _.fold(
+                          // (f) => !f.errors.isNull &&
+                          //         !f.errors.password.isNull &&
+                          //         f.errors.password.isNotEmpty
+                          //       ? 20
+                          //       : 2,
+                          //   (_) => 2,
+                          // ),
                         ),
                   ),
               child: Material(

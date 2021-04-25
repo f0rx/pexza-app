@@ -3,7 +3,7 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/core.dart';
-import 'package:pexza/features/auth/data/models/auth_response.dart';
+import 'package:pexza/features/auth/data/models/auth_response/auth_response.dart';
 import 'package:pexza/manager/locator/locator.dart';
 
 abstract class AuthFacade extends Facade {
