@@ -1,12 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 class LandlordPropertyListing extends StatelessWidget {
-  final List<Property> props = Property.list.take(3).toList();
   final Widget appBar;
 
   LandlordPropertyListing({
@@ -58,75 +59,99 @@ class LandlordPropertyListing extends StatelessWidget {
             VerticalSpace(height: App.longest * 0.03),
             //
             Flexible(
-              child: ListView.separated(
-                physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                itemCount: props.length,
-                separatorBuilder: (_, __) =>
-                    VerticalSpace(height: App.longest * 0.01),
-                itemBuilder: (context, i) => InkWell(
-                  splashColor: Colors.grey.shade300,
-                  onTap: () => navigator.pushLandlordPropertyDetailScreen(),
-                  child: Hero(
-                    // TODO: Fix hero
-                    tag: props.elementAt(i).id.value,
-                    child: Container(
-                      height: App.longest * 0.09,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
-                      decoration: BoxDecoration(
-                        color: props.elementAt(i).color.getOrNull,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Flexible(
-                            child: HorizontalSpace(
-                              width: double.infinity,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AutoSizeText(
-                                    props.elementAt(i).type.getOrEmpty,
-                                    style: Theme.of(context).textTheme.headline6.copyWith(
-                                      color: AppColors.accentColor,
-                                      // fontSize: 17.0,
+              child: BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
+                builder: (context, state) => ListView.separated(
+                  physics: NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemCount: state.properties
+                      .asList()
+                      .take(((App.longest * 0.6) / (App.longest * 0.1)).ceil())
+                      .length,
+                  separatorBuilder: (_, __) =>
+                      VerticalSpace(height: App.longest * 0.01),
+                  itemBuilder: (context, i) => InkWell(
+                    splashColor: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(8.0),
+                    onTap: () => navigator.pushLandlordPropertyDetailScreen(),
+                    child: Hero(
+                      // TODO: Fix hero
+                      tag: state.properties.get(i).id.value,
+                      child: Container(
+                        height: App.longest * 0.09,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: App.shortest * 0.05),
+                        decoration: BoxDecoration(
+                          color: state.properties
+                              .get(i)
+                              .color
+                              .withOpacity(Helpers.optionOf(0.5, 0.2)),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                              child: HorizontalSpace(
+                                width: double.infinity,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AutoSizeText(
+                                      state.properties.get(i).name.getOrEmpty,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline6
+                                          .copyWith(
+                                            color: AppColors.accentColor,
+                                            fontSize: 16.0,
+                                          ),
+                                      maxLines: 1,
                                     ),
-                                    maxLines: 1,
-                                  ),
-                                  //
-                                  VerticalSpace(height: 6.0),
-                                  //
-                                  AutoSizeText(
-                                    props.elementAt(i).location.getOrEmpty,
-                                    style: TextStyle(
-                                      color: Helpers.computeLuminance(
-                                          props.elementAt(i).color.getOrNull),
-                                      fontSize: 15.0,
+                                    //
+                                    VerticalSpace(height: 6.0),
+                                    //
+                                    AutoSizeText(
+                                      state.properties.get(i).street.getOrEmpty,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .caption
+                                          .copyWith(
+                                            color: Helpers.computeLuminance(
+                                              state.properties
+                                                  .get(i)
+                                                  .color
+                                                  .withOpacity(
+                                                    Helpers.optionOf(0.5, 0.2),
+                                                  ),
+                                            ),
+                                            fontSize: 16.0,
+                                          ),
+                                      maxLines: 1,
                                     ),
-                                    maxLines: 1,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          AppIconButton(
-                            padding: EdgeInsets.zero,
-                            backgroundColor: Colors.transparent,
-                            elevation: 0.0,
-                            child: RotatedBox(
-                              quarterTurns: 2,
-                              child: Icon(
-                                Icons.keyboard_backspace_rounded,
-                                color: Helpers.computeLuminance(
-                                    props.elementAt(i).color.getOrNull),
+                            AppIconButton(
+                              padding: EdgeInsets.zero,
+                              backgroundColor: Colors.transparent,
+                              elevation: 0.0,
+                              child: RotatedBox(
+                                quarterTurns: 2,
+                                child: Icon(
+                                  Icons.keyboard_backspace_rounded,
+                                  color: Helpers.computeLuminance(state
+                                      .properties
+                                      .get(i)
+                                      .color
+                                      .withOpacity(Helpers.optionOf(0.5, 0.2))),
+                                ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
