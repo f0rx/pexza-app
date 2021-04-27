@@ -12,6 +12,28 @@ class AppColors {
       Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
           .withOpacity(1.0);
 
+  static Map<int, Color> swatch(Color color) {
+    Color _color = color ?? AppColors.random;
+    int r, g, b;
+
+    r = _color.red;
+    g = _color.green;
+    b = _color.blue;
+
+    return {
+      50: Color.fromRGBO(r, g, b, .1),
+      100: Color.fromRGBO(r, g, b, .2),
+      200: Color.fromRGBO(r, g, b, .3),
+      300: Color.fromRGBO(r, g, b, .4),
+      400: Color.fromRGBO(r, g, b, .5),
+      500: Color.fromRGBO(r, g, b, .6),
+      600: Color.fromRGBO(r, g, b, .7),
+      700: Color.fromRGBO(r, g, b, .8),
+      800: Color.fromRGBO(r, g, b, .9),
+      900: Color.fromRGBO(r, g, b, 1),
+    };
+  }
+
   // App Colors
   static const _primaryPrivate = 0xffE5E5E5;
   static const _primary2Private = 0xffF5F5F5;

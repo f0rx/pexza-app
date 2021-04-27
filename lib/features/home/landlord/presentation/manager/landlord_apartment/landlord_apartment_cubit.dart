@@ -1,4 +1,4 @@
-library landlord_property_cubit.dart;
+library landlord_apartment_cubit.dart;
 
 import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
@@ -10,36 +10,28 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
-import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart';
 import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
-import 'package:pexza/utils/utils.dart';
 
-part 'landlord_property_state.dart';
-part 'landlord_property_cubit.freezed.dart';
+part 'landlord_apartment_state.dart';
+part 'landlord_apartment_cubit.freezed.dart';
 
 @injectable
-class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
-  final PropertyRepository _repository;
-  final ApartmentRepository _apartmentRepository;
+class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
+  final ApartmentRepository _repository;
   final Connectivity _connectivity;
   final DataConnectionChecker _dataConnectionChecker;
 
-  LandlordPropertyCubit(
+  LandlordApartmentCubit(
     this._repository,
-    this._apartmentRepository,
     this._connectivity,
     this._dataConnectionChecker,
-  ) : super(LandlordPropertyState.initial());
+  ) : super(LandlordApartmentState.initial());
 
   void toggleLoading([isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
-      ));
-
-  void propertyTypeChanged(PropertyType value) => emit(state.copyWith(
-        propertyType: LandlordPropertyTypeField(value),
       ));
 
   Future<void> checkInternetAndConnectivity() async {
@@ -53,15 +45,38 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     if (!hasInternet) throw LandlordFailure.poorInternetConnection();
   }
 
-  Future<void> fetchAll() async {
+  Future<void> fetchAllLandlordProps() async {
     toggleLoading();
 
     try {
-      final props = await _repository.all();
+      final aprts = await _repository.all();
 
       emit(state.copyWith(
         optionOfFailure: none(),
-        properties: props.data.map((e) => e?.domain).toImmutableList(),
+        apartments: aprts.data.map((e) => e?.domain).toImmutableList(),
+      ));
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(
+        optionOfFailure: some(e),
+      ));
+    } on DioError catch (e) {
+      _handleDioFailures(e);
+    }
+
+    toggleLoading();
+  }
+
+  Future<void> getApartmentsForProperty(LandlordProperty property) async {
+    toggleLoading();
+
+    try {
+      final aprts = await _repository.allApartmentsForProperty(
+        property.id.value,
+      );
+
+      emit(state.copyWith(
+        optionOfFailure: none(),
+        apartments: aprts.data.map((e) => e?.domain).toImmutableList(),
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
@@ -77,41 +92,31 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
   Future<void> create() async {
     toggleLoading();
 
-    // Create Data Transfer Object (DTO)
-    final _dto = LandlordPropertyData.fromDomain(LandlordProperty(
+    final _dto = LandlordApartmentData.fromDomain(LandlordApartment(
       name: state.name,
-      propertyType: state.propertyType,
-      houseType: state.houseType,
-      street: state.street,
-      town: state.town,
-      state: state.state,
-      color: null,
-      image: null,
+      property: state.selected?.getOrNull,
     ));
 
     try {
-      // Check if user is connected & has good internet
-      await checkInternetAndConnectivity();
-
-      final prop = await _repository.create(_dto);
+      final apartment = await _repository.create(_dto);
 
       emit(state.copyWith(
         optionOfFailure: none(),
-        property: prop?.domain,
+        apartment: apartment.domain,
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         optionOfFailure: some(e),
       ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+    } on DioError catch (e) {
+      _handleDioFailures(e);
     }
 
     toggleLoading();
   }
 
   Future<void> get({
-    LandlordProperty property,
+    LandlordApartment apartment,
     UniqueId<int> id,
   }) async {
     toggleLoading();
@@ -120,19 +125,12 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       // Check if user is connected & has good internet
       await checkInternetAndConnectivity();
 
-      final _propertyDTO = await _repository.show(property?.id?.value ?? id);
-
-      final _apartmentListDTO = await _apartmentRepository
-          .allApartmentsForProperty(_propertyDTO.data.id);
+      final _apartment = await _repository.show(apartment?.id?.value ?? id);
 
       emit(state.copyWith(
         optionOfFailure: none(),
-        property: _propertyDTO?.domain?.copyWith(color: property.color),
-        apartments:
-            _apartmentListDTO.data.map((e) => e?.domain).toImmutableList(),
+        apartment: _apartment?.domain,
       ));
-    } on MissingRequiredKeysException catch (ex) {
-      _handleMissingKeysException(ex);
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         optionOfFailure: some(e),
@@ -145,49 +143,39 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
   }
 
   Future<void> update({
-    LandlordProperty property,
+    LandlordApartment apartment,
     UniqueId<int> id,
   }) async {
     toggleLoading();
 
-    // Create Data Transfer Object (DTO)
-    final _dto = LandlordPropertyData.fromDomain(LandlordProperty(
+    final _dto = LandlordApartmentData.fromDomain(LandlordApartment(
       name: state.name,
-      propertyType: state.propertyType,
-      houseType: state.houseType,
-      street: state.street,
-      town: state.town,
-      state: state.state,
-      color: null,
-      image: null,
+      property: state.selected?.getOrNull,
     ));
 
     try {
-      // Check if user is connected & has good internet
-      await checkInternetAndConnectivity();
-
-      final prop = await _repository.update(
-        property?.id?.value ?? id,
+      final _apartment = await _repository.update(
+        apartment?.id?.value ?? id,
         _dto,
       );
 
       emit(state.copyWith(
         optionOfFailure: none(),
-        property: prop?.domain,
+        apartment: _apartment.domain,
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         optionOfFailure: some(e),
       ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+    } on DioError catch (e) {
+      _handleDioFailures(e);
     }
 
     toggleLoading();
   }
 
   Future<void> delete({
-    LandlordProperty property,
+    LandlordApartment apartment,
     UniqueId<int> id,
   }) async {
     toggleLoading();
@@ -196,11 +184,16 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       // Check if user is connected & has good internet
       await checkInternetAndConnectivity();
 
-      final prop = await _repository.delete(property?.id?.value ?? id);
+      Future.wait<void>([
+        _repository.delete(apartment?.id?.value ?? id),
+        this.fetchAllLandlordProps(),
+        if (state.selected.isValid)
+          this.getApartmentsForProperty(state.selected.getOrNull),
+      ], eagerError: true);
 
       emit(state.copyWith(
         optionOfFailure: none(),
-        property: prop?.domain,
+        // apartment: aprt?.domain,
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
@@ -243,17 +236,5 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
           optionOfFailure: some(LandlordFailure.unknown()),
         ));
     }
-  }
-
-  void _handleMissingKeysException(MissingRequiredKeysException e) {
-    emit(state.copyWith(
-      optionOfFailure: some(LandlordFailure.unknown(
-        message: e.message,
-        details: e.missingKeys.fold(
-            "",
-            (p, next) => "${p.padIf(p.isNotEmpty && next.isNotEmpty, ',')}"
-                "$next"),
-      )),
-    ));
   }
 }

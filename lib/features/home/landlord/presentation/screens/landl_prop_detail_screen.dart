@@ -22,7 +22,7 @@ class LandlordPropertyDetailScreen extends StatelessWidget
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<LandlordPropertyCubit>()..get(property.id),
+      create: (_) => getIt<LandlordPropertyCubit>()..get(property: property),
       child: BlocListener<LandlordPropertyCubit, LandlordPropertyState>(
         listener: (c, s) {
           c.read<LandlordPropertyCubit>().state.optionOfFailure.fold(
@@ -71,36 +71,132 @@ class LandlordPropertyDetailScreen extends StatelessWidget
             top: 0,
             left: 0,
             right: 0,
+            bottom: App.height * 0.7,
             child: BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
-              builder: (context, state) {
-                // log.wtf(state.property);
-
-                return Hero(
-                  tag: state.property?.id?.value ?? property?.id?.value,
-                  child: Container(
-                    height: App.height * 0.2,
-                    width: double.infinity,
-                    margin: EdgeInsets.symmetric(
-                      horizontal: Helpers.appPadding,
-                    ).copyWith(top: Helpers.appPadding),
-                    decoration: BoxDecoration(
-                      color: state.property?.color?.withOpacity(0.2),
+              builder: (context, state) => Hero(
+                tag: state.property?.id?.value ?? property?.id?.value,
+                child: Container(
+                  height: App.height * 0.17,
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: Helpers.appPadding,
+                  ).copyWith(top: Helpers.appPadding),
+                  child: Visibility(
+                    visible: !state.isLoading,
+                    replacement: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
+                      child: RectangleShimmer(
+                        width: double.infinity,
+                        height: double.infinity,
+                        boxColor: Colors.grey.shade400,
+                        shimmerBaseColor: property.color.shade300,
+                        shimmerHighlightColor: property.color.shade100,
+                      ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        //
-                      ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.0),
+                        color: state.property?.color?.shade300,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: App.shortest * 0.05,
+                        // vertical: App.shortest * 0.05,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    AutoSizeText(
+                                      "15",
+                                      softWrap: true,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5
+                                          .copyWith(
+                                            color: AppColors.accentColor,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                      maxLines: 1,
+                                    ),
+                                    AutoSizeText(
+                                      "Rented out",
+                                      softWrap: true,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1
+                                                .color
+                                                .withOpacity(0.6),
+                                          ),
+                                      maxLines: 1,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              //
+                              Spacer(),
+                              //
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    AutoSizeText(
+                                      "${state.apartments.size}",
+                                      softWrap: true,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5
+                                          .copyWith(
+                                            color: AppColors.accentColor,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                      maxLines: 1,
+                                    ),
+                                    AutoSizeText(
+                                      "Total Apartments",
+                                      softWrap: true,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1
+                                                .color
+                                                .withOpacity(0.6),
+                                          ),
+                                      maxLines: 1,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          //
+                          LinearProgressIndicator(
+                            value: 0.45,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ),
           //
           Positioned(
+            top: App.height * 0.3,
             left: 0,
             right: 0,
             bottom: 0,
@@ -115,7 +211,7 @@ class LandlordPropertyDetailScreen extends StatelessWidget
                 elevation: 2.0,
                 type: MaterialType.card,
                 child: Container(
-                  height: App.height * 0.5,
+                  height: double.infinity,
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(
                     horizontal: Helpers.appPadding,
@@ -127,6 +223,7 @@ class LandlordPropertyDetailScreen extends StatelessWidget
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SubtitledHeader(text: "Tenants"),
+                            //
                             Flexible(
                               child: InkWell(
                                 onTap: () => navigator
@@ -148,6 +245,14 @@ class LandlordPropertyDetailScreen extends StatelessWidget
                           ],
                         ),
                       ),
+                      //
+                      Flexible(
+                        child: Column(
+                          children: [
+                            //
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -161,7 +266,6 @@ class LandlordPropertyDetailScreen extends StatelessWidget
         builder: (context, state) => FloatingActionButton(
           onPressed: () => navigator.pushLandlordAddTenantScreen(),
           tooltip: "Assign apartment to a Tenant",
-          isExtended: true,
           heroTag: "assign-${state.property?.id?.value ?? property?.id?.value}",
           child: Icon(
             Icons.person_add,

@@ -8,6 +8,7 @@ part of landlord_property_data;
 
 _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     Map<String, dynamic> json) {
+  $checkKeys(json, disallowNullValues: const ['state_id']);
   return _$_LandlordPropertyData(
     id: json['id'] as int ?? 0,
     name: json['name'] as String ?? '',
@@ -16,6 +17,7 @@ _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     street: json['street'] as String ?? '',
     town: json['town'] as String ?? '',
     state: json['state'] as String ?? '',
+    stateId: json['state_id'] as int,
     country: json['country'] as String ?? '',
     createdAt: json['created_at'] as String,
     updatedAt: json['updated_at'] as String,
@@ -41,6 +43,7 @@ Map<String, dynamic> _$_$_LandlordPropertyDataToJson(
   writeNotNull('street', instance.street);
   writeNotNull('town', instance.town);
   writeNotNull('state', instance.state);
+  writeNotNull('state_id', instance.stateId);
   writeNotNull('country', instance.country);
   writeNotNull('created_at', instance.createdAt);
   writeNotNull('updated_at', instance.updatedAt);

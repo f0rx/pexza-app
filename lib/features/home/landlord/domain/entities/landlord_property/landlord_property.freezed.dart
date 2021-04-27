@@ -23,7 +23,7 @@ class _$LandlordPropertyTearOff {
       @nullable LandlordField town,
       @nullable LandlordField state,
       @nullable LandlordField country,
-      @required @nullable Color color,
+      @required @nullable MaterialColor color,
       @required @nullable LandlordPropertyImage image,
       @nullable TenantsCountField numberOfTenants,
       @nullable DateTime createdAt,
@@ -71,7 +71,7 @@ mixin _$LandlordProperty {
   @nullable
   LandlordField get country;
   @nullable
-  Color get color;
+  MaterialColor get color;
   @nullable
   LandlordPropertyImage get image;
   @nullable
@@ -101,7 +101,7 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       @nullable LandlordField town,
       @nullable LandlordField state,
       @nullable LandlordField country,
-      @nullable Color color,
+      @nullable MaterialColor color,
       @nullable LandlordPropertyImage image,
       @nullable TenantsCountField numberOfTenants,
       @nullable DateTime createdAt,
@@ -147,7 +147,7 @@ class _$LandlordPropertyCopyWithImpl<$Res>
       town: town == freezed ? _value.town : town as LandlordField,
       state: state == freezed ? _value.state : state as LandlordField,
       country: country == freezed ? _value.country : country as LandlordField,
-      color: color == freezed ? _value.color : color as Color,
+      color: color == freezed ? _value.color : color as MaterialColor,
       image: image == freezed ? _value.image : image as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
@@ -178,7 +178,7 @@ abstract class _$LandlordPropertyCopyWith<$Res>
       @nullable LandlordField town,
       @nullable LandlordField state,
       @nullable LandlordField country,
-      @nullable Color color,
+      @nullable MaterialColor color,
       @nullable LandlordPropertyImage image,
       @nullable TenantsCountField numberOfTenants,
       @nullable DateTime createdAt,
@@ -226,7 +226,7 @@ class __$LandlordPropertyCopyWithImpl<$Res>
       town: town == freezed ? _value.town : town as LandlordField,
       state: state == freezed ? _value.state : state as LandlordField,
       country: country == freezed ? _value.country : country as LandlordField,
-      color: color == freezed ? _value.color : color as Color,
+      color: color == freezed ? _value.color : color as MaterialColor,
       image: image == freezed ? _value.image : image as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
@@ -286,7 +286,7 @@ class _$_LandlordProperty extends _LandlordProperty {
   final LandlordField country;
   @override
   @nullable
-  final Color color;
+  final MaterialColor color;
   @override
   @nullable
   final LandlordPropertyImage image;
@@ -384,7 +384,7 @@ abstract class _LandlordProperty extends LandlordProperty {
       @nullable LandlordField town,
       @nullable LandlordField state,
       @nullable LandlordField country,
-      @required @nullable Color color,
+      @required @nullable MaterialColor color,
       @required @nullable LandlordPropertyImage image,
       @nullable TenantsCountField numberOfTenants,
       @nullable DateTime createdAt,
@@ -417,7 +417,7 @@ abstract class _LandlordProperty extends LandlordProperty {
   LandlordField get country;
   @override
   @nullable
-  Color get color;
+  MaterialColor get color;
   @override
   @nullable
   LandlordPropertyImage get image;

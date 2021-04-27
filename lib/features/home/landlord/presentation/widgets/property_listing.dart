@@ -77,105 +77,161 @@ Widget _gridView() {
 }
 
 Widget _listView() {
+  final double _itemHeight = App.longest * 0.1;
+  final BorderRadius _radius = BorderRadius.circular(8.0);
+  final int _count = ((App.longest * 0.4) / _itemHeight).ceil();
+
   return BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
     builder: (context, state) => ListView.separated(
       physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
-      itemCount: state.properties
-          .asList()
-          .take(((App.longest * 0.4) / (App.longest * 0.1)).ceil())
-          .length,
+      itemCount: state.properties.isEmpty()
+          ? _count
+          : state.properties.asList().take(_count).length,
       separatorBuilder: (_, __) => VerticalSpace(height: App.longest * 0.01),
-      itemBuilder: (context, i) => Hero(
-        tag: state.properties.get(i).id.value,
-        child: InkWell(
-          splashColor: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(8.0),
-          onTap: () => navigator.pushLandlordPropertyDetailScreen(
-            property: state.properties.get(i),
-          ),
-          child: Container(
-            height: App.longest * 0.09,
-            padding: EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
-            decoration: BoxDecoration(
-              color: state.properties
-                  .get(i)
-                  .color
-                  .withOpacity(Helpers.optionOf(0.5, 0.2)),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: HorizontalSpace(
-                    width: double.infinity,
+      itemBuilder: (context, i) => state.properties.isEmpty()
+          ? ClipRRect(
+              borderRadius: _radius,
+              child: SizedBox(
+                height: _itemHeight,
+                child: RectangleShimmer(
+                  width: double.infinity,
+                  height: double.infinity,
+                  boxColor: Colors.grey.shade400,
+                  shimmerBaseColor: Helpers.optionOf(
+                    Colors.grey.shade300,
+                    Colors.grey.shade600,
+                  ),
+                  shimmerHighlightColor: Helpers.optionOf(
+                    Colors.grey.shade200,
+                    Colors.grey.shade500,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(12.0),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        AutoSizeText(
-                          state.properties
-                              .get(i)
-                              .name
-                              .getOrEmpty
-                              .removeNewLines(),
-                          softWrap: true,
-                          wrapWords: true,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.headline4.copyWith(
-                                color: AppColors.accentColor,
-                                fontSize: 17.0,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(
+                        2,
+                        (index) => Flexible(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50.0),
+                            child: Container(
+                              height: 7,
+                              width: App.shortest / (index + 0.7),
+                              color: Helpers.optionOf(
+                                Colors.grey.shade400,
+                                Colors.grey.shade700,
                               ),
-                          maxLines: 1,
+                            ),
+                          ),
                         ),
-                        //
-                        VerticalSpace(height: 6.0),
-                        //
-                        AutoSizeText(
-                          state.properties
-                              .get(i)
-                              .street
-                              .getOrEmpty
-                              .removeNewLines(),
-                          softWrap: true,
-                          wrapWords: true,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.caption.copyWith(
-                                color: Helpers.computeLuminance(
-                                  state.properties.get(i).color.withOpacity(
-                                        Helpers.optionOf(0.5, 0.2),
-                                      ),
-                                ),
-                                fontSize: 14.0,
-                              ),
-                          maxLines: 2,
-                        ),
-                      ],
+                      ).reversed.toList(),
                     ),
                   ),
                 ),
-                AppIconButton(
-                  padding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  child: RotatedBox(
-                    quarterTurns: 2,
-                    child: Icon(
-                      Icons.keyboard_backspace_rounded,
-                      color: Helpers.computeLuminance(state.properties
-                          .get(i)
-                          .color
-                          .withOpacity(Helpers.optionOf(0.5, 0.2))),
-                    ),
+              ),
+            )
+          : Hero(
+              tag: state.properties.get(i).id.value,
+              child: InkWell(
+                splashColor: Colors.grey.shade300,
+                borderRadius: _radius,
+                onTap: () => navigator.pushLandlordPropertyDetailScreen(
+                  property: state.properties.get(i),
+                ),
+                child: Container(
+                  height: _itemHeight,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
+                  decoration: BoxDecoration(
+                    color: state.properties
+                        .get(i)
+                        .color
+                        .withOpacity(Helpers.optionOf(0.5, 0.2)),
+                    borderRadius: _radius,
                   ),
-                )
-              ],
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: HorizontalSpace(
+                          width: double.infinity,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              AutoSizeText(
+                                state.properties
+                                    .get(i)
+                                    .name
+                                    .getOrEmpty
+                                    .removeNewLines(),
+                                softWrap: true,
+                                wrapWords: true,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4
+                                    .copyWith(
+                                      color: AppColors.accentColor,
+                                      fontSize: 17.0,
+                                    ),
+                                maxLines: 1,
+                              ),
+                              //
+                              VerticalSpace(height: 6.0),
+                              //
+                              AutoSizeText(
+                                state.properties
+                                    .get(i)
+                                    .street
+                                    .getOrEmpty
+                                    .removeNewLines(),
+                                softWrap: true,
+                                wrapWords: true,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .caption
+                                    .copyWith(
+                                      color: Helpers.computeLuminance(
+                                        state.properties
+                                            .get(i)
+                                            .color
+                                            .withOpacity(
+                                              Helpers.optionOf(0.5, 0.2),
+                                            ),
+                                      ),
+                                      fontSize: 14.0,
+                                    ),
+                                maxLines: 2,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      AppIconButton(
+                        padding: EdgeInsets.zero,
+                        backgroundColor: Colors.transparent,
+                        elevation: 0.0,
+                        child: RotatedBox(
+                          quarterTurns: 2,
+                          child: Icon(
+                            Icons.keyboard_backspace_rounded,
+                            color: Helpers.computeLuminance(state.properties
+                                .get(i)
+                                .color
+                                .withOpacity(Helpers.optionOf(0.5, 0.2))),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
     ),
   );
 }

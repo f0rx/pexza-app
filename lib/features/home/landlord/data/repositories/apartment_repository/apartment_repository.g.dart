@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of property_repository.dart;
+part of apartment_repository.dart;
 
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-class _PropertyRepository implements PropertyRepository {
-  _PropertyRepository(this._dio, {this.baseUrl}) {
+class _ApartmentRepository implements ApartmentRepository {
+  _ApartmentRepository(this._dio, {this.baseUrl}) {
     ArgumentError.checkNotNull(_dio, '_dio');
   }
 
@@ -16,12 +16,12 @@ class _PropertyRepository implements PropertyRepository {
   String baseUrl;
 
   @override
-  Future<LandlordPropertyDTOList> all() async {
+  Future<LandlordApartmentListDTO> all() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>(
-        '/landlord/property',
+        '/landlord/apartment',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -29,19 +29,38 @@ class _PropertyRepository implements PropertyRepository {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = LandlordPropertyDTOList.fromJson(_result.data);
+    final value = LandlordApartmentListDTO.fromJson(_result.data);
     return value;
   }
 
   @override
-  Future<LandlordPropertyDTO> create(dto) async {
+  Future<LandlordApartmentListDTO> allApartmentsForProperty(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/landlord/property/$id/apartments',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = LandlordApartmentListDTO.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<LandlordApartmentDTO> create(dto) async {
     ArgumentError.checkNotNull(dto, 'dto');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(dto?.toJson() ?? <String, dynamic>{});
     final _result = await _dio.request<Map<String, dynamic>>(
-        '/landlord/property',
+        '/landlord/apartment',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
@@ -49,18 +68,18 @@ class _PropertyRepository implements PropertyRepository {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = LandlordPropertyDTO.fromJson(_result.data);
+    final value = LandlordApartmentDTO.fromJson(_result.data);
     return value;
   }
 
   @override
-  Future<LandlordPropertyDTO> show(id) async {
+  Future<LandlordApartmentDTO> show(id) async {
     ArgumentError.checkNotNull(id, 'id');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>(
-        '/landlord/property/$id',
+        '/landlord/apartment/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -68,12 +87,12 @@ class _PropertyRepository implements PropertyRepository {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = LandlordPropertyDTO.fromJson(_result.data);
+    final value = LandlordApartmentDTO.fromJson(_result.data);
     return value;
   }
 
   @override
-  Future<LandlordPropertyDTO> update(id, dto) async {
+  Future<LandlordApartmentDTO> update(id, dto) async {
     ArgumentError.checkNotNull(id, 'id');
     ArgumentError.checkNotNull(dto, 'dto');
     const _extra = <String, dynamic>{};
@@ -81,7 +100,7 @@ class _PropertyRepository implements PropertyRepository {
     final _data = <String, dynamic>{};
     _data.addAll(dto?.toJson() ?? <String, dynamic>{});
     final _result = await _dio.request<Map<String, dynamic>>(
-        '/landlord/property/$id',
+        '/landlord/apartment/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'PUT',
@@ -89,18 +108,18 @@ class _PropertyRepository implements PropertyRepository {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = LandlordPropertyDTO.fromJson(_result.data);
+    final value = LandlordApartmentDTO.fromJson(_result.data);
     return value;
   }
 
   @override
-  Future<LandlordPropertyDTO> delete(id) async {
+  Future<LandlordApartmentDTO> delete(id) async {
     ArgumentError.checkNotNull(id, 'id');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>(
-        '/landlord/property/$id',
+        '/landlord/apartment/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'DELETE',
@@ -108,7 +127,7 @@ class _PropertyRepository implements PropertyRepository {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = LandlordPropertyDTO.fromJson(_result.data);
+    final value = LandlordApartmentDTO.fromJson(_result.data);
     return value;
   }
 }

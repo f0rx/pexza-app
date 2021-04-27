@@ -51,27 +51,33 @@ class LandlordHomeScreen extends StatelessWidget with AutoRouteWrapper {
     return Scaffold(
       body: BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
         // buildWhen: (p, c) => c.isLoading,
-        builder: (c, state) => Visibility(
-          visible: !c.watch<LandlordPropertyCubit>().state.properties.isEmpty(),
-          replacement: PortalEntry(
-            visible: !c.watch<LandlordPropertyCubit>().state.isLoading,
-            portal: EmptyLandlordProps(
-              appBar: HomeAppBar(
-                onPressed: () => navigator.pushAccountScreen(),
-              ),
-              title: "No Property Listed",
-              description: "You have not listed a property yet. "
-                  "Click the button below to add properties.",
-              buttonText: "Add Property",
-              onPressed: () => navigator.pushLandlordAddPropertyScreen(),
+        builder: (c, state) => PortalEntry(
+          visible: !c.watch<LandlordPropertyCubit>().state.isLoading &&
+              c.watch<LandlordPropertyCubit>().state.properties.isEmpty(),
+          portal: EmptyLandlordProps(
+            appBar: HomeAppBar(
+              onPressed: () => navigator.pushAccountScreen(),
             ),
-            child: App.waveLoadingBar,
+            title: "No Property Listed",
+            description: "You have not listed a property yet. "
+                "Click the button below to add properties.",
+            buttonText: "Add Property",
+            onPressed: () => navigator.pushLandlordAddPropertyScreen(),
           ),
           child: LandlordProperties(
             appBar: HomeAppBar(
               onPressed: () => navigator.pushAccountScreen(),
             ),
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => navigator.pushLandlordAddPropertyScreen(),
+        tooltip: "Add a new Property",
+        heroTag: "add-new-property",
+        child: Icon(
+          Icons.add_business,
+          color: Helpers.computeLuminance(AppColors.accentColor),
         ),
       ),
     );

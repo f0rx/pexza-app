@@ -18,7 +18,7 @@ abstract class PropertyRepository {
 
   @POST("/landlord/property")
   Future<LandlordPropertyDTO> create(
-    @Body() LandlordPropertyDTO property,
+    @Body() LandlordPropertyData dto,
   );
 
   @GET("/landlord/property/{id}")
@@ -27,7 +27,7 @@ abstract class PropertyRepository {
   @PUT("/landlord/property/{id}")
   Future<LandlordPropertyDTO> update(
     @Path() int id,
-    @Body() LandlordPropertyDTO property,
+    @Body() LandlordPropertyData dto,
   );
 
   @DELETE("/landlord/property/{id}")
