@@ -139,6 +139,8 @@ extension StringX on String {
       return e.value;
     }).join();
   }
+
+  String removeNewLines() => this.replaceAll("\n", "");
 }
 
 enum Direction {

@@ -21,8 +21,8 @@ abstract class UserDTO implements _$UserDTO {
   const factory UserDTO({
     @HiveField(0)
     @nullable
-    @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
-        String id,
+    @JsonKey(includeIfNull: false, defaultValue: 0)
+        int id,
     @HiveField(1)
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
@@ -108,7 +108,7 @@ abstract class UserDTO implements _$UserDTO {
       _$UserDTOFromJson(json);
 
   User get domain => User(
-        id: UniqueId.fromExternal(id),
+        id: UniqueId<int>.fromExternal(id),
         role: role != null ? Role.valueOf(role) : null,
         firstName: firstName != null ? DisplayName(firstName) : null,
         lastName: lastName != null ? DisplayName(lastName) : null,

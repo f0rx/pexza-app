@@ -49,11 +49,11 @@ class _DioInstance {
 
     dio.options.receiveTimeout = 8000;
 
-    // dio.interceptors.add(
-    //   DioCacheManager(
-    //     CacheConfig(baseUrl: env.baseUri.path),
-    //   ).interceptor,
-    // );
+    dio.interceptors.add(
+      DioCacheManager(
+        CacheConfig(baseUrl: env.baseUri.path),
+      ).interceptor,
+    );
 
     if (env.flavor == BuildFlavor.dev)
       dio.interceptors.add(
