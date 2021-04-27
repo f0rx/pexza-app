@@ -7,10 +7,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
+import 'package:pexza/utils/utils.dart';
 
 part 'landlord_property_state.dart';
 part 'landlord_property_cubit.freezed.dart';
@@ -31,6 +33,17 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         isLoading: isLoading ?? !state.isLoading,
       ));
 
+  Future<void> checkInternetAndConnectivity() async {
+    final isConnected =
+        (await _connectivity.checkConnectivity()) != ConnectivityResult.none;
+
+    if (!isConnected) throw LandlordFailure.noInternetConnection();
+
+    final hasInternet = await _dataConnectionChecker.hasConnection;
+
+    if (!hasInternet) throw LandlordFailure.poorInternetConnection();
+  }
+
   Future<void> fetchAll() async {
     toggleLoading();
 
@@ -39,10 +52,50 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
       emit(state.copyWith(
         optionOfFailure: none(),
-        properties: props.data.map((e) => e.domain).toImmutableList(),
+        properties: props.data.map((e) => e?.domain).toImmutableList(),
+      ));
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(
+        optionOfFailure: some(e),
       ));
     } on DioError catch (e) {
       _handleDioFailures(e);
+    }
+
+    toggleLoading();
+  }
+
+  Future<void> create() async {
+    toggleLoading();
+
+    // Create Data Transfer Object (DTO)
+    final property = LandlordPropertyDTO.fromDomain(LandlordProperty(
+      name: state.name,
+      propertyType: state.propertyType,
+      houseType: state.houseType,
+      street: state.street,
+      town: state.town,
+      state: state.state,
+      color: null,
+      image: null,
+    ));
+
+    try {
+      // Check if user is connected & has good internet
+      await checkInternetAndConnectivity();
+
+      final prop = await _repository.create(property);
+
+      emit(state.copyWith(
+        optionOfFailure: none(),
+        property: prop?.domain,
+      ));
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(
+        optionOfFailure: some(e),
+      ));
+    } on DioError catch (_) {
+      _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -52,14 +105,21 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     toggleLoading();
 
     try {
+      // Check if user is connected & has good internet
+      await checkInternetAndConnectivity();
+
       final property = await _repository.show(id.value);
 
       emit(state.copyWith(
         optionOfFailure: none(),
-        property: property.domain,
+        property: property?.domain,
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(
+        optionOfFailure: some(e),
+      ));
+    } on DioError catch (_) {
+      _handleDioFailures(_);
     }
 
     toggleLoading();

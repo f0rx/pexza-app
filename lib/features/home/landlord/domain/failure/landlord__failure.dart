@@ -32,6 +32,9 @@ abstract class LandlordFailure implements _$LandlordFailure, Failure {
     String details,
   }) = _LandlordFailure;
 
+  factory LandlordFailure.noInternetConnection() =>
+      LandlordFailure(message: "You're offline!");
+
   factory LandlordFailure.poorInternetConnection() =>
       LandlordFailure(message: "Poor internet connection!");
 

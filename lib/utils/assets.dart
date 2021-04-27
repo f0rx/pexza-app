@@ -9,22 +9,34 @@ mixin AppAssets {
   static const IMAGES_DIR = "$ASSETS_DIR/images";
   // Sub-folders
   //////////////  IMAGES  ////////////
-  static const LOGO_IMAGES_DIR = "$IMAGES_DIR/logo";
-  static const LANDLORD_IMAGES_DIR = "$IMAGES_DIR/landlord";
-  static const ONBOARDING_MAIN_IMAGES_DIR = "$IMAGES_DIR/onboarding/main";
-  static const ONBOARDING_PROFILE_IMAGES_DIR = "$IMAGES_DIR/onboarding/profile";
+  static const String LOGO_IMAGES_DIR = "$IMAGES_DIR/logo";
+  static const String LANDLORD_IMAGES_DIR = "$IMAGES_DIR/landlord";
+  static const String ONBOARDING_MAIN_IMAGES_DIR =
+      "$IMAGES_DIR/onboarding/main";
+  static const String ONBOARDING_PROFILE_IMAGES_DIR =
+      "$IMAGES_DIR/onboarding/profile";
 
   /////////////  SVGS /////////////
-  static const AUTH_SVG_DIR = "$SVG_DIR/auth";
-  static const LANDLORD_SVG_DIR = "$SVG_DIR/landlord";
-  static const ONBOARDING_SVG_DIR = "$SVG_DIR/onboarding";
+  static const String AUTH_SVG_DIR = "$SVG_DIR/auth";
+  static const String LANDLORD_SVG_DIR = "$SVG_DIR/landlord";
+  static const String ONBOARDING_SVG_DIR = "$SVG_DIR/onboarding";
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
 
-  static const logo = "$LOGO_IMAGES_DIR/logo.png";
+  static const String logo = "$LOGO_IMAGES_DIR/logo.png";
 
-  static const user = "$IMAGES_DIR/user.png";
+  static const String user = "$IMAGES_DIR/user.png";
+
+  /////// APARTMENTS SAMPLE IMAGES ///////
+  static const String apartment1 = "$LANDLORD_IMAGES_DIR/apartment-1.jpg";
+  static const String apartment2 = "$LANDLORD_IMAGES_DIR/apartment-2.jpg";
+  static const String apartment3 = "$LANDLORD_IMAGES_DIR/apartment-3.jpg";
+  static const String apartment4 = "$LANDLORD_IMAGES_DIR/apartment-4.png";
+  static const String apartment5 = "$LANDLORD_IMAGES_DIR/apartment-5.jpg";
+  static const String apartment6 = "$LANDLORD_IMAGES_DIR/apartment-6.jpg";
+  static const String apartment7 = "$LANDLORD_IMAGES_DIR/apartment-7.png";
+  static const String apartment8 = "$LANDLORD_IMAGES_DIR/apartment-8.jpg";
 
   // On Boarding Assets
   static const String onBoarding1 = '$ONBOARDING_MAIN_IMAGES_DIR/1.png';

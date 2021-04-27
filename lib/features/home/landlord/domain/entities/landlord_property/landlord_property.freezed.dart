@@ -23,7 +23,8 @@ class _$LandlordPropertyTearOff {
       @nullable LandlordField town,
       @nullable LandlordField state,
       @nullable LandlordField country,
-      @required Color color,
+      @required @nullable Color color,
+      @required @nullable LandlordPropertyImage image,
       @nullable TenantsCountField numberOfTenants,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
@@ -38,6 +39,7 @@ class _$LandlordPropertyTearOff {
       state: state,
       country: country,
       color: color,
+      image: image,
       numberOfTenants: numberOfTenants,
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -68,7 +70,10 @@ mixin _$LandlordProperty {
   LandlordField get state;
   @nullable
   LandlordField get country;
+  @nullable
   Color get color;
+  @nullable
+  LandlordPropertyImage get image;
   @nullable
   TenantsCountField get numberOfTenants;
   @nullable
@@ -96,7 +101,8 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       @nullable LandlordField town,
       @nullable LandlordField state,
       @nullable LandlordField country,
-      Color color,
+      @nullable Color color,
+      @nullable LandlordPropertyImage image,
       @nullable TenantsCountField numberOfTenants,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
@@ -123,6 +129,7 @@ class _$LandlordPropertyCopyWithImpl<$Res>
     Object state = freezed,
     Object country = freezed,
     Object color = freezed,
+    Object image = freezed,
     Object numberOfTenants = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -141,6 +148,7 @@ class _$LandlordPropertyCopyWithImpl<$Res>
       state: state == freezed ? _value.state : state as LandlordField,
       country: country == freezed ? _value.country : country as LandlordField,
       color: color == freezed ? _value.color : color as Color,
+      image: image == freezed ? _value.image : image as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
           : numberOfTenants as TenantsCountField,
@@ -170,7 +178,8 @@ abstract class _$LandlordPropertyCopyWith<$Res>
       @nullable LandlordField town,
       @nullable LandlordField state,
       @nullable LandlordField country,
-      Color color,
+      @nullable Color color,
+      @nullable LandlordPropertyImage image,
       @nullable TenantsCountField numberOfTenants,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
@@ -199,6 +208,7 @@ class __$LandlordPropertyCopyWithImpl<$Res>
     Object state = freezed,
     Object country = freezed,
     Object color = freezed,
+    Object image = freezed,
     Object numberOfTenants = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -217,6 +227,7 @@ class __$LandlordPropertyCopyWithImpl<$Res>
       state: state == freezed ? _value.state : state as LandlordField,
       country: country == freezed ? _value.country : country as LandlordField,
       color: color == freezed ? _value.color : color as Color,
+      image: image == freezed ? _value.image : image as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
           : numberOfTenants as TenantsCountField,
@@ -241,13 +252,13 @@ class _$_LandlordProperty extends _LandlordProperty {
       @nullable this.town,
       @nullable this.state,
       @nullable this.country,
-      @required this.color,
+      @required @nullable this.color,
+      @required @nullable this.image,
       @nullable this.numberOfTenants,
       @nullable this.createdAt,
       @nullable this.updatedAt,
       @nullable this.deletedAt})
-      : assert(color != null),
-        super._();
+      : super._();
 
   @override
   @nullable
@@ -274,7 +285,11 @@ class _$_LandlordProperty extends _LandlordProperty {
   @nullable
   final LandlordField country;
   @override
+  @nullable
   final Color color;
+  @override
+  @nullable
+  final LandlordPropertyImage image;
   @override
   @nullable
   final TenantsCountField numberOfTenants;
@@ -290,7 +305,7 @@ class _$_LandlordProperty extends _LandlordProperty {
 
   @override
   String toString() {
-    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, country: $country, color: $color, numberOfTenants: $numberOfTenants, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, country: $country, color: $color, image: $image, numberOfTenants: $numberOfTenants, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -318,6 +333,8 @@ class _$_LandlordProperty extends _LandlordProperty {
                     .equals(other.country, country)) &&
             (identical(other.color, color) ||
                 const DeepCollectionEquality().equals(other.color, color)) &&
+            (identical(other.image, image) ||
+                const DeepCollectionEquality().equals(other.image, image)) &&
             (identical(other.numberOfTenants, numberOfTenants) ||
                 const DeepCollectionEquality()
                     .equals(other.numberOfTenants, numberOfTenants)) &&
@@ -344,6 +361,7 @@ class _$_LandlordProperty extends _LandlordProperty {
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(color) ^
+      const DeepCollectionEquality().hash(image) ^
       const DeepCollectionEquality().hash(numberOfTenants) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
@@ -366,7 +384,8 @@ abstract class _LandlordProperty extends LandlordProperty {
       @nullable LandlordField town,
       @nullable LandlordField state,
       @nullable LandlordField country,
-      @required Color color,
+      @required @nullable Color color,
+      @required @nullable LandlordPropertyImage image,
       @nullable TenantsCountField numberOfTenants,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
@@ -397,7 +416,11 @@ abstract class _LandlordProperty extends LandlordProperty {
   @nullable
   LandlordField get country;
   @override
+  @nullable
   Color get color;
+  @override
+  @nullable
+  LandlordPropertyImage get image;
   @override
   @nullable
   TenantsCountField get numberOfTenants;

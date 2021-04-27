@@ -1,6 +1,7 @@
 library landlord_property_data;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
@@ -13,6 +14,17 @@ part 'landlord_property_data.freezed.dart';
 @freezed
 @immutable
 abstract class LandlordPropertyData implements _$LandlordPropertyData {
+  static KtList<String> images = KtList.of(
+    AppAssets.apartment1,
+    AppAssets.apartment2,
+    AppAssets.apartment3,
+    AppAssets.apartment4,
+    AppAssets.apartment5,
+    AppAssets.apartment6,
+    AppAssets.apartment7,
+    AppAssets.apartment8,
+  );
+
   const LandlordPropertyData._();
 
   const factory LandlordPropertyData({
@@ -74,6 +86,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
         state: !state.isNull ? LandlordField(state) : null,
         country: !country.isNull ? LandlordField(country) : null,
         color: AppColors.random,
+        image: LandlordPropertyImage(images.random()),
         numberOfTenants:
             !numberOfTenants.isNull ? TenantsCountField(numberOfTenants) : null,
         createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
