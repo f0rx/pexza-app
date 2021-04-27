@@ -33,6 +33,9 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         List<dynamic> token,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "property_id")
+        List<dynamic> propertyId,
   }) = _ServerFieldErrors;
 
   factory ServerFieldErrors.fromJson(Map<String, dynamic> json) =>

@@ -143,9 +143,12 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             //
             VerticalSpace(height: App.shortest * 0.2),
             //
-            AppElevatedButton(
-              text: "Add Property",
-              onPressed: () {},
+            Hero(
+              tag: "assign-property-id",
+              child: AppElevatedButton(
+                text: "Add Property",
+                onPressed: () {},
+              ),
             ),
           ],
         ),

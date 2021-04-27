@@ -1,22 +1,69 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
+import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
+import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
 
 class LandlordPropertyDetailScreen extends StatelessWidget
     with AutoRouteWrapper {
+  final LandlordProperty property;
+
+  const LandlordPropertyDetailScreen({
+    Key key,
+    @required this.property,
+  }) : super(key: key);
+
   @override
   Widget wrappedRoute(BuildContext context) {
-    return this;
+    return BlocProvider(
+      create: (_) => getIt<LandlordPropertyCubit>()..get(property.id),
+      child: BlocListener<LandlordPropertyCubit, LandlordPropertyState>(
+        listener: (c, s) {
+          c.read<LandlordPropertyCubit>().state.optionOfFailure.fold(
+                () => null,
+                (failure) => Flushbar(
+                  duration: const Duration(seconds: 10),
+                  icon: const Icon(Icons.error, color: Colors.red),
+                  messageText: AutoSizeText(
+                    !failure.message.isNullOrBlank
+                        ? failure.message
+                        : failure.error,
+                  ),
+                  borderRadius: 8,
+                  dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+                  margin: const EdgeInsets.all(8),
+                  flushbarPosition:
+                      MediaQuery.of(context).viewInsets.bottom == 0
+                          ? FlushbarPosition.BOTTOM
+                          : FlushbarPosition.TOP,
+                  shouldIconPulse: true,
+                  backgroundColor: Theme.of(context).primaryColor,
+                ).show(context),
+              );
+        },
+        child: this,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Toolbar(
-        title: "Property Name",
+        title: context
+                .watch<LandlordPropertyCubit>()
+                .state
+                .property
+                ?.name
+                ?.getOrEmpty
+                ?.removeNewLines() ??
+            property?.name?.getOrEmpty?.removeNewLines(),
       ),
       body: Stack(
         children: [
@@ -24,23 +71,32 @@ class LandlordPropertyDetailScreen extends StatelessWidget
             top: 0,
             left: 0,
             right: 0,
-            child: Container(
-              height: App.height * 0.2,
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(
-                horizontal: Helpers.appPadding,
-              ).copyWith(top: Helpers.appPadding),
-              decoration: BoxDecoration(
-                color: Colors.teal.shade200,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  //
-                ],
-              ),
+            child: BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
+              builder: (context, state) {
+                // log.wtf(state.property);
+
+                return Hero(
+                  tag: state.property?.id?.value ?? property?.id?.value,
+                  child: Container(
+                    height: App.height * 0.2,
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: Helpers.appPadding,
+                    ).copyWith(top: Helpers.appPadding),
+                    decoration: BoxDecoration(
+                      color: state.property?.color?.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        //
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
           //
@@ -100,11 +156,17 @@ class LandlordPropertyDetailScreen extends StatelessWidget
           ),
         ],
       ),
-      floatingActionButton: AppIconButton(
-        onPressed: () => navigator.pushLandlordAddTenantScreen(),
-        child: Icon(
-          Icons.person_add,
-          color: Helpers.computeLuminance(AppColors.accentColor),
+      floatingActionButton:
+          BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
+        builder: (context, state) => FloatingActionButton(
+          onPressed: () => navigator.pushLandlordAddTenantScreen(),
+          tooltip: "Assign apartment to a Tenant",
+          isExtended: true,
+          heroTag: "assign-${state.property?.id?.value ?? property?.id?.value}",
+          child: Icon(
+            Icons.person_add,
+            color: Helpers.computeLuminance(AppColors.accentColor),
+          ),
         ),
       ),
     );
