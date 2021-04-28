@@ -9,7 +9,7 @@ abstract class LandlordApartmentState implements _$LandlordApartmentState {
     @Default(false) bool isLoading,
     @Default(false) bool validate,
     @required LandlordField name,
-    @required LandlordPropertySelectField selected,
+    LandlordProperty currentProperty,
     @Default(KtList.empty()) KtList<LandlordApartment> apartments,
     @nullable LandlordApartment apartment,
     @Default(const None()) Option<LandlordFailure> optionOfFailure,
@@ -17,6 +17,5 @@ abstract class LandlordApartmentState implements _$LandlordApartmentState {
 
   factory LandlordApartmentState.initial() => LandlordApartmentState(
         name: LandlordField(""),
-        selected: LandlordPropertySelectField(null),
       );
 }

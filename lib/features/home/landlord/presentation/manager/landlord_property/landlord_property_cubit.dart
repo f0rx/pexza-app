@@ -121,13 +121,12 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
     try {
       if (_prop.failures.isNone()) {
-        // Create Data Transfer Object (DTO)
-        final _dto = LandlordPropertyData.fromDomain(_prop);
-
         // Check if user is connected & has good internet
         await checkInternetAndConnectivity();
 
-        final prop = await _repository.create(_dto);
+        final prop = await _repository.create(
+          LandlordPropertyData.fromDomain(_prop),
+        );
 
         emit(state.copyWith(
           property: prop?.domain,

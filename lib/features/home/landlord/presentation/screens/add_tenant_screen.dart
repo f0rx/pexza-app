@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/utils/utils.dart';
-import 'package:pexza/widgets/toolbar.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
@@ -148,7 +148,8 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             VerticalSpace(height: App.shortest * 0.2),
             //
             Hero(
-              tag: "assign-property-id",
+              tag:
+                  "${Constants.kAssignTenantToPropHeroTag}-${property?.id?.value}",
               child: AppElevatedButton(
                 text: "Add Property",
                 onPressed: () {},

@@ -11,9 +11,11 @@ import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart';
+import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
+import 'package:pexza/utils/utils.dart';
 
 part 'landlord_apartment_state.dart';
 part 'landlord_apartment_cubit.freezed.dart';
@@ -21,17 +23,32 @@ part 'landlord_apartment_cubit.freezed.dart';
 @injectable
 class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
   final ApartmentRepository _repository;
+  final PropertyRepository _propertyRepository;
   final Connectivity _connectivity;
   final DataConnectionChecker _dataConnectionChecker;
 
   LandlordApartmentCubit(
     this._repository,
+    this._propertyRepository,
     this._connectivity,
     this._dataConnectionChecker,
   ) : super(LandlordApartmentState.initial());
 
   void toggleLoading([isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
+      ));
+
+  void apartmentNameChanged(String value) => emit(state.copyWith(
+        name: LandlordField(value),
+      ));
+
+  void init([
+    LandlordApartment apartment,
+    LandlordProperty property,
+  ]) async =>
+      emit(state.copyWith(
+        name: apartment?.name ?? state.name,
+        currentProperty: property ?? state.currentProperty,
       ));
 
   Future<void> checkInternetAndConnectivity() async {
@@ -92,18 +109,30 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
   Future<void> create() async {
     toggleLoading();
 
-    final _dto = LandlordApartmentData.fromDomain(LandlordApartment(
+    // Create Object Instance from state inputs
+    final _apartment = LandlordApartment(
       name: state.name,
-      property: state.selected,
+      property: state.currentProperty,
+    );
+
+    emit(state.copyWith(
+      validate: true,
+      optionOfFailure: none(),
     ));
 
     try {
-      final apartment = await _repository.create(_dto);
+      if (_apartment.failures.isNone()) {
+        // Check if user is connected & has good internet
+        await checkInternetAndConnectivity();
 
-      emit(state.copyWith(
-        optionOfFailure: none(),
-        apartment: apartment.domain,
-      ));
+        final apartmentDTO = await _repository.create(
+          LandlordApartmentData.fromDomain(_apartment),
+        );
+
+        emit(state.copyWith(
+          apartment: apartmentDTO.domain,
+        ));
+      }
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         optionOfFailure: some(e),
@@ -150,7 +179,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
 
     final _dto = LandlordApartmentData.fromDomain(LandlordApartment(
       name: state.name,
-      property: state.selected,
+      property: state.currentProperty,
     ));
 
     try {
@@ -187,8 +216,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       Future.wait<void>([
         _repository.delete(apartment?.id?.value ?? id),
         this.fetchAllLandlordProps(),
-        if (state.selected.isValid)
-          this.getApartmentsForProperty(state.selected.getOrNull),
+        if (!state.currentProperty.isNull)
+          this.getApartmentsForProperty(state.currentProperty),
       ], eagerError: true);
 
       emit(state.copyWith(

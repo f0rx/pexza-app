@@ -55,18 +55,18 @@ class _DioInstance {
       ).interceptor,
     );
 
-    if (env.flavor == BuildFlavor.dev)
-      dio.interceptors.add(
-        PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
-          responseBody: true,
-          responseHeader: false,
-          error: true,
-          compact: true,
-          maxWidth: 100,
-        ),
-      );
+    // if (env.flavor == BuildFlavor.dev)
+    dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 100,
+      ),
+    );
 
     dio.interceptors.add(
       InterceptorsWrapper(

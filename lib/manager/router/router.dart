@@ -8,6 +8,7 @@ import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dar
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/add_apartment_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_property_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_tenant_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/home_screen.dart';
@@ -111,6 +112,11 @@ import 'package:pexza/manager/router/export.dart';
     ),
     AdaptiveRoute(
       page: LandlordPropertyDetailScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: LandlordAddApartmentScreen,
       guards: [AuthGuard],
       maintainState: true,
     ),

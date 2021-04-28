@@ -73,6 +73,7 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i15.ApartmentRepository(get<_i6.Dio>()));
     gh.factory<_i16.LandlordApartmentCubit>(() => _i16.LandlordApartmentCubit(
         get<_i15.ApartmentRepository>(),
+        get<_i11.PropertyRepository>(),
         get<_i4.Connectivity>(),
         get<_i5.DataConnectionChecker>()));
     gh.factory<_i17.LandlordPropertyCubit>(() => _i17.LandlordPropertyCubit(

@@ -74,7 +74,7 @@ class LandlordHomeScreen extends StatelessWidget with AutoRouteWrapper {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => navigator.pushLandlordAddPropertyScreen(),
-        tooltip: "Add a new Property",
+        tooltip: "Add new Property",
         heroTag: Constants.kAddEditPropertyHeroTag,
         child: Icon(
           Icons.add_business,

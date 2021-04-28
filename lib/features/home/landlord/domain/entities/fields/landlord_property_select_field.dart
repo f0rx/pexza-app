@@ -6,7 +6,7 @@ class LandlordPropertySelectField extends FieldObject<LandlordProperty> {
   final Either<FieldObjectException<String>, LandlordProperty> value;
 
   factory LandlordPropertySelectField(LandlordProperty input) {
-    assert(input != null);
+    // assert(input != null);
     return LandlordPropertySelectField._(Validator.isEmpty(input));
   }
 

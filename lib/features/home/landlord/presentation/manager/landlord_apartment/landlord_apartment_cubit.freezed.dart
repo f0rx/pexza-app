@@ -18,7 +18,7 @@ class _$LandlordApartmentStateTearOff {
       {bool isLoading = false,
       bool validate = false,
       @required LandlordField name,
-      @required LandlordPropertySelectField selected,
+      LandlordProperty currentProperty,
       KtList<LandlordApartment> apartments = const KtList.empty(),
       @nullable LandlordApartment apartment,
       Option<LandlordFailure> optionOfFailure = const None()}) {
@@ -26,7 +26,7 @@ class _$LandlordApartmentStateTearOff {
       isLoading: isLoading,
       validate: validate,
       name: name,
-      selected: selected,
+      currentProperty: currentProperty,
       apartments: apartments,
       apartment: apartment,
       optionOfFailure: optionOfFailure,
@@ -43,7 +43,7 @@ mixin _$LandlordApartmentState {
   bool get isLoading;
   bool get validate;
   LandlordField get name;
-  LandlordPropertySelectField get selected;
+  LandlordProperty get currentProperty;
   KtList<LandlordApartment> get apartments;
   @nullable
   LandlordApartment get apartment;
@@ -62,11 +62,12 @@ abstract class $LandlordApartmentStateCopyWith<$Res> {
       {bool isLoading,
       bool validate,
       LandlordField name,
-      LandlordPropertySelectField selected,
+      LandlordProperty currentProperty,
       KtList<LandlordApartment> apartments,
       @nullable LandlordApartment apartment,
       Option<LandlordFailure> optionOfFailure});
 
+  $LandlordPropertyCopyWith<$Res> get currentProperty;
   $LandlordApartmentCopyWith<$Res> get apartment;
 }
 
@@ -84,7 +85,7 @@ class _$LandlordApartmentStateCopyWithImpl<$Res>
     Object isLoading = freezed,
     Object validate = freezed,
     Object name = freezed,
-    Object selected = freezed,
+    Object currentProperty = freezed,
     Object apartments = freezed,
     Object apartment = freezed,
     Object optionOfFailure = freezed,
@@ -93,9 +94,9 @@ class _$LandlordApartmentStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
       name: name == freezed ? _value.name : name as LandlordField,
-      selected: selected == freezed
-          ? _value.selected
-          : selected as LandlordPropertySelectField,
+      currentProperty: currentProperty == freezed
+          ? _value.currentProperty
+          : currentProperty as LandlordProperty,
       apartments: apartments == freezed
           ? _value.apartments
           : apartments as KtList<LandlordApartment>,
@@ -106,6 +107,16 @@ class _$LandlordApartmentStateCopyWithImpl<$Res>
           ? _value.optionOfFailure
           : optionOfFailure as Option<LandlordFailure>,
     ));
+  }
+
+  @override
+  $LandlordPropertyCopyWith<$Res> get currentProperty {
+    if (_value.currentProperty == null) {
+      return null;
+    }
+    return $LandlordPropertyCopyWith<$Res>(_value.currentProperty, (value) {
+      return _then(_value.copyWith(currentProperty: value));
+    });
   }
 
   @override
@@ -130,11 +141,13 @@ abstract class _$LandlordApartmentStateCopyWith<$Res>
       {bool isLoading,
       bool validate,
       LandlordField name,
-      LandlordPropertySelectField selected,
+      LandlordProperty currentProperty,
       KtList<LandlordApartment> apartments,
       @nullable LandlordApartment apartment,
       Option<LandlordFailure> optionOfFailure});
 
+  @override
+  $LandlordPropertyCopyWith<$Res> get currentProperty;
   @override
   $LandlordApartmentCopyWith<$Res> get apartment;
 }
@@ -155,7 +168,7 @@ class __$LandlordApartmentStateCopyWithImpl<$Res>
     Object isLoading = freezed,
     Object validate = freezed,
     Object name = freezed,
-    Object selected = freezed,
+    Object currentProperty = freezed,
     Object apartments = freezed,
     Object apartment = freezed,
     Object optionOfFailure = freezed,
@@ -164,9 +177,9 @@ class __$LandlordApartmentStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
       name: name == freezed ? _value.name : name as LandlordField,
-      selected: selected == freezed
-          ? _value.selected
-          : selected as LandlordPropertySelectField,
+      currentProperty: currentProperty == freezed
+          ? _value.currentProperty
+          : currentProperty as LandlordProperty,
       apartments: apartments == freezed
           ? _value.apartments
           : apartments as KtList<LandlordApartment>,
@@ -186,14 +199,13 @@ class _$_LandlordApartmentState extends _LandlordApartmentState {
       {this.isLoading = false,
       this.validate = false,
       @required this.name,
-      @required this.selected,
+      this.currentProperty,
       this.apartments = const KtList.empty(),
       @nullable this.apartment,
       this.optionOfFailure = const None()})
       : assert(isLoading != null),
         assert(validate != null),
         assert(name != null),
-        assert(selected != null),
         assert(apartments != null),
         assert(optionOfFailure != null),
         super._();
@@ -207,7 +219,7 @@ class _$_LandlordApartmentState extends _LandlordApartmentState {
   @override
   final LandlordField name;
   @override
-  final LandlordPropertySelectField selected;
+  final LandlordProperty currentProperty;
   @JsonKey(defaultValue: const KtList.empty())
   @override
   final KtList<LandlordApartment> apartments;
@@ -220,7 +232,7 @@ class _$_LandlordApartmentState extends _LandlordApartmentState {
 
   @override
   String toString() {
-    return 'LandlordApartmentState(isLoading: $isLoading, validate: $validate, name: $name, selected: $selected, apartments: $apartments, apartment: $apartment, optionOfFailure: $optionOfFailure)';
+    return 'LandlordApartmentState(isLoading: $isLoading, validate: $validate, name: $name, currentProperty: $currentProperty, apartments: $apartments, apartment: $apartment, optionOfFailure: $optionOfFailure)';
   }
 
   @override
@@ -235,9 +247,9 @@ class _$_LandlordApartmentState extends _LandlordApartmentState {
                     .equals(other.validate, validate)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.selected, selected) ||
+            (identical(other.currentProperty, currentProperty) ||
                 const DeepCollectionEquality()
-                    .equals(other.selected, selected)) &&
+                    .equals(other.currentProperty, currentProperty)) &&
             (identical(other.apartments, apartments) ||
                 const DeepCollectionEquality()
                     .equals(other.apartments, apartments)) &&
@@ -255,7 +267,7 @@ class _$_LandlordApartmentState extends _LandlordApartmentState {
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(validate) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(selected) ^
+      const DeepCollectionEquality().hash(currentProperty) ^
       const DeepCollectionEquality().hash(apartments) ^
       const DeepCollectionEquality().hash(apartment) ^
       const DeepCollectionEquality().hash(optionOfFailure);
@@ -273,7 +285,7 @@ abstract class _LandlordApartmentState extends LandlordApartmentState {
       {bool isLoading,
       bool validate,
       @required LandlordField name,
-      @required LandlordPropertySelectField selected,
+      LandlordProperty currentProperty,
       KtList<LandlordApartment> apartments,
       @nullable LandlordApartment apartment,
       Option<LandlordFailure> optionOfFailure}) = _$_LandlordApartmentState;
@@ -285,7 +297,7 @@ abstract class _LandlordApartmentState extends LandlordApartmentState {
   @override
   LandlordField get name;
   @override
-  LandlordPropertySelectField get selected;
+  LandlordProperty get currentProperty;
   @override
   KtList<LandlordApartment> get apartments;
   @override

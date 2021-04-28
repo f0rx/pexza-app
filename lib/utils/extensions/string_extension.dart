@@ -140,7 +140,7 @@ extension StringX on String {
     }).join();
   }
 
-  String removeNewLines() => this.replaceAll("\n", "");
+  String removeNewLines() => this.replaceAll("\n", " ");
 }
 
 enum Direction {

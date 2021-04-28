@@ -17,15 +17,14 @@ abstract class LandlordApartment implements _$LandlordApartment {
     @nullable UniqueId<int> id,
     @nullable LandlordField name,
     @nullable ApartmentStatus status,
-    @nullable LandlordPropertySelectField property,
+    @nullable LandlordProperty property,
     @nullable DateTime createdAt,
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,
   }) = _LandlordApartment;
 
-  Option<FieldObjectException<dynamic>> get failures =>
-      name.mapped.andThen(property.mapped).fold(
-            (f) => some(f),
-            (_) => none(),
-          );
+  Option<FieldObjectException<dynamic>> get failures => name.mapped.fold(
+        (f) => some(f),
+        (_) => none(),
+      );
 }
