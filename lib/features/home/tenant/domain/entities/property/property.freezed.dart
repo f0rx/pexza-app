@@ -15,7 +15,7 @@ class _$PropertyTearOff {
 
 // ignore: unused_element
   _Property call(
-      {@nullable UniqueId id,
+      {@nullable UniqueId<dynamic> id,
       @nullable PropertyOwner owner,
       @nullable PropertyName type,
       @nullable PropertyLocation location,
@@ -48,7 +48,7 @@ const $Property = _$PropertyTearOff();
 mixin _$Property {
 // Rent Info
   @nullable
-  UniqueId get id;
+  UniqueId<dynamic> get id;
   @nullable
   PropertyOwner get owner;
   @nullable
@@ -78,7 +78,7 @@ abstract class $PropertyCopyWith<$Res> {
   factory $PropertyCopyWith(Property value, $Res Function(Property) then) =
       _$PropertyCopyWithImpl<$Res>;
   $Res call(
-      {@nullable UniqueId id,
+      {@nullable UniqueId<dynamic> id,
       @nullable PropertyOwner owner,
       @nullable PropertyName type,
       @nullable PropertyLocation location,
@@ -114,7 +114,7 @@ class _$PropertyCopyWithImpl<$Res> implements $PropertyCopyWith<$Res> {
     Object renewalAmount = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as UniqueId,
+      id: id == freezed ? _value.id : id as UniqueId<dynamic>,
       owner: owner == freezed ? _value.owner : owner as PropertyOwner,
       type: type == freezed ? _value.type : type as PropertyName,
       location:
@@ -149,7 +149,7 @@ abstract class _$PropertyCopyWith<$Res> implements $PropertyCopyWith<$Res> {
       __$PropertyCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable UniqueId id,
+      {@nullable UniqueId<dynamic> id,
       @nullable PropertyOwner owner,
       @nullable PropertyName type,
       @nullable PropertyLocation location,
@@ -187,7 +187,7 @@ class __$PropertyCopyWithImpl<$Res> extends _$PropertyCopyWithImpl<$Res>
     Object renewalAmount = freezed,
   }) {
     return _then(_Property(
-      id: id == freezed ? _value.id : id as UniqueId,
+      id: id == freezed ? _value.id : id as UniqueId<dynamic>,
       owner: owner == freezed ? _value.owner : owner as PropertyOwner,
       type: type == freezed ? _value.type : type as PropertyName,
       location:
@@ -223,7 +223,7 @@ class _$_Property extends _Property {
 
   @override // Rent Info
   @nullable
-  final UniqueId id;
+  final UniqueId<dynamic> id;
   @override
   @nullable
   final PropertyOwner owner;
@@ -311,7 +311,7 @@ class _$_Property extends _Property {
 abstract class _Property extends Property {
   const _Property._() : super._();
   const factory _Property(
-      {@nullable UniqueId id,
+      {@nullable UniqueId<dynamic> id,
       @nullable PropertyOwner owner,
       @nullable PropertyName type,
       @nullable PropertyLocation location,
@@ -324,7 +324,7 @@ abstract class _Property extends Property {
 
   @override // Rent Info
   @nullable
-  UniqueId get id;
+  UniqueId<dynamic> get id;
   @override
   @nullable
   PropertyOwner get owner;

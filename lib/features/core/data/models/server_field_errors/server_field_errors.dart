@@ -10,6 +10,9 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
 
   const factory ServerFieldErrors({
     @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
+        List<dynamic> name,
+    @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "first_name")
         List<dynamic> firstName,
     @nullable
@@ -33,6 +36,24 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         List<dynamic> token,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "property_id")
+        List<dynamic> propertyId,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
+        List<dynamic> propertyType,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
+        List<dynamic> houseType,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
+        List<dynamic> street,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
+        List<dynamic> town,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "state_id")
+        List<dynamic> stateId,
   }) = _ServerFieldErrors;
 
   factory ServerFieldErrors.fromJson(Map<String, dynamic> json) =>

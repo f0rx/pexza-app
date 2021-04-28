@@ -103,6 +103,14 @@ class Helpers {
     await precacheImage(AssetImage(AppAssets.onBoarding1), context);
     await precacheImage(AssetImage(AppAssets.onBoarding2), context);
     await precacheImage(AssetImage(AppAssets.onBoarding3), context);
+    await precacheImage(AssetImage(AppAssets.apartment1), context);
+    await precacheImage(AssetImage(AppAssets.apartment2), context);
+    await precacheImage(AssetImage(AppAssets.apartment3), context);
+    await precacheImage(AssetImage(AppAssets.apartment4), context);
+    await precacheImage(AssetImage(AppAssets.apartment5), context);
+    await precacheImage(AssetImage(AppAssets.apartment6), context);
+    await precacheImage(AssetImage(AppAssets.apartment7), context);
+    await precacheImage(AssetImage(AppAssets.apartment8), context);
   }
 
   static String hhmmss([Duration duration = Duration.zero]) {

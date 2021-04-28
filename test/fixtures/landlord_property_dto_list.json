@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Robbie Barrows And Co House",
+      "property_type": "Residential",
+      "house_type": "Three bed room flat",
+      "street": "46355 Pagac Camp Suite 264\nSouth Jakob, NC 83578-2366",
+      "town": "Uyo",
+      "state": "Abia",
+      "country": "Nigeria",
+      "created_at": "3 days ago",
+      "number_of_tenants": 1
+    },
+    {
+      "id": 2,
+      "name": "Elinore Renner And Co House",
+      "property_type": "Residential",
+      "house_type": "Three bed room flat",
+      "street": "34881 Nienow Shore\nStreichburgh, WI 09099-8147",
+      "town": "Uyo",
+      "state": "Abia",
+      "country": "Nigeria",
+      "created_at": "3 days ago",
+      "number_of_tenants": 1
+    }
+  ],
+  "links": {
+    "first": "https://pexzaapp.com/api/landlord/property?page=1",
+    "last": "https://pexzaapp.com/api/landlord/property?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Previous",
+        "active": false
+      },
+      {
+        "url": "https://pexzaapp.com/api/landlord/property?page=1",
+        "label": "1",
+        "active": true
+      },
+      {
+        "url": null,
+        "label": "Next &raquo;",
+        "active": false
+      }
+    ],
+    "path": "https://pexzaapp.com/api/landlord/property",
+    "per_page": 15,
+    "to": 2,
+    "total": 2
+  }
+}

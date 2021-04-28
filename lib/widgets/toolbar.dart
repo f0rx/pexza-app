@@ -31,6 +31,7 @@ class Toolbar extends AppBar {
                   wrapWords: false,
                   softWrap: false,
                   maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 )
               : null,
           automaticallyImplyLeading: implyLeading,
