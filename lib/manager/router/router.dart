@@ -8,6 +8,7 @@ import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dar
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/add_apartment_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_property_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_tenant_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/home_screen.dart';
@@ -15,6 +16,7 @@ import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_det
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/view_all_properties_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_detail_screen.dart';
@@ -98,12 +100,23 @@ import 'package:pexza/manager/router/export.dart';
       maintainState: true,
     ),
     AdaptiveRoute(
+      page: ViewAllPropertiesScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+      fullscreenDialog: true,
+    ),
+    AdaptiveRoute(
       page: LandlordAddPropertyScreen,
       guards: [AuthGuard],
       maintainState: true,
     ),
     AdaptiveRoute(
       page: LandlordPropertyDetailScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: LandlordAddApartmentScreen,
       guards: [AuthGuard],
       maintainState: true,
     ),

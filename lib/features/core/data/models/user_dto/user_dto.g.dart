@@ -17,7 +17,7 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_UserDTO(
-      id: fields[0] as String,
+      id: fields[0] as int,
       role: fields[1] as String,
       firstName: fields[2] as String,
       lastName: fields[3] as String,
@@ -88,6 +88,7 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
 
 _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
   return _$_UserDTO(
+    id: json['id'] as int ?? 0,
     role: json['role'] as String ?? '',
     token: json['token'] as String ?? '',
     firstName: json['first_name'] as String ?? '',
@@ -116,6 +117,7 @@ Map<String, dynamic> _$_$_UserDTOToJson(_$_UserDTO instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
   writeNotNull('role', instance.role);
   writeNotNull('token', instance.token);
   writeNotNull('first_name', instance.firstName);

@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
+import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/utils/utils.dart';
-import 'package:pexza/widgets/toolbar.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
@@ -11,6 +12,9 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
   final FocusNode _displayNameFocus = FocusNode();
   final FocusNode _emailAddressFocus = FocusNode();
   final FocusNode _propertyNameFocus = FocusNode();
+  final LandlordProperty property;
+
+  LandlordAddTenantScreen({Key key, this.property}) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -20,7 +24,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Toolbar(title: "Add Tenant"),
+      appBar: Toolbar(title: "Pair Tenant to Apartment"),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         controller: ScrollController(),
@@ -143,9 +147,13 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             //
             VerticalSpace(height: App.shortest * 0.2),
             //
-            AppElevatedButton(
-              text: "Add Property",
-              onPressed: () {},
+            Hero(
+              tag:
+                  "${Constants.kAssignTenantToPropHeroTag}-${property?.id?.value}",
+              child: AppElevatedButton(
+                text: "Add Property",
+                onPressed: () {},
+              ),
             ),
           ],
         ),

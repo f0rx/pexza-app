@@ -141,9 +141,7 @@ class AuthRemoteDatasource {
     try {
       final _response = await _dio.get(EndPoints.GET_USER);
 
-      return right(UserDTO.fromJson(_response?.data['data']).copyWith(
-        id: "${_response.data['data']['id']}",
-      ));
+      return right(UserDTO.fromJson(_response?.data['data']));
     } on DioError catch (e) {
       // If callback is not-null, call the method
       await callback?.call();
