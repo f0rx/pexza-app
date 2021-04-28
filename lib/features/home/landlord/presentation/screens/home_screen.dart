@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
+import 'package:pexza/features/core/data/data.dart';
 import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
 import 'package:pexza/features/home/landlord/presentation/widgets/empty_landlord_props.dart';
 import 'package:pexza/features/home/landlord/presentation/widgets/properties_widget.dart';
@@ -74,7 +75,7 @@ class LandlordHomeScreen extends StatelessWidget with AutoRouteWrapper {
       floatingActionButton: FloatingActionButton(
         onPressed: () => navigator.pushLandlordAddPropertyScreen(),
         tooltip: "Add a new Property",
-        heroTag: "add-new-property",
+        heroTag: Constants.kAddEditPropertyHeroTag,
         child: Icon(
           Icons.add_business,
           color: Helpers.computeLuminance(AppColors.accentColor),

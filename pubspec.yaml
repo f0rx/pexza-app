@@ -120,6 +120,8 @@ dependencies:
   avatar_glow: ^1.2.0
   # Capture in-app user feedback, wishes, ratings and much more.
   wiredash: ^0.5.0
+  # A draggable Flutter widget
+  sliding_up_panel: ^1.0.2
 
 dependency_overrides:
   analyzer: ^0.41.1

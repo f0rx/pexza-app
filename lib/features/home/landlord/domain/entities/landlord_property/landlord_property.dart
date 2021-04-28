@@ -2,6 +2,7 @@ library landlord_property.dart;
 
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dartz/dartz.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 
@@ -34,4 +35,16 @@ abstract class LandlordProperty implements _$LandlordProperty {
     color: null,
     image: null,
   );
+
+  Option<FieldObjectException<dynamic>> get failures => name.mapped
+      .andThen(propertyType.mapped)
+      .andThen(houseType.mapped)
+      .andThen(street.mapped)
+      .andThen(town.mapped)
+      // .andThen(state.mapped)
+      // .andThen(country.mapped)
+      .fold(
+        (f) => some(f),
+        (_) => none(),
+      );
 }

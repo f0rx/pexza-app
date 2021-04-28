@@ -38,6 +38,22 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         isLoading: isLoading ?? !state.isLoading,
       ));
 
+  void proeprtyNameChanged(String value) => emit(state.copyWith(
+        name: LandlordField(value),
+      ));
+
+  void houseTypeChanged(String value) => emit(state.copyWith(
+        houseType: LandlordField(value),
+      ));
+
+  void proeprtyTownChanged(String value) => emit(state.copyWith(
+        town: LandlordField(value),
+      ));
+
+  void proeprtyAddressChanged(String value) => emit(state.copyWith(
+        street: LandlordField(value),
+      ));
+
   void propertyTypeChanged(PropertyType value) => emit(state.copyWith(
         propertyType: LandlordPropertyTypeField(value),
       ));
@@ -52,6 +68,15 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
     if (!hasInternet) throw LandlordFailure.poorInternetConnection();
   }
+
+  void init([LandlordProperty prop]) => emit(state.copyWith(
+        name: prop?.name ?? state.name,
+        propertyType: prop?.propertyType ?? state.propertyType,
+        houseType: prop?.houseType ?? state.houseType,
+        street: prop?.street ?? state.street,
+        town: prop?.town ?? state.town,
+        state: prop?.state ?? state.state,
+      ));
 
   Future<void> fetchAll() async {
     toggleLoading();
@@ -77,8 +102,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
   Future<void> create() async {
     toggleLoading();
 
-    // Create Data Transfer Object (DTO)
-    final _dto = LandlordPropertyData.fromDomain(LandlordProperty(
+    // Create Object Instance from state inputs
+    final _prop = LandlordProperty(
       name: state.name,
       propertyType: state.propertyType,
       houseType: state.houseType,
@@ -87,18 +112,27 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       state: state.state,
       color: null,
       image: null,
+    );
+
+    emit(state.copyWith(
+      validate: true,
+      optionOfFailure: none(),
     ));
 
     try {
-      // Check if user is connected & has good internet
-      await checkInternetAndConnectivity();
+      if (_prop.failures.isNone()) {
+        // Create Data Transfer Object (DTO)
+        final _dto = LandlordPropertyData.fromDomain(_prop);
 
-      final prop = await _repository.create(_dto);
+        // Check if user is connected & has good internet
+        await checkInternetAndConnectivity();
 
-      emit(state.copyWith(
-        optionOfFailure: none(),
-        property: prop?.domain,
-      ));
+        final prop = await _repository.create(_dto);
+
+        emit(state.copyWith(
+          property: prop?.domain,
+        ));
+      }
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         optionOfFailure: some(e),
@@ -150,8 +184,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
   }) async {
     toggleLoading();
 
-    // Create Data Transfer Object (DTO)
-    final _dto = LandlordPropertyData.fromDomain(LandlordProperty(
+    // Create Object Instance from state inputs
+    final _prop = LandlordProperty(
       name: state.name,
       propertyType: state.propertyType,
       houseType: state.houseType,
@@ -160,21 +194,30 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       state: state.state,
       color: null,
       image: null,
+    );
+
+    emit(state.copyWith(
+      validate: true,
+      optionOfFailure: none(),
     ));
 
     try {
-      // Check if user is connected & has good internet
-      await checkInternetAndConnectivity();
+      if (_prop.failures.isNone()) {
+        // Create Data Transfer Object (DTO)
+        final _dto = LandlordPropertyData.fromDomain(_prop);
 
-      final prop = await _repository.update(
-        property?.id?.value ?? id,
-        _dto,
-      );
+        // Check if user is connected & has good internet
+        await checkInternetAndConnectivity();
 
-      emit(state.copyWith(
-        optionOfFailure: none(),
-        property: prop?.domain,
-      ));
+        final prop = await _repository.update(
+          property?.id?.value ?? id,
+          _dto,
+        );
+
+        emit(state.copyWith(
+          property: prop?.domain,
+        ));
+      }
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         optionOfFailure: some(e),

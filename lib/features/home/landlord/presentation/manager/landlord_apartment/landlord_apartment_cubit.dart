@@ -94,7 +94,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
 
     final _dto = LandlordApartmentData.fromDomain(LandlordApartment(
       name: state.name,
-      property: state.selected?.getOrNull,
+      property: state.selected,
     ));
 
     try {
@@ -150,7 +150,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
 
     final _dto = LandlordApartmentData.fromDomain(LandlordApartment(
       name: state.name,
-      property: state.selected?.getOrNull,
+      property: state.selected,
     ));
 
     try {

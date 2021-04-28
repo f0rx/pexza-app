@@ -18,7 +18,7 @@ class _$LandlordApartmentTearOff {
       {@nullable UniqueId<int> id,
       @nullable LandlordField name,
       @nullable ApartmentStatus status,
-      @nullable LandlordProperty property,
+      @nullable LandlordPropertySelectField property,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) {
@@ -47,7 +47,7 @@ mixin _$LandlordApartment {
   @nullable
   ApartmentStatus get status;
   @nullable
-  LandlordProperty get property;
+  LandlordPropertySelectField get property;
   @nullable
   DateTime get createdAt;
   @nullable
@@ -68,12 +68,10 @@ abstract class $LandlordApartmentCopyWith<$Res> {
       {@nullable UniqueId<int> id,
       @nullable LandlordField name,
       @nullable ApartmentStatus status,
-      @nullable LandlordProperty property,
+      @nullable LandlordPropertySelectField property,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
-
-  $LandlordPropertyCopyWith<$Res> get property;
 }
 
 /// @nodoc
@@ -99,8 +97,9 @@ class _$LandlordApartmentCopyWithImpl<$Res>
       id: id == freezed ? _value.id : id as UniqueId<int>,
       name: name == freezed ? _value.name : name as LandlordField,
       status: status == freezed ? _value.status : status as ApartmentStatus,
-      property:
-          property == freezed ? _value.property : property as LandlordProperty,
+      property: property == freezed
+          ? _value.property
+          : property as LandlordPropertySelectField,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -108,16 +107,6 @@ class _$LandlordApartmentCopyWithImpl<$Res>
       deletedAt:
           deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
-  }
-
-  @override
-  $LandlordPropertyCopyWith<$Res> get property {
-    if (_value.property == null) {
-      return null;
-    }
-    return $LandlordPropertyCopyWith<$Res>(_value.property, (value) {
-      return _then(_value.copyWith(property: value));
-    });
   }
 }
 
@@ -132,13 +121,10 @@ abstract class _$LandlordApartmentCopyWith<$Res>
       {@nullable UniqueId<int> id,
       @nullable LandlordField name,
       @nullable ApartmentStatus status,
-      @nullable LandlordProperty property,
+      @nullable LandlordPropertySelectField property,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
-
-  @override
-  $LandlordPropertyCopyWith<$Res> get property;
 }
 
 /// @nodoc
@@ -166,8 +152,9 @@ class __$LandlordApartmentCopyWithImpl<$Res>
       id: id == freezed ? _value.id : id as UniqueId<int>,
       name: name == freezed ? _value.name : name as LandlordField,
       status: status == freezed ? _value.status : status as ApartmentStatus,
-      property:
-          property == freezed ? _value.property : property as LandlordProperty,
+      property: property == freezed
+          ? _value.property
+          : property as LandlordPropertySelectField,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -201,7 +188,7 @@ class _$_LandlordApartment extends _LandlordApartment {
   final ApartmentStatus status;
   @override
   @nullable
-  final LandlordProperty property;
+  final LandlordPropertySelectField property;
   @override
   @nullable
   final DateTime createdAt;
@@ -264,7 +251,7 @@ abstract class _LandlordApartment extends LandlordApartment {
       {@nullable UniqueId<int> id,
       @nullable LandlordField name,
       @nullable ApartmentStatus status,
-      @nullable LandlordProperty property,
+      @nullable LandlordPropertySelectField property,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) = _$_LandlordApartment;
@@ -280,7 +267,7 @@ abstract class _LandlordApartment extends LandlordApartment {
   ApartmentStatus get status;
   @override
   @nullable
-  LandlordProperty get property;
+  LandlordPropertySelectField get property;
   @override
   @nullable
   DateTime get createdAt;

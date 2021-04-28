@@ -44,7 +44,7 @@ abstract class LandlordApartmentData implements _$LandlordApartmentData {
   factory LandlordApartmentData.fromDomain(LandlordApartment instance) =>
       LandlordApartmentData(
         name: instance.name?.getOrNull,
-        propertyId: instance.property?.id?.value,
+        propertyId: instance.property?.getOrNull?.id?.value,
       );
 
   LandlordApartment get domain {
