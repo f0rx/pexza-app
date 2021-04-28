@@ -34,8 +34,6 @@ class TenantHomeScreen extends StatelessWidget with AutoRouteWrapper {
           children: [
             BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
               builder: (context, state) => HomeAppBar(
-                text: "Hi ${state.user?.firstName?.getOrEmpty}",
-                avatarText: "TN",
                 onPressed: () => navigator.pushAccountScreen(),
               ),
             ),

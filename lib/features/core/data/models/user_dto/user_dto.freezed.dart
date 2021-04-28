@@ -20,8 +20,8 @@ class _$UserDTOTearOff {
   _UserDTO call(
       {@HiveField(0)
       @nullable
-      @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
-          String id,
+      @JsonKey(includeIfNull: false, defaultValue: 0)
+          int id,
       @HiveField(1)
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -120,8 +120,8 @@ const $UserDTO = _$UserDTOTearOff();
 mixin _$UserDTO {
   @HiveField(0)
   @nullable
-  @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
-  String get id;
+  @JsonKey(includeIfNull: false, defaultValue: 0)
+  int get id;
   @HiveField(1)
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -202,8 +202,8 @@ abstract class $UserDTOCopyWith<$Res> {
   $Res call(
       {@HiveField(0)
       @nullable
-      @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
-          String id,
+      @JsonKey(includeIfNull: false, defaultValue: 0)
+          int id,
       @HiveField(1)
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -298,7 +298,7 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
     Object deletedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as String,
+      id: id == freezed ? _value.id : id as int,
       role: role == freezed ? _value.role : role as String,
       token: token == freezed ? _value.token : token as String,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
@@ -329,8 +329,8 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
   $Res call(
       {@HiveField(0)
       @nullable
-      @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
-          String id,
+      @JsonKey(includeIfNull: false, defaultValue: 0)
+          int id,
       @HiveField(1)
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -426,7 +426,7 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
     Object deletedAt = freezed,
   }) {
     return _then(_UserDTO(
-      id: id == freezed ? _value.id : id as String,
+      id: id == freezed ? _value.id : id as int,
       role: role == freezed ? _value.role : role as String,
       token: token == freezed ? _value.token : token as String,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
@@ -457,7 +457,7 @@ class _$_UserDTO extends _UserDTO {
   const _$_UserDTO(
       {@HiveField(0)
       @nullable
-      @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false, defaultValue: 0)
           this.id,
       @HiveField(1)
       @nullable
@@ -531,8 +531,8 @@ class _$_UserDTO extends _UserDTO {
   @override
   @HiveField(0)
   @nullable
-  @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
-  final String id;
+  @JsonKey(includeIfNull: false, defaultValue: 0)
+  final int id;
   @override
   @HiveField(1)
   @nullable
@@ -704,8 +704,8 @@ abstract class _UserDTO extends UserDTO {
   const factory _UserDTO(
       {@HiveField(0)
       @nullable
-      @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
-          String id,
+      @JsonKey(includeIfNull: false, defaultValue: 0)
+          int id,
       @HiveField(1)
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -776,8 +776,8 @@ abstract class _UserDTO extends UserDTO {
   @override
   @HiveField(0)
   @nullable
-  @JsonKey(ignore: true, includeIfNull: false, defaultValue: '')
-  String get id;
+  @JsonKey(includeIfNull: false, defaultValue: 0)
+  int get id;
   @override
   @HiveField(1)
   @nullable

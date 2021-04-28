@@ -19,7 +19,7 @@ abstract class User implements _$User, BaseUser {
   const User._();
 
   const factory User({
-    @nullable UniqueId id,
+    @nullable UniqueId<int> id,
     @nullable Role role,
     @nullable DisplayName firstName,
     @nullable DisplayName lastName,
@@ -37,7 +37,7 @@ abstract class User implements _$User, BaseUser {
   }) = _User;
 
   factory User.guest() => User(
-        id: UniqueId.v4(),
+        id: UniqueId.fromExternal(45),
         firstName: DisplayName("Guest"),
         lastName: DisplayName("User"),
         email: EmailAddress("name@email.com"),

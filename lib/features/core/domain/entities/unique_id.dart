@@ -1,19 +1,19 @@
 import 'package:uuid/uuid.dart';
 
-class UniqueId {
-  final String value;
+class UniqueId<T> {
+  final T value;
 
   factory UniqueId() {
     // Grants true uniqueness
-    return UniqueId._(Uuid().v1());
+    return UniqueId._(Uuid().v1() as T);
   }
 
   factory UniqueId.v4() {
     // Grants true uniqueness
-    return UniqueId._(Uuid().v4());
+    return UniqueId._(Uuid().v4() as T);
   }
 
-  factory UniqueId.fromExternal(String id) {
+  factory UniqueId.fromExternal(T id) {
     // Here, we'll just have to trust what's coming in from the server :)
     assert(id != null);
     return UniqueId._(id);

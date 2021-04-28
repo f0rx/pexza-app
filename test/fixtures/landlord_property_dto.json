@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": 1,
+    "name": "Robbie Barrows And Co House",
+    "property_type": "Residential",
+    "house_type": "Three bed room flat",
+    "street": "46355 Pagac Camp Suite 264\nSouth Jakob, NC 83578-2366",
+    "town": "Uyo",
+    "state": "Abia",
+    "country": "Nigeria",
+    "created_at": "3 days ago",
+    "number_of_tenants": 1
+  }
+}

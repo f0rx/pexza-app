@@ -15,6 +15,7 @@ import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_det
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/view_all_properties_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_detail_screen.dart';
@@ -96,6 +97,12 @@ import 'package:pexza/manager/router/export.dart';
       page: LandlordHomeScreen,
       guards: [AuthGuard],
       maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: ViewAllPropertiesScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+      fullscreenDialog: true,
     ),
     AdaptiveRoute(
       page: LandlordAddPropertyScreen,
