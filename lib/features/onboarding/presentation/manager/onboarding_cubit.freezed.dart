@@ -17,9 +17,9 @@ class _$OnBoardingStateTearOff {
   _OnBoardingState call(
       {bool isLoading = false,
       Either<Failure, bool> isConnected =
-          const Left(OnBoardingFailure.notConnected()),
+          const Left(const OnBoardingFailure.notConnected()),
       Either<Failure, bool> hasInternet =
-          const Left(OnBoardingFailure.poorInternet())}) {
+          const Left(const OnBoardingFailure.poorInternet())}) {
     return _OnBoardingState(
       isLoading: isLoading,
       isConnected: isConnected,
@@ -126,8 +126,8 @@ class __$OnBoardingStateCopyWithImpl<$Res>
 class _$_OnBoardingState implements _OnBoardingState {
   const _$_OnBoardingState(
       {this.isLoading = false,
-      this.isConnected = const Left(OnBoardingFailure.notConnected()),
-      this.hasInternet = const Left(OnBoardingFailure.poorInternet())})
+      this.isConnected = const Left(const OnBoardingFailure.notConnected()),
+      this.hasInternet = const Left(const OnBoardingFailure.poorInternet())})
       : assert(isLoading != null),
         assert(isConnected != null),
         assert(hasInternet != null);
@@ -135,10 +135,10 @@ class _$_OnBoardingState implements _OnBoardingState {
   @JsonKey(defaultValue: false)
   @override
   final bool isLoading;
-  @JsonKey(defaultValue: const Left(OnBoardingFailure.notConnected()))
+  @JsonKey(defaultValue: const Left(const OnBoardingFailure.notConnected()))
   @override
   final Either<Failure, bool> isConnected;
-  @JsonKey(defaultValue: const Left(OnBoardingFailure.poorInternet()))
+  @JsonKey(defaultValue: const Left(const OnBoardingFailure.poorInternet()))
   @override
   final Either<Failure, bool> hasInternet;
 

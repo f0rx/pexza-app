@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart';
@@ -22,11 +23,13 @@ import 'package:pexza/utils/utils.dart';
 class AuthFacadeImpl extends AuthFacade {
   final AuthRemoteDatasource _remote;
   final AuthLocalDatasource _local;
+  final FirebaseAnalytics _analytics;
   StreamController<Either<AuthResponse, Option<User>>> __controller;
 
   AuthFacadeImpl(
     this._remote,
     this._local,
+    this._analytics,
   ) : __controller = StreamController.broadcast();
 
   @override
@@ -111,14 +114,8 @@ class AuthFacadeImpl extends AuthFacade {
       return handleFailure(
         authResponse: ex,
       );
-    } on DioError catch (ex) {
-      switch (ex.type) {
-        case DioErrorType.CONNECT_TIMEOUT:
-          return left(AuthResponse.timeout());
-          break;
-        default:
-          return handleFailure(dioError: ex);
-      }
+    } on DioError catch (ex, trace) {
+      return handleFailure(dioError: ex, trace: trace);
     }
   }
 
@@ -160,6 +157,9 @@ class AuthFacadeImpl extends AuthFacade {
       // It makes sense that this should be here
       await this.getAndCacheUserInfo();
 
+      // Log Firebase Analytics Login event
+      _analytics.logLogin(loginMethod: "jwt");
+
       // Sink new signin event
       await sink();
 
@@ -168,8 +168,8 @@ class AuthFacadeImpl extends AuthFacade {
       return handleFailure(
         authResponse: ex,
       );
-    } on DioError catch (ex) {
-      return handleFailure(dioError: ex);
+    } on DioError catch (ex, trace) {
+      return handleFailure(dioError: ex, trace: trace);
     }
   }
 
@@ -205,8 +205,8 @@ class AuthFacadeImpl extends AuthFacade {
       return handleFailure(
         authResponse: ex,
       );
-    } on DioError catch (ex) {
-      return handleFailure(dioError: ex);
+    } on DioError catch (ex, trace) {
+      return handleFailure(dioError: ex, trace: trace);
     }
   }
 
@@ -243,8 +243,8 @@ class AuthFacadeImpl extends AuthFacade {
       return handleFailure(
         authResponse: ex,
       );
-    } on DioError catch (ex) {
-      return handleFailure(dioError: ex);
+    } on DioError catch (ex, trace) {
+      return handleFailure(dioError: ex, trace: trace);
     }
   }
 
@@ -272,8 +272,8 @@ class AuthFacadeImpl extends AuthFacade {
       return right(AuthResponse.fromJson(_response.data));
     } on AuthResponse catch (ex) {
       return handleFailure(authResponse: ex);
-    } on DioError catch (ex) {
-      return handleFailure(dioError: ex);
+    } on DioError catch (ex, trace) {
+      return handleFailure(dioError: ex, trace: trace);
     }
   }
 
@@ -300,8 +300,8 @@ class AuthFacadeImpl extends AuthFacade {
       return right(AuthResponse.fromJson(_response.data));
     } on AuthResponse catch (ex) {
       return handleFailure(authResponse: ex);
-    } on DioError catch (ex) {
-      return handleFailure(dioError: ex);
+    } on DioError catch (ex, trace) {
+      return handleFailure(dioError: ex, trace: trace);
     }
   }
 
@@ -316,7 +316,7 @@ class AuthFacadeImpl extends AuthFacade {
 
       // Notify listeners
       await sink();
-    } on DioError catch (ex) {
+    } on DioError catch (_) {
       // Delete local user--auth cache
       _local.signOut();
       return handleFailure(
@@ -368,6 +368,7 @@ class AuthFacadeImpl extends AuthFacade {
   Future<Either<AuthResponse, R>> handleFailure<R>({
     DioError dioError,
     AuthResponse authResponse,
+    StackTrace trace,
   }) async {
     AuthResponse _exception = authResponse;
 
@@ -382,6 +383,11 @@ class AuthFacadeImpl extends AuthFacade {
         _exception = AuthResponse.fromJson(dioError.response.data).copyWith(
           code: dioError.response?.data['code'] ?? dioError.response.statusCode,
         );
+        // Log Exception to Firebase Analytics
+        _analytics.logEvent(
+          name: 'AuthFailureEvent',
+          parameters: dioError.response.data,
+        );
         break;
       case DioErrorType.SEND_TIMEOUT:
         _exception = AuthResponse.timeout();
@@ -390,6 +396,14 @@ class AuthFacadeImpl extends AuthFacade {
       default:
         _exception = authResponse ??
             AuthResponse.unknownFailure(message: dioError?.message);
+        // Log Inknown Exceptions to Firebase Analytics
+        _analytics.logEvent(
+          name: 'UnknownAuthFailureEvent',
+          parameters: {
+            "message": dioError?.message,
+            "stack-trace": trace?.toString(),
+          },
+        );
     }
 
     // Sink all unrelated auth-failures

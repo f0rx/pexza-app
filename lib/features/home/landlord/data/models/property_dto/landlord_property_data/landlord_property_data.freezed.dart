@@ -25,10 +25,10 @@ class _$LandlordPropertyDataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
           String propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
           String houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -40,25 +40,25 @@ class _$LandlordPropertyDataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(disallowNullValue: true, name: "state_id")
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
           int numberOfTenants}) {
     return _LandlordPropertyData(
       id: id,
@@ -96,10 +96,10 @@ mixin _$LandlordPropertyData {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get name;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
   String get propertyType;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
   String get houseType;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -111,25 +111,25 @@ mixin _$LandlordPropertyData {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get state;
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'state_id')
+  @JsonKey(disallowNullValue: true, name: "state_id")
   int get stateId;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get country;
   @nullable
-  @JsonKey(includeIfNull: false, name: 'created_at')
+  @JsonKey(includeIfNull: false, name: "created_at")
   @TimestampConverter()
   String get createdAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: 'updated_at')
+  @JsonKey(includeIfNull: false, name: "updated_at")
   @TimestampConverter()
   String get updatedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: 'deleted_at')
+  @JsonKey(includeIfNull: false, name: "deleted_at")
   @TimestampConverter()
   String get deletedAt;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
   int get numberOfTenants;
 
   Map<String, dynamic> toJson();
@@ -150,10 +150,10 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
           String propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
           String houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -165,25 +165,25 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(disallowNullValue: true, name: "state_id")
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
           int numberOfTenants});
 }
 
@@ -249,10 +249,10 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
           String propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
           String houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -264,25 +264,25 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '')
           String state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(disallowNullValue: true, name: "state_id")
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
           int numberOfTenants});
 }
 
@@ -347,10 +347,10 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
           this.propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
           this.houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -362,25 +362,25 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(disallowNullValue: true, name: "state_id")
           this.stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.country,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           this.createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           this.updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           this.deletedAt,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
           this.numberOfTenants})
       : super._();
 
@@ -397,11 +397,11 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final String name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
   final String propertyType;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
   final String houseType;
   @override
   @nullable
@@ -417,7 +417,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final String state;
   @override
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'state_id')
+  @JsonKey(disallowNullValue: true, name: "state_id")
   final int stateId;
   @override
   @nullable
@@ -425,22 +425,22 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final String country;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'created_at')
+  @JsonKey(includeIfNull: false, name: "created_at")
   @TimestampConverter()
   final String createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'updated_at')
+  @JsonKey(includeIfNull: false, name: "updated_at")
   @TimestampConverter()
   final String updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'deleted_at')
+  @JsonKey(includeIfNull: false, name: "deleted_at")
   @TimestampConverter()
   final String deletedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
   final int numberOfTenants;
 
   @override
@@ -527,10 +527,10 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
           String propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
           String houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -542,25 +542,25 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(disallowNullValue: true, name: "state_id")
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
           int numberOfTenants}) = _$_LandlordPropertyData;
 
   factory _LandlordPropertyData.fromJson(Map<String, dynamic> json) =
@@ -576,11 +576,11 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   String get name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
   String get propertyType;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+  @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
   String get houseType;
   @override
   @nullable
@@ -596,7 +596,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   String get state;
   @override
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'state_id')
+  @JsonKey(disallowNullValue: true, name: "state_id")
   int get stateId;
   @override
   @nullable
@@ -604,22 +604,22 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   String get country;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'created_at')
+  @JsonKey(includeIfNull: false, name: "created_at")
   @TimestampConverter()
   String get createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'updated_at')
+  @JsonKey(includeIfNull: false, name: "updated_at")
   @TimestampConverter()
   String get updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'deleted_at')
+  @JsonKey(includeIfNull: false, name: "deleted_at")
   @TimestampConverter()
   String get deletedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
   int get numberOfTenants;
   @override
   @JsonKey(ignore: true)

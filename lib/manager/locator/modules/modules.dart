@@ -1,6 +1,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -21,6 +22,9 @@ abstract class Modules {
 
   @lazySingleton
   FirebaseAuth get firebaseAuth => FirebaseAuth.instance;
+
+  @lazySingleton
+  FirebaseAnalytics get firebaseAnalytics => FirebaseAnalytics()..logAppOpen();
 
   @lazySingleton
   GoogleSignIn get googleSignIn => GoogleSignIn();

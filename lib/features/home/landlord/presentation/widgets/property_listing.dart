@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
-import 'package:pexza/features/home/landlord/presentation/widgets/empty_landlord_props.dart';
-import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 

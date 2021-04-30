@@ -69,6 +69,8 @@ class _LandlordPropertyDetailScreenState
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Scaffold(
       appBar: Toolbar(
         title: widget.property?.name?.getOrEmpty?.removeNewLines() ??

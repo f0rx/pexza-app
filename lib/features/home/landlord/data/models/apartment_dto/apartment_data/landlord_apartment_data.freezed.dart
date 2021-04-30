@@ -29,18 +29,18 @@ class _$LandlordApartmentDataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String status,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'property_id')
+      @JsonKey(disallowNullValue: true, name: "property_id")
           int propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt}) {
     return _LandlordApartmentData(
@@ -76,18 +76,18 @@ mixin _$LandlordApartmentData {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get status;
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'property_id')
+  @JsonKey(disallowNullValue: true, name: "property_id")
   int get propertyId;
   @nullable
-  @JsonKey(includeIfNull: false, name: 'created_at')
+  @JsonKey(includeIfNull: false, name: "created_at")
   @TimestampConverter()
   String get createdAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: 'updated_at')
+  @JsonKey(includeIfNull: false, name: "updated_at")
   @TimestampConverter()
   String get updatedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: 'deleted_at')
+  @JsonKey(includeIfNull: false, name: "deleted_at")
   @TimestampConverter()
   String get deletedAt;
 
@@ -112,18 +112,18 @@ abstract class $LandlordApartmentDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String status,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'property_id')
+      @JsonKey(disallowNullValue: true, name: "property_id")
           int propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt});
 }
@@ -177,18 +177,18 @@ abstract class _$LandlordApartmentDataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '')
           String status,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'property_id')
+      @JsonKey(disallowNullValue: true, name: "property_id")
           int propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt});
 }
@@ -241,18 +241,18 @@ class _$_LandlordApartmentData extends _LandlordApartmentData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.status,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'property_id')
+      @JsonKey(disallowNullValue: true, name: "property_id")
           this.propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           this.createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           this.updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           this.deletedAt})
       : super._();
@@ -274,21 +274,21 @@ class _$_LandlordApartmentData extends _LandlordApartmentData {
   final String status;
   @override
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'property_id')
+  @JsonKey(disallowNullValue: true, name: "property_id")
   final int propertyId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'created_at')
+  @JsonKey(includeIfNull: false, name: "created_at")
   @TimestampConverter()
   final String createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'updated_at')
+  @JsonKey(includeIfNull: false, name: "updated_at")
   @TimestampConverter()
   final String updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'deleted_at')
+  @JsonKey(includeIfNull: false, name: "deleted_at")
   @TimestampConverter()
   final String deletedAt;
 
@@ -357,18 +357,18 @@ abstract class _LandlordApartmentData extends LandlordApartmentData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String status,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'property_id')
+      @JsonKey(disallowNullValue: true, name: "property_id")
           int propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'created_at')
+      @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'updated_at')
+      @JsonKey(includeIfNull: false, name: "updated_at")
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: 'deleted_at')
+      @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt}) = _$_LandlordApartmentData;
 
@@ -389,21 +389,21 @@ abstract class _LandlordApartmentData extends LandlordApartmentData {
   String get status;
   @override
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'property_id')
+  @JsonKey(disallowNullValue: true, name: "property_id")
   int get propertyId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'created_at')
+  @JsonKey(includeIfNull: false, name: "created_at")
   @TimestampConverter()
   String get createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'updated_at')
+  @JsonKey(includeIfNull: false, name: "updated_at")
   @TimestampConverter()
   String get updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: 'deleted_at')
+  @JsonKey(includeIfNull: false, name: "deleted_at")
   @TimestampConverter()
   String get deletedAt;
   @override
