@@ -116,8 +116,10 @@ dependencies:
   retrofit: ^1.3.4+1
   # Pretty Dio logger is a Dio interceptor that logs network calls in a pretty, easy to read format.
   pretty_dio_logger: ^1.1.1
-  # Dio-http-cache is a cache library for Dio
-  dio_http_cache: ^0.2.11
+  # Dio HTTP cache interceptor with multiple stores respecting HTTP directives (or not).
+  dio_cache_interceptor: ^1.0.0
+  # Flutter apps depending on this package will contain native sqlite3 libraries.
+  sqlite3_flutter_libs: ^0.4.0+1
   # A flutter library to show images from the internet
   # and keep them in the cache directory.
   cached_network_image: ^2.5.1
