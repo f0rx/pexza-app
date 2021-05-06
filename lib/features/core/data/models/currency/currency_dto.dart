@@ -3,7 +3,7 @@ library currency.dart;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pexza/features/core/domain/entities/currency/index.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
-import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
+import 'package:pexza/manager/serializer/serializers.dart';
 import 'package:pexza/utils/utils.dart';
 
 part 'currency_dto.g.dart';
@@ -16,6 +16,16 @@ abstract class CurrencyDTO implements _$CurrencyDTO {
 
   const factory CurrencyDTO({
     @nullable @JsonKey(includeIfNull: false, defaultValue: "") int id,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: "", name: "name")
+        String countryName,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: "", name: "country_phone_code")
+        String countryPhoneCode,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: false, name: "is_supported")
+    @IntToBoolSerializer()
+        bool isSupported,
     @nullable @JsonKey(includeIfNull: false, defaultValue: "") String currency,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")

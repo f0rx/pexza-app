@@ -25,11 +25,12 @@ class _$StateDTOTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          String phoneCode,
-      @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+          int countryId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           CountryDTO country,
@@ -48,8 +49,8 @@ class _$StateDTOTearOff {
     return _StateDTO(
       id: id,
       name: name,
-      phoneCode: phoneCode,
       isSupported: isSupported,
+      countryId: countryId,
       country: country,
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -76,11 +77,12 @@ mixin _$StateDTO {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get name;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-  String get phoneCode;
-  @nullable
   @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @IntToBoolSerializer()
   bool get isSupported;
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+  int get countryId;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   CountryDTO get country;
@@ -114,11 +116,12 @@ abstract class $StateDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          String phoneCode,
-      @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+          int countryId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           CountryDTO country,
@@ -150,8 +153,8 @@ class _$StateDTOCopyWithImpl<$Res> implements $StateDTOCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object phoneCode = freezed,
     Object isSupported = freezed,
+    Object countryId = freezed,
     Object country = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -160,9 +163,9 @@ class _$StateDTOCopyWithImpl<$Res> implements $StateDTOCopyWith<$Res> {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
       name: name == freezed ? _value.name : name as String,
-      phoneCode: phoneCode == freezed ? _value.phoneCode : phoneCode as String,
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
+      countryId: countryId == freezed ? _value.countryId : countryId as int,
       country: country == freezed ? _value.country : country as CountryDTO,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
@@ -194,11 +197,12 @@ abstract class _$StateDTOCopyWith<$Res> implements $StateDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          String phoneCode,
-      @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+          int countryId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           CountryDTO country,
@@ -232,8 +236,8 @@ class __$StateDTOCopyWithImpl<$Res> extends _$StateDTOCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object phoneCode = freezed,
     Object isSupported = freezed,
+    Object countryId = freezed,
     Object country = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -242,9 +246,9 @@ class __$StateDTOCopyWithImpl<$Res> extends _$StateDTOCopyWithImpl<$Res>
     return _then(_StateDTO(
       id: id == freezed ? _value.id : id as int,
       name: name == freezed ? _value.name : name as String,
-      phoneCode: phoneCode == freezed ? _value.phoneCode : phoneCode as String,
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
+      countryId: countryId == freezed ? _value.countryId : countryId as int,
       country: country == freezed ? _value.country : country as CountryDTO,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
@@ -265,11 +269,12 @@ class _$_StateDTO extends _StateDTO {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          this.phoneCode,
-      @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           this.isSupported,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+          this.countryId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.country,
@@ -300,12 +305,13 @@ class _$_StateDTO extends _StateDTO {
   final String name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-  final String phoneCode;
+  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @IntToBoolSerializer()
+  final bool isSupported;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
-  final bool isSupported;
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+  final int countryId;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -328,7 +334,7 @@ class _$_StateDTO extends _StateDTO {
 
   @override
   String toString() {
-    return 'StateDTO(id: $id, name: $name, phoneCode: $phoneCode, isSupported: $isSupported, country: $country, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'StateDTO(id: $id, name: $name, isSupported: $isSupported, countryId: $countryId, country: $country, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -339,12 +345,12 @@ class _$_StateDTO extends _StateDTO {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.phoneCode, phoneCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.phoneCode, phoneCode)) &&
             (identical(other.isSupported, isSupported) ||
                 const DeepCollectionEquality()
                     .equals(other.isSupported, isSupported)) &&
+            (identical(other.countryId, countryId) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryId, countryId)) &&
             (identical(other.country, country) ||
                 const DeepCollectionEquality()
                     .equals(other.country, country)) &&
@@ -364,8 +370,8 @@ class _$_StateDTO extends _StateDTO {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(phoneCode) ^
       const DeepCollectionEquality().hash(isSupported) ^
+      const DeepCollectionEquality().hash(countryId) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
@@ -392,11 +398,12 @@ abstract class _StateDTO extends StateDTO {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          String phoneCode,
-      @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+          int countryId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           CountryDTO country,
@@ -425,12 +432,13 @@ abstract class _StateDTO extends StateDTO {
   String get name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-  String get phoneCode;
+  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @IntToBoolSerializer()
+  bool get isSupported;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
-  bool get isSupported;
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+  int get countryId;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')

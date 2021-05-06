@@ -13,6 +13,7 @@ abstract class LandlordMergerState implements _$LandlordMergerState {
     @required AmountField amount,
     @Default(PaymentPlan.yearly) PaymentPlan plan,
     @Default(LandlordMergerState.kDefaultDuration) int duration,
+    @nullable Currency currency,
     @nullable LandlordProperty selectedProperty,
     @nullable LandlordApartment selectedApartment,
     @Default(KtList.empty()) KtList<LandlordProperty> properties,

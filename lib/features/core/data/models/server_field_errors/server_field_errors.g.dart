@@ -18,11 +18,15 @@ _$_ServerFieldErrors _$_$_ServerFieldErrorsFromJson(Map<String, dynamic> json) {
     password: json['password'] as List ?? '',
     token: json['token'] as List ?? '',
     propertyId: json['property_id'] as List ?? '',
+    apartmentId: json['apartment_id'] as List ?? '',
     propertyType: json['property_type'] as List ?? '',
     houseType: json['house_type'] as List ?? '',
     street: json['street'] as List ?? '',
     town: json['town'] as List ?? '',
     stateId: json['state_id'] as List ?? '',
+    tenantEmail: json['tenant_email'] as List ?? '',
+    duration: json['duration'] as List ?? '',
+    amount: json['amount'] as List ?? '',
   );
 }
 
@@ -46,10 +50,14 @@ Map<String, dynamic> _$_$_ServerFieldErrorsToJson(
   writeNotNull('password', instance.password);
   writeNotNull('token', instance.token);
   writeNotNull('property_id', instance.propertyId);
+  writeNotNull('apartment_id', instance.apartmentId);
   writeNotNull('property_type', instance.propertyType);
   writeNotNull('house_type', instance.houseType);
   writeNotNull('street', instance.street);
   writeNotNull('town', instance.town);
   writeNotNull('state_id', instance.stateId);
+  writeNotNull('tenant_email', instance.tenantEmail);
+  writeNotNull('duration', instance.duration);
+  writeNotNull('amount', instance.amount);
   return val;
 }

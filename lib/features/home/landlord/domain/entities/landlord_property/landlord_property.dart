@@ -20,6 +20,7 @@ abstract class LandlordProperty implements _$LandlordProperty {
     @nullable LandlordField<String> houseType,
     @nullable LandlordField<String> street,
     @nullable LandlordField<String> town,
+    @nullable PhotoField photo,
     @nullable CountryState state,
     @nullable LandlordField<String> country,
     @nullable @required MaterialColor color,

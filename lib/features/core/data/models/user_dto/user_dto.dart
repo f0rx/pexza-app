@@ -78,15 +78,23 @@ abstract class UserDTO implements _$UserDTO {
         bool isEmailVerified,
     @HiveField(12)
     @nullable
+    @JsonKey(includeIfNull: false, name: "verification_code_sent_at")
+        String verificationCodeSentAt,
+    @HiveField(13)
+    @nullable
+    @JsonKey(includeIfNull: false, name: "forgot_password_code_sent_at")
+        String forgotPasswordCodeSentAt,
+    @HiveField(14)
+    @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
         String createdAt,
-    @HiveField(13)
+    @HiveField(15)
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
         String updatedAt,
-    @HiveField(14)
+    @HiveField(16)
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
@@ -124,6 +132,12 @@ abstract class UserDTO implements _$UserDTO {
         provider: provider != null ? AuthProvider.valueOf(provider) : null,
         password: Password.DEFAULT,
         photo: photo,
+        forgotPasswordCodeSentAt: forgotPasswordCodeSentAt != null
+            ? DateTime.tryParse(forgotPasswordCodeSentAt)
+            : null,
+        verificationCodeSentAt: verificationCodeSentAt != null
+            ? DateTime.tryParse(verificationCodeSentAt)
+            : null,
         createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
         updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
         deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,

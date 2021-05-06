@@ -29,14 +29,14 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<LandlordMergerCubit>()..fetchAllLandlordProperties(),
-      child: BlocListener<LandlordMergerCubit, LandlordMergerState>(
+      child: BlocConsumer<LandlordMergerCubit, LandlordMergerState>(
         listener: (c, s) => s.response.fold(
           () => null,
           (either) => BottomAlertDialog.show(
             context,
             message: either.fold(
-              (f) => f.message ?? f.error,
-              (r) => r.message ?? r.details,
+              (f) => f?.message ?? f?.error,
+              (r) => r?.message ?? r?.details,
             ),
             icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
             iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
@@ -47,7 +47,13 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             ),
           ),
         ),
-        child: this,
+        // buildWhen: (p, c) => p.isLoading != c.isLoading,
+        builder: (c, s) => PortalEntry(
+          // visible: c.watch<LandlordMergerCubit>().state.isLoading,
+          visible: true,
+          portal: App.positionedLoader(c),
+          child: this,
+        ),
       ),
     );
   }
@@ -74,18 +80,28 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                 enableSuggestions: true,
                 autocorrect: false,
                 cursorColor: Theme.of(context).accentColor,
-                keyboardType: TextInputType.text,
-                textCapitalization: TextCapitalization.words,
+                keyboardType: TextInputType.emailAddress,
+                textCapitalization: TextCapitalization.none,
                 textInputAction: TextInputAction.next,
                 focusNode: _emailAddressFocus,
                 decoration: const InputDecoration(
                   labelText: "Tenant's E-mail Address",
-                  hintText: "janedoe@gmail.com",
+                  hintText: EmailAddress.kPlaceholder,
                 ),
                 autofillHints: [],
                 autovalidateMode: AutovalidateMode.disabled,
                 onChanged: c.read<LandlordMergerCubit>().emailAddressChanged,
-                validator: (value) {},
+                validator: (value) =>
+                    c.read<LandlordMergerCubit>().state.email.value.fold(
+                          (error) => error.message,
+                          (r) => s.response.fold(
+                            () => null,
+                            (_) => _.fold(
+                              (f) => f.errors?.tenantEmail?.firstOrNull,
+                              (_) => null,
+                            ),
+                          ),
+                        ),
                 onFieldSubmitted: (_) =>
                     FocusScope.of(context).requestFocus(_amountFocus),
               ),
@@ -278,7 +294,17 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                 autofillHints: [],
                 autovalidateMode: AutovalidateMode.disabled,
                 onChanged: c.read<LandlordMergerCubit>().amountChanged,
-                validator: (value) {},
+                validator: (value) =>
+                    c.read<LandlordMergerCubit>().state.amount.value.fold(
+                          (error) => error.message,
+                          (r) => s.response.fold(
+                            () => null,
+                            (_) => _.fold(
+                              (f) => f.errors?.amount?.firstOrNull,
+                              (_) => null,
+                            ),
+                          ),
+                        ),
                 onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
               ),
             ),

@@ -1,7 +1,8 @@
 library apartment_merger.dart;
 
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pexza/features/core/domain/entities/entities.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 
@@ -15,10 +16,11 @@ abstract class ApartmentMerger implements _$ApartmentMerger {
   const factory ApartmentMerger({
     @nullable UniqueId<int> id,
     @nullable LandlordApartment apartment,
-    @nullable Duration duration,
+    @nullable EmailAddress emailAddress,
+    @nullable int duration,
     @nullable PaymentPlan plan,
     @nullable Currency currency,
-    @nullable LandlordField<int> amount,
+    @nullable AmountField amount,
     @nullable ApartmentStatus status,
     @nullable User tenant,
     @nullable User landlord,
@@ -28,4 +30,9 @@ abstract class ApartmentMerger implements _$ApartmentMerger {
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,
   }) = _ApartmentMerger;
+
+  Option<FieldObjectException<dynamic>> get failures => amount.mapped.fold(
+        (f) => some(f),
+        (_) => none(),
+      );
 }

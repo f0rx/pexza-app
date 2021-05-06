@@ -17,10 +17,11 @@ class _$ApartmentMergerTearOff {
   _ApartmentMerger call(
       {@nullable UniqueId<int> id,
       @nullable LandlordApartment apartment,
-      @nullable Duration duration,
+      @nullable EmailAddress emailAddress,
+      @nullable int duration,
       @nullable PaymentPlan plan,
       @nullable Currency currency,
-      @nullable LandlordField<int> amount,
+      @nullable AmountField amount,
       @nullable ApartmentStatus status,
       @nullable User tenant,
       @nullable User landlord,
@@ -32,6 +33,7 @@ class _$ApartmentMergerTearOff {
     return _ApartmentMerger(
       id: id,
       apartment: apartment,
+      emailAddress: emailAddress,
       duration: duration,
       plan: plan,
       currency: currency,
@@ -59,13 +61,15 @@ mixin _$ApartmentMerger {
   @nullable
   LandlordApartment get apartment;
   @nullable
-  Duration get duration;
+  EmailAddress get emailAddress;
+  @nullable
+  int get duration;
   @nullable
   PaymentPlan get plan;
   @nullable
   Currency get currency;
   @nullable
-  LandlordField<int> get amount;
+  AmountField get amount;
   @nullable
   ApartmentStatus get status;
   @nullable
@@ -95,10 +99,11 @@ abstract class $ApartmentMergerCopyWith<$Res> {
   $Res call(
       {@nullable UniqueId<int> id,
       @nullable LandlordApartment apartment,
-      @nullable Duration duration,
+      @nullable EmailAddress emailAddress,
+      @nullable int duration,
       @nullable PaymentPlan plan,
       @nullable Currency currency,
-      @nullable LandlordField<int> amount,
+      @nullable AmountField amount,
       @nullable ApartmentStatus status,
       @nullable User tenant,
       @nullable User landlord,
@@ -127,6 +132,7 @@ class _$ApartmentMergerCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object apartment = freezed,
+    Object emailAddress = freezed,
     Object duration = freezed,
     Object plan = freezed,
     Object currency = freezed,
@@ -145,10 +151,13 @@ class _$ApartmentMergerCopyWithImpl<$Res>
       apartment: apartment == freezed
           ? _value.apartment
           : apartment as LandlordApartment,
-      duration: duration == freezed ? _value.duration : duration as Duration,
+      emailAddress: emailAddress == freezed
+          ? _value.emailAddress
+          : emailAddress as EmailAddress,
+      duration: duration == freezed ? _value.duration : duration as int,
       plan: plan == freezed ? _value.plan : plan as PaymentPlan,
       currency: currency == freezed ? _value.currency : currency as Currency,
-      amount: amount == freezed ? _value.amount : amount as LandlordField<int>,
+      amount: amount == freezed ? _value.amount : amount as AmountField,
       status: status == freezed ? _value.status : status as ApartmentStatus,
       tenant: tenant == freezed ? _value.tenant : tenant as User,
       landlord: landlord == freezed ? _value.landlord : landlord as User,
@@ -215,10 +224,11 @@ abstract class _$ApartmentMergerCopyWith<$Res>
   $Res call(
       {@nullable UniqueId<int> id,
       @nullable LandlordApartment apartment,
-      @nullable Duration duration,
+      @nullable EmailAddress emailAddress,
+      @nullable int duration,
       @nullable PaymentPlan plan,
       @nullable Currency currency,
-      @nullable LandlordField<int> amount,
+      @nullable AmountField amount,
       @nullable ApartmentStatus status,
       @nullable User tenant,
       @nullable User landlord,
@@ -253,6 +263,7 @@ class __$ApartmentMergerCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object apartment = freezed,
+    Object emailAddress = freezed,
     Object duration = freezed,
     Object plan = freezed,
     Object currency = freezed,
@@ -271,10 +282,13 @@ class __$ApartmentMergerCopyWithImpl<$Res>
       apartment: apartment == freezed
           ? _value.apartment
           : apartment as LandlordApartment,
-      duration: duration == freezed ? _value.duration : duration as Duration,
+      emailAddress: emailAddress == freezed
+          ? _value.emailAddress
+          : emailAddress as EmailAddress,
+      duration: duration == freezed ? _value.duration : duration as int,
       plan: plan == freezed ? _value.plan : plan as PaymentPlan,
       currency: currency == freezed ? _value.currency : currency as Currency,
-      amount: amount == freezed ? _value.amount : amount as LandlordField<int>,
+      amount: amount == freezed ? _value.amount : amount as AmountField,
       status: status == freezed ? _value.status : status as ApartmentStatus,
       tenant: tenant == freezed ? _value.tenant : tenant as User,
       landlord: landlord == freezed ? _value.landlord : landlord as User,
@@ -296,6 +310,7 @@ class _$_ApartmentMerger extends _ApartmentMerger {
   const _$_ApartmentMerger(
       {@nullable this.id,
       @nullable this.apartment,
+      @nullable this.emailAddress,
       @nullable this.duration,
       @nullable this.plan,
       @nullable this.currency,
@@ -318,7 +333,10 @@ class _$_ApartmentMerger extends _ApartmentMerger {
   final LandlordApartment apartment;
   @override
   @nullable
-  final Duration duration;
+  final EmailAddress emailAddress;
+  @override
+  @nullable
+  final int duration;
   @override
   @nullable
   final PaymentPlan plan;
@@ -327,7 +345,7 @@ class _$_ApartmentMerger extends _ApartmentMerger {
   final Currency currency;
   @override
   @nullable
-  final LandlordField<int> amount;
+  final AmountField amount;
   @override
   @nullable
   final ApartmentStatus status;
@@ -355,7 +373,7 @@ class _$_ApartmentMerger extends _ApartmentMerger {
 
   @override
   String toString() {
-    return 'ApartmentMerger(id: $id, apartment: $apartment, duration: $duration, plan: $plan, currency: $currency, amount: $amount, status: $status, tenant: $tenant, landlord: $landlord, expireAt: $expireAt, renewedAt: $renewedAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'ApartmentMerger(id: $id, apartment: $apartment, emailAddress: $emailAddress, duration: $duration, plan: $plan, currency: $currency, amount: $amount, status: $status, tenant: $tenant, landlord: $landlord, expireAt: $expireAt, renewedAt: $renewedAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -367,6 +385,9 @@ class _$_ApartmentMerger extends _ApartmentMerger {
             (identical(other.apartment, apartment) ||
                 const DeepCollectionEquality()
                     .equals(other.apartment, apartment)) &&
+            (identical(other.emailAddress, emailAddress) ||
+                const DeepCollectionEquality()
+                    .equals(other.emailAddress, emailAddress)) &&
             (identical(other.duration, duration) ||
                 const DeepCollectionEquality()
                     .equals(other.duration, duration)) &&
@@ -406,6 +427,7 @@ class _$_ApartmentMerger extends _ApartmentMerger {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(apartment) ^
+      const DeepCollectionEquality().hash(emailAddress) ^
       const DeepCollectionEquality().hash(duration) ^
       const DeepCollectionEquality().hash(plan) ^
       const DeepCollectionEquality().hash(currency) ^
@@ -430,10 +452,11 @@ abstract class _ApartmentMerger extends ApartmentMerger {
   const factory _ApartmentMerger(
       {@nullable UniqueId<int> id,
       @nullable LandlordApartment apartment,
-      @nullable Duration duration,
+      @nullable EmailAddress emailAddress,
+      @nullable int duration,
       @nullable PaymentPlan plan,
       @nullable Currency currency,
-      @nullable LandlordField<int> amount,
+      @nullable AmountField amount,
       @nullable ApartmentStatus status,
       @nullable User tenant,
       @nullable User landlord,
@@ -451,7 +474,10 @@ abstract class _ApartmentMerger extends ApartmentMerger {
   LandlordApartment get apartment;
   @override
   @nullable
-  Duration get duration;
+  EmailAddress get emailAddress;
+  @override
+  @nullable
+  int get duration;
   @override
   @nullable
   PaymentPlan get plan;
@@ -460,7 +486,7 @@ abstract class _ApartmentMerger extends ApartmentMerger {
   Currency get currency;
   @override
   @nullable
-  LandlordField<int> get amount;
+  AmountField get amount;
   @override
   @nullable
   ApartmentStatus get status;

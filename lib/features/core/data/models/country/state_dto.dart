@@ -23,11 +23,12 @@ abstract class StateDTO implements _$StateDTO {
     @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-        String phoneCode,
-    @nullable
     @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+    @IntToBoolSerializer()
         bool isSupported,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+        int countryId,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         CountryDTO country,
@@ -51,6 +52,7 @@ abstract class StateDTO implements _$StateDTO {
   factory StateDTO.fromDomain(CountryState instance) => StateDTO(
         id: instance?.id?.value,
         name: instance?.name?.getOrNull,
+        countryId: instance?.country?.id?.value,
       );
 
   CountryState get domain => CountryState(

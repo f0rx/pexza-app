@@ -21,6 +21,7 @@ class _$LandlordMergerStateTearOff {
       @required AmountField amount,
       PaymentPlan plan = PaymentPlan.yearly,
       int duration = LandlordMergerState.kDefaultDuration,
+      @nullable Currency currency,
       @nullable LandlordProperty selectedProperty,
       @nullable LandlordApartment selectedApartment,
       KtList<LandlordProperty> properties = const KtList.empty(),
@@ -33,6 +34,7 @@ class _$LandlordMergerStateTearOff {
       amount: amount,
       plan: plan,
       duration: duration,
+      currency: currency,
       selectedProperty: selectedProperty,
       selectedApartment: selectedApartment,
       properties: properties,
@@ -54,6 +56,8 @@ mixin _$LandlordMergerState {
   AmountField get amount;
   PaymentPlan get plan;
   int get duration;
+  @nullable
+  Currency get currency;
   @nullable
   LandlordProperty get selectedProperty;
   @nullable
@@ -78,12 +82,14 @@ abstract class $LandlordMergerStateCopyWith<$Res> {
       AmountField amount,
       PaymentPlan plan,
       int duration,
+      @nullable Currency currency,
       @nullable LandlordProperty selectedProperty,
       @nullable LandlordApartment selectedApartment,
       KtList<LandlordProperty> properties,
       KtList<LandlordApartment> apartments,
       Option<Either<Failure, Success>> response});
 
+  $CurrencyCopyWith<$Res> get currency;
   $LandlordPropertyCopyWith<$Res> get selectedProperty;
   $LandlordApartmentCopyWith<$Res> get selectedApartment;
 }
@@ -105,6 +111,7 @@ class _$LandlordMergerStateCopyWithImpl<$Res>
     Object amount = freezed,
     Object plan = freezed,
     Object duration = freezed,
+    Object currency = freezed,
     Object selectedProperty = freezed,
     Object selectedApartment = freezed,
     Object properties = freezed,
@@ -118,6 +125,7 @@ class _$LandlordMergerStateCopyWithImpl<$Res>
       amount: amount == freezed ? _value.amount : amount as AmountField,
       plan: plan == freezed ? _value.plan : plan as PaymentPlan,
       duration: duration == freezed ? _value.duration : duration as int,
+      currency: currency == freezed ? _value.currency : currency as Currency,
       selectedProperty: selectedProperty == freezed
           ? _value.selectedProperty
           : selectedProperty as LandlordProperty,
@@ -134,6 +142,16 @@ class _$LandlordMergerStateCopyWithImpl<$Res>
           ? _value.response
           : response as Option<Either<Failure, Success>>,
     ));
+  }
+
+  @override
+  $CurrencyCopyWith<$Res> get currency {
+    if (_value.currency == null) {
+      return null;
+    }
+    return $CurrencyCopyWith<$Res>(_value.currency, (value) {
+      return _then(_value.copyWith(currency: value));
+    });
   }
 
   @override
@@ -171,12 +189,15 @@ abstract class _$LandlordMergerStateCopyWith<$Res>
       AmountField amount,
       PaymentPlan plan,
       int duration,
+      @nullable Currency currency,
       @nullable LandlordProperty selectedProperty,
       @nullable LandlordApartment selectedApartment,
       KtList<LandlordProperty> properties,
       KtList<LandlordApartment> apartments,
       Option<Either<Failure, Success>> response});
 
+  @override
+  $CurrencyCopyWith<$Res> get currency;
   @override
   $LandlordPropertyCopyWith<$Res> get selectedProperty;
   @override
@@ -202,6 +223,7 @@ class __$LandlordMergerStateCopyWithImpl<$Res>
     Object amount = freezed,
     Object plan = freezed,
     Object duration = freezed,
+    Object currency = freezed,
     Object selectedProperty = freezed,
     Object selectedApartment = freezed,
     Object properties = freezed,
@@ -215,6 +237,7 @@ class __$LandlordMergerStateCopyWithImpl<$Res>
       amount: amount == freezed ? _value.amount : amount as AmountField,
       plan: plan == freezed ? _value.plan : plan as PaymentPlan,
       duration: duration == freezed ? _value.duration : duration as int,
+      currency: currency == freezed ? _value.currency : currency as Currency,
       selectedProperty: selectedProperty == freezed
           ? _value.selectedProperty
           : selectedProperty as LandlordProperty,
@@ -243,6 +266,7 @@ class _$_LandlordMergerState extends _LandlordMergerState {
       @required this.amount,
       this.plan = PaymentPlan.yearly,
       this.duration = LandlordMergerState.kDefaultDuration,
+      @nullable this.currency,
       @nullable this.selectedProperty,
       @nullable this.selectedApartment,
       this.properties = const KtList.empty(),
@@ -277,6 +301,9 @@ class _$_LandlordMergerState extends _LandlordMergerState {
   final int duration;
   @override
   @nullable
+  final Currency currency;
+  @override
+  @nullable
   final LandlordProperty selectedProperty;
   @override
   @nullable
@@ -293,7 +320,7 @@ class _$_LandlordMergerState extends _LandlordMergerState {
 
   @override
   String toString() {
-    return 'LandlordMergerState(isLoading: $isLoading, validate: $validate, email: $email, amount: $amount, plan: $plan, duration: $duration, selectedProperty: $selectedProperty, selectedApartment: $selectedApartment, properties: $properties, apartments: $apartments, response: $response)';
+    return 'LandlordMergerState(isLoading: $isLoading, validate: $validate, email: $email, amount: $amount, plan: $plan, duration: $duration, currency: $currency, selectedProperty: $selectedProperty, selectedApartment: $selectedApartment, properties: $properties, apartments: $apartments, response: $response)';
   }
 
   @override
@@ -315,6 +342,9 @@ class _$_LandlordMergerState extends _LandlordMergerState {
             (identical(other.duration, duration) ||
                 const DeepCollectionEquality()
                     .equals(other.duration, duration)) &&
+            (identical(other.currency, currency) ||
+                const DeepCollectionEquality()
+                    .equals(other.currency, currency)) &&
             (identical(other.selectedProperty, selectedProperty) ||
                 const DeepCollectionEquality()
                     .equals(other.selectedProperty, selectedProperty)) &&
@@ -341,6 +371,7 @@ class _$_LandlordMergerState extends _LandlordMergerState {
       const DeepCollectionEquality().hash(amount) ^
       const DeepCollectionEquality().hash(plan) ^
       const DeepCollectionEquality().hash(duration) ^
+      const DeepCollectionEquality().hash(currency) ^
       const DeepCollectionEquality().hash(selectedProperty) ^
       const DeepCollectionEquality().hash(selectedApartment) ^
       const DeepCollectionEquality().hash(properties) ^
@@ -363,6 +394,7 @@ abstract class _LandlordMergerState extends LandlordMergerState {
       @required AmountField amount,
       PaymentPlan plan,
       int duration,
+      @nullable Currency currency,
       @nullable LandlordProperty selectedProperty,
       @nullable LandlordApartment selectedApartment,
       KtList<LandlordProperty> properties,
@@ -381,6 +413,9 @@ abstract class _LandlordMergerState extends LandlordMergerState {
   PaymentPlan get plan;
   @override
   int get duration;
+  @override
+  @nullable
+  Currency get currency;
   @override
   @nullable
   LandlordProperty get selectedProperty;

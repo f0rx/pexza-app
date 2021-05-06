@@ -49,6 +49,9 @@ class _$ServerFieldErrorsTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
           List<dynamic> propertyId,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'apartment_id')
+          List<dynamic> apartmentId,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
           List<dynamic> propertyType,
       @nullable
@@ -62,7 +65,16 @@ class _$ServerFieldErrorsTearOff {
           List<dynamic> town,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          List<dynamic> stateId}) {
+          List<dynamic> stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'tenant_email')
+          List<dynamic> tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'duration')
+          List<dynamic> duration,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          List<dynamic> amount}) {
     return _ServerFieldErrors(
       name: name,
       firstName: firstName,
@@ -74,11 +86,15 @@ class _$ServerFieldErrorsTearOff {
       password: password,
       token: token,
       propertyId: propertyId,
+      apartmentId: apartmentId,
       propertyType: propertyType,
       houseType: houseType,
       street: street,
       town: town,
       stateId: stateId,
+      tenantEmail: tenantEmail,
+      duration: duration,
+      amount: amount,
     );
   }
 
@@ -125,6 +141,9 @@ mixin _$ServerFieldErrors {
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
   List<dynamic> get propertyId;
   @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'apartment_id')
+  List<dynamic> get apartmentId;
+  @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
   List<dynamic> get propertyType;
   @nullable
@@ -139,6 +158,15 @@ mixin _$ServerFieldErrors {
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
   List<dynamic> get stateId;
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'tenant_email')
+  List<dynamic> get tenantEmail;
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'duration')
+  List<dynamic> get duration;
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  List<dynamic> get amount;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -182,6 +210,9 @@ abstract class $ServerFieldErrorsCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
           List<dynamic> propertyId,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'apartment_id')
+          List<dynamic> apartmentId,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
           List<dynamic> propertyType,
       @nullable
@@ -195,7 +226,16 @@ abstract class $ServerFieldErrorsCopyWith<$Res> {
           List<dynamic> town,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          List<dynamic> stateId});
+          List<dynamic> stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'tenant_email')
+          List<dynamic> tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'duration')
+          List<dynamic> duration,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          List<dynamic> amount});
 }
 
 /// @nodoc
@@ -219,11 +259,15 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
     Object password = freezed,
     Object token = freezed,
     Object propertyId = freezed,
+    Object apartmentId = freezed,
     Object propertyType = freezed,
     Object houseType = freezed,
     Object street = freezed,
     Object town = freezed,
     Object stateId = freezed,
+    Object tenantEmail = freezed,
+    Object duration = freezed,
+    Object amount = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as List<dynamic>,
@@ -241,6 +285,9 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
       propertyId: propertyId == freezed
           ? _value.propertyId
           : propertyId as List<dynamic>,
+      apartmentId: apartmentId == freezed
+          ? _value.apartmentId
+          : apartmentId as List<dynamic>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as List<dynamic>,
@@ -249,6 +296,12 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
       street: street == freezed ? _value.street : street as List<dynamic>,
       town: town == freezed ? _value.town : town as List<dynamic>,
       stateId: stateId == freezed ? _value.stateId : stateId as List<dynamic>,
+      tenantEmail: tenantEmail == freezed
+          ? _value.tenantEmail
+          : tenantEmail as List<dynamic>,
+      duration:
+          duration == freezed ? _value.duration : duration as List<dynamic>,
+      amount: amount == freezed ? _value.amount : amount as List<dynamic>,
     ));
   }
 }
@@ -292,6 +345,9 @@ abstract class _$ServerFieldErrorsCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
           List<dynamic> propertyId,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'apartment_id')
+          List<dynamic> apartmentId,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
           List<dynamic> propertyType,
       @nullable
@@ -305,7 +361,16 @@ abstract class _$ServerFieldErrorsCopyWith<$Res>
           List<dynamic> town,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          List<dynamic> stateId});
+          List<dynamic> stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'tenant_email')
+          List<dynamic> tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'duration')
+          List<dynamic> duration,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          List<dynamic> amount});
 }
 
 /// @nodoc
@@ -331,11 +396,15 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
     Object password = freezed,
     Object token = freezed,
     Object propertyId = freezed,
+    Object apartmentId = freezed,
     Object propertyType = freezed,
     Object houseType = freezed,
     Object street = freezed,
     Object town = freezed,
     Object stateId = freezed,
+    Object tenantEmail = freezed,
+    Object duration = freezed,
+    Object amount = freezed,
   }) {
     return _then(_ServerFieldErrors(
       name: name == freezed ? _value.name : name as List<dynamic>,
@@ -353,6 +422,9 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
       propertyId: propertyId == freezed
           ? _value.propertyId
           : propertyId as List<dynamic>,
+      apartmentId: apartmentId == freezed
+          ? _value.apartmentId
+          : apartmentId as List<dynamic>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as List<dynamic>,
@@ -361,6 +433,12 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
       street: street == freezed ? _value.street : street as List<dynamic>,
       town: town == freezed ? _value.town : town as List<dynamic>,
       stateId: stateId == freezed ? _value.stateId : stateId as List<dynamic>,
+      tenantEmail: tenantEmail == freezed
+          ? _value.tenantEmail
+          : tenantEmail as List<dynamic>,
+      duration:
+          duration == freezed ? _value.duration : duration as List<dynamic>,
+      amount: amount == freezed ? _value.amount : amount as List<dynamic>,
     ));
   }
 }
@@ -401,6 +479,9 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
           this.propertyId,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'apartment_id')
+          this.apartmentId,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
           this.propertyType,
       @nullable
@@ -414,7 +495,16 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
           this.town,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          this.stateId})
+          this.stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'tenant_email')
+          this.tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'duration')
+          this.duration,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          this.amount})
       : super._();
 
   factory _$_ServerFieldErrors.fromJson(Map<String, dynamic> json) =>
@@ -462,6 +552,10 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
   final List<dynamic> propertyId;
   @override
   @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'apartment_id')
+  final List<dynamic> apartmentId;
+  @override
+  @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
   final List<dynamic> propertyType;
   @override
@@ -480,10 +574,22 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
   final List<dynamic> stateId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'tenant_email')
+  final List<dynamic> tenantEmail;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'duration')
+  final List<dynamic> duration;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  final List<dynamic> amount;
 
   @override
   String toString() {
-    return 'ServerFieldErrors(name: $name, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, age: $age, phone: $phone, password: $password, token: $token, propertyId: $propertyId, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, stateId: $stateId)';
+    return 'ServerFieldErrors(name: $name, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, age: $age, phone: $phone, password: $password, token: $token, propertyId: $propertyId, apartmentId: $apartmentId, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, stateId: $stateId, tenantEmail: $tenantEmail, duration: $duration, amount: $amount)';
   }
 
   @override
@@ -514,6 +620,9 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
             (identical(other.propertyId, propertyId) ||
                 const DeepCollectionEquality()
                     .equals(other.propertyId, propertyId)) &&
+            (identical(other.apartmentId, apartmentId) ||
+                const DeepCollectionEquality()
+                    .equals(other.apartmentId, apartmentId)) &&
             (identical(other.propertyType, propertyType) ||
                 const DeepCollectionEquality()
                     .equals(other.propertyType, propertyType)) &&
@@ -525,7 +634,16 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
             (identical(other.town, town) ||
                 const DeepCollectionEquality().equals(other.town, town)) &&
             (identical(other.stateId, stateId) ||
-                const DeepCollectionEquality().equals(other.stateId, stateId)));
+                const DeepCollectionEquality()
+                    .equals(other.stateId, stateId)) &&
+            (identical(other.tenantEmail, tenantEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.tenantEmail, tenantEmail)) &&
+            (identical(other.duration, duration) ||
+                const DeepCollectionEquality()
+                    .equals(other.duration, duration)) &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)));
   }
 
   @override
@@ -541,11 +659,15 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(propertyId) ^
+      const DeepCollectionEquality().hash(apartmentId) ^
       const DeepCollectionEquality().hash(propertyType) ^
       const DeepCollectionEquality().hash(houseType) ^
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
-      const DeepCollectionEquality().hash(stateId);
+      const DeepCollectionEquality().hash(stateId) ^
+      const DeepCollectionEquality().hash(tenantEmail) ^
+      const DeepCollectionEquality().hash(duration) ^
+      const DeepCollectionEquality().hash(amount);
 
   @JsonKey(ignore: true)
   @override
@@ -592,6 +714,9 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
           List<dynamic> propertyId,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'apartment_id')
+          List<dynamic> apartmentId,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
           List<dynamic> propertyType,
       @nullable
@@ -605,7 +730,16 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
           List<dynamic> town,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          List<dynamic> stateId}) = _$_ServerFieldErrors;
+          List<dynamic> stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'tenant_email')
+          List<dynamic> tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'duration')
+          List<dynamic> duration,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          List<dynamic> amount}) = _$_ServerFieldErrors;
 
   factory _ServerFieldErrors.fromJson(Map<String, dynamic> json) =
       _$_ServerFieldErrors.fromJson;
@@ -652,6 +786,10 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
   List<dynamic> get propertyId;
   @override
   @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'apartment_id')
+  List<dynamic> get apartmentId;
+  @override
+  @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
   List<dynamic> get propertyType;
   @override
@@ -670,6 +808,18 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
   List<dynamic> get stateId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'tenant_email')
+  List<dynamic> get tenantEmail;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'duration')
+  List<dynamic> get duration;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  List<dynamic> get amount;
   @override
   @JsonKey(ignore: true)
   _$ServerFieldErrorsCopyWith<_ServerFieldErrors> get copyWith;

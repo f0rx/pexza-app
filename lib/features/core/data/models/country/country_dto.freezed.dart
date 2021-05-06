@@ -29,9 +29,10 @@ class _$CountryDTOTearOff {
           String phoneCode,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String currency,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+          String currencyType,
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           String currencyName,
       @nullable
@@ -51,7 +52,7 @@ class _$CountryDTOTearOff {
       name: name,
       phoneCode: phoneCode,
       isSupported: isSupported,
-      currency: currency,
+      currencyType: currencyType,
       currencyName: currencyName,
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -82,9 +83,10 @@ mixin _$CountryDTO {
   String get phoneCode;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @IntToBoolSerializer()
   bool get isSupported;
-  @JsonKey(includeIfNull: false, defaultValue: '')
-  String get currency;
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+  String get currencyType;
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
   String get currencyName;
   @nullable
@@ -122,9 +124,10 @@ abstract class $CountryDTOCopyWith<$Res> {
           String phoneCode,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String currency,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+          String currencyType,
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           String currencyName,
       @nullable
@@ -155,7 +158,7 @@ class _$CountryDTOCopyWithImpl<$Res> implements $CountryDTOCopyWith<$Res> {
     Object name = freezed,
     Object phoneCode = freezed,
     Object isSupported = freezed,
-    Object currency = freezed,
+    Object currencyType = freezed,
     Object currencyName = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -167,7 +170,9 @@ class _$CountryDTOCopyWithImpl<$Res> implements $CountryDTOCopyWith<$Res> {
       phoneCode: phoneCode == freezed ? _value.phoneCode : phoneCode as String,
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
-      currency: currency == freezed ? _value.currency : currency as String,
+      currencyType: currencyType == freezed
+          ? _value.currencyType
+          : currencyType as String,
       currencyName: currencyName == freezed
           ? _value.currencyName
           : currencyName as String,
@@ -196,9 +201,10 @@ abstract class _$CountryDTOCopyWith<$Res> implements $CountryDTOCopyWith<$Res> {
           String phoneCode,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String currency,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+          String currencyType,
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           String currencyName,
       @nullable
@@ -231,7 +237,7 @@ class __$CountryDTOCopyWithImpl<$Res> extends _$CountryDTOCopyWithImpl<$Res>
     Object name = freezed,
     Object phoneCode = freezed,
     Object isSupported = freezed,
-    Object currency = freezed,
+    Object currencyType = freezed,
     Object currencyName = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -243,7 +249,9 @@ class __$CountryDTOCopyWithImpl<$Res> extends _$CountryDTOCopyWithImpl<$Res>
       phoneCode: phoneCode == freezed ? _value.phoneCode : phoneCode as String,
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
-      currency: currency == freezed ? _value.currency : currency as String,
+      currencyType: currencyType == freezed
+          ? _value.currencyType
+          : currencyType as String,
       currencyName: currencyName == freezed
           ? _value.currencyName
           : currencyName as String,
@@ -270,9 +278,10 @@ class _$_CountryDTO extends _CountryDTO {
           this.phoneCode,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           this.isSupported,
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          this.currency,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+          this.currencyType,
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           this.currencyName,
       @nullable
@@ -307,10 +316,11 @@ class _$_CountryDTO extends _CountryDTO {
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @IntToBoolSerializer()
   final bool isSupported;
   @override
-  @JsonKey(includeIfNull: false, defaultValue: '')
-  final String currency;
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+  final String currencyType;
   @override
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
   final String currencyName;
@@ -332,7 +342,7 @@ class _$_CountryDTO extends _CountryDTO {
 
   @override
   String toString() {
-    return 'CountryDTO(id: $id, name: $name, phoneCode: $phoneCode, isSupported: $isSupported, currency: $currency, currencyName: $currencyName, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'CountryDTO(id: $id, name: $name, phoneCode: $phoneCode, isSupported: $isSupported, currencyType: $currencyType, currencyName: $currencyName, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -349,9 +359,9 @@ class _$_CountryDTO extends _CountryDTO {
             (identical(other.isSupported, isSupported) ||
                 const DeepCollectionEquality()
                     .equals(other.isSupported, isSupported)) &&
-            (identical(other.currency, currency) ||
+            (identical(other.currencyType, currencyType) ||
                 const DeepCollectionEquality()
-                    .equals(other.currency, currency)) &&
+                    .equals(other.currencyType, currencyType)) &&
             (identical(other.currencyName, currencyName) ||
                 const DeepCollectionEquality()
                     .equals(other.currencyName, currencyName)) &&
@@ -373,7 +383,7 @@ class _$_CountryDTO extends _CountryDTO {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(phoneCode) ^
       const DeepCollectionEquality().hash(isSupported) ^
-      const DeepCollectionEquality().hash(currency) ^
+      const DeepCollectionEquality().hash(currencyType) ^
       const DeepCollectionEquality().hash(currencyName) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
@@ -404,9 +414,10 @@ abstract class _CountryDTO extends CountryDTO {
           String phoneCode,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String currency,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+          String currencyType,
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           String currencyName,
       @nullable
@@ -440,10 +451,11 @@ abstract class _CountryDTO extends CountryDTO {
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @IntToBoolSerializer()
   bool get isSupported;
   @override
-  @JsonKey(includeIfNull: false, defaultValue: '')
-  String get currency;
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+  String get currencyType;
   @override
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
   String get currencyName;

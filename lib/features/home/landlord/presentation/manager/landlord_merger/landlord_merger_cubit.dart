@@ -17,6 +17,7 @@ import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.da
 import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
 import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart';
 import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart';
+import 'package:pexza/utils/utils.dart';
 
 part 'landlord_merger_state.dart';
 part 'landlord_merger_cubit.freezed.dart';
@@ -44,7 +45,8 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
       ));
 
   void amountChanged(String value) => emit(state.copyWith(
-        amount: AmountField(int.tryParse(value)),
+        amount:
+            AmountField(int.tryParse(value) ?? AmountField.DEFAULT.getOrCrash),
       ));
 
   void propertyChanged(LandlordProperty property) async {
@@ -128,6 +130,52 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
       emit(state.copyWith(
         response: some(left(LandlordFailure.poorInternetConnection())),
       ));
+  }
+
+  void pairTenant() async {
+    toggleLoading();
+
+    // Create Object Instance from state inputs
+    final _merger = ApartmentMerger(
+      emailAddress: state.email,
+      apartment: state.selectedApartment,
+      duration: state.duration,
+      plan: state.plan,
+      currency: state.currency,
+      amount: state.amount,
+    );
+
+    // Validate Input fields
+    emit(state.copyWith(validate: true));
+
+    log.wtf(_merger);
+
+    try {
+      if (_merger.failures.isNone()) {
+        return;
+        // Check if user is connected & has good internet
+        await checkInternetAndConnectivity();
+
+        final _mergerDTO = await _apartmentRepository.assignTenantToApartment(
+          ApartmentMergerData.fromDomain(_merger),
+        );
+
+        emit(state.copyWith(
+            // response: some(right(LandlordSuccess(
+            //   message: "${apartmentDTO?.data?.name ?? 'New Apartment'} added to "
+            //       "${state.currentProperty?.name?.getOrEmpty}",
+            // ))),
+            ));
+      }
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(
+        response: some(left(e)),
+      ));
+    } on DioError catch (e) {
+      _handleDioFailures(e);
+    }
+
+    toggleLoading();
   }
 
   void _handleDioFailures(DioError ex) {

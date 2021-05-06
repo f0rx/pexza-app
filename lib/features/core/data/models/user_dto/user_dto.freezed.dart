@@ -73,15 +73,23 @@ class _$UserDTOTearOff {
           bool isEmailVerified,
       @HiveField(12)
       @nullable
+      @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+          String verificationCodeSentAt,
+      @HiveField(13)
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+          String forgotPasswordCodeSentAt,
+      @HiveField(14)
+      @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
-      @HiveField(13)
+      @HiveField(15)
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
-      @HiveField(14)
+      @HiveField(16)
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
@@ -100,6 +108,8 @@ class _$UserDTOTearOff {
       password: password,
       photo: photo,
       isEmailVerified: isEmailVerified,
+      verificationCodeSentAt: verificationCodeSentAt,
+      forgotPasswordCodeSentAt: forgotPasswordCodeSentAt,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -176,15 +186,23 @@ mixin _$UserDTO {
   bool get isEmailVerified;
   @HiveField(12)
   @nullable
+  @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+  String get verificationCodeSentAt;
+  @HiveField(13)
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+  String get forgotPasswordCodeSentAt;
+  @HiveField(14)
+  @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
-  @HiveField(13)
+  @HiveField(15)
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
-  @HiveField(14)
+  @HiveField(16)
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
@@ -255,15 +273,23 @@ abstract class $UserDTOCopyWith<$Res> {
           bool isEmailVerified,
       @HiveField(12)
       @nullable
+      @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+          String verificationCodeSentAt,
+      @HiveField(13)
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+          String forgotPasswordCodeSentAt,
+      @HiveField(14)
+      @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
-      @HiveField(13)
+      @HiveField(15)
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
-      @HiveField(14)
+      @HiveField(16)
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
@@ -293,6 +319,8 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
     Object password = freezed,
     Object photo = freezed,
     Object isEmailVerified = freezed,
+    Object verificationCodeSentAt = freezed,
+    Object forgotPasswordCodeSentAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -314,6 +342,12 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
+      verificationCodeSentAt: verificationCodeSentAt == freezed
+          ? _value.verificationCodeSentAt
+          : verificationCodeSentAt as String,
+      forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
+          ? _value.forgotPasswordCodeSentAt
+          : forgotPasswordCodeSentAt as String,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
@@ -382,15 +416,23 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
           bool isEmailVerified,
       @HiveField(12)
       @nullable
+      @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+          String verificationCodeSentAt,
+      @HiveField(13)
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+          String forgotPasswordCodeSentAt,
+      @HiveField(14)
+      @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
-      @HiveField(13)
+      @HiveField(15)
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
-      @HiveField(14)
+      @HiveField(16)
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
@@ -421,6 +463,8 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
     Object password = freezed,
     Object photo = freezed,
     Object isEmailVerified = freezed,
+    Object verificationCodeSentAt = freezed,
+    Object forgotPasswordCodeSentAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -442,6 +486,12 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
+      verificationCodeSentAt: verificationCodeSentAt == freezed
+          ? _value.verificationCodeSentAt
+          : verificationCodeSentAt as String,
+      forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
+          ? _value.forgotPasswordCodeSentAt
+          : forgotPasswordCodeSentAt as String,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
@@ -510,15 +560,23 @@ class _$_UserDTO extends _UserDTO {
           this.isEmailVerified,
       @HiveField(12)
       @nullable
+      @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+          this.verificationCodeSentAt,
+      @HiveField(13)
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+          this.forgotPasswordCodeSentAt,
+      @HiveField(14)
+      @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           this.createdAt,
-      @HiveField(13)
+      @HiveField(15)
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           this.updatedAt,
-      @HiveField(14)
+      @HiveField(16)
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
@@ -600,17 +658,27 @@ class _$_UserDTO extends _UserDTO {
   @override
   @HiveField(12)
   @nullable
+  @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+  final String verificationCodeSentAt;
+  @override
+  @HiveField(13)
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+  final String forgotPasswordCodeSentAt;
+  @override
+  @HiveField(14)
+  @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   final String createdAt;
   @override
-  @HiveField(13)
+  @HiveField(15)
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   final String updatedAt;
   @override
-  @HiveField(14)
+  @HiveField(16)
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
@@ -618,7 +686,7 @@ class _$_UserDTO extends _UserDTO {
 
   @override
   String toString() {
-    return 'UserDTO(id: $id, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'UserDTO(id: $id, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -657,6 +725,14 @@ class _$_UserDTO extends _UserDTO {
             (identical(other.isEmailVerified, isEmailVerified) ||
                 const DeepCollectionEquality()
                     .equals(other.isEmailVerified, isEmailVerified)) &&
+            (identical(other.verificationCodeSentAt, verificationCodeSentAt) ||
+                const DeepCollectionEquality().equals(
+                    other.verificationCodeSentAt, verificationCodeSentAt)) &&
+            (identical(
+                    other.forgotPasswordCodeSentAt, forgotPasswordCodeSentAt) ||
+                const DeepCollectionEquality().equals(
+                    other.forgotPasswordCodeSentAt,
+                    forgotPasswordCodeSentAt)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -684,6 +760,8 @@ class _$_UserDTO extends _UserDTO {
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(isEmailVerified) ^
+      const DeepCollectionEquality().hash(verificationCodeSentAt) ^
+      const DeepCollectionEquality().hash(forgotPasswordCodeSentAt) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(deletedAt);
@@ -757,15 +835,23 @@ abstract class _UserDTO extends UserDTO {
           bool isEmailVerified,
       @HiveField(12)
       @nullable
+      @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+          String verificationCodeSentAt,
+      @HiveField(13)
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+          String forgotPasswordCodeSentAt,
+      @HiveField(14)
+      @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
-      @HiveField(13)
+      @HiveField(15)
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
-      @HiveField(14)
+      @HiveField(16)
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
@@ -845,17 +931,27 @@ abstract class _UserDTO extends UserDTO {
   @override
   @HiveField(12)
   @nullable
+  @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+  String get verificationCodeSentAt;
+  @override
+  @HiveField(13)
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+  String get forgotPasswordCodeSentAt;
+  @override
+  @HiveField(14)
+  @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @override
-  @HiveField(13)
+  @HiveField(15)
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @override
-  @HiveField(14)
+  @HiveField(16)
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()

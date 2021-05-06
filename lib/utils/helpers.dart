@@ -163,6 +163,23 @@ class Helpers {
         ),
       );
 
+  Widget positionedLoader(BuildContext context, [bool overlay = true]) {
+    final _keyboardClosed = MediaQuery.of(context).viewInsets.bottom == 0;
+
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        CircularProgressBar.adaptive(
+          width: width * 0.08,
+          height: width * 0.08,
+          strokeWidth: 3.5,
+          radius: 14,
+        ),
+      ],
+    );
+  }
+
   GlobalKey<NavigatorState> addKey(GlobalKey<NavigatorState> newKey) {
     key = newKey;
     return key;

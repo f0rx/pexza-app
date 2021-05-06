@@ -21,6 +21,7 @@ class _$LandlordPropertyTearOff {
       @nullable LandlordField<String> houseType,
       @nullable LandlordField<String> street,
       @nullable LandlordField<String> town,
+      @nullable PhotoField photo,
       @nullable CountryState state,
       @nullable LandlordField<String> country,
       @required @nullable MaterialColor color,
@@ -39,6 +40,7 @@ class _$LandlordPropertyTearOff {
       houseType: houseType,
       street: street,
       town: town,
+      photo: photo,
       state: state,
       country: country,
       color: color,
@@ -72,6 +74,8 @@ mixin _$LandlordProperty {
   LandlordField<String> get street;
   @nullable
   LandlordField<String> get town;
+  @nullable
+  PhotoField get photo;
   @nullable
   CountryState get state;
   @nullable
@@ -111,6 +115,7 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       @nullable LandlordField<String> houseType,
       @nullable LandlordField<String> street,
       @nullable LandlordField<String> town,
+      @nullable PhotoField photo,
       @nullable CountryState state,
       @nullable LandlordField<String> country,
       @nullable MaterialColor color,
@@ -143,6 +148,7 @@ class _$LandlordPropertyCopyWithImpl<$Res>
     Object houseType = freezed,
     Object street = freezed,
     Object town = freezed,
+    Object photo = freezed,
     Object state = freezed,
     Object country = freezed,
     Object color = freezed,
@@ -167,6 +173,7 @@ class _$LandlordPropertyCopyWithImpl<$Res>
       street:
           street == freezed ? _value.street : street as LandlordField<String>,
       town: town == freezed ? _value.town : town as LandlordField<String>,
+      photo: photo == freezed ? _value.photo : photo as PhotoField,
       state: state == freezed ? _value.state : state as CountryState,
       country: country == freezed
           ? _value.country
@@ -219,6 +226,7 @@ abstract class _$LandlordPropertyCopyWith<$Res>
       @nullable LandlordField<String> houseType,
       @nullable LandlordField<String> street,
       @nullable LandlordField<String> town,
+      @nullable PhotoField photo,
       @nullable CountryState state,
       @nullable LandlordField<String> country,
       @nullable MaterialColor color,
@@ -254,6 +262,7 @@ class __$LandlordPropertyCopyWithImpl<$Res>
     Object houseType = freezed,
     Object street = freezed,
     Object town = freezed,
+    Object photo = freezed,
     Object state = freezed,
     Object country = freezed,
     Object color = freezed,
@@ -278,6 +287,7 @@ class __$LandlordPropertyCopyWithImpl<$Res>
       street:
           street == freezed ? _value.street : street as LandlordField<String>,
       town: town == freezed ? _value.town : town as LandlordField<String>,
+      photo: photo == freezed ? _value.photo : photo as PhotoField,
       state: state == freezed ? _value.state : state as CountryState,
       country: country == freezed
           ? _value.country
@@ -315,6 +325,7 @@ class _$_LandlordProperty extends _LandlordProperty {
       @nullable this.houseType,
       @nullable this.street,
       @nullable this.town,
+      @nullable this.photo,
       @nullable this.state,
       @nullable this.country,
       @required @nullable this.color,
@@ -346,6 +357,9 @@ class _$_LandlordProperty extends _LandlordProperty {
   @override
   @nullable
   final LandlordField<String> town;
+  @override
+  @nullable
+  final PhotoField photo;
   @override
   @nullable
   final CountryState state;
@@ -382,7 +396,7 @@ class _$_LandlordProperty extends _LandlordProperty {
 
   @override
   String toString() {
-    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, country: $country, color: $color, image: $image, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, photo: $photo, state: $state, country: $country, color: $color, image: $image, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -403,6 +417,8 @@ class _$_LandlordProperty extends _LandlordProperty {
                 const DeepCollectionEquality().equals(other.street, street)) &&
             (identical(other.town, town) ||
                 const DeepCollectionEquality().equals(other.town, town)) &&
+            (identical(other.photo, photo) ||
+                const DeepCollectionEquality().equals(other.photo, photo)) &&
             (identical(other.state, state) ||
                 const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.country, country) ||
@@ -447,6 +463,7 @@ class _$_LandlordProperty extends _LandlordProperty {
       const DeepCollectionEquality().hash(houseType) ^
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
+      const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(color) ^
@@ -474,6 +491,7 @@ abstract class _LandlordProperty extends LandlordProperty {
       @nullable LandlordField<String> houseType,
       @nullable LandlordField<String> street,
       @nullable LandlordField<String> town,
+      @nullable PhotoField photo,
       @nullable CountryState state,
       @nullable LandlordField<String> country,
       @required @nullable MaterialColor color,
@@ -504,6 +522,9 @@ abstract class _LandlordProperty extends LandlordProperty {
   @override
   @nullable
   LandlordField<String> get town;
+  @override
+  @nullable
+  PhotoField get photo;
   @override
   @nullable
   CountryState get state;
