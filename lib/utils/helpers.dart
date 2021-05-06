@@ -5,11 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/manager/theme/theme.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
@@ -358,7 +360,7 @@ class Helpers {
     // Set defaults
     firstDate ??= DateTime(1910);
     lastDate ??= App.today;
-    selectedDate ??= App.today;
+    selectedDate ??= lastDate ?? App.today;
 
     switch (theme.platform) {
       case TargetPlatform.iOS:
@@ -492,5 +494,20 @@ class Helpers {
       }
     }
     return age;
+  }
+
+  Future<void> report<T>({
+    @required T exception,
+    @required StackTrace stack,
+    bool printDetails = false,
+    String reason = "Non-fatal Try/Catch Exception",
+  }) async {
+    if (getIt<FirebaseCrashlytics>().isCrashlyticsCollectionEnabled)
+      getIt<FirebaseCrashlytics>().recordError(
+        exception,
+        stack,
+        printDetails: printDetails,
+        reason: reason,
+      );
   }
 }

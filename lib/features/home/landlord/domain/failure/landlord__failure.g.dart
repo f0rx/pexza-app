@@ -14,7 +14,6 @@ _$_LandlordFailure _$_$_LandlordFailureFromJson(Map<String, dynamic> json) {
     error: json['error'] as String ?? '',
     errors: const ServerFieldErrorsSerializer()
         .fromJson(json['errors'] as Map<String, dynamic>),
-    details: json['details'] as String,
   );
 }
 
@@ -33,6 +32,5 @@ Map<String, dynamic> _$_$_LandlordFailureToJson(_$_LandlordFailure instance) {
   writeNotNull('error', instance.error);
   writeNotNull(
       'errors', const ServerFieldErrorsSerializer().toJson(instance.errors));
-  val['details'] = instance.details;
   return val;
 }

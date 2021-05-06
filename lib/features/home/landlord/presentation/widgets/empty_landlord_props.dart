@@ -7,17 +7,19 @@ import 'package:pexza/widgets/widgets.dart';
 class EmptyLandlordProps extends StatelessWidget {
   final String title;
   final String description;
-  final String buttonText;
   final Widget appBar;
-  final VoidCallback onPressed;
+  final Widget fab;
+  final bool showAppbar;
+  final bool showFAB;
 
   const EmptyLandlordProps({
     Key key,
     @required this.title,
     this.description,
-    @required this.buttonText,
-    @required this.onPressed,
-    this.appBar,
+    this.appBar = const SizedBox(),
+    this.fab = const SizedBox(),
+    this.showAppbar = true,
+    this.showFAB = true,
   }) : super(key: key);
 
   @override
@@ -38,7 +40,10 @@ class EmptyLandlordProps extends StatelessWidget {
                 top: 0,
                 left: 0,
                 right: 0,
-                child: appBar,
+                child: Visibility(
+                  visible: showAppbar,
+                  child: appBar,
+                ),
               ),
               //
               Positioned.fill(
@@ -70,13 +75,6 @@ class EmptyLandlordProps extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      //
-                      VerticalSpace(height: App.height * 0.04),
-                      //
-                      AppElevatedButton(
-                        text: buttonText,
-                        onPressed: onPressed,
-                      ),
                     ],
                   ),
                 ),
@@ -84,6 +82,10 @@ class EmptyLandlordProps extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: Visibility(
+        visible: showFAB,
+        child: fab,
       ),
     );
   }

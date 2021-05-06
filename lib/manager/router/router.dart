@@ -13,9 +13,11 @@ import 'package:pexza/features/home/landlord/presentation/screens/add_property_s
 import 'package:pexza/features/home/landlord/presentation/screens/add_tenant_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landl_apartment_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/view_all_apartments_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_properties_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
@@ -106,9 +108,16 @@ import 'package:pexza/manager/router/export.dart';
       fullscreenDialog: true,
     ),
     AdaptiveRoute(
+      page: ViewAllApartmentScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+      fullscreenDialog: true,
+    ),
+    AdaptiveRoute(
       page: LandlordAddPropertyScreen,
       guards: [AuthGuard],
       maintainState: true,
+      fullscreenDialog: true,
     ),
     AdaptiveRoute(
       page: LandlordPropertyDetailScreen,
@@ -116,9 +125,15 @@ import 'package:pexza/manager/router/export.dart';
       maintainState: true,
     ),
     AdaptiveRoute(
+      page: LandlordApartmentDetailScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
       page: LandlordAddApartmentScreen,
       guards: [AuthGuard],
       maintainState: true,
+      fullscreenDialog: true,
     ),
     AdaptiveRoute(
       page: LandlordRentDetailScreen,
@@ -129,6 +144,7 @@ import 'package:pexza/manager/router/export.dart';
       page: LandlordAddTenantScreen,
       guards: [AuthGuard],
       maintainState: true,
+      fullscreenDialog: true,
     ),
     AdaptiveRoute(
       page: LandlordMaintenanceRequestScreen,

@@ -1,7 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
-import 'package:pexza/features/core/domain/entities/fields/country/country_name/country_name.dart';
-import 'package:pexza/features/core/domain/entities/fields/country/currency/country_currency.dart';
+import 'package:pexza/features/core/domain/entities/currency/index.dart';
+import 'package:pexza/features/core/domain/entities/unique_id.dart';
+import 'country_name/country_name.dart';
 
 part 'country.freezed.dart';
 
@@ -15,22 +16,26 @@ abstract class Country implements _$Country {
   const Country._();
 
   const factory Country({
-    @required CountryName name,
-    @required String codeName,
-    @required String dialCode,
-    @required String language,
-    @Default(CountryCurrency.USD) CountryCurrency currency,
+    @nullable UniqueId<int> id,
+    @nullable CountryName name,
+    @nullable String codeName,
+    @nullable String dialCode,
+    @Default(false) bool isSupported,
+    @Default("English - UK") String language,
+    @Default(CurrencyType.NGN) CurrencyType currencyType,
     @Default(Country.DEFAULT_PREFIX) String prefix,
     @Default(Country.DEFAULT_HINT_TEXT) String hintText,
     @Default(Country.DEFAULT_DIGITS_COUNT) int digitsCount,
+    @nullable DateTime createdAt,
+    @nullable DateTime updatedAt,
+    @nullable DateTime deletedAt,
   }) = _Country;
 
   static const Country NG = Country(
     codeName: "NG",
     dialCode: "+234",
-    language: "English - UK",
     name: CountryName.Nigeria,
-    currency: CountryCurrency.NGN,
+    currencyType: CurrencyType.NGN,
     digitsCount: 11,
   );
 

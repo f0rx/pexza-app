@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:pexza/config/secrets.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/manager/locator/locator.dart';
@@ -47,12 +48,15 @@ class BuildEnvironment implements Secrets {
     switch (flavor) {
       case BuildFlavor.dev:
         await locator(Environment.dev);
+        getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(false);
         break;
       case BuildFlavor.prod:
         await locator(Environment.prod);
+        getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(true);
         break;
       default:
         await locator(Environment.prod);
+        getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(true);
     }
   }
 }

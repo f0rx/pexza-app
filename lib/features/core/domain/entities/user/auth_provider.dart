@@ -4,6 +4,7 @@ import 'package:built_value/built_value.dart';
 part 'auth_provider.g.dart';
 
 class AuthProvider extends EnumClass {
+  @BuiltValueEnumConst(fallback: true)
   static const AuthProvider regular = _$regular;
   static const AuthProvider google = _$google;
   static const AuthProvider facebook = _$facebook;

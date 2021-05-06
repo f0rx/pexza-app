@@ -35,7 +35,9 @@ class _$LandlordFailureTearOff {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details}) {
+      @nullable
+      @JsonKey(includeIfNull: false, ignore: true)
+          String details}) {
     return _LandlordFailure(
       code: code,
       status: status,
@@ -74,6 +76,8 @@ mixin _$LandlordFailure {
   @JsonKey(includeIfNull: false)
   @ServerFieldErrorsSerializer()
   ServerFieldErrors get errors; //
+  @nullable
+  @JsonKey(includeIfNull: false, ignore: true)
   String get details;
 
   Map<String, dynamic> toJson();
@@ -103,7 +107,9 @@ abstract class $LandlordFailureCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details});
+      @nullable
+      @JsonKey(includeIfNull: false, ignore: true)
+          String details});
 
   $ServerFieldErrorsCopyWith<$Res> get errors;
 }
@@ -171,7 +177,9 @@ abstract class _$LandlordFailureCopyWith<$Res>
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details});
+      @nullable
+      @JsonKey(includeIfNull: false, ignore: true)
+          String details});
 
   @override
   $ServerFieldErrorsCopyWith<$Res> get errors;
@@ -230,7 +238,9 @@ class _$_LandlordFailure extends _LandlordFailure {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           this.errors,
-      this.details})
+      @nullable
+      @JsonKey(includeIfNull: false, ignore: true)
+          this.details})
       : super._();
 
   factory _$_LandlordFailure.fromJson(Map<String, dynamic> json) =>
@@ -258,6 +268,8 @@ class _$_LandlordFailure extends _LandlordFailure {
   @ServerFieldErrorsSerializer()
   final ServerFieldErrors errors;
   @override //
+  @nullable
+  @JsonKey(includeIfNull: false, ignore: true)
   final String details;
 
   @override
@@ -325,7 +337,9 @@ abstract class _LandlordFailure extends LandlordFailure {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details}) = _$_LandlordFailure;
+      @nullable
+      @JsonKey(includeIfNull: false, ignore: true)
+          String details}) = _$_LandlordFailure;
 
   factory _LandlordFailure.fromJson(Map<String, dynamic> json) =
       _$_LandlordFailure.fromJson;
@@ -352,6 +366,8 @@ abstract class _LandlordFailure extends LandlordFailure {
   @ServerFieldErrorsSerializer()
   ServerFieldErrors get errors;
   @override //
+  @nullable
+  @JsonKey(includeIfNull: false, ignore: true)
   String get details;
   @override
   @JsonKey(ignore: true)

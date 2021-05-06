@@ -22,7 +22,7 @@ ApartmentStatus _$apartmentStatusValueOf(String name) {
     case 'occupied':
       return _$occupied;
     default:
-      throw new ArgumentError(name);
+      return _$vacant;
   }
 }
 

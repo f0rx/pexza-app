@@ -29,7 +29,7 @@ abstract class LandlordFailure implements _$LandlordFailure, Failure {
     @ServerFieldErrorsSerializer()
         ServerFieldErrors errors,
     //
-    String details,
+    @nullable @JsonKey(includeIfNull: false, ignore: true) String details,
   }) = _LandlordFailure;
 
   factory LandlordFailure.noInternetConnection() =>

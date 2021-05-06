@@ -16,7 +16,7 @@ PropertyType _$propertyTypeValueOf(String name) {
     case 'Commercial':
       return _$Commercial;
     default:
-      throw new ArgumentError(name);
+      return _$Residential;
   }
 }
 

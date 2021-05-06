@@ -4,17 +4,19 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Response;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/core/domain/failures/base.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart';
 import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
+import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
 import 'package:pexza/utils/utils.dart';
 
 part 'landlord_property_state.dart';
@@ -85,12 +87,12 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       final props = await _repository.all();
 
       emit(state.copyWith(
-        optionOfFailure: none(),
+        // response: some(left()),
         properties: props.data.map((e) => e?.domain).toImmutableList(),
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (e) {
       _handleDioFailures(e);
@@ -109,15 +111,13 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       houseType: state.houseType,
       street: state.street,
       town: state.town,
-      state: state.state,
+      // state: state.state,
       color: null,
       image: null,
     );
 
-    emit(state.copyWith(
-      validate: true,
-      optionOfFailure: none(),
-    ));
+    // Validate form errors
+    emit(state.copyWith(validate: true));
 
     try {
       if (_prop.failures.isNone()) {
@@ -130,11 +130,14 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
         emit(state.copyWith(
           property: prop?.domain,
+          response: some(right(LandlordSuccess(
+            message: "${_prop?.name?.getOrEmpty} was created successfully!",
+          ))),
         ));
       }
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (_) {
       _handleDioFailures(_);
@@ -155,20 +158,15 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
       final _propertyDTO = await _repository.show(property?.id?.value ?? id);
 
-      final _apartmentListDTO = await _apartmentRepository
-          .allApartmentsForProperty(_propertyDTO.data.id);
-
       emit(state.copyWith(
-        optionOfFailure: none(),
+        // response: some(left()),
         property: _propertyDTO?.domain?.copyWith(color: property.color),
-        apartments:
-            _apartmentListDTO.data.map((e) => e?.domain).toImmutableList(),
       ));
     } on MissingRequiredKeysException catch (ex) {
       _handleMissingKeysException(ex);
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (_) {
       _handleDioFailures(_);
@@ -190,15 +188,13 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       houseType: state.houseType,
       street: state.street,
       town: state.town,
-      state: state.state,
+      // state: state.state,
       color: null,
       image: null,
     );
 
-    emit(state.copyWith(
-      validate: true,
-      optionOfFailure: none(),
-    ));
+    // Validate form errors
+    emit(state.copyWith(validate: true));
 
     try {
       if (_prop.failures.isNone()) {
@@ -215,11 +211,14 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
         emit(state.copyWith(
           property: prop?.domain,
+          response: some(right(LandlordSuccess(
+            message: "Property updated successfully!",
+          ))),
         ));
       }
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (_) {
       _handleDioFailures(_);
@@ -241,12 +240,14 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       final prop = await _repository.delete(property?.id?.value ?? id);
 
       emit(state.copyWith(
-        optionOfFailure: none(),
         property: prop?.domain,
+        response: some(right(LandlordSuccess(
+          message: "${property?.name?.getOrEmpty} was deleted!",
+        ))),
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (_) {
       _handleDioFailures(_);
@@ -259,43 +260,43 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     switch (ex?.type) {
       case DioErrorType.CONNECT_TIMEOUT:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.poorInternetConnection()),
+          response: some(left(LandlordFailure.poorInternetConnection())),
         ));
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.receiveTimeout()),
+          response: some(left(LandlordFailure.receiveTimeout())),
         ));
         break;
       case DioErrorType.RESPONSE:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.fromJson(
+          response: some(left(LandlordFailure.fromJson(
             ex.response.data,
-          )),
+          ))),
         ));
         break;
       case DioErrorType.SEND_TIMEOUT:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.timeout()),
+          response: some(left(LandlordFailure.timeout())),
         ));
         break;
       case DioErrorType.DEFAULT:
       default:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.unknown()),
+          response: some(left(LandlordFailure.unknown())),
         ));
     }
   }
 
   void _handleMissingKeysException(MissingRequiredKeysException e) {
     emit(state.copyWith(
-      optionOfFailure: some(LandlordFailure.unknown(
+      response: some(left(LandlordFailure.unknown(
         message: e.message,
         details: e.missingKeys.fold(
             "",
             (p, next) => "${p.padIf(p.isNotEmpty && next.isNotEmpty, ',')}"
                 "$next"),
-      )),
+      ))),
     ));
   }
 }

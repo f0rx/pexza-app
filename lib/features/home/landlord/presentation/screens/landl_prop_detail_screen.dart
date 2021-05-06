@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -26,29 +25,23 @@ class LandlordPropertyDetailScreen extends StatefulWidget
     return BlocProvider(
       create: (_) => getIt<LandlordPropertyCubit>()..get(property: property),
       child: BlocListener<LandlordPropertyCubit, LandlordPropertyState>(
-        listener: (c, s) {
-          c.read<LandlordPropertyCubit>().state.optionOfFailure.fold(
-                () => null,
-                (failure) => Flushbar(
-                  duration: const Duration(seconds: 10),
-                  icon: const Icon(Icons.error, color: Colors.red),
-                  messageText: AutoSizeText(
-                    !failure.message.isNullOrBlank
-                        ? failure.message
-                        : failure.error,
-                  ),
-                  borderRadius: 8,
-                  dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                  margin: const EdgeInsets.all(8),
-                  flushbarPosition:
-                      MediaQuery.of(context).viewInsets.bottom == 0
-                          ? FlushbarPosition.BOTTOM
-                          : FlushbarPosition.TOP,
-                  shouldIconPulse: true,
-                  backgroundColor: Theme.of(context).primaryColor,
-                ).show(context),
-              );
-        },
+        listener: (c, s) => s.response.fold(
+          () => null,
+          (either) async => await BottomAlertDialog.show(
+            context,
+            message: either.fold(
+              (f) => f?.message ?? f?.error,
+              (r) => r?.message ?? r?.details,
+            ),
+            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
+            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
+            shouldIconPulse: either.fold((_) => null, (r) => false),
+            callback: either.fold(
+              (_) => null,
+              (r) => (_) => navigator.pop(),
+            ),
+          ),
+        ),
         child: this,
       ),
     );
@@ -73,28 +66,51 @@ class _LandlordPropertyDetailScreenState
 
     return Scaffold(
       appBar: Toolbar(
-        title: widget.property?.name?.getOrEmpty?.removeNewLines() ??
-            widget.property?.name?.getOrEmpty?.removeNewLines(),
+        // title: widget,
+        headline: BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
+          builder: (c, s) {
+            final _state = s.property?.name?.getOrEmpty?.removeNewLines();
+            final _const = widget.property?.name?.getOrEmpty?.removeNewLines();
+            return AutoSizeText(
+              "${_state ?? _const}",
+              wrapWords: false,
+              softWrap: false,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            );
+          },
+        ),
         actions: [
           BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
             builder: (c, s) => Hero(
               tag: Constants.kAddEditPropertyHeroTag,
-              child: IconButton(
-                onPressed: () => navigator.pushLandlordAddPropertyScreen(
-                  property: s.property ?? widget.property,
-                ),
-                icon: Icon(Icons.edit_outlined),
+              child: AppIconButton(
+                child: Icon(Icons.edit_outlined),
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
                 tooltip: "Update Property",
+                onPressed: () async {
+                  // Await navigate to edit screen
+                  await navigator.pushLandlordAddPropertyScreen(
+                    property: s.property ?? widget.property,
+                  );
+                  // Update property on pop()
+                  await c.read<LandlordPropertyCubit>().get(
+                        property: widget.property,
+                      );
+                },
               ),
             ),
           ),
           //
-          IconButton(
+          AppIconButton(
             // onPressed: () => context.read<LandlordPropertyCubit>().delete(
-            //       property: property,
+            //       property: widget.property,
             //     ),
             onPressed: () {},
-            icon: Icon(Icons.delete_outline_outlined),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            child: Icon(Icons.delete_outline_outlined),
             tooltip: "Delete Property",
           ),
         ],
@@ -291,10 +307,10 @@ class _PropertyDetailBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
-      builder: (context, state) => Column(
+      builder: (c, s) => Column(
         children: [
           Hero(
-            tag: state.property?.id?.value ?? property?.id?.value,
+            tag: s.property?.id?.value ?? property?.id?.value,
             child: Container(
               height: App.height * 0.17,
               width: double.infinity,
@@ -302,7 +318,7 @@ class _PropertyDetailBody extends StatelessWidget {
                 horizontal: Helpers.appPadding,
               ).copyWith(top: Helpers.appPadding),
               child: Visibility(
-                visible: !state.isLoading,
+                visible: !s.isLoading,
                 replacement: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: RectangleShimmer(
@@ -313,100 +329,110 @@ class _PropertyDetailBody extends StatelessWidget {
                     shimmerHighlightColor: property.color.shade100,
                   ),
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    color: state.property?.color?.shade300,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: App.shortest * 0.05,
-                    // vertical: App.shortest * 0.05,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Material(
+                    color: s.property?.color?.shade300,
+                    elevation: 2.0,
+                    type: MaterialType.card,
+                    child: InkWell(
+                      onTap: () => navigator.pushViewAllApartmentScreen(
+                        landlordProperty: s.property,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: App.shortest * 0.05,
+                          // vertical: App.shortest * 0.05,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                AutoSizeText(
-                                  "15",
-                                  softWrap: true,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5
-                                      .copyWith(
-                                        color: AppColors.accentColor,
-                                        fontWeight: FontWeight.w600,
+                                Flexible(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      AutoSizeText(
+                                        "15",
+                                        softWrap: true,
+                                        style: Theme.of(c)
+                                            .textTheme
+                                            .headline5
+                                            .copyWith(
+                                              color: AppColors.accentColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                        maxLines: 1,
                                       ),
-                                  maxLines: 1,
-                                ),
-                                AutoSizeText(
-                                  "Rented out",
-                                  softWrap: true,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1
-                                      .copyWith(
-                                        color: Theme.of(context)
+                                      AutoSizeText(
+                                        "Rented out",
+                                        softWrap: true,
+                                        style: Theme.of(c)
                                             .textTheme
                                             .subtitle1
-                                            .color
-                                            .withOpacity(0.6),
+                                            .copyWith(
+                                              color: Theme.of(c)
+                                                  .textTheme
+                                                  .subtitle1
+                                                  .color
+                                                  .withOpacity(0.6),
+                                            ),
+                                        maxLines: 1,
                                       ),
-                                  maxLines: 1,
+                                    ],
+                                  ),
+                                ),
+                                //
+                                Spacer(),
+                                //
+                                Flexible(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      AutoSizeText(
+                                        "${s.property?.numberOfApartments?.getOrEmpty}",
+                                        softWrap: true,
+                                        style: Theme.of(c)
+                                            .textTheme
+                                            .headline5
+                                            .copyWith(
+                                              color: AppColors.accentColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                        maxLines: 1,
+                                      ),
+                                      AutoSizeText(
+                                        "Total Apartments",
+                                        softWrap: true,
+                                        style: Theme.of(c)
+                                            .textTheme
+                                            .subtitle1
+                                            .copyWith(
+                                              color: Theme.of(c)
+                                                  .textTheme
+                                                  .subtitle1
+                                                  .color
+                                                  .withOpacity(0.6),
+                                            ),
+                                        maxLines: 1,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                          //
-                          Spacer(),
-                          //
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                AutoSizeText(
-                                  "${state.apartments.size}",
-                                  softWrap: true,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline5
-                                      .copyWith(
-                                        color: AppColors.accentColor,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                  maxLines: 1,
-                                ),
-                                AutoSizeText(
-                                  "Total Apartments",
-                                  softWrap: true,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1
-                                      .copyWith(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .subtitle1
-                                            .color
-                                            .withOpacity(0.6),
-                                      ),
-                                  maxLines: 1,
-                                ),
-                              ],
+                            //
+                            LinearProgressIndicator(
+                              value: 0.45,
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                      //
-                      LinearProgressIndicator(
-                        value: 0.45,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -424,12 +450,13 @@ class _PropertyDetailBody extends StatelessWidget {
                 onPressed: () => navigator.pushLandlordAddApartmentScreen(
                   property: property,
                 ),
+                disabled: s.isLoading,
                 width: App.shortest * 0.3,
                 height: 20,
                 text: "Add Apartment",
               ),
             ),
-          ),
+          )
         ],
       ),
     );

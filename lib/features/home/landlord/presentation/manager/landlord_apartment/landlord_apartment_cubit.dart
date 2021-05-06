@@ -4,17 +4,19 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Response;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/core/domain/failures/base.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart';
 import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
+import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
 import 'package:pexza/utils/utils.dart';
 
 part 'landlord_apartment_state.dart';
@@ -62,19 +64,19 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
     if (!hasInternet) throw LandlordFailure.poorInternetConnection();
   }
 
-  Future<void> fetchAllLandlordProps() async {
+  Future<void> fetchAllLandlordApartments() async {
     toggleLoading();
 
     try {
       final aprts = await _repository.all();
 
       emit(state.copyWith(
-        optionOfFailure: none(),
+        // response: none(),
         apartments: aprts.data.map((e) => e?.domain).toImmutableList(),
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (e) {
       _handleDioFailures(e);
@@ -83,21 +85,24 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
     toggleLoading();
   }
 
-  Future<void> getApartmentsForProperty(LandlordProperty property) async {
+  Future<void> getApartmentsForProperty({
+    LandlordProperty property,
+    UniqueId<int> id,
+  }) async {
     toggleLoading();
 
     try {
       final aprts = await _repository.allApartmentsForProperty(
-        property.id.value,
+        property?.id?.value ?? id?.value,
       );
 
       emit(state.copyWith(
-        optionOfFailure: none(),
+        // response: none(),
         apartments: aprts.data.map((e) => e?.domain).toImmutableList(),
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (e) {
       _handleDioFailures(e);
@@ -115,10 +120,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       property: state.currentProperty,
     );
 
-    emit(state.copyWith(
-      validate: true,
-      optionOfFailure: none(),
-    ));
+    // Validate Input fields
+    emit(state.copyWith(validate: true));
 
     try {
       if (_apartment.failures.isNone()) {
@@ -131,11 +134,15 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
 
         emit(state.copyWith(
           apartment: apartmentDTO.domain,
+          response: some(right(LandlordSuccess(
+            message: "${apartmentDTO?.data?.name ?? 'New Apartment'} added to "
+                "${state.currentProperty?.name?.getOrEmpty}",
+          ))),
         ));
       }
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (e) {
       _handleDioFailures(e);
@@ -156,13 +163,10 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
 
       final _apartment = await _repository.show(apartment?.id?.value ?? id);
 
-      emit(state.copyWith(
-        optionOfFailure: none(),
-        apartment: _apartment?.domain,
-      ));
+      emit(state.copyWith(apartment: _apartment?.domain));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (_) {
       _handleDioFailures(_);
@@ -177,24 +181,34 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
   }) async {
     toggleLoading();
 
-    final _dto = LandlordApartmentData.fromDomain(LandlordApartment(
+    final _apartment = LandlordApartment(
       name: state.name,
       property: state.currentProperty,
-    ));
+    );
+
+    // Validate Input fields
+    emit(state.copyWith(validate: true));
 
     try {
-      final _apartment = await _repository.update(
-        apartment?.id?.value ?? id,
-        _dto,
-      );
+      if (_apartment.failures.isNone()) {
+        // Check if user is connected & has good internet
+        await checkInternetAndConnectivity();
 
-      emit(state.copyWith(
-        optionOfFailure: none(),
-        apartment: _apartment.domain,
-      ));
+        final _apartmentDTO = await _repository.update(
+          apartment?.id?.value ?? id,
+          LandlordApartmentData.fromDomain(_apartment),
+        );
+
+        emit(state.copyWith(
+          apartment: _apartmentDTO.domain,
+          response: some(right(LandlordSuccess(
+            message: "${apartment.name.getOrEmpty} updated successfully!",
+          ))),
+        ));
+      }
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (e) {
       _handleDioFailures(e);
@@ -215,18 +229,19 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
 
       Future.wait<void>([
         _repository.delete(apartment?.id?.value ?? id),
-        this.fetchAllLandlordProps(),
+        this.fetchAllLandlordApartments(),
         if (!state.currentProperty.isNull)
-          this.getApartmentsForProperty(state.currentProperty),
+          this.getApartmentsForProperty(property: state.currentProperty),
       ], eagerError: true);
 
       emit(state.copyWith(
-        optionOfFailure: none(),
-        // apartment: aprt?.domain,
+        response: some(right(LandlordSuccess(
+          message: "${apartment.name.getOrEmpty} deleted successfully!",
+        ))),
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
-        optionOfFailure: some(e),
+        response: some(left(e)),
       ));
     } on DioError catch (_) {
       _handleDioFailures(_);
@@ -239,31 +254,35 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
     switch (ex?.type) {
       case DioErrorType.CONNECT_TIMEOUT:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.poorInternetConnection()),
-        ));
+            response: some(
+          left(LandlordFailure.poorInternetConnection()),
+        )));
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.receiveTimeout()),
-        ));
+            response: some(
+          left(LandlordFailure.receiveTimeout()),
+        )));
         break;
       case DioErrorType.RESPONSE:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.fromJson(
+          response: some(left(LandlordFailure.fromJson(
             ex.response.data,
-          )),
+          ))),
         ));
         break;
       case DioErrorType.SEND_TIMEOUT:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.timeout()),
-        ));
+            response: some(
+          left(LandlordFailure.timeout()),
+        )));
         break;
       case DioErrorType.DEFAULT:
       default:
         emit(state.copyWith(
-          optionOfFailure: some(LandlordFailure.unknown()),
-        ));
+            response: some(
+          left(LandlordFailure.unknown()),
+        )));
     }
   }
 }

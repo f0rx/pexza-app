@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:pexza/features/core/core.dart';
 
-class LandlordField extends FieldObject<String> {
-  static const LandlordField DEFAULT = LandlordField._(Right(''));
-  final Either<FieldObjectException<String>, String> value;
+class LandlordField<T> extends FieldObject<T> {
+  static const LandlordField<String> DEFAULT =
+      LandlordField<String>._(Right(''));
+  final Either<FieldObjectException<String>, T> value;
 
-  factory LandlordField(String input) {
+  factory LandlordField(T input) {
     assert(input != null);
     return LandlordField._(Validator.isEmpty(input));
   }

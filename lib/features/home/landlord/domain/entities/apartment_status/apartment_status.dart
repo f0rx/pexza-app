@@ -7,6 +7,7 @@ import 'package:built_value/serializer.dart';
 part 'apartment_status.g.dart';
 
 class ApartmentStatus extends EnumClass {
+  @BuiltValueEnumConst(fallback: true)
   static const ApartmentStatus vacant = _$vacant;
   static const ApartmentStatus assigned = _$assigned;
   static const ApartmentStatus paired = _$paired;

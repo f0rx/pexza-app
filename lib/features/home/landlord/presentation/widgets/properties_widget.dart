@@ -7,10 +7,12 @@ import 'package:pexza/widgets/widgets.dart';
 
 class LandlordProperties extends StatelessWidget {
   final Widget appBar;
+  final Widget fab;
 
   LandlordProperties({
     Key key,
     this.appBar,
+    this.fab = const SizedBox(),
   }) : super(key: key);
 
   @override
@@ -201,6 +203,7 @@ class LandlordProperties extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: fab,
     );
   }
 }

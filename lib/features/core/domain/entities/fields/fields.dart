@@ -1,6 +1,4 @@
-export 'country/country.dart';
-export 'country/country_name/country_name.dart';
-export 'country/currency/country_currency.dart';
+export 'country/index.dart';
 export 'phone/export.dart';
 export 'gender/gender.dart';
 export 'gender/gender_type.dart';

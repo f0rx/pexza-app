@@ -39,9 +39,21 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
         String houseType,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String street,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
-    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String state,
+    // @nullable @JsonKey(includeIfNull: false) StateDTO state,
     @nullable @JsonKey(disallowNullValue: true, name: "state_id") int stateId,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String country,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
+        int numberOfTenants,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_apartments")
+        int numberOfApartments,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_available_apartments")
+        int numberOfAvailableApartments,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_rented_apartment")
+        int numberOfRentedApartment,
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
@@ -54,9 +66,6 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
         String deletedAt,
-    @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
-        int numberOfTenants,
   }) = _LandlordPropertyData;
 
   factory LandlordPropertyData.fromJson(Map<String, dynamic> json) =>
@@ -71,8 +80,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
         houseType: instance.houseType?.getOrNull,
         town: instance.town?.getOrNull,
         street: instance.street?.getOrNull,
-        state: instance.state?.getOrNull,
-        stateId: 1,
+        stateId: 5,
       );
 
   LandlordProperty get domain {
@@ -87,12 +95,27 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       houseType: !houseType.isNull ? LandlordField(houseType) : null,
       town: !town.isNull ? LandlordField(town) : null,
       street: !street.isNull ? LandlordField(street) : null,
-      state: !state.isNull ? LandlordField(state) : null,
+      // state: !state.isNull
+      //     ? CountryState(
+      //         name: CountryStateName(state?.name),
+      //         country: !country.isNull
+      //             ? Country(name: CountryName.valueOf(country))
+      //             : null,
+      //       )
+      //     : null,
       country: !country.isNull ? LandlordField(country) : null,
       color: MaterialColor(_color.value, AppColors.swatch(_color)),
       image: LandlordPropertyImage(images.random()),
       numberOfTenants:
-          !numberOfTenants.isNull ? TenantsCountField(numberOfTenants) : null,
+          !numberOfTenants.isNull ? LandlordField(numberOfTenants) : null,
+      numberOfApartments:
+          !numberOfApartments.isNull ? LandlordField(numberOfApartments) : null,
+      numberOfAvailableApartments: !numberOfAvailableApartments.isNull
+          ? LandlordField(numberOfAvailableApartments)
+          : null,
+      numberOfRentedApartment: !numberOfRentedApartment.isNull
+          ? LandlordField(numberOfRentedApartment)
+          : null,
       createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
       updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
       deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,

@@ -19,7 +19,7 @@ Role _$valueOf(String name) {
     case 'admin':
       return _$admin;
     default:
-      throw new ArgumentError(name);
+      return _$tenant;
   }
 }
 

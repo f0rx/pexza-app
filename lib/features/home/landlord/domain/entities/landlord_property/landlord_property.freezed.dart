@@ -16,16 +16,19 @@ class _$LandlordPropertyTearOff {
 // ignore: unused_element
   _LandlordProperty call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField name,
+      @nullable LandlordField<String> name,
       @nullable LandlordPropertyTypeField propertyType,
-      @nullable LandlordField houseType,
-      @nullable LandlordField street,
-      @nullable LandlordField town,
-      @nullable LandlordField state,
-      @nullable LandlordField country,
+      @nullable LandlordField<String> houseType,
+      @nullable LandlordField<String> street,
+      @nullable LandlordField<String> town,
+      @nullable CountryState state,
+      @nullable LandlordField<String> country,
       @required @nullable MaterialColor color,
       @required @nullable LandlordPropertyImage image,
-      @nullable TenantsCountField numberOfTenants,
+      @nullable LandlordField<int> numberOfTenants,
+      @nullable LandlordField<int> numberOfApartments,
+      @nullable LandlordField<int> numberOfAvailableApartments,
+      @nullable LandlordField<int> numberOfRentedApartment,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) {
@@ -41,6 +44,9 @@ class _$LandlordPropertyTearOff {
       color: color,
       image: image,
       numberOfTenants: numberOfTenants,
+      numberOfApartments: numberOfApartments,
+      numberOfAvailableApartments: numberOfAvailableApartments,
+      numberOfRentedApartment: numberOfRentedApartment,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -57,25 +63,31 @@ mixin _$LandlordProperty {
   @nullable
   UniqueId<int> get id;
   @nullable
-  LandlordField get name;
+  LandlordField<String> get name;
   @nullable
   LandlordPropertyTypeField get propertyType;
   @nullable
-  LandlordField get houseType;
+  LandlordField<String> get houseType;
   @nullable
-  LandlordField get street;
+  LandlordField<String> get street;
   @nullable
-  LandlordField get town;
+  LandlordField<String> get town;
   @nullable
-  LandlordField get state;
+  CountryState get state;
   @nullable
-  LandlordField get country;
+  LandlordField<String> get country;
   @nullable
   MaterialColor get color;
   @nullable
   LandlordPropertyImage get image;
   @nullable
-  TenantsCountField get numberOfTenants;
+  LandlordField<int> get numberOfTenants;
+  @nullable
+  LandlordField<int> get numberOfApartments;
+  @nullable
+  LandlordField<int> get numberOfAvailableApartments;
+  @nullable
+  LandlordField<int> get numberOfRentedApartment;
   @nullable
   DateTime get createdAt;
   @nullable
@@ -94,19 +106,24 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       _$LandlordPropertyCopyWithImpl<$Res>;
   $Res call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField name,
+      @nullable LandlordField<String> name,
       @nullable LandlordPropertyTypeField propertyType,
-      @nullable LandlordField houseType,
-      @nullable LandlordField street,
-      @nullable LandlordField town,
-      @nullable LandlordField state,
-      @nullable LandlordField country,
+      @nullable LandlordField<String> houseType,
+      @nullable LandlordField<String> street,
+      @nullable LandlordField<String> town,
+      @nullable CountryState state,
+      @nullable LandlordField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage image,
-      @nullable TenantsCountField numberOfTenants,
+      @nullable LandlordField<int> numberOfTenants,
+      @nullable LandlordField<int> numberOfApartments,
+      @nullable LandlordField<int> numberOfAvailableApartments,
+      @nullable LandlordField<int> numberOfRentedApartment,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
+
+  $CountryStateCopyWith<$Res> get state;
 }
 
 /// @nodoc
@@ -131,27 +148,43 @@ class _$LandlordPropertyCopyWithImpl<$Res>
     Object color = freezed,
     Object image = freezed,
     Object numberOfTenants = freezed,
+    Object numberOfApartments = freezed,
+    Object numberOfAvailableApartments = freezed,
+    Object numberOfRentedApartment = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId<int>,
-      name: name == freezed ? _value.name : name as LandlordField,
+      name: name == freezed ? _value.name : name as LandlordField<String>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as LandlordPropertyTypeField,
-      houseType:
-          houseType == freezed ? _value.houseType : houseType as LandlordField,
-      street: street == freezed ? _value.street : street as LandlordField,
-      town: town == freezed ? _value.town : town as LandlordField,
-      state: state == freezed ? _value.state : state as LandlordField,
-      country: country == freezed ? _value.country : country as LandlordField,
+      houseType: houseType == freezed
+          ? _value.houseType
+          : houseType as LandlordField<String>,
+      street:
+          street == freezed ? _value.street : street as LandlordField<String>,
+      town: town == freezed ? _value.town : town as LandlordField<String>,
+      state: state == freezed ? _value.state : state as CountryState,
+      country: country == freezed
+          ? _value.country
+          : country as LandlordField<String>,
       color: color == freezed ? _value.color : color as MaterialColor,
       image: image == freezed ? _value.image : image as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
-          : numberOfTenants as TenantsCountField,
+          : numberOfTenants as LandlordField<int>,
+      numberOfApartments: numberOfApartments == freezed
+          ? _value.numberOfApartments
+          : numberOfApartments as LandlordField<int>,
+      numberOfAvailableApartments: numberOfAvailableApartments == freezed
+          ? _value.numberOfAvailableApartments
+          : numberOfAvailableApartments as LandlordField<int>,
+      numberOfRentedApartment: numberOfRentedApartment == freezed
+          ? _value.numberOfRentedApartment
+          : numberOfRentedApartment as LandlordField<int>,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -159,6 +192,16 @@ class _$LandlordPropertyCopyWithImpl<$Res>
       deletedAt:
           deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
+  }
+
+  @override
+  $CountryStateCopyWith<$Res> get state {
+    if (_value.state == null) {
+      return null;
+    }
+    return $CountryStateCopyWith<$Res>(_value.state, (value) {
+      return _then(_value.copyWith(state: value));
+    });
   }
 }
 
@@ -171,19 +214,25 @@ abstract class _$LandlordPropertyCopyWith<$Res>
   @override
   $Res call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField name,
+      @nullable LandlordField<String> name,
       @nullable LandlordPropertyTypeField propertyType,
-      @nullable LandlordField houseType,
-      @nullable LandlordField street,
-      @nullable LandlordField town,
-      @nullable LandlordField state,
-      @nullable LandlordField country,
+      @nullable LandlordField<String> houseType,
+      @nullable LandlordField<String> street,
+      @nullable LandlordField<String> town,
+      @nullable CountryState state,
+      @nullable LandlordField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage image,
-      @nullable TenantsCountField numberOfTenants,
+      @nullable LandlordField<int> numberOfTenants,
+      @nullable LandlordField<int> numberOfApartments,
+      @nullable LandlordField<int> numberOfAvailableApartments,
+      @nullable LandlordField<int> numberOfRentedApartment,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
+
+  @override
+  $CountryStateCopyWith<$Res> get state;
 }
 
 /// @nodoc
@@ -210,27 +259,43 @@ class __$LandlordPropertyCopyWithImpl<$Res>
     Object color = freezed,
     Object image = freezed,
     Object numberOfTenants = freezed,
+    Object numberOfApartments = freezed,
+    Object numberOfAvailableApartments = freezed,
+    Object numberOfRentedApartment = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
   }) {
     return _then(_LandlordProperty(
       id: id == freezed ? _value.id : id as UniqueId<int>,
-      name: name == freezed ? _value.name : name as LandlordField,
+      name: name == freezed ? _value.name : name as LandlordField<String>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as LandlordPropertyTypeField,
-      houseType:
-          houseType == freezed ? _value.houseType : houseType as LandlordField,
-      street: street == freezed ? _value.street : street as LandlordField,
-      town: town == freezed ? _value.town : town as LandlordField,
-      state: state == freezed ? _value.state : state as LandlordField,
-      country: country == freezed ? _value.country : country as LandlordField,
+      houseType: houseType == freezed
+          ? _value.houseType
+          : houseType as LandlordField<String>,
+      street:
+          street == freezed ? _value.street : street as LandlordField<String>,
+      town: town == freezed ? _value.town : town as LandlordField<String>,
+      state: state == freezed ? _value.state : state as CountryState,
+      country: country == freezed
+          ? _value.country
+          : country as LandlordField<String>,
       color: color == freezed ? _value.color : color as MaterialColor,
       image: image == freezed ? _value.image : image as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
-          : numberOfTenants as TenantsCountField,
+          : numberOfTenants as LandlordField<int>,
+      numberOfApartments: numberOfApartments == freezed
+          ? _value.numberOfApartments
+          : numberOfApartments as LandlordField<int>,
+      numberOfAvailableApartments: numberOfAvailableApartments == freezed
+          ? _value.numberOfAvailableApartments
+          : numberOfAvailableApartments as LandlordField<int>,
+      numberOfRentedApartment: numberOfRentedApartment == freezed
+          ? _value.numberOfRentedApartment
+          : numberOfRentedApartment as LandlordField<int>,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -255,6 +320,9 @@ class _$_LandlordProperty extends _LandlordProperty {
       @required @nullable this.color,
       @required @nullable this.image,
       @nullable this.numberOfTenants,
+      @nullable this.numberOfApartments,
+      @nullable this.numberOfAvailableApartments,
+      @nullable this.numberOfRentedApartment,
       @nullable this.createdAt,
       @nullable this.updatedAt,
       @nullable this.deletedAt})
@@ -265,25 +333,25 @@ class _$_LandlordProperty extends _LandlordProperty {
   final UniqueId<int> id;
   @override
   @nullable
-  final LandlordField name;
+  final LandlordField<String> name;
   @override
   @nullable
   final LandlordPropertyTypeField propertyType;
   @override
   @nullable
-  final LandlordField houseType;
+  final LandlordField<String> houseType;
   @override
   @nullable
-  final LandlordField street;
+  final LandlordField<String> street;
   @override
   @nullable
-  final LandlordField town;
+  final LandlordField<String> town;
   @override
   @nullable
-  final LandlordField state;
+  final CountryState state;
   @override
   @nullable
-  final LandlordField country;
+  final LandlordField<String> country;
   @override
   @nullable
   final MaterialColor color;
@@ -292,7 +360,16 @@ class _$_LandlordProperty extends _LandlordProperty {
   final LandlordPropertyImage image;
   @override
   @nullable
-  final TenantsCountField numberOfTenants;
+  final LandlordField<int> numberOfTenants;
+  @override
+  @nullable
+  final LandlordField<int> numberOfApartments;
+  @override
+  @nullable
+  final LandlordField<int> numberOfAvailableApartments;
+  @override
+  @nullable
+  final LandlordField<int> numberOfRentedApartment;
   @override
   @nullable
   final DateTime createdAt;
@@ -305,7 +382,7 @@ class _$_LandlordProperty extends _LandlordProperty {
 
   @override
   String toString() {
-    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, country: $country, color: $color, image: $image, numberOfTenants: $numberOfTenants, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, country: $country, color: $color, image: $image, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -338,6 +415,18 @@ class _$_LandlordProperty extends _LandlordProperty {
             (identical(other.numberOfTenants, numberOfTenants) ||
                 const DeepCollectionEquality()
                     .equals(other.numberOfTenants, numberOfTenants)) &&
+            (identical(other.numberOfApartments, numberOfApartments) ||
+                const DeepCollectionEquality()
+                    .equals(other.numberOfApartments, numberOfApartments)) &&
+            (identical(other.numberOfAvailableApartments,
+                    numberOfAvailableApartments) ||
+                const DeepCollectionEquality().equals(
+                    other.numberOfAvailableApartments,
+                    numberOfAvailableApartments)) &&
+            (identical(
+                    other.numberOfRentedApartment, numberOfRentedApartment) ||
+                const DeepCollectionEquality().equals(
+                    other.numberOfRentedApartment, numberOfRentedApartment)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -363,6 +452,9 @@ class _$_LandlordProperty extends _LandlordProperty {
       const DeepCollectionEquality().hash(color) ^
       const DeepCollectionEquality().hash(image) ^
       const DeepCollectionEquality().hash(numberOfTenants) ^
+      const DeepCollectionEquality().hash(numberOfApartments) ^
+      const DeepCollectionEquality().hash(numberOfAvailableApartments) ^
+      const DeepCollectionEquality().hash(numberOfRentedApartment) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(deletedAt);
@@ -377,16 +469,19 @@ abstract class _LandlordProperty extends LandlordProperty {
   const _LandlordProperty._() : super._();
   const factory _LandlordProperty(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField name,
+      @nullable LandlordField<String> name,
       @nullable LandlordPropertyTypeField propertyType,
-      @nullable LandlordField houseType,
-      @nullable LandlordField street,
-      @nullable LandlordField town,
-      @nullable LandlordField state,
-      @nullable LandlordField country,
+      @nullable LandlordField<String> houseType,
+      @nullable LandlordField<String> street,
+      @nullable LandlordField<String> town,
+      @nullable CountryState state,
+      @nullable LandlordField<String> country,
       @required @nullable MaterialColor color,
       @required @nullable LandlordPropertyImage image,
-      @nullable TenantsCountField numberOfTenants,
+      @nullable LandlordField<int> numberOfTenants,
+      @nullable LandlordField<int> numberOfApartments,
+      @nullable LandlordField<int> numberOfAvailableApartments,
+      @nullable LandlordField<int> numberOfRentedApartment,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) = _$_LandlordProperty;
@@ -396,25 +491,25 @@ abstract class _LandlordProperty extends LandlordProperty {
   UniqueId<int> get id;
   @override
   @nullable
-  LandlordField get name;
+  LandlordField<String> get name;
   @override
   @nullable
   LandlordPropertyTypeField get propertyType;
   @override
   @nullable
-  LandlordField get houseType;
+  LandlordField<String> get houseType;
   @override
   @nullable
-  LandlordField get street;
+  LandlordField<String> get street;
   @override
   @nullable
-  LandlordField get town;
+  LandlordField<String> get town;
   @override
   @nullable
-  LandlordField get state;
+  CountryState get state;
   @override
   @nullable
-  LandlordField get country;
+  LandlordField<String> get country;
   @override
   @nullable
   MaterialColor get color;
@@ -423,7 +518,16 @@ abstract class _LandlordProperty extends LandlordProperty {
   LandlordPropertyImage get image;
   @override
   @nullable
-  TenantsCountField get numberOfTenants;
+  LandlordField<int> get numberOfTenants;
+  @override
+  @nullable
+  LandlordField<int> get numberOfApartments;
+  @override
+  @nullable
+  LandlordField<int> get numberOfAvailableApartments;
+  @override
+  @nullable
+  LandlordField<int> get numberOfRentedApartment;
   @override
   @nullable
   DateTime get createdAt;

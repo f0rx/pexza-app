@@ -32,29 +32,23 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
     return BlocProvider(
       create: (_) => getIt<LandlordPropertyCubit>()..init(property),
       child: BlocConsumer<LandlordPropertyCubit, LandlordPropertyState>(
-        listener: (c, s) {
-          c.read<LandlordPropertyCubit>().state.optionOfFailure.fold(
-                () => null,
-                (failure) => Flushbar(
-                  duration: const Duration(seconds: 10),
-                  icon: const Icon(Icons.error, color: Colors.red),
-                  messageText: AutoSizeText(
-                    !failure.message.isNullOrBlank
-                        ? failure.message
-                        : failure.error,
-                  ),
-                  borderRadius: 8,
-                  dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                  margin: const EdgeInsets.all(8),
-                  flushbarPosition:
-                      MediaQuery.of(context).viewInsets.bottom == 0
-                          ? FlushbarPosition.BOTTOM
-                          : FlushbarPosition.TOP,
-                  shouldIconPulse: true,
-                  backgroundColor: Theme.of(context).primaryColor,
-                ).show(context),
-              );
-        },
+        listener: (c, s) => s.response.fold(
+          () => null,
+          (either) => BottomAlertDialog.show(
+            context,
+            message: either.fold(
+              (f) => f?.message ?? f?.error,
+              (r) => r?.message ?? r?.details,
+            ),
+            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
+            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
+            shouldIconPulse: either.fold((_) => null, (r) => false),
+            callback: either.fold(
+              (_) => null,
+              (r) => (_) => navigator.pop(),
+            ),
+          ),
+        ),
         builder: (context, state) => PortalEntry(
           visible: context.watch<LandlordPropertyCubit>().state.isLoading,
           portal: App.waveLoadingBar,
@@ -72,6 +66,8 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
             ? "Add New Property"
             : "Update ${context.read<LandlordPropertyCubit>().state.propertyType.getOrNull} "
                 "Property",
+        implyLeading: true,
+        leadingCondition: false,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -105,11 +101,12 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                 validator: (value) =>
                     c.read<LandlordPropertyCubit>().state.name.value.fold(
                           (error) => error.message,
-                          (r) => s.optionOfFailure.fold(
+                          (r) => s.response.fold(
                             () => null,
-                            (f) => !f.errors.isNull
-                                ? f.errors?.name?.firstOrNull
-                                : null,
+                            (_) => _.fold(
+                              (f) => f.errors?.name?.firstOrNull,
+                              (_) => null,
+                            ),
                           ),
                         ),
                 onFieldSubmitted: (_) =>
@@ -188,11 +185,12 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                 validator: (value) =>
                     c.read<LandlordPropertyCubit>().state.houseType.value.fold(
                           (error) => error.message,
-                          (r) => s.optionOfFailure.fold(
+                          (r) => s.response.fold(
                             () => null,
-                            (f) => !f.errors.isNull
-                                ? f.errors?.houseType?.firstOrNull
-                                : null,
+                            (_) => _.fold(
+                              (f) => f.errors?.houseType?.firstOrNull,
+                              (_) => null,
+                            ),
                           ),
                         ),
                 onFieldSubmitted: (_) =>
@@ -234,11 +232,12 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                 validator: (value) =>
                     c.read<LandlordPropertyCubit>().state.town.value.fold(
                           (error) => error.message,
-                          (r) => s.optionOfFailure.fold(
+                          (r) => s.response.fold(
                             () => null,
-                            (f) => !f.errors.isNull
-                                ? f.errors?.town?.firstOrNull
-                                : null,
+                            (_) => _.fold(
+                              (f) => f.errors?.town?.firstOrNull,
+                              (_) => null,
+                            ),
                           ),
                         ),
                 onFieldSubmitted: (_) =>
@@ -280,11 +279,12 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                 validator: (value) =>
                     c.read<LandlordPropertyCubit>().state.street.value.fold(
                           (error) => error.message,
-                          (r) => s.optionOfFailure.fold(
+                          (r) => s.response.fold(
                             () => null,
-                            (f) => !f.errors.isNull
-                                ? f.errors?.street?.firstOrNull
-                                : null,
+                            (_) => _.fold(
+                              (f) => f.errors?.street?.firstOrNull,
+                              (_) => null,
+                            ),
                           ),
                         ),
                 onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),

@@ -24,7 +24,11 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Toolbar(title: "Pair Tenant to Apartment"),
+      appBar: Toolbar(
+        title: "Pair Tenant to Apartment",
+        implyLeading: true,
+        leadingCondition: false,
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         controller: ScrollController(),

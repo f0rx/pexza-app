@@ -18,12 +18,12 @@ class _$MetaFieldTearOff {
 
 // ignore: unused_element
   _MetaField call(
-      {@JsonKey(includeIfNull: false, name: "current_page") int currentPage,
+      {@JsonKey(includeIfNull: false, name: 'current_page') int currentPage,
       @JsonKey(includeIfNull: false) int from,
-      @JsonKey(includeIfNull: false, name: "last_page") int lastPage,
+      @JsonKey(includeIfNull: false, name: 'last_page') int lastPage,
       @nullable @JsonKey(includeIfNull: false) List<PaginationLinks> links,
       @nullable @JsonKey(includeIfNull: false) String path,
-      @JsonKey(includeIfNull: false, name: "per_page") int perPage,
+      @JsonKey(includeIfNull: false, name: 'per_page') int perPage,
       @JsonKey(includeIfNull: false) int to,
       @JsonKey(includeIfNull: false) int total}) {
     return _MetaField(
@@ -50,11 +50,11 @@ const $MetaField = _$MetaFieldTearOff();
 
 /// @nodoc
 mixin _$MetaField {
-  @JsonKey(includeIfNull: false, name: "current_page")
+  @JsonKey(includeIfNull: false, name: 'current_page')
   int get currentPage;
   @JsonKey(includeIfNull: false)
   int get from;
-  @JsonKey(includeIfNull: false, name: "last_page")
+  @JsonKey(includeIfNull: false, name: 'last_page')
   int get lastPage;
   @nullable
   @JsonKey(includeIfNull: false)
@@ -62,7 +62,7 @@ mixin _$MetaField {
   @nullable
   @JsonKey(includeIfNull: false)
   String get path;
-  @JsonKey(includeIfNull: false, name: "per_page")
+  @JsonKey(includeIfNull: false, name: 'per_page')
   int get perPage;
   @JsonKey(includeIfNull: false)
   int get to;
@@ -79,12 +79,12 @@ abstract class $MetaFieldCopyWith<$Res> {
   factory $MetaFieldCopyWith(MetaField value, $Res Function(MetaField) then) =
       _$MetaFieldCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(includeIfNull: false, name: "current_page") int currentPage,
+      {@JsonKey(includeIfNull: false, name: 'current_page') int currentPage,
       @JsonKey(includeIfNull: false) int from,
-      @JsonKey(includeIfNull: false, name: "last_page") int lastPage,
+      @JsonKey(includeIfNull: false, name: 'last_page') int lastPage,
       @nullable @JsonKey(includeIfNull: false) List<PaginationLinks> links,
       @nullable @JsonKey(includeIfNull: false) String path,
-      @JsonKey(includeIfNull: false, name: "per_page") int perPage,
+      @JsonKey(includeIfNull: false, name: 'per_page') int perPage,
       @JsonKey(includeIfNull: false) int to,
       @JsonKey(includeIfNull: false) int total});
 }
@@ -129,12 +129,12 @@ abstract class _$MetaFieldCopyWith<$Res> implements $MetaFieldCopyWith<$Res> {
       __$MetaFieldCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(includeIfNull: false, name: "current_page") int currentPage,
+      {@JsonKey(includeIfNull: false, name: 'current_page') int currentPage,
       @JsonKey(includeIfNull: false) int from,
-      @JsonKey(includeIfNull: false, name: "last_page") int lastPage,
+      @JsonKey(includeIfNull: false, name: 'last_page') int lastPage,
       @nullable @JsonKey(includeIfNull: false) List<PaginationLinks> links,
       @nullable @JsonKey(includeIfNull: false) String path,
-      @JsonKey(includeIfNull: false, name: "per_page") int perPage,
+      @JsonKey(includeIfNull: false, name: 'per_page') int perPage,
       @JsonKey(includeIfNull: false) int to,
       @JsonKey(includeIfNull: false) int total});
 }
@@ -178,12 +178,12 @@ class __$MetaFieldCopyWithImpl<$Res> extends _$MetaFieldCopyWithImpl<$Res>
 /// @nodoc
 class _$_MetaField extends _MetaField {
   const _$_MetaField(
-      {@JsonKey(includeIfNull: false, name: "current_page") this.currentPage,
+      {@JsonKey(includeIfNull: false, name: 'current_page') this.currentPage,
       @JsonKey(includeIfNull: false) this.from,
-      @JsonKey(includeIfNull: false, name: "last_page") this.lastPage,
+      @JsonKey(includeIfNull: false, name: 'last_page') this.lastPage,
       @nullable @JsonKey(includeIfNull: false) this.links,
       @nullable @JsonKey(includeIfNull: false) this.path,
-      @JsonKey(includeIfNull: false, name: "per_page") this.perPage,
+      @JsonKey(includeIfNull: false, name: 'per_page') this.perPage,
       @JsonKey(includeIfNull: false) this.to,
       @JsonKey(includeIfNull: false) this.total})
       : super._();
@@ -192,13 +192,13 @@ class _$_MetaField extends _MetaField {
       _$_$_MetaFieldFromJson(json);
 
   @override
-  @JsonKey(includeIfNull: false, name: "current_page")
+  @JsonKey(includeIfNull: false, name: 'current_page')
   final int currentPage;
   @override
   @JsonKey(includeIfNull: false)
   final int from;
   @override
-  @JsonKey(includeIfNull: false, name: "last_page")
+  @JsonKey(includeIfNull: false, name: 'last_page')
   final int lastPage;
   @override
   @nullable
@@ -209,7 +209,7 @@ class _$_MetaField extends _MetaField {
   @JsonKey(includeIfNull: false)
   final String path;
   @override
-  @JsonKey(includeIfNull: false, name: "per_page")
+  @JsonKey(includeIfNull: false, name: 'per_page')
   final int perPage;
   @override
   @JsonKey(includeIfNull: false)
@@ -274,12 +274,12 @@ class _$_MetaField extends _MetaField {
 abstract class _MetaField extends MetaField {
   const _MetaField._() : super._();
   const factory _MetaField(
-      {@JsonKey(includeIfNull: false, name: "current_page") int currentPage,
+      {@JsonKey(includeIfNull: false, name: 'current_page') int currentPage,
       @JsonKey(includeIfNull: false) int from,
-      @JsonKey(includeIfNull: false, name: "last_page") int lastPage,
+      @JsonKey(includeIfNull: false, name: 'last_page') int lastPage,
       @nullable @JsonKey(includeIfNull: false) List<PaginationLinks> links,
       @nullable @JsonKey(includeIfNull: false) String path,
-      @JsonKey(includeIfNull: false, name: "per_page") int perPage,
+      @JsonKey(includeIfNull: false, name: 'per_page') int perPage,
       @JsonKey(includeIfNull: false) int to,
       @JsonKey(includeIfNull: false) int total}) = _$_MetaField;
 
@@ -287,13 +287,13 @@ abstract class _MetaField extends MetaField {
       _$_MetaField.fromJson;
 
   @override
-  @JsonKey(includeIfNull: false, name: "current_page")
+  @JsonKey(includeIfNull: false, name: 'current_page')
   int get currentPage;
   @override
   @JsonKey(includeIfNull: false)
   int get from;
   @override
-  @JsonKey(includeIfNull: false, name: "last_page")
+  @JsonKey(includeIfNull: false, name: 'last_page')
   int get lastPage;
   @override
   @nullable
@@ -304,7 +304,7 @@ abstract class _MetaField extends MetaField {
   @JsonKey(includeIfNull: false)
   String get path;
   @override
-  @JsonKey(includeIfNull: false, name: "per_page")
+  @JsonKey(includeIfNull: false, name: 'per_page')
   int get perPage;
   @override
   @JsonKey(includeIfNull: false)

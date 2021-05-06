@@ -15,7 +15,7 @@ abstract class LandlordApartment implements _$LandlordApartment {
 
   const factory LandlordApartment({
     @nullable UniqueId<int> id,
-    @nullable LandlordField name,
+    @nullable LandlordField<String> name,
     @nullable ApartmentStatus status,
     @nullable LandlordProperty property,
     @nullable DateTime createdAt,

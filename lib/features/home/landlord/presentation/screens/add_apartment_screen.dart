@@ -1,6 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,29 +27,23 @@ class LandlordAddApartmentScreen extends StatelessWidget with AutoRouteWrapper {
     return BlocProvider(
       create: (_) => getIt<LandlordApartmentCubit>()..init(apartment, property),
       child: BlocConsumer<LandlordApartmentCubit, LandlordApartmentState>(
-        listener: (c, s) {
-          c.read<LandlordApartmentCubit>().state.optionOfFailure.fold(
-                () => null,
-                (failure) => Flushbar(
-                  duration: const Duration(seconds: 10),
-                  icon: const Icon(Icons.error, color: Colors.red),
-                  messageText: AutoSizeText(
-                    !failure.message.isNullOrBlank
-                        ? failure.message
-                        : failure.error,
-                  ),
-                  borderRadius: 8,
-                  dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                  margin: const EdgeInsets.all(8),
-                  flushbarPosition:
-                      MediaQuery.of(context).viewInsets.bottom == 0
-                          ? FlushbarPosition.BOTTOM
-                          : FlushbarPosition.TOP,
-                  shouldIconPulse: true,
-                  backgroundColor: Theme.of(context).primaryColor,
-                ).show(context),
-              );
-        },
+        listener: (c, s) => s.response.fold(
+          () => null,
+          (either) => BottomAlertDialog.show(
+            context,
+            message: either.fold(
+              (f) => f.message ?? f.error,
+              (r) => r.message ?? r.details,
+            ),
+            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
+            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
+            shouldIconPulse: either.fold((_) => null, (r) => false),
+            callback: either.fold(
+              (_) => null,
+              (r) => (_) => navigator.pop(),
+            ),
+          ),
+        ),
         builder: (c, state) => PortalEntry(
           visible: c.watch<LandlordApartmentCubit>().state.isLoading,
           portal: App.waveLoadingBar,
@@ -63,7 +56,11 @@ class LandlordAddApartmentScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Toolbar(title: "Add Apartment to ${property?.name?.getOrEmpty}"),
+      appBar: Toolbar(
+        title: "Add Apartment to ${property?.name?.getOrEmpty}",
+        implyLeading: true,
+        leadingCondition: false,
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         controller: ScrollController(),
@@ -96,11 +93,12 @@ class LandlordAddApartmentScreen extends StatelessWidget with AutoRouteWrapper {
                 validator: (value) =>
                     c.read<LandlordApartmentCubit>().state.name.value.fold(
                           (error) => error.message,
-                          (r) => s.optionOfFailure.fold(
+                          (r) => s.response.fold(
                             () => null,
-                            (f) => !f.errors.isNull
-                                ? f.errors?.name?.firstOrNull
-                                : null,
+                            (_) => _.fold(
+                              (f) => f.errors?.name?.firstOrNull,
+                              (_) => null,
+                            ),
                           ),
                         ),
                 onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),

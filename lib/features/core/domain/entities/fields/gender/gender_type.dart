@@ -4,6 +4,7 @@ import 'package:built_value/built_value.dart';
 part 'gender_type.g.dart';
 
 class GenderType extends EnumClass {
+  @BuiltValueEnumConst(fallback: true)
   static const GenderType Male = _$male;
   static const GenderType Female = _$female;
   static const GenderType Others = _$others;

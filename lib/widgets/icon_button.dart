@@ -10,6 +10,7 @@ class AppIconButton extends StatelessWidget {
   final EdgeInsets padding;
   final BorderRadiusGeometry borderRadius;
   final Widget child;
+  final String tooltip;
   final Function() onPressed;
   final Function() onLongPressed;
 
@@ -20,6 +21,7 @@ class AppIconButton extends StatelessWidget {
     this.clipBehavior = Clip.antiAlias,
     this.type = MaterialType.circle,
     this.padding,
+    this.tooltip = "",
     this.borderRadius,
     this.onPressed,
     this.onLongPressed,
@@ -28,19 +30,22 @@ class AppIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: backgroundColor,
-      elevation: elevation,
-      clipBehavior: clipBehavior,
-      borderRadius: borderRadius,
-      type: type,
-      child: InkWell(
-        child: Padding(
-          child: Center(child: child),
-          padding: padding ?? EdgeInsets.all(App.shortest * 0.03),
+    return Tooltip(
+      message: tooltip,
+      child: Material(
+        color: backgroundColor,
+        elevation: elevation,
+        clipBehavior: clipBehavior,
+        borderRadius: borderRadius,
+        type: type,
+        child: InkWell(
+          child: Padding(
+            child: Center(child: child),
+            padding: padding ?? EdgeInsets.all(App.shortest * 0.03),
+          ),
+          onTap: onPressed,
+          onLongPress: onLongPressed,
         ),
-        onTap: onPressed,
-        onLongPress: onLongPressed,
       ),
     );
   }

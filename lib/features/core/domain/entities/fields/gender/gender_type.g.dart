@@ -19,7 +19,7 @@ GenderType _$valueOf(String name) {
     case 'Others':
       return _$others;
     default:
-      throw new ArgumentError(name);
+      return _$male;
   }
 }
 

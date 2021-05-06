@@ -7,6 +7,7 @@ import 'package:built_value/serializer.dart';
 part 'property_type.g.dart';
 
 class PropertyType extends EnumClass {
+  @BuiltValueEnumConst(fallback: true)
   static const PropertyType Residential = _$Residential;
   static const PropertyType Commercial = _$Commercial;
 

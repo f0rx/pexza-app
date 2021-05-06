@@ -22,7 +22,7 @@ PropertyPlan _$valueOf(String name) {
     case 'BiAnnually':
       return _$bi_annually;
     default:
-      throw new ArgumentError(name);
+      return _$monthly;
   }
 }
 

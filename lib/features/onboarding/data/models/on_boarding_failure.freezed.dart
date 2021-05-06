@@ -14,27 +14,18 @@ class _$OnBoardingFailureTearOff {
   const _$OnBoardingFailureTearOff();
 
 // ignore: unused_element
-  _OnBoardingFailure call(
-      {int code, String message, String error, String details}) {
-    return _OnBoardingFailure(
-      code: code,
-      message: message,
-      error: error,
-      details: details,
-    );
-  }
-
-// ignore: unused_element
   _NoInternetConnection notConnected(
       {int code,
       String message = OnBoardingFailure.kNotConnected,
       String error,
-      String details}) {
+      String details,
+      ServerFieldErrors errors}) {
     return _NoInternetConnection(
       code: code,
       message: message,
       error: error,
       details: details,
+      errors: errors,
     );
   }
 
@@ -43,12 +34,14 @@ class _$OnBoardingFailureTearOff {
       {int code,
       String message = OnBoardingFailure.kPoorInternet,
       String error,
-      String details}) {
+      String details,
+      ServerFieldErrors errors}) {
     return _PoorInternetConnection(
       code: code,
       message: message,
       error: error,
       details: details,
+      errors: errors,
     );
   }
 }
@@ -63,35 +56,32 @@ mixin _$OnBoardingFailure {
   String get message;
   String get error;
   String get details;
+  ServerFieldErrors get errors;
 
   @optionalTypeArgs
-  TResult when<TResult extends Object>(
-    TResult $default(int code, String message, String error, String details), {
+  TResult when<TResult extends Object>({
     @required
-        TResult notConnected(
-            int code, String message, String error, String details),
+        TResult notConnected(int code, String message, String error,
+            String details, ServerFieldErrors errors),
     @required
-        TResult poorInternet(
-            int code, String message, String error, String details),
+        TResult poorInternet(int code, String message, String error,
+            String details, ServerFieldErrors errors),
   });
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>(
-    TResult $default(int code, String message, String error, String details), {
-    TResult notConnected(
-        int code, String message, String error, String details),
-    TResult poorInternet(
-        int code, String message, String error, String details),
+  TResult maybeWhen<TResult extends Object>({
+    TResult notConnected(int code, String message, String error, String details,
+        ServerFieldErrors errors),
+    TResult poorInternet(int code, String message, String error, String details,
+        ServerFieldErrors errors),
     @required TResult orElse(),
   });
   @optionalTypeArgs
-  TResult map<TResult extends Object>(
-    TResult $default(_OnBoardingFailure value), {
+  TResult map<TResult extends Object>({
     @required TResult notConnected(_NoInternetConnection value),
     @required TResult poorInternet(_PoorInternetConnection value),
   });
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>(
-    TResult $default(_OnBoardingFailure value), {
+  TResult maybeMap<TResult extends Object>({
     TResult notConnected(_NoInternetConnection value),
     TResult poorInternet(_PoorInternetConnection value),
     @required TResult orElse(),
@@ -106,7 +96,14 @@ abstract class $OnBoardingFailureCopyWith<$Res> {
   factory $OnBoardingFailureCopyWith(
           OnBoardingFailure value, $Res Function(OnBoardingFailure) then) =
       _$OnBoardingFailureCopyWithImpl<$Res>;
-  $Res call({int code, String message, String error, String details});
+  $Res call(
+      {int code,
+      String message,
+      String error,
+      String details,
+      ServerFieldErrors errors});
+
+  $ServerFieldErrorsCopyWith<$Res> get errors;
 }
 
 /// @nodoc
@@ -124,183 +121,26 @@ class _$OnBoardingFailureCopyWithImpl<$Res>
     Object message = freezed,
     Object error = freezed,
     Object details = freezed,
+    Object errors = freezed,
   }) {
     return _then(_value.copyWith(
       code: code == freezed ? _value.code : code as int,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       details: details == freezed ? _value.details : details as String,
+      errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
     ));
   }
-}
-
-/// @nodoc
-abstract class _$OnBoardingFailureCopyWith<$Res>
-    implements $OnBoardingFailureCopyWith<$Res> {
-  factory _$OnBoardingFailureCopyWith(
-          _OnBoardingFailure value, $Res Function(_OnBoardingFailure) then) =
-      __$OnBoardingFailureCopyWithImpl<$Res>;
-  @override
-  $Res call({int code, String message, String error, String details});
-}
-
-/// @nodoc
-class __$OnBoardingFailureCopyWithImpl<$Res>
-    extends _$OnBoardingFailureCopyWithImpl<$Res>
-    implements _$OnBoardingFailureCopyWith<$Res> {
-  __$OnBoardingFailureCopyWithImpl(
-      _OnBoardingFailure _value, $Res Function(_OnBoardingFailure) _then)
-      : super(_value, (v) => _then(v as _OnBoardingFailure));
 
   @override
-  _OnBoardingFailure get _value => super._value as _OnBoardingFailure;
-
-  @override
-  $Res call({
-    Object code = freezed,
-    Object message = freezed,
-    Object error = freezed,
-    Object details = freezed,
-  }) {
-    return _then(_OnBoardingFailure(
-      code: code == freezed ? _value.code : code as int,
-      message: message == freezed ? _value.message : message as String,
-      error: error == freezed ? _value.error : error as String,
-      details: details == freezed ? _value.details : details as String,
-    ));
-  }
-}
-
-/// @nodoc
-class _$_OnBoardingFailure extends _OnBoardingFailure {
-  const _$_OnBoardingFailure(
-      {this.code, this.message, this.error, this.details})
-      : super._();
-
-  @override
-  final int code;
-  @override
-  final String message;
-  @override
-  final String error;
-  @override
-  final String details;
-
-  @override
-  String toString() {
-    return 'OnBoardingFailure(code: $code, message: $message, error: $error, details: $details)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _OnBoardingFailure &&
-            (identical(other.code, code) ||
-                const DeepCollectionEquality().equals(other.code, code)) &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality()
-                    .equals(other.message, message)) &&
-            (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)) &&
-            (identical(other.details, details) ||
-                const DeepCollectionEquality().equals(other.details, details)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(code) ^
-      const DeepCollectionEquality().hash(message) ^
-      const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(details);
-
-  @JsonKey(ignore: true)
-  @override
-  _$OnBoardingFailureCopyWith<_OnBoardingFailure> get copyWith =>
-      __$OnBoardingFailureCopyWithImpl<_OnBoardingFailure>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>(
-    TResult $default(int code, String message, String error, String details), {
-    @required
-        TResult notConnected(
-            int code, String message, String error, String details),
-    @required
-        TResult poorInternet(
-            int code, String message, String error, String details),
-  }) {
-    assert($default != null);
-    assert(notConnected != null);
-    assert(poorInternet != null);
-    return $default(code, message, error, details);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>(
-    TResult $default(int code, String message, String error, String details), {
-    TResult notConnected(
-        int code, String message, String error, String details),
-    TResult poorInternet(
-        int code, String message, String error, String details),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if ($default != null) {
-      return $default(code, message, error, details);
+  $ServerFieldErrorsCopyWith<$Res> get errors {
+    if (_value.errors == null) {
+      return null;
     }
-    return orElse();
+    return $ServerFieldErrorsCopyWith<$Res>(_value.errors, (value) {
+      return _then(_value.copyWith(errors: value));
+    });
   }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>(
-    TResult $default(_OnBoardingFailure value), {
-    @required TResult notConnected(_NoInternetConnection value),
-    @required TResult poorInternet(_PoorInternetConnection value),
-  }) {
-    assert($default != null);
-    assert(notConnected != null);
-    assert(poorInternet != null);
-    return $default(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>(
-    TResult $default(_OnBoardingFailure value), {
-    TResult notConnected(_NoInternetConnection value),
-    TResult poorInternet(_PoorInternetConnection value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if ($default != null) {
-      return $default(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _OnBoardingFailure extends OnBoardingFailure {
-  const _OnBoardingFailure._() : super._();
-  const factory _OnBoardingFailure(
-      {int code,
-      String message,
-      String error,
-      String details}) = _$_OnBoardingFailure;
-
-  @override
-  int get code;
-  @override
-  String get message;
-  @override
-  String get error;
-  @override
-  String get details;
-  @override
-  @JsonKey(ignore: true)
-  _$OnBoardingFailureCopyWith<_OnBoardingFailure> get copyWith;
 }
 
 /// @nodoc
@@ -310,7 +150,15 @@ abstract class _$NoInternetConnectionCopyWith<$Res>
           $Res Function(_NoInternetConnection) then) =
       __$NoInternetConnectionCopyWithImpl<$Res>;
   @override
-  $Res call({int code, String message, String error, String details});
+  $Res call(
+      {int code,
+      String message,
+      String error,
+      String details,
+      ServerFieldErrors errors});
+
+  @override
+  $ServerFieldErrorsCopyWith<$Res> get errors;
 }
 
 /// @nodoc
@@ -330,12 +178,14 @@ class __$NoInternetConnectionCopyWithImpl<$Res>
     Object message = freezed,
     Object error = freezed,
     Object details = freezed,
+    Object errors = freezed,
   }) {
     return _then(_NoInternetConnection(
       code: code == freezed ? _value.code : code as int,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       details: details == freezed ? _value.details : details as String,
+      errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
     ));
   }
 }
@@ -346,7 +196,8 @@ class _$_NoInternetConnection extends _NoInternetConnection {
       {this.code,
       this.message = OnBoardingFailure.kNotConnected,
       this.error,
-      this.details})
+      this.details,
+      this.errors})
       : assert(message != null),
         super._();
 
@@ -359,10 +210,12 @@ class _$_NoInternetConnection extends _NoInternetConnection {
   final String error;
   @override
   final String details;
+  @override
+  final ServerFieldErrors errors;
 
   @override
   String toString() {
-    return 'OnBoardingFailure.notConnected(code: $code, message: $message, error: $error, details: $details)';
+    return 'OnBoardingFailure.notConnected(code: $code, message: $message, error: $error, details: $details, errors: $errors)';
   }
 
   @override
@@ -377,7 +230,10 @@ class _$_NoInternetConnection extends _NoInternetConnection {
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)) &&
             (identical(other.details, details) ||
-                const DeepCollectionEquality().equals(other.details, details)));
+                const DeepCollectionEquality()
+                    .equals(other.details, details)) &&
+            (identical(other.errors, errors) ||
+                const DeepCollectionEquality().equals(other.errors, errors)));
   }
 
   @override
@@ -386,7 +242,8 @@ class _$_NoInternetConnection extends _NoInternetConnection {
       const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(details);
+      const DeepCollectionEquality().hash(details) ^
+      const DeepCollectionEquality().hash(errors);
 
   @JsonKey(ignore: true)
   @override
@@ -396,46 +253,41 @@ class _$_NoInternetConnection extends _NoInternetConnection {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>(
-    TResult $default(int code, String message, String error, String details), {
+  TResult when<TResult extends Object>({
     @required
-        TResult notConnected(
-            int code, String message, String error, String details),
+        TResult notConnected(int code, String message, String error,
+            String details, ServerFieldErrors errors),
     @required
-        TResult poorInternet(
-            int code, String message, String error, String details),
+        TResult poorInternet(int code, String message, String error,
+            String details, ServerFieldErrors errors),
   }) {
-    assert($default != null);
     assert(notConnected != null);
     assert(poorInternet != null);
-    return notConnected(code, message, error, details);
+    return notConnected(code, message, error, details, errors);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>(
-    TResult $default(int code, String message, String error, String details), {
-    TResult notConnected(
-        int code, String message, String error, String details),
-    TResult poorInternet(
-        int code, String message, String error, String details),
+  TResult maybeWhen<TResult extends Object>({
+    TResult notConnected(int code, String message, String error, String details,
+        ServerFieldErrors errors),
+    TResult poorInternet(int code, String message, String error, String details,
+        ServerFieldErrors errors),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (notConnected != null) {
-      return notConnected(code, message, error, details);
+      return notConnected(code, message, error, details, errors);
     }
     return orElse();
   }
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>(
-    TResult $default(_OnBoardingFailure value), {
+  TResult map<TResult extends Object>({
     @required TResult notConnected(_NoInternetConnection value),
     @required TResult poorInternet(_PoorInternetConnection value),
   }) {
-    assert($default != null);
     assert(notConnected != null);
     assert(poorInternet != null);
     return notConnected(this);
@@ -443,8 +295,7 @@ class _$_NoInternetConnection extends _NoInternetConnection {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>(
-    TResult $default(_OnBoardingFailure value), {
+  TResult maybeMap<TResult extends Object>({
     TResult notConnected(_NoInternetConnection value),
     TResult poorInternet(_PoorInternetConnection value),
     @required TResult orElse(),
@@ -463,7 +314,8 @@ abstract class _NoInternetConnection extends OnBoardingFailure {
       {int code,
       String message,
       String error,
-      String details}) = _$_NoInternetConnection;
+      String details,
+      ServerFieldErrors errors}) = _$_NoInternetConnection;
 
   @override
   int get code;
@@ -473,6 +325,8 @@ abstract class _NoInternetConnection extends OnBoardingFailure {
   String get error;
   @override
   String get details;
+  @override
+  ServerFieldErrors get errors;
   @override
   @JsonKey(ignore: true)
   _$NoInternetConnectionCopyWith<_NoInternetConnection> get copyWith;
@@ -485,7 +339,15 @@ abstract class _$PoorInternetConnectionCopyWith<$Res>
           $Res Function(_PoorInternetConnection) then) =
       __$PoorInternetConnectionCopyWithImpl<$Res>;
   @override
-  $Res call({int code, String message, String error, String details});
+  $Res call(
+      {int code,
+      String message,
+      String error,
+      String details,
+      ServerFieldErrors errors});
+
+  @override
+  $ServerFieldErrorsCopyWith<$Res> get errors;
 }
 
 /// @nodoc
@@ -505,12 +367,14 @@ class __$PoorInternetConnectionCopyWithImpl<$Res>
     Object message = freezed,
     Object error = freezed,
     Object details = freezed,
+    Object errors = freezed,
   }) {
     return _then(_PoorInternetConnection(
       code: code == freezed ? _value.code : code as int,
       message: message == freezed ? _value.message : message as String,
       error: error == freezed ? _value.error : error as String,
       details: details == freezed ? _value.details : details as String,
+      errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
     ));
   }
 }
@@ -521,7 +385,8 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
       {this.code,
       this.message = OnBoardingFailure.kPoorInternet,
       this.error,
-      this.details})
+      this.details,
+      this.errors})
       : assert(message != null),
         super._();
 
@@ -534,10 +399,12 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
   final String error;
   @override
   final String details;
+  @override
+  final ServerFieldErrors errors;
 
   @override
   String toString() {
-    return 'OnBoardingFailure.poorInternet(code: $code, message: $message, error: $error, details: $details)';
+    return 'OnBoardingFailure.poorInternet(code: $code, message: $message, error: $error, details: $details, errors: $errors)';
   }
 
   @override
@@ -552,7 +419,10 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)) &&
             (identical(other.details, details) ||
-                const DeepCollectionEquality().equals(other.details, details)));
+                const DeepCollectionEquality()
+                    .equals(other.details, details)) &&
+            (identical(other.errors, errors) ||
+                const DeepCollectionEquality().equals(other.errors, errors)));
   }
 
   @override
@@ -561,7 +431,8 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
       const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(details);
+      const DeepCollectionEquality().hash(details) ^
+      const DeepCollectionEquality().hash(errors);
 
   @JsonKey(ignore: true)
   @override
@@ -571,46 +442,41 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>(
-    TResult $default(int code, String message, String error, String details), {
+  TResult when<TResult extends Object>({
     @required
-        TResult notConnected(
-            int code, String message, String error, String details),
+        TResult notConnected(int code, String message, String error,
+            String details, ServerFieldErrors errors),
     @required
-        TResult poorInternet(
-            int code, String message, String error, String details),
+        TResult poorInternet(int code, String message, String error,
+            String details, ServerFieldErrors errors),
   }) {
-    assert($default != null);
     assert(notConnected != null);
     assert(poorInternet != null);
-    return poorInternet(code, message, error, details);
+    return poorInternet(code, message, error, details, errors);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>(
-    TResult $default(int code, String message, String error, String details), {
-    TResult notConnected(
-        int code, String message, String error, String details),
-    TResult poorInternet(
-        int code, String message, String error, String details),
+  TResult maybeWhen<TResult extends Object>({
+    TResult notConnected(int code, String message, String error, String details,
+        ServerFieldErrors errors),
+    TResult poorInternet(int code, String message, String error, String details,
+        ServerFieldErrors errors),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (poorInternet != null) {
-      return poorInternet(code, message, error, details);
+      return poorInternet(code, message, error, details, errors);
     }
     return orElse();
   }
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>(
-    TResult $default(_OnBoardingFailure value), {
+  TResult map<TResult extends Object>({
     @required TResult notConnected(_NoInternetConnection value),
     @required TResult poorInternet(_PoorInternetConnection value),
   }) {
-    assert($default != null);
     assert(notConnected != null);
     assert(poorInternet != null);
     return poorInternet(this);
@@ -618,8 +484,7 @@ class _$_PoorInternetConnection extends _PoorInternetConnection {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>(
-    TResult $default(_OnBoardingFailure value), {
+  TResult maybeMap<TResult extends Object>({
     TResult notConnected(_NoInternetConnection value),
     TResult poorInternet(_PoorInternetConnection value),
     @required TResult orElse(),
@@ -638,7 +503,8 @@ abstract class _PoorInternetConnection extends OnBoardingFailure {
       {int code,
       String message,
       String error,
-      String details}) = _$_PoorInternetConnection;
+      String details,
+      ServerFieldErrors errors}) = _$_PoorInternetConnection;
 
   @override
   int get code;
@@ -648,6 +514,8 @@ abstract class _PoorInternetConnection extends OnBoardingFailure {
   String get error;
   @override
   String get details;
+  @override
+  ServerFieldErrors get errors;
   @override
   @JsonKey(ignore: true)
   _$PoorInternetConnectionCopyWith<_PoorInternetConnection> get copyWith;

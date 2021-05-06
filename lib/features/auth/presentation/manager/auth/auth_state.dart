@@ -3,7 +3,8 @@ part of 'auth_cubit.dart';
 @freezed
 abstract class AuthState with _$AuthState {
   static KtList<Country> countries = KtList.from(Country.list);
-  static DateTime firstYear = DateTime(1910);
+  static DateTime firstYear = DateTime(1960);
+  static DateTime lastYear = DateTime(DateTime.now().year - 18);
   const AuthState._();
 
   const factory AuthState({

@@ -111,7 +111,7 @@ Widget _listView() {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: List.generate(
-                        2,
+                        3,
                         (index) => Flexible(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50.0),

@@ -15,26 +15,23 @@ abstract class LandlordProperty implements _$LandlordProperty {
 
   const factory LandlordProperty({
     @nullable UniqueId<int> id,
-    @nullable LandlordField name,
+    @nullable LandlordField<String> name,
     @nullable LandlordPropertyTypeField propertyType,
-    @nullable LandlordField houseType,
-    @nullable LandlordField street,
-    @nullable LandlordField town,
-    @nullable LandlordField state,
-    @nullable LandlordField country,
+    @nullable LandlordField<String> houseType,
+    @nullable LandlordField<String> street,
+    @nullable LandlordField<String> town,
+    @nullable CountryState state,
+    @nullable LandlordField<String> country,
     @nullable @required MaterialColor color,
     @nullable @required LandlordPropertyImage image,
-    @nullable TenantsCountField numberOfTenants,
+    @nullable LandlordField<int> numberOfTenants,
+    @nullable LandlordField<int> numberOfApartments,
+    @nullable LandlordField<int> numberOfAvailableApartments,
+    @nullable LandlordField<int> numberOfRentedApartment,
     @nullable DateTime createdAt,
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,
   }) = _LandlordProperty;
-
-  static LandlordProperty default_ = LandlordProperty(
-    name: LandlordField("-- Select --"),
-    color: null,
-    image: null,
-  );
 
   Option<FieldObjectException<dynamic>> get failures => name.mapped
       .andThen(propertyType.mapped)

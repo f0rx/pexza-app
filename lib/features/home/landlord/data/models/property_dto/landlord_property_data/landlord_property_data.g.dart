@@ -16,13 +16,16 @@ _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     houseType: json['house_type'] as String ?? '',
     street: json['street'] as String ?? '',
     town: json['town'] as String ?? '',
-    state: json['state'] as String ?? '',
     stateId: json['state_id'] as int,
     country: json['country'] as String ?? '',
+    numberOfTenants: json['number_of_tenants'] as int ?? 0,
+    numberOfApartments: json['number_of_apartments'] as int ?? 0,
+    numberOfAvailableApartments:
+        json['number_of_available_apartments'] as int ?? 0,
+    numberOfRentedApartment: json['number_of_rented_apartment'] as int ?? 0,
     createdAt: json['created_at'] as String,
     updatedAt: json['updated_at'] as String,
     deletedAt: json['deleted_at'] as String,
-    numberOfTenants: json['number_of_tenants'] as int ?? 0,
   );
 }
 
@@ -42,12 +45,15 @@ Map<String, dynamic> _$_$_LandlordPropertyDataToJson(
   writeNotNull('house_type', instance.houseType);
   writeNotNull('street', instance.street);
   writeNotNull('town', instance.town);
-  writeNotNull('state', instance.state);
   writeNotNull('state_id', instance.stateId);
   writeNotNull('country', instance.country);
+  writeNotNull('number_of_tenants', instance.numberOfTenants);
+  writeNotNull('number_of_apartments', instance.numberOfApartments);
+  writeNotNull(
+      'number_of_available_apartments', instance.numberOfAvailableApartments);
+  writeNotNull('number_of_rented_apartment', instance.numberOfRentedApartment);
   writeNotNull('created_at', instance.createdAt);
   writeNotNull('updated_at', instance.updatedAt);
   writeNotNull('deleted_at', instance.deletedAt);
-  writeNotNull('number_of_tenants', instance.numberOfTenants);
   return val;
 }

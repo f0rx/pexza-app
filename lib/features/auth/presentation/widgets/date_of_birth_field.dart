@@ -37,7 +37,7 @@ class DateOfBirthField extends StatelessWidget {
                         fieldLabelText: "$labelText",
                         fieldHintText: "mm/dd/yyyy",
                         firstDate: AuthState.firstYear,
-                        lastDate: App.today,
+                        lastDate: AuthState.lastYear,
                         errorFormatText: "Invalid $labelText",
                         errorInvalidText: "That's in the Future",
                         onDateSubmitted:
@@ -127,6 +127,7 @@ class DateOfBirthField extends StatelessWidget {
                         onPressed: () => App.showAdaptiveDatePicker(
                           context,
                           firstDate: AuthState.firstYear,
+                          lastDate: AuthState.lastYear,
                           currentDate:
                               state.dateOfBirth.value.getOrElse(() => null),
                           helpText: "Choose $labelText",

@@ -17,16 +17,16 @@ class _$LandlordPropertyStateTearOff {
   _LandlordPropertyState call(
       {bool isLoading = false,
       bool validate = false,
-      @required LandlordField name,
+      @required LandlordField<String> name,
       @required LandlordPropertyTypeField propertyType,
-      @required LandlordField houseType,
-      @required LandlordField street,
-      @required LandlordField town,
-      @required LandlordField state,
+      @required LandlordField<String> houseType,
+      @required LandlordField<String> street,
+      @required LandlordField<String> town,
+      @required LandlordField<String> state,
       KtList<LandlordProperty> properties = const KtList.empty(),
       KtList<LandlordApartment> apartments = const KtList.empty(),
       @nullable LandlordProperty property,
-      Option<LandlordFailure> optionOfFailure = const None()}) {
+      Option<Either<Failure, Success>> response = const None()}) {
     return _LandlordPropertyState(
       isLoading: isLoading,
       validate: validate,
@@ -39,7 +39,7 @@ class _$LandlordPropertyStateTearOff {
       properties: properties,
       apartments: apartments,
       property: property,
-      optionOfFailure: optionOfFailure,
+      response: response,
     );
   }
 }
@@ -52,17 +52,17 @@ const $LandlordPropertyState = _$LandlordPropertyStateTearOff();
 mixin _$LandlordPropertyState {
   bool get isLoading;
   bool get validate;
-  LandlordField get name;
+  LandlordField<String> get name;
   LandlordPropertyTypeField get propertyType;
-  LandlordField get houseType;
-  LandlordField get street;
-  LandlordField get town;
-  LandlordField get state;
+  LandlordField<String> get houseType;
+  LandlordField<String> get street;
+  LandlordField<String> get town;
+  LandlordField<String> get state;
   KtList<LandlordProperty> get properties;
   KtList<LandlordApartment> get apartments;
   @nullable
   LandlordProperty get property;
-  Option<LandlordFailure> get optionOfFailure;
+  Option<Either<Failure, Success>> get response;
 
   @JsonKey(ignore: true)
   $LandlordPropertyStateCopyWith<LandlordPropertyState> get copyWith;
@@ -76,16 +76,16 @@ abstract class $LandlordPropertyStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool validate,
-      LandlordField name,
+      LandlordField<String> name,
       LandlordPropertyTypeField propertyType,
-      LandlordField houseType,
-      LandlordField street,
-      LandlordField town,
-      LandlordField state,
+      LandlordField<String> houseType,
+      LandlordField<String> street,
+      LandlordField<String> town,
+      LandlordField<String> state,
       KtList<LandlordProperty> properties,
       KtList<LandlordApartment> apartments,
       @nullable LandlordProperty property,
-      Option<LandlordFailure> optionOfFailure});
+      Option<Either<Failure, Success>> response});
 
   $LandlordPropertyCopyWith<$Res> get property;
 }
@@ -112,20 +112,22 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
     Object properties = freezed,
     Object apartments = freezed,
     Object property = freezed,
-    Object optionOfFailure = freezed,
+    Object response = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      name: name == freezed ? _value.name : name as LandlordField,
+      name: name == freezed ? _value.name : name as LandlordField<String>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as LandlordPropertyTypeField,
-      houseType:
-          houseType == freezed ? _value.houseType : houseType as LandlordField,
-      street: street == freezed ? _value.street : street as LandlordField,
-      town: town == freezed ? _value.town : town as LandlordField,
-      state: state == freezed ? _value.state : state as LandlordField,
+      houseType: houseType == freezed
+          ? _value.houseType
+          : houseType as LandlordField<String>,
+      street:
+          street == freezed ? _value.street : street as LandlordField<String>,
+      town: town == freezed ? _value.town : town as LandlordField<String>,
+      state: state == freezed ? _value.state : state as LandlordField<String>,
       properties: properties == freezed
           ? _value.properties
           : properties as KtList<LandlordProperty>,
@@ -134,9 +136,9 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
           : apartments as KtList<LandlordApartment>,
       property:
           property == freezed ? _value.property : property as LandlordProperty,
-      optionOfFailure: optionOfFailure == freezed
-          ? _value.optionOfFailure
-          : optionOfFailure as Option<LandlordFailure>,
+      response: response == freezed
+          ? _value.response
+          : response as Option<Either<Failure, Success>>,
     ));
   }
 
@@ -161,16 +163,16 @@ abstract class _$LandlordPropertyStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool validate,
-      LandlordField name,
+      LandlordField<String> name,
       LandlordPropertyTypeField propertyType,
-      LandlordField houseType,
-      LandlordField street,
-      LandlordField town,
-      LandlordField state,
+      LandlordField<String> houseType,
+      LandlordField<String> street,
+      LandlordField<String> town,
+      LandlordField<String> state,
       KtList<LandlordProperty> properties,
       KtList<LandlordApartment> apartments,
       @nullable LandlordProperty property,
-      Option<LandlordFailure> optionOfFailure});
+      Option<Either<Failure, Success>> response});
 
   @override
   $LandlordPropertyCopyWith<$Res> get property;
@@ -200,20 +202,22 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
     Object properties = freezed,
     Object apartments = freezed,
     Object property = freezed,
-    Object optionOfFailure = freezed,
+    Object response = freezed,
   }) {
     return _then(_LandlordPropertyState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      name: name == freezed ? _value.name : name as LandlordField,
+      name: name == freezed ? _value.name : name as LandlordField<String>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as LandlordPropertyTypeField,
-      houseType:
-          houseType == freezed ? _value.houseType : houseType as LandlordField,
-      street: street == freezed ? _value.street : street as LandlordField,
-      town: town == freezed ? _value.town : town as LandlordField,
-      state: state == freezed ? _value.state : state as LandlordField,
+      houseType: houseType == freezed
+          ? _value.houseType
+          : houseType as LandlordField<String>,
+      street:
+          street == freezed ? _value.street : street as LandlordField<String>,
+      town: town == freezed ? _value.town : town as LandlordField<String>,
+      state: state == freezed ? _value.state : state as LandlordField<String>,
       properties: properties == freezed
           ? _value.properties
           : properties as KtList<LandlordProperty>,
@@ -222,9 +226,9 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
           : apartments as KtList<LandlordApartment>,
       property:
           property == freezed ? _value.property : property as LandlordProperty,
-      optionOfFailure: optionOfFailure == freezed
-          ? _value.optionOfFailure
-          : optionOfFailure as Option<LandlordFailure>,
+      response: response == freezed
+          ? _value.response
+          : response as Option<Either<Failure, Success>>,
     ));
   }
 }
@@ -243,7 +247,7 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
       this.properties = const KtList.empty(),
       this.apartments = const KtList.empty(),
       @nullable this.property,
-      this.optionOfFailure = const None()})
+      this.response = const None()})
       : assert(isLoading != null),
         assert(validate != null),
         assert(name != null),
@@ -254,7 +258,7 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
         assert(state != null),
         assert(properties != null),
         assert(apartments != null),
-        assert(optionOfFailure != null),
+        assert(response != null),
         super._();
 
   @JsonKey(defaultValue: false)
@@ -264,17 +268,17 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
   @override
   final bool validate;
   @override
-  final LandlordField name;
+  final LandlordField<String> name;
   @override
   final LandlordPropertyTypeField propertyType;
   @override
-  final LandlordField houseType;
+  final LandlordField<String> houseType;
   @override
-  final LandlordField street;
+  final LandlordField<String> street;
   @override
-  final LandlordField town;
+  final LandlordField<String> town;
   @override
-  final LandlordField state;
+  final LandlordField<String> state;
   @JsonKey(defaultValue: const KtList.empty())
   @override
   final KtList<LandlordProperty> properties;
@@ -286,11 +290,11 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
   final LandlordProperty property;
   @JsonKey(defaultValue: const None())
   @override
-  final Option<LandlordFailure> optionOfFailure;
+  final Option<Either<Failure, Success>> response;
 
   @override
   String toString() {
-    return 'LandlordPropertyState(isLoading: $isLoading, validate: $validate, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, properties: $properties, apartments: $apartments, property: $property, optionOfFailure: $optionOfFailure)';
+    return 'LandlordPropertyState(isLoading: $isLoading, validate: $validate, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, properties: $properties, apartments: $apartments, property: $property, response: $response)';
   }
 
   @override
@@ -326,9 +330,9 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
             (identical(other.property, property) ||
                 const DeepCollectionEquality()
                     .equals(other.property, property)) &&
-            (identical(other.optionOfFailure, optionOfFailure) ||
+            (identical(other.response, response) ||
                 const DeepCollectionEquality()
-                    .equals(other.optionOfFailure, optionOfFailure)));
+                    .equals(other.response, response)));
   }
 
   @override
@@ -345,7 +349,7 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
       const DeepCollectionEquality().hash(properties) ^
       const DeepCollectionEquality().hash(apartments) ^
       const DeepCollectionEquality().hash(property) ^
-      const DeepCollectionEquality().hash(optionOfFailure);
+      const DeepCollectionEquality().hash(response);
 
   @JsonKey(ignore: true)
   @override
@@ -359,33 +363,33 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
   const factory _LandlordPropertyState(
       {bool isLoading,
       bool validate,
-      @required LandlordField name,
+      @required LandlordField<String> name,
       @required LandlordPropertyTypeField propertyType,
-      @required LandlordField houseType,
-      @required LandlordField street,
-      @required LandlordField town,
-      @required LandlordField state,
+      @required LandlordField<String> houseType,
+      @required LandlordField<String> street,
+      @required LandlordField<String> town,
+      @required LandlordField<String> state,
       KtList<LandlordProperty> properties,
       KtList<LandlordApartment> apartments,
       @nullable LandlordProperty property,
-      Option<LandlordFailure> optionOfFailure}) = _$_LandlordPropertyState;
+      Option<Either<Failure, Success>> response}) = _$_LandlordPropertyState;
 
   @override
   bool get isLoading;
   @override
   bool get validate;
   @override
-  LandlordField get name;
+  LandlordField<String> get name;
   @override
   LandlordPropertyTypeField get propertyType;
   @override
-  LandlordField get houseType;
+  LandlordField<String> get houseType;
   @override
-  LandlordField get street;
+  LandlordField<String> get street;
   @override
-  LandlordField get town;
+  LandlordField<String> get town;
   @override
-  LandlordField get state;
+  LandlordField<String> get state;
   @override
   KtList<LandlordProperty> get properties;
   @override
@@ -394,7 +398,7 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
   @nullable
   LandlordProperty get property;
   @override
-  Option<LandlordFailure> get optionOfFailure;
+  Option<Either<Failure, Success>> get response;
   @override
   @JsonKey(ignore: true)
   _$LandlordPropertyStateCopyWith<_LandlordPropertyState> get copyWith;
