@@ -373,9 +373,8 @@ class Router extends RouterBase {
       );
     },
     LandlordAddTenantScreen: (data) {
-      final args = data.getArgs<LandlordAddTenantScreenArguments>(
-        orElse: () => LandlordAddTenantScreenArguments(),
-      );
+      final args =
+          data.getArgs<LandlordAddTenantScreenArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => LandlordAddTenantScreen(
           key: args.key,
@@ -573,12 +572,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushLandlordAddTenantScreen(
           {Key key,
-          LandlordProperty property,
+          @required LandlordProperty property,
+          LandlordApartment apartment,
           OnNavigationRejected onReject}) =>
       push<dynamic>(
         Routes.landlordAddTenantScreen,
-        arguments:
-            LandlordAddTenantScreenArguments(key: key, property: property),
+        arguments: LandlordAddTenantScreenArguments(
+            key: key, property: property, apartment: apartment),
         onReject: onReject,
       );
 
@@ -672,5 +672,6 @@ class LandlordAddTenantScreenArguments {
   final Key key;
   final LandlordProperty property;
   final LandlordApartment apartment;
-  LandlordAddTenantScreenArguments({this.key, this.property, this.apartment});
+  LandlordAddTenantScreenArguments(
+      {this.key, @required this.property, this.apartment});
 }

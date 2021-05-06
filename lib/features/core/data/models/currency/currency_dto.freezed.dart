@@ -19,13 +19,13 @@ class _$CurrencyDTOTearOff {
 // ignore: unused_element
   _CurrencyDTO call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String currency,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           String currencyName}) {
     return _CurrencyDTO(
       id: id,
@@ -47,13 +47,13 @@ const $CurrencyDTO = _$CurrencyDTOTearOff();
 /// @nodoc
 mixin _$CurrencyDTO {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "")
+  @JsonKey(includeIfNull: false, defaultValue: '')
   int get id;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "")
+  @JsonKey(includeIfNull: false, defaultValue: '')
   String get currency;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
   String get currencyName;
 
   Map<String, dynamic> toJson();
@@ -68,13 +68,13 @@ abstract class $CurrencyDTOCopyWith<$Res> {
       _$CurrencyDTOCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String currency,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           String currencyName});
 }
 
@@ -111,13 +111,13 @@ abstract class _$CurrencyDTOCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String currency,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           String currencyName});
 }
 
@@ -153,13 +153,13 @@ class __$CurrencyDTOCopyWithImpl<$Res> extends _$CurrencyDTOCopyWithImpl<$Res>
 class _$_CurrencyDTO extends _CurrencyDTO {
   const _$_CurrencyDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           this.id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           this.currency,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           this.currencyName})
       : super._();
 
@@ -168,15 +168,15 @@ class _$_CurrencyDTO extends _CurrencyDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "")
+  @JsonKey(includeIfNull: false, defaultValue: '')
   final int id;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "")
+  @JsonKey(includeIfNull: false, defaultValue: '')
   final String currency;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
   final String currencyName;
 
   @override
@@ -220,13 +220,13 @@ abstract class _CurrencyDTO extends CurrencyDTO {
   const _CurrencyDTO._() : super._();
   const factory _CurrencyDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "")
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String currency,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
           String currencyName}) = _$_CurrencyDTO;
 
   factory _CurrencyDTO.fromJson(Map<String, dynamic> json) =
@@ -234,15 +234,15 @@ abstract class _CurrencyDTO extends CurrencyDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "")
+  @JsonKey(includeIfNull: false, defaultValue: '')
   int get id;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "")
+  @JsonKey(includeIfNull: false, defaultValue: '')
   String get currency;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: "", name: "currency_name")
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
   String get currencyName;
   @override
   @JsonKey(ignore: true)

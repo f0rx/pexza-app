@@ -36,7 +36,7 @@ class _$ApartmentMergerDTOTearOff {
           String apartmentId,
       @JsonKey(includeIfNull: false)
           int duration,
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
           int currencyId,
       @JsonKey(includeIfNull: false)
           CurrencyDTO currency,
@@ -50,23 +50,23 @@ class _$ApartmentMergerDTOTearOff {
       @JsonKey(includeIfNull: false)
           LandlordApartmentDTO apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) {
     return _ApartmentMergerDTO(
@@ -120,7 +120,7 @@ mixin _$ApartmentMergerDTO {
   String get apartmentId;
   @JsonKey(includeIfNull: false)
   int get duration;
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
   int get currencyId;
   @JsonKey(includeIfNull: false)
   CurrencyDTO get currency;
@@ -134,23 +134,23 @@ mixin _$ApartmentMergerDTO {
   @JsonKey(includeIfNull: false)
   LandlordApartmentDTO get apartment;
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   String get expireAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   String get renewedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
 
@@ -183,7 +183,7 @@ abstract class $ApartmentMergerDTOCopyWith<$Res> {
           String apartmentId,
       @JsonKey(includeIfNull: false)
           int duration,
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
           int currencyId,
       @JsonKey(includeIfNull: false)
           CurrencyDTO currency,
@@ -197,23 +197,23 @@ abstract class $ApartmentMergerDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           LandlordApartmentDTO apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -345,7 +345,7 @@ abstract class _$ApartmentMergerDTOCopyWith<$Res>
           String apartmentId,
       @JsonKey(includeIfNull: false)
           int duration,
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
           int currencyId,
       @JsonKey(includeIfNull: false)
           CurrencyDTO currency,
@@ -359,23 +359,23 @@ abstract class _$ApartmentMergerDTOCopyWith<$Res>
       @JsonKey(includeIfNull: false)
           LandlordApartmentDTO apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -470,7 +470,7 @@ class _$_ApartmentMergerDTO extends _ApartmentMergerDTO {
           this.apartmentId,
       @JsonKey(includeIfNull: false)
           this.duration,
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
           this.currencyId,
       @JsonKey(includeIfNull: false)
           this.currency,
@@ -484,23 +484,23 @@ class _$_ApartmentMergerDTO extends _ApartmentMergerDTO {
       @JsonKey(includeIfNull: false)
           this.apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           this.expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           this.renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           this.createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           this.updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           this.deletedAt})
       : super._();
@@ -534,7 +534,7 @@ class _$_ApartmentMergerDTO extends _ApartmentMergerDTO {
   @JsonKey(includeIfNull: false)
   final int duration;
   @override
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
   final int currencyId;
   @override
   @JsonKey(includeIfNull: false)
@@ -553,27 +553,27 @@ class _$_ApartmentMergerDTO extends _ApartmentMergerDTO {
   final LandlordApartmentDTO apartment;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   final String expireAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   final String renewedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   final String createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   final String updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   final String deletedAt;
 
@@ -688,7 +688,7 @@ abstract class _ApartmentMergerDTO extends ApartmentMergerDTO {
           String apartmentId,
       @JsonKey(includeIfNull: false)
           int duration,
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
           int currencyId,
       @JsonKey(includeIfNull: false)
           CurrencyDTO currency,
@@ -702,23 +702,23 @@ abstract class _ApartmentMergerDTO extends ApartmentMergerDTO {
       @JsonKey(includeIfNull: false)
           LandlordApartmentDTO apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) = _$_ApartmentMergerDTO;
 
@@ -751,7 +751,7 @@ abstract class _ApartmentMergerDTO extends ApartmentMergerDTO {
   @JsonKey(includeIfNull: false)
   int get duration;
   @override
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
   int get currencyId;
   @override
   @JsonKey(includeIfNull: false)
@@ -770,27 +770,27 @@ abstract class _ApartmentMergerDTO extends ApartmentMergerDTO {
   LandlordApartmentDTO get apartment;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   String get expireAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   String get renewedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
   @override

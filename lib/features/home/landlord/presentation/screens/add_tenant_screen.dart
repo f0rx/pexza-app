@@ -15,23 +15,21 @@ import 'package:pexza/features/home/landlord/presentation/widgets/index.dart';
 class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
   static double inputSpacing = App.longest * 0.015;
   final FocusNode _emailAddressFocus = FocusNode();
-  final FocusNode _propertyNameFocus = FocusNode();
   final FocusNode _amountFocus = FocusNode();
   final LandlordProperty property;
   final LandlordApartment apartment;
 
   LandlordAddTenantScreen({
     Key key,
-    this.property,
+    @required this.property,
     this.apartment,
   }) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<LandlordApartmentCubit>()
-        ..getApartmentsForProperty(property: property),
-      child: BlocListener<LandlordApartmentCubit, LandlordApartmentState>(
+      create: (_) => getIt<LandlordMergerCubit>()..fetchAllLandlordProperties(),
+      child: BlocListener<LandlordMergerCubit, LandlordMergerState>(
         listener: (c, s) => s.response.fold(
           () => null,
           (either) => BottomAlertDialog.show(
@@ -70,84 +68,66 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             .copyWith(top: App.longest * 0.02),
         child: Column(
           children: [
-            TextFormField(
-              maxLines: 1,
-              enableSuggestions: true,
-              autocorrect: false,
-              cursorColor: Theme.of(context).accentColor,
-              keyboardType: TextInputType.text,
-              textCapitalization: TextCapitalization.words,
-              textInputAction: TextInputAction.next,
-              focusNode: _emailAddressFocus,
-              decoration: const InputDecoration(
-                labelText: "Tenant's E-mail Address",
-                hintText: "janedoe@gmail.com",
-              ),
-              autofillHints: [],
-              autovalidateMode: AutovalidateMode.disabled,
-              onChanged: (value) {},
-              validator: (value) {},
-              onFieldSubmitted: (_) =>
-                  FocusScope.of(context).requestFocus(_propertyNameFocus),
-            ),
-            //
-            VerticalSpace(height: inputSpacing),
-            //
-            TextFormField(
-              maxLines: 1,
-              enableSuggestions: true,
-              autocorrect: false,
-              cursorColor: Theme.of(context).accentColor,
-              keyboardType: TextInputType.text,
-              textCapitalization: TextCapitalization.words,
-              textInputAction: TextInputAction.next,
-              focusNode: _propertyNameFocus,
-              decoration: const InputDecoration(
-                labelText: "Propety Name",
-                hintText: "3 Bedroom Flat",
-              ),
-              autofillHints: [],
-              autovalidateMode: AutovalidateMode.disabled,
-              onChanged: (value) {},
-              validator: (value) {},
-              onFieldSubmitted: (_) =>
-                  FocusScope.of(context).requestFocus(_amountFocus),
-            ),
-            //
-            VerticalSpace(height: inputSpacing),
-            //
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(
-                  color: Colors.grey,
+            BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
+              builder: (c, s) => TextFormField(
+                maxLines: 1,
+                enableSuggestions: true,
+                autocorrect: false,
+                cursorColor: Theme.of(context).accentColor,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
+                textInputAction: TextInputAction.next,
+                focusNode: _emailAddressFocus,
+                decoration: const InputDecoration(
+                  labelText: "Tenant's E-mail Address",
+                  hintText: "janedoe@gmail.com",
                 ),
+                autofillHints: [],
+                autovalidateMode: AutovalidateMode.disabled,
+                onChanged: c.read<LandlordMergerCubit>().emailAddressChanged,
+                validator: (value) {},
+                onFieldSubmitted: (_) =>
+                    FocusScope.of(context).requestFocus(_amountFocus),
               ),
-              child: DropdownButtonHideUnderline(
-                child: ButtonTheme(
-                  alignedDropdown: true,
-                  layoutBehavior: ButtonBarLayoutBehavior.constrained,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  child: DropdownButton<int>(
-                    items: List.generate(50, (index) => index + 1)
-                        .map<DropdownMenuItem<int>>(
-                          (item) => DropdownMenuItem<int>(
-                            value: item,
-                            child: Text(
-                              "$item year".pluralize(item),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
+            ),
+            //
+            VerticalSpace(height: inputSpacing),
+            //
+            BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
+              builder: (c, s) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Colors.grey,
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: ButtonTheme(
+                    alignedDropdown: true,
+                    layoutBehavior: ButtonBarLayoutBehavior.constrained,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    child: DropdownButton<LandlordProperty>(
+                      items: s.properties
+                          .asList()
+                          .map<DropdownMenuItem<LandlordProperty>>(
+                            (item) => DropdownMenuItem<LandlordProperty>(
+                              value: item,
+                              child: Text(
+                                "${item.name?.getOrEmpty}",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
                             ),
-                          ),
-                        )
-                        .toList(),
-                    hint: Text("-- Select Duration --"),
-                    value: 2,
-                    isExpanded: true,
-                    icon: Icon(Icons.keyboard_arrow_down),
-                    iconSize: 19.0,
-                    onChanged: (value) {},
+                          )
+                          .toList(),
+                      hint: Text("-- Select the Property --"),
+                      value: s.selectedProperty,
+                      isExpanded: true,
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      iconSize: 19.0,
+                      onChanged: c.read<LandlordMergerCubit>().propertyChanged,
+                    ),
                   ),
                 ),
               ),
@@ -155,7 +135,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             //
             VerticalSpace(height: inputSpacing),
             //
-            BlocBuilder<LandlordApartmentCubit, LandlordApartmentState>(
+            BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
               builder: (c, s) => Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
@@ -175,7 +155,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                             (item) => DropdownMenuItem<LandlordApartment>(
                               value: item,
                               child: Text(
-                                "${item.name.getOrEmpty}",
+                                "${item.name?.getOrEmpty}",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 softWrap: true,
@@ -183,12 +163,12 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                             ),
                           )
                           .toList(),
-                      hint: Text("-- Select Gender --"),
-                      value: null,
+                      hint: Text("-- Choose Apartment --"),
+                      value: s.selectedApartment,
                       isExpanded: true,
                       icon: Icon(Icons.keyboard_arrow_down),
                       iconSize: 19.0,
-                      onChanged: (value) {},
+                      onChanged: c.read<LandlordMergerCubit>().apartmentChanged,
                     ),
                   ),
                 ),
@@ -197,39 +177,42 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             //
             VerticalSpace(height: inputSpacing),
             //
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(
-                  color: Colors.grey,
+            BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
+              builder: (c, s) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: ButtonTheme(
-                  alignedDropdown: true,
-                  layoutBehavior: ButtonBarLayoutBehavior.constrained,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  child: DropdownButton<PaymentPlan>(
-                    items: PaymentPlan.values
-                        .toList()
-                        .map<DropdownMenuItem<PaymentPlan>>(
-                          (item) => DropdownMenuItem<PaymentPlan>(
-                            value: item,
-                            child: Text(
-                              "${item.name}".capitalizeFirst(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
+                child: DropdownButtonHideUnderline(
+                  child: ButtonTheme(
+                    alignedDropdown: true,
+                    layoutBehavior: ButtonBarLayoutBehavior.constrained,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    child: DropdownButton<PaymentPlan>(
+                      items: PaymentPlan.values
+                          .toList()
+                          .map<DropdownMenuItem<PaymentPlan>>(
+                            (item) => DropdownMenuItem<PaymentPlan>(
+                              value: item,
+                              child: Text(
+                                "${item.name}".capitalizeFirst(),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
                             ),
-                          ),
-                        )
-                        .toList(),
-                    hint: Text("-- Choose payment plan --"),
-                    value: PaymentPlan.yearly,
-                    isExpanded: true,
-                    icon: Icon(Icons.keyboard_arrow_down),
-                    iconSize: 19.0,
-                    onChanged: (value) {},
+                          )
+                          .toList(),
+                      hint: Text("-- Choose payment plan --"),
+                      value: s.plan,
+                      isExpanded: true,
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      iconSize: 19.0,
+                      onChanged:
+                          c.read<LandlordMergerCubit>().paymentPlanChanged,
+                    ),
                   ),
                 ),
               ),
@@ -237,24 +220,67 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             //
             VerticalSpace(height: inputSpacing),
             //
-            TextFormField(
-              maxLines: 1,
-              enableSuggestions: true,
-              autocorrect: false,
-              cursorColor: Theme.of(context).accentColor,
-              keyboardType: TextInputType.number,
-              textCapitalization: TextCapitalization.none,
-              textInputAction: TextInputAction.done,
-              focusNode: _amountFocus,
-              decoration: const InputDecoration(
-                labelText: "Amount",
-                prefixIcon: const Icon(Icons.attach_money),
+            BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
+              builder: (c, s) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(
+                    color: Colors.grey,
+                  ),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: ButtonTheme(
+                    alignedDropdown: true,
+                    layoutBehavior: ButtonBarLayoutBehavior.constrained,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    child: DropdownButton<int>(
+                      items: List.generate(50, (index) => index + 1)
+                          .map<DropdownMenuItem<int>>(
+                            (item) => DropdownMenuItem<int>(
+                              value: item,
+                              child: Text(
+                                "$item year".pluralize(item),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      hint: Text("-- Select Duration --"),
+                      value: s.duration,
+                      isExpanded: true,
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      iconSize: 19.0,
+                      onChanged: c.read<LandlordMergerCubit>().durationChanged,
+                    ),
+                  ),
+                ),
               ),
-              autofillHints: [],
-              autovalidateMode: AutovalidateMode.disabled,
-              onChanged: (value) {},
-              validator: (value) {},
-              onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+            ),
+            //
+            VerticalSpace(height: inputSpacing),
+            //
+            BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
+              builder: (c, s) => TextFormField(
+                maxLines: 1,
+                enableSuggestions: true,
+                autocorrect: false,
+                cursorColor: Theme.of(context).accentColor,
+                keyboardType: TextInputType.number,
+                textCapitalization: TextCapitalization.none,
+                textInputAction: TextInputAction.done,
+                focusNode: _amountFocus,
+                decoration: const InputDecoration(
+                  labelText: "Amount",
+                  prefixIcon: const Icon(Icons.attach_money),
+                ),
+                autofillHints: [],
+                autovalidateMode: AutovalidateMode.disabled,
+                onChanged: c.read<LandlordMergerCubit>().amountChanged,
+                validator: (value) {},
+                onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+              ),
             ),
             //
             VerticalSpace(height: App.shortest * 0.2),
