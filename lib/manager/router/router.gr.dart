@@ -380,6 +380,7 @@ class Router extends RouterBase {
         builder: (context) => LandlordAddTenantScreen(
           key: args.key,
           property: args.property,
+          apartment: args.apartment,
         ).wrappedRoute(context),
         settings: data,
         fullscreenDialog: true,
@@ -670,5 +671,6 @@ class LandlordAddApartmentScreenArguments {
 class LandlordAddTenantScreenArguments {
   final Key key;
   final LandlordProperty property;
-  LandlordAddTenantScreenArguments({this.key, this.property});
+  final LandlordApartment apartment;
+  LandlordAddTenantScreenArguments({this.key, this.property, this.apartment});
 }

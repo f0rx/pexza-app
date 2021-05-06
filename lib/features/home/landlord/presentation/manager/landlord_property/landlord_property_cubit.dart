@@ -280,8 +280,10 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
           response: some(left(LandlordFailure.timeout())),
         ));
         break;
-      case DioErrorType.DEFAULT:
+      // case DioErrorType.DEFAULT:
       default:
+        print("Loggin unknown error-----");
+        log.wtf(ex);
         emit(state.copyWith(
           response: some(left(LandlordFailure.unknown())),
         ));
@@ -289,6 +291,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
   }
 
   void _handleMissingKeysException(MissingRequiredKeysException e) {
+    print("Loggin unknown error-----");
+    log.wtf(e);
     emit(state.copyWith(
       response: some(left(LandlordFailure.unknown(
         message: e.message,
