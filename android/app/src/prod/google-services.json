@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "692870871996-u9eatm8elbce3rsn92nqso13fvvsfalt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pexza",
+            "certificate_hash": "0ba6c6e7b9dc366fd8502fc7b0d117b9d8b4de06"
+          }
+        },
+        {
           "client_id": "692870871996-nbi46sv00b0mrmmisfpruasnv2ob9knt.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -42,14 +50,6 @@
         }
       },
       "oauth_client": [
-        {
-          "client_id": "692870871996-mf5mh304nhdo8u0f8fmhhodhvnt2q1n9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pexza.dev",
-            "certificate_hash": "5f0bda23879f9e2880393b9edf177ab5fcd520c0"
-          }
-        },
         {
           "client_id": "692870871996-nbi46sv00b0mrmmisfpruasnv2ob9knt.apps.googleusercontent.com",
           "client_type": 3

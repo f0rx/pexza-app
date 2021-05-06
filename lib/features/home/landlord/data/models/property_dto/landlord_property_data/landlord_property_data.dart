@@ -1,0 +1,124 @@
+library landlord_property_data;
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/collection.dart' hide nullable;
+import 'package:flutter/material.dart';
+import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
+import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
+import 'package:pexza/manager/serializer/serializers.dart';
+import 'package:pexza/utils/utils.dart';
+
+part 'landlord_property_data.g.dart';
+part 'landlord_property_data.freezed.dart';
+
+@freezed
+@immutable
+abstract class LandlordPropertyData implements _$LandlordPropertyData {
+  static KtList<String> images = KtList.of(
+    AppAssets.apartment1,
+    AppAssets.apartment2,
+    AppAssets.apartment3,
+    AppAssets.apartment4,
+    AppAssets.apartment5,
+    AppAssets.apartment6,
+    AppAssets.apartment7,
+    AppAssets.apartment8,
+  );
+
+  const LandlordPropertyData._();
+
+  const factory LandlordPropertyData({
+    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
+        String propertyType,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
+        String houseType,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String street,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
+    // @nullable @JsonKey(includeIfNull: false) StateDTO state,
+    @nullable @JsonKey(disallowNullValue: true, name: "state_id") int stateId,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String country,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
+        int numberOfTenants,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_apartments")
+        int numberOfApartments,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_available_apartments")
+        int numberOfAvailableApartments,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_rented_apartment")
+        int numberOfRentedApartment,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "created_at")
+    @TimestampConverter()
+        String createdAt,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "updated_at")
+    @TimestampConverter()
+        String updatedAt,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "deleted_at")
+    @TimestampConverter()
+        String deletedAt,
+  }) = _LandlordPropertyData;
+
+  factory LandlordPropertyData.fromJson(Map<String, dynamic> json) =>
+      _$LandlordPropertyDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$_$_LandlordPropertyDataToJson(this);
+
+  factory LandlordPropertyData.fromDomain(LandlordProperty instance) =>
+      LandlordPropertyData(
+        name: instance.name?.getOrNull,
+        propertyType: instance.propertyType?.getOrNull?.name,
+        houseType: instance.houseType?.getOrNull,
+        town: instance.town?.getOrNull,
+        street: instance.street?.getOrNull,
+        stateId: 5,
+      );
+
+  LandlordProperty get domain {
+    Color _color = AppColors.random;
+
+    return LandlordProperty(
+      id: UniqueId<int>.fromExternal(id),
+      name: !name.isNull ? LandlordField(name) : null,
+      propertyType: !propertyType.isNull
+          ? LandlordPropertyTypeField(PropertyType.valueOf(propertyType))
+          : null,
+      houseType: !houseType.isNull ? LandlordField(houseType) : null,
+      town: !town.isNull ? LandlordField(town) : null,
+      street: !street.isNull ? LandlordField(street) : null,
+      // state: !state.isNull
+      //     ? CountryState(
+      //         name: CountryStateName(state?.name),
+      //         country: !country.isNull
+      //             ? Country(name: CountryName.valueOf(country))
+      //             : null,
+      //       )
+      //     : null,
+      country: !country.isNull ? LandlordField(country) : null,
+      color: MaterialColor(_color.value, AppColors.swatch(_color)),
+      image: LandlordPropertyImage(images.random()),
+      numberOfTenants:
+          !numberOfTenants.isNull ? LandlordField(numberOfTenants) : null,
+      numberOfApartments:
+          !numberOfApartments.isNull ? LandlordField(numberOfApartments) : null,
+      numberOfAvailableApartments: !numberOfAvailableApartments.isNull
+          ? LandlordField(numberOfAvailableApartments)
+          : null,
+      numberOfRentedApartment: !numberOfRentedApartment.isNull
+          ? LandlordField(numberOfRentedApartment)
+          : null,
+      createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
+      updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
+      deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
+    );
+  }
+}

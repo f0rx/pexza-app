@@ -15,7 +15,7 @@ class _$UserTearOff {
 
 // ignore: unused_element
   _User call(
-      {@nullable UniqueId id,
+      {@nullable UniqueId<int> id,
       @nullable Role role,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
@@ -57,7 +57,7 @@ const $User = _$UserTearOff();
 /// @nodoc
 mixin _$User {
   @nullable
-  UniqueId get id;
+  UniqueId<int> get id;
   @nullable
   Role get role;
   @nullable
@@ -96,7 +96,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {@nullable UniqueId id,
+      {@nullable UniqueId<int> id,
       @nullable Role role,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
@@ -140,7 +140,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object deletedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as UniqueId,
+      id: id == freezed ? _value.id : id as UniqueId<int>,
       role: role == freezed ? _value.role : role as Role,
       firstName:
           firstName == freezed ? _value.firstName : firstName as DisplayName,
@@ -174,7 +174,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable UniqueId id,
+      {@nullable UniqueId<int> id,
       @nullable Role role,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
@@ -219,7 +219,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object deletedAt = freezed,
   }) {
     return _then(_User(
-      id: id == freezed ? _value.id : id as UniqueId,
+      id: id == freezed ? _value.id : id as UniqueId<int>,
       role: role == freezed ? _value.role : role as Role,
       firstName:
           firstName == freezed ? _value.firstName : firstName as DisplayName,
@@ -269,7 +269,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
   @override
   @nullable
-  final UniqueId id;
+  final UniqueId<int> id;
   @override
   @nullable
   final Role role;
@@ -413,7 +413,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 abstract class _User extends User {
   const _User._() : super._();
   const factory _User(
-      {@nullable UniqueId id,
+      {@nullable UniqueId<int> id,
       @nullable Role role,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
@@ -431,7 +431,7 @@ abstract class _User extends User {
 
   @override
   @nullable
-  UniqueId get id;
+  UniqueId<int> get id;
   @override
   @nullable
   Role get role;

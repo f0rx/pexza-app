@@ -8,6 +8,7 @@ class Toolbar extends AppBar {
   Toolbar({
     Key key,
     String title,
+    Widget headline = const SizedBox(),
     Widget leadingIcon,
     TextStyle titleStyle,
     bool centerTitle = true,
@@ -31,8 +32,9 @@ class Toolbar extends AppBar {
                   wrapWords: false,
                   softWrap: false,
                   maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 )
-              : null,
+              : headline,
           automaticallyImplyLeading: implyLeading,
           centerTitle: centerTitle,
           elevation: elevation,

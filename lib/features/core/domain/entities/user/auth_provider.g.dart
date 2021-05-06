@@ -19,7 +19,7 @@ AuthProvider _$authProviderValueOf(String name) {
     case 'facebook':
       return _$facebook;
     default:
-      throw new ArgumentError(name);
+      return _$regular;
   }
 }
 

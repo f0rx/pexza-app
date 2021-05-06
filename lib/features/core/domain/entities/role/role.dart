@@ -6,6 +6,7 @@ part 'role.g.dart';
 
 class Role extends EnumClass {
   static const Role landlord = _$landlord;
+  @BuiltValueEnumConst(fallback: true)
   static const Role tenant = _$tenant;
   static const Role admin = _$admin;
 

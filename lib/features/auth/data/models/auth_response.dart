@@ -10,7 +10,7 @@ part 'auth_response.g.dart';
 
 @freezed
 @immutable
-abstract class AuthResponse implements _$AuthResponse, Failure {
+abstract class AuthResponse implements _$AuthResponse, Response {
   static const int UNVERIFIED = 1101;
 
   const AuthResponse._();

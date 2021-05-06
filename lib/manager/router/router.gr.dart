@@ -18,13 +18,18 @@ import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
 import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
+import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/add_apartment_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_property_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_tenant_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/home_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landl_apartment_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/view_all_apartments_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/view_all_properties_screen.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
@@ -52,10 +57,16 @@ class Routes {
   static const String tenantRentPaymentScreen = '/tenant-rent-payment-screen';
   static const String serviceRequestScreen = '/service-request-screen';
   static const String landlordHomeScreen = '/landlord-home-screen';
+  static const String viewAllPropertiesScreen = '/view-all-properties-screen';
+  static const String viewAllApartmentScreen = '/view-all-apartment-screen';
   static const String landlordAddPropertyScreen =
       '/landlord-add-property-screen';
   static const String landlordPropertyDetailScreen =
       '/landlord-property-detail-screen';
+  static const String landlordApartmentDetailScreen =
+      '/landlord-apartment-detail-screen';
+  static const String landlordAddApartmentScreen =
+      '/landlord-add-apartment-screen';
   static const String landlordRentDetailScreen = '/landlord-rent-detail-screen';
   static const String landlordAddTenantScreen = '/landlord-add-tenant-screen';
   static const String landlordMaintenanceRequestScreen =
@@ -82,8 +93,12 @@ class Routes {
     tenantRentPaymentScreen,
     serviceRequestScreen,
     landlordHomeScreen,
+    viewAllPropertiesScreen,
+    viewAllApartmentScreen,
     landlordAddPropertyScreen,
     landlordPropertyDetailScreen,
+    landlordApartmentDetailScreen,
+    landlordAddApartmentScreen,
     landlordRentDetailScreen,
     landlordAddTenantScreen,
     landlordMaintenanceRequestScreen,
@@ -120,10 +135,18 @@ class Router extends RouterBase {
         page: ServiceRequestScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordHomeScreen,
         page: LandlordHomeScreen, guards: [AuthGuard]),
+    RouteDef(Routes.viewAllPropertiesScreen,
+        page: ViewAllPropertiesScreen, guards: [AuthGuard]),
+    RouteDef(Routes.viewAllApartmentScreen,
+        page: ViewAllApartmentScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordAddPropertyScreen,
         page: LandlordAddPropertyScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordPropertyDetailScreen,
         page: LandlordPropertyDetailScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordApartmentDetailScreen,
+        page: LandlordApartmentDetailScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordAddApartmentScreen,
+        page: LandlordAddApartmentScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordRentDetailScreen,
         page: LandlordRentDetailScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordAddTenantScreen,
@@ -269,18 +292,76 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
-    LandlordAddPropertyScreen: (data) {
+    ViewAllPropertiesScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LandlordAddPropertyScreen().wrappedRoute(context),
+        builder: (context) => ViewAllPropertiesScreen().wrappedRoute(context),
         settings: data,
+        fullscreenDialog: true,
+        maintainState: true,
+      );
+    },
+    ViewAllApartmentScreen: (data) {
+      final args = data.getArgs<ViewAllApartmentScreenArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => ViewAllApartmentScreen(
+          key: args.key,
+          landlordProperty: args.landlordProperty,
+        ).wrappedRoute(context),
+        settings: data,
+        fullscreenDialog: true,
+        maintainState: true,
+      );
+    },
+    LandlordAddPropertyScreen: (data) {
+      final args = data.getArgs<LandlordAddPropertyScreenArguments>(
+        orElse: () => LandlordAddPropertyScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordAddPropertyScreen(
+          key: args.key,
+          property: args.property,
+        ).wrappedRoute(context),
+        settings: data,
+        fullscreenDialog: true,
         maintainState: true,
       );
     },
     LandlordPropertyDetailScreen: (data) {
+      final args =
+          data.getArgs<LandlordPropertyDetailScreenArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) =>
-            LandlordPropertyDetailScreen().wrappedRoute(context),
+        builder: (context) => LandlordPropertyDetailScreen(
+          key: args.key,
+          property: args.property,
+        ).wrappedRoute(context),
         settings: data,
+        maintainState: true,
+      );
+    },
+    LandlordApartmentDetailScreen: (data) {
+      final args = data.getArgs<LandlordApartmentDetailScreenArguments>(
+        orElse: () => LandlordApartmentDetailScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordApartmentDetailScreen(
+          key: args.key,
+          landlordApartment: args.landlordApartment,
+        ).wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    LandlordAddApartmentScreen: (data) {
+      final args =
+          data.getArgs<LandlordAddApartmentScreenArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordAddApartmentScreen(
+          key: args.key,
+          property: args.property,
+          apartment: args.apartment,
+        ).wrappedRoute(context),
+        settings: data,
+        fullscreenDialog: true,
         maintainState: true,
       );
     },
@@ -292,9 +373,16 @@ class Router extends RouterBase {
       );
     },
     LandlordAddTenantScreen: (data) {
+      final args = data.getArgs<LandlordAddTenantScreenArguments>(
+        orElse: () => LandlordAddTenantScreenArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LandlordAddTenantScreen().wrappedRoute(context),
+        builder: (context) => LandlordAddTenantScreen(
+          key: args.key,
+          property: args.property,
+        ).wrappedRoute(context),
         settings: data,
+        fullscreenDialog: true,
         maintainState: true,
       );
     },
@@ -420,17 +508,78 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushLandlordHomeScreen() =>
       push<dynamic>(Routes.landlordHomeScreen);
 
-  Future<dynamic> pushLandlordAddPropertyScreen() =>
-      push<dynamic>(Routes.landlordAddPropertyScreen);
+  Future<dynamic> pushViewAllPropertiesScreen() =>
+      push<dynamic>(Routes.viewAllPropertiesScreen);
 
-  Future<dynamic> pushLandlordPropertyDetailScreen() =>
-      push<dynamic>(Routes.landlordPropertyDetailScreen);
+  Future<dynamic> pushViewAllApartmentScreen(
+          {Key key,
+          @required LandlordProperty landlordProperty,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.viewAllApartmentScreen,
+        arguments: ViewAllApartmentScreenArguments(
+            key: key, landlordProperty: landlordProperty),
+        onReject: onReject,
+      );
+
+  Future<dynamic> pushLandlordAddPropertyScreen(
+          {Key key,
+          LandlordProperty property,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordAddPropertyScreen,
+        arguments:
+            LandlordAddPropertyScreenArguments(key: key, property: property),
+        onReject: onReject,
+      );
+
+  Future<dynamic> pushLandlordPropertyDetailScreen(
+          {Key key,
+          @required LandlordProperty property,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordPropertyDetailScreen,
+        arguments:
+            LandlordPropertyDetailScreenArguments(key: key, property: property),
+        onReject: onReject,
+      );
+
+  Future<dynamic> pushLandlordApartmentDetailScreen(
+          {Key key,
+          LandlordApartment landlordApartment,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordApartmentDetailScreen,
+        arguments: LandlordApartmentDetailScreenArguments(
+            key: key, landlordApartment: landlordApartment),
+        onReject: onReject,
+      );
+
+  Future<dynamic> pushLandlordAddApartmentScreen(
+          {Key key,
+          @required LandlordProperty property,
+          LandlordApartment apartment,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordAddApartmentScreen,
+        arguments: LandlordAddApartmentScreenArguments(
+            key: key, property: property, apartment: apartment),
+        onReject: onReject,
+      );
 
   Future<dynamic> pushLandlordRentDetailScreen() =>
       push<dynamic>(Routes.landlordRentDetailScreen);
 
-  Future<dynamic> pushLandlordAddTenantScreen() =>
-      push<dynamic>(Routes.landlordAddTenantScreen);
+  Future<dynamic> pushLandlordAddTenantScreen(
+          {Key key,
+          LandlordProperty property,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordAddTenantScreen,
+        arguments:
+            LandlordAddTenantScreenArguments(key: key, property: property),
+        onReject: onReject,
+      );
 
   Future<dynamic> pushLandlordMaintenanceRequestScreen() =>
       push<dynamic>(Routes.landlordMaintenanceRequestScreen);
@@ -478,4 +627,48 @@ class TenantRentPaymentScreenArguments {
   final Key key;
   final Property property;
   TenantRentPaymentScreenArguments({this.key, this.property});
+}
+
+/// ViewAllApartmentScreen arguments holder class
+class ViewAllApartmentScreenArguments {
+  final Key key;
+  final LandlordProperty landlordProperty;
+  ViewAllApartmentScreenArguments({this.key, @required this.landlordProperty});
+}
+
+/// LandlordAddPropertyScreen arguments holder class
+class LandlordAddPropertyScreenArguments {
+  final Key key;
+  final LandlordProperty property;
+  LandlordAddPropertyScreenArguments({this.key, this.property});
+}
+
+/// LandlordPropertyDetailScreen arguments holder class
+class LandlordPropertyDetailScreenArguments {
+  final Key key;
+  final LandlordProperty property;
+  LandlordPropertyDetailScreenArguments({this.key, @required this.property});
+}
+
+/// LandlordApartmentDetailScreen arguments holder class
+class LandlordApartmentDetailScreenArguments {
+  final Key key;
+  final LandlordApartment landlordApartment;
+  LandlordApartmentDetailScreenArguments({this.key, this.landlordApartment});
+}
+
+/// LandlordAddApartmentScreen arguments holder class
+class LandlordAddApartmentScreenArguments {
+  final Key key;
+  final LandlordProperty property;
+  final LandlordApartment apartment;
+  LandlordAddApartmentScreenArguments(
+      {this.key, @required this.property, this.apartment});
+}
+
+/// LandlordAddTenantScreen arguments holder class
+class LandlordAddTenantScreenArguments {
+  final Key key;
+  final LandlordProperty property;
+  LandlordAddTenantScreenArguments({this.key, this.property});
 }

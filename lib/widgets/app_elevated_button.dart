@@ -16,6 +16,8 @@ class AppElevatedButton extends StatelessWidget {
   //
   final Widget child;
   final bool autofocus;
+  final bool disabled;
+  final double opacity;
   final Clip clipBehavior;
   final Function() onLongPress;
   final Function() onPressed;
@@ -41,6 +43,8 @@ class AppElevatedButton extends StatelessWidget {
     this.wordSpacing,
     this.textColor,
     this.autofocus = false,
+    this.disabled = false,
+    double opacity,
     this.clipBehavior = Clip.none,
     this.onLongPress,
     @required this.onPressed,
@@ -54,6 +58,7 @@ class AppElevatedButton extends StatelessWidget {
     this.textStyle,
     this.child,
   })  : assert(text != null || child != null),
+        opacity = disabled ? 0.6 : 1.0,
         borderRadius = BorderRadius.circular(Helpers.buttonRadius),
         shape = RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
@@ -64,44 +69,51 @@ class AppElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: Visibility(
-        visible: text != null && text.isNotEmpty,
-        replacement: child ?? const SizedBox(),
-        child: FractionallySizedBox(
-          child: SizedBox(
-            width: width,
-            height: height,
-            child: Align(
-              alignment: textAlignment,
-              child: AutoSizeText(
-                text,
-                style: TextStyle(
-                  fontSize: fontSize,
-                  fontWeight: fontWeight,
-                  fontFamily: fontFamily,
-                  wordSpacing: wordSpacing,
-                  color: textColor,
+    return IgnorePointer(
+      ignoring: disabled,
+      child: AnimatedOpacity(
+        duration: const Duration(microseconds: 800),
+        opacity: opacity,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          child: Visibility(
+            visible: text != null && text.isNotEmpty,
+            replacement: child ?? const SizedBox(),
+            child: FractionallySizedBox(
+              child: SizedBox(
+                width: width,
+                height: height,
+                child: Align(
+                  alignment: textAlignment,
+                  child: AutoSizeText(
+                    text,
+                    style: TextStyle(
+                      fontSize: fontSize,
+                      fontWeight: fontWeight,
+                      fontFamily: fontFamily,
+                      wordSpacing: wordSpacing,
+                      color: textColor,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
+          autofocus: autofocus,
+          clipBehavior: clipBehavior,
+          onLongPress: onLongPress,
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(backgroundColor),
+            // alignment: alignment,
+            elevation: MaterialStateProperty.all(elevation),
+            padding: MaterialStateProperty.all(padding),
+            shape: MaterialStateProperty.all(
+              shape ?? RoundedRectangleBorder(borderRadius: borderRadius),
+            ),
+            tapTargetSize: tapTargetSize,
+            textStyle: MaterialStateProperty.all(textStyle),
+          ),
         ),
-      ),
-      autofocus: autofocus,
-      clipBehavior: clipBehavior,
-      onLongPress: onLongPress,
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
-        // alignment: alignment,
-        elevation: MaterialStateProperty.all(elevation),
-        padding: MaterialStateProperty.all(padding),
-        shape: MaterialStateProperty.all(
-          shape ?? RoundedRectangleBorder(borderRadius: borderRadius),
-        ),
-        tapTargetSize: tapTargetSize,
-        textStyle: MaterialStateProperty.all(textStyle),
       ),
     );
   }

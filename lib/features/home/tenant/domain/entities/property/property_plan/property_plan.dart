@@ -4,6 +4,7 @@ import 'package:built_value/built_value.dart';
 part 'property_plan.g.dart';
 
 class PropertyPlan extends EnumClass {
+  @BuiltValueEnumConst(fallback: true)
   static const PropertyPlan Monthly = _$monthly;
   static const PropertyPlan Annually = _$annually;
   static const PropertyPlan BiMonthly = _$bi_monthly;

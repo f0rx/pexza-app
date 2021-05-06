@@ -5,8 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/models/auth_response.dart';
-import 'package:pexza/features/core/core.dart';
-import 'package:pexza/utils/utils.dart';
+import 'package:pexza/features/core/core.dart' hide Response;
 
 @singleton
 class AuthRemoteDatasource {
@@ -141,9 +140,7 @@ class AuthRemoteDatasource {
     try {
       final _response = await _dio.get(EndPoints.GET_USER);
 
-      return right(UserDTO.fromJson(_response?.data['data']).copyWith(
-        id: "${_response.data['data']['id']}",
-      ));
+      return right(UserDTO.fromJson(_response?.data['data']));
     } on DioError catch (e) {
       // If callback is not-null, call the method
       await callback?.call();

@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart' hide Router;
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +44,13 @@ class Pexza extends StatelessWidget {
               builder: ExtendedNavigator(
                 navigatorKey: App.key,
                 initialRoute: Routes.splashScreen,
-                observers: [NavigationHistoryObserver()],
+                observers: [
+                  NavigationHistoryObserver(),
+                  // if (env.flavor == BuildFlavor.prod)
+                  FirebaseAnalyticsObserver(
+                    analytics: getIt<FirebaseAnalytics>(),
+                  ),
+                ],
                 router: Router(),
                 guards: [AuthGuard()],
               ),
