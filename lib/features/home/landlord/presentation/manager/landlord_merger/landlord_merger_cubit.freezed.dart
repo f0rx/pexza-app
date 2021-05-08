@@ -25,6 +25,7 @@ class _$LandlordMergerStateTearOff {
       @nullable LandlordProperty selectedProperty,
       @nullable LandlordApartment selectedApartment,
       KtList<LandlordProperty> properties = const KtList.empty(),
+      KtList<Currency> currencies = const KtList.empty(),
       KtList<LandlordApartment> apartments = const KtList.empty(),
       Option<Either<Failure, Success>> response = const None()}) {
     return _LandlordMergerState(
@@ -38,6 +39,7 @@ class _$LandlordMergerStateTearOff {
       selectedProperty: selectedProperty,
       selectedApartment: selectedApartment,
       properties: properties,
+      currencies: currencies,
       apartments: apartments,
       response: response,
     );
@@ -63,6 +65,7 @@ mixin _$LandlordMergerState {
   @nullable
   LandlordApartment get selectedApartment;
   KtList<LandlordProperty> get properties;
+  KtList<Currency> get currencies;
   KtList<LandlordApartment> get apartments;
   Option<Either<Failure, Success>> get response;
 
@@ -86,6 +89,7 @@ abstract class $LandlordMergerStateCopyWith<$Res> {
       @nullable LandlordProperty selectedProperty,
       @nullable LandlordApartment selectedApartment,
       KtList<LandlordProperty> properties,
+      KtList<Currency> currencies,
       KtList<LandlordApartment> apartments,
       Option<Either<Failure, Success>> response});
 
@@ -115,6 +119,7 @@ class _$LandlordMergerStateCopyWithImpl<$Res>
     Object selectedProperty = freezed,
     Object selectedApartment = freezed,
     Object properties = freezed,
+    Object currencies = freezed,
     Object apartments = freezed,
     Object response = freezed,
   }) {
@@ -135,6 +140,9 @@ class _$LandlordMergerStateCopyWithImpl<$Res>
       properties: properties == freezed
           ? _value.properties
           : properties as KtList<LandlordProperty>,
+      currencies: currencies == freezed
+          ? _value.currencies
+          : currencies as KtList<Currency>,
       apartments: apartments == freezed
           ? _value.apartments
           : apartments as KtList<LandlordApartment>,
@@ -193,6 +201,7 @@ abstract class _$LandlordMergerStateCopyWith<$Res>
       @nullable LandlordProperty selectedProperty,
       @nullable LandlordApartment selectedApartment,
       KtList<LandlordProperty> properties,
+      KtList<Currency> currencies,
       KtList<LandlordApartment> apartments,
       Option<Either<Failure, Success>> response});
 
@@ -227,6 +236,7 @@ class __$LandlordMergerStateCopyWithImpl<$Res>
     Object selectedProperty = freezed,
     Object selectedApartment = freezed,
     Object properties = freezed,
+    Object currencies = freezed,
     Object apartments = freezed,
     Object response = freezed,
   }) {
@@ -247,6 +257,9 @@ class __$LandlordMergerStateCopyWithImpl<$Res>
       properties: properties == freezed
           ? _value.properties
           : properties as KtList<LandlordProperty>,
+      currencies: currencies == freezed
+          ? _value.currencies
+          : currencies as KtList<Currency>,
       apartments: apartments == freezed
           ? _value.apartments
           : apartments as KtList<LandlordApartment>,
@@ -270,6 +283,7 @@ class _$_LandlordMergerState extends _LandlordMergerState {
       @nullable this.selectedProperty,
       @nullable this.selectedApartment,
       this.properties = const KtList.empty(),
+      this.currencies = const KtList.empty(),
       this.apartments = const KtList.empty(),
       this.response = const None()})
       : assert(isLoading != null),
@@ -279,6 +293,7 @@ class _$_LandlordMergerState extends _LandlordMergerState {
         assert(plan != null),
         assert(duration != null),
         assert(properties != null),
+        assert(currencies != null),
         assert(apartments != null),
         assert(response != null),
         super._();
@@ -313,6 +328,9 @@ class _$_LandlordMergerState extends _LandlordMergerState {
   final KtList<LandlordProperty> properties;
   @JsonKey(defaultValue: const KtList.empty())
   @override
+  final KtList<Currency> currencies;
+  @JsonKey(defaultValue: const KtList.empty())
+  @override
   final KtList<LandlordApartment> apartments;
   @JsonKey(defaultValue: const None())
   @override
@@ -320,7 +338,7 @@ class _$_LandlordMergerState extends _LandlordMergerState {
 
   @override
   String toString() {
-    return 'LandlordMergerState(isLoading: $isLoading, validate: $validate, email: $email, amount: $amount, plan: $plan, duration: $duration, currency: $currency, selectedProperty: $selectedProperty, selectedApartment: $selectedApartment, properties: $properties, apartments: $apartments, response: $response)';
+    return 'LandlordMergerState(isLoading: $isLoading, validate: $validate, email: $email, amount: $amount, plan: $plan, duration: $duration, currency: $currency, selectedProperty: $selectedProperty, selectedApartment: $selectedApartment, properties: $properties, currencies: $currencies, apartments: $apartments, response: $response)';
   }
 
   @override
@@ -354,6 +372,9 @@ class _$_LandlordMergerState extends _LandlordMergerState {
             (identical(other.properties, properties) ||
                 const DeepCollectionEquality()
                     .equals(other.properties, properties)) &&
+            (identical(other.currencies, currencies) ||
+                const DeepCollectionEquality()
+                    .equals(other.currencies, currencies)) &&
             (identical(other.apartments, apartments) ||
                 const DeepCollectionEquality()
                     .equals(other.apartments, apartments)) &&
@@ -375,6 +396,7 @@ class _$_LandlordMergerState extends _LandlordMergerState {
       const DeepCollectionEquality().hash(selectedProperty) ^
       const DeepCollectionEquality().hash(selectedApartment) ^
       const DeepCollectionEquality().hash(properties) ^
+      const DeepCollectionEquality().hash(currencies) ^
       const DeepCollectionEquality().hash(apartments) ^
       const DeepCollectionEquality().hash(response);
 
@@ -398,6 +420,7 @@ abstract class _LandlordMergerState extends LandlordMergerState {
       @nullable LandlordProperty selectedProperty,
       @nullable LandlordApartment selectedApartment,
       KtList<LandlordProperty> properties,
+      KtList<Currency> currencies,
       KtList<LandlordApartment> apartments,
       Option<Either<Failure, Success>> response}) = _$_LandlordMergerState;
 
@@ -424,6 +447,8 @@ abstract class _LandlordMergerState extends LandlordMergerState {
   LandlordApartment get selectedApartment;
   @override
   KtList<LandlordProperty> get properties;
+  @override
+  KtList<Currency> get currencies;
   @override
   KtList<LandlordApartment> get apartments;
   @override

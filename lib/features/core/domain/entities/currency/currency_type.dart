@@ -5,6 +5,7 @@ import 'package:built_value/serializer.dart';
 part 'currency_type.g.dart';
 
 class CurrencyType extends EnumClass {
+  @BuiltValueEnumConst(fallback: true)
   static const CurrencyType NGN = _$NGN;
   static const CurrencyType USD = _$USD;
   static const CurrencyType GBP = _$GBP;

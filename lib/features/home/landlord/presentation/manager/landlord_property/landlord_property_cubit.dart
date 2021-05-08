@@ -60,15 +60,25 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         propertyType: LandlordPropertyTypeField(value),
       ));
 
-  Future<void> checkInternetAndConnectivity() async {
+  Future<void> checkInternetAndConnectivity([bool shouldThrow = false]) async {
     final isConnected =
         (await _connectivity.checkConnectivity()) != ConnectivityResult.none;
 
-    if (!isConnected) throw LandlordFailure.noInternetConnection();
+    if (!isConnected) {
+      if (shouldThrow) throw LandlordFailure.noInternetConnection();
+      emit(state.copyWith(
+        response: some(left(LandlordFailure.noInternetConnection())),
+      ));
+    }
 
     final hasInternet = await _dataConnectionChecker.hasConnection;
 
-    if (!hasInternet) throw LandlordFailure.poorInternetConnection();
+    if (isConnected && !hasInternet) {
+      if (shouldThrow) throw LandlordFailure.poorInternetConnection();
+      emit(state.copyWith(
+        response: some(left(LandlordFailure.poorInternetConnection())),
+      ));
+    }
   }
 
   void init([LandlordProperty prop]) => emit(state.copyWith(
@@ -77,7 +87,7 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         houseType: prop?.houseType ?? state.houseType,
         street: prop?.street ?? state.street,
         town: prop?.town ?? state.town,
-        state: prop?.state ?? state.state,
+        selectedState: prop?.state ?? state.selectedState,
       ));
 
   Future<void> fetchAll() async {
@@ -112,8 +122,6 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       street: state.street,
       town: state.town,
       // state: state.state,
-      color: null,
-      image: null,
     );
 
     // Validate form errors
@@ -122,7 +130,7 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     try {
       if (_prop.failures.isNone()) {
         // Check if user is connected & has good internet
-        await checkInternetAndConnectivity();
+        await checkInternetAndConnectivity(true);
 
         final prop = await _repository.create(
           LandlordPropertyData.fromDomain(_prop),
@@ -189,8 +197,6 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       street: state.street,
       town: state.town,
       // state: state.state,
-      color: null,
-      image: null,
     );
 
     // Validate form errors
@@ -202,7 +208,7 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         final _dto = LandlordPropertyData.fromDomain(_prop);
 
         // Check if user is connected & has good internet
-        await checkInternetAndConnectivity();
+        await checkInternetAndConnectivity(true);
 
         final prop = await _repository.update(
           property?.id?.value ?? id,

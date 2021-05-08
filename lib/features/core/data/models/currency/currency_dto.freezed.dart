@@ -19,7 +19,7 @@ class _$CurrencyDTOTearOff {
 // ignore: unused_element
   _CurrencyDTO call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'name')
@@ -28,7 +28,7 @@ class _$CurrencyDTOTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_phone_code')
           String countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
       @IntToBoolSerializer()
           bool isSupported,
       @nullable
@@ -60,7 +60,7 @@ const $CurrencyDTO = _$CurrencyDTOTearOff();
 /// @nodoc
 mixin _$CurrencyDTO {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'name')
@@ -69,7 +69,7 @@ mixin _$CurrencyDTO {
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_phone_code')
   String get countryPhoneCode;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
   @IntToBoolSerializer()
   bool get isSupported;
   @nullable
@@ -91,7 +91,7 @@ abstract class $CurrencyDTOCopyWith<$Res> {
       _$CurrencyDTOCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'name')
@@ -100,7 +100,7 @@ abstract class $CurrencyDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_phone_code')
           String countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
       @IntToBoolSerializer()
           bool isSupported,
       @nullable
@@ -154,7 +154,7 @@ abstract class _$CurrencyDTOCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'name')
@@ -163,7 +163,7 @@ abstract class _$CurrencyDTOCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_phone_code')
           String countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
       @IntToBoolSerializer()
           bool isSupported,
       @nullable
@@ -216,7 +216,7 @@ class __$CurrencyDTOCopyWithImpl<$Res> extends _$CurrencyDTOCopyWithImpl<$Res>
 class _$_CurrencyDTO extends _CurrencyDTO {
   const _$_CurrencyDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'name')
@@ -225,7 +225,7 @@ class _$_CurrencyDTO extends _CurrencyDTO {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_phone_code')
           this.countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
       @IntToBoolSerializer()
           this.isSupported,
       @nullable
@@ -241,7 +241,7 @@ class _$_CurrencyDTO extends _CurrencyDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -253,7 +253,7 @@ class _$_CurrencyDTO extends _CurrencyDTO {
   final String countryPhoneCode;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
   @IntToBoolSerializer()
   final bool isSupported;
   @override
@@ -318,7 +318,7 @@ abstract class _CurrencyDTO extends CurrencyDTO {
   const _CurrencyDTO._() : super._();
   const factory _CurrencyDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'name')
@@ -327,7 +327,7 @@ abstract class _CurrencyDTO extends CurrencyDTO {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_phone_code')
           String countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
       @IntToBoolSerializer()
           bool isSupported,
       @nullable
@@ -342,7 +342,7 @@ abstract class _CurrencyDTO extends CurrencyDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable
@@ -354,7 +354,7 @@ abstract class _CurrencyDTO extends CurrencyDTO {
   String get countryPhoneCode;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
   @IntToBoolSerializer()
   bool get isSupported;
   @override

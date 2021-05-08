@@ -31,8 +31,9 @@ abstract class ApartmentMerger implements _$ApartmentMerger {
     @nullable DateTime deletedAt,
   }) = _ApartmentMerger;
 
-  Option<FieldObjectException<dynamic>> get failures => amount.mapped.fold(
-        (f) => some(f),
-        (_) => none(),
-      );
+  Option<FieldObjectException<dynamic>> get failures =>
+      emailAddress.mapped.andThen(amount.mapped).fold(
+            (f) => some(f),
+            (_) => none(),
+          );
 }

@@ -11,12 +11,11 @@ _$_StateDTO _$_$_StateDTOFromJson(Map<String, dynamic> json) {
     id: json['id'] as int ?? 0,
     name: json['name'] as String ?? '',
     isSupported:
-        const IntToBoolSerializer().fromJson(json['is_supported'] as int) ??
-            false,
-    countryId: json['country_id'] as int ?? '',
+        const IntToBoolSerializer().fromJson(json['is_supported']) ?? true,
+    countryId: const IntegerSerializer().fromJson(json['country_id']),
     country: json['country'] == null
         ? null
-        : CountryDTO.fromJson(json['country'] as Map<String, dynamic>) ?? '',
+        : CountryDTO.fromJson(json['country'] as Map<String, dynamic>),
     createdAt: json['created_at'] as String,
     updatedAt: json['updated_at'] as String,
     deletedAt: json['deleted_at'] as String,
@@ -36,7 +35,8 @@ Map<String, dynamic> _$_$_StateDTOToJson(_$_StateDTO instance) {
   writeNotNull('name', instance.name);
   writeNotNull(
       'is_supported', const IntToBoolSerializer().toJson(instance.isSupported));
-  writeNotNull('country_id', instance.countryId);
+  writeNotNull(
+      'country_id', const IntegerSerializer().toJson(instance.countryId));
   writeNotNull('country', instance.country?.toJson());
   writeNotNull('created_at', instance.createdAt);
   writeNotNull('updated_at', instance.updatedAt);

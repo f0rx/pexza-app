@@ -14,9 +14,9 @@ _$_ApartmentMergerData _$_$_ApartmentMergerDataFromJson(
     amount: json['amount'] as int ?? 0,
     paymentPlan: json['payment_plan'] as String ?? '',
     tenantEmail: json['tenant_email'] as String,
-    apartmentId: json['apartment_id'] as int,
+    apartmentId: const IntegerSerializer().fromJson(json['apartment_id']),
     duration: json['duration'] as int,
-    currencyId: json['currency_id'] as int,
+    currencyId: const IntegerSerializer().fromJson(json['currency_id']),
     currency: json['currency'] == null
         ? null
         : CurrencyDTO.fromJson(json['currency'] as Map<String, dynamic>),
@@ -53,9 +53,11 @@ Map<String, dynamic> _$_$_ApartmentMergerDataToJson(
   writeNotNull('amount', instance.amount);
   writeNotNull('payment_plan', instance.paymentPlan);
   writeNotNull('tenant_email', instance.tenantEmail);
-  writeNotNull('apartment_id', instance.apartmentId);
+  writeNotNull(
+      'apartment_id', const IntegerSerializer().toJson(instance.apartmentId));
   writeNotNull('duration', instance.duration);
-  writeNotNull('currency_id', instance.currencyId);
+  writeNotNull(
+      'currency_id', const IntegerSerializer().toJson(instance.currencyId));
   writeNotNull('currency', instance.currency?.toJson());
   writeNotNull('tenant', instance.tenant?.toJson());
   writeNotNull('landlord', instance.landlord?.toJson());

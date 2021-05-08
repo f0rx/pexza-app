@@ -4,6 +4,7 @@ part of 'landlord_merger_cubit.dart';
 @immutable
 abstract class LandlordMergerState implements _$LandlordMergerState {
   static const int kDefaultDuration = 2;
+  static const int kMaxDuration = 50;
   const LandlordMergerState._();
 
   const factory LandlordMergerState({
@@ -17,12 +18,13 @@ abstract class LandlordMergerState implements _$LandlordMergerState {
     @nullable LandlordProperty selectedProperty,
     @nullable LandlordApartment selectedApartment,
     @Default(KtList.empty()) KtList<LandlordProperty> properties,
+    @Default(KtList.empty()) KtList<Currency> currencies,
     @Default(KtList.empty()) KtList<LandlordApartment> apartments,
     @Default(const None()) Option<Either<Failure, Success>> response,
   }) = _LandlordMergerState;
 
   factory LandlordMergerState.initial() => LandlordMergerState(
         email: EmailAddress(""),
-        amount: AmountField(-1),
+        amount: AmountField(0),
       );
 }

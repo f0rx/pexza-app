@@ -1,22 +1,22 @@
-library country_state.dart;
+library province_state.dart;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
 
-part 'country_state.freezed.dart';
+part 'province_state.freezed.dart';
 
 @freezed
 @immutable
-abstract class CountryState implements _$CountryState {
-  const CountryState._();
+abstract class ProvinceState implements _$ProvinceState {
+  const ProvinceState._();
 
-  const factory CountryState({
+  const factory ProvinceState({
     @nullable UniqueId<int> id,
-    @nullable CountryStateName name,
+    @nullable StateName name,
     @Default(false) bool isSupported,
     @nullable Country country,
     @nullable DateTime createdAt,
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,
-  }) = _CountryState;
+  }) = _ProvinceState;
 }

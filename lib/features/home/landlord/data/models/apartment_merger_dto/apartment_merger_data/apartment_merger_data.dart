@@ -30,10 +30,12 @@ abstract class ApartmentMergerData implements _$ApartmentMergerData {
         String tenantEmail,
     @nullable
     @JsonKey(includeIfNull: false, name: 'apartment_id')
+    @IntegerSerializer()
         int apartmentId,
     @nullable @JsonKey(includeIfNull: false) int duration,
     @nullable
     @JsonKey(includeIfNull: false, name: "currency_id")
+    @IntegerSerializer()
         int currencyId,
     @nullable @JsonKey(includeIfNull: false) CurrencyDTO currency,
     @nullable @JsonKey(includeIfNull: false) UserDTO tenant,

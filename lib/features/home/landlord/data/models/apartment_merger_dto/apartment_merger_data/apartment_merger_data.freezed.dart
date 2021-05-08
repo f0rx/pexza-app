@@ -35,12 +35,14 @@ class _$ApartmentMergerDataTearOff {
           String tenantEmail,
       @nullable
       @JsonKey(includeIfNull: false, name: 'apartment_id')
+      @IntegerSerializer()
           int apartmentId,
       @nullable
       @JsonKey(includeIfNull: false)
           int duration,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+      @IntegerSerializer()
           int currencyId,
       @nullable
       @JsonKey(includeIfNull: false)
@@ -55,23 +57,23 @@ class _$ApartmentMergerDataTearOff {
       @JsonKey(includeIfNull: false)
           LandlordApartmentData apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) {
     return _ApartmentMergerData(
@@ -124,12 +126,14 @@ mixin _$ApartmentMergerData {
   String get tenantEmail;
   @nullable
   @JsonKey(includeIfNull: false, name: 'apartment_id')
+  @IntegerSerializer()
   int get apartmentId;
   @nullable
   @JsonKey(includeIfNull: false)
   int get duration;
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
+  @IntegerSerializer()
   int get currencyId;
   @nullable
   @JsonKey(includeIfNull: false)
@@ -144,23 +148,23 @@ mixin _$ApartmentMergerData {
   @JsonKey(includeIfNull: false)
   LandlordApartmentData get apartment;
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   String get expireAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   String get renewedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
 
@@ -192,12 +196,14 @@ abstract class $ApartmentMergerDataCopyWith<$Res> {
           String tenantEmail,
       @nullable
       @JsonKey(includeIfNull: false, name: 'apartment_id')
+      @IntegerSerializer()
           int apartmentId,
       @nullable
       @JsonKey(includeIfNull: false)
           int duration,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+      @IntegerSerializer()
           int currencyId,
       @nullable
       @JsonKey(includeIfNull: false)
@@ -212,23 +218,23 @@ abstract class $ApartmentMergerDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           LandlordApartmentData apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -359,12 +365,14 @@ abstract class _$ApartmentMergerDataCopyWith<$Res>
           String tenantEmail,
       @nullable
       @JsonKey(includeIfNull: false, name: 'apartment_id')
+      @IntegerSerializer()
           int apartmentId,
       @nullable
       @JsonKey(includeIfNull: false)
           int duration,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+      @IntegerSerializer()
           int currencyId,
       @nullable
       @JsonKey(includeIfNull: false)
@@ -379,23 +387,23 @@ abstract class _$ApartmentMergerDataCopyWith<$Res>
       @JsonKey(includeIfNull: false)
           LandlordApartmentData apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -489,12 +497,14 @@ class _$_ApartmentMergerData extends _ApartmentMergerData {
           this.tenantEmail,
       @nullable
       @JsonKey(includeIfNull: false, name: 'apartment_id')
+      @IntegerSerializer()
           this.apartmentId,
       @nullable
       @JsonKey(includeIfNull: false)
           this.duration,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+      @IntegerSerializer()
           this.currencyId,
       @nullable
       @JsonKey(includeIfNull: false)
@@ -509,23 +519,23 @@ class _$_ApartmentMergerData extends _ApartmentMergerData {
       @JsonKey(includeIfNull: false)
           this.apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           this.expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           this.renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           this.createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           this.updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           this.deletedAt})
       : super._();
@@ -556,6 +566,7 @@ class _$_ApartmentMergerData extends _ApartmentMergerData {
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'apartment_id')
+  @IntegerSerializer()
   final int apartmentId;
   @override
   @nullable
@@ -563,7 +574,8 @@ class _$_ApartmentMergerData extends _ApartmentMergerData {
   final int duration;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
+  @IntegerSerializer()
   final int currencyId;
   @override
   @nullable
@@ -583,27 +595,27 @@ class _$_ApartmentMergerData extends _ApartmentMergerData {
   final LandlordApartmentData apartment;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   final String expireAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   final String renewedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   final String createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   final String updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   final String deletedAt;
 
@@ -718,12 +730,14 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
           String tenantEmail,
       @nullable
       @JsonKey(includeIfNull: false, name: 'apartment_id')
+      @IntegerSerializer()
           int apartmentId,
       @nullable
       @JsonKey(includeIfNull: false)
           int duration,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+      @IntegerSerializer()
           int currencyId,
       @nullable
       @JsonKey(includeIfNull: false)
@@ -738,23 +752,23 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
       @JsonKey(includeIfNull: false)
           LandlordApartmentData apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expireAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) = _$_ApartmentMergerData;
 
@@ -784,6 +798,7 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'apartment_id')
+  @IntegerSerializer()
   int get apartmentId;
   @override
   @nullable
@@ -791,7 +806,8 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
   int get duration;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
+  @IntegerSerializer()
   int get currencyId;
   @override
   @nullable
@@ -811,27 +827,27 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
   LandlordApartmentData get apartment;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   String get expireAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   String get renewedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
   @override

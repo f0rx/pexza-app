@@ -13,7 +13,8 @@ abstract class LandlordPropertyState implements _$LandlordPropertyState {
     @required LandlordField<String> houseType,
     @required LandlordField<String> street,
     @required LandlordField<String> town,
-    @required LandlordField<String> state,
+    @nullable ProvinceState selectedState,
+    @Default(KtList.empty()) KtList<ProvinceState> states,
     @Default(KtList.empty()) KtList<LandlordProperty> properties,
     @Default(KtList.empty()) KtList<LandlordApartment> apartments,
     @nullable LandlordProperty property,
@@ -26,6 +27,5 @@ abstract class LandlordPropertyState implements _$LandlordPropertyState {
         houseType: LandlordField(""),
         street: LandlordField(""),
         town: LandlordField(""),
-        state: LandlordField(""),
       );
 }

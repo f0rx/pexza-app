@@ -13,7 +13,7 @@ _$_LandlordApartmentData _$_$_LandlordApartmentDataFromJson(
     id: json['id'] as int ?? 0,
     name: json['name'] as String ?? '',
     status: json['status'] as String ?? '',
-    propertyId: json['property_id'] as int,
+    propertyId: const IntegerSerializer().fromJson(json['property_id']),
     property: json['property'] == null
         ? null
         : LandlordPropertyData.fromJson(
@@ -37,7 +37,8 @@ Map<String, dynamic> _$_$_LandlordApartmentDataToJson(
   writeNotNull('id', instance.id);
   writeNotNull('name', instance.name);
   writeNotNull('status', instance.status);
-  writeNotNull('property_id', instance.propertyId);
+  writeNotNull(
+      'property_id', const IntegerSerializer().toJson(instance.propertyId));
   writeNotNull('property', instance.property?.toJson());
   writeNotNull('created_at', instance.createdAt);
   writeNotNull('updated_at', instance.updatedAt);

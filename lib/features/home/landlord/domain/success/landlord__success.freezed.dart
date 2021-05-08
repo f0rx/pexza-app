@@ -23,11 +23,14 @@ class _$LandlordSuccessTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
       @nullable
-      @JsonKey(includeIfNull: false, ignore: true)
-          String details}) {
+      @JsonKey(ignore: true)
+          String details,
+      @JsonKey(ignore: true)
+          bool popRoute = true}) {
     return _LandlordSuccess(
       message: message,
       details: details,
+      popRoute: popRoute,
     );
   }
 
@@ -47,8 +50,10 @@ mixin _$LandlordSuccess {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get message;
   @nullable
-  @JsonKey(includeIfNull: false, ignore: true)
+  @JsonKey(ignore: true)
   String get details;
+  @JsonKey(ignore: true)
+  bool get popRoute;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -65,8 +70,10 @@ abstract class $LandlordSuccessCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
       @nullable
-      @JsonKey(includeIfNull: false, ignore: true)
-          String details});
+      @JsonKey(ignore: true)
+          String details,
+      @JsonKey(ignore: true)
+          bool popRoute});
 }
 
 /// @nodoc
@@ -82,10 +89,12 @@ class _$LandlordSuccessCopyWithImpl<$Res>
   $Res call({
     Object message = freezed,
     Object details = freezed,
+    Object popRoute = freezed,
   }) {
     return _then(_value.copyWith(
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
+      popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
     ));
   }
 }
@@ -102,8 +111,10 @@ abstract class _$LandlordSuccessCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
       @nullable
-      @JsonKey(includeIfNull: false, ignore: true)
-          String details});
+      @JsonKey(ignore: true)
+          String details,
+      @JsonKey(ignore: true)
+          bool popRoute});
 }
 
 /// @nodoc
@@ -121,10 +132,12 @@ class __$LandlordSuccessCopyWithImpl<$Res>
   $Res call({
     Object message = freezed,
     Object details = freezed,
+    Object popRoute = freezed,
   }) {
     return _then(_LandlordSuccess(
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
+      popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
     ));
   }
 }
@@ -139,9 +152,12 @@ class _$_LandlordSuccess extends _LandlordSuccess {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.message,
       @nullable
-      @JsonKey(includeIfNull: false, ignore: true)
-          this.details})
-      : super._();
+      @JsonKey(ignore: true)
+          this.details,
+      @JsonKey(ignore: true)
+          this.popRoute = true})
+      : assert(popRoute != null),
+        super._();
 
   factory _$_LandlordSuccess.fromJson(Map<String, dynamic> json) =>
       _$_$_LandlordSuccessFromJson(json);
@@ -152,12 +168,15 @@ class _$_LandlordSuccess extends _LandlordSuccess {
   final String message;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, ignore: true)
+  @JsonKey(ignore: true)
   final String details;
+  @override
+  @JsonKey(ignore: true)
+  final bool popRoute;
 
   @override
   String toString() {
-    return 'LandlordSuccess(message: $message, details: $details)';
+    return 'LandlordSuccess(message: $message, details: $details, popRoute: $popRoute)';
   }
 
   @override
@@ -168,14 +187,19 @@ class _$_LandlordSuccess extends _LandlordSuccess {
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
             (identical(other.details, details) ||
-                const DeepCollectionEquality().equals(other.details, details)));
+                const DeepCollectionEquality()
+                    .equals(other.details, details)) &&
+            (identical(other.popRoute, popRoute) ||
+                const DeepCollectionEquality()
+                    .equals(other.popRoute, popRoute)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(message) ^
-      const DeepCollectionEquality().hash(details);
+      const DeepCollectionEquality().hash(details) ^
+      const DeepCollectionEquality().hash(popRoute);
 
   @JsonKey(ignore: true)
   @override
@@ -196,8 +220,10 @@ abstract class _LandlordSuccess extends LandlordSuccess {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
       @nullable
-      @JsonKey(includeIfNull: false, ignore: true)
-          String details}) = _$_LandlordSuccess;
+      @JsonKey(ignore: true)
+          String details,
+      @JsonKey(ignore: true)
+          bool popRoute}) = _$_LandlordSuccess;
 
   factory _LandlordSuccess.fromJson(Map<String, dynamic> json) =
       _$_LandlordSuccess.fromJson;
@@ -208,8 +234,11 @@ abstract class _LandlordSuccess extends LandlordSuccess {
   String get message;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, ignore: true)
+  @JsonKey(ignore: true)
   String get details;
+  @override
+  @JsonKey(ignore: true)
+  bool get popRoute;
   @override
   @JsonKey(ignore: true)
   _$LandlordSuccessCopyWith<_LandlordSuccess> get copyWith;

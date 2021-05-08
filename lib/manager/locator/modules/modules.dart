@@ -9,6 +9,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/auth/data/repositories/access_token_manager.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
@@ -105,10 +106,7 @@ class _DioInstance {
               // dio.interceptors.requestLock.lock();
               // dio.interceptors.responseLock.lock();
 
-              // final _facade = getIt<AuthFacade>();
-
-              // await _facade.refreshAccessToken();
-              // await _facade.retry(error.request);
+              // await getIt<AuthWatcherCubit>().signOut;
 
               // dio.interceptors.requestLock.unlock();
               // dio.interceptors.responseLock.unlock();

@@ -8,12 +8,11 @@ part of currency.dart;
 
 _$_CurrencyDTO _$_$_CurrencyDTOFromJson(Map<String, dynamic> json) {
   return _$_CurrencyDTO(
-    id: json['id'] as int ?? '',
+    id: json['id'] as int,
     countryName: json['name'] as String ?? '',
     countryPhoneCode: json['country_phone_code'] as String ?? '',
     isSupported:
-        const IntToBoolSerializer().fromJson(json['is_supported'] as int) ??
-            false,
+        const IntToBoolSerializer().fromJson(json['is_supported']) ?? true,
     currency: json['currency'] as String ?? '',
     currencyName: json['currency_name'] as String ?? '',
   );

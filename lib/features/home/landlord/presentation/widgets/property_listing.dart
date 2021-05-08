@@ -45,7 +45,7 @@ Widget _gridView() {
                         height: App.width * 0.4,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(prop.image.getOrEmpty),
+                            image: AssetImage(prop.photo?.getOrEmpty),
                             fit: BoxFit.cover,
                           ),
                         ),

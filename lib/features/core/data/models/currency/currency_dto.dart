@@ -15,7 +15,7 @@ abstract class CurrencyDTO implements _$CurrencyDTO {
   const CurrencyDTO._();
 
   const factory CurrencyDTO({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: "") int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: "", name: "name")
         String countryName,
@@ -23,7 +23,7 @@ abstract class CurrencyDTO implements _$CurrencyDTO {
     @JsonKey(includeIfNull: false, defaultValue: "", name: "country_phone_code")
         String countryPhoneCode,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: false, name: "is_supported")
+    @JsonKey(includeIfNull: false, defaultValue: true, name: "is_supported")
     @IntToBoolSerializer()
         bool isSupported,
     @nullable @JsonKey(includeIfNull: false, defaultValue: "") String currency,
@@ -34,6 +34,8 @@ abstract class CurrencyDTO implements _$CurrencyDTO {
 
   factory CurrencyDTO.fromJson(Map<String, dynamic> json) =>
       _$CurrencyDTOFromJson(json);
+
+  Map<String, dynamic> toJson() => _$_$_CurrencyDTOToJson(this);
 
   factory CurrencyDTO.fromDomain(Currency instance) => CurrencyDTO(
         id: instance?.id?.value,

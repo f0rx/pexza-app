@@ -1,8 +1,15 @@
-import 'package:kt_dart/collection.dart';
+library country_name.dart;
 
-part 'country_name_gen.dart';
+import 'package:kt_dart/collection.dart';
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
+import 'package:pexza/manager/serializer/serializers.dart';
+
+part 'country_name.gen.dart';
 
 class CountryName {
+  @BuiltValueEnumConst(fallback: true)
   static const CountryName Nigeria = _$Nigeria;
   static const CountryName Canada = _$Canada;
   static const CountryName Germany = _$Germany;
@@ -15,15 +22,27 @@ class CountryName {
   static const CountryName Spain = _$Spain;
   static const CountryName Romania = _$Romania;
   static const CountryName Tanzania = _$Tanzania;
+  @BuiltValueEnumConst(wireName: "Czech Republic")
   static const CountryName CzechRepublic = _$CzechRepublic;
+  @BuiltValueEnumConst(wireName: "United States")
   static const CountryName UnitedStates = _$UnitedStates;
+  @BuiltValueEnumConst(wireName: "United Kingdom")
   static const CountryName UnitedKingdom = _$UnitedKingdom;
 
   final String name;
 
   const CountryName._(this.name);
 
-  static KtList<CountryName> get values => _$values;
+  static BuiltSet<CountryName> get values => _$countryNameValues;
 
-  static CountryName valueOf(String name) => _$valueOf(name);
+  static KtList<CountryName> get names => values.toList().toImmutableList();
+
+  static CountryName valueOf(String name) => _$countryNameValueOf(name);
+
+  String serialize() => serializers.serializeWith(CountryName.serializer, this);
+
+  static CountryName deserialize(String string) =>
+      serializers.deserializeWith(CountryName.serializer, string);
+
+  static Serializer<CountryName> get serializer => _$countryNameSerializer;
 }

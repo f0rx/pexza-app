@@ -21,15 +21,15 @@ class _$LandlordPropertyTearOff {
       @nullable LandlordField<String> houseType,
       @nullable LandlordField<String> street,
       @nullable LandlordField<String> town,
-      @nullable PhotoField photo,
-      @nullable CountryState state,
+      @nullable ProvinceState state,
       @nullable LandlordField<String> country,
-      @required @nullable MaterialColor color,
-      @required @nullable LandlordPropertyImage image,
+      @nullable MaterialColor color,
+      @nullable LandlordPropertyImage photo,
       @nullable LandlordField<int> numberOfTenants,
       @nullable LandlordField<int> numberOfApartments,
       @nullable LandlordField<int> numberOfAvailableApartments,
       @nullable LandlordField<int> numberOfRentedApartment,
+      @nullable Animatable<dynamic> animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) {
@@ -40,15 +40,15 @@ class _$LandlordPropertyTearOff {
       houseType: houseType,
       street: street,
       town: town,
-      photo: photo,
       state: state,
       country: country,
       color: color,
-      image: image,
+      photo: photo,
       numberOfTenants: numberOfTenants,
       numberOfApartments: numberOfApartments,
       numberOfAvailableApartments: numberOfAvailableApartments,
       numberOfRentedApartment: numberOfRentedApartment,
+      animatable: animatable,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -75,15 +75,13 @@ mixin _$LandlordProperty {
   @nullable
   LandlordField<String> get town;
   @nullable
-  PhotoField get photo;
-  @nullable
-  CountryState get state;
+  ProvinceState get state;
   @nullable
   LandlordField<String> get country;
   @nullable
   MaterialColor get color;
   @nullable
-  LandlordPropertyImage get image;
+  LandlordPropertyImage get photo;
   @nullable
   LandlordField<int> get numberOfTenants;
   @nullable
@@ -92,6 +90,8 @@ mixin _$LandlordProperty {
   LandlordField<int> get numberOfAvailableApartments;
   @nullable
   LandlordField<int> get numberOfRentedApartment;
+  @nullable
+  Animatable<dynamic> get animatable;
   @nullable
   DateTime get createdAt;
   @nullable
@@ -115,20 +115,20 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       @nullable LandlordField<String> houseType,
       @nullable LandlordField<String> street,
       @nullable LandlordField<String> town,
-      @nullable PhotoField photo,
-      @nullable CountryState state,
+      @nullable ProvinceState state,
       @nullable LandlordField<String> country,
       @nullable MaterialColor color,
-      @nullable LandlordPropertyImage image,
+      @nullable LandlordPropertyImage photo,
       @nullable LandlordField<int> numberOfTenants,
       @nullable LandlordField<int> numberOfApartments,
       @nullable LandlordField<int> numberOfAvailableApartments,
       @nullable LandlordField<int> numberOfRentedApartment,
+      @nullable Animatable<dynamic> animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
 
-  $CountryStateCopyWith<$Res> get state;
+  $ProvinceStateCopyWith<$Res> get state;
 }
 
 /// @nodoc
@@ -148,15 +148,15 @@ class _$LandlordPropertyCopyWithImpl<$Res>
     Object houseType = freezed,
     Object street = freezed,
     Object town = freezed,
-    Object photo = freezed,
     Object state = freezed,
     Object country = freezed,
     Object color = freezed,
-    Object image = freezed,
+    Object photo = freezed,
     Object numberOfTenants = freezed,
     Object numberOfApartments = freezed,
     Object numberOfAvailableApartments = freezed,
     Object numberOfRentedApartment = freezed,
+    Object animatable = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -173,13 +173,12 @@ class _$LandlordPropertyCopyWithImpl<$Res>
       street:
           street == freezed ? _value.street : street as LandlordField<String>,
       town: town == freezed ? _value.town : town as LandlordField<String>,
-      photo: photo == freezed ? _value.photo : photo as PhotoField,
-      state: state == freezed ? _value.state : state as CountryState,
+      state: state == freezed ? _value.state : state as ProvinceState,
       country: country == freezed
           ? _value.country
           : country as LandlordField<String>,
       color: color == freezed ? _value.color : color as MaterialColor,
-      image: image == freezed ? _value.image : image as LandlordPropertyImage,
+      photo: photo == freezed ? _value.photo : photo as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
           : numberOfTenants as LandlordField<int>,
@@ -192,6 +191,9 @@ class _$LandlordPropertyCopyWithImpl<$Res>
       numberOfRentedApartment: numberOfRentedApartment == freezed
           ? _value.numberOfRentedApartment
           : numberOfRentedApartment as LandlordField<int>,
+      animatable: animatable == freezed
+          ? _value.animatable
+          : animatable as Animatable<dynamic>,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -202,11 +204,11 @@ class _$LandlordPropertyCopyWithImpl<$Res>
   }
 
   @override
-  $CountryStateCopyWith<$Res> get state {
+  $ProvinceStateCopyWith<$Res> get state {
     if (_value.state == null) {
       return null;
     }
-    return $CountryStateCopyWith<$Res>(_value.state, (value) {
+    return $ProvinceStateCopyWith<$Res>(_value.state, (value) {
       return _then(_value.copyWith(state: value));
     });
   }
@@ -226,21 +228,21 @@ abstract class _$LandlordPropertyCopyWith<$Res>
       @nullable LandlordField<String> houseType,
       @nullable LandlordField<String> street,
       @nullable LandlordField<String> town,
-      @nullable PhotoField photo,
-      @nullable CountryState state,
+      @nullable ProvinceState state,
       @nullable LandlordField<String> country,
       @nullable MaterialColor color,
-      @nullable LandlordPropertyImage image,
+      @nullable LandlordPropertyImage photo,
       @nullable LandlordField<int> numberOfTenants,
       @nullable LandlordField<int> numberOfApartments,
       @nullable LandlordField<int> numberOfAvailableApartments,
       @nullable LandlordField<int> numberOfRentedApartment,
+      @nullable Animatable<dynamic> animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
 
   @override
-  $CountryStateCopyWith<$Res> get state;
+  $ProvinceStateCopyWith<$Res> get state;
 }
 
 /// @nodoc
@@ -262,15 +264,15 @@ class __$LandlordPropertyCopyWithImpl<$Res>
     Object houseType = freezed,
     Object street = freezed,
     Object town = freezed,
-    Object photo = freezed,
     Object state = freezed,
     Object country = freezed,
     Object color = freezed,
-    Object image = freezed,
+    Object photo = freezed,
     Object numberOfTenants = freezed,
     Object numberOfApartments = freezed,
     Object numberOfAvailableApartments = freezed,
     Object numberOfRentedApartment = freezed,
+    Object animatable = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -287,13 +289,12 @@ class __$LandlordPropertyCopyWithImpl<$Res>
       street:
           street == freezed ? _value.street : street as LandlordField<String>,
       town: town == freezed ? _value.town : town as LandlordField<String>,
-      photo: photo == freezed ? _value.photo : photo as PhotoField,
-      state: state == freezed ? _value.state : state as CountryState,
+      state: state == freezed ? _value.state : state as ProvinceState,
       country: country == freezed
           ? _value.country
           : country as LandlordField<String>,
       color: color == freezed ? _value.color : color as MaterialColor,
-      image: image == freezed ? _value.image : image as LandlordPropertyImage,
+      photo: photo == freezed ? _value.photo : photo as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
           : numberOfTenants as LandlordField<int>,
@@ -306,6 +307,9 @@ class __$LandlordPropertyCopyWithImpl<$Res>
       numberOfRentedApartment: numberOfRentedApartment == freezed
           ? _value.numberOfRentedApartment
           : numberOfRentedApartment as LandlordField<int>,
+      animatable: animatable == freezed
+          ? _value.animatable
+          : animatable as Animatable<dynamic>,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -325,15 +329,15 @@ class _$_LandlordProperty extends _LandlordProperty {
       @nullable this.houseType,
       @nullable this.street,
       @nullable this.town,
-      @nullable this.photo,
       @nullable this.state,
       @nullable this.country,
-      @required @nullable this.color,
-      @required @nullable this.image,
+      @nullable this.color,
+      @nullable this.photo,
       @nullable this.numberOfTenants,
       @nullable this.numberOfApartments,
       @nullable this.numberOfAvailableApartments,
       @nullable this.numberOfRentedApartment,
+      @nullable this.animatable,
       @nullable this.createdAt,
       @nullable this.updatedAt,
       @nullable this.deletedAt})
@@ -359,10 +363,7 @@ class _$_LandlordProperty extends _LandlordProperty {
   final LandlordField<String> town;
   @override
   @nullable
-  final PhotoField photo;
-  @override
-  @nullable
-  final CountryState state;
+  final ProvinceState state;
   @override
   @nullable
   final LandlordField<String> country;
@@ -371,7 +372,7 @@ class _$_LandlordProperty extends _LandlordProperty {
   final MaterialColor color;
   @override
   @nullable
-  final LandlordPropertyImage image;
+  final LandlordPropertyImage photo;
   @override
   @nullable
   final LandlordField<int> numberOfTenants;
@@ -386,6 +387,9 @@ class _$_LandlordProperty extends _LandlordProperty {
   final LandlordField<int> numberOfRentedApartment;
   @override
   @nullable
+  final Animatable<dynamic> animatable;
+  @override
+  @nullable
   final DateTime createdAt;
   @override
   @nullable
@@ -396,7 +400,7 @@ class _$_LandlordProperty extends _LandlordProperty {
 
   @override
   String toString() {
-    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, photo: $photo, state: $state, country: $country, color: $color, image: $image, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, country: $country, color: $color, photo: $photo, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, animatable: $animatable, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -417,8 +421,6 @@ class _$_LandlordProperty extends _LandlordProperty {
                 const DeepCollectionEquality().equals(other.street, street)) &&
             (identical(other.town, town) ||
                 const DeepCollectionEquality().equals(other.town, town)) &&
-            (identical(other.photo, photo) ||
-                const DeepCollectionEquality().equals(other.photo, photo)) &&
             (identical(other.state, state) ||
                 const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.country, country) ||
@@ -426,8 +428,8 @@ class _$_LandlordProperty extends _LandlordProperty {
                     .equals(other.country, country)) &&
             (identical(other.color, color) ||
                 const DeepCollectionEquality().equals(other.color, color)) &&
-            (identical(other.image, image) ||
-                const DeepCollectionEquality().equals(other.image, image)) &&
+            (identical(other.photo, photo) ||
+                const DeepCollectionEquality().equals(other.photo, photo)) &&
             (identical(other.numberOfTenants, numberOfTenants) ||
                 const DeepCollectionEquality()
                     .equals(other.numberOfTenants, numberOfTenants)) &&
@@ -443,6 +445,9 @@ class _$_LandlordProperty extends _LandlordProperty {
                     other.numberOfRentedApartment, numberOfRentedApartment) ||
                 const DeepCollectionEquality().equals(
                     other.numberOfRentedApartment, numberOfRentedApartment)) &&
+            (identical(other.animatable, animatable) ||
+                const DeepCollectionEquality()
+                    .equals(other.animatable, animatable)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -463,15 +468,15 @@ class _$_LandlordProperty extends _LandlordProperty {
       const DeepCollectionEquality().hash(houseType) ^
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
-      const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(color) ^
-      const DeepCollectionEquality().hash(image) ^
+      const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(numberOfTenants) ^
       const DeepCollectionEquality().hash(numberOfApartments) ^
       const DeepCollectionEquality().hash(numberOfAvailableApartments) ^
       const DeepCollectionEquality().hash(numberOfRentedApartment) ^
+      const DeepCollectionEquality().hash(animatable) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(deletedAt);
@@ -491,15 +496,15 @@ abstract class _LandlordProperty extends LandlordProperty {
       @nullable LandlordField<String> houseType,
       @nullable LandlordField<String> street,
       @nullable LandlordField<String> town,
-      @nullable PhotoField photo,
-      @nullable CountryState state,
+      @nullable ProvinceState state,
       @nullable LandlordField<String> country,
-      @required @nullable MaterialColor color,
-      @required @nullable LandlordPropertyImage image,
+      @nullable MaterialColor color,
+      @nullable LandlordPropertyImage photo,
       @nullable LandlordField<int> numberOfTenants,
       @nullable LandlordField<int> numberOfApartments,
       @nullable LandlordField<int> numberOfAvailableApartments,
       @nullable LandlordField<int> numberOfRentedApartment,
+      @nullable Animatable<dynamic> animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) = _$_LandlordProperty;
@@ -524,10 +529,7 @@ abstract class _LandlordProperty extends LandlordProperty {
   LandlordField<String> get town;
   @override
   @nullable
-  PhotoField get photo;
-  @override
-  @nullable
-  CountryState get state;
+  ProvinceState get state;
   @override
   @nullable
   LandlordField<String> get country;
@@ -536,7 +538,7 @@ abstract class _LandlordProperty extends LandlordProperty {
   MaterialColor get color;
   @override
   @nullable
-  LandlordPropertyImage get image;
+  LandlordPropertyImage get photo;
   @override
   @nullable
   LandlordField<int> get numberOfTenants;
@@ -549,6 +551,9 @@ abstract class _LandlordProperty extends LandlordProperty {
   @override
   @nullable
   LandlordField<int> get numberOfRentedApartment;
+  @override
+  @nullable
+  Animatable<dynamic> get animatable;
   @override
   @nullable
   DateTime get createdAt;

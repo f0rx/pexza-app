@@ -44,6 +44,7 @@ class _$LandlordPropertyDataTearOff {
           StateDTO state,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -131,6 +132,7 @@ mixin _$LandlordPropertyData {
   StateDTO get state;
   @nullable
   @JsonKey(disallowNullValue: true, name: 'state_id')
+  @IntegerSerializer()
   int get stateId;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -201,6 +203,7 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
           StateDTO state,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -338,6 +341,7 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
           StateDTO state,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -465,6 +469,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
           this.state,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           this.stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -533,6 +538,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   @override
   @nullable
   @JsonKey(disallowNullValue: true, name: 'state_id')
+  @IntegerSerializer()
   final int stateId;
   @override
   @nullable
@@ -695,6 +701,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
           StateDTO state,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -762,6 +769,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   @override
   @nullable
   @JsonKey(disallowNullValue: true, name: 'state_id')
+  @IntegerSerializer()
   int get stateId;
   @override
   @nullable

@@ -11,6 +11,7 @@ abstract class Failure with _FailureMixin {
 abstract class Success with _SuccessMixin {
   String get message;
   String get details;
+  bool get popRoute;
 }
 
 mixin _FailureMixin {

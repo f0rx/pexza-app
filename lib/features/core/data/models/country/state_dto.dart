@@ -23,15 +23,14 @@ abstract class StateDTO implements _$StateDTO {
     @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+    @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
     @IntToBoolSerializer()
         bool isSupported,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
+    @JsonKey(includeIfNull: false, name: 'country_id')
+    @IntegerSerializer()
         int countryId,
-    @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '')
-        CountryDTO country,
+    @nullable @JsonKey(includeIfNull: false) CountryDTO country,
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
@@ -49,15 +48,15 @@ abstract class StateDTO implements _$StateDTO {
   factory StateDTO.fromJson(Map<String, dynamic> json) =>
       _$StateDTOFromJson(json);
 
-  factory StateDTO.fromDomain(CountryState instance) => StateDTO(
+  factory StateDTO.fromDomain(ProvinceState instance) => StateDTO(
         id: instance?.id?.value,
         name: instance?.name?.getOrNull,
         countryId: instance?.country?.id?.value,
       );
 
-  CountryState get domain => CountryState(
+  ProvinceState get domain => ProvinceState(
         id: UniqueId<int>.fromExternal(id),
-        name: !name.isNull ? CountryStateName(name) : null,
+        name: !name.isNull ? StateName(name) : null,
         isSupported: isSupported,
         country: country?.domain,
         createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,

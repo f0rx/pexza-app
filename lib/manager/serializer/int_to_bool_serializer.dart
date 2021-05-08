@@ -1,27 +1,35 @@
 import 'package:json_annotation/json_annotation.dart';
 
-class IntToBoolSerializer implements JsonConverter<bool, int> {
+class IntToBoolSerializer implements JsonConverter<bool, dynamic> {
   const IntToBoolSerializer();
 
   @override
-  bool fromJson(int value) {
-    switch (value) {
-      case 1:
-        return true;
+  bool fromJson(dynamic value) {
+    final int _value = value == null
+        ? null
+        : value.runtimeType == int
+            ? value
+            : int.tryParse(value);
+
+    if (_value == null) return false;
+
+    switch (_value) {
       case 0:
-      default:
         return false;
+      case 1:
+      default:
+        return true;
     }
   }
 
   @override
-  int toJson(bool instance) {
+  dynamic toJson(bool instance) {
     switch (instance) {
-      case true:
-        return 1;
       case false:
-      default:
         return 0;
+      case true:
+      default:
+        return 1;
     }
   }
 }

@@ -163,20 +163,37 @@ class Helpers {
         ),
       );
 
-  Widget positionedLoader(BuildContext context, [bool overlay = true]) {
-    final _keyboardClosed = MediaQuery.of(context).viewInsets.bottom == 0;
+  Widget positionedLoader(
+    BuildContext context, [
+    bool overlay = true,
+    Widget loader,
+  ]) {
+    final bool _keyboardClosed = MediaQuery.of(context).viewInsets.bottom == 0;
+    double _topHeight;
+    try {
+      _topHeight = Scaffold.of(context).appBarMaxHeight;
+    } catch (e) {
+      _topHeight = kToolbarHeight;
+    }
 
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        CircularProgressBar.adaptive(
-          width: width * 0.08,
-          height: width * 0.08,
-          strokeWidth: 3.5,
-          radius: 14,
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: _topHeight),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment:
+              _keyboardClosed ? MainAxisAlignment.end : MainAxisAlignment.start,
+          children: [
+            loader ??
+                CircularProgressBar.adaptive(
+                  width: width * 0.08,
+                  height: width * 0.08,
+                  strokeWidth: 3.5,
+                  radius: 14,
+                ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

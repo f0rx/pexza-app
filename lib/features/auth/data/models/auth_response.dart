@@ -31,7 +31,9 @@ abstract class AuthResponse implements _$AuthResponse, Response {
     @ServerFieldErrorsSerializer()
         ServerFieldErrors errors,
     //
-    String details,
+    @JsonKey(ignore: true) String details,
+    //
+    @Default(true) @JsonKey(ignore: true) bool popRoute,
   }) = _AuthResponse;
 
   T fold<T>({

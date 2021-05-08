@@ -53,15 +53,25 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
         currentProperty: property ?? state.currentProperty,
       ));
 
-  Future<void> checkInternetAndConnectivity() async {
+  Future<void> checkInternetAndConnectivity([bool shouldThrow = false]) async {
     final isConnected =
         (await _connectivity.checkConnectivity()) != ConnectivityResult.none;
 
-    if (!isConnected) throw LandlordFailure.noInternetConnection();
+    if (!isConnected) {
+      if (shouldThrow) throw LandlordFailure.noInternetConnection();
+      emit(state.copyWith(
+        response: some(left(LandlordFailure.noInternetConnection())),
+      ));
+    }
 
     final hasInternet = await _dataConnectionChecker.hasConnection;
 
-    if (!hasInternet) throw LandlordFailure.poorInternetConnection();
+    if (isConnected && !hasInternet) {
+      if (shouldThrow) throw LandlordFailure.poorInternetConnection();
+      emit(state.copyWith(
+        response: some(left(LandlordFailure.poorInternetConnection())),
+      ));
+    }
   }
 
   Future<void> fetchAllLandlordApartments() async {
@@ -126,7 +136,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
     try {
       if (_apartment.failures.isNone()) {
         // Check if user is connected & has good internet
-        await checkInternetAndConnectivity();
+        await checkInternetAndConnectivity(true);
 
         final apartmentDTO = await _repository.create(
           LandlordApartmentData.fromDomain(_apartment),
@@ -192,7 +202,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
     try {
       if (_apartment.failures.isNone()) {
         // Check if user is connected & has good internet
-        await checkInternetAndConnectivity();
+        await checkInternetAndConnectivity(true);
 
         final _apartmentDTO = await _repository.update(
           apartment?.id?.value ?? id,

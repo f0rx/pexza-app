@@ -12,8 +12,7 @@ _$_CountryDTO _$_$_CountryDTOFromJson(Map<String, dynamic> json) {
     name: json['name'] as String ?? '',
     phoneCode: json['country_phone_code'] as String ?? '',
     isSupported:
-        const IntToBoolSerializer().fromJson(json['is_supported'] as int) ??
-            false,
+        const IntToBoolSerializer().fromJson(json['is_supported']) ?? false,
     currencyType: json['currency'] as String ?? '',
     currencyName: json['currency_name'] as String ?? '',
     createdAt: json['created_at'] as String,

@@ -4,7 +4,7 @@ import 'package:pexza/features/core/domain/failures/field_object/field_object_ex
 import 'package:pexza/features/core/domain/validator/validator.dart';
 
 class AmountField extends FieldObject<int> {
-  static const AmountField DEFAULT = AmountField._(Right(-1));
+  static const AmountField DEFAULT = AmountField._(Right(0));
   final Either<FieldObjectException<String>, int> value;
 
   factory AmountField(int input) {
