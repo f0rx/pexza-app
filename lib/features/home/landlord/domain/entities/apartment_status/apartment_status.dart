@@ -12,6 +12,7 @@ class ApartmentStatus extends EnumClass {
   static const ApartmentStatus assigned = _$assigned;
   static const ApartmentStatus paired = _$paired;
   static const ApartmentStatus occupied = _$occupied;
+  static const ApartmentStatus reject = _$reject;
 
   const ApartmentStatus._(String name) : super(name);
 

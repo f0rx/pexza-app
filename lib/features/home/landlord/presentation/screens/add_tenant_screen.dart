@@ -120,6 +120,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
               builder: (c, s) => DropdownFieldWidget(
                 hint: "-- Select the Property --",
+                disabled: s.isLoading,
                 disabledHint: "Fetching your properties..",
                 items: s.properties
                     .asList()
@@ -153,6 +154,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
               builder: (c, s) => DropdownFieldWidget(
                 hint: "-- Choose Apartment --",
+                disabled: s.isLoading,
                 disabledHint: s.isLoading
                     ? "Fetching apartments..."
                     : !s.selectedProperty.isNull && s.apartments.isEmpty()
@@ -250,6 +252,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
               builder: (c, s) => DropdownFieldWidget(
                 hint: "-- Select Currency --",
+                disabled: s.isLoading,
                 disabledHint: "Fetching data..please wait.",
                 items: s.currencies
                     .asList()

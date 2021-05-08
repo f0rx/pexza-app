@@ -79,18 +79,27 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
     try {
       await checkInternetAndConnectivity();
 
+      LandlordProperty selectedProp = property;
+
       if (property.isNull || apartment.isNull) {
         final props = await _propertyRepository.all();
+        // Map the incoming DTO to domain oject
+        final domain = props.data.map((e) => e?.domain).toImmutableList();
+        // Set the current property as selected
+        selectedProp = domain.find((a) => a.id.value == property.id.value);
 
-        emit(state.copyWith(
-          properties: props.data.map((e) => e?.domain).toImmutableList(),
-        ));
+        emit(state.copyWith(properties: domain));
       }
+
+      // Update selected property & Fetch related Apartments
+      this.propertyChanged(selectedProp);
 
       // Fetch currencies
       final _currDTO = await _miscRepository.fetchCurrencies();
       // Emit Currencies
-      emit(state.copyWith(currencies: _currDTO?.domain?.toImmutableList()));
+      emit(state.copyWith(
+        currencies: _currDTO?.domain?.toImmutableList(),
+      ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         response: some(left(e)),
