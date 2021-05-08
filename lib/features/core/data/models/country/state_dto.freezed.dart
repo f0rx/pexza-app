@@ -25,31 +25,33 @@ class _$StateDTOTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          String phoneCode,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false, name: 'country_id')
+      @IntegerSerializer()
+          int countryId,
+      @nullable
+      @JsonKey(includeIfNull: false)
           CountryDTO country,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) {
     return _StateDTO(
       id: id,
       name: name,
-      phoneCode: phoneCode,
       isSupported: isSupported,
+      countryId: countryId,
       country: country,
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -76,24 +78,26 @@ mixin _$StateDTO {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get name;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-  String get phoneCode;
-  @nullable
-  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
+  @IntToBoolSerializer()
   bool get isSupported;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false, name: 'country_id')
+  @IntegerSerializer()
+  int get countryId;
+  @nullable
+  @JsonKey(includeIfNull: false)
   CountryDTO get country;
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
 
@@ -114,24 +118,26 @@ abstract class $StateDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          String phoneCode,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false, name: 'country_id')
+      @IntegerSerializer()
+          int countryId,
+      @nullable
+      @JsonKey(includeIfNull: false)
           CountryDTO country,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -150,8 +156,8 @@ class _$StateDTOCopyWithImpl<$Res> implements $StateDTOCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object phoneCode = freezed,
     Object isSupported = freezed,
+    Object countryId = freezed,
     Object country = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -160,9 +166,9 @@ class _$StateDTOCopyWithImpl<$Res> implements $StateDTOCopyWith<$Res> {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
       name: name == freezed ? _value.name : name as String,
-      phoneCode: phoneCode == freezed ? _value.phoneCode : phoneCode as String,
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
+      countryId: countryId == freezed ? _value.countryId : countryId as int,
       country: country == freezed ? _value.country : country as CountryDTO,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
@@ -194,24 +200,26 @@ abstract class _$StateDTOCopyWith<$Res> implements $StateDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          String phoneCode,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false, name: 'country_id')
+      @IntegerSerializer()
+          int countryId,
+      @nullable
+      @JsonKey(includeIfNull: false)
           CountryDTO country,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -232,8 +240,8 @@ class __$StateDTOCopyWithImpl<$Res> extends _$StateDTOCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object name = freezed,
-    Object phoneCode = freezed,
     Object isSupported = freezed,
+    Object countryId = freezed,
     Object country = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -242,9 +250,9 @@ class __$StateDTOCopyWithImpl<$Res> extends _$StateDTOCopyWithImpl<$Res>
     return _then(_StateDTO(
       id: id == freezed ? _value.id : id as int,
       name: name == freezed ? _value.name : name as String,
-      phoneCode: phoneCode == freezed ? _value.phoneCode : phoneCode as String,
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
+      countryId: countryId == freezed ? _value.countryId : countryId as int,
       country: country == freezed ? _value.country : country as CountryDTO,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
@@ -265,24 +273,26 @@ class _$_StateDTO extends _StateDTO {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          this.phoneCode,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
+      @IntToBoolSerializer()
           this.isSupported,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false, name: 'country_id')
+      @IntegerSerializer()
+          this.countryId,
+      @nullable
+      @JsonKey(includeIfNull: false)
           this.country,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           this.createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           this.updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           this.deletedAt})
       : super._();
@@ -300,35 +310,37 @@ class _$_StateDTO extends _StateDTO {
   final String name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-  final String phoneCode;
-  @override
-  @nullable
-  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
+  @IntToBoolSerializer()
   final bool isSupported;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false, name: 'country_id')
+  @IntegerSerializer()
+  final int countryId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
   final CountryDTO country;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   final String createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   final String updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   final String deletedAt;
 
   @override
   String toString() {
-    return 'StateDTO(id: $id, name: $name, phoneCode: $phoneCode, isSupported: $isSupported, country: $country, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'StateDTO(id: $id, name: $name, isSupported: $isSupported, countryId: $countryId, country: $country, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -339,12 +351,12 @@ class _$_StateDTO extends _StateDTO {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.phoneCode, phoneCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.phoneCode, phoneCode)) &&
             (identical(other.isSupported, isSupported) ||
                 const DeepCollectionEquality()
                     .equals(other.isSupported, isSupported)) &&
+            (identical(other.countryId, countryId) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryId, countryId)) &&
             (identical(other.country, country) ||
                 const DeepCollectionEquality()
                     .equals(other.country, country)) &&
@@ -364,8 +376,8 @@ class _$_StateDTO extends _StateDTO {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(phoneCode) ^
       const DeepCollectionEquality().hash(isSupported) ^
+      const DeepCollectionEquality().hash(countryId) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
@@ -392,24 +404,26 @@ abstract class _StateDTO extends StateDTO {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-          String phoneCode,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+      @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
+      @IntToBoolSerializer()
           bool isSupported,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false, name: 'country_id')
+      @IntegerSerializer()
+          int countryId,
+      @nullable
+      @JsonKey(includeIfNull: false)
           CountryDTO country,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) = _$_StateDTO;
 
@@ -425,29 +439,31 @@ abstract class _StateDTO extends StateDTO {
   String get name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_id')
-  String get phoneCode;
-  @override
-  @nullable
-  @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+  @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')
+  @IntToBoolSerializer()
   bool get isSupported;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false, name: 'country_id')
+  @IntegerSerializer()
+  int get countryId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
   CountryDTO get country;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
   @override

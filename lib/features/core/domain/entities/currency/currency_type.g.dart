@@ -19,7 +19,7 @@ CurrencyType _$currencyTypeValueOf(String name) {
     case 'GBP':
       return _$GBP;
     default:
-      throw new ArgumentError(name);
+      return _$NGN;
   }
 }
 

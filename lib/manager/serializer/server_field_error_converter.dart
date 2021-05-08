@@ -7,6 +7,7 @@ class ServerFieldErrorsSerializer
 
   @override
   ServerFieldErrors fromJson(Map<String, dynamic> value) => ServerFieldErrors(
+        name: value != null ? value['name'] : null,
         firstName: value != null ? value['first_name'] : null,
         lastName: value != null ? value['last_name'] : null,
         email: value != null ? value['email'] : null,
@@ -15,6 +16,17 @@ class ServerFieldErrorsSerializer
         phone: value != null ? value['phone'] : null,
         password: value != null ? value['password'] : null,
         token: value != null ? value['token'] : null,
+        propertyId: value != null ? value['property_id'] : null,
+        apartmentId: value != null ? value['apartment_id'] : null,
+        propertyType: value != null ? value['property_type'] : null,
+        houseType: value != null ? value['house_type'] : null,
+        street: value != null ? value['street'] : null,
+        town: value != null ? value['town'] : null,
+        stateId: value != null ? value['state_id'] : null,
+        tenantEmail: value != null ? value['tenant_email'] : null,
+        duration: value != null ? value['duration'] : null,
+        amount: value != null ? value['amount'] : null,
+        currencyId: value != null ? value['currency_id'] : null,
       );
 
   @override

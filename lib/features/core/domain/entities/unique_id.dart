@@ -1,3 +1,4 @@
+import 'dart:math' as Math;
 import 'package:uuid/uuid.dart';
 
 class UniqueId<T> {
@@ -17,6 +18,10 @@ class UniqueId<T> {
     // Here, we'll just have to trust what's coming in from the server :)
     assert(id != null);
     return UniqueId._(id);
+  }
+
+  factory UniqueId.int([int min = 0, int max = 100]) {
+    return UniqueId._(min + Math.Random.secure().nextInt(max - min) as T);
   }
 
   const UniqueId._(this.value);

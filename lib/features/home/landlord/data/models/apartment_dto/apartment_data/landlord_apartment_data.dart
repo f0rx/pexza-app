@@ -22,6 +22,7 @@ abstract class LandlordApartmentData implements _$LandlordApartmentData {
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     @nullable
     @JsonKey(disallowNullValue: true, name: "property_id")
+    @IntegerSerializer()
         int propertyId,
     @nullable @JsonKey(disallowNullValue: true) LandlordPropertyData property,
     @nullable

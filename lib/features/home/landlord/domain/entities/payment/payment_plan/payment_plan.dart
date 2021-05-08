@@ -16,4 +16,17 @@ class PaymentPlan extends EnumClass {
   static PaymentPlan valueOf(String name) => _$paymentPlanValueOf(name);
 
   static Serializer<PaymentPlan> get serializer => _$paymentPlanSerializer;
+
+  T fold<T>({
+    T Function(String) monthly,
+    T Function(String) yearly,
+  }) {
+    switch (this.name) {
+      case "monthly":
+        return monthly?.call(this.name);
+      case "yearly":
+      default:
+        return yearly?.call(this.name);
+    }
+  }
 }

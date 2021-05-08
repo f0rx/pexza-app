@@ -15,17 +15,6 @@ part 'landlord_property_data.freezed.dart';
 @freezed
 @immutable
 abstract class LandlordPropertyData implements _$LandlordPropertyData {
-  static KtList<String> images = KtList.of(
-    AppAssets.apartment1,
-    AppAssets.apartment2,
-    AppAssets.apartment3,
-    AppAssets.apartment4,
-    AppAssets.apartment5,
-    AppAssets.apartment6,
-    AppAssets.apartment7,
-    AppAssets.apartment8,
-  );
-
   const LandlordPropertyData._();
 
   const factory LandlordPropertyData({
@@ -37,10 +26,14 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
         String houseType,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String photo,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String street,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
-    // @nullable @JsonKey(includeIfNull: false) StateDTO state,
-    @nullable @JsonKey(disallowNullValue: true, name: "state_id") int stateId,
+    @nullable @JsonKey(includeIfNull: false) StateDTO state,
+    @nullable
+    @JsonKey(disallowNullValue: true, name: "state_id")
+    @IntegerSerializer()
+        int stateId,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String country,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
@@ -95,17 +88,14 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       houseType: !houseType.isNull ? LandlordField(houseType) : null,
       town: !town.isNull ? LandlordField(town) : null,
       street: !street.isNull ? LandlordField(street) : null,
-      // state: !state.isNull
-      //     ? CountryState(
-      //         name: CountryStateName(state?.name),
-      //         country: !country.isNull
-      //             ? Country(name: CountryName.valueOf(country))
-      //             : null,
-      //       )
-      //     : null,
+      photo: LandlordPropertyImage(
+        "https://res.cloudinary.com/anifowosetobi"
+        "/image/upload/v1601500323/user_korsis.png",
+      ),
+      state: !state.isNull ? state.domain : null,
       country: !country.isNull ? LandlordField(country) : null,
       color: MaterialColor(_color.value, AppColors.swatch(_color)),
-      image: LandlordPropertyImage(images.random()),
+      // image: LandlordPropertyImage(images.random()),
       numberOfTenants:
           !numberOfTenants.isNull ? LandlordField(numberOfTenants) : null,
       numberOfApartments:

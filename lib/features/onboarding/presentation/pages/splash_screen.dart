@@ -112,7 +112,7 @@ class SplashScreen extends StatelessWidget {
                         Colors.grey.shade700,
                         context: context,
                       ),
-                      (_) => AppColors.accentColor,
+                      (_) => AppColors.accentColor.shade400,
                     ),
                   ),
                 ),

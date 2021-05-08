@@ -1,0 +1,10 @@
+{
+    "status": "success",
+    "currencies": [
+        {
+            "id": 1,
+            "currency": "NGN",
+            "currency_name": "Naira"
+        }
+    ]
+}

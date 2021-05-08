@@ -32,12 +32,19 @@ class _$LandlordPropertyDataTearOff {
           String houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
+          String photo,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String street,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
+      @JsonKey(includeIfNull: false)
+          StateDTO state,
+      @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -71,8 +78,10 @@ class _$LandlordPropertyDataTearOff {
       name: name,
       propertyType: propertyType,
       houseType: houseType,
+      photo: photo,
       street: street,
       town: town,
+      state: state,
       stateId: stateId,
       country: country,
       numberOfTenants: numberOfTenants,
@@ -111,12 +120,19 @@ mixin _$LandlordPropertyData {
   String get houseType;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
+  String get photo;
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
   String get street;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
-  String get town; // @nullable @JsonKey(includeIfNull: false) StateDTO state,
+  String get town;
+  @nullable
+  @JsonKey(includeIfNull: false)
+  StateDTO get state;
   @nullable
   @JsonKey(disallowNullValue: true, name: 'state_id')
+  @IntegerSerializer()
   int get stateId;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -175,12 +191,19 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
           String houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
+          String photo,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String street,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
+      @JsonKey(includeIfNull: false)
+          StateDTO state,
+      @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -209,6 +232,8 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
+
+  $StateDTOCopyWith<$Res> get state;
 }
 
 /// @nodoc
@@ -226,8 +251,10 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
     Object name = freezed,
     Object propertyType = freezed,
     Object houseType = freezed,
+    Object photo = freezed,
     Object street = freezed,
     Object town = freezed,
+    Object state = freezed,
     Object stateId = freezed,
     Object country = freezed,
     Object numberOfTenants = freezed,
@@ -245,8 +272,10 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
           ? _value.propertyType
           : propertyType as String,
       houseType: houseType == freezed ? _value.houseType : houseType as String,
+      photo: photo == freezed ? _value.photo : photo as String,
       street: street == freezed ? _value.street : street as String,
       town: town == freezed ? _value.town : town as String,
+      state: state == freezed ? _value.state : state as StateDTO,
       stateId: stateId == freezed ? _value.stateId : stateId as int,
       country: country == freezed ? _value.country : country as String,
       numberOfTenants: numberOfTenants == freezed
@@ -265,6 +294,16 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
     ));
+  }
+
+  @override
+  $StateDTOCopyWith<$Res> get state {
+    if (_value.state == null) {
+      return null;
+    }
+    return $StateDTOCopyWith<$Res>(_value.state, (value) {
+      return _then(_value.copyWith(state: value));
+    });
   }
 }
 
@@ -290,12 +329,19 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
           String houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
+          String photo,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String street,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
+      @JsonKey(includeIfNull: false)
+          StateDTO state,
+      @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -324,6 +370,9 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
+
+  @override
+  $StateDTOCopyWith<$Res> get state;
 }
 
 /// @nodoc
@@ -343,8 +392,10 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
     Object name = freezed,
     Object propertyType = freezed,
     Object houseType = freezed,
+    Object photo = freezed,
     Object street = freezed,
     Object town = freezed,
+    Object state = freezed,
     Object stateId = freezed,
     Object country = freezed,
     Object numberOfTenants = freezed,
@@ -362,8 +413,10 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
           ? _value.propertyType
           : propertyType as String,
       houseType: houseType == freezed ? _value.houseType : houseType as String,
+      photo: photo == freezed ? _value.photo : photo as String,
       street: street == freezed ? _value.street : street as String,
       town: town == freezed ? _value.town : town as String,
+      state: state == freezed ? _value.state : state as StateDTO,
       stateId: stateId == freezed ? _value.stateId : stateId as int,
       country: country == freezed ? _value.country : country as String,
       numberOfTenants: numberOfTenants == freezed
@@ -404,12 +457,19 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
           this.houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
+          this.photo,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
           this.street,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.town,
       @nullable
+      @JsonKey(includeIfNull: false)
+          this.state,
+      @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           this.stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -462,14 +522,23 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
+  final String photo;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
   final String street;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   final String town;
-  @override // @nullable @JsonKey(includeIfNull: false) StateDTO state,
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  final StateDTO state;
+  @override
   @nullable
   @JsonKey(disallowNullValue: true, name: 'state_id')
+  @IntegerSerializer()
   final int stateId;
   @override
   @nullable
@@ -513,7 +582,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
 
   @override
   String toString() {
-    return 'LandlordPropertyData(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, stateId: $stateId, country: $country, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordPropertyData(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, photo: $photo, street: $street, town: $town, state: $state, stateId: $stateId, country: $country, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -530,10 +599,14 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
             (identical(other.houseType, houseType) ||
                 const DeepCollectionEquality()
                     .equals(other.houseType, houseType)) &&
+            (identical(other.photo, photo) ||
+                const DeepCollectionEquality().equals(other.photo, photo)) &&
             (identical(other.street, street) ||
                 const DeepCollectionEquality().equals(other.street, street)) &&
             (identical(other.town, town) ||
                 const DeepCollectionEquality().equals(other.town, town)) &&
+            (identical(other.state, state) ||
+                const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.stateId, stateId) ||
                 const DeepCollectionEquality()
                     .equals(other.stateId, stateId)) &&
@@ -573,8 +646,10 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(propertyType) ^
       const DeepCollectionEquality().hash(houseType) ^
+      const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
+      const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(stateId) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(numberOfTenants) ^
@@ -614,12 +689,19 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
           String houseType,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
+          String photo,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String street,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
+      @JsonKey(includeIfNull: false)
+          StateDTO state,
+      @nullable
       @JsonKey(disallowNullValue: true, name: 'state_id')
+      @IntegerSerializer()
           int stateId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -671,14 +753,23 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
+  String get photo;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
   String get street;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get town;
-  @override // @nullable @JsonKey(includeIfNull: false) StateDTO state,
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  StateDTO get state;
+  @override
   @nullable
   @JsonKey(disallowNullValue: true, name: 'state_id')
+  @IntegerSerializer()
   int get stateId;
   @override
   @nullable

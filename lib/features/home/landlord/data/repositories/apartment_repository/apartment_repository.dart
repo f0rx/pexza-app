@@ -19,6 +19,11 @@ abstract class ApartmentRepository {
   @GET("/landlord/property/{id}/apartments")
   Future<LandlordApartmentListDTO> allApartmentsForProperty(@Path("id") int id);
 
+  @POST("/landlord/assignment")
+  Future<ApartmentMergerDTO> assignTenantToApartment(
+    @Body() ApartmentMergerData dto,
+  );
+
   @POST("/landlord/apartment")
   Future<LandlordApartmentDTO> create(
     @Body() LandlordApartmentData dto,

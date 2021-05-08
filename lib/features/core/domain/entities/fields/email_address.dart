@@ -5,6 +5,7 @@ import 'package:pexza/features/core/domain/validator/validator.dart';
 
 class EmailAddress extends FieldObject<String> {
   static const EmailAddress DEFAULT = EmailAddress._(Right(''));
+  static const String kPlaceholder = "johndoe@email.com";
 
   final Either<FieldObjectException<String>, String> value;
 

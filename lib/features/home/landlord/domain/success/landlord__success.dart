@@ -16,7 +16,8 @@ abstract class LandlordSuccess implements _$LandlordSuccess, Success {
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
         String message,
-    @nullable @JsonKey(includeIfNull: false, ignore: true) String details,
+    @nullable @JsonKey(ignore: true) String details,
+    @Default(true) @JsonKey(ignore: true) bool popRoute,
   }) = _LandlordSuccess;
 
   factory LandlordSuccess.fromJson(Map<String, dynamic> json) =>

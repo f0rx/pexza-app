@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of country_state.dart;
+part of province_state.dart;
 
 // **************************************************************************
 // FreezedGenerator
@@ -10,19 +10,19 @@ part of country_state.dart;
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-class _$CountryStateTearOff {
-  const _$CountryStateTearOff();
+class _$ProvinceStateTearOff {
+  const _$ProvinceStateTearOff();
 
 // ignore: unused_element
-  _CountryState call(
+  _ProvinceState call(
       {@nullable UniqueId<int> id,
-      @nullable CountryStateName name,
+      @nullable StateName name,
       bool isSupported = false,
       @nullable Country country,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) {
-    return _CountryState(
+    return _ProvinceState(
       id: id,
       name: name,
       isSupported: isSupported,
@@ -36,14 +36,14 @@ class _$CountryStateTearOff {
 
 /// @nodoc
 // ignore: unused_element
-const $CountryState = _$CountryStateTearOff();
+const $ProvinceState = _$ProvinceStateTearOff();
 
 /// @nodoc
-mixin _$CountryState {
+mixin _$ProvinceState {
   @nullable
   UniqueId<int> get id;
   @nullable
-  CountryStateName get name;
+  StateName get name;
   bool get isSupported;
   @nullable
   Country get country;
@@ -55,17 +55,17 @@ mixin _$CountryState {
   DateTime get deletedAt;
 
   @JsonKey(ignore: true)
-  $CountryStateCopyWith<CountryState> get copyWith;
+  $ProvinceStateCopyWith<ProvinceState> get copyWith;
 }
 
 /// @nodoc
-abstract class $CountryStateCopyWith<$Res> {
-  factory $CountryStateCopyWith(
-          CountryState value, $Res Function(CountryState) then) =
-      _$CountryStateCopyWithImpl<$Res>;
+abstract class $ProvinceStateCopyWith<$Res> {
+  factory $ProvinceStateCopyWith(
+          ProvinceState value, $Res Function(ProvinceState) then) =
+      _$ProvinceStateCopyWithImpl<$Res>;
   $Res call(
       {@nullable UniqueId<int> id,
-      @nullable CountryStateName name,
+      @nullable StateName name,
       bool isSupported,
       @nullable Country country,
       @nullable DateTime createdAt,
@@ -76,12 +76,13 @@ abstract class $CountryStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CountryStateCopyWithImpl<$Res> implements $CountryStateCopyWith<$Res> {
-  _$CountryStateCopyWithImpl(this._value, this._then);
+class _$ProvinceStateCopyWithImpl<$Res>
+    implements $ProvinceStateCopyWith<$Res> {
+  _$ProvinceStateCopyWithImpl(this._value, this._then);
 
-  final CountryState _value;
+  final ProvinceState _value;
   // ignore: unused_field
-  final $Res Function(CountryState) _then;
+  final $Res Function(ProvinceState) _then;
 
   @override
   $Res call({
@@ -95,7 +96,7 @@ class _$CountryStateCopyWithImpl<$Res> implements $CountryStateCopyWith<$Res> {
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId<int>,
-      name: name == freezed ? _value.name : name as CountryStateName,
+      name: name == freezed ? _value.name : name as StateName,
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
       country: country == freezed ? _value.country : country as Country,
@@ -120,15 +121,15 @@ class _$CountryStateCopyWithImpl<$Res> implements $CountryStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CountryStateCopyWith<$Res>
-    implements $CountryStateCopyWith<$Res> {
-  factory _$CountryStateCopyWith(
-          _CountryState value, $Res Function(_CountryState) then) =
-      __$CountryStateCopyWithImpl<$Res>;
+abstract class _$ProvinceStateCopyWith<$Res>
+    implements $ProvinceStateCopyWith<$Res> {
+  factory _$ProvinceStateCopyWith(
+          _ProvinceState value, $Res Function(_ProvinceState) then) =
+      __$ProvinceStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {@nullable UniqueId<int> id,
-      @nullable CountryStateName name,
+      @nullable StateName name,
       bool isSupported,
       @nullable Country country,
       @nullable DateTime createdAt,
@@ -140,14 +141,15 @@ abstract class _$CountryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$CountryStateCopyWithImpl<$Res> extends _$CountryStateCopyWithImpl<$Res>
-    implements _$CountryStateCopyWith<$Res> {
-  __$CountryStateCopyWithImpl(
-      _CountryState _value, $Res Function(_CountryState) _then)
-      : super(_value, (v) => _then(v as _CountryState));
+class __$ProvinceStateCopyWithImpl<$Res>
+    extends _$ProvinceStateCopyWithImpl<$Res>
+    implements _$ProvinceStateCopyWith<$Res> {
+  __$ProvinceStateCopyWithImpl(
+      _ProvinceState _value, $Res Function(_ProvinceState) _then)
+      : super(_value, (v) => _then(v as _ProvinceState));
 
   @override
-  _CountryState get _value => super._value as _CountryState;
+  _ProvinceState get _value => super._value as _ProvinceState;
 
   @override
   $Res call({
@@ -159,9 +161,9 @@ class __$CountryStateCopyWithImpl<$Res> extends _$CountryStateCopyWithImpl<$Res>
     Object updatedAt = freezed,
     Object deletedAt = freezed,
   }) {
-    return _then(_CountryState(
+    return _then(_ProvinceState(
       id: id == freezed ? _value.id : id as UniqueId<int>,
-      name: name == freezed ? _value.name : name as CountryStateName,
+      name: name == freezed ? _value.name : name as StateName,
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
       country: country == freezed ? _value.country : country as Country,
@@ -176,8 +178,8 @@ class __$CountryStateCopyWithImpl<$Res> extends _$CountryStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_CountryState extends _CountryState {
-  const _$_CountryState(
+class _$_ProvinceState extends _ProvinceState {
+  const _$_ProvinceState(
       {@nullable this.id,
       @nullable this.name,
       this.isSupported = false,
@@ -193,7 +195,7 @@ class _$_CountryState extends _CountryState {
   final UniqueId<int> id;
   @override
   @nullable
-  final CountryStateName name;
+  final StateName name;
   @JsonKey(defaultValue: false)
   @override
   final bool isSupported;
@@ -212,13 +214,13 @@ class _$_CountryState extends _CountryState {
 
   @override
   String toString() {
-    return 'CountryState(id: $id, name: $name, isSupported: $isSupported, country: $country, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'ProvinceState(id: $id, name: $name, isSupported: $isSupported, country: $country, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _CountryState &&
+        (other is _ProvinceState &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
@@ -253,27 +255,27 @@ class _$_CountryState extends _CountryState {
 
   @JsonKey(ignore: true)
   @override
-  _$CountryStateCopyWith<_CountryState> get copyWith =>
-      __$CountryStateCopyWithImpl<_CountryState>(this, _$identity);
+  _$ProvinceStateCopyWith<_ProvinceState> get copyWith =>
+      __$ProvinceStateCopyWithImpl<_ProvinceState>(this, _$identity);
 }
 
-abstract class _CountryState extends CountryState {
-  const _CountryState._() : super._();
-  const factory _CountryState(
+abstract class _ProvinceState extends ProvinceState {
+  const _ProvinceState._() : super._();
+  const factory _ProvinceState(
       {@nullable UniqueId<int> id,
-      @nullable CountryStateName name,
+      @nullable StateName name,
       bool isSupported,
       @nullable Country country,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
-      @nullable DateTime deletedAt}) = _$_CountryState;
+      @nullable DateTime deletedAt}) = _$_ProvinceState;
 
   @override
   @nullable
   UniqueId<int> get id;
   @override
   @nullable
-  CountryStateName get name;
+  StateName get name;
   @override
   bool get isSupported;
   @override
@@ -290,5 +292,5 @@ abstract class _CountryState extends CountryState {
   DateTime get deletedAt;
   @override
   @JsonKey(ignore: true)
-  _$CountryStateCopyWith<_CountryState> get copyWith;
+  _$ProvinceStateCopyWith<_ProvinceState> get copyWith;
 }
