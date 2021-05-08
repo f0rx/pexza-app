@@ -70,8 +70,8 @@ extension StringX on String {
   String padIf(
       [bool condition = true,
       String pad = '',
-      Direction start = Direction.right]) {
-    if (condition) return this.pad(pad, start);
+      Direction position = Direction.right]) {
+    if (condition) return this.pad(pad, position);
     return this;
   }
 

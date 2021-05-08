@@ -324,8 +324,9 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             VerticalSpace(height: App.shortest * 0.2),
             //
             Hero(
-              tag:
-                  "${Constants.kAssignTenantToPropHeroTag}-${property?.id?.value}",
+              tag: "${Constants.kAssignTenantToPropHeroTag}-"
+                  "${property?.id?.value?.toString()?.padIf(!apartment.isNull, '-')}"
+                  "${apartment?.id?.value ?? ''}",
               child: BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
                 builder: (c, s) => AppElevatedButton(
                   text: "Pair Tenant",

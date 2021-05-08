@@ -103,14 +103,22 @@ class ViewAllApartmentScreen extends StatelessWidget with AutoRouteWrapper {
                 physics: NeverScrollableScrollPhysics(),
                 separatorBuilder: (c, i) => Divider(height: 0),
                 itemCount: s.apartments.size,
-                itemBuilder: (c, i) => ListTile(
-                  onTap: () {},
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: Helpers.appPadding,
-                    vertical: 0,
-                  ),
-                  title: AutoSizeText(
-                    "${s.apartments.getOrNull(i)?.name?.getOrEmpty}",
+                itemBuilder: (c, i) => Hero(
+                  tag: "${Constants.kAssignTenantToPropHeroTag}-"
+                      "${landlordProperty?.id?.value}-"
+                      "${s.apartments.getOrNull(i)?.id?.value}",
+                  child: ListTile(
+                    onTap: () => navigator.pushLandlordAddTenantScreen(
+                      property: landlordProperty,
+                      apartment: s.apartments.getOrNull(i),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: Helpers.appPadding,
+                      vertical: 0,
+                    ),
+                    title: AutoSizeText(
+                      "${s.apartments.getOrNull(i)?.name?.getOrEmpty}",
+                    ),
                   ),
                 ),
               ),
