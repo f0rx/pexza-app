@@ -32,6 +32,9 @@ class _$BaseApartmentDTOTearOff {
       @IntegerSerializer()
           int propertyId,
       @nullable
+      @JsonKey(disallowNullValue: true)
+          LandlordPropertyData property,
+      @nullable
       @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
@@ -48,6 +51,7 @@ class _$BaseApartmentDTOTearOff {
       name: name,
       status: status,
       propertyId: propertyId,
+      property: property,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -79,6 +83,9 @@ mixin _$BaseApartmentDTO {
   @JsonKey(disallowNullValue: true, name: "property_id")
   @IntegerSerializer()
   int get propertyId;
+  @nullable
+  @JsonKey(disallowNullValue: true)
+  LandlordPropertyData get property;
   @nullable
   @JsonKey(includeIfNull: false, name: "created_at")
   @TimestampConverter()
@@ -117,6 +124,9 @@ abstract class $BaseApartmentDTOCopyWith<$Res> {
       @IntegerSerializer()
           int propertyId,
       @nullable
+      @JsonKey(disallowNullValue: true)
+          LandlordPropertyData property,
+      @nullable
       @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
@@ -128,6 +138,8 @@ abstract class $BaseApartmentDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt});
+
+  $LandlordPropertyDataCopyWith<$Res> get property;
 }
 
 /// @nodoc
@@ -145,6 +157,7 @@ class _$BaseApartmentDTOCopyWithImpl<$Res>
     Object name = freezed,
     Object status = freezed,
     Object propertyId = freezed,
+    Object property = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -154,10 +167,23 @@ class _$BaseApartmentDTOCopyWithImpl<$Res>
       name: name == freezed ? _value.name : name as String,
       status: status == freezed ? _value.status : status as String,
       propertyId: propertyId == freezed ? _value.propertyId : propertyId as int,
+      property: property == freezed
+          ? _value.property
+          : property as LandlordPropertyData,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
     ));
+  }
+
+  @override
+  $LandlordPropertyDataCopyWith<$Res> get property {
+    if (_value.property == null) {
+      return null;
+    }
+    return $LandlordPropertyDataCopyWith<$Res>(_value.property, (value) {
+      return _then(_value.copyWith(property: value));
+    });
   }
 }
 
@@ -183,6 +209,9 @@ abstract class _$BaseApartmentDTOCopyWith<$Res>
       @IntegerSerializer()
           int propertyId,
       @nullable
+      @JsonKey(disallowNullValue: true)
+          LandlordPropertyData property,
+      @nullable
       @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
           String createdAt,
@@ -194,6 +223,9 @@ abstract class _$BaseApartmentDTOCopyWith<$Res>
       @JsonKey(includeIfNull: false, name: "deleted_at")
       @TimestampConverter()
           String deletedAt});
+
+  @override
+  $LandlordPropertyDataCopyWith<$Res> get property;
 }
 
 /// @nodoc
@@ -213,6 +245,7 @@ class __$BaseApartmentDTOCopyWithImpl<$Res>
     Object name = freezed,
     Object status = freezed,
     Object propertyId = freezed,
+    Object property = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -222,6 +255,9 @@ class __$BaseApartmentDTOCopyWithImpl<$Res>
       name: name == freezed ? _value.name : name as String,
       status: status == freezed ? _value.status : status as String,
       propertyId: propertyId == freezed ? _value.propertyId : propertyId as int,
+      property: property == freezed
+          ? _value.property
+          : property as LandlordPropertyData,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
@@ -247,6 +283,9 @@ class _$_BaseApartmentDTO extends _BaseApartmentDTO {
       @JsonKey(disallowNullValue: true, name: "property_id")
       @IntegerSerializer()
           this.propertyId,
+      @nullable
+      @JsonKey(disallowNullValue: true)
+          this.property,
       @nullable
       @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
@@ -283,6 +322,10 @@ class _$_BaseApartmentDTO extends _BaseApartmentDTO {
   final int propertyId;
   @override
   @nullable
+  @JsonKey(disallowNullValue: true)
+  final LandlordPropertyData property;
+  @override
+  @nullable
   @JsonKey(includeIfNull: false, name: "created_at")
   @TimestampConverter()
   final String createdAt;
@@ -299,7 +342,7 @@ class _$_BaseApartmentDTO extends _BaseApartmentDTO {
 
   @override
   String toString() {
-    return 'BaseApartmentDTO(id: $id, name: $name, status: $status, propertyId: $propertyId, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'BaseApartmentDTO(id: $id, name: $name, status: $status, propertyId: $propertyId, property: $property, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -315,6 +358,9 @@ class _$_BaseApartmentDTO extends _BaseApartmentDTO {
             (identical(other.propertyId, propertyId) ||
                 const DeepCollectionEquality()
                     .equals(other.propertyId, propertyId)) &&
+            (identical(other.property, property) ||
+                const DeepCollectionEquality()
+                    .equals(other.property, property)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -333,6 +379,7 @@ class _$_BaseApartmentDTO extends _BaseApartmentDTO {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(propertyId) ^
+      const DeepCollectionEquality().hash(property) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(deletedAt);
@@ -364,6 +411,9 @@ abstract class _BaseApartmentDTO extends BaseApartmentDTO {
       @JsonKey(disallowNullValue: true, name: "property_id")
       @IntegerSerializer()
           int propertyId,
+      @nullable
+      @JsonKey(disallowNullValue: true)
+          LandlordPropertyData property,
       @nullable
       @JsonKey(includeIfNull: false, name: "created_at")
       @TimestampConverter()
@@ -397,6 +447,10 @@ abstract class _BaseApartmentDTO extends BaseApartmentDTO {
   @JsonKey(disallowNullValue: true, name: "property_id")
   @IntegerSerializer()
   int get propertyId;
+  @override
+  @nullable
+  @JsonKey(disallowNullValue: true)
+  LandlordPropertyData get property;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: "created_at")

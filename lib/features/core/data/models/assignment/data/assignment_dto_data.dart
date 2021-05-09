@@ -98,11 +98,10 @@ abstract class AssignmentDTOData implements _$AssignmentDTOData {
         plan: !paymentPlan.isNull ? PaymentPlan.valueOf(paymentPlan) : null,
         landlord: !landlord.isNull ? landlord.domain : null,
         tenant: !tenant.isNull ? tenant.domain : null,
-        // TODO: Fix this, return apartment?.tenantDomain
         apartment: !apartment.isNull
             ? isLandlord
                 ? apartment?.landlordDomain
-                : null
+                : apartment?.tenantDomain
             : null,
         country: !currency.isNull
             ? Country(

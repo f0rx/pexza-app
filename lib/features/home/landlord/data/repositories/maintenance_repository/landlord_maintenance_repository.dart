@@ -7,7 +7,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'landlord_maintenance_repository.g.dart';
 
-@injectable
+@singleton
 @RestApi()
 abstract class LandlordMaintenanceRepository {
   @factoryMethod

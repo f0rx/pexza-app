@@ -213,6 +213,7 @@ Widget _listView() {
                       AppIconButton(
                         padding: EdgeInsets.zero,
                         backgroundColor: Colors.transparent,
+                        tooltip: "View Details",
                         elevation: 0.0,
                         child: RotatedBox(
                           quarterTurns: 2,

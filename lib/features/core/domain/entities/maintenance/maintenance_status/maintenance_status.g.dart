@@ -19,7 +19,7 @@ MaintenanceStatus _$maintenanceStatusValueOf(String name) {
     case 'pending':
       return _$pending;
     default:
-      throw new ArgumentError(name);
+      return _$unfixed;
   }
 }
 

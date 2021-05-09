@@ -16,8 +16,7 @@ import 'package:pexza/features/auth/presentation/screens/profile_setup_screen.da
 import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
-import 'package:pexza/features/core/domain/entities/entities.dart';
-import 'package:pexza/features/core/domain/entities/fields/fields.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_apartment_screen.dart';
@@ -33,8 +32,8 @@ import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_apartments_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_properties_screen.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/apartment_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
-import 'package:pexza/features/home/tenant/presentation/screens/property_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_payment_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/service_request_screen.dart';
@@ -53,8 +52,8 @@ class Routes {
   static const String forgotPasswordScreen = '/forgot-password-screen';
   static const String verifyEmailScreen = '/verify-email-screen';
   static const String tenantHomeScreen = '/tenant-home-screen';
-  static const String tenantPropertyDetailScreen =
-      '/tenant-property-detail-screen';
+  static const String tenantApartmentDetailScreen =
+      '/tenant-apartment-detail-screen';
   static const String tenantRentDetailScreen = '/tenant-rent-detail-screen';
   static const String tenantRentPaymentScreen = '/tenant-rent-payment-screen';
   static const String serviceRequestScreen = '/service-request-screen';
@@ -92,7 +91,7 @@ class Routes {
     forgotPasswordScreen,
     verifyEmailScreen,
     tenantHomeScreen,
-    tenantPropertyDetailScreen,
+    tenantApartmentDetailScreen,
     tenantRentDetailScreen,
     tenantRentPaymentScreen,
     serviceRequestScreen,
@@ -130,8 +129,8 @@ class Router extends RouterBase {
     RouteDef(Routes.verifyEmailScreen, page: VerifyEmailScreen),
     RouteDef(Routes.tenantHomeScreen,
         page: TenantHomeScreen, guards: [AuthGuard]),
-    RouteDef(Routes.tenantPropertyDetailScreen,
-        page: TenantPropertyDetailScreen, guards: [AuthGuard]),
+    RouteDef(Routes.tenantApartmentDetailScreen,
+        page: TenantApartmentDetailScreen, guards: [AuthGuard]),
     RouteDef(Routes.tenantRentDetailScreen,
         page: TenantRentDetailScreen, guards: [AuthGuard]),
     RouteDef(Routes.tenantRentPaymentScreen,
@@ -246,16 +245,17 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
-    TenantPropertyDetailScreen: (data) {
-      final args = data.getArgs<TenantPropertyDetailScreenArguments>(
-        orElse: () => TenantPropertyDetailScreenArguments(),
+    TenantApartmentDetailScreen: (data) {
+      final args = data.getArgs<TenantApartmentDetailScreenArguments>(
+        orElse: () => TenantApartmentDetailScreenArguments(),
       );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => TenantPropertyDetailScreen(
+        builder: (context) => TenantApartmentDetailScreen(
           key: args.key,
-          property: args.property,
+          apartment: args.apartment,
         ).wrappedRoute(context),
         settings: data,
+        fullscreenDialog: true,
         maintainState: true,
       );
     },
@@ -286,8 +286,12 @@ class Router extends RouterBase {
       );
     },
     ServiceRequestScreen: (data) {
+      final args = data.getArgs<ServiceRequestScreenArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => ServiceRequestScreen().wrappedRoute(context),
+        builder: (context) => ServiceRequestScreen(
+          key: args.key,
+          assignment: args.assignment,
+        ).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -497,12 +501,14 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushTenantHomeScreen() =>
       push<dynamic>(Routes.tenantHomeScreen);
 
-  Future<dynamic> pushTenantPropertyDetailScreen(
-          {Key key, Property property, OnNavigationRejected onReject}) =>
+  Future<dynamic> pushTenantApartmentDetailScreen(
+          {Key key,
+          TenantApartment apartment,
+          OnNavigationRejected onReject}) =>
       push<dynamic>(
-        Routes.tenantPropertyDetailScreen,
-        arguments:
-            TenantPropertyDetailScreenArguments(key: key, property: property),
+        Routes.tenantApartmentDetailScreen,
+        arguments: TenantApartmentDetailScreenArguments(
+            key: key, apartment: apartment),
         onReject: onReject,
       );
 
@@ -524,8 +530,16 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         onReject: onReject,
       );
 
-  Future<dynamic> pushServiceRequestScreen() =>
-      push<dynamic>(Routes.serviceRequestScreen);
+  Future<dynamic> pushServiceRequestScreen(
+          {Key key,
+          @required Assignment assignment,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.serviceRequestScreen,
+        arguments:
+            ServiceRequestScreenArguments(key: key, assignment: assignment),
+        onReject: onReject,
+      );
 
   Future<dynamic> pushLandlordHomeScreen() =>
       push<dynamic>(Routes.landlordHomeScreen);
@@ -640,11 +654,11 @@ class VerifyEmailScreenArguments {
   VerifyEmailScreenArguments({this.key, this.email});
 }
 
-/// TenantPropertyDetailScreen arguments holder class
-class TenantPropertyDetailScreenArguments {
+/// TenantApartmentDetailScreen arguments holder class
+class TenantApartmentDetailScreenArguments {
   final Key key;
-  final Property property;
-  TenantPropertyDetailScreenArguments({this.key, this.property});
+  final TenantApartment apartment;
+  TenantApartmentDetailScreenArguments({this.key, this.apartment});
 }
 
 /// TenantRentDetailScreen arguments holder class
@@ -659,6 +673,13 @@ class TenantRentPaymentScreenArguments {
   final Key key;
   final Property property;
   TenantRentPaymentScreenArguments({this.key, this.property});
+}
+
+/// ServiceRequestScreen arguments holder class
+class ServiceRequestScreenArguments {
+  final Key key;
+  final Assignment assignment;
+  ServiceRequestScreenArguments({this.key, @required this.assignment});
 }
 
 /// ViewAllApartmentScreen arguments holder class

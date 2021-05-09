@@ -22,15 +22,15 @@ class _$AssignmentDTODataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: 0)
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, name: "tenant_id")
+      @JsonKey(includeIfNull: false, name: 'tenant_id')
       @IntegerSerializer()
           int tenantId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "landlord_id")
+      @JsonKey(includeIfNull: false, name: 'landlord_id')
       @IntegerSerializer()
           int landlordId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "apartment_id")
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
       @IntegerSerializer()
           int apartmentId,
       @nullable
@@ -50,14 +50,14 @@ class _$AssignmentDTODataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
           String paymentPlan,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
       @IntegerSerializer()
           int currencyId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String amount,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewal_id")
+      @JsonKey(includeIfNull: false, name: 'renewal_id')
       @IntegerSerializer()
           int renewalId,
       @nullable
@@ -70,27 +70,27 @@ class _$AssignmentDTODataTearOff {
       @JsonKey(includeIfNull: false)
           BaseApartmentDTO apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "can_renew")
+      @JsonKey(includeIfNull: false, name: 'can_renew')
       @IntToBoolSerializer()
           bool canRenew,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expiresOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) {
     return _AssignmentDTOData(
@@ -134,15 +134,15 @@ mixin _$AssignmentDTOData {
   @JsonKey(includeIfNull: false, defaultValue: 0)
   int get id;
   @nullable
-  @JsonKey(includeIfNull: false, name: "tenant_id")
+  @JsonKey(includeIfNull: false, name: 'tenant_id')
   @IntegerSerializer()
   int get tenantId;
   @nullable
-  @JsonKey(includeIfNull: false, name: "landlord_id")
+  @JsonKey(includeIfNull: false, name: 'landlord_id')
   @IntegerSerializer()
   int get landlordId;
   @nullable
-  @JsonKey(includeIfNull: false, name: "apartment_id")
+  @JsonKey(includeIfNull: false, name: 'apartment_id')
   @IntegerSerializer()
   int get apartmentId;
   @nullable
@@ -162,14 +162,14 @@ mixin _$AssignmentDTOData {
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
   String get paymentPlan;
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
   @IntegerSerializer()
   int get currencyId;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get amount;
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewal_id")
+  @JsonKey(includeIfNull: false, name: 'renewal_id')
   @IntegerSerializer()
   int get renewalId;
   @nullable
@@ -182,27 +182,27 @@ mixin _$AssignmentDTOData {
   @JsonKey(includeIfNull: false)
   BaseApartmentDTO get apartment;
   @nullable
-  @JsonKey(includeIfNull: false, name: "can_renew")
+  @JsonKey(includeIfNull: false, name: 'can_renew')
   @IntToBoolSerializer()
   bool get canRenew;
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   String get renewedOn;
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   String get expiresOn;
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
 
@@ -221,15 +221,15 @@ abstract class $AssignmentDTODataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: 0)
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, name: "tenant_id")
+      @JsonKey(includeIfNull: false, name: 'tenant_id')
       @IntegerSerializer()
           int tenantId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "landlord_id")
+      @JsonKey(includeIfNull: false, name: 'landlord_id')
       @IntegerSerializer()
           int landlordId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "apartment_id")
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
       @IntegerSerializer()
           int apartmentId,
       @nullable
@@ -249,14 +249,14 @@ abstract class $AssignmentDTODataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
           String paymentPlan,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
       @IntegerSerializer()
           int currencyId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String amount,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewal_id")
+      @JsonKey(includeIfNull: false, name: 'renewal_id')
       @IntegerSerializer()
           int renewalId,
       @nullable
@@ -269,27 +269,27 @@ abstract class $AssignmentDTODataCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           BaseApartmentDTO apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "can_renew")
+      @JsonKey(includeIfNull: false, name: 'can_renew')
       @IntToBoolSerializer()
           bool canRenew,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expiresOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -414,15 +414,15 @@ abstract class _$AssignmentDTODataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: 0)
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, name: "tenant_id")
+      @JsonKey(includeIfNull: false, name: 'tenant_id')
       @IntegerSerializer()
           int tenantId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "landlord_id")
+      @JsonKey(includeIfNull: false, name: 'landlord_id')
       @IntegerSerializer()
           int landlordId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "apartment_id")
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
       @IntegerSerializer()
           int apartmentId,
       @nullable
@@ -442,14 +442,14 @@ abstract class _$AssignmentDTODataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
           String paymentPlan,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
       @IntegerSerializer()
           int currencyId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String amount,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewal_id")
+      @JsonKey(includeIfNull: false, name: 'renewal_id')
       @IntegerSerializer()
           int renewalId,
       @nullable
@@ -462,27 +462,27 @@ abstract class _$AssignmentDTODataCopyWith<$Res>
       @JsonKey(includeIfNull: false)
           BaseApartmentDTO apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "can_renew")
+      @JsonKey(includeIfNull: false, name: 'can_renew')
       @IntToBoolSerializer()
           bool canRenew,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expiresOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -570,15 +570,15 @@ class _$_AssignmentDTOData extends _AssignmentDTOData {
       @JsonKey(includeIfNull: false, defaultValue: 0)
           this.id,
       @nullable
-      @JsonKey(includeIfNull: false, name: "tenant_id")
+      @JsonKey(includeIfNull: false, name: 'tenant_id')
       @IntegerSerializer()
           this.tenantId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "landlord_id")
+      @JsonKey(includeIfNull: false, name: 'landlord_id')
       @IntegerSerializer()
           this.landlordId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "apartment_id")
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
       @IntegerSerializer()
           this.apartmentId,
       @nullable
@@ -598,14 +598,14 @@ class _$_AssignmentDTOData extends _AssignmentDTOData {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
           this.paymentPlan,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
       @IntegerSerializer()
           this.currencyId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.amount,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewal_id")
+      @JsonKey(includeIfNull: false, name: 'renewal_id')
       @IntegerSerializer()
           this.renewalId,
       @nullable
@@ -618,27 +618,27 @@ class _$_AssignmentDTOData extends _AssignmentDTOData {
       @JsonKey(includeIfNull: false)
           this.apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "can_renew")
+      @JsonKey(includeIfNull: false, name: 'can_renew')
       @IntToBoolSerializer()
           this.canRenew,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           this.createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           this.renewedOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           this.expiresOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           this.updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           this.deletedAt})
       : super._();
@@ -652,17 +652,17 @@ class _$_AssignmentDTOData extends _AssignmentDTOData {
   final int id;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "tenant_id")
+  @JsonKey(includeIfNull: false, name: 'tenant_id')
   @IntegerSerializer()
   final int tenantId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "landlord_id")
+  @JsonKey(includeIfNull: false, name: 'landlord_id')
   @IntegerSerializer()
   final int landlordId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "apartment_id")
+  @JsonKey(includeIfNull: false, name: 'apartment_id')
   @IntegerSerializer()
   final int apartmentId;
   @override
@@ -688,7 +688,7 @@ class _$_AssignmentDTOData extends _AssignmentDTOData {
   final String paymentPlan;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
   @IntegerSerializer()
   final int currencyId;
   @override
@@ -697,7 +697,7 @@ class _$_AssignmentDTOData extends _AssignmentDTOData {
   final String amount;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewal_id")
+  @JsonKey(includeIfNull: false, name: 'renewal_id')
   @IntegerSerializer()
   final int renewalId;
   @override
@@ -714,32 +714,32 @@ class _$_AssignmentDTOData extends _AssignmentDTOData {
   final BaseApartmentDTO apartment;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "can_renew")
+  @JsonKey(includeIfNull: false, name: 'can_renew')
   @IntToBoolSerializer()
   final bool canRenew;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   final String createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   final String renewedOn;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   final String expiresOn;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   final String updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   final String deletedAt;
 
@@ -855,15 +855,15 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
       @JsonKey(includeIfNull: false, defaultValue: 0)
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, name: "tenant_id")
+      @JsonKey(includeIfNull: false, name: 'tenant_id')
       @IntegerSerializer()
           int tenantId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "landlord_id")
+      @JsonKey(includeIfNull: false, name: 'landlord_id')
       @IntegerSerializer()
           int landlordId,
       @nullable
-      @JsonKey(includeIfNull: false, name: "apartment_id")
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
       @IntegerSerializer()
           int apartmentId,
       @nullable
@@ -883,14 +883,14 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
           String paymentPlan,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_id")
+      @JsonKey(includeIfNull: false, name: 'currency_id')
       @IntegerSerializer()
           int currencyId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String amount,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewal_id")
+      @JsonKey(includeIfNull: false, name: 'renewal_id')
       @IntegerSerializer()
           int renewalId,
       @nullable
@@ -903,27 +903,27 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
       @JsonKey(includeIfNull: false)
           BaseApartmentDTO apartment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "can_renew")
+      @JsonKey(includeIfNull: false, name: 'can_renew')
       @IntToBoolSerializer()
           bool canRenew,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "renewed_at")
+      @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
           String renewedOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "expire_at")
+      @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
           String expiresOn,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) = _$_AssignmentDTOData;
 
@@ -936,17 +936,17 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
   int get id;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "tenant_id")
+  @JsonKey(includeIfNull: false, name: 'tenant_id')
   @IntegerSerializer()
   int get tenantId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "landlord_id")
+  @JsonKey(includeIfNull: false, name: 'landlord_id')
   @IntegerSerializer()
   int get landlordId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "apartment_id")
+  @JsonKey(includeIfNull: false, name: 'apartment_id')
   @IntegerSerializer()
   int get apartmentId;
   @override
@@ -972,7 +972,7 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
   String get paymentPlan;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_id")
+  @JsonKey(includeIfNull: false, name: 'currency_id')
   @IntegerSerializer()
   int get currencyId;
   @override
@@ -981,7 +981,7 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
   String get amount;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewal_id")
+  @JsonKey(includeIfNull: false, name: 'renewal_id')
   @IntegerSerializer()
   int get renewalId;
   @override
@@ -998,32 +998,32 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
   BaseApartmentDTO get apartment;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "can_renew")
+  @JsonKey(includeIfNull: false, name: 'can_renew')
   @IntToBoolSerializer()
   bool get canRenew;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "renewed_at")
+  @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
   String get renewedOn;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "expire_at")
+  @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
   String get expiresOn;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
   @override

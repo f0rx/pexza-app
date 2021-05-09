@@ -22,6 +22,7 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
     @nullable @JsonKey(includeIfNull: false) List<dynamic> phone,
     @nullable @JsonKey(includeIfNull: false) List<dynamic> password,
     @nullable @JsonKey(includeIfNull: false) List<dynamic> token,
+    @nullable @JsonKey(includeIfNull: false) List<dynamic> code,
     @nullable
     @JsonKey(includeIfNull: false, name: "property_id")
         List<dynamic> propertyId,
@@ -49,6 +50,13 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
     @nullable
     @JsonKey(includeIfNull: false, name: "currency_id")
         List<dynamic> currencyId,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "service_id")
+        List<dynamic> serviceId,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "assignment_id")
+        List<dynamic> assignmentId,
+    @nullable @JsonKey(includeIfNull: false) List<dynamic> comment,
   }) = _ServerFieldErrors;
 
   factory ServerFieldErrors.fromJson(Map<String, dynamic> json) =>

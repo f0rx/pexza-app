@@ -24,6 +24,7 @@ abstract class LandlordProperty implements _$LandlordProperty {
     @nullable BasicTextField<String> country,
     @nullable MaterialColor color,
     @nullable LandlordPropertyImage photo,
+    @nullable User landlord,
     @nullable BasicTextField<int> numberOfTenants,
     @nullable BasicTextField<int> numberOfApartments,
     @nullable BasicTextField<int> numberOfAvailableApartments,
