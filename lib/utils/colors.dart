@@ -97,7 +97,7 @@ class AppColors {
 
   static const Color background = Color(0xFFf8f8f8);
 
-  static const Color lightRed = Color(0xFFFBEAE5);
+  static const Color lightRed = Color(0xFFff7862);
 
   static const Color yellow = Color(0xFFECAE12);
   static const Color fbButton = Color(0xFF425bb4);
@@ -106,6 +106,7 @@ class AppColors {
   static const Color loginButton = Color(0xFF3871b6);
 
   static const Color errorRed = Color(0xFFED4337);
+  static const Color deepRed = Color(0xFFb3000e);
   static const Color cardColor = Color(0xFFfe4d55);
 
   static const Color green = Color(0xFF00C853);

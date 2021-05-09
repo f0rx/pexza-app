@@ -49,8 +49,8 @@ abstract class CountryDTO implements _$CountryDTO {
         name: instance?.name?.name,
         phoneCode: instance?.dialCode,
         isSupported: instance?.isSupported,
-        currencyType: instance?.currencyType?.name,
-        currencyName: Currency.getNameFor(instance?.currencyType),
+        currencyType: instance?.currency?.type?.name,
+        currencyName: instance?.currency?.name,
       );
 
   Country get domain => Country(
@@ -58,8 +58,11 @@ abstract class CountryDTO implements _$CountryDTO {
         name: !name.isNull ? CountryName.valueOf(name) : null,
         dialCode: phoneCode,
         isSupported: isSupported,
-        currencyType:
-            !currencyType.isNull ? CurrencyType.valueOf(currencyType) : null,
+        currency: Currency(
+          name: !currencyName.isNull ? currencyName : null,
+          type:
+              !currencyType.isNull ? CurrencyType.valueOf(currencyType) : null,
+        ),
         createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
         updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
         deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,

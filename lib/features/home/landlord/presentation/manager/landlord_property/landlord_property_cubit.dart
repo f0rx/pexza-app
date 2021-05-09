@@ -12,7 +12,6 @@ import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/domain/failures/base.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart';
-import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
@@ -25,13 +24,11 @@ part 'landlord_property_cubit.freezed.dart';
 @injectable
 class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
   final PropertyRepository _repository;
-  final ApartmentRepository _apartmentRepository;
   final Connectivity _connectivity;
   final DataConnectionChecker _dataConnectionChecker;
 
   LandlordPropertyCubit(
     this._repository,
-    this._apartmentRepository,
     this._connectivity,
     this._dataConnectionChecker,
   ) : super(LandlordPropertyState.initial());
@@ -41,19 +38,19 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       ));
 
   void proeprtyNameChanged(String value) => emit(state.copyWith(
-        name: LandlordField(value),
+        name: BasicTextField(value),
       ));
 
   void houseTypeChanged(String value) => emit(state.copyWith(
-        houseType: LandlordField(value),
+        houseType: BasicTextField(value),
       ));
 
   void proeprtyTownChanged(String value) => emit(state.copyWith(
-        town: LandlordField(value),
+        town: BasicTextField(value),
       ));
 
   void proeprtyAddressChanged(String value) => emit(state.copyWith(
-        street: LandlordField(value),
+        street: BasicTextField(value),
       ));
 
   void propertyTypeChanged(PropertyType value) => emit(state.copyWith(

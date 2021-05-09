@@ -16,19 +16,19 @@ class _$LandlordPropertyTearOff {
 // ignore: unused_element
   _LandlordProperty call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField<String> name,
+      @nullable BasicTextField<String> name,
       @nullable LandlordPropertyTypeField propertyType,
-      @nullable LandlordField<String> houseType,
-      @nullable LandlordField<String> street,
-      @nullable LandlordField<String> town,
+      @nullable BasicTextField<String> houseType,
+      @nullable BasicTextField<String> street,
+      @nullable BasicTextField<String> town,
       @nullable ProvinceState state,
-      @nullable LandlordField<String> country,
+      @nullable BasicTextField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage photo,
-      @nullable LandlordField<int> numberOfTenants,
-      @nullable LandlordField<int> numberOfApartments,
-      @nullable LandlordField<int> numberOfAvailableApartments,
-      @nullable LandlordField<int> numberOfRentedApartment,
+      @nullable BasicTextField<int> numberOfTenants,
+      @nullable BasicTextField<int> numberOfApartments,
+      @nullable BasicTextField<int> numberOfAvailableApartments,
+      @nullable BasicTextField<int> numberOfRentedApartment,
       @nullable Animatable<dynamic> animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
@@ -65,31 +65,31 @@ mixin _$LandlordProperty {
   @nullable
   UniqueId<int> get id;
   @nullable
-  LandlordField<String> get name;
+  BasicTextField<String> get name;
   @nullable
   LandlordPropertyTypeField get propertyType;
   @nullable
-  LandlordField<String> get houseType;
+  BasicTextField<String> get houseType;
   @nullable
-  LandlordField<String> get street;
+  BasicTextField<String> get street;
   @nullable
-  LandlordField<String> get town;
+  BasicTextField<String> get town;
   @nullable
   ProvinceState get state;
   @nullable
-  LandlordField<String> get country;
+  BasicTextField<String> get country;
   @nullable
   MaterialColor get color;
   @nullable
   LandlordPropertyImage get photo;
   @nullable
-  LandlordField<int> get numberOfTenants;
+  BasicTextField<int> get numberOfTenants;
   @nullable
-  LandlordField<int> get numberOfApartments;
+  BasicTextField<int> get numberOfApartments;
   @nullable
-  LandlordField<int> get numberOfAvailableApartments;
+  BasicTextField<int> get numberOfAvailableApartments;
   @nullable
-  LandlordField<int> get numberOfRentedApartment;
+  BasicTextField<int> get numberOfRentedApartment;
   @nullable
   Animatable<dynamic> get animatable;
   @nullable
@@ -110,19 +110,19 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       _$LandlordPropertyCopyWithImpl<$Res>;
   $Res call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField<String> name,
+      @nullable BasicTextField<String> name,
       @nullable LandlordPropertyTypeField propertyType,
-      @nullable LandlordField<String> houseType,
-      @nullable LandlordField<String> street,
-      @nullable LandlordField<String> town,
+      @nullable BasicTextField<String> houseType,
+      @nullable BasicTextField<String> street,
+      @nullable BasicTextField<String> town,
       @nullable ProvinceState state,
-      @nullable LandlordField<String> country,
+      @nullable BasicTextField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage photo,
-      @nullable LandlordField<int> numberOfTenants,
-      @nullable LandlordField<int> numberOfApartments,
-      @nullable LandlordField<int> numberOfAvailableApartments,
-      @nullable LandlordField<int> numberOfRentedApartment,
+      @nullable BasicTextField<int> numberOfTenants,
+      @nullable BasicTextField<int> numberOfApartments,
+      @nullable BasicTextField<int> numberOfAvailableApartments,
+      @nullable BasicTextField<int> numberOfRentedApartment,
       @nullable Animatable<dynamic> animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
@@ -163,34 +163,34 @@ class _$LandlordPropertyCopyWithImpl<$Res>
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId<int>,
-      name: name == freezed ? _value.name : name as LandlordField<String>,
+      name: name == freezed ? _value.name : name as BasicTextField<String>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as LandlordPropertyTypeField,
       houseType: houseType == freezed
           ? _value.houseType
-          : houseType as LandlordField<String>,
+          : houseType as BasicTextField<String>,
       street:
-          street == freezed ? _value.street : street as LandlordField<String>,
-      town: town == freezed ? _value.town : town as LandlordField<String>,
+          street == freezed ? _value.street : street as BasicTextField<String>,
+      town: town == freezed ? _value.town : town as BasicTextField<String>,
       state: state == freezed ? _value.state : state as ProvinceState,
       country: country == freezed
           ? _value.country
-          : country as LandlordField<String>,
+          : country as BasicTextField<String>,
       color: color == freezed ? _value.color : color as MaterialColor,
       photo: photo == freezed ? _value.photo : photo as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
-          : numberOfTenants as LandlordField<int>,
+          : numberOfTenants as BasicTextField<int>,
       numberOfApartments: numberOfApartments == freezed
           ? _value.numberOfApartments
-          : numberOfApartments as LandlordField<int>,
+          : numberOfApartments as BasicTextField<int>,
       numberOfAvailableApartments: numberOfAvailableApartments == freezed
           ? _value.numberOfAvailableApartments
-          : numberOfAvailableApartments as LandlordField<int>,
+          : numberOfAvailableApartments as BasicTextField<int>,
       numberOfRentedApartment: numberOfRentedApartment == freezed
           ? _value.numberOfRentedApartment
-          : numberOfRentedApartment as LandlordField<int>,
+          : numberOfRentedApartment as BasicTextField<int>,
       animatable: animatable == freezed
           ? _value.animatable
           : animatable as Animatable<dynamic>,
@@ -223,19 +223,19 @@ abstract class _$LandlordPropertyCopyWith<$Res>
   @override
   $Res call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField<String> name,
+      @nullable BasicTextField<String> name,
       @nullable LandlordPropertyTypeField propertyType,
-      @nullable LandlordField<String> houseType,
-      @nullable LandlordField<String> street,
-      @nullable LandlordField<String> town,
+      @nullable BasicTextField<String> houseType,
+      @nullable BasicTextField<String> street,
+      @nullable BasicTextField<String> town,
       @nullable ProvinceState state,
-      @nullable LandlordField<String> country,
+      @nullable BasicTextField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage photo,
-      @nullable LandlordField<int> numberOfTenants,
-      @nullable LandlordField<int> numberOfApartments,
-      @nullable LandlordField<int> numberOfAvailableApartments,
-      @nullable LandlordField<int> numberOfRentedApartment,
+      @nullable BasicTextField<int> numberOfTenants,
+      @nullable BasicTextField<int> numberOfApartments,
+      @nullable BasicTextField<int> numberOfAvailableApartments,
+      @nullable BasicTextField<int> numberOfRentedApartment,
       @nullable Animatable<dynamic> animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
@@ -279,34 +279,34 @@ class __$LandlordPropertyCopyWithImpl<$Res>
   }) {
     return _then(_LandlordProperty(
       id: id == freezed ? _value.id : id as UniqueId<int>,
-      name: name == freezed ? _value.name : name as LandlordField<String>,
+      name: name == freezed ? _value.name : name as BasicTextField<String>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as LandlordPropertyTypeField,
       houseType: houseType == freezed
           ? _value.houseType
-          : houseType as LandlordField<String>,
+          : houseType as BasicTextField<String>,
       street:
-          street == freezed ? _value.street : street as LandlordField<String>,
-      town: town == freezed ? _value.town : town as LandlordField<String>,
+          street == freezed ? _value.street : street as BasicTextField<String>,
+      town: town == freezed ? _value.town : town as BasicTextField<String>,
       state: state == freezed ? _value.state : state as ProvinceState,
       country: country == freezed
           ? _value.country
-          : country as LandlordField<String>,
+          : country as BasicTextField<String>,
       color: color == freezed ? _value.color : color as MaterialColor,
       photo: photo == freezed ? _value.photo : photo as LandlordPropertyImage,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
-          : numberOfTenants as LandlordField<int>,
+          : numberOfTenants as BasicTextField<int>,
       numberOfApartments: numberOfApartments == freezed
           ? _value.numberOfApartments
-          : numberOfApartments as LandlordField<int>,
+          : numberOfApartments as BasicTextField<int>,
       numberOfAvailableApartments: numberOfAvailableApartments == freezed
           ? _value.numberOfAvailableApartments
-          : numberOfAvailableApartments as LandlordField<int>,
+          : numberOfAvailableApartments as BasicTextField<int>,
       numberOfRentedApartment: numberOfRentedApartment == freezed
           ? _value.numberOfRentedApartment
-          : numberOfRentedApartment as LandlordField<int>,
+          : numberOfRentedApartment as BasicTextField<int>,
       animatable: animatable == freezed
           ? _value.animatable
           : animatable as Animatable<dynamic>,
@@ -348,25 +348,25 @@ class _$_LandlordProperty extends _LandlordProperty {
   final UniqueId<int> id;
   @override
   @nullable
-  final LandlordField<String> name;
+  final BasicTextField<String> name;
   @override
   @nullable
   final LandlordPropertyTypeField propertyType;
   @override
   @nullable
-  final LandlordField<String> houseType;
+  final BasicTextField<String> houseType;
   @override
   @nullable
-  final LandlordField<String> street;
+  final BasicTextField<String> street;
   @override
   @nullable
-  final LandlordField<String> town;
+  final BasicTextField<String> town;
   @override
   @nullable
   final ProvinceState state;
   @override
   @nullable
-  final LandlordField<String> country;
+  final BasicTextField<String> country;
   @override
   @nullable
   final MaterialColor color;
@@ -375,16 +375,16 @@ class _$_LandlordProperty extends _LandlordProperty {
   final LandlordPropertyImage photo;
   @override
   @nullable
-  final LandlordField<int> numberOfTenants;
+  final BasicTextField<int> numberOfTenants;
   @override
   @nullable
-  final LandlordField<int> numberOfApartments;
+  final BasicTextField<int> numberOfApartments;
   @override
   @nullable
-  final LandlordField<int> numberOfAvailableApartments;
+  final BasicTextField<int> numberOfAvailableApartments;
   @override
   @nullable
-  final LandlordField<int> numberOfRentedApartment;
+  final BasicTextField<int> numberOfRentedApartment;
   @override
   @nullable
   final Animatable<dynamic> animatable;
@@ -491,19 +491,19 @@ abstract class _LandlordProperty extends LandlordProperty {
   const _LandlordProperty._() : super._();
   const factory _LandlordProperty(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField<String> name,
+      @nullable BasicTextField<String> name,
       @nullable LandlordPropertyTypeField propertyType,
-      @nullable LandlordField<String> houseType,
-      @nullable LandlordField<String> street,
-      @nullable LandlordField<String> town,
+      @nullable BasicTextField<String> houseType,
+      @nullable BasicTextField<String> street,
+      @nullable BasicTextField<String> town,
       @nullable ProvinceState state,
-      @nullable LandlordField<String> country,
+      @nullable BasicTextField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage photo,
-      @nullable LandlordField<int> numberOfTenants,
-      @nullable LandlordField<int> numberOfApartments,
-      @nullable LandlordField<int> numberOfAvailableApartments,
-      @nullable LandlordField<int> numberOfRentedApartment,
+      @nullable BasicTextField<int> numberOfTenants,
+      @nullable BasicTextField<int> numberOfApartments,
+      @nullable BasicTextField<int> numberOfAvailableApartments,
+      @nullable BasicTextField<int> numberOfRentedApartment,
       @nullable Animatable<dynamic> animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
@@ -514,25 +514,25 @@ abstract class _LandlordProperty extends LandlordProperty {
   UniqueId<int> get id;
   @override
   @nullable
-  LandlordField<String> get name;
+  BasicTextField<String> get name;
   @override
   @nullable
   LandlordPropertyTypeField get propertyType;
   @override
   @nullable
-  LandlordField<String> get houseType;
+  BasicTextField<String> get houseType;
   @override
   @nullable
-  LandlordField<String> get street;
+  BasicTextField<String> get street;
   @override
   @nullable
-  LandlordField<String> get town;
+  BasicTextField<String> get town;
   @override
   @nullable
   ProvinceState get state;
   @override
   @nullable
-  LandlordField<String> get country;
+  BasicTextField<String> get country;
   @override
   @nullable
   MaterialColor get color;
@@ -541,16 +541,16 @@ abstract class _LandlordProperty extends LandlordProperty {
   LandlordPropertyImage get photo;
   @override
   @nullable
-  LandlordField<int> get numberOfTenants;
+  BasicTextField<int> get numberOfTenants;
   @override
   @nullable
-  LandlordField<int> get numberOfApartments;
+  BasicTextField<int> get numberOfApartments;
   @override
   @nullable
-  LandlordField<int> get numberOfAvailableApartments;
+  BasicTextField<int> get numberOfAvailableApartments;
   @override
   @nullable
-  LandlordField<int> get numberOfRentedApartment;
+  BasicTextField<int> get numberOfRentedApartment;
   @override
   @nullable
   Animatable<dynamic> get animatable;

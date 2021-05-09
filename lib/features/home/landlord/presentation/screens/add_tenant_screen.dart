@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
@@ -78,6 +77,23 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             .copyWith(top: App.longest * 0.02),
         child: Column(
           children: [
+            VerticalSpace(height: App.height * 0.03),
+            //
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: Helpers.descriptionPadding),
+              child: AutoSizeText(
+                "Onboard your new tenant by providing their e-mail address. "
+                "We'll send them an invite immediately.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 17.0, wordSpacing: 2.0),
+                softWrap: true,
+                wrapWords: true,
+              ),
+            ),
+            //
+            VerticalSpace(height: App.height * 0.02),
+            //
             BlocBuilder<LandlordMergerCubit, LandlordMergerState>(
               builder: (c, s) => TextFormField(
                 maxLines: 1,

@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:auto_size_text/auto_size_text.dart';

@@ -8,7 +8,6 @@ part of landlord_property_data;
 
 _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     Map<String, dynamic> json) {
-  $checkKeys(json, disallowNullValues: const ['state_id']);
   return _$_LandlordPropertyData(
     id: json['id'] as int ?? 0,
     name: json['name'] as String ?? '',
@@ -51,7 +50,7 @@ Map<String, dynamic> _$_$_LandlordPropertyDataToJson(
   writeNotNull('street', instance.street);
   writeNotNull('town', instance.town);
   writeNotNull('state', instance.state?.toJson());
-  writeNotNull('state_id', const IntegerSerializer().toJson(instance.stateId));
+  val['state_id'] = const IntegerSerializer().toJson(instance.stateId);
   writeNotNull('country', instance.country);
   writeNotNull('number_of_tenants', instance.numberOfTenants);
   writeNotNull('number_of_apartments', instance.numberOfApartments);

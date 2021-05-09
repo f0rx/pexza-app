@@ -1,0 +1,270 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "comment": "I require a fix on Room 13 pls. I actually cannot sleeep. Not cool bro",
+            "service": {
+                "id": 1,
+                "name": "plumbing",
+                "created_at": "2021-05-08T20:18:49.000000Z",
+                "updated_at": "2021-05-08T20:18:49.000000Z"
+            },
+            "urgency": "9",
+            "assignment": {
+                "id": 301,
+                "created_at": "17 minutes ago",
+                "currency": {
+                    "id": 1,
+                    "name": "Nigeria",
+                    "country_phone_code": "+234",
+                    "is_supported": "1",
+                    "currency": "NGN",
+                    "currency_name": "Naira",
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-08T20:18:49.000000Z"
+                },
+                "amount": "2",
+                "payment_plan": "monthly",
+                "expire_at": "2021-07-09T06:51:25.000000Z",
+                "renewed_at": null,
+                "status": "paired",
+                "tenant": {
+                    "id": 334,
+                    "first_name": "Brendan",
+                    "last_name": "Developer",
+                    "phone": "08100395180",
+                    "email": "brendan@ict-networld.com",
+                    "verification_code_sent_at": "2021-05-09T06:32:10.000000Z",
+                    "forgot_password_code_sent_at": null,
+                    "role": "tenant",
+                    "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+                    "dob": "1987-03-09T00:00:00.000000Z",
+                    "gender": "others",
+                    "driver": "regular",
+                    "deleted_at": null,
+                    "created_at": "2021-05-09T06:31:37.000000Z",
+                    "updated_at": "2021-05-09T06:40:31.000000Z"
+                },
+                "landlord": {
+                    "id": 3,
+                    "first_name": "Madilyn",
+                    "last_name": "Bailey",
+                    "phone": "7589",
+                    "email": "tobexkee@gmail.com",
+                    "verification_code_sent_at": null,
+                    "forgot_password_code_sent_at": null,
+                    "role": "landlord",
+                    "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+                    "dob": "2021-05-08T00:00:00.000000Z",
+                    "gender": "male",
+                    "driver": "regular",
+                    "deleted_at": null,
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-08T20:18:49.000000Z"
+                },
+                "apartment": {
+                    "id": 10,
+                    "property_id": "2",
+                    "name": "Room 6688",
+                    "status": "paired",
+                    "deleted_at": null,
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-09T06:53:53.000000Z"
+                },
+                "recent_payment": null,
+                "payment_histories": []
+            },
+            "created_at": "2021-05-09T07:07:45.000000Z",
+            "status": "unfixed",
+            "fixed_at": null
+        },
+        {
+            "id": 2,
+            "comment": "The light bulbs are flickering in my room. And sometimes it goes dark",
+            "service": {
+                "id": 2,
+                "name": "electrical fixes",
+                "created_at": "2021-05-08T20:18:49.000000Z",
+                "updated_at": "2021-05-08T20:18:49.000000Z"
+            },
+            "urgency": "7",
+            "assignment": {
+                "id": 302,
+                "created_at": "17 minutes ago",
+                "currency": {
+                    "id": 1,
+                    "name": "Nigeria",
+                    "country_phone_code": "+234",
+                    "is_supported": "1",
+                    "currency": "NGN",
+                    "currency_name": "Naira",
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-08T20:18:49.000000Z"
+                },
+                "amount": "1",
+                "payment_plan": "yearly",
+                "expire_at": "2022-05-09T06:52:08.000000Z",
+                "renewed_at": null,
+                "status": "paired",
+                "tenant": {
+                    "id": 334,
+                    "first_name": "Brendan",
+                    "last_name": "Developer",
+                    "phone": "08100395180",
+                    "email": "brendan@ict-networld.com",
+                    "verification_code_sent_at": "2021-05-09T06:32:10.000000Z",
+                    "forgot_password_code_sent_at": null,
+                    "role": "tenant",
+                    "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+                    "dob": "1987-03-09T00:00:00.000000Z",
+                    "gender": "others",
+                    "driver": "regular",
+                    "deleted_at": null,
+                    "created_at": "2021-05-09T06:31:37.000000Z",
+                    "updated_at": "2021-05-09T06:40:31.000000Z"
+                },
+                "landlord": {
+                    "id": 3,
+                    "first_name": "Madilyn",
+                    "last_name": "Bailey",
+                    "phone": "7589",
+                    "email": "tobexkee@gmail.com",
+                    "verification_code_sent_at": null,
+                    "forgot_password_code_sent_at": null,
+                    "role": "landlord",
+                    "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+                    "dob": "2021-05-08T00:00:00.000000Z",
+                    "gender": "male",
+                    "driver": "regular",
+                    "deleted_at": null,
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-08T20:18:49.000000Z"
+                },
+                "apartment": {
+                    "id": 1,
+                    "property_id": "1",
+                    "name": "Room 1171",
+                    "status": "paired",
+                    "deleted_at": null,
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-09T06:53:58.000000Z"
+                },
+                "recent_payment": null,
+                "payment_histories": []
+            },
+            "created_at": "2021-05-09T07:08:34.000000Z",
+            "status": "unfixed",
+            "fixed_at": null
+        },
+        {
+            "id": 3,
+            "comment": "My courtyard always stinks of dead fish. Can't we do somthing aout this?",
+            "service": {
+                "id": 1,
+                "name": "plumbing",
+                "created_at": "2021-05-08T20:18:49.000000Z",
+                "updated_at": "2021-05-08T20:18:49.000000Z"
+            },
+            "urgency": "5",
+            "assignment": {
+                "id": 301,
+                "created_at": "17 minutes ago",
+                "currency": {
+                    "id": 1,
+                    "name": "Nigeria",
+                    "country_phone_code": "+234",
+                    "is_supported": "1",
+                    "currency": "NGN",
+                    "currency_name": "Naira",
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-08T20:18:49.000000Z"
+                },
+                "amount": "2",
+                "payment_plan": "monthly",
+                "expire_at": "2021-07-09T06:51:25.000000Z",
+                "renewed_at": null,
+                "status": "paired",
+                "tenant": {
+                    "id": 334,
+                    "first_name": "Brendan",
+                    "last_name": "Developer",
+                    "phone": "08100395180",
+                    "email": "brendan@ict-networld.com",
+                    "verification_code_sent_at": "2021-05-09T06:32:10.000000Z",
+                    "forgot_password_code_sent_at": null,
+                    "role": "tenant",
+                    "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+                    "dob": "1987-03-09T00:00:00.000000Z",
+                    "gender": "others",
+                    "driver": "regular",
+                    "deleted_at": null,
+                    "created_at": "2021-05-09T06:31:37.000000Z",
+                    "updated_at": "2021-05-09T06:40:31.000000Z"
+                },
+                "landlord": {
+                    "id": 3,
+                    "first_name": "Madilyn",
+                    "last_name": "Bailey",
+                    "phone": "7589",
+                    "email": "tobexkee@gmail.com",
+                    "verification_code_sent_at": null,
+                    "forgot_password_code_sent_at": null,
+                    "role": "landlord",
+                    "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+                    "dob": "2021-05-08T00:00:00.000000Z",
+                    "gender": "male",
+                    "driver": "regular",
+                    "deleted_at": null,
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-08T20:18:49.000000Z"
+                },
+                "apartment": {
+                    "id": 10,
+                    "property_id": "2",
+                    "name": "Room 6688",
+                    "status": "paired",
+                    "deleted_at": null,
+                    "created_at": "2021-05-08T20:18:49.000000Z",
+                    "updated_at": "2021-05-09T06:53:53.000000Z"
+                },
+                "recent_payment": null,
+                "payment_histories": []
+            },
+            "created_at": "2021-05-09T07:09:17.000000Z",
+            "status": "unfixed",
+            "fixed_at": null
+        }
+    ],
+    "links": {
+        "first": "https://pexzaapp.com/api/landlord/maintenance/all?page=1",
+        "last": "https://pexzaapp.com/api/landlord/maintenance/all?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "https://pexzaapp.com/api/landlord/maintenance/all?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "path": "https://pexzaapp.com/api/landlord/maintenance/all",
+        "per_page": 15,
+        "to": 3,
+        "total": 3
+    }
+}

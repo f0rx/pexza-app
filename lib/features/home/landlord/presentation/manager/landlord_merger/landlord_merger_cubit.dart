@@ -226,11 +226,6 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
           ApartmentMergerData.fromDomain(_merger),
         );
 
-        log.wtf(_mergerDTO);
-        print(
-            "====================................=========================.=======...............");
-        log.wtf(_mergerDTO?.domain?.tenant);
-
         emit(state.copyWith(
           response: some(right(LandlordSuccess(
             message: "${_merger.apartment.name.getOrEmpty} was assigned to "

@@ -8,3 +8,7 @@ export 'kconsts.dart';
 export 'models/currency/currency_dto.dart';
 export 'models/currency/currency_dto_list/currency_dto_list.dart';
 export 'models/country/index.dart';
+export 'models/assignment/index.dart';
+export 'models/maintenance_service/index.dart';
+export 'models/maintenance/index.dart';
+export 'models/base_apartment/base_apartment_dto.dart';

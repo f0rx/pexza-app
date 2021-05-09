@@ -17,7 +17,7 @@ class _$LandlordApartmentStateTearOff {
   _LandlordApartmentState call(
       {bool isLoading = false,
       bool validate = false,
-      @required LandlordField<String> name,
+      @required BasicTextField<String> name,
       LandlordProperty currentProperty,
       KtList<LandlordApartment> apartments = const KtList.empty(),
       @nullable LandlordApartment apartment,
@@ -42,7 +42,7 @@ const $LandlordApartmentState = _$LandlordApartmentStateTearOff();
 mixin _$LandlordApartmentState {
   bool get isLoading;
   bool get validate;
-  LandlordField<String> get name;
+  BasicTextField<String> get name;
   LandlordProperty get currentProperty;
   KtList<LandlordApartment> get apartments;
   @nullable
@@ -61,7 +61,7 @@ abstract class $LandlordApartmentStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool validate,
-      LandlordField<String> name,
+      BasicTextField<String> name,
       LandlordProperty currentProperty,
       KtList<LandlordApartment> apartments,
       @nullable LandlordApartment apartment,
@@ -93,7 +93,7 @@ class _$LandlordApartmentStateCopyWithImpl<$Res>
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      name: name == freezed ? _value.name : name as LandlordField<String>,
+      name: name == freezed ? _value.name : name as BasicTextField<String>,
       currentProperty: currentProperty == freezed
           ? _value.currentProperty
           : currentProperty as LandlordProperty,
@@ -140,7 +140,7 @@ abstract class _$LandlordApartmentStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool validate,
-      LandlordField<String> name,
+      BasicTextField<String> name,
       LandlordProperty currentProperty,
       KtList<LandlordApartment> apartments,
       @nullable LandlordApartment apartment,
@@ -176,7 +176,7 @@ class __$LandlordApartmentStateCopyWithImpl<$Res>
     return _then(_LandlordApartmentState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      name: name == freezed ? _value.name : name as LandlordField<String>,
+      name: name == freezed ? _value.name : name as BasicTextField<String>,
       currentProperty: currentProperty == freezed
           ? _value.currentProperty
           : currentProperty as LandlordProperty,
@@ -217,7 +217,7 @@ class _$_LandlordApartmentState extends _LandlordApartmentState {
   @override
   final bool validate;
   @override
-  final LandlordField<String> name;
+  final BasicTextField<String> name;
   @override
   final LandlordProperty currentProperty;
   @JsonKey(defaultValue: const KtList.empty())
@@ -284,7 +284,7 @@ abstract class _LandlordApartmentState extends LandlordApartmentState {
   const factory _LandlordApartmentState(
       {bool isLoading,
       bool validate,
-      @required LandlordField<String> name,
+      @required BasicTextField<String> name,
       LandlordProperty currentProperty,
       KtList<LandlordApartment> apartments,
       @nullable LandlordApartment apartment,
@@ -295,7 +295,7 @@ abstract class _LandlordApartmentState extends LandlordApartmentState {
   @override
   bool get validate;
   @override
-  LandlordField<String> get name;
+  BasicTextField<String> get name;
   @override
   LandlordProperty get currentProperty;
   @override

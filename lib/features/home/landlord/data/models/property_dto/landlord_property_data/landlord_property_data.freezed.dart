@@ -43,7 +43,7 @@ class _$LandlordPropertyDataTearOff {
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
           int stateId,
       @nullable
@@ -131,7 +131,7 @@ mixin _$LandlordPropertyData {
   @JsonKey(includeIfNull: false)
   StateDTO get state;
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'state_id')
+  @JsonKey(includeIfNull: true, name: 'state_id')
   @IntegerSerializer()
   int get stateId;
   @nullable
@@ -202,7 +202,7 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
           int stateId,
       @nullable
@@ -340,7 +340,7 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
           int stateId,
       @nullable
@@ -468,7 +468,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       @JsonKey(includeIfNull: false)
           this.state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
           this.stateId,
       @nullable
@@ -537,7 +537,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final StateDTO state;
   @override
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'state_id')
+  @JsonKey(includeIfNull: true, name: 'state_id')
   @IntegerSerializer()
   final int stateId;
   @override
@@ -700,7 +700,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
-      @JsonKey(disallowNullValue: true, name: 'state_id')
+      @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
           int stateId,
       @nullable
@@ -768,7 +768,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   StateDTO get state;
   @override
   @nullable
-  @JsonKey(disallowNullValue: true, name: 'state_id')
+  @JsonKey(includeIfNull: true, name: 'state_id')
   @IntegerSerializer()
   int get stateId;
   @override

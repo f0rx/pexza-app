@@ -8,7 +8,7 @@ abstract class LandlordApartmentState implements _$LandlordApartmentState {
   const factory LandlordApartmentState({
     @Default(false) bool isLoading,
     @Default(false) bool validate,
-    @required LandlordField<String> name,
+    @required BasicTextField<String> name,
     LandlordProperty currentProperty,
     @Default(KtList.empty()) KtList<LandlordApartment> apartments,
     @nullable LandlordApartment apartment,
@@ -16,6 +16,6 @@ abstract class LandlordApartmentState implements _$LandlordApartmentState {
   }) = _LandlordApartmentState;
 
   factory LandlordApartmentState.initial() => LandlordApartmentState(
-        name: LandlordField(""),
+        name: BasicTextField(""),
       );
 }
