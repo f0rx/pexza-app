@@ -25,31 +25,31 @@ class _$CountriesListTearOff {
       @JsonKey(includeIfNull: false)
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, name: "country_phone_code")
+      @JsonKey(includeIfNull: false, name: 'country_phone_code')
           String countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, name: "is_supported", defaultValue: true)
+      @JsonKey(includeIfNull: false, name: 'is_supported', defaultValue: true)
       @IntToBoolSerializer()
           bool isSupported,
       @nullable
       @JsonKey(includeIfNull: false)
           String currency,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_name")
+      @JsonKey(includeIfNull: false, name: 'currency_name')
           String currencyName,
       @nullable
       @JsonKey(includeIfNull: false)
           List<StateDTO> states,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) {
     return _CountriesList(
@@ -86,31 +86,31 @@ mixin _$CountriesList {
   @JsonKey(includeIfNull: false)
   String get name;
   @nullable
-  @JsonKey(includeIfNull: false, name: "country_phone_code")
+  @JsonKey(includeIfNull: false, name: 'country_phone_code')
   String get countryPhoneCode;
   @nullable
-  @JsonKey(includeIfNull: false, name: "is_supported", defaultValue: true)
+  @JsonKey(includeIfNull: false, name: 'is_supported', defaultValue: true)
   @IntToBoolSerializer()
   bool get isSupported;
   @nullable
   @JsonKey(includeIfNull: false)
   String get currency;
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_name")
+  @JsonKey(includeIfNull: false, name: 'currency_name')
   String get currencyName;
   @nullable
   @JsonKey(includeIfNull: false)
   List<StateDTO> get states;
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
 
@@ -132,31 +132,31 @@ abstract class $CountriesListCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, name: "country_phone_code")
+      @JsonKey(includeIfNull: false, name: 'country_phone_code')
           String countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, name: "is_supported", defaultValue: true)
+      @JsonKey(includeIfNull: false, name: 'is_supported', defaultValue: true)
       @IntToBoolSerializer()
           bool isSupported,
       @nullable
       @JsonKey(includeIfNull: false)
           String currency,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_name")
+      @JsonKey(includeIfNull: false, name: 'currency_name')
           String currencyName,
       @nullable
       @JsonKey(includeIfNull: false)
           List<StateDTO> states,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 }
@@ -218,31 +218,31 @@ abstract class _$CountriesListCopyWith<$Res>
       @JsonKey(includeIfNull: false)
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, name: "country_phone_code")
+      @JsonKey(includeIfNull: false, name: 'country_phone_code')
           String countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, name: "is_supported", defaultValue: true)
+      @JsonKey(includeIfNull: false, name: 'is_supported', defaultValue: true)
       @IntToBoolSerializer()
           bool isSupported,
       @nullable
       @JsonKey(includeIfNull: false)
           String currency,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_name")
+      @JsonKey(includeIfNull: false, name: 'currency_name')
           String currencyName,
       @nullable
       @JsonKey(includeIfNull: false)
           List<StateDTO> states,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 }
@@ -303,31 +303,31 @@ class _$_CountriesList extends _CountriesList {
       @JsonKey(includeIfNull: false)
           this.name,
       @nullable
-      @JsonKey(includeIfNull: false, name: "country_phone_code")
+      @JsonKey(includeIfNull: false, name: 'country_phone_code')
           this.countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, name: "is_supported", defaultValue: true)
+      @JsonKey(includeIfNull: false, name: 'is_supported', defaultValue: true)
       @IntToBoolSerializer()
           this.isSupported,
       @nullable
       @JsonKey(includeIfNull: false)
           this.currency,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_name")
+      @JsonKey(includeIfNull: false, name: 'currency_name')
           this.currencyName,
       @nullable
       @JsonKey(includeIfNull: false)
           this.states,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           this.createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           this.updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           this.deletedAt})
       : super._();
@@ -345,11 +345,11 @@ class _$_CountriesList extends _CountriesList {
   final String name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "country_phone_code")
+  @JsonKey(includeIfNull: false, name: 'country_phone_code')
   final String countryPhoneCode;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "is_supported", defaultValue: true)
+  @JsonKey(includeIfNull: false, name: 'is_supported', defaultValue: true)
   @IntToBoolSerializer()
   final bool isSupported;
   @override
@@ -358,7 +358,7 @@ class _$_CountriesList extends _CountriesList {
   final String currency;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_name")
+  @JsonKey(includeIfNull: false, name: 'currency_name')
   final String currencyName;
   @override
   @nullable
@@ -366,17 +366,17 @@ class _$_CountriesList extends _CountriesList {
   final List<StateDTO> states;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   final String createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   final String updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   final String deletedAt;
 
@@ -453,31 +453,31 @@ abstract class _CountriesList extends CountriesList {
       @JsonKey(includeIfNull: false)
           String name,
       @nullable
-      @JsonKey(includeIfNull: false, name: "country_phone_code")
+      @JsonKey(includeIfNull: false, name: 'country_phone_code')
           String countryPhoneCode,
       @nullable
-      @JsonKey(includeIfNull: false, name: "is_supported", defaultValue: true)
+      @JsonKey(includeIfNull: false, name: 'is_supported', defaultValue: true)
       @IntToBoolSerializer()
           bool isSupported,
       @nullable
       @JsonKey(includeIfNull: false)
           String currency,
       @nullable
-      @JsonKey(includeIfNull: false, name: "currency_name")
+      @JsonKey(includeIfNull: false, name: 'currency_name')
           String currencyName,
       @nullable
       @JsonKey(includeIfNull: false)
           List<StateDTO> states,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) = _$_CountriesList;
 
@@ -494,11 +494,11 @@ abstract class _CountriesList extends CountriesList {
   String get name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "country_phone_code")
+  @JsonKey(includeIfNull: false, name: 'country_phone_code')
   String get countryPhoneCode;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "is_supported", defaultValue: true)
+  @JsonKey(includeIfNull: false, name: 'is_supported', defaultValue: true)
   @IntToBoolSerializer()
   bool get isSupported;
   @override
@@ -507,7 +507,7 @@ abstract class _CountriesList extends CountriesList {
   String get currency;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "currency_name")
+  @JsonKey(includeIfNull: false, name: 'currency_name')
   String get currencyName;
   @override
   @nullable
@@ -515,17 +515,17 @@ abstract class _CountriesList extends CountriesList {
   List<StateDTO> get states;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
   @override

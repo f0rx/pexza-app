@@ -17,11 +17,11 @@ class _$LandlordPropertyStateTearOff {
   _LandlordPropertyState call(
       {bool isLoading = false,
       bool validate = false,
-      @required LandlordField<String> name,
+      @required BasicTextField<String> name,
       @required LandlordPropertyTypeField propertyType,
-      @required LandlordField<String> houseType,
-      @required LandlordField<String> street,
-      @required LandlordField<String> town,
+      @required BasicTextField<String> houseType,
+      @required BasicTextField<String> street,
+      @required BasicTextField<String> town,
       @nullable ProvinceState selectedState,
       KtList<ProvinceState> states = const KtList.empty(),
       KtList<LandlordProperty> properties = const KtList.empty(),
@@ -54,11 +54,11 @@ const $LandlordPropertyState = _$LandlordPropertyStateTearOff();
 mixin _$LandlordPropertyState {
   bool get isLoading;
   bool get validate;
-  LandlordField<String> get name;
+  BasicTextField<String> get name;
   LandlordPropertyTypeField get propertyType;
-  LandlordField<String> get houseType;
-  LandlordField<String> get street;
-  LandlordField<String> get town;
+  BasicTextField<String> get houseType;
+  BasicTextField<String> get street;
+  BasicTextField<String> get town;
   @nullable
   ProvinceState get selectedState;
   KtList<ProvinceState> get states;
@@ -80,11 +80,11 @@ abstract class $LandlordPropertyStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool validate,
-      LandlordField<String> name,
+      BasicTextField<String> name,
       LandlordPropertyTypeField propertyType,
-      LandlordField<String> houseType,
-      LandlordField<String> street,
-      LandlordField<String> town,
+      BasicTextField<String> houseType,
+      BasicTextField<String> street,
+      BasicTextField<String> town,
       @nullable ProvinceState selectedState,
       KtList<ProvinceState> states,
       KtList<LandlordProperty> properties,
@@ -124,16 +124,16 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      name: name == freezed ? _value.name : name as LandlordField<String>,
+      name: name == freezed ? _value.name : name as BasicTextField<String>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as LandlordPropertyTypeField,
       houseType: houseType == freezed
           ? _value.houseType
-          : houseType as LandlordField<String>,
+          : houseType as BasicTextField<String>,
       street:
-          street == freezed ? _value.street : street as LandlordField<String>,
-      town: town == freezed ? _value.town : town as LandlordField<String>,
+          street == freezed ? _value.street : street as BasicTextField<String>,
+      town: town == freezed ? _value.town : town as BasicTextField<String>,
       selectedState: selectedState == freezed
           ? _value.selectedState
           : selectedState as ProvinceState,
@@ -184,11 +184,11 @@ abstract class _$LandlordPropertyStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool validate,
-      LandlordField<String> name,
+      BasicTextField<String> name,
       LandlordPropertyTypeField propertyType,
-      LandlordField<String> houseType,
-      LandlordField<String> street,
-      LandlordField<String> town,
+      BasicTextField<String> houseType,
+      BasicTextField<String> street,
+      BasicTextField<String> town,
       @nullable ProvinceState selectedState,
       KtList<ProvinceState> states,
       KtList<LandlordProperty> properties,
@@ -232,16 +232,16 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
     return _then(_LandlordPropertyState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      name: name == freezed ? _value.name : name as LandlordField<String>,
+      name: name == freezed ? _value.name : name as BasicTextField<String>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as LandlordPropertyTypeField,
       houseType: houseType == freezed
           ? _value.houseType
-          : houseType as LandlordField<String>,
+          : houseType as BasicTextField<String>,
       street:
-          street == freezed ? _value.street : street as LandlordField<String>,
-      town: town == freezed ? _value.town : town as LandlordField<String>,
+          street == freezed ? _value.street : street as BasicTextField<String>,
+      town: town == freezed ? _value.town : town as BasicTextField<String>,
       selectedState: selectedState == freezed
           ? _value.selectedState
           : selectedState as ProvinceState,
@@ -298,15 +298,15 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
   @override
   final bool validate;
   @override
-  final LandlordField<String> name;
+  final BasicTextField<String> name;
   @override
   final LandlordPropertyTypeField propertyType;
   @override
-  final LandlordField<String> houseType;
+  final BasicTextField<String> houseType;
   @override
-  final LandlordField<String> street;
+  final BasicTextField<String> street;
   @override
-  final LandlordField<String> town;
+  final BasicTextField<String> town;
   @override
   @nullable
   final ProvinceState selectedState;
@@ -401,11 +401,11 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
   const factory _LandlordPropertyState(
       {bool isLoading,
       bool validate,
-      @required LandlordField<String> name,
+      @required BasicTextField<String> name,
       @required LandlordPropertyTypeField propertyType,
-      @required LandlordField<String> houseType,
-      @required LandlordField<String> street,
-      @required LandlordField<String> town,
+      @required BasicTextField<String> houseType,
+      @required BasicTextField<String> street,
+      @required BasicTextField<String> town,
       @nullable ProvinceState selectedState,
       KtList<ProvinceState> states,
       KtList<LandlordProperty> properties,
@@ -418,15 +418,15 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
   @override
   bool get validate;
   @override
-  LandlordField<String> get name;
+  BasicTextField<String> get name;
   @override
   LandlordPropertyTypeField get propertyType;
   @override
-  LandlordField<String> get houseType;
+  BasicTextField<String> get houseType;
   @override
-  LandlordField<String> get street;
+  BasicTextField<String> get street;
   @override
-  LandlordField<String> get town;
+  BasicTextField<String> get town;
   @override
   @nullable
   ProvinceState get selectedState;

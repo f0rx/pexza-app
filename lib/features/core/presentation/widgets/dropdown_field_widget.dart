@@ -10,6 +10,7 @@ class DropdownFieldWidget<Model> extends StatelessWidget {
   final String disabledHint;
   final Model selected;
   final bool validate;
+  final bool disabled;
   final String error;
   final double iconSize;
   final void Function(Model) onChanged;
@@ -22,6 +23,7 @@ class DropdownFieldWidget<Model> extends StatelessWidget {
     this.disabledHint = "-- Invalid selection --",
     @required this.selected,
     this.validate = false,
+    this.disabled = false,
     this.error = '',
     this.iconSize = 19.0,
     @required this.onChanged,
@@ -35,37 +37,40 @@ class DropdownFieldWidget<Model> extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius),
-            border: Border.all(
-              color: _showErrors ? AppColors.errorRed : Colors.grey,
+        IgnorePointer(
+          ignoring: disabled ?? false,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius),
+              border: Border.all(
+                color: _showErrors ? AppColors.errorRed : Colors.grey,
+              ),
             ),
-          ),
-          child: DropdownButtonHideUnderline(
-            child: ButtonTheme(
-              alignedDropdown: true,
-              layoutBehavior: ButtonBarLayoutBehavior.constrained,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              child: DropdownButton<Model>(
-                items: items,
-                disabledHint: AutoSizeText(
-                  disabledHint,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
+            child: DropdownButtonHideUnderline(
+              child: ButtonTheme(
+                alignedDropdown: true,
+                layoutBehavior: ButtonBarLayoutBehavior.constrained,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                child: DropdownButton<Model>(
+                  items: items,
+                  disabledHint: AutoSizeText(
+                    disabledHint,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                  ),
+                  hint: AutoSizeText(
+                    hint,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                  ),
+                  value: selected,
+                  isExpanded: true,
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  iconSize: iconSize,
+                  onChanged: onChanged,
                 ),
-                hint: AutoSizeText(
-                  hint,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                ),
-                value: selected,
-                isExpanded: true,
-                icon: Icon(Icons.keyboard_arrow_down),
-                iconSize: iconSize,
-                onChanged: onChanged,
               ),
             ),
           ),

@@ -1,3 +1,5 @@
+library entities.dart;
+
 export 'fields/fields.dart';
 export 'user/auth_provider.dart';
 export 'user/base_user.dart';
@@ -7,3 +9,12 @@ export 'field_object.dart';
 export 'immutable_ids.dart';
 export 'unique_id.dart';
 export 'currency/index.dart';
+export 'basic_text_field.dart';
+export 'apartment_status/apartment_status.dart';
+export 'assignment/assignment.dart';
+export 'payment/index.dart';
+export 'base_apartment.dart';
+export 'maintenance_service/maintenance_service.dart';
+export 'maintenance/maintenance.dart';
+export 'maintenance/maintenance_status/maintenance_status.dart';
+export 'maintenance/urgency_resolver.dart';

@@ -14,7 +14,6 @@ import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart';
 import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
-import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
 import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
 import 'package:pexza/utils/utils.dart';
@@ -41,7 +40,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       ));
 
   void apartmentNameChanged(String value) => emit(state.copyWith(
-        name: LandlordField(value),
+        name: BasicTextField(value),
       ));
 
   void init([

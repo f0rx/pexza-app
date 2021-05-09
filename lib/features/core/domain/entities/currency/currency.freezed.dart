@@ -17,7 +17,7 @@ class _$CurrencyTearOff {
   _Currency call(
       {@nullable UniqueId<int> id,
       @nullable String name,
-      @nullable CurrencyType type}) {
+      CurrencyType type = CurrencyType.NGN}) {
     return _Currency(
       id: id,
       name: name,
@@ -36,7 +36,6 @@ mixin _$Currency {
   UniqueId<int> get id;
   @nullable
   String get name;
-  @nullable
   CurrencyType get type;
 
   @JsonKey(ignore: true)
@@ -48,9 +47,7 @@ abstract class $CurrencyCopyWith<$Res> {
   factory $CurrencyCopyWith(Currency value, $Res Function(Currency) then) =
       _$CurrencyCopyWithImpl<$Res>;
   $Res call(
-      {@nullable UniqueId<int> id,
-      @nullable String name,
-      @nullable CurrencyType type});
+      {@nullable UniqueId<int> id, @nullable String name, CurrencyType type});
 }
 
 /// @nodoc
@@ -81,9 +78,7 @@ abstract class _$CurrencyCopyWith<$Res> implements $CurrencyCopyWith<$Res> {
       __$CurrencyCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable UniqueId<int> id,
-      @nullable String name,
-      @nullable CurrencyType type});
+      {@nullable UniqueId<int> id, @nullable String name, CurrencyType type});
 }
 
 /// @nodoc
@@ -112,8 +107,9 @@ class __$CurrencyCopyWithImpl<$Res> extends _$CurrencyCopyWithImpl<$Res>
 /// @nodoc
 class _$_Currency extends _Currency {
   const _$_Currency(
-      {@nullable this.id, @nullable this.name, @nullable this.type})
-      : super._();
+      {@nullable this.id, @nullable this.name, this.type = CurrencyType.NGN})
+      : assert(type != null),
+        super._();
 
   @override
   @nullable
@@ -121,8 +117,8 @@ class _$_Currency extends _Currency {
   @override
   @nullable
   final String name;
+  @JsonKey(defaultValue: CurrencyType.NGN)
   @override
-  @nullable
   final CurrencyType type;
 
   @override
@@ -160,7 +156,7 @@ abstract class _Currency extends Currency {
   const factory _Currency(
       {@nullable UniqueId<int> id,
       @nullable String name,
-      @nullable CurrencyType type}) = _$_Currency;
+      CurrencyType type}) = _$_Currency;
 
   @override
   @nullable
@@ -169,7 +165,6 @@ abstract class _Currency extends Currency {
   @nullable
   String get name;
   @override
-  @nullable
   CurrencyType get type;
   @override
   @JsonKey(ignore: true)

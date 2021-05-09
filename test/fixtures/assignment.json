@@ -1,0 +1,66 @@
+{
+    "data": {
+        "id": 301,
+        "created_at": "7 minutes ago",
+        "currency": {
+            "id": 1,
+            "name": "Nigeria",
+            "country_phone_code": "+234",
+            "is_supported": "1",
+            "currency": "NGN",
+            "currency_name": "Naira",
+            "created_at": "2021-05-08T20:18:49.000000Z",
+            "updated_at": "2021-05-08T20:18:49.000000Z"
+        },
+        "amount": "2",
+        "payment_plan": "monthly",
+        "expire_at": "2021-07-09T06:51:25.000000Z",
+        "renewed_at": null,
+        "status": "paired",
+        "tenant": {
+            "id": 334,
+            "first_name": "Brendan",
+            "last_name": "Developer",
+            "phone": "08100395180",
+            "email": "brendan@ict-networld.com",
+            "verification_code_sent_at": "2021-05-09T06:32:10.000000Z",
+            "forgot_password_code_sent_at": null,
+            "role": "tenant",
+            "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+            "dob": "1987-03-09T00:00:00.000000Z",
+            "gender": "others",
+            "driver": "regular",
+            "deleted_at": null,
+            "created_at": "2021-05-09T06:31:37.000000Z",
+            "updated_at": "2021-05-09T06:40:31.000000Z"
+        },
+        "landlord": {
+            "id": 3,
+            "first_name": "Madilyn",
+            "last_name": "Bailey",
+            "phone": "7589",
+            "email": "tobexkee@gmail.com",
+            "verification_code_sent_at": null,
+            "forgot_password_code_sent_at": null,
+            "role": "landlord",
+            "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+            "dob": "2021-05-08T00:00:00.000000Z",
+            "gender": "male",
+            "driver": "regular",
+            "deleted_at": null,
+            "created_at": "2021-05-08T20:18:49.000000Z",
+            "updated_at": "2021-05-08T20:18:49.000000Z"
+        },
+        "apartment": {
+            "id": 10,
+            "property_id": "2",
+            "name": "Room 6688",
+            "status": "paired",
+            "deleted_at": null,
+            "created_at": "2021-05-08T20:18:49.000000Z",
+            "updated_at": "2021-05-09T06:53:53.000000Z"
+        },
+        "recent_payment": null,
+        "payment_histories": []
+    }
+}

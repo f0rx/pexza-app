@@ -16,6 +16,7 @@ import 'package:pexza/features/auth/presentation/screens/profile_setup_screen.da
 import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
+import 'package:pexza/features/core/domain/entities/entities.dart';
 import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
@@ -27,6 +28,7 @@ import 'package:pexza/features/home/landlord/presentation/screens/landl_apartmen
 import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/request_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_apartments_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_properties_screen.dart';
@@ -71,6 +73,8 @@ class Routes {
   static const String landlordAddTenantScreen = '/landlord-add-tenant-screen';
   static const String landlordMaintenanceRequestScreen =
       '/landlord-maintenance-request-screen';
+  static const String landlordMaintenanceRequestDetailScreen =
+      '/landlord-maintenance-request-detail-screen';
   static const String landlordTenantsListingScreen =
       '/landlord-tenants-listing-screen';
   static const String accountScreen = '/account-screen';
@@ -102,6 +106,7 @@ class Routes {
     landlordRentDetailScreen,
     landlordAddTenantScreen,
     landlordMaintenanceRequestScreen,
+    landlordMaintenanceRequestDetailScreen,
     landlordTenantsListingScreen,
     accountScreen,
     editAccountScreen,
@@ -153,6 +158,8 @@ class Router extends RouterBase {
         page: LandlordAddTenantScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordMaintenanceRequestScreen,
         page: LandlordMaintenanceRequestScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordMaintenanceRequestDetailScreen,
+        page: LandlordMaintenanceRequestDetailScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordTenantsListingScreen,
         page: LandlordTenantsListingScreen, guards: [AuthGuard]),
     RouteDef(Routes.accountScreen, page: AccountScreen),
@@ -394,6 +401,21 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
+    LandlordMaintenanceRequestDetailScreen: (data) {
+      final args =
+          data.getArgs<LandlordMaintenanceRequestDetailScreenArguments>(
+        orElse: () => LandlordMaintenanceRequestDetailScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordMaintenanceRequestDetailScreen(
+          key: args.key,
+          maintenance: args.maintenance,
+        ).wrappedRoute(context),
+        settings: data,
+        fullscreenDialog: true,
+        maintainState: true,
+      );
+    },
     LandlordTenantsListingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) =>
@@ -585,6 +607,15 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushLandlordMaintenanceRequestScreen() =>
       push<dynamic>(Routes.landlordMaintenanceRequestScreen);
 
+  Future<dynamic> pushLandlordMaintenanceRequestDetailScreen(
+          {Key key, Maintenance maintenance, OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordMaintenanceRequestDetailScreen,
+        arguments: LandlordMaintenanceRequestDetailScreenArguments(
+            key: key, maintenance: maintenance),
+        onReject: onReject,
+      );
+
   Future<dynamic> pushLandlordTenantsListingScreen() =>
       push<dynamic>(Routes.landlordTenantsListingScreen);
 
@@ -674,4 +705,11 @@ class LandlordAddTenantScreenArguments {
   final LandlordApartment apartment;
   LandlordAddTenantScreenArguments(
       {this.key, @required this.property, this.apartment});
+}
+
+/// LandlordMaintenanceRequestDetailScreen arguments holder class
+class LandlordMaintenanceRequestDetailScreenArguments {
+  final Key key;
+  final Maintenance maintenance;
+  LandlordMaintenanceRequestDetailScreenArguments({this.key, this.maintenance});
 }

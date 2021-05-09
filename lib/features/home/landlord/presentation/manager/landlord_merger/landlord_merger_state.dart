@@ -3,7 +3,7 @@ part of 'landlord_merger_cubit.dart';
 @freezed
 @immutable
 abstract class LandlordMergerState implements _$LandlordMergerState {
-  static const int kDefaultDuration = 2;
+  static const int kDefaultDuration = 1;
   static const int kMaxDuration = 50;
   const LandlordMergerState._();
 

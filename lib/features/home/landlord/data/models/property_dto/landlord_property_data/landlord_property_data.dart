@@ -1,7 +1,6 @@
 library landlord_property_data;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:flutter/material.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
@@ -31,7 +30,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
     @nullable @JsonKey(includeIfNull: false) StateDTO state,
     @nullable
-    @JsonKey(disallowNullValue: true, name: "state_id")
+    @JsonKey(includeIfNull: true, name: "state_id")
     @IntegerSerializer()
         int stateId,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String country,
@@ -81,30 +80,31 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
 
     return LandlordProperty(
       id: UniqueId<int>.fromExternal(id),
-      name: !name.isNull ? LandlordField(name) : null,
+      name: !name.isNull ? BasicTextField(name) : null,
       propertyType: !propertyType.isNull
           ? LandlordPropertyTypeField(PropertyType.valueOf(propertyType))
           : null,
-      houseType: !houseType.isNull ? LandlordField(houseType) : null,
-      town: !town.isNull ? LandlordField(town) : null,
-      street: !street.isNull ? LandlordField(street) : null,
+      houseType: !houseType.isNull ? BasicTextField(houseType) : null,
+      town: !town.isNull ? BasicTextField(town) : null,
+      street: !street.isNull ? BasicTextField(street) : null,
       photo: LandlordPropertyImage(
         "https://res.cloudinary.com/anifowosetobi"
         "/image/upload/v1601500323/user_korsis.png",
       ),
       state: !state.isNull ? state.domain : null,
-      country: !country.isNull ? LandlordField(country) : null,
+      country: !country.isNull ? BasicTextField(country) : null,
       color: MaterialColor(_color.value, AppColors.swatch(_color)),
       // image: LandlordPropertyImage(images.random()),
       numberOfTenants:
-          !numberOfTenants.isNull ? LandlordField(numberOfTenants) : null,
-      numberOfApartments:
-          !numberOfApartments.isNull ? LandlordField(numberOfApartments) : null,
+          !numberOfTenants.isNull ? BasicTextField(numberOfTenants) : null,
+      numberOfApartments: !numberOfApartments.isNull
+          ? BasicTextField(numberOfApartments)
+          : null,
       numberOfAvailableApartments: !numberOfAvailableApartments.isNull
-          ? LandlordField(numberOfAvailableApartments)
+          ? BasicTextField(numberOfAvailableApartments)
           : null,
       numberOfRentedApartment: !numberOfRentedApartment.isNull
-          ? LandlordField(numberOfRentedApartment)
+          ? BasicTextField(numberOfRentedApartment)
           : null,
       createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
       updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,

@@ -8,7 +8,6 @@ import 'package:flutter_wall_layout/flutter_wall_layout.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
-import 'package:pexza/features/home/landlord/presentation/widgets/property_listing.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';

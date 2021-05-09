@@ -10,6 +10,7 @@ const ApartmentStatus _$vacant = const ApartmentStatus._('vacant');
 const ApartmentStatus _$assigned = const ApartmentStatus._('assigned');
 const ApartmentStatus _$paired = const ApartmentStatus._('paired');
 const ApartmentStatus _$occupied = const ApartmentStatus._('occupied');
+const ApartmentStatus _$reject = const ApartmentStatus._('reject');
 
 ApartmentStatus _$apartmentStatusValueOf(String name) {
   switch (name) {
@@ -21,6 +22,8 @@ ApartmentStatus _$apartmentStatusValueOf(String name) {
       return _$paired;
     case 'occupied':
       return _$occupied;
+    case 'reject':
+      return _$reject;
     default:
       return _$vacant;
   }
@@ -32,6 +35,7 @@ final BuiltSet<ApartmentStatus> _$apartmentStatusValues =
   _$assigned,
   _$paired,
   _$occupied,
+  _$reject,
 ]);
 
 Serializer<ApartmentStatus> _$apartmentStatusSerializer =

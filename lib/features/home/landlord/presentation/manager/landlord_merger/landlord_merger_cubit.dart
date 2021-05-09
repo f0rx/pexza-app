@@ -51,9 +51,13 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
             AmountField(int.tryParse(value) ?? AmountField.DEFAULT.getOrCrash),
       ));
 
-  void propertyChanged(LandlordProperty property) async {
+  Future<void> propertyChanged(LandlordProperty property) async {
     // Update state
-    emit(state.copyWith(selectedProperty: property));
+    emit(state.copyWith(
+      selectedProperty: property.id.value == state.selectedProperty?.id?.value
+          ? state.selectedProperty
+          : property,
+    ));
     // Fetch Apartments
     await this.getApartmentsForProperty(property: property);
   }
@@ -67,7 +71,10 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
       emit(state.copyWith(currency: currency));
 
   void apartmentChanged(LandlordApartment apartment) => emit(state.copyWith(
-        selectedApartment: apartment,
+        selectedApartment:
+            apartment.id.value == state.selectedApartment?.id?.value
+                ? state.selectedApartment
+                : apartment,
       ));
 
   Future<void> init({
@@ -79,18 +86,48 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
     try {
       await checkInternetAndConnectivity();
 
-      if (property.isNull || apartment.isNull) {
+      LandlordProperty selectedProp = property;
+      LandlordApartment selectedApartment = apartment;
+
+      if (!property.isNull && !apartment.isNull) {
+        emit(state.copyWith(properties: KtList.from([selectedProp])));
+
+        // Update selected property & Fetch related Apartments
+        await this.propertyChanged(selectedProp);
+
+        // Find the selected Apartment from the List returned from server
+        final _selected = state.apartments.firstOrNull(
+          (a) => a.id?.value == selectedApartment?.id?.value,
+        );
+
+        // Update the selected apartment
+        this.apartmentChanged(_selected);
+      } else {
         final props = await _propertyRepository.all();
 
-        emit(state.copyWith(
-          properties: props.data.map((e) => e?.domain).toImmutableList(),
-        ));
+        // Map the incoming DTO to domain oject
+        final domain = props.data.map((e) => e?.domain).toImmutableList();
+
+        // Update state [should come first before propertyChanged()]
+        emit(state.copyWith(properties: domain));
+
+        // Find the seleced Property from the list returned from server
+        // Set the current property as selected
+        selectedProp = domain.firstOrNull(
+          (a) => a.id.value == property.id.value,
+        );
+
+        // Update selected property & Fetch related Apartments
+        await this.propertyChanged(selectedProp);
       }
 
       // Fetch currencies
       final _currDTO = await _miscRepository.fetchCurrencies();
+
       // Emit Currencies
-      emit(state.copyWith(currencies: _currDTO?.domain?.toImmutableList()));
+      emit(state.copyWith(
+        currencies: _currDTO?.domain?.toImmutableList(),
+      ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         response: some(left(e)),
@@ -112,9 +149,18 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
       final aprts = await _apartmentRepository.allApartmentsForProperty(
         property?.id?.value ?? id?.value,
       );
+      // Map to domain objects
+      final domains = aprts.data.map((e) => e?.domain).toImmutableList();
 
       emit(state.copyWith(
-        apartments: aprts.data.map((e) => e?.domain).toImmutableList(),
+        apartments: domains,
+        // If user already selected an apartment, we'll find it in the incoming
+        // list and modify the state of the dropdown
+        selectedApartment: !state.selectedApartment.isNull
+            ? domains.firstOrNull(
+                (a) => a?.id?.value == state.selectedApartment?.id?.value,
+              )
+            : null,
         response: some(right(LandlordSuccess(
           message: "Great! Please select the apartment.",
           popRoute: false,
@@ -179,11 +225,6 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
         final _mergerDTO = await _apartmentRepository.assignTenantToApartment(
           ApartmentMergerData.fromDomain(_merger),
         );
-
-        log.wtf(_mergerDTO);
-        print(
-            "====================................=========================.=======...............");
-        log.wtf(_mergerDTO?.domain?.tenant);
 
         emit(state.copyWith(
           response: some(right(LandlordSuccess(
