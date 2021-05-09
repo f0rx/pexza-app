@@ -7,7 +7,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'misc_repository.g.dart';
 
-@injectable
+@singleton
 @RestApi()
 abstract class MiscRepository {
   @factoryMethod
@@ -18,4 +18,7 @@ abstract class MiscRepository {
 
   @GET("/currencies")
   Future<CurrencyListDTO> fetchCurrencies();
+
+  @GET("/services")
+  Future<MaintenanceServiceDTOList> fetchServices();
 }

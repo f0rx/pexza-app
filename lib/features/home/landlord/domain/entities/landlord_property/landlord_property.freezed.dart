@@ -25,6 +25,7 @@ class _$LandlordPropertyTearOff {
       @nullable BasicTextField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage photo,
+      @nullable User landlord,
       @nullable BasicTextField<int> numberOfTenants,
       @nullable BasicTextField<int> numberOfApartments,
       @nullable BasicTextField<int> numberOfAvailableApartments,
@@ -44,6 +45,7 @@ class _$LandlordPropertyTearOff {
       country: country,
       color: color,
       photo: photo,
+      landlord: landlord,
       numberOfTenants: numberOfTenants,
       numberOfApartments: numberOfApartments,
       numberOfAvailableApartments: numberOfAvailableApartments,
@@ -83,6 +85,8 @@ mixin _$LandlordProperty {
   @nullable
   LandlordPropertyImage get photo;
   @nullable
+  User get landlord;
+  @nullable
   BasicTextField<int> get numberOfTenants;
   @nullable
   BasicTextField<int> get numberOfApartments;
@@ -119,6 +123,7 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       @nullable BasicTextField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage photo,
+      @nullable User landlord,
       @nullable BasicTextField<int> numberOfTenants,
       @nullable BasicTextField<int> numberOfApartments,
       @nullable BasicTextField<int> numberOfAvailableApartments,
@@ -129,6 +134,7 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       @nullable DateTime deletedAt});
 
   $ProvinceStateCopyWith<$Res> get state;
+  $UserCopyWith<$Res> get landlord;
 }
 
 /// @nodoc
@@ -152,6 +158,7 @@ class _$LandlordPropertyCopyWithImpl<$Res>
     Object country = freezed,
     Object color = freezed,
     Object photo = freezed,
+    Object landlord = freezed,
     Object numberOfTenants = freezed,
     Object numberOfApartments = freezed,
     Object numberOfAvailableApartments = freezed,
@@ -179,6 +186,7 @@ class _$LandlordPropertyCopyWithImpl<$Res>
           : country as BasicTextField<String>,
       color: color == freezed ? _value.color : color as MaterialColor,
       photo: photo == freezed ? _value.photo : photo as LandlordPropertyImage,
+      landlord: landlord == freezed ? _value.landlord : landlord as User,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
           : numberOfTenants as BasicTextField<int>,
@@ -212,6 +220,16 @@ class _$LandlordPropertyCopyWithImpl<$Res>
       return _then(_value.copyWith(state: value));
     });
   }
+
+  @override
+  $UserCopyWith<$Res> get landlord {
+    if (_value.landlord == null) {
+      return null;
+    }
+    return $UserCopyWith<$Res>(_value.landlord, (value) {
+      return _then(_value.copyWith(landlord: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -232,6 +250,7 @@ abstract class _$LandlordPropertyCopyWith<$Res>
       @nullable BasicTextField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage photo,
+      @nullable User landlord,
       @nullable BasicTextField<int> numberOfTenants,
       @nullable BasicTextField<int> numberOfApartments,
       @nullable BasicTextField<int> numberOfAvailableApartments,
@@ -243,6 +262,8 @@ abstract class _$LandlordPropertyCopyWith<$Res>
 
   @override
   $ProvinceStateCopyWith<$Res> get state;
+  @override
+  $UserCopyWith<$Res> get landlord;
 }
 
 /// @nodoc
@@ -268,6 +289,7 @@ class __$LandlordPropertyCopyWithImpl<$Res>
     Object country = freezed,
     Object color = freezed,
     Object photo = freezed,
+    Object landlord = freezed,
     Object numberOfTenants = freezed,
     Object numberOfApartments = freezed,
     Object numberOfAvailableApartments = freezed,
@@ -295,6 +317,7 @@ class __$LandlordPropertyCopyWithImpl<$Res>
           : country as BasicTextField<String>,
       color: color == freezed ? _value.color : color as MaterialColor,
       photo: photo == freezed ? _value.photo : photo as LandlordPropertyImage,
+      landlord: landlord == freezed ? _value.landlord : landlord as User,
       numberOfTenants: numberOfTenants == freezed
           ? _value.numberOfTenants
           : numberOfTenants as BasicTextField<int>,
@@ -333,6 +356,7 @@ class _$_LandlordProperty extends _LandlordProperty {
       @nullable this.country,
       @nullable this.color,
       @nullable this.photo,
+      @nullable this.landlord,
       @nullable this.numberOfTenants,
       @nullable this.numberOfApartments,
       @nullable this.numberOfAvailableApartments,
@@ -375,6 +399,9 @@ class _$_LandlordProperty extends _LandlordProperty {
   final LandlordPropertyImage photo;
   @override
   @nullable
+  final User landlord;
+  @override
+  @nullable
   final BasicTextField<int> numberOfTenants;
   @override
   @nullable
@@ -400,7 +427,7 @@ class _$_LandlordProperty extends _LandlordProperty {
 
   @override
   String toString() {
-    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, country: $country, color: $color, photo: $photo, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, animatable: $animatable, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordProperty(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, state: $state, country: $country, color: $color, photo: $photo, landlord: $landlord, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, animatable: $animatable, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -430,6 +457,9 @@ class _$_LandlordProperty extends _LandlordProperty {
                 const DeepCollectionEquality().equals(other.color, color)) &&
             (identical(other.photo, photo) ||
                 const DeepCollectionEquality().equals(other.photo, photo)) &&
+            (identical(other.landlord, landlord) ||
+                const DeepCollectionEquality()
+                    .equals(other.landlord, landlord)) &&
             (identical(other.numberOfTenants, numberOfTenants) ||
                 const DeepCollectionEquality()
                     .equals(other.numberOfTenants, numberOfTenants)) &&
@@ -472,6 +502,7 @@ class _$_LandlordProperty extends _LandlordProperty {
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(color) ^
       const DeepCollectionEquality().hash(photo) ^
+      const DeepCollectionEquality().hash(landlord) ^
       const DeepCollectionEquality().hash(numberOfTenants) ^
       const DeepCollectionEquality().hash(numberOfApartments) ^
       const DeepCollectionEquality().hash(numberOfAvailableApartments) ^
@@ -500,6 +531,7 @@ abstract class _LandlordProperty extends LandlordProperty {
       @nullable BasicTextField<String> country,
       @nullable MaterialColor color,
       @nullable LandlordPropertyImage photo,
+      @nullable User landlord,
       @nullable BasicTextField<int> numberOfTenants,
       @nullable BasicTextField<int> numberOfApartments,
       @nullable BasicTextField<int> numberOfAvailableApartments,
@@ -539,6 +571,9 @@ abstract class _LandlordProperty extends LandlordProperty {
   @override
   @nullable
   LandlordPropertyImage get photo;
+  @override
+  @nullable
+  User get landlord;
   @override
   @nullable
   BasicTextField<int> get numberOfTenants;

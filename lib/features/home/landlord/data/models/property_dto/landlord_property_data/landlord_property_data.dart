@@ -29,6 +29,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String street,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
     @nullable @JsonKey(includeIfNull: false) StateDTO state,
+    @nullable @JsonKey(includeIfNull: false) UserDTO landlord,
     @nullable
     @JsonKey(includeIfNull: true, name: "state_id")
     @IntegerSerializer()
@@ -92,6 +93,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
         "/image/upload/v1601500323/user_korsis.png",
       ),
       state: !state.isNull ? state.domain : null,
+      landlord: !landlord.isNull ? landlord.domain : null,
       country: !country.isNull ? BasicTextField(country) : null,
       color: MaterialColor(_color.value, AppColors.swatch(_color)),
       // image: LandlordPropertyImage(images.random()),

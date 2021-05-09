@@ -16,6 +16,7 @@ class ServerFieldErrorsSerializer
         phone: value != null ? value['phone'] : null,
         password: value != null ? value['password'] : null,
         token: value != null ? value['token'] : null,
+        code: value != null ? value['code'] : null,
         propertyId: value != null ? value['property_id'] : null,
         apartmentId: value != null ? value['apartment_id'] : null,
         propertyType: value != null ? value['property_type'] : null,
@@ -27,6 +28,9 @@ class ServerFieldErrorsSerializer
         duration: value != null ? value['duration'] : null,
         amount: value != null ? value['amount'] : null,
         currencyId: value != null ? value['currency_id'] : null,
+        serviceId: value != null ? value['service_id'] : null,
+        assignmentId: value != null ? value['assignment_id'] : null,
+        comment: value != null ? value['comment'] : null,
       );
 
   @override

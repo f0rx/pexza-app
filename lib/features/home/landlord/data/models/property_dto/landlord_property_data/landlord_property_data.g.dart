@@ -19,6 +19,9 @@ _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     state: json['state'] == null
         ? null
         : StateDTO.fromJson(json['state'] as Map<String, dynamic>),
+    landlord: json['landlord'] == null
+        ? null
+        : UserDTO.fromJson(json['landlord'] as Map<String, dynamic>),
     stateId: const IntegerSerializer().fromJson(json['state_id']),
     country: json['country'] as String ?? '',
     numberOfTenants: json['number_of_tenants'] as int ?? 0,
@@ -50,6 +53,7 @@ Map<String, dynamic> _$_$_LandlordPropertyDataToJson(
   writeNotNull('street', instance.street);
   writeNotNull('town', instance.town);
   writeNotNull('state', instance.state?.toJson());
+  writeNotNull('landlord', instance.landlord?.toJson());
   val['state_id'] = const IntegerSerializer().toJson(instance.stateId);
   writeNotNull('country', instance.country);
   writeNotNull('number_of_tenants', instance.numberOfTenants);

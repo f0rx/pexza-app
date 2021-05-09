@@ -8,7 +8,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'property_repository.g.dart';
 
-@injectable
+@singleton
 @RestApi()
 abstract class PropertyRepository {
   @factoryMethod

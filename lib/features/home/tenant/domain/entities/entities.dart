@@ -5,3 +5,4 @@ export 'property/property_color.dart';
 export 'property/property_plan/property_plan.dart';
 export 'property/property_owner.dart';
 export 'property/property_amount.dart';
+export 'apartment/tenant_apartment.dart';

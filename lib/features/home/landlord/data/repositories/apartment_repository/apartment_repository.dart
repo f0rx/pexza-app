@@ -7,7 +7,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'apartment_repository.g.dart';
 
-@injectable
+@singleton
 @RestApi()
 abstract class ApartmentRepository {
   @factoryMethod

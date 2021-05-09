@@ -46,6 +46,9 @@ class _$ServerFieldErrorsTearOff {
       @JsonKey(includeIfNull: false)
           List<dynamic> token,
       @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> code,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'property_id')
           List<dynamic> propertyId,
       @nullable
@@ -77,7 +80,16 @@ class _$ServerFieldErrorsTearOff {
           List<dynamic> amount,
       @nullable
       @JsonKey(includeIfNull: false, name: 'currency_id')
-          List<dynamic> currencyId}) {
+          List<dynamic> currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          List<dynamic> serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          List<dynamic> assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> comment}) {
     return _ServerFieldErrors(
       name: name,
       firstName: firstName,
@@ -88,6 +100,7 @@ class _$ServerFieldErrorsTearOff {
       phone: phone,
       password: password,
       token: token,
+      code: code,
       propertyId: propertyId,
       apartmentId: apartmentId,
       propertyType: propertyType,
@@ -99,6 +112,9 @@ class _$ServerFieldErrorsTearOff {
       duration: duration,
       amount: amount,
       currencyId: currencyId,
+      serviceId: serviceId,
+      assignmentId: assignmentId,
+      comment: comment,
     );
   }
 
@@ -142,6 +158,9 @@ mixin _$ServerFieldErrors {
   @JsonKey(includeIfNull: false)
   List<dynamic> get token;
   @nullable
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get code;
+  @nullable
   @JsonKey(includeIfNull: false, name: 'property_id')
   List<dynamic> get propertyId;
   @nullable
@@ -174,6 +193,15 @@ mixin _$ServerFieldErrors {
   @nullable
   @JsonKey(includeIfNull: false, name: 'currency_id')
   List<dynamic> get currencyId;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'service_id')
+  List<dynamic> get serviceId;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'assignment_id')
+  List<dynamic> get assignmentId;
+  @nullable
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get comment;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -214,6 +242,9 @@ abstract class $ServerFieldErrorsCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           List<dynamic> token,
       @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> code,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'property_id')
           List<dynamic> propertyId,
       @nullable
@@ -245,7 +276,16 @@ abstract class $ServerFieldErrorsCopyWith<$Res> {
           List<dynamic> amount,
       @nullable
       @JsonKey(includeIfNull: false, name: 'currency_id')
-          List<dynamic> currencyId});
+          List<dynamic> currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          List<dynamic> serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          List<dynamic> assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> comment});
 }
 
 /// @nodoc
@@ -268,6 +308,7 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
     Object phone = freezed,
     Object password = freezed,
     Object token = freezed,
+    Object code = freezed,
     Object propertyId = freezed,
     Object apartmentId = freezed,
     Object propertyType = freezed,
@@ -279,6 +320,9 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
     Object duration = freezed,
     Object amount = freezed,
     Object currencyId = freezed,
+    Object serviceId = freezed,
+    Object assignmentId = freezed,
+    Object comment = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as List<dynamic>,
@@ -293,6 +337,7 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
       password:
           password == freezed ? _value.password : password as List<dynamic>,
       token: token == freezed ? _value.token : token as List<dynamic>,
+      code: code == freezed ? _value.code : code as List<dynamic>,
       propertyId: propertyId == freezed
           ? _value.propertyId
           : propertyId as List<dynamic>,
@@ -316,6 +361,12 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
       currencyId: currencyId == freezed
           ? _value.currencyId
           : currencyId as List<dynamic>,
+      serviceId:
+          serviceId == freezed ? _value.serviceId : serviceId as List<dynamic>,
+      assignmentId: assignmentId == freezed
+          ? _value.assignmentId
+          : assignmentId as List<dynamic>,
+      comment: comment == freezed ? _value.comment : comment as List<dynamic>,
     ));
   }
 }
@@ -356,6 +407,9 @@ abstract class _$ServerFieldErrorsCopyWith<$Res>
       @JsonKey(includeIfNull: false)
           List<dynamic> token,
       @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> code,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'property_id')
           List<dynamic> propertyId,
       @nullable
@@ -387,7 +441,16 @@ abstract class _$ServerFieldErrorsCopyWith<$Res>
           List<dynamic> amount,
       @nullable
       @JsonKey(includeIfNull: false, name: 'currency_id')
-          List<dynamic> currencyId});
+          List<dynamic> currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          List<dynamic> serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          List<dynamic> assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> comment});
 }
 
 /// @nodoc
@@ -412,6 +475,7 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
     Object phone = freezed,
     Object password = freezed,
     Object token = freezed,
+    Object code = freezed,
     Object propertyId = freezed,
     Object apartmentId = freezed,
     Object propertyType = freezed,
@@ -423,6 +487,9 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
     Object duration = freezed,
     Object amount = freezed,
     Object currencyId = freezed,
+    Object serviceId = freezed,
+    Object assignmentId = freezed,
+    Object comment = freezed,
   }) {
     return _then(_ServerFieldErrors(
       name: name == freezed ? _value.name : name as List<dynamic>,
@@ -437,6 +504,7 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
       password:
           password == freezed ? _value.password : password as List<dynamic>,
       token: token == freezed ? _value.token : token as List<dynamic>,
+      code: code == freezed ? _value.code : code as List<dynamic>,
       propertyId: propertyId == freezed
           ? _value.propertyId
           : propertyId as List<dynamic>,
@@ -460,6 +528,12 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
       currencyId: currencyId == freezed
           ? _value.currencyId
           : currencyId as List<dynamic>,
+      serviceId:
+          serviceId == freezed ? _value.serviceId : serviceId as List<dynamic>,
+      assignmentId: assignmentId == freezed
+          ? _value.assignmentId
+          : assignmentId as List<dynamic>,
+      comment: comment == freezed ? _value.comment : comment as List<dynamic>,
     ));
   }
 }
@@ -497,6 +571,9 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
       @JsonKey(includeIfNull: false)
           this.token,
       @nullable
+      @JsonKey(includeIfNull: false)
+          this.code,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'property_id')
           this.propertyId,
       @nullable
@@ -528,7 +605,16 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
           this.amount,
       @nullable
       @JsonKey(includeIfNull: false, name: 'currency_id')
-          this.currencyId})
+          this.currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          this.serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          this.assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          this.comment})
       : super._();
 
   factory _$_ServerFieldErrors.fromJson(Map<String, dynamic> json) =>
@@ -570,6 +656,10 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
   @nullable
   @JsonKey(includeIfNull: false)
   final List<dynamic> token;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  final List<dynamic> code;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'property_id')
@@ -614,10 +704,22 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
   @nullable
   @JsonKey(includeIfNull: false, name: 'currency_id')
   final List<dynamic> currencyId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'service_id')
+  final List<dynamic> serviceId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'assignment_id')
+  final List<dynamic> assignmentId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  final List<dynamic> comment;
 
   @override
   String toString() {
-    return 'ServerFieldErrors(name: $name, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, age: $age, phone: $phone, password: $password, token: $token, propertyId: $propertyId, apartmentId: $apartmentId, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, stateId: $stateId, tenantEmail: $tenantEmail, duration: $duration, amount: $amount, currencyId: $currencyId)';
+    return 'ServerFieldErrors(name: $name, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, age: $age, phone: $phone, password: $password, token: $token, code: $code, propertyId: $propertyId, apartmentId: $apartmentId, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, stateId: $stateId, tenantEmail: $tenantEmail, duration: $duration, amount: $amount, currencyId: $currencyId, serviceId: $serviceId, assignmentId: $assignmentId, comment: $comment)';
   }
 
   @override
@@ -645,6 +747,8 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
                     .equals(other.password, password)) &&
             (identical(other.token, token) ||
                 const DeepCollectionEquality().equals(other.token, token)) &&
+            (identical(other.code, code) ||
+                const DeepCollectionEquality().equals(other.code, code)) &&
             (identical(other.propertyId, propertyId) ||
                 const DeepCollectionEquality()
                     .equals(other.propertyId, propertyId)) &&
@@ -674,7 +778,15 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
                 const DeepCollectionEquality().equals(other.amount, amount)) &&
             (identical(other.currencyId, currencyId) ||
                 const DeepCollectionEquality()
-                    .equals(other.currencyId, currencyId)));
+                    .equals(other.currencyId, currencyId)) &&
+            (identical(other.serviceId, serviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.serviceId, serviceId)) &&
+            (identical(other.assignmentId, assignmentId) ||
+                const DeepCollectionEquality()
+                    .equals(other.assignmentId, assignmentId)) &&
+            (identical(other.comment, comment) ||
+                const DeepCollectionEquality().equals(other.comment, comment)));
   }
 
   @override
@@ -689,6 +801,7 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(token) ^
+      const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(propertyId) ^
       const DeepCollectionEquality().hash(apartmentId) ^
       const DeepCollectionEquality().hash(propertyType) ^
@@ -699,7 +812,10 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
       const DeepCollectionEquality().hash(tenantEmail) ^
       const DeepCollectionEquality().hash(duration) ^
       const DeepCollectionEquality().hash(amount) ^
-      const DeepCollectionEquality().hash(currencyId);
+      const DeepCollectionEquality().hash(currencyId) ^
+      const DeepCollectionEquality().hash(serviceId) ^
+      const DeepCollectionEquality().hash(assignmentId) ^
+      const DeepCollectionEquality().hash(comment);
 
   @JsonKey(ignore: true)
   @override
@@ -743,6 +859,9 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
       @JsonKey(includeIfNull: false)
           List<dynamic> token,
       @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> code,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'property_id')
           List<dynamic> propertyId,
       @nullable
@@ -774,7 +893,16 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
           List<dynamic> amount,
       @nullable
       @JsonKey(includeIfNull: false, name: 'currency_id')
-          List<dynamic> currencyId}) = _$_ServerFieldErrors;
+          List<dynamic> currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          List<dynamic> serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          List<dynamic> assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> comment}) = _$_ServerFieldErrors;
 
   factory _ServerFieldErrors.fromJson(Map<String, dynamic> json) =
       _$_ServerFieldErrors.fromJson;
@@ -815,6 +943,10 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
   @nullable
   @JsonKey(includeIfNull: false)
   List<dynamic> get token;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get code;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'property_id')
@@ -859,6 +991,18 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
   @nullable
   @JsonKey(includeIfNull: false, name: 'currency_id')
   List<dynamic> get currencyId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'service_id')
+  List<dynamic> get serviceId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'assignment_id')
+  List<dynamic> get assignmentId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get comment;
   @override
   @JsonKey(ignore: true)
   _$ServerFieldErrorsCopyWith<_ServerFieldErrors> get copyWith;

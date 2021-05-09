@@ -43,6 +43,9 @@ class _$LandlordPropertyDataTearOff {
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
+      @JsonKey(includeIfNull: false)
+          UserDTO landlord,
+      @nullable
       @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
           int stateId,
@@ -82,6 +85,7 @@ class _$LandlordPropertyDataTearOff {
       street: street,
       town: town,
       state: state,
+      landlord: landlord,
       stateId: stateId,
       country: country,
       numberOfTenants: numberOfTenants,
@@ -130,6 +134,9 @@ mixin _$LandlordPropertyData {
   @nullable
   @JsonKey(includeIfNull: false)
   StateDTO get state;
+  @nullable
+  @JsonKey(includeIfNull: false)
+  UserDTO get landlord;
   @nullable
   @JsonKey(includeIfNull: true, name: 'state_id')
   @IntegerSerializer()
@@ -202,6 +209,9 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
+      @JsonKey(includeIfNull: false)
+          UserDTO landlord,
+      @nullable
       @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
           int stateId,
@@ -234,6 +244,7 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
           String deletedAt});
 
   $StateDTOCopyWith<$Res> get state;
+  $UserDTOCopyWith<$Res> get landlord;
 }
 
 /// @nodoc
@@ -255,6 +266,7 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
     Object street = freezed,
     Object town = freezed,
     Object state = freezed,
+    Object landlord = freezed,
     Object stateId = freezed,
     Object country = freezed,
     Object numberOfTenants = freezed,
@@ -276,6 +288,7 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
       street: street == freezed ? _value.street : street as String,
       town: town == freezed ? _value.town : town as String,
       state: state == freezed ? _value.state : state as StateDTO,
+      landlord: landlord == freezed ? _value.landlord : landlord as UserDTO,
       stateId: stateId == freezed ? _value.stateId : stateId as int,
       country: country == freezed ? _value.country : country as String,
       numberOfTenants: numberOfTenants == freezed
@@ -303,6 +316,16 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
     }
     return $StateDTOCopyWith<$Res>(_value.state, (value) {
       return _then(_value.copyWith(state: value));
+    });
+  }
+
+  @override
+  $UserDTOCopyWith<$Res> get landlord {
+    if (_value.landlord == null) {
+      return null;
+    }
+    return $UserDTOCopyWith<$Res>(_value.landlord, (value) {
+      return _then(_value.copyWith(landlord: value));
     });
   }
 }
@@ -340,6 +363,9 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
+      @JsonKey(includeIfNull: false)
+          UserDTO landlord,
+      @nullable
       @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
           int stateId,
@@ -373,6 +399,8 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
 
   @override
   $StateDTOCopyWith<$Res> get state;
+  @override
+  $UserDTOCopyWith<$Res> get landlord;
 }
 
 /// @nodoc
@@ -396,6 +424,7 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
     Object street = freezed,
     Object town = freezed,
     Object state = freezed,
+    Object landlord = freezed,
     Object stateId = freezed,
     Object country = freezed,
     Object numberOfTenants = freezed,
@@ -417,6 +446,7 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
       street: street == freezed ? _value.street : street as String,
       town: town == freezed ? _value.town : town as String,
       state: state == freezed ? _value.state : state as StateDTO,
+      landlord: landlord == freezed ? _value.landlord : landlord as UserDTO,
       stateId: stateId == freezed ? _value.stateId : stateId as int,
       country: country == freezed ? _value.country : country as String,
       numberOfTenants: numberOfTenants == freezed
@@ -467,6 +497,9 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       @nullable
       @JsonKey(includeIfNull: false)
           this.state,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          this.landlord,
       @nullable
       @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
@@ -537,6 +570,10 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final StateDTO state;
   @override
   @nullable
+  @JsonKey(includeIfNull: false)
+  final UserDTO landlord;
+  @override
+  @nullable
   @JsonKey(includeIfNull: true, name: 'state_id')
   @IntegerSerializer()
   final int stateId;
@@ -582,7 +619,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
 
   @override
   String toString() {
-    return 'LandlordPropertyData(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, photo: $photo, street: $street, town: $town, state: $state, stateId: $stateId, country: $country, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordPropertyData(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, photo: $photo, street: $street, town: $town, state: $state, landlord: $landlord, stateId: $stateId, country: $country, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -607,6 +644,9 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
                 const DeepCollectionEquality().equals(other.town, town)) &&
             (identical(other.state, state) ||
                 const DeepCollectionEquality().equals(other.state, state)) &&
+            (identical(other.landlord, landlord) ||
+                const DeepCollectionEquality()
+                    .equals(other.landlord, landlord)) &&
             (identical(other.stateId, stateId) ||
                 const DeepCollectionEquality()
                     .equals(other.stateId, stateId)) &&
@@ -650,6 +690,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
       const DeepCollectionEquality().hash(state) ^
+      const DeepCollectionEquality().hash(landlord) ^
       const DeepCollectionEquality().hash(stateId) ^
       const DeepCollectionEquality().hash(country) ^
       const DeepCollectionEquality().hash(numberOfTenants) ^
@@ -699,6 +740,9 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          UserDTO landlord,
       @nullable
       @JsonKey(includeIfNull: true, name: 'state_id')
       @IntegerSerializer()
@@ -766,6 +810,10 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   @nullable
   @JsonKey(includeIfNull: false)
   StateDTO get state;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  UserDTO get landlord;
   @override
   @nullable
   @JsonKey(includeIfNull: true, name: 'state_id')

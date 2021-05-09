@@ -48,4 +48,21 @@ class _MiscRepository implements MiscRepository {
     final value = CurrencyListDTO.fromJson(_result.data);
     return value;
   }
+
+  @override
+  Future<MaintenanceServiceDTOList> fetchServices() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>('/services',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = MaintenanceServiceDTOList.fromJson(_result.data);
+    return value;
+  }
 }

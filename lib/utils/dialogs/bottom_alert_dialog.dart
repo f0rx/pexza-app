@@ -39,6 +39,8 @@ abstract class BottomAlertDialog {
       backgroundColor: Theme.of(context).primaryColor,
     );
 
+    if (_bar.isShowing()) _bar?.dismiss();
+
     if (callbackAfterClose) {
       return await _bar?.show(context)?.then((_) => callback?.call(_));
     } else {

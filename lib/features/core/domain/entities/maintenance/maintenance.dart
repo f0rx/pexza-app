@@ -2,6 +2,7 @@ library maintenance.dart;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pexza/features/core/core.dart';
+import 'package:dartz/dartz.dart';
 
 part 'maintenance.freezed.dart';
 
@@ -22,4 +23,10 @@ abstract class Maintenance implements _$Maintenance {
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,
   }) = _Maintenance;
+
+  Option<FieldObjectException<dynamic>> get failures =>
+      comment.mapped.andThen(urgency.mapped).fold(
+            (f) => some(f),
+            (_) => none(),
+          );
 }
