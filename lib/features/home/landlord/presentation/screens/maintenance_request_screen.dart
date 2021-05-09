@@ -136,29 +136,28 @@ class _MaintenancePanelBuilder extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SubtitledHeader(text: "15 Requests"),
-                //
-                Flexible(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () => navigator.pushLandlordTenantsListingScreen(),
-                      borderRadius: BorderRadius.circular(50.0),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12.0,
-                          vertical: 7.0,
-                        ),
-                        child: AutoSizeText(
-                          "See all",
-                          style: TextStyle(
-                            fontSize: 14.5,
-                            color: App.theme.accentColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Flexible(
+                //   child: Material(
+                //     color: Colors.transparent,
+                //     child: InkWell(
+                //       onTap: () => navigator.pushLandlordTenantsListingScreen(),
+                //       borderRadius: BorderRadius.circular(50.0),
+                //       child: Padding(
+                //         padding: const EdgeInsets.symmetric(
+                //           horizontal: 12.0,
+                //           vertical: 7.0,
+                //         ),
+                //         child: AutoSizeText(
+                //           "See all",
+                //           style: TextStyle(
+                //             fontSize: 14.5,
+                //             color: App.theme.accentColor,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
