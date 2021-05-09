@@ -1,4 +1,4 @@
-name: Release Production apk
+name: Debug workflow
 on:
   workflow_dispatch:
     inputs:
@@ -22,7 +22,7 @@ on:
 
 jobs:
   build:
-    name: Build a Production APK for testing
+    name: Build apk for testing
     runs-on: ubuntu-latest
     env:
       APP_NAME: "Pexza App"
