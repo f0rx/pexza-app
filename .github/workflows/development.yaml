@@ -16,9 +16,7 @@ on:
     types:
       - opened
       - reopened
-      - closed
       - synchronize
-      - closed
 
 jobs:
   build:
