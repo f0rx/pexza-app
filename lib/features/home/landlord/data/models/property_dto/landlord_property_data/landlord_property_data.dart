@@ -1,7 +1,6 @@
 library landlord_property_data;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:flutter/material.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
@@ -15,17 +14,6 @@ part 'landlord_property_data.freezed.dart';
 @freezed
 @immutable
 abstract class LandlordPropertyData implements _$LandlordPropertyData {
-  static KtList<String> images = KtList.of(
-    AppAssets.apartment1,
-    AppAssets.apartment2,
-    AppAssets.apartment3,
-    AppAssets.apartment4,
-    AppAssets.apartment5,
-    AppAssets.apartment6,
-    AppAssets.apartment7,
-    AppAssets.apartment8,
-  );
-
   const LandlordPropertyData._();
 
   const factory LandlordPropertyData({
@@ -37,10 +25,15 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "house_type")
         String houseType,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String photo,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String street,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
-    // @nullable @JsonKey(includeIfNull: false) StateDTO state,
-    @nullable @JsonKey(disallowNullValue: true, name: "state_id") int stateId,
+    @nullable @JsonKey(includeIfNull: false) StateDTO state,
+    @nullable @JsonKey(includeIfNull: false) UserDTO landlord,
+    @nullable
+    @JsonKey(includeIfNull: true, name: "state_id")
+    @IntegerSerializer()
+        int stateId,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String country,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
@@ -88,33 +81,32 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
 
     return LandlordProperty(
       id: UniqueId<int>.fromExternal(id),
-      name: !name.isNull ? LandlordField(name) : null,
+      name: !name.isNull ? BasicTextField(name) : null,
       propertyType: !propertyType.isNull
           ? LandlordPropertyTypeField(PropertyType.valueOf(propertyType))
           : null,
-      houseType: !houseType.isNull ? LandlordField(houseType) : null,
-      town: !town.isNull ? LandlordField(town) : null,
-      street: !street.isNull ? LandlordField(street) : null,
-      // state: !state.isNull
-      //     ? CountryState(
-      //         name: CountryStateName(state?.name),
-      //         country: !country.isNull
-      //             ? Country(name: CountryName.valueOf(country))
-      //             : null,
-      //       )
-      //     : null,
-      country: !country.isNull ? LandlordField(country) : null,
+      houseType: !houseType.isNull ? BasicTextField(houseType) : null,
+      town: !town.isNull ? BasicTextField(town) : null,
+      street: !street.isNull ? BasicTextField(street) : null,
+      photo: LandlordPropertyImage(
+        "https://res.cloudinary.com/anifowosetobi"
+        "/image/upload/v1601500323/user_korsis.png",
+      ),
+      state: !state.isNull ? state.domain : null,
+      landlord: !landlord.isNull ? landlord.domain : null,
+      country: !country.isNull ? BasicTextField(country) : null,
       color: MaterialColor(_color.value, AppColors.swatch(_color)),
-      image: LandlordPropertyImage(images.random()),
+      // image: LandlordPropertyImage(images.random()),
       numberOfTenants:
-          !numberOfTenants.isNull ? LandlordField(numberOfTenants) : null,
-      numberOfApartments:
-          !numberOfApartments.isNull ? LandlordField(numberOfApartments) : null,
+          !numberOfTenants.isNull ? BasicTextField(numberOfTenants) : null,
+      numberOfApartments: !numberOfApartments.isNull
+          ? BasicTextField(numberOfApartments)
+          : null,
       numberOfAvailableApartments: !numberOfAvailableApartments.isNull
-          ? LandlordField(numberOfAvailableApartments)
+          ? BasicTextField(numberOfAvailableApartments)
           : null,
       numberOfRentedApartment: !numberOfRentedApartment.isNull
-          ? LandlordField(numberOfRentedApartment)
+          ? BasicTextField(numberOfRentedApartment)
           : null,
       createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
       updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,

@@ -61,9 +61,9 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
   Future<void> get signOut async {
     emit(state.copyWith(isLoading: true));
 
-    final user = await currentUser;
-
     await _facade.signOut();
+
+    final user = await currentUser;
 
     emit(state.copyWith(
       isLoading: false,

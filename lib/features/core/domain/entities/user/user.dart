@@ -31,6 +31,8 @@ abstract class User implements _$User, BaseUser {
     @nullable Phone phone,
     @nullable Password password,
     @nullable String photo,
+    @nullable DateTime verificationCodeSentAt,
+    @nullable DateTime forgotPasswordCodeSentAt,
     @nullable DateTime createdAt,
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,

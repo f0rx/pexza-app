@@ -30,6 +30,7 @@ class _$LandlordApartmentDataTearOff {
           String status,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'property_id')
+      @IntegerSerializer()
           int propertyId,
       @nullable
       @JsonKey(disallowNullValue: true)
@@ -81,6 +82,7 @@ mixin _$LandlordApartmentData {
   String get status;
   @nullable
   @JsonKey(disallowNullValue: true, name: 'property_id')
+  @IntegerSerializer()
   int get propertyId;
   @nullable
   @JsonKey(disallowNullValue: true)
@@ -120,6 +122,7 @@ abstract class $LandlordApartmentDataCopyWith<$Res> {
           String status,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'property_id')
+      @IntegerSerializer()
           int propertyId,
       @nullable
       @JsonKey(disallowNullValue: true)
@@ -204,6 +207,7 @@ abstract class _$LandlordApartmentDataCopyWith<$Res>
           String status,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'property_id')
+      @IntegerSerializer()
           int propertyId,
       @nullable
       @JsonKey(disallowNullValue: true)
@@ -278,6 +282,7 @@ class _$_LandlordApartmentData extends _LandlordApartmentData {
           this.status,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'property_id')
+      @IntegerSerializer()
           this.propertyId,
       @nullable
       @JsonKey(disallowNullValue: true)
@@ -314,6 +319,7 @@ class _$_LandlordApartmentData extends _LandlordApartmentData {
   @override
   @nullable
   @JsonKey(disallowNullValue: true, name: 'property_id')
+  @IntegerSerializer()
   final int propertyId;
   @override
   @nullable
@@ -405,6 +411,7 @@ abstract class _LandlordApartmentData extends LandlordApartmentData {
           String status,
       @nullable
       @JsonKey(disallowNullValue: true, name: 'property_id')
+      @IntegerSerializer()
           int propertyId,
       @nullable
       @JsonKey(disallowNullValue: true)
@@ -440,6 +447,7 @@ abstract class _LandlordApartmentData extends LandlordApartmentData {
   @override
   @nullable
   @JsonKey(disallowNullValue: true, name: 'property_id')
+  @IntegerSerializer()
   int get propertyId;
   @override
   @nullable

@@ -3,7 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pexza/features/home/tenant/presentation/widgets/property_info_widget.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/utils/helpers.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';

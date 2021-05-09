@@ -16,7 +16,7 @@ class _$LandlordApartmentTearOff {
 // ignore: unused_element
   _LandlordApartment call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField<String> name,
+      @nullable BasicTextField<String> name,
       @nullable ApartmentStatus status,
       @nullable LandlordProperty property,
       @nullable DateTime createdAt,
@@ -43,7 +43,7 @@ mixin _$LandlordApartment {
   @nullable
   UniqueId<int> get id;
   @nullable
-  LandlordField<String> get name;
+  BasicTextField<String> get name;
   @nullable
   ApartmentStatus get status;
   @nullable
@@ -66,7 +66,7 @@ abstract class $LandlordApartmentCopyWith<$Res> {
       _$LandlordApartmentCopyWithImpl<$Res>;
   $Res call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField<String> name,
+      @nullable BasicTextField<String> name,
       @nullable ApartmentStatus status,
       @nullable LandlordProperty property,
       @nullable DateTime createdAt,
@@ -97,7 +97,7 @@ class _$LandlordApartmentCopyWithImpl<$Res>
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId<int>,
-      name: name == freezed ? _value.name : name as LandlordField<String>,
+      name: name == freezed ? _value.name : name as BasicTextField<String>,
       status: status == freezed ? _value.status : status as ApartmentStatus,
       property:
           property == freezed ? _value.property : property as LandlordProperty,
@@ -130,7 +130,7 @@ abstract class _$LandlordApartmentCopyWith<$Res>
   @override
   $Res call(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField<String> name,
+      @nullable BasicTextField<String> name,
       @nullable ApartmentStatus status,
       @nullable LandlordProperty property,
       @nullable DateTime createdAt,
@@ -164,7 +164,7 @@ class __$LandlordApartmentCopyWithImpl<$Res>
   }) {
     return _then(_LandlordApartment(
       id: id == freezed ? _value.id : id as UniqueId<int>,
-      name: name == freezed ? _value.name : name as LandlordField<String>,
+      name: name == freezed ? _value.name : name as BasicTextField<String>,
       status: status == freezed ? _value.status : status as ApartmentStatus,
       property:
           property == freezed ? _value.property : property as LandlordProperty,
@@ -195,7 +195,7 @@ class _$_LandlordApartment extends _LandlordApartment {
   final UniqueId<int> id;
   @override
   @nullable
-  final LandlordField<String> name;
+  final BasicTextField<String> name;
   @override
   @nullable
   final ApartmentStatus status;
@@ -262,7 +262,7 @@ abstract class _LandlordApartment extends LandlordApartment {
   const _LandlordApartment._() : super._();
   const factory _LandlordApartment(
       {@nullable UniqueId<int> id,
-      @nullable LandlordField<String> name,
+      @nullable BasicTextField<String> name,
       @nullable ApartmentStatus status,
       @nullable LandlordProperty property,
       @nullable DateTime createdAt,
@@ -274,7 +274,7 @@ abstract class _LandlordApartment extends LandlordApartment {
   UniqueId<int> get id;
   @override
   @nullable
-  LandlordField<String> get name;
+  BasicTextField<String> get name;
   @override
   @nullable
   ApartmentStatus get status;

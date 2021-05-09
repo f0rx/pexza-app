@@ -22,6 +22,7 @@ abstract class LandlordApartmentData implements _$LandlordApartmentData {
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     @nullable
     @JsonKey(disallowNullValue: true, name: "property_id")
+    @IntegerSerializer()
         int propertyId,
     @nullable @JsonKey(disallowNullValue: true) LandlordPropertyData property,
     @nullable
@@ -52,7 +53,7 @@ abstract class LandlordApartmentData implements _$LandlordApartmentData {
   LandlordApartment get domain {
     return LandlordApartment(
       id: UniqueId<int>.fromExternal(id),
-      name: !name.isNull ? LandlordField(name) : null,
+      name: !name.isNull ? BasicTextField(name) : null,
       status: !status.isNull ? ApartmentStatus.valueOf(status) : null,
       property: property?.domain,
       createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,

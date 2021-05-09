@@ -45,7 +45,7 @@ Widget _gridView() {
                         height: App.width * 0.4,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(prop.image.getOrEmpty),
+                            image: AssetImage(prop.photo?.getOrEmpty),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -213,6 +213,7 @@ Widget _listView() {
                       AppIconButton(
                         padding: EdgeInsets.zero,
                         backgroundColor: Colors.transparent,
+                        tooltip: "View Details",
                         elevation: 0.0,
                         child: RotatedBox(
                           quarterTurns: 2,

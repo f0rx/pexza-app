@@ -1,14 +1,57 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_portal/flutter_portal.dart';
+import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
+import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
+import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 
 class ServiceRequestScreen extends StatelessWidget with AutoRouteWrapper {
+  final Assignment assignment;
+
+  const ServiceRequestScreen({
+    Key key,
+    @required this.assignment,
+  }) : super(key: key);
+
   @override
   Widget wrappedRoute(BuildContext context) {
-    return this;
+    return BlocProvider(
+      create: (_) => getIt<TenantMaintenanceCubit>()..init(assignment),
+      child: BlocConsumer<TenantMaintenanceCubit, TenantMaintenanceState>(
+        listenWhen: (p, c) =>
+            p.response.getOrElse(() => null) !=
+            c.response.getOrElse(() => null),
+        listener: (c, s) => s.response.fold(
+          () => null,
+          (either) => BottomAlertDialog.show(
+            context,
+            message: either.fold(
+              (f) => f.message ?? f.error,
+              (r) => r.message ?? r.details,
+            ),
+            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
+            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
+            shouldIconPulse: either.fold((_) => null, (r) => false),
+            callback: either.fold(
+              (_) => null,
+              (r) => (_) => navigator.pop(true),
+            ),
+          ),
+        ),
+        builder: (c, s) => PortalEntry(
+          visible: c.watch<TenantMaintenanceCubit>().state.isLoading,
+          portal: App.circularLoadingOverlay,
+          child: this,
+        ),
+      ),
+    );
   }
 
   @override
@@ -24,9 +67,36 @@ class ServiceRequestScreen extends StatelessWidget with AutoRouteWrapper {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Placeholder(
-              fallbackHeight: 60,
-              strokeWidth: 1.0,
+            BlocBuilder<TenantMaintenanceCubit, TenantMaintenanceState>(
+              builder: (c, s) => DropdownFieldWidget(
+                hint: "-- Select Service Type --",
+                disabled: s.isLoading,
+                disabledHint: "Fetching available services..",
+                items: s.services
+                    .asList()
+                    .map<DropdownMenuItem<MaintenanceService>>(
+                      (item) => DropdownMenuItem<MaintenanceService>(
+                        value: item,
+                        child: AutoSizeText(
+                          "${item.name?.getOrEmpty}"?.capitalizeFirst(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                        ),
+                      ),
+                    )
+                    .toList(),
+                selected: s.service,
+                validate: s.validate,
+                error: s.response?.fold(
+                  () => null,
+                  (_) => _?.fold(
+                    (f) => f.errors?.serviceId?.firstOrNull,
+                    (_) => null,
+                  ),
+                ),
+                onChanged: c.read<TenantMaintenanceCubit>().serviceChanged,
+              ),
             ),
             //
             VerticalSpace(height: App.longest * 0.04),
@@ -43,38 +113,58 @@ class ServiceRequestScreen extends StatelessWidget with AutoRouteWrapper {
             //
             VerticalSpace(height: App.longest * 0.02),
             //
-            Theme(
-              data: ThemeData(
-                sliderTheme: SliderThemeData(
-                  trackShape: CustomTrackShape(),
+            BlocBuilder<TenantMaintenanceCubit, TenantMaintenanceState>(
+              buildWhen: (p, c) => p.urgency.getOrNull != c.urgency.getOrNull,
+              builder: (c, s) => Theme(
+                data: Theme.of(context).copyWith(
+                  sliderTheme: SliderThemeData(
+                    trackShape: CustomTrackShape(),
+                  ),
                 ),
-              ),
-              child: Slider.adaptive(
-                value: 0.34,
-                onChanged: (value) {},
+                child: Slider.adaptive(
+                  value: s.urgency.getOrNull / 10,
+                  max: 1.0,
+                  min: 0.0,
+                  divisions: 10,
+                  label: "${s.urgency.getOrNull}",
+                  onChanged: c.read<TenantMaintenanceCubit>().urgencyChanged,
+                ),
               ),
             ),
             //
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AutoSizeText(
-                  "Minor",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey,
+                BlocBuilder<TenantMaintenanceCubit, TenantMaintenanceState>(
+                  buildWhen: (p, c) =>
+                      p.urgency.getOrNull != c.urgency.getOrNull,
+                  builder: (c, s) => AutoSizeText(
+                    "Minor",
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                      color: s.urgency.getOrNull <= 3
+                          ? AppColors.yellow
+                          : Colors.grey,
+                    ),
+                    maxLines: 1,
                   ),
-                  maxLines: 1,
                 ),
-                AutoSizeText(
-                  "Very Urgent",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.accentColor,
+                //
+                BlocBuilder<TenantMaintenanceCubit, TenantMaintenanceState>(
+                  buildWhen: (p, c) =>
+                      p.urgency.getOrNull != c.urgency.getOrNull,
+                  builder: (c, s) => AutoSizeText(
+                    "Very Urgent",
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                      color: s.urgency.getOrNull >= 7
+                          ? AppColors.errorRed
+                          : Colors.grey,
+                    ),
+                    maxLines: 1,
                   ),
-                  maxLines: 1,
                 ),
               ],
             ),
@@ -96,16 +186,47 @@ class ServiceRequestScreen extends StatelessWidget with AutoRouteWrapper {
             ConstrainedBox(
               constraints: BoxConstraints.loose(
                   Size(double.infinity, App.longest * 0.3)),
-              child: TextFormField(
-                maxLines: 100,
-                keyboardType: TextInputType.multiline,
-                textInputAction: TextInputAction.newline,
-                textCapitalization: TextCapitalization.sentences,
-                cursorColor: Theme.of(context).accentColor,
-                decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  hintText: "The leak is at the kitchen and its a major "
-                      "problem as I have not been able to cook efficiently.",
+              child:
+                  BlocBuilder<TenantMaintenanceCubit, TenantMaintenanceState>(
+                builder: (c, s) => TextFormField(
+                  maxLines: 80,
+                  keyboardType: TextInputType.multiline,
+                  textInputAction: TextInputAction.newline,
+                  textCapitalization: TextCapitalization.sentences,
+                  cursorColor: Theme.of(context).accentColor,
+                  autovalidateMode: s.validate
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  decoration: InputDecoration(
+                    alignLabelWithHint: true,
+                    hintText: "The leak is at the kitchen and its a major "
+                        "problem as I have not been able to cook efficiently.",
+                  ),
+                  onChanged: c.read<TenantMaintenanceCubit>().commentChanged,
+                  validator: (value) => s.comment.value.fold(
+                    (error) => error.message,
+                    (r) => s.response?.fold(
+                      () => null,
+                      (_) => _?.fold(
+                        (f) => f.errors?.comment?.firstOrNull,
+                        (_) => null,
+                      ),
+                    ),
+                  ),
+                  onFieldSubmitted: (_) => FocusScope.of(c).unfocus(),
+                ),
+              ),
+            ),
+            //
+            VerticalSpace(height: App.longest * 0.04),
+            //
+            BlocBuilder<TenantMaintenanceCubit, TenantMaintenanceState>(
+              builder: (c, s) => Hero(
+                tag: "${Constants.kCreateRequest}",
+                child: AppElevatedButton(
+                  text: "Forward Request",
+                  disabled: s.isLoading,
+                  onPressed: c.read<TenantMaintenanceCubit>().create,
                 ),
               ),
             ),

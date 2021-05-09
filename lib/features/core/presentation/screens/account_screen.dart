@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
@@ -42,40 +42,14 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
               height: App.shortest * 0.16,
               child: Row(
                 children: [
-                  Material(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    color: Colors.white,
-                    child: BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
-                      builder: (context, state) => CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        placeholderFadeInDuration: Duration(milliseconds: 300),
-                        imageUrl: "${state.user?.photo}",
-                        imageBuilder: (context, provider) => Ink.image(
-                          image: provider,
-                          fit: BoxFit.cover,
-                          width: App.shortest * 0.16,
-                          height: double.infinity,
-                          child: InkWell(
-                            splashColor: Colors.black12,
-                            onTap: () => navigator.pushEditAccountScreen(),
-                          ),
-                        ),
-                        placeholder: (_, url) => Center(
-                          child: CircularProgressBar.adaptive(
-                            width: App.width * 0.06,
-                            height: App.width * 0.06,
-                            strokeWidth: 2.5,
-                          ),
-                        ),
-                        errorWidget: (context, url, error) => CircleAvatar(
-                          backgroundImage: AssetImage('${AppAssets.owner}'),
-                          backgroundColor: Theme.of(context).accentColor,
-                          radius: 15.0,
-                        ),
-                      ),
+                  BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
+                    builder: (context, state) => ImageWidget(
+                      url: "${state.user?.photo}",
+                      radius: 25.0,
+                      maxWidth: App.shortest * 0.16,
+                      maxHeight: double.infinity,
+                      splashColor: Colors.black12,
+                      onPressed: () => navigator.pushEditAccountScreen(),
                     ),
                   ),
                   //

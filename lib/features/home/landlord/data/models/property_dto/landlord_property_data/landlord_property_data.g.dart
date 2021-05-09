@@ -8,15 +8,21 @@ part of landlord_property_data;
 
 _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     Map<String, dynamic> json) {
-  $checkKeys(json, disallowNullValues: const ['state_id']);
   return _$_LandlordPropertyData(
     id: json['id'] as int ?? 0,
     name: json['name'] as String ?? '',
     propertyType: json['property_type'] as String ?? '',
     houseType: json['house_type'] as String ?? '',
+    photo: json['photo'] as String ?? '',
     street: json['street'] as String ?? '',
     town: json['town'] as String ?? '',
-    stateId: json['state_id'] as int,
+    state: json['state'] == null
+        ? null
+        : StateDTO.fromJson(json['state'] as Map<String, dynamic>),
+    landlord: json['landlord'] == null
+        ? null
+        : UserDTO.fromJson(json['landlord'] as Map<String, dynamic>),
+    stateId: const IntegerSerializer().fromJson(json['state_id']),
     country: json['country'] as String ?? '',
     numberOfTenants: json['number_of_tenants'] as int ?? 0,
     numberOfApartments: json['number_of_apartments'] as int ?? 0,
@@ -43,9 +49,12 @@ Map<String, dynamic> _$_$_LandlordPropertyDataToJson(
   writeNotNull('name', instance.name);
   writeNotNull('property_type', instance.propertyType);
   writeNotNull('house_type', instance.houseType);
+  writeNotNull('photo', instance.photo);
   writeNotNull('street', instance.street);
   writeNotNull('town', instance.town);
-  writeNotNull('state_id', instance.stateId);
+  writeNotNull('state', instance.state?.toJson());
+  writeNotNull('landlord', instance.landlord?.toJson());
+  val['state_id'] = const IntegerSerializer().toJson(instance.stateId);
   writeNotNull('country', instance.country);
   writeNotNull('number_of_tenants', instance.numberOfTenants);
   writeNotNull('number_of_apartments', instance.numberOfApartments);

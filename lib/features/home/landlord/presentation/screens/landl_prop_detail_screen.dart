@@ -10,6 +10,7 @@ import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
+import 'package:pexza/features/home/landlord/presentation/widgets/index.dart';
 
 class LandlordPropertyDetailScreen extends StatefulWidget
     with AutoRouteWrapper {
@@ -227,69 +228,7 @@ class _PanelBuilder extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: App.shortest * 0.02),
             child: Divider(height: 5.0),
           ),
-          itemBuilder: (c, index) => Container(
-            width: double.infinity,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {},
-                  child: Container(
-                    height: App.longest * 0.075,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: App.shortest * 0.03),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxHeight: App.longest * 0.055,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.asset(
-                              AppAssets.tenant,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                        //
-                        Expanded(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: ListTile(
-                                  dense: true,
-                                  title: AutoSizeText(
-                                    "Damilola Adebowale",
-                                  ),
-                                  subtitle: AutoSizeText(
-                                    "Apartment 3",
-                                  ),
-                                ),
-                              ),
-                              //
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 15.0,
-                                color: Helpers.computeLuminance(
-                                  Theme.of(context).primaryColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          itemBuilder: (c, index) => Container(),
         ),
       ],
     );

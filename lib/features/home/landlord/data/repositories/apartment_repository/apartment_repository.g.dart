@@ -53,6 +53,26 @@ class _ApartmentRepository implements ApartmentRepository {
   }
 
   @override
+  Future<ApartmentMergerDTO> assignTenantToApartment(dto) async {
+    ArgumentError.checkNotNull(dto, 'dto');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(dto?.toJson() ?? <String, dynamic>{});
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/landlord/assignment',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = ApartmentMergerDTO.fromJson(_result.data);
+    return value;
+  }
+
+  @override
   Future<LandlordApartmentDTO> create(dto) async {
     ArgumentError.checkNotNull(dto, 'dto');
     const _extra = <String, dynamic>{};

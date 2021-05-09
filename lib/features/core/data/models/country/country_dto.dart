@@ -21,8 +21,10 @@ abstract class CountryDTO implements _$CountryDTO {
         String phoneCode,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: false, name: 'is_supported')
+    @IntToBoolSerializer()
         bool isSupported,
-    @JsonKey(includeIfNull: false, defaultValue: '') String currency,
+    @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency')
+        String currencyType,
     @JsonKey(includeIfNull: false, defaultValue: '', name: 'currency_name')
         String currencyName,
     @nullable
@@ -47,8 +49,8 @@ abstract class CountryDTO implements _$CountryDTO {
         name: instance?.name?.name,
         phoneCode: instance?.dialCode,
         isSupported: instance?.isSupported,
-        currency: instance?.currencyType?.name,
-        currencyName: Currency.getNameFor(instance?.currencyType),
+        currencyType: instance?.currency?.type?.name,
+        currencyName: instance?.currency?.name,
       );
 
   Country get domain => Country(
@@ -56,7 +58,11 @@ abstract class CountryDTO implements _$CountryDTO {
         name: !name.isNull ? CountryName.valueOf(name) : null,
         dialCode: phoneCode,
         isSupported: isSupported,
-        currencyType: !currency.isNull ? CurrencyType.valueOf(currency) : null,
+        currency: Currency(
+          name: !currencyName.isNull ? currencyName : null,
+          type:
+              !currencyType.isNull ? CurrencyType.valueOf(currencyType) : null,
+        ),
         createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
         updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
         deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,

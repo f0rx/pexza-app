@@ -22,7 +22,7 @@ abstract class Country implements _$Country {
     @nullable String dialCode,
     @Default(false) bool isSupported,
     @Default("English - UK") String language,
-    @Default(CurrencyType.NGN) CurrencyType currencyType,
+    @nullable Currency currency,
     @Default(Country.DEFAULT_PREFIX) String prefix,
     @Default(Country.DEFAULT_HINT_TEXT) String hintText,
     @Default(Country.DEFAULT_DIGITS_COUNT) int digitsCount,
@@ -35,7 +35,6 @@ abstract class Country implements _$Country {
     codeName: "NG",
     dialCode: "+234",
     name: CountryName.Nigeria,
-    currencyType: CurrencyType.NGN,
     digitsCount: 11,
   );
 

@@ -163,6 +163,40 @@ class Helpers {
         ),
       );
 
+  Widget positionedLoader(
+    BuildContext context, [
+    bool overlay = true,
+    Widget loader,
+  ]) {
+    final bool _keyboardClosed = MediaQuery.of(context).viewInsets.bottom == 0;
+    double _topHeight;
+    try {
+      _topHeight = Scaffold.of(context).appBarMaxHeight;
+    } catch (e) {
+      _topHeight = kToolbarHeight;
+    }
+
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: _topHeight),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment:
+              _keyboardClosed ? MainAxisAlignment.end : MainAxisAlignment.start,
+          children: [
+            loader ??
+                CircularProgressBar.adaptive(
+                  width: width * 0.08,
+                  height: width * 0.08,
+                  strokeWidth: 3.5,
+                  radius: 14,
+                ),
+          ],
+        ),
+      ),
+    );
+  }
+
   GlobalKey<NavigatorState> addKey(GlobalKey<NavigatorState> newKey) {
     key = newKey;
     return key;

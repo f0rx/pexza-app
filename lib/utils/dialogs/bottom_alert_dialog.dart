@@ -17,7 +17,7 @@ abstract class BottomAlertDialog {
     ArgumentError.checkNotNull(message, 'message');
 
     final _bar = Flushbar(
-      duration: duration ?? const Duration(seconds: 10),
+      duration: duration ?? const Duration(seconds: 15),
       icon: Icon(
         icon ?? Icons.error,
         color: iconColor ?? Colors.red,
@@ -39,13 +39,13 @@ abstract class BottomAlertDialog {
       backgroundColor: Theme.of(context).primaryColor,
     );
 
+    if (_bar.isShowing()) _bar?.dismiss();
+
     if (callbackAfterClose) {
-      return await _bar.show(context).then(
-            (_) => callbackAfterClose ? callback?.call(_) : null,
-          );
+      return await _bar?.show(context)?.then((_) => callback?.call(_));
     } else {
       callback?.call(null);
-      return _bar.show(context);
+      return _bar?.show(context);
     }
   }
 }

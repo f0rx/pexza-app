@@ -14,7 +14,6 @@ _$_AuthResponse _$_$_AuthResponseFromJson(Map<String, dynamic> json) {
     error: json['error'] as String ?? '',
     errors: const ServerFieldErrorsSerializer()
         .fromJson(json['errors'] as Map<String, dynamic>),
-    details: json['details'] as String,
   );
 }
 
@@ -33,6 +32,5 @@ Map<String, dynamic> _$_$_AuthResponseToJson(_$_AuthResponse instance) {
   writeNotNull('error', instance.error);
   writeNotNull(
       'errors', const ServerFieldErrorsSerializer().toJson(instance.errors));
-  val['details'] = instance.details;
   return val;
 }

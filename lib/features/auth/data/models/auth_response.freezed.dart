@@ -35,7 +35,10 @@ class _$AuthResponseTearOff {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details}) {
+      @JsonKey(ignore: true)
+          String details,
+      @JsonKey(ignore: true)
+          bool popRoute = true}) {
     return _AuthResponse(
       code: code,
       status: status,
@@ -43,6 +46,7 @@ class _$AuthResponseTearOff {
       error: error,
       errors: errors,
       details: details,
+      popRoute: popRoute,
     );
   }
 
@@ -74,7 +78,10 @@ mixin _$AuthResponse {
   @JsonKey(includeIfNull: false)
   @ServerFieldErrorsSerializer()
   ServerFieldErrors get errors; //
-  String get details;
+  @JsonKey(ignore: true)
+  String get details; //
+  @JsonKey(ignore: true)
+  bool get popRoute;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -103,7 +110,10 @@ abstract class $AuthResponseCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details});
+      @JsonKey(ignore: true)
+          String details,
+      @JsonKey(ignore: true)
+          bool popRoute});
 
   $ServerFieldErrorsCopyWith<$Res> get errors;
 }
@@ -124,6 +134,7 @@ class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
     Object error = freezed,
     Object errors = freezed,
     Object details = freezed,
+    Object popRoute = freezed,
   }) {
     return _then(_value.copyWith(
       code: code == freezed ? _value.code : code as int,
@@ -132,6 +143,7 @@ class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
       error: error == freezed ? _value.error : error as String,
       errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
       details: details == freezed ? _value.details : details as String,
+      popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
     ));
   }
 
@@ -170,7 +182,10 @@ abstract class _$AuthResponseCopyWith<$Res>
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details});
+      @JsonKey(ignore: true)
+          String details,
+      @JsonKey(ignore: true)
+          bool popRoute});
 
   @override
   $ServerFieldErrorsCopyWith<$Res> get errors;
@@ -194,6 +209,7 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
     Object error = freezed,
     Object errors = freezed,
     Object details = freezed,
+    Object popRoute = freezed,
   }) {
     return _then(_AuthResponse(
       code: code == freezed ? _value.code : code as int,
@@ -202,6 +218,7 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
       error: error == freezed ? _value.error : error as String,
       errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
       details: details == freezed ? _value.details : details as String,
+      popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
     ));
   }
 }
@@ -228,8 +245,12 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           this.errors,
-      this.details})
-      : super._();
+      @JsonKey(ignore: true)
+          this.details,
+      @JsonKey(ignore: true)
+          this.popRoute = true})
+      : assert(popRoute != null),
+        super._();
 
   factory _$_AuthResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_AuthResponseFromJson(json);
@@ -256,11 +277,15 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
   @ServerFieldErrorsSerializer()
   final ServerFieldErrors errors;
   @override //
+  @JsonKey(ignore: true)
   final String details;
+  @override //
+  @JsonKey(ignore: true)
+  final bool popRoute;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthResponse(code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details)';
+    return 'AuthResponse(code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details, popRoute: $popRoute)';
   }
 
   @override
@@ -273,7 +298,8 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('message', message))
       ..add(DiagnosticsProperty('error', error))
       ..add(DiagnosticsProperty('errors', errors))
-      ..add(DiagnosticsProperty('details', details));
+      ..add(DiagnosticsProperty('details', details))
+      ..add(DiagnosticsProperty('popRoute', popRoute));
   }
 
   @override
@@ -292,7 +318,11 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
             (identical(other.errors, errors) ||
                 const DeepCollectionEquality().equals(other.errors, errors)) &&
             (identical(other.details, details) ||
-                const DeepCollectionEquality().equals(other.details, details)));
+                const DeepCollectionEquality()
+                    .equals(other.details, details)) &&
+            (identical(other.popRoute, popRoute) ||
+                const DeepCollectionEquality()
+                    .equals(other.popRoute, popRoute)));
   }
 
   @override
@@ -303,7 +333,8 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(error) ^
       const DeepCollectionEquality().hash(errors) ^
-      const DeepCollectionEquality().hash(details);
+      const DeepCollectionEquality().hash(details) ^
+      const DeepCollectionEquality().hash(popRoute);
 
   @JsonKey(ignore: true)
   @override
@@ -336,7 +367,10 @@ abstract class _AuthResponse extends AuthResponse {
       @JsonKey(includeIfNull: false)
       @ServerFieldErrorsSerializer()
           ServerFieldErrors errors,
-      String details}) = _$_AuthResponse;
+      @JsonKey(ignore: true)
+          String details,
+      @JsonKey(ignore: true)
+          bool popRoute}) = _$_AuthResponse;
 
   factory _AuthResponse.fromJson(Map<String, dynamic> json) =
       _$_AuthResponse.fromJson;
@@ -363,7 +397,11 @@ abstract class _AuthResponse extends AuthResponse {
   @ServerFieldErrorsSerializer()
   ServerFieldErrors get errors;
   @override //
+  @JsonKey(ignore: true)
   String get details;
+  @override //
+  @JsonKey(ignore: true)
+  bool get popRoute;
   @override
   @JsonKey(ignore: true)
   _$AuthResponseCopyWith<_AuthResponse> get copyWith;

@@ -21,7 +21,7 @@ class _$CountryTearOff {
       @nullable String dialCode,
       bool isSupported = false,
       String language = 'English - UK',
-      CurrencyType currencyType = CurrencyType.NGN,
+      @nullable Currency currency,
       String prefix = Country.DEFAULT_PREFIX,
       String hintText = Country.DEFAULT_HINT_TEXT,
       int digitsCount = Country.DEFAULT_DIGITS_COUNT,
@@ -35,7 +35,7 @@ class _$CountryTearOff {
       dialCode: dialCode,
       isSupported: isSupported,
       language: language,
-      currencyType: currencyType,
+      currency: currency,
       prefix: prefix,
       hintText: hintText,
       digitsCount: digitsCount,
@@ -62,7 +62,8 @@ mixin _$Country {
   String get dialCode;
   bool get isSupported;
   String get language;
-  CurrencyType get currencyType;
+  @nullable
+  Currency get currency;
   String get prefix;
   String get hintText;
   int get digitsCount;
@@ -88,13 +89,15 @@ abstract class $CountryCopyWith<$Res> {
       @nullable String dialCode,
       bool isSupported,
       String language,
-      CurrencyType currencyType,
+      @nullable Currency currency,
       String prefix,
       String hintText,
       int digitsCount,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
+
+  $CurrencyCopyWith<$Res> get currency;
 }
 
 /// @nodoc
@@ -113,7 +116,7 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
     Object dialCode = freezed,
     Object isSupported = freezed,
     Object language = freezed,
-    Object currencyType = freezed,
+    Object currency = freezed,
     Object prefix = freezed,
     Object hintText = freezed,
     Object digitsCount = freezed,
@@ -129,9 +132,7 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
       language: language == freezed ? _value.language : language as String,
-      currencyType: currencyType == freezed
-          ? _value.currencyType
-          : currencyType as CurrencyType,
+      currency: currency == freezed ? _value.currency : currency as Currency,
       prefix: prefix == freezed ? _value.prefix : prefix as String,
       hintText: hintText == freezed ? _value.hintText : hintText as String,
       digitsCount:
@@ -143,6 +144,16 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
       deletedAt:
           deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
+  }
+
+  @override
+  $CurrencyCopyWith<$Res> get currency {
+    if (_value.currency == null) {
+      return null;
+    }
+    return $CurrencyCopyWith<$Res>(_value.currency, (value) {
+      return _then(_value.copyWith(currency: value));
+    });
   }
 }
 
@@ -158,13 +169,16 @@ abstract class _$CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
       @nullable String dialCode,
       bool isSupported,
       String language,
-      CurrencyType currencyType,
+      @nullable Currency currency,
       String prefix,
       String hintText,
       int digitsCount,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
+
+  @override
+  $CurrencyCopyWith<$Res> get currency;
 }
 
 /// @nodoc
@@ -184,7 +198,7 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
     Object dialCode = freezed,
     Object isSupported = freezed,
     Object language = freezed,
-    Object currencyType = freezed,
+    Object currency = freezed,
     Object prefix = freezed,
     Object hintText = freezed,
     Object digitsCount = freezed,
@@ -200,9 +214,7 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
       isSupported:
           isSupported == freezed ? _value.isSupported : isSupported as bool,
       language: language == freezed ? _value.language : language as String,
-      currencyType: currencyType == freezed
-          ? _value.currencyType
-          : currencyType as CurrencyType,
+      currency: currency == freezed ? _value.currency : currency as Currency,
       prefix: prefix == freezed ? _value.prefix : prefix as String,
       hintText: hintText == freezed ? _value.hintText : hintText as String,
       digitsCount:
@@ -226,7 +238,7 @@ class _$_Country extends _Country {
       @nullable this.dialCode,
       this.isSupported = false,
       this.language = 'English - UK',
-      this.currencyType = CurrencyType.NGN,
+      @nullable this.currency,
       this.prefix = Country.DEFAULT_PREFIX,
       this.hintText = Country.DEFAULT_HINT_TEXT,
       this.digitsCount = Country.DEFAULT_DIGITS_COUNT,
@@ -235,7 +247,6 @@ class _$_Country extends _Country {
       @nullable this.deletedAt})
       : assert(isSupported != null),
         assert(language != null),
-        assert(currencyType != null),
         assert(prefix != null),
         assert(hintText != null),
         assert(digitsCount != null),
@@ -259,9 +270,9 @@ class _$_Country extends _Country {
   @JsonKey(defaultValue: 'English - UK')
   @override
   final String language;
-  @JsonKey(defaultValue: CurrencyType.NGN)
   @override
-  final CurrencyType currencyType;
+  @nullable
+  final Currency currency;
   @JsonKey(defaultValue: Country.DEFAULT_PREFIX)
   @override
   final String prefix;
@@ -283,7 +294,7 @@ class _$_Country extends _Country {
 
   @override
   String toString() {
-    return 'Country(id: $id, name: $name, codeName: $codeName, dialCode: $dialCode, isSupported: $isSupported, language: $language, currencyType: $currencyType, prefix: $prefix, hintText: $hintText, digitsCount: $digitsCount, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'Country(id: $id, name: $name, codeName: $codeName, dialCode: $dialCode, isSupported: $isSupported, language: $language, currency: $currency, prefix: $prefix, hintText: $hintText, digitsCount: $digitsCount, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -306,9 +317,9 @@ class _$_Country extends _Country {
             (identical(other.language, language) ||
                 const DeepCollectionEquality()
                     .equals(other.language, language)) &&
-            (identical(other.currencyType, currencyType) ||
+            (identical(other.currency, currency) ||
                 const DeepCollectionEquality()
-                    .equals(other.currencyType, currencyType)) &&
+                    .equals(other.currency, currency)) &&
             (identical(other.prefix, prefix) ||
                 const DeepCollectionEquality().equals(other.prefix, prefix)) &&
             (identical(other.hintText, hintText) ||
@@ -337,7 +348,7 @@ class _$_Country extends _Country {
       const DeepCollectionEquality().hash(dialCode) ^
       const DeepCollectionEquality().hash(isSupported) ^
       const DeepCollectionEquality().hash(language) ^
-      const DeepCollectionEquality().hash(currencyType) ^
+      const DeepCollectionEquality().hash(currency) ^
       const DeepCollectionEquality().hash(prefix) ^
       const DeepCollectionEquality().hash(hintText) ^
       const DeepCollectionEquality().hash(digitsCount) ^
@@ -360,7 +371,7 @@ abstract class _Country extends Country {
       @nullable String dialCode,
       bool isSupported,
       String language,
-      CurrencyType currencyType,
+      @nullable Currency currency,
       String prefix,
       String hintText,
       int digitsCount,
@@ -385,7 +396,8 @@ abstract class _Country extends Country {
   @override
   String get language;
   @override
-  CurrencyType get currencyType;
+  @nullable
+  Currency get currency;
   @override
   String get prefix;
   @override

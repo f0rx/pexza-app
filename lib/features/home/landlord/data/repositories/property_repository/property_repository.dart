@@ -2,12 +2,13 @@ library property_repository.dart;
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pexza/features/core/data/data.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'property_repository.g.dart';
 
-@injectable
+@singleton
 @RestApi()
 abstract class PropertyRepository {
   @factoryMethod

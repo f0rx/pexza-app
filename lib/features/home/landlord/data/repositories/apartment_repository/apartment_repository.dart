@@ -7,7 +7,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'apartment_repository.g.dart';
 
-@injectable
+@singleton
 @RestApi()
 abstract class ApartmentRepository {
   @factoryMethod
@@ -18,6 +18,11 @@ abstract class ApartmentRepository {
 
   @GET("/landlord/property/{id}/apartments")
   Future<LandlordApartmentListDTO> allApartmentsForProperty(@Path("id") int id);
+
+  @POST("/landlord/assignment")
+  Future<ApartmentMergerDTO> assignTenantToApartment(
+    @Body() ApartmentMergerData dto,
+  );
 
   @POST("/landlord/apartment")
   Future<LandlordApartmentDTO> create(

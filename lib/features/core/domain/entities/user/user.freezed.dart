@@ -27,6 +27,8 @@ class _$UserTearOff {
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
+      @nullable DateTime verificationCodeSentAt,
+      @nullable DateTime forgotPasswordCodeSentAt,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) {
@@ -43,6 +45,8 @@ class _$UserTearOff {
       phone: phone,
       password: password,
       photo: photo,
+      verificationCodeSentAt: verificationCodeSentAt,
+      forgotPasswordCodeSentAt: forgotPasswordCodeSentAt,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -81,6 +85,10 @@ mixin _$User {
   @nullable
   String get photo;
   @nullable
+  DateTime get verificationCodeSentAt;
+  @nullable
+  DateTime get forgotPasswordCodeSentAt;
+  @nullable
   DateTime get createdAt;
   @nullable
   DateTime get updatedAt;
@@ -108,6 +116,8 @@ abstract class $UserCopyWith<$Res> {
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
+      @nullable DateTime verificationCodeSentAt,
+      @nullable DateTime forgotPasswordCodeSentAt,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
@@ -135,6 +145,8 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object phone = freezed,
     Object password = freezed,
     Object photo = freezed,
+    Object verificationCodeSentAt = freezed,
+    Object forgotPasswordCodeSentAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -158,6 +170,12 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
       photo: photo == freezed ? _value.photo : photo as String,
+      verificationCodeSentAt: verificationCodeSentAt == freezed
+          ? _value.verificationCodeSentAt
+          : verificationCodeSentAt as DateTime,
+      forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
+          ? _value.forgotPasswordCodeSentAt
+          : forgotPasswordCodeSentAt as DateTime,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -186,6 +204,8 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
+      @nullable DateTime verificationCodeSentAt,
+      @nullable DateTime forgotPasswordCodeSentAt,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
@@ -214,6 +234,8 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object phone = freezed,
     Object password = freezed,
     Object photo = freezed,
+    Object verificationCodeSentAt = freezed,
+    Object forgotPasswordCodeSentAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -237,6 +259,12 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
       photo: photo == freezed ? _value.photo : photo as String,
+      verificationCodeSentAt: verificationCodeSentAt == freezed
+          ? _value.verificationCodeSentAt
+          : verificationCodeSentAt as DateTime,
+      forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
+          ? _value.forgotPasswordCodeSentAt
+          : forgotPasswordCodeSentAt as DateTime,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -262,6 +290,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       @nullable this.phone,
       @nullable this.password,
       @nullable this.photo,
+      @nullable this.verificationCodeSentAt,
+      @nullable this.forgotPasswordCodeSentAt,
       @nullable this.createdAt,
       @nullable this.updatedAt,
       @nullable this.deletedAt})
@@ -305,6 +335,12 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final String photo;
   @override
   @nullable
+  final DateTime verificationCodeSentAt;
+  @override
+  @nullable
+  final DateTime forgotPasswordCodeSentAt;
+  @override
+  @nullable
   final DateTime createdAt;
   @override
   @nullable
@@ -315,7 +351,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, phone: $phone, password: $password, photo: $photo, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'User(id: $id, role: $role, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, phone: $phone, password: $password, photo: $photo, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -335,6 +371,10 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('phone', phone))
       ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('photo', photo))
+      ..add(
+          DiagnosticsProperty('verificationCodeSentAt', verificationCodeSentAt))
+      ..add(DiagnosticsProperty(
+          'forgotPasswordCodeSentAt', forgotPasswordCodeSentAt))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('deletedAt', deletedAt));
@@ -374,6 +414,14 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                     .equals(other.password, password)) &&
             (identical(other.photo, photo) ||
                 const DeepCollectionEquality().equals(other.photo, photo)) &&
+            (identical(other.verificationCodeSentAt, verificationCodeSentAt) ||
+                const DeepCollectionEquality().equals(
+                    other.verificationCodeSentAt, verificationCodeSentAt)) &&
+            (identical(
+                    other.forgotPasswordCodeSentAt, forgotPasswordCodeSentAt) ||
+                const DeepCollectionEquality().equals(
+                    other.forgotPasswordCodeSentAt,
+                    forgotPasswordCodeSentAt)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -400,6 +448,8 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(photo) ^
+      const DeepCollectionEquality().hash(verificationCodeSentAt) ^
+      const DeepCollectionEquality().hash(forgotPasswordCodeSentAt) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(deletedAt);
@@ -425,6 +475,8 @@ abstract class _User extends User {
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
+      @nullable DateTime verificationCodeSentAt,
+      @nullable DateTime forgotPasswordCodeSentAt,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) = _$_User;
@@ -465,6 +517,12 @@ abstract class _User extends User {
   @override
   @nullable
   String get photo;
+  @override
+  @nullable
+  DateTime get verificationCodeSentAt;
+  @override
+  @nullable
+  DateTime get forgotPasswordCodeSentAt;
   @override
   @nullable
   DateTime get createdAt;

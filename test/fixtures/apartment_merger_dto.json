@@ -1,0 +1,98 @@
+{
+    "data": {
+        "id": 302,
+        "currency": {
+            "id": 1,
+            "name": "Nigeria",
+            "country_phone_code": "+234",
+            "is_supported": 1,
+            "currency": "NGN",
+            "currency_name": "Naira",
+            "created_at": "2021-04-30T13:38:21.000000Z",
+            "updated_at": "2021-04-30T13:38:21.000000Z"
+        },
+        "created_at": "1 second ago",
+        "amount": 1,
+        "payment_plan": "monthly",
+        "expire_at": "2021-06-06T20:52:05.000000Z",
+        "renewed_at": null,
+        "status": "assigned",
+        "tenant": {
+            "id": 2,
+            "first_name": "Jerome",
+            "last_name": "Tromp",
+            "phone": "8520",
+            "email": "emeritusprofessoranis@gmail.com",
+            "verification_code_sent_at": null,
+            "forgot_password_code_sent_at": null,
+            "role": "tenant",
+            "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+            "dob": "2021-04-30T00:00:00.000000Z",
+            "gender": "male",
+            "driver": "regular",
+            "deleted_at": null,
+            "created_at": "2021-04-30T13:38:21.000000Z",
+            "updated_at": "2021-04-30T13:38:21.000000Z"
+        },
+        "landlord": {
+            "id": 1,
+            "first_name": "Giovanna",
+            "last_name": "Waelchi",
+            "phone": "8311",
+            "email": "tobexkee@gmail.com",
+            "verification_code_sent_at": "2021-05-06T10:50:27.000000Z",
+            "forgot_password_code_sent_at": "2021-05-06T10:50:27.000000Z",
+            "role": "landlord",
+            "photo": "https://res.cloudinary.com/anifowosetobi/image/upload/v1601500323/user_korsis.png",
+            "dob": "2021-04-30T00:00:00.000000Z",
+            "gender": "male",
+            "driver": "regular",
+            "deleted_at": null,
+            "created_at": "2021-04-30T13:38:21.000000Z",
+            "updated_at": "2021-05-06T10:50:27.000000Z"
+        },
+        "apartment": {
+            "id": 302,
+            "property_id": 61,
+            "name": "Room 1",
+            "status": "assigned",
+            "deleted_at": null,
+            "created_at": "2021-05-05T08:15:37.000000Z",
+            "updated_at": "2021-05-06T20:52:05.000000Z",
+            "property": {
+                "id": 61,
+                "user_id": "1",
+                "name": "Evan's Estates",
+                "photo": "https://res.cloudinary.com/pexzaapp/image/upload/v1602551350/kl_qp7pxm.png",
+                "property_type": "Residential",
+                "house_type": "Bungalow With 4 Bedrooms And Shared Kitchen.",
+                "street": "F5 Awolowo Str. Opposite Red Gate.",
+                "town": "Ikeja",
+                "state_id": 5,
+                "deleted_at": null,
+                "created_at": "2021-05-04T23:13:47.000000Z",
+                "updated_at": "2021-05-06T08:07:17.000000Z",
+                "state": {
+                    "id": 5,
+                    "name": "Bauchi",
+                    "is_supported": 1,
+                    "country_id": 1,
+                    "created_at": "2021-04-30T13:38:21.000000Z",
+                    "updated_at": "2021-04-30T13:38:21.000000Z",
+                    "country": {
+                        "id": 1,
+                        "name": "Nigeria",
+                        "country_phone_code": "+234",
+                        "is_supported": 1,
+                        "currency": "NGN",
+                        "currency_name": "Naira",
+                        "created_at": "2021-04-30T13:38:21.000000Z",
+                        "updated_at": "2021-04-30T13:38:21.000000Z"
+                    }
+                }
+            }
+        },
+        "recent_payment": null,
+        "payment_histories": []
+    }
+}

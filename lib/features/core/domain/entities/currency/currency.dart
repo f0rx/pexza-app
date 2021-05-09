@@ -14,7 +14,7 @@ abstract class Currency implements _$Currency {
   const factory Currency({
     @nullable UniqueId<int> id,
     @nullable String name,
-    @nullable CurrencyType type,
+    @Default(CurrencyType.NGN) CurrencyType type,
   }) = _Currency;
 
   static String getNameFor(CurrencyType type) {

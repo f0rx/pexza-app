@@ -29,16 +29,18 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
       password: fields[9] as String,
       photo: fields[10] as String,
       isEmailVerified: fields[11] as bool,
-      createdAt: fields[12] as String,
-      updatedAt: fields[13] as String,
-      deletedAt: fields[14] as String,
+      verificationCodeSentAt: fields[12] as String,
+      forgotPasswordCodeSentAt: fields[13] as String,
+      createdAt: fields[14] as String,
+      updatedAt: fields[15] as String,
+      deletedAt: fields[16] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_UserDTO obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(17)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -64,10 +66,14 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
       ..writeByte(11)
       ..write(obj.isEmailVerified)
       ..writeByte(12)
-      ..write(obj.createdAt)
+      ..write(obj.verificationCodeSentAt)
       ..writeByte(13)
-      ..write(obj.updatedAt)
+      ..write(obj.forgotPasswordCodeSentAt)
       ..writeByte(14)
+      ..write(obj.createdAt)
+      ..writeByte(15)
+      ..write(obj.updatedAt)
+      ..writeByte(16)
       ..write(obj.deletedAt);
   }
 
@@ -102,6 +108,8 @@ _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
     photo: json['photo'] as String ?? '',
     isEmailVerified:
         UserDTO.isEmailVerifiedFromJson(json['email_verified_at'] as String),
+    verificationCodeSentAt: json['verification_code_sent_at'] as String,
+    forgotPasswordCodeSentAt: json['forgot_password_code_sent_at'] as String,
     createdAt: json['created_at'] as String,
     updatedAt: json['updated_at'] as String,
     deletedAt: json['deleted_at'] as String,
@@ -130,6 +138,9 @@ Map<String, dynamic> _$_$_UserDTOToJson(_$_UserDTO instance) {
   writeNotNull('password', instance.password);
   writeNotNull('photo', instance.photo);
   writeNotNull('email_verified_at', instance.isEmailVerified);
+  writeNotNull('verification_code_sent_at', instance.verificationCodeSentAt);
+  writeNotNull(
+      'forgot_password_code_sent_at', instance.forgotPasswordCodeSentAt);
   writeNotNull('created_at', instance.createdAt);
   writeNotNull('updated_at', instance.updatedAt);
   writeNotNull('deleted_at', instance.deletedAt);

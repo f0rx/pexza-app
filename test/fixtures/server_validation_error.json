@@ -1,0 +1,19 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "Email address is invalid!",
+            "Do this thing bros"
+        ],
+        "tenant_email": [
+            "The selected tenant email is invalid.",
+            "Can only assign apartment to a tenant account"
+        ],
+        "apartment_id": [
+            "The apartment is already assigned to another tenant"
+        ],
+        "currency_id": [
+            "The currency id field is required."
+        ]
+    }
+}

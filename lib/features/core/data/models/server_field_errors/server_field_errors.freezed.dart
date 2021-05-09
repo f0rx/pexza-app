@@ -19,50 +19,77 @@ class _$ServerFieldErrorsTearOff {
 // ignore: unused_element
   _ServerFieldErrors call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
+      @JsonKey(includeIfNull: false, name: 'first_name')
           List<dynamic> firstName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
+      @JsonKey(includeIfNull: false, name: 'last_name')
           List<dynamic> lastName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> email,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> gender,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> age,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> phone,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> password,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> token,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
+      @JsonKey(includeIfNull: false)
+          List<dynamic> code,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_id')
           List<dynamic> propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
+          List<dynamic> apartmentId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_type')
           List<dynamic> propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, name: 'house_type')
           List<dynamic> houseType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> street,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          List<dynamic> stateId}) {
+      @JsonKey(includeIfNull: false, name: 'state_id')
+          List<dynamic> stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'tenant_email')
+          List<dynamic> tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'duration')
+          List<dynamic> duration,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+          List<dynamic> currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          List<dynamic> serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          List<dynamic> assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> comment}) {
     return _ServerFieldErrors(
       name: name,
       firstName: firstName,
@@ -73,12 +100,21 @@ class _$ServerFieldErrorsTearOff {
       phone: phone,
       password: password,
       token: token,
+      code: code,
       propertyId: propertyId,
+      apartmentId: apartmentId,
       propertyType: propertyType,
       houseType: houseType,
       street: street,
       town: town,
       stateId: stateId,
+      tenantEmail: tenantEmail,
+      duration: duration,
+      amount: amount,
+      currencyId: currencyId,
+      serviceId: serviceId,
+      assignmentId: assignmentId,
+      comment: comment,
     );
   }
 
@@ -95,50 +131,77 @@ const $ServerFieldErrors = _$ServerFieldErrorsTearOff();
 /// @nodoc
 mixin _$ServerFieldErrors {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get name;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
+  @JsonKey(includeIfNull: false, name: 'first_name')
   List<dynamic> get firstName;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
+  @JsonKey(includeIfNull: false, name: 'last_name')
   List<dynamic> get lastName;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get email;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get gender;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get age;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get phone;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get password;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get token;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get code;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'property_id')
   List<dynamic> get propertyId;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+  @JsonKey(includeIfNull: false, name: 'apartment_id')
+  List<dynamic> get apartmentId;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'property_type')
   List<dynamic> get propertyType;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+  @JsonKey(includeIfNull: false, name: 'house_type')
   List<dynamic> get houseType;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get street;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get town;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
+  @JsonKey(includeIfNull: false, name: 'state_id')
   List<dynamic> get stateId;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'tenant_email')
+  List<dynamic> get tenantEmail;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'duration')
+  List<dynamic> get duration;
+  @nullable
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get amount;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'currency_id')
+  List<dynamic> get currencyId;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'service_id')
+  List<dynamic> get serviceId;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'assignment_id')
+  List<dynamic> get assignmentId;
+  @nullable
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get comment;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -152,50 +215,77 @@ abstract class $ServerFieldErrorsCopyWith<$Res> {
       _$ServerFieldErrorsCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
+      @JsonKey(includeIfNull: false, name: 'first_name')
           List<dynamic> firstName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
+      @JsonKey(includeIfNull: false, name: 'last_name')
           List<dynamic> lastName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> email,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> gender,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> age,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> phone,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> password,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> token,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
+      @JsonKey(includeIfNull: false)
+          List<dynamic> code,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_id')
           List<dynamic> propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
+          List<dynamic> apartmentId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_type')
           List<dynamic> propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, name: 'house_type')
           List<dynamic> houseType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> street,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          List<dynamic> stateId});
+      @JsonKey(includeIfNull: false, name: 'state_id')
+          List<dynamic> stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'tenant_email')
+          List<dynamic> tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'duration')
+          List<dynamic> duration,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+          List<dynamic> currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          List<dynamic> serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          List<dynamic> assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> comment});
 }
 
 /// @nodoc
@@ -218,12 +308,21 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
     Object phone = freezed,
     Object password = freezed,
     Object token = freezed,
+    Object code = freezed,
     Object propertyId = freezed,
+    Object apartmentId = freezed,
     Object propertyType = freezed,
     Object houseType = freezed,
     Object street = freezed,
     Object town = freezed,
     Object stateId = freezed,
+    Object tenantEmail = freezed,
+    Object duration = freezed,
+    Object amount = freezed,
+    Object currencyId = freezed,
+    Object serviceId = freezed,
+    Object assignmentId = freezed,
+    Object comment = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as List<dynamic>,
@@ -238,9 +337,13 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
       password:
           password == freezed ? _value.password : password as List<dynamic>,
       token: token == freezed ? _value.token : token as List<dynamic>,
+      code: code == freezed ? _value.code : code as List<dynamic>,
       propertyId: propertyId == freezed
           ? _value.propertyId
           : propertyId as List<dynamic>,
+      apartmentId: apartmentId == freezed
+          ? _value.apartmentId
+          : apartmentId as List<dynamic>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as List<dynamic>,
@@ -249,6 +352,21 @@ class _$ServerFieldErrorsCopyWithImpl<$Res>
       street: street == freezed ? _value.street : street as List<dynamic>,
       town: town == freezed ? _value.town : town as List<dynamic>,
       stateId: stateId == freezed ? _value.stateId : stateId as List<dynamic>,
+      tenantEmail: tenantEmail == freezed
+          ? _value.tenantEmail
+          : tenantEmail as List<dynamic>,
+      duration:
+          duration == freezed ? _value.duration : duration as List<dynamic>,
+      amount: amount == freezed ? _value.amount : amount as List<dynamic>,
+      currencyId: currencyId == freezed
+          ? _value.currencyId
+          : currencyId as List<dynamic>,
+      serviceId:
+          serviceId == freezed ? _value.serviceId : serviceId as List<dynamic>,
+      assignmentId: assignmentId == freezed
+          ? _value.assignmentId
+          : assignmentId as List<dynamic>,
+      comment: comment == freezed ? _value.comment : comment as List<dynamic>,
     ));
   }
 }
@@ -262,50 +380,77 @@ abstract class _$ServerFieldErrorsCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
+      @JsonKey(includeIfNull: false, name: 'first_name')
           List<dynamic> firstName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
+      @JsonKey(includeIfNull: false, name: 'last_name')
           List<dynamic> lastName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> email,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> gender,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> age,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> phone,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> password,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> token,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
+      @JsonKey(includeIfNull: false)
+          List<dynamic> code,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_id')
           List<dynamic> propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
+          List<dynamic> apartmentId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_type')
           List<dynamic> propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, name: 'house_type')
           List<dynamic> houseType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> street,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          List<dynamic> stateId});
+      @JsonKey(includeIfNull: false, name: 'state_id')
+          List<dynamic> stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'tenant_email')
+          List<dynamic> tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'duration')
+          List<dynamic> duration,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+          List<dynamic> currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          List<dynamic> serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          List<dynamic> assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> comment});
 }
 
 /// @nodoc
@@ -330,12 +475,21 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
     Object phone = freezed,
     Object password = freezed,
     Object token = freezed,
+    Object code = freezed,
     Object propertyId = freezed,
+    Object apartmentId = freezed,
     Object propertyType = freezed,
     Object houseType = freezed,
     Object street = freezed,
     Object town = freezed,
     Object stateId = freezed,
+    Object tenantEmail = freezed,
+    Object duration = freezed,
+    Object amount = freezed,
+    Object currencyId = freezed,
+    Object serviceId = freezed,
+    Object assignmentId = freezed,
+    Object comment = freezed,
   }) {
     return _then(_ServerFieldErrors(
       name: name == freezed ? _value.name : name as List<dynamic>,
@@ -350,9 +504,13 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
       password:
           password == freezed ? _value.password : password as List<dynamic>,
       token: token == freezed ? _value.token : token as List<dynamic>,
+      code: code == freezed ? _value.code : code as List<dynamic>,
       propertyId: propertyId == freezed
           ? _value.propertyId
           : propertyId as List<dynamic>,
+      apartmentId: apartmentId == freezed
+          ? _value.apartmentId
+          : apartmentId as List<dynamic>,
       propertyType: propertyType == freezed
           ? _value.propertyType
           : propertyType as List<dynamic>,
@@ -361,6 +519,21 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
       street: street == freezed ? _value.street : street as List<dynamic>,
       town: town == freezed ? _value.town : town as List<dynamic>,
       stateId: stateId == freezed ? _value.stateId : stateId as List<dynamic>,
+      tenantEmail: tenantEmail == freezed
+          ? _value.tenantEmail
+          : tenantEmail as List<dynamic>,
+      duration:
+          duration == freezed ? _value.duration : duration as List<dynamic>,
+      amount: amount == freezed ? _value.amount : amount as List<dynamic>,
+      currencyId: currencyId == freezed
+          ? _value.currencyId
+          : currencyId as List<dynamic>,
+      serviceId:
+          serviceId == freezed ? _value.serviceId : serviceId as List<dynamic>,
+      assignmentId: assignmentId == freezed
+          ? _value.assignmentId
+          : assignmentId as List<dynamic>,
+      comment: comment == freezed ? _value.comment : comment as List<dynamic>,
     ));
   }
 }
@@ -371,50 +544,77 @@ class __$ServerFieldErrorsCopyWithImpl<$Res>
 class _$_ServerFieldErrors extends _ServerFieldErrors {
   const _$_ServerFieldErrors(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
+      @JsonKey(includeIfNull: false, name: 'first_name')
           this.firstName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
+      @JsonKey(includeIfNull: false, name: 'last_name')
           this.lastName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.email,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.gender,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.age,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.phone,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.password,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.token,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
+      @JsonKey(includeIfNull: false)
+          this.code,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_id')
           this.propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
+          this.apartmentId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_type')
           this.propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, name: 'house_type')
           this.houseType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.street,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          this.stateId})
+      @JsonKey(includeIfNull: false, name: 'state_id')
+          this.stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'tenant_email')
+          this.tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'duration')
+          this.duration,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          this.amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+          this.currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          this.serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          this.assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          this.comment})
       : super._();
 
   factory _$_ServerFieldErrors.fromJson(Map<String, dynamic> json) =>
@@ -422,68 +622,104 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
+  @JsonKey(includeIfNull: false, name: 'first_name')
   final List<dynamic> firstName;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
+  @JsonKey(includeIfNull: false, name: 'last_name')
   final List<dynamic> lastName;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> email;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> gender;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> age;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> phone;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> password;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> token;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
+  @JsonKey(includeIfNull: false)
+  final List<dynamic> code;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'property_id')
   final List<dynamic> propertyId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+  @JsonKey(includeIfNull: false, name: 'apartment_id')
+  final List<dynamic> apartmentId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'property_type')
   final List<dynamic> propertyType;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+  @JsonKey(includeIfNull: false, name: 'house_type')
   final List<dynamic> houseType;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> street;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final List<dynamic> town;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
+  @JsonKey(includeIfNull: false, name: 'state_id')
   final List<dynamic> stateId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'tenant_email')
+  final List<dynamic> tenantEmail;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'duration')
+  final List<dynamic> duration;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  final List<dynamic> amount;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'currency_id')
+  final List<dynamic> currencyId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'service_id')
+  final List<dynamic> serviceId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'assignment_id')
+  final List<dynamic> assignmentId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  final List<dynamic> comment;
 
   @override
   String toString() {
-    return 'ServerFieldErrors(name: $name, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, age: $age, phone: $phone, password: $password, token: $token, propertyId: $propertyId, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, stateId: $stateId)';
+    return 'ServerFieldErrors(name: $name, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, age: $age, phone: $phone, password: $password, token: $token, code: $code, propertyId: $propertyId, apartmentId: $apartmentId, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, stateId: $stateId, tenantEmail: $tenantEmail, duration: $duration, amount: $amount, currencyId: $currencyId, serviceId: $serviceId, assignmentId: $assignmentId, comment: $comment)';
   }
 
   @override
@@ -511,9 +747,14 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
                     .equals(other.password, password)) &&
             (identical(other.token, token) ||
                 const DeepCollectionEquality().equals(other.token, token)) &&
+            (identical(other.code, code) ||
+                const DeepCollectionEquality().equals(other.code, code)) &&
             (identical(other.propertyId, propertyId) ||
                 const DeepCollectionEquality()
                     .equals(other.propertyId, propertyId)) &&
+            (identical(other.apartmentId, apartmentId) ||
+                const DeepCollectionEquality()
+                    .equals(other.apartmentId, apartmentId)) &&
             (identical(other.propertyType, propertyType) ||
                 const DeepCollectionEquality()
                     .equals(other.propertyType, propertyType)) &&
@@ -525,7 +766,27 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
             (identical(other.town, town) ||
                 const DeepCollectionEquality().equals(other.town, town)) &&
             (identical(other.stateId, stateId) ||
-                const DeepCollectionEquality().equals(other.stateId, stateId)));
+                const DeepCollectionEquality()
+                    .equals(other.stateId, stateId)) &&
+            (identical(other.tenantEmail, tenantEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.tenantEmail, tenantEmail)) &&
+            (identical(other.duration, duration) ||
+                const DeepCollectionEquality()
+                    .equals(other.duration, duration)) &&
+            (identical(other.amount, amount) ||
+                const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.currencyId, currencyId) ||
+                const DeepCollectionEquality()
+                    .equals(other.currencyId, currencyId)) &&
+            (identical(other.serviceId, serviceId) ||
+                const DeepCollectionEquality()
+                    .equals(other.serviceId, serviceId)) &&
+            (identical(other.assignmentId, assignmentId) ||
+                const DeepCollectionEquality()
+                    .equals(other.assignmentId, assignmentId)) &&
+            (identical(other.comment, comment) ||
+                const DeepCollectionEquality().equals(other.comment, comment)));
   }
 
   @override
@@ -540,12 +801,21 @@ class _$_ServerFieldErrors extends _ServerFieldErrors {
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(token) ^
+      const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(propertyId) ^
+      const DeepCollectionEquality().hash(apartmentId) ^
       const DeepCollectionEquality().hash(propertyType) ^
       const DeepCollectionEquality().hash(houseType) ^
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
-      const DeepCollectionEquality().hash(stateId);
+      const DeepCollectionEquality().hash(stateId) ^
+      const DeepCollectionEquality().hash(tenantEmail) ^
+      const DeepCollectionEquality().hash(duration) ^
+      const DeepCollectionEquality().hash(amount) ^
+      const DeepCollectionEquality().hash(currencyId) ^
+      const DeepCollectionEquality().hash(serviceId) ^
+      const DeepCollectionEquality().hash(assignmentId) ^
+      const DeepCollectionEquality().hash(comment);
 
   @JsonKey(ignore: true)
   @override
@@ -562,114 +832,177 @@ abstract class _ServerFieldErrors extends ServerFieldErrors {
   const _ServerFieldErrors._() : super._();
   const factory _ServerFieldErrors(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> name,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
+      @JsonKey(includeIfNull: false, name: 'first_name')
           List<dynamic> firstName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
+      @JsonKey(includeIfNull: false, name: 'last_name')
           List<dynamic> lastName,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> email,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> gender,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> age,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> phone,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> password,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> token,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
+      @JsonKey(includeIfNull: false)
+          List<dynamic> code,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_id')
           List<dynamic> propertyId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+      @JsonKey(includeIfNull: false, name: 'apartment_id')
+          List<dynamic> apartmentId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'property_type')
           List<dynamic> propertyType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+      @JsonKey(includeIfNull: false, name: 'house_type')
           List<dynamic> houseType,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> street,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           List<dynamic> town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
-          List<dynamic> stateId}) = _$_ServerFieldErrors;
+      @JsonKey(includeIfNull: false, name: 'state_id')
+          List<dynamic> stateId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'tenant_email')
+          List<dynamic> tenantEmail,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'duration')
+          List<dynamic> duration,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'currency_id')
+          List<dynamic> currencyId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'service_id')
+          List<dynamic> serviceId,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'assignment_id')
+          List<dynamic> assignmentId,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          List<dynamic> comment}) = _$_ServerFieldErrors;
 
   factory _ServerFieldErrors.fromJson(Map<String, dynamic> json) =
       _$_ServerFieldErrors.fromJson;
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get name;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
+  @JsonKey(includeIfNull: false, name: 'first_name')
   List<dynamic> get firstName;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'last_name')
+  @JsonKey(includeIfNull: false, name: 'last_name')
   List<dynamic> get lastName;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get email;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get gender;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get age;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get phone;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get password;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get token;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_id')
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get code;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'property_id')
   List<dynamic> get propertyId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'property_type')
+  @JsonKey(includeIfNull: false, name: 'apartment_id')
+  List<dynamic> get apartmentId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'property_type')
   List<dynamic> get propertyType;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'house_type')
+  @JsonKey(includeIfNull: false, name: 'house_type')
   List<dynamic> get houseType;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get street;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   List<dynamic> get town;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '', name: 'state_id')
+  @JsonKey(includeIfNull: false, name: 'state_id')
   List<dynamic> get stateId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'tenant_email')
+  List<dynamic> get tenantEmail;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'duration')
+  List<dynamic> get duration;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get amount;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'currency_id')
+  List<dynamic> get currencyId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'service_id')
+  List<dynamic> get serviceId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'assignment_id')
+  List<dynamic> get assignmentId;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  List<dynamic> get comment;
   @override
   @JsonKey(ignore: true)
   _$ServerFieldErrorsCopyWith<_ServerFieldErrors> get copyWith;
