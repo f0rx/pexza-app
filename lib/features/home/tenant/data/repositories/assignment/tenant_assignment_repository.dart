@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pexza/features/core/data/models/assignment/index.dart';
+import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 
 part 'tenant_assignment_repository.g.dart';
 
@@ -14,7 +15,7 @@ abstract class TenantAssignmentRepository {
   factory TenantAssignmentRepository(Dio dio) = _TenantAssignmentRepository;
 
   @GET("/tenant/assignment")
-  Future<AssignmentDTOList> all();
+  Future<AssignmentDTOList> all({@Query("show") AssignmentQueryParam query});
 
   @POST("/tenant/assignment/{id}/accept")
   Future<AssignmentDTO> accept(

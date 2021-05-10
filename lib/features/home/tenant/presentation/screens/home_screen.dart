@@ -24,8 +24,10 @@ class TenantHomeScreen extends StatefulWidget with AutoRouteWrapper {
   Widget wrappedRoute(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+            create: (_) => getIt<TenantAssignmentCubit>()
+              ..all(AssignmentQueryParam.assigned)),
         BlocProvider(create: (_) => getIt<TenantApartmentCubit>()..all()),
-        BlocProvider(create: (_) => getIt<TenantAssignmentCubit>()..all()),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -45,7 +47,7 @@ class TenantHomeScreen extends StatefulWidget with AutoRouteWrapper {
                 shouldIconPulse: either.fold((_) => null, (r) => false),
                 callback: either.fold(
                   (_) => null,
-                  (r) => (_) => navigator.pop(),
+                  (r) => r.popRoute ? (_) => navigator.pop() : null,
                 ),
               ),
             ),
@@ -166,10 +168,15 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                           return _SectionInfo<Assignment>(
                             model: assignment,
                             title: "${assignment?.apartment?.name?.getOrEmpty}",
-                            subtitle: "",
+                            // subtitle: "",
                             color: assignment?.apartment?.property?.color ??
                                 Colors.teal,
-                            onPressed: (_) {},
+                            onAccept: c
+                                .read<TenantAssignmentCubit>()
+                                .acceptAssignment,
+                            onReject: c
+                                .read<TenantAssignmentCubit>()
+                                .rejectAssignment,
                           );
                         },
                       ),
@@ -252,28 +259,36 @@ class _SectionInfo<M> extends StatelessWidget {
   final Color color;
   final String title;
   final String subtitle;
+  final bool _isAssignment;
   final void Function(M) onPressed;
+  final void Function(M) onAccept;
+  final void Function(M) onReject;
 
-  const _SectionInfo({
+  _SectionInfo({
     Key key,
     @required this.model,
     @required this.color,
     @required this.title,
-    @required this.subtitle,
-    @required this.onPressed,
-  }) : super(key: key);
+    this.subtitle = '',
+    this.onPressed,
+    this.onAccept,
+    this.onReject,
+  })  : _isAssignment = model is Assignment,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double _itemHeight = App.longest * 0.1;
+    if (_isAssignment) assert(onAccept != null && onReject != null);
+
+    final double _itemHeight =
+        !subtitle.isNullOrBlank ? App.longest * 0.09 : App.longest * 0.065;
     final BorderRadius _radius = BorderRadius.circular(8.0);
-    final int _count = ((App.longest * 0.4) / _itemHeight).ceil();
     final double opacity = 0.3;
 
     return InkWell(
       splashColor: Colors.grey.shade300,
       borderRadius: _radius,
-      onTap: () => onPressed.call(model),
+      onTap: _isAssignment ? null : () => onPressed.call(model),
       child: Container(
         height: _itemHeight,
         padding: EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
@@ -303,34 +318,77 @@ class _SectionInfo<M> extends StatelessWidget {
                       maxLines: 1,
                     ),
                     //
-                    VerticalSpace(height: 6.0),
-                    //
-                    AutoSizeText(
-                      "${subtitle.removeNewLines()}",
-                      softWrap: true,
-                      wrapWords: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.caption.copyWith(
-                            color: Helpers.computeLuminance(
-                                color.withOpacity(opacity)),
-                            fontSize: 14.0,
+                    Visibility(
+                      visible: !subtitle.isNullOrBlank,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          VerticalSpace(height: 6.0),
+                          //
+                          AutoSizeText(
+                            "${subtitle.removeNewLines()}",
+                            softWrap: true,
+                            wrapWords: true,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.caption.copyWith(
+                                  color: Helpers.computeLuminance(
+                                      color.withOpacity(opacity)),
+                                  fontSize: 14.0,
+                                ),
+                            maxLines: 2,
                           ),
-                      maxLines: 2,
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-            AppIconButton(
-              padding: EdgeInsets.zero,
-              backgroundColor: Colors.transparent,
-              tooltip: "View Details",
-              elevation: 0.0,
-              child: RotatedBox(
-                quarterTurns: 2,
-                child: Icon(
-                  Icons.keyboard_backspace_rounded,
-                  color: Helpers.computeLuminance(color.withOpacity(opacity)),
+            Visibility(
+              visible: !_isAssignment,
+              replacement: Row(
+                children: [
+                  AppIconButton(
+                    child: Icon(
+                      Icons.check_circle,
+                      color: Colors.white,
+                      size: 25.0,
+                    ),
+                    backgroundColor: AppColors.successGreen,
+                    elevation: 0.0,
+                    padding: EdgeInsets.all(3.0),
+                    tooltip: "Accept Assignment",
+                    onPressed: () => onAccept.call(model),
+                  ),
+                  //
+                  HorizontalSpace(width: App.shortest * 0.03),
+                  //
+                  AppIconButton(
+                    child: Icon(
+                      Icons.cancel,
+                      color: Colors.white,
+                      size: 25.0,
+                    ),
+                    backgroundColor: AppColors.lightRed,
+                    elevation: 0.0,
+                    padding: EdgeInsets.all(3.0),
+                    tooltip: "Reject Assignment",
+                    onPressed: () => onReject.call(model),
+                  ),
+                ],
+              ),
+              child: AppIconButton(
+                padding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                tooltip: "View Details",
+                elevation: 0.0,
+                child: RotatedBox(
+                  quarterTurns: 2,
+                  child: Icon(
+                    Icons.keyboard_backspace_rounded,
+                    color: Helpers.computeLuminance(color.withOpacity(opacity)),
+                  ),
                 ),
               ),
             )
@@ -342,7 +400,7 @@ class _SectionInfo<M> extends StatelessWidget {
 }
 
 class _ShimmerLayout extends StatelessWidget {
-  static double kDefaultHeight = App.longest * 0.1;
+  static double kDefaultHeight = App.longest * 0.09;
   static int kDefaultCount = (App.longest * 0.4 / kDefaultHeight).ceil();
 
   final double _height;

@@ -16,9 +16,10 @@ class _TenantAssignmentRepository implements TenantAssignmentRepository {
   String baseUrl;
 
   @override
-  Future<AssignmentDTOList> all() async {
+  Future<AssignmentDTOList> all({query}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'show': query?.toJson()};
+    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>(
         '/tenant/assignment',

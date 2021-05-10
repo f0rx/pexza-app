@@ -4,6 +4,8 @@ import 'package:logger/logger.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
+import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart';
+import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 import 'package:test/test.dart';
 
 import 'fixtures/fixture_reader.dart';
@@ -70,7 +72,7 @@ void main() {
     Logger().wtf(_dto.toJson());
   });
 
-  test('assignment - serialization & deserialization', () {
+  test('assignment - serialization & deserialization', () async {
     String assignmentJson = fixture("assignment.json");
 
     final assignment = AssignmentDTO.fromJson(jsonDecode(assignmentJson));

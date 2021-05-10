@@ -9,7 +9,9 @@ import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/domain/failures/base.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
+import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
 import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart';
+import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 import 'package:pexza/utils/utils.dart';
 
 part 'tenant_assignment_state.dart';
@@ -56,11 +58,11 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
     }
   }
 
-  void all() async {
+  void all([AssignmentQueryParam param]) async {
     toggleLoading();
 
     try {
-      final assignments = await _repository.all();
+      final assignments = await _repository.all(query: param);
 
       emit(state.copyWith(assignments: assignments.domain()));
     } on LandlordFailure catch (e) {
@@ -73,6 +75,50 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
 
     toggleLoading();
   }
+
+  void acceptAssignment(
+    Assignment assignment,
+  ) async {
+    toggleLoading();
+
+    // Validate form errors
+    emit(state.copyWith(validate: true));
+
+    try {
+      // Check if user is connected & has good internet
+      await checkInternetAndConnectivity(true);
+
+      final _result = await _repository.accept(
+        assignment?.id?.value,
+        AssignmentDTOData.fromDomain(assignment),
+      );
+
+      emit(state.copyWith(
+        assignment: _result?.domain(),
+        response: some(right(LandlordSuccess(
+          message: "You accepted apartment "
+              "${assignment.apartment.name.getOrEmpty}!",
+          popRoute: false,
+        ))),
+      ));
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(
+        response: some(left(e)),
+      ));
+    } on DioError catch (_) {
+      _handleDioFailures(_);
+    }
+
+    toggleLoading();
+  }
+
+  void rejectAssignment(
+    Assignment assignment,
+  ) {}
+
+  void cancelAssignment(
+    Assignment assignment,
+  ) {}
 
   void _handleDioFailures(DioError ex) {
     switch (ex?.type) {
