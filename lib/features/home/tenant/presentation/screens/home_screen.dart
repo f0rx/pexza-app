@@ -218,7 +218,7 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                                         .getOrNull(i)
                                         ?.property
                                         ?.color ??
-                                    Colors.amberAccent,
+                                    AppColors.random,
                                 onPressed: (current) {
                                   return navigator
                                       .pushTenantApartmentDetailScreen(
