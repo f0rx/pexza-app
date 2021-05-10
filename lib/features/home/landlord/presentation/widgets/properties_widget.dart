@@ -8,10 +8,12 @@ import 'package:pexza/widgets/widgets.dart';
 class LandlordProperties extends StatelessWidget {
   final Widget appBar;
   final Widget fab;
+  final VoidCallback addPropertyOnPressed;
 
   LandlordProperties({
     Key key,
     this.appBar,
+    this.addPropertyOnPressed,
     this.fab = const SizedBox(),
   }) : super(key: key);
 
@@ -155,7 +157,7 @@ class LandlordProperties extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(8.0),
                       child: InkWell(
-                        onTap: () => navigator.pushLandlordAddPropertyScreen(),
+                        onTap: addPropertyOnPressed,
                         splashColor: AppColors.primaryColor.shade500,
                         borderRadius: BorderRadius.circular(8.0),
                         child: SizedBox(

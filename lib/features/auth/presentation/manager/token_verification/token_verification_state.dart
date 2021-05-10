@@ -6,10 +6,11 @@ abstract class TokenVerificationState implements _$TokenVerificationState {
   const TokenVerificationState._();
 
   const factory TokenVerificationState({
-    @required OTPCode code,
     @Default(false) bool isLoading,
     @Default(false) bool validate,
-    @Default(const None()) Option<Either<AuthResponse, Unit>> authStatus,
+    @required OTPCode code,
+    @nullable Assignment assignment,
+    @Default(const None()) Option<Either<Failure, Success>> response,
   }) = _TokenVerificationState;
 
   factory TokenVerificationState.initial() => TokenVerificationState(

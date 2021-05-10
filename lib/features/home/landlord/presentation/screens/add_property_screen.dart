@@ -43,7 +43,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
             shouldIconPulse: either.fold((_) => null, (r) => false),
             callback: either.fold(
               (_) => null,
-              (r) => (_) => navigator.pop(),
+              (r) => r.popRoute ? (_) => navigator.pop(true) : null,
             ),
           ),
         ),

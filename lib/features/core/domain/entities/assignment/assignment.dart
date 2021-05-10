@@ -2,6 +2,8 @@ library assignment.dart;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
+import 'package:pexza/features/home/tenant/domain/domain.dart';
 
 part 'assignment.freezed.dart';
 
@@ -33,4 +35,32 @@ abstract class Assignment implements _$Assignment {
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,
   }) = _Assignment;
+
+  TenantApartment get tenantApartment => this
+      .copyWith(
+        apartment: TenantApartment(
+          id: apartment.id,
+          name: apartment.name,
+          status: apartment.status,
+          property: apartment.property,
+          createdAt: apartment.createdAt,
+          updatedAt: apartment.updatedAt,
+          deletedAt: apartment.deletedAt,
+        ),
+      )
+      .apartment;
+
+  LandlordApartment get landlordApartment => this
+      .copyWith(
+        apartment: LandlordApartment(
+          id: apartment.id,
+          name: apartment.name,
+          status: apartment.status,
+          property: apartment.property,
+          createdAt: apartment.createdAt,
+          updatedAt: apartment.updatedAt,
+          deletedAt: apartment.deletedAt,
+        ),
+      )
+      .apartment;
 }

@@ -191,8 +191,14 @@ class Router extends RouterBase {
       );
     },
     ProfileSetupScreen: (data) {
+      final args = data.getArgs<ProfileSetupScreenArguments>(
+        orElse: () => ProfileSetupScreenArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => ProfileSetupScreen().wrappedRoute(context),
+        builder: (context) => ProfileSetupScreen(
+          key: args.key,
+          assignment: args.assignment,
+        ).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -476,8 +482,15 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushProfileSelectScreen() =>
       push<dynamic>(Routes.profileSelectScreen);
 
-  Future<dynamic> pushProfileSetupScreen() =>
-      push<dynamic>(Routes.profileSetupScreen);
+  Future<dynamic> pushProfileSetupScreen({
+    Key key,
+    Assignment assignment,
+  }) =>
+      push<dynamic>(
+        Routes.profileSetupScreen,
+        arguments:
+            ProfileSetupScreenArguments(key: key, assignment: assignment),
+      );
 
   Future<dynamic> pushRentDetailsScreen() =>
       push<dynamic>(Routes.rentDetailsScreen);
@@ -646,6 +659,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// ProfileSetupScreen arguments holder class
+class ProfileSetupScreenArguments {
+  final Key key;
+  final Assignment assignment;
+  ProfileSetupScreenArguments({this.key, this.assignment});
+}
 
 /// VerifyEmailScreen arguments holder class
 class VerifyEmailScreenArguments {

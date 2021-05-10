@@ -133,8 +133,9 @@ class Validator {
   }
 
   static Either<FieldObjectException<String>, String> otpCodeValidator(
-      String code,
-      {int max = 6}) {
+    String code, {
+    int max = 6,
+  }) {
     String clean = code.trim();
     if (clean == null || clean.isEmpty || clean.length < 1)
       return left(FieldObjectException.empty());

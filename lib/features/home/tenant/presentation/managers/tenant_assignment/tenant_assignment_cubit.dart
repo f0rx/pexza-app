@@ -8,8 +8,10 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/domain/failures/base.dart';
+import 'package:pexza/features/home/tenant/domain/domain.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
 import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
+import 'package:pexza/features/home/tenant/data/repositories/apartment/tenant_apartment_repository.dart';
 import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart';
 import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 import 'package:pexza/utils/utils.dart';
@@ -19,12 +21,14 @@ part 'tenant_assignment_cubit.freezed.dart';
 
 @injectable
 class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
+  final TenantApartmentRepository _apartmentRepository;
   final TenantAssignmentRepository _repository;
   final Connectivity _connectivity;
   final DataConnectionChecker _dataConnectionChecker;
 
   TenantAssignmentCubit(
     this._repository,
+    this._apartmentRepository,
     this._connectivity,
     this._dataConnectionChecker,
   ) : super(TenantAssignmentState.initial());
@@ -33,8 +37,13 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
         isLoading: isLoading ?? !state.isLoading,
       ));
 
-  void init([Assignment assignment]) async => emit(state.copyWith(
+  void init({
+    Assignment assignment,
+    BaseApartment apartment,
+  }) async =>
+      emit(state.copyWith(
         assignment: assignment ?? state.assignment,
+        apartment: apartment ?? state.apartment,
       ));
 
   Future<void> checkInternetAndConnectivity([bool shouldThrow = false]) async {
@@ -58,13 +67,23 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
     }
   }
 
-  void all([AssignmentQueryParam param]) async {
+  void all([
+    AssignmentQueryParam param = AssignmentQueryParam.assigned,
+  ]) async {
     toggleLoading();
 
     try {
-      final assignments = await _repository.all(query: param);
+      final unaccepted = await _repository.all(query: param);
 
-      emit(state.copyWith(assignments: assignments.domain()));
+      emit(state.copyWith(assignments: unaccepted.domain()));
+
+      ///
+      final paired = await _repository.all(query: AssignmentQueryParam.paired);
+
+      final apartments =
+          paired.domain().map((e) => e.tenantApartment).toMutableList();
+
+      emit(state.copyWith(apartments: apartments));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         response: some(left(e)),
@@ -75,50 +94,6 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
 
     toggleLoading();
   }
-
-  void acceptAssignment(
-    Assignment assignment,
-  ) async {
-    toggleLoading();
-
-    // Validate form errors
-    emit(state.copyWith(validate: true));
-
-    try {
-      // Check if user is connected & has good internet
-      await checkInternetAndConnectivity(true);
-
-      final _result = await _repository.accept(
-        assignment?.id?.value,
-        AssignmentDTOData.fromDomain(assignment),
-      );
-
-      emit(state.copyWith(
-        assignment: _result?.domain(),
-        response: some(right(LandlordSuccess(
-          message: "You accepted apartment "
-              "${assignment.apartment.name.getOrEmpty}!",
-          popRoute: false,
-        ))),
-      ));
-    } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
-    }
-
-    toggleLoading();
-  }
-
-  void rejectAssignment(
-    Assignment assignment,
-  ) {}
-
-  void cancelAssignment(
-    Assignment assignment,
-  ) {}
 
   void _handleDioFailures(DioError ex) {
     switch (ex?.type) {

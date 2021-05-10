@@ -16,16 +16,14 @@ class TenantApartmentDetailScreen extends StatelessWidget
     with AutoRouteWrapper {
   final TenantApartment apartment;
 
-  const TenantApartmentDetailScreen({
-    Key key,
-    this.apartment,
-  }) : super(key: key);
+  const TenantApartmentDetailScreen({Key key, @required this.apartment})
+      : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<TenantApartmentCubit>()..init(),
-      child: BlocConsumer<TenantApartmentCubit, TenantApartmentState>(
+      create: (_) => getIt<TenantAssignmentCubit>()..init(apartment: apartment),
+      child: BlocConsumer<TenantAssignmentCubit, TenantAssignmentState>(
         listener: (c, s) => s.response.fold(
           () => null,
           (either) => BottomAlertDialog.show(
@@ -44,7 +42,7 @@ class TenantApartmentDetailScreen extends StatelessWidget
           ),
         ),
         builder: (c, s) => PortalEntry(
-          visible: c.watch<TenantApartmentCubit>().state.isLoading,
+          visible: c.watch<TenantAssignmentCubit>().state.isLoading,
           portal: App.circularLoadingOverlay,
           child: this,
         ),
@@ -160,7 +158,7 @@ class TenantApartmentDetailScreen extends StatelessWidget
                                     .pushServiceRequestScreen(assignment: null);
 
                                 if (shouldRefresh != null && shouldRefresh)
-                                  context.read<TenantApartmentCubit>().all();
+                                  context.read<TenantAssignmentCubit>().all();
                               },
                               splashColor: AppColors.primaryColor.shade500,
                               borderRadius: BorderRadius.circular(8.0),
