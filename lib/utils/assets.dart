@@ -46,6 +46,8 @@ mixin AppAssets {
   // Profile Select Assets
   static const String owner = '$ONBOARDING_PROFILE_IMAGES_DIR/owner.png';
   static const String tenant = '$ONBOARDING_PROFILE_IMAGES_DIR/tenant.png';
+  static const String anonymous = "https://res.cloudinary.com/anifowosetobi"
+      "/image/upload/v1601500323/user_korsis.png";
 
   // Landlord Assets
   static const String emptyProps = '$LANDLORD_IMAGES_DIR/empty_props.png';

@@ -1,8 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:pexza/features/core/domain/entities/entities.dart';
-import 'package:pexza/features/core/domain/entities/role/role.dart';
-import 'package:pexza/features/core/domain/entities/user/user.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/manager/serializer/serializers.dart';
 import 'package:pexza/utils/utils.dart';
 
@@ -99,6 +97,9 @@ abstract class UserDTO implements _$UserDTO {
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
         String deletedAt,
+    @nullable
+    @JsonKey(includeIfNull: false)
+        BaseApartmentDTO apartment,
   }) = _UserDTO;
 
   factory UserDTO.fromDomain(User instance) => UserDTO(
@@ -141,5 +142,6 @@ abstract class UserDTO implements _$UserDTO {
         createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
         updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
         deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
+        apartment: !apartment.isNull ? apartment.tenantDomain : null,
       );
 }

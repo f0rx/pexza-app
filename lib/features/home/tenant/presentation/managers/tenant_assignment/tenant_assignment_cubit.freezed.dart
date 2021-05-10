@@ -17,7 +17,8 @@ class _$TenantAssignmentStateTearOff {
   _TenantAssignmentState call(
       {bool isLoading = false,
       bool validate = false,
-      KtList<Assignment> assignments = const KtList.empty(),
+      KtList<Assignment> unaccepted = const KtList.empty(),
+      KtList<Assignment> paired = const KtList.empty(),
       @nullable Assignment assignment,
       KtList<TenantApartment> apartments = const KtList.empty(),
       @nullable TenantApartment apartment,
@@ -25,7 +26,8 @@ class _$TenantAssignmentStateTearOff {
     return _TenantAssignmentState(
       isLoading: isLoading,
       validate: validate,
-      assignments: assignments,
+      unaccepted: unaccepted,
+      paired: paired,
       assignment: assignment,
       apartments: apartments,
       apartment: apartment,
@@ -42,7 +44,8 @@ const $TenantAssignmentState = _$TenantAssignmentStateTearOff();
 mixin _$TenantAssignmentState {
   bool get isLoading;
   bool get validate;
-  KtList<Assignment> get assignments;
+  KtList<Assignment> get unaccepted;
+  KtList<Assignment> get paired;
   @nullable
   Assignment get assignment;
   KtList<TenantApartment> get apartments;
@@ -62,7 +65,8 @@ abstract class $TenantAssignmentStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool validate,
-      KtList<Assignment> assignments,
+      KtList<Assignment> unaccepted,
+      KtList<Assignment> paired,
       @nullable Assignment assignment,
       KtList<TenantApartment> apartments,
       @nullable TenantApartment apartment,
@@ -85,7 +89,8 @@ class _$TenantAssignmentStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object validate = freezed,
-    Object assignments = freezed,
+    Object unaccepted = freezed,
+    Object paired = freezed,
     Object assignment = freezed,
     Object apartments = freezed,
     Object apartment = freezed,
@@ -94,9 +99,10 @@ class _$TenantAssignmentStateCopyWithImpl<$Res>
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      assignments: assignments == freezed
-          ? _value.assignments
-          : assignments as KtList<Assignment>,
+      unaccepted: unaccepted == freezed
+          ? _value.unaccepted
+          : unaccepted as KtList<Assignment>,
+      paired: paired == freezed ? _value.paired : paired as KtList<Assignment>,
       assignment:
           assignment == freezed ? _value.assignment : assignment as Assignment,
       apartments: apartments == freezed
@@ -142,7 +148,8 @@ abstract class _$TenantAssignmentStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool validate,
-      KtList<Assignment> assignments,
+      KtList<Assignment> unaccepted,
+      KtList<Assignment> paired,
       @nullable Assignment assignment,
       KtList<TenantApartment> apartments,
       @nullable TenantApartment apartment,
@@ -169,7 +176,8 @@ class __$TenantAssignmentStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object validate = freezed,
-    Object assignments = freezed,
+    Object unaccepted = freezed,
+    Object paired = freezed,
     Object assignment = freezed,
     Object apartments = freezed,
     Object apartment = freezed,
@@ -178,9 +186,10 @@ class __$TenantAssignmentStateCopyWithImpl<$Res>
     return _then(_TenantAssignmentState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      assignments: assignments == freezed
-          ? _value.assignments
-          : assignments as KtList<Assignment>,
+      unaccepted: unaccepted == freezed
+          ? _value.unaccepted
+          : unaccepted as KtList<Assignment>,
+      paired: paired == freezed ? _value.paired : paired as KtList<Assignment>,
       assignment:
           assignment == freezed ? _value.assignment : assignment as Assignment,
       apartments: apartments == freezed
@@ -201,14 +210,16 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
   const _$_TenantAssignmentState(
       {this.isLoading = false,
       this.validate = false,
-      this.assignments = const KtList.empty(),
+      this.unaccepted = const KtList.empty(),
+      this.paired = const KtList.empty(),
       @nullable this.assignment,
       this.apartments = const KtList.empty(),
       @nullable this.apartment,
       this.response = const None()})
       : assert(isLoading != null),
         assert(validate != null),
-        assert(assignments != null),
+        assert(unaccepted != null),
+        assert(paired != null),
         assert(apartments != null),
         assert(response != null),
         super._();
@@ -221,7 +232,10 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
   final bool validate;
   @JsonKey(defaultValue: const KtList.empty())
   @override
-  final KtList<Assignment> assignments;
+  final KtList<Assignment> unaccepted;
+  @JsonKey(defaultValue: const KtList.empty())
+  @override
+  final KtList<Assignment> paired;
   @override
   @nullable
   final Assignment assignment;
@@ -237,7 +251,7 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
 
   @override
   String toString() {
-    return 'TenantAssignmentState(isLoading: $isLoading, validate: $validate, assignments: $assignments, assignment: $assignment, apartments: $apartments, apartment: $apartment, response: $response)';
+    return 'TenantAssignmentState(isLoading: $isLoading, validate: $validate, unaccepted: $unaccepted, paired: $paired, assignment: $assignment, apartments: $apartments, apartment: $apartment, response: $response)';
   }
 
   @override
@@ -250,9 +264,11 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
             (identical(other.validate, validate) ||
                 const DeepCollectionEquality()
                     .equals(other.validate, validate)) &&
-            (identical(other.assignments, assignments) ||
+            (identical(other.unaccepted, unaccepted) ||
                 const DeepCollectionEquality()
-                    .equals(other.assignments, assignments)) &&
+                    .equals(other.unaccepted, unaccepted)) &&
+            (identical(other.paired, paired) ||
+                const DeepCollectionEquality().equals(other.paired, paired)) &&
             (identical(other.assignment, assignment) ||
                 const DeepCollectionEquality()
                     .equals(other.assignment, assignment)) &&
@@ -272,7 +288,8 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(validate) ^
-      const DeepCollectionEquality().hash(assignments) ^
+      const DeepCollectionEquality().hash(unaccepted) ^
+      const DeepCollectionEquality().hash(paired) ^
       const DeepCollectionEquality().hash(assignment) ^
       const DeepCollectionEquality().hash(apartments) ^
       const DeepCollectionEquality().hash(apartment) ^
@@ -290,7 +307,8 @@ abstract class _TenantAssignmentState extends TenantAssignmentState {
   const factory _TenantAssignmentState(
       {bool isLoading,
       bool validate,
-      KtList<Assignment> assignments,
+      KtList<Assignment> unaccepted,
+      KtList<Assignment> paired,
       @nullable Assignment assignment,
       KtList<TenantApartment> apartments,
       @nullable TenantApartment apartment,
@@ -301,7 +319,9 @@ abstract class _TenantAssignmentState extends TenantAssignmentState {
   @override
   bool get validate;
   @override
-  KtList<Assignment> get assignments;
+  KtList<Assignment> get unaccepted;
+  @override
+  KtList<Assignment> get paired;
   @override
   @nullable
   Assignment get assignment;

@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/domain/entities/fields/fields.dart';
@@ -151,6 +152,23 @@ class Validator {
       return left(
           FieldObjectException.invalid(message: "Field must be single line"));
     return right(value);
+  }
+
+  static Either<FieldObjectException<String>, T> validateColor<T>({
+    T input,
+    bool useStandard = true,
+  }) {
+    if (input is String) {
+      String clean = input?.trim();
+      if (clean == null || clean.isEmpty || clean.length < 1)
+        return left(FieldObjectException.empty());
+
+      if (useStandard && !clean.caseInsensitiveContains('#'))
+        return left(
+            FieldObjectException.invalid(message: "Invalid Color Hex!"));
+    } else if (input == null) return left(FieldObjectException.empty());
+
+    return right(input);
   }
 
   static Either<FieldObjectException<String>, KtList<T>> maxListLength<T>(

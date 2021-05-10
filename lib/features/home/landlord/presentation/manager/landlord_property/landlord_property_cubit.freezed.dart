@@ -23,7 +23,9 @@ class _$LandlordPropertyStateTearOff {
       @required BasicTextField<String> street,
       @required BasicTextField<String> town,
       @nullable ProvinceState selectedState,
+      @nullable User selectedTenant,
       KtList<ProvinceState> states = const KtList.empty(),
+      KtList<User> tenants = const KtList.empty(),
       KtList<LandlordProperty> properties = const KtList.empty(),
       KtList<LandlordApartment> apartments = const KtList.empty(),
       @nullable LandlordProperty property,
@@ -37,7 +39,9 @@ class _$LandlordPropertyStateTearOff {
       street: street,
       town: town,
       selectedState: selectedState,
+      selectedTenant: selectedTenant,
       states: states,
+      tenants: tenants,
       properties: properties,
       apartments: apartments,
       property: property,
@@ -61,7 +65,10 @@ mixin _$LandlordPropertyState {
   BasicTextField<String> get town;
   @nullable
   ProvinceState get selectedState;
+  @nullable
+  User get selectedTenant;
   KtList<ProvinceState> get states;
+  KtList<User> get tenants;
   KtList<LandlordProperty> get properties;
   KtList<LandlordApartment> get apartments;
   @nullable
@@ -86,13 +93,16 @@ abstract class $LandlordPropertyStateCopyWith<$Res> {
       BasicTextField<String> street,
       BasicTextField<String> town,
       @nullable ProvinceState selectedState,
+      @nullable User selectedTenant,
       KtList<ProvinceState> states,
+      KtList<User> tenants,
       KtList<LandlordProperty> properties,
       KtList<LandlordApartment> apartments,
       @nullable LandlordProperty property,
       Option<Either<Failure, Success>> response});
 
   $ProvinceStateCopyWith<$Res> get selectedState;
+  $UserCopyWith<$Res> get selectedTenant;
   $LandlordPropertyCopyWith<$Res> get property;
 }
 
@@ -115,7 +125,9 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
     Object street = freezed,
     Object town = freezed,
     Object selectedState = freezed,
+    Object selectedTenant = freezed,
     Object states = freezed,
+    Object tenants = freezed,
     Object properties = freezed,
     Object apartments = freezed,
     Object property = freezed,
@@ -137,8 +149,12 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
       selectedState: selectedState == freezed
           ? _value.selectedState
           : selectedState as ProvinceState,
+      selectedTenant: selectedTenant == freezed
+          ? _value.selectedTenant
+          : selectedTenant as User,
       states:
           states == freezed ? _value.states : states as KtList<ProvinceState>,
+      tenants: tenants == freezed ? _value.tenants : tenants as KtList<User>,
       properties: properties == freezed
           ? _value.properties
           : properties as KtList<LandlordProperty>,
@@ -160,6 +176,16 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
     }
     return $ProvinceStateCopyWith<$Res>(_value.selectedState, (value) {
       return _then(_value.copyWith(selectedState: value));
+    });
+  }
+
+  @override
+  $UserCopyWith<$Res> get selectedTenant {
+    if (_value.selectedTenant == null) {
+      return null;
+    }
+    return $UserCopyWith<$Res>(_value.selectedTenant, (value) {
+      return _then(_value.copyWith(selectedTenant: value));
     });
   }
 
@@ -190,7 +216,9 @@ abstract class _$LandlordPropertyStateCopyWith<$Res>
       BasicTextField<String> street,
       BasicTextField<String> town,
       @nullable ProvinceState selectedState,
+      @nullable User selectedTenant,
       KtList<ProvinceState> states,
+      KtList<User> tenants,
       KtList<LandlordProperty> properties,
       KtList<LandlordApartment> apartments,
       @nullable LandlordProperty property,
@@ -198,6 +226,8 @@ abstract class _$LandlordPropertyStateCopyWith<$Res>
 
   @override
   $ProvinceStateCopyWith<$Res> get selectedState;
+  @override
+  $UserCopyWith<$Res> get selectedTenant;
   @override
   $LandlordPropertyCopyWith<$Res> get property;
 }
@@ -223,7 +253,9 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
     Object street = freezed,
     Object town = freezed,
     Object selectedState = freezed,
+    Object selectedTenant = freezed,
     Object states = freezed,
+    Object tenants = freezed,
     Object properties = freezed,
     Object apartments = freezed,
     Object property = freezed,
@@ -245,8 +277,12 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
       selectedState: selectedState == freezed
           ? _value.selectedState
           : selectedState as ProvinceState,
+      selectedTenant: selectedTenant == freezed
+          ? _value.selectedTenant
+          : selectedTenant as User,
       states:
           states == freezed ? _value.states : states as KtList<ProvinceState>,
+      tenants: tenants == freezed ? _value.tenants : tenants as KtList<User>,
       properties: properties == freezed
           ? _value.properties
           : properties as KtList<LandlordProperty>,
@@ -273,7 +309,9 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
       @required this.street,
       @required this.town,
       @nullable this.selectedState,
+      @nullable this.selectedTenant,
       this.states = const KtList.empty(),
+      this.tenants = const KtList.empty(),
       this.properties = const KtList.empty(),
       this.apartments = const KtList.empty(),
       @nullable this.property,
@@ -286,6 +324,7 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
         assert(street != null),
         assert(town != null),
         assert(states != null),
+        assert(tenants != null),
         assert(properties != null),
         assert(apartments != null),
         assert(response != null),
@@ -310,9 +349,15 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
   @override
   @nullable
   final ProvinceState selectedState;
+  @override
+  @nullable
+  final User selectedTenant;
   @JsonKey(defaultValue: const KtList.empty())
   @override
   final KtList<ProvinceState> states;
+  @JsonKey(defaultValue: const KtList.empty())
+  @override
+  final KtList<User> tenants;
   @JsonKey(defaultValue: const KtList.empty())
   @override
   final KtList<LandlordProperty> properties;
@@ -328,7 +373,7 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
 
   @override
   String toString() {
-    return 'LandlordPropertyState(isLoading: $isLoading, validate: $validate, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, selectedState: $selectedState, states: $states, properties: $properties, apartments: $apartments, property: $property, response: $response)';
+    return 'LandlordPropertyState(isLoading: $isLoading, validate: $validate, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, selectedState: $selectedState, selectedTenant: $selectedTenant, states: $states, tenants: $tenants, properties: $properties, apartments: $apartments, property: $property, response: $response)';
   }
 
   @override
@@ -356,8 +401,14 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
             (identical(other.selectedState, selectedState) ||
                 const DeepCollectionEquality()
                     .equals(other.selectedState, selectedState)) &&
+            (identical(other.selectedTenant, selectedTenant) ||
+                const DeepCollectionEquality()
+                    .equals(other.selectedTenant, selectedTenant)) &&
             (identical(other.states, states) ||
                 const DeepCollectionEquality().equals(other.states, states)) &&
+            (identical(other.tenants, tenants) ||
+                const DeepCollectionEquality()
+                    .equals(other.tenants, tenants)) &&
             (identical(other.properties, properties) ||
                 const DeepCollectionEquality()
                     .equals(other.properties, properties)) &&
@@ -383,7 +434,9 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
       const DeepCollectionEquality().hash(selectedState) ^
+      const DeepCollectionEquality().hash(selectedTenant) ^
       const DeepCollectionEquality().hash(states) ^
+      const DeepCollectionEquality().hash(tenants) ^
       const DeepCollectionEquality().hash(properties) ^
       const DeepCollectionEquality().hash(apartments) ^
       const DeepCollectionEquality().hash(property) ^
@@ -407,7 +460,9 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
       @required BasicTextField<String> street,
       @required BasicTextField<String> town,
       @nullable ProvinceState selectedState,
+      @nullable User selectedTenant,
       KtList<ProvinceState> states,
+      KtList<User> tenants,
       KtList<LandlordProperty> properties,
       KtList<LandlordApartment> apartments,
       @nullable LandlordProperty property,
@@ -431,7 +486,12 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
   @nullable
   ProvinceState get selectedState;
   @override
+  @nullable
+  User get selectedTenant;
+  @override
   KtList<ProvinceState> get states;
+  @override
+  KtList<User> get tenants;
   @override
   KtList<LandlordProperty> get properties;
   @override

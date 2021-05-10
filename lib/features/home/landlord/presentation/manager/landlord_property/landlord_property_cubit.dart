@@ -78,13 +78,21 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     }
   }
 
-  void init([LandlordProperty prop]) => emit(state.copyWith(
+  void init({
+    LandlordProperty prop,
+    KtList<LandlordProperty> properties,
+    KtList<User> tenants,
+  }) =>
+      emit(state.copyWith(
         name: prop?.name ?? state.name,
         propertyType: prop?.propertyType ?? state.propertyType,
         houseType: prop?.houseType ?? state.houseType,
         street: prop?.street ?? state.street,
         town: prop?.town ?? state.town,
         selectedState: prop?.state ?? state.selectedState,
+        property: prop ?? state.property,
+        tenants: tenants ?? state.tenants,
+        properties: properties ?? state.properties,
       ));
 
   Future<void> fetchAll() async {
@@ -101,8 +109,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -141,11 +149,9 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         ));
       }
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -167,14 +173,40 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         // response: some(left()),
         property: _propertyDTO?.domain?.copyWith(color: property.color),
       ));
+
+      this.fetchTenants(property: property);
     } on MissingRequiredKeysException catch (ex) {
       _handleMissingKeysException(ex);
     } on LandlordFailure catch (e) {
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
+    }
+
+    toggleLoading();
+  }
+
+  Future<void> fetchTenants({
+    LandlordProperty property,
+    UniqueId<int> id,
+  }) async {
+    toggleLoading();
+
+    try {
+      // Check if user is connected & has good internet
+      await checkInternetAndConnectivity();
+
+      final list = await _repository.tenants(property?.id?.value ?? id);
+
       emit(state.copyWith(
-        response: some(left(e)),
+        tenants: list?.map((e) => e.domain)?.toImmutableList(),
       ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+    } on MissingRequiredKeysException catch (ex) {
+      _handleMissingKeysException(ex);
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -220,11 +252,9 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         ));
       }
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -238,7 +268,7 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
     try {
       // Check if user is connected & has good internet
-      await checkInternetAndConnectivity();
+      await checkInternetAndConnectivity(true);
 
       final prop = await _repository.delete(property?.id?.value ?? id);
 
@@ -252,8 +282,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -285,8 +315,6 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         break;
       // case DioErrorType.DEFAULT:
       default:
-        print("Loggin unknown error-----");
-        log.wtf(ex);
         emit(state.copyWith(
           response: some(left(LandlordFailure.unknown())),
         ));

@@ -75,7 +75,7 @@ Widget _gridView() {
 }
 
 Widget _listView() {
-  final double _itemHeight = App.longest * 0.1;
+  final double _itemHeight = App.longest * 0.09;
   final BorderRadius _radius = BorderRadius.circular(8.0);
   final int _count = ((App.longest * 0.4) / _itemHeight).ceil();
 
@@ -136,9 +136,13 @@ Widget _listView() {
               child: InkWell(
                 splashColor: Colors.grey.shade300,
                 borderRadius: _radius,
-                onTap: () => navigator.pushLandlordPropertyDetailScreen(
-                  property: state.properties.get(i),
-                ),
+                onTap: () async {
+                  await navigator.pushLandlordPropertyDetailScreen(
+                    property: state.properties.get(i),
+                  );
+                  // Refresh properties on route pop()
+                  context.read<LandlordPropertyCubit>().fetchAll();
+                },
                 child: Container(
                   height: _itemHeight,
                   padding:

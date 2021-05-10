@@ -16,6 +16,7 @@ _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     photo: json['photo'] as String ?? '',
     street: json['street'] as String ?? '',
     town: json['town'] as String ?? '',
+    swatch: json['swatch'] as String ?? '',
     state: json['state'] == null
         ? null
         : StateDTO.fromJson(json['state'] as Map<String, dynamic>),
@@ -52,6 +53,7 @@ Map<String, dynamic> _$_$_LandlordPropertyDataToJson(
   writeNotNull('photo', instance.photo);
   writeNotNull('street', instance.street);
   writeNotNull('town', instance.town);
+  writeNotNull('swatch', instance.swatch);
   writeNotNull('state', instance.state?.toJson());
   writeNotNull('landlord', instance.landlord?.toJson());
   val['state_id'] = const IntegerSerializer().toJson(instance.stateId);

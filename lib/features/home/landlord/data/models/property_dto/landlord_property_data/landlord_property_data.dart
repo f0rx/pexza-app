@@ -28,6 +28,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String photo,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String street,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
+    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String swatch,
     @nullable @JsonKey(includeIfNull: false) StateDTO state,
     @nullable @JsonKey(includeIfNull: false) UserDTO landlord,
     @nullable
@@ -77,7 +78,15 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       );
 
   LandlordProperty get domain {
-    Color _color = AppColors.random;
+    // Get color ===> fwt 508 wed 1pm
+    Color _color = AppColors.fromHex(
+      PropertyColor(swatch).getOrNull ??
+          AppColors.stringHex(
+            AppColors.random,
+            appendHash: true,
+            withAlpha: false,
+          ),
+    );
 
     return LandlordProperty(
       id: UniqueId<int>.fromExternal(id),
@@ -89,14 +98,12 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       town: !town.isNull ? BasicTextField(town) : null,
       street: !street.isNull ? BasicTextField(street) : null,
       photo: LandlordPropertyImage(
-        "https://res.cloudinary.com/anifowosetobi"
-        "/image/upload/v1601500323/user_korsis.png",
+        !photo.isNullOrBlank ? photo : AppAssets.anonymous,
       ),
       state: !state.isNull ? state.domain : null,
       landlord: !landlord.isNull ? landlord.domain : null,
       country: !country.isNull ? BasicTextField(country) : null,
       color: MaterialColor(_color.value, AppColors.swatch(_color)),
-      // image: LandlordPropertyImage(images.random()),
       numberOfTenants:
           !numberOfTenants.isNull ? BasicTextField(numberOfTenants) : null,
       numberOfApartments: !numberOfApartments.isNull

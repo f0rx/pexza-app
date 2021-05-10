@@ -73,9 +73,11 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
     toggleLoading();
 
     try {
+      await checkInternetAndConnectivity();
+
       final unaccepted = await _repository.all(query: param);
 
-      emit(state.copyWith(assignments: unaccepted.domain()));
+      emit(state.copyWith(unaccepted: unaccepted?.domain()));
 
       ///
       final paired = await _repository.all(query: AssignmentQueryParam.paired);
@@ -83,13 +85,16 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
       final apartments =
           paired.domain().map((e) => e.tenantApartment).toMutableList();
 
-      emit(state.copyWith(apartments: apartments));
+      emit(state.copyWith(
+        paired: paired?.domain(),
+        apartments: apartments,
+      ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();

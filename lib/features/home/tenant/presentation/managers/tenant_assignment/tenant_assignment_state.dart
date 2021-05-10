@@ -8,7 +8,8 @@ abstract class TenantAssignmentState implements _$TenantAssignmentState {
   const factory TenantAssignmentState({
     @Default(false) bool isLoading,
     @Default(false) bool validate,
-    @Default(KtList.empty()) KtList<Assignment> assignments,
+    @Default(KtList.empty()) KtList<Assignment> unaccepted,
+    @Default(KtList.empty()) KtList<Assignment> paired,
     @nullable Assignment assignment,
     @Default(KtList.empty()) KtList<TenantApartment> apartments,
     @nullable TenantApartment apartment,

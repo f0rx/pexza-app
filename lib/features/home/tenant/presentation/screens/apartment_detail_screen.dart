@@ -15,9 +15,13 @@ import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 class TenantApartmentDetailScreen extends StatelessWidget
     with AutoRouteWrapper {
   final TenantApartment apartment;
+  final Assignment assignment;
 
-  const TenantApartmentDetailScreen({Key key, @required this.apartment})
-      : super(key: key);
+  const TenantApartmentDetailScreen({
+    Key key,
+    @required this.apartment,
+    @required this.assignment,
+  }) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -153,13 +157,9 @@ class TenantApartmentDetailScreen extends StatelessWidget
                             color: AppColors.primaryColor.shade400,
                             borderRadius: BorderRadius.circular(8.0),
                             child: InkWell(
-                              onTap: () async {
-                                final shouldRefresh = await navigator
-                                    .pushServiceRequestScreen(assignment: null);
-
-                                if (shouldRefresh != null && shouldRefresh)
-                                  context.read<TenantAssignmentCubit>().all();
-                              },
+                              onTap: () => navigator.pushServiceRequestScreen(
+                                assignment: assignment,
+                              ),
                               splashColor: AppColors.primaryColor.shade500,
                               borderRadius: BorderRadius.circular(8.0),
                               child: SizedBox(

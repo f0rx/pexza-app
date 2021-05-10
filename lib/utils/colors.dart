@@ -8,9 +8,22 @@ class AppColors {
   static Color fromHex(String hex) =>
       Color(int.parse(hex.substring(1, 7), radix: 16) + 0xFF000000);
 
-  static get random =>
+  static Color get random =>
       Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
           .withOpacity(1.0);
+
+  static String stringHex(
+    Color color, {
+    bool withAlpha = true,
+    bool appendHash = false,
+  }) {
+    String value = color.toString().split('(0x')[1].split(')')[0];
+
+    if (!withAlpha)
+      value = value.length > 6 ? value.replaceRange(0, 2, '') : value;
+    if (appendHash) value = "#$value";
+    return value;
+  }
 
   static Map<int, Color> swatch(Color color) {
     Color _color = color ?? AppColors.random;

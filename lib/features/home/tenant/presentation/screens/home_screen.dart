@@ -107,7 +107,7 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Visibility(
-                    visible: !s.assignments.isEmpty(),
+                    visible: !s.unaccepted.isEmpty(),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,36 +126,47 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                     visible: !s.isLoading,
                     replacement: _ShimmerLayout(count: 1),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Visibility(
-                          visible: !s.assignments.isEmpty(),
-                          child: ListView.separated(
-                            physics: NeverScrollableScrollPhysics(),
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            itemCount: s.assignments.size,
-                            separatorBuilder: (_, __) => VerticalSpace(
-                              height: App.height * 0.01,
-                            ),
-                            itemBuilder: (context, i) {
-                              final Assignment assignment =
-                                  s.assignments.getOrNull(i);
+                          visible: !s.unaccepted.isEmpty(),
+                          child: Column(
+                            children: [
+                              ListView.separated(
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                itemCount: s.unaccepted.size,
+                                separatorBuilder: (_, __) => VerticalSpace(
+                                  height: App.height * 0.01,
+                                ),
+                                itemBuilder: (context, i) {
+                                  final Assignment assignment =
+                                      s.unaccepted.getOrNull(i);
 
-                              return _SectionInfo<Assignment>(
-                                model: assignment,
-                                title:
-                                    "${assignment?.apartment?.name?.getOrEmpty}",
-                                // subtitle: "",
-                                color: assignment?.apartment?.property?.color ??
-                                    Colors.teal,
-                                onPressed: (_) async {
-                                  final shouldRefresh = await navigator
-                                      .pushProfileSetupScreen(assignment: _);
-                                  if (shouldRefresh != null && shouldRefresh)
-                                    c.read<TenantAssignmentCubit>().all();
+                                  return _SectionInfo<Assignment>(
+                                    model: assignment,
+                                    title:
+                                        "${assignment?.apartment?.name?.getOrEmpty}",
+                                    subtitle:
+                                        "${s.apartments.getOrNull(i)?.property?.street?.getOrNull ?? ''}",
+                                    color: assignment
+                                            ?.apartment?.property?.color ??
+                                        Colors.teal,
+                                    onPressed: (_) async {
+                                      final shouldRefresh = await navigator
+                                          .pushProfileSetupScreen(
+                                              assignment: _);
+                                      if (shouldRefresh != null &&
+                                          shouldRefresh)
+                                        c.read<TenantAssignmentCubit>().all();
+                                    },
+                                  );
                                 },
-                              );
-                            },
+                              ),
+                              //
+                              VerticalSpace(height: App.height * 0.05),
+                            ],
                           ),
                         ),
                         //
@@ -165,9 +176,8 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                           visible: !s.apartments.isEmpty(),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              VerticalSpace(height: App.height * 0.05),
-                              //
                               SubtitledHeader(
                                 text: "My Apartments",
                                 fontWeight: FontWeight.w700,
@@ -201,15 +211,25 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                                   _SectionInfo<TenantApartment>(
                                 model: s.apartments.getOrNull(i),
                                 title:
-                                    "${s.apartments.getOrNull(i)?.name?.getOrEmpty}",
+                                    "${s.apartments.getOrNull(i)?.name?.getOrNull ?? ''}",
                                 subtitle:
-                                    "${s.apartments.getOrNull(i)?.property?.street?.getOrEmpty}",
-                                color:
-                                    s.apartments.getOrNull(i)?.property?.color,
-                                onPressed: (_) =>
-                                    navigator.pushTenantApartmentDetailScreen(
-                                  apartment: s.apartments.getOrNull(i),
-                                ),
+                                    "${s.apartments.getOrNull(i)?.property?.street?.getOrNull ?? ''}",
+                                color: s.apartments
+                                        .getOrNull(i)
+                                        ?.property
+                                        ?.color ??
+                                    Colors.amberAccent,
+                                onPressed: (current) {
+                                  return navigator
+                                      .pushTenantApartmentDetailScreen(
+                                    apartment: s.apartments.getOrNull(i),
+                                    assignment: s.paired.firstOrNull(
+                                      (e) =>
+                                          e?.apartment?.id?.value ==
+                                          current?.id?.value,
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -258,7 +278,7 @@ class _SectionInfo<M> extends StatelessWidget {
         height: _itemHeight,
         padding: EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
         decoration: BoxDecoration(
-          color: color.withOpacity(opacity),
+          color: color?.withOpacity(opacity),
           borderRadius: _radius,
         ),
         child: Row(
@@ -298,7 +318,7 @@ class _SectionInfo<M> extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.caption.copyWith(
                                   color: Helpers.computeLuminance(
-                                      color.withOpacity(opacity)),
+                                      color?.withOpacity(opacity)),
                                   fontSize: 14.0,
                                 ),
                             maxLines: 2,

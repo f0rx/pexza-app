@@ -22,6 +22,9 @@ class LandlordMaintenanceRequestScreen extends StatefulWidget
     return BlocProvider(
       create: (_) => getIt<LandlordMaintenanceCubit>()..all(),
       child: BlocConsumer<LandlordMaintenanceCubit, LandlordMaintenanceState>(
+        listenWhen: (p, c) =>
+            p.response.getOrElse(() => null) !=
+            c.response.getOrElse(() => null),
         listener: (c, s) => s.response.fold(
           () => null,
           (either) => BottomAlertDialog.show(
@@ -132,33 +135,8 @@ class _MaintenancePanelBuilder extends StatelessWidget {
               horizontal: Helpers.appPadding,
               vertical: App.shortest * 0.04,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SubtitledHeader(text: "15 Requests"),
-                // Flexible(
-                //   child: Material(
-                //     color: Colors.transparent,
-                //     child: InkWell(
-                //       onTap: () => navigator.pushLandlordTenantsListingScreen(),
-                //       borderRadius: BorderRadius.circular(50.0),
-                //       child: Padding(
-                //         padding: const EdgeInsets.symmetric(
-                //           horizontal: 12.0,
-                //           vertical: 7.0,
-                //         ),
-                //         child: AutoSizeText(
-                //           "See all",
-                //           style: TextStyle(
-                //             fontSize: 14.5,
-                //             color: App.theme.accentColor,
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ],
+            child: SubtitledHeader(
+              text: "${s?.maintenances?.size} Requests",
             ),
           ),
           //
@@ -182,6 +160,8 @@ class _MaintenancePanelBuilder extends StatelessWidget {
                 if (shouldRefresh != null && shouldRefresh)
                   await c.read<LandlordMaintenanceCubit>().all();
               },
+              padding: EdgeInsets.only(
+                  bottom: index == s.maintenances.lastIndex ? 30.0 : 0.0),
               tenant: s.maintenances.getOrNull(index)?.assignment?.tenant,
               subtitleColor: UrgencyResolver(
                 s.maintenances.getOrNull(index)?.urgency?.getOrEmpty,
@@ -217,7 +197,7 @@ class _MaintenanceBodyBuilder extends StatelessWidget {
                 textInputAction: TextInputAction.search,
                 style: TextStyle(fontSize: 17.0),
                 decoration: const InputDecoration(
-                  hintText: "Search tenant..",
+                  hintText: "Search by tenant or apartment..",
                   contentPadding: EdgeInsets.only(top: 12.0, bottom: 12.0),
                   prefixIcon: Icon(
                     Icons.search_sharp,

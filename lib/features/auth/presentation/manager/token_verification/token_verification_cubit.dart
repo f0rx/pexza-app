@@ -103,23 +103,18 @@ class TokenVerificationCubit extends Cubit<TokenVerificationState> {
   void rejectAssignment() async {
     toggleLoading();
 
-    // Validate form errors
-    emit(state.copyWith(validate: true));
-
     try {
-      if (state.code.isValid) {
-        // Check if user is connected & has good internet
-        await checkInternetAndConnectivity(true);
+      // Check if user is connected & has good internet
+      await checkInternetAndConnectivity(true);
 
-        final _result = await _repository.reject(state.assignment?.id?.value);
+      final _result = await _repository.reject(state.assignment?.id?.value);
 
-        emit(state.copyWith(
-          assignment: _result?.domain(),
-          response: some(right(LandlordSuccess(
-            message: "Ok! The assignment was rejected.",
-          ))),
-        ));
-      }
+      emit(state.copyWith(
+        assignment: _result?.domain(),
+        response: some(right(LandlordSuccess(
+          message: "Ok! The assignment was rejected.",
+        ))),
+      ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(
         response: some(left(e)),

@@ -113,6 +113,9 @@ _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
     createdAt: json['created_at'] as String,
     updatedAt: json['updated_at'] as String,
     deletedAt: json['deleted_at'] as String,
+    apartment: json['apartment'] == null
+        ? null
+        : BaseApartmentDTO.fromJson(json['apartment'] as Map<String, dynamic>),
   );
 }
 
@@ -144,5 +147,6 @@ Map<String, dynamic> _$_$_UserDTOToJson(_$_UserDTO instance) {
   writeNotNull('created_at', instance.createdAt);
   writeNotNull('updated_at', instance.updatedAt);
   writeNotNull('deleted_at', instance.deletedAt);
+  writeNotNull('apartment', instance.apartment?.toJson());
   return val;
 }
