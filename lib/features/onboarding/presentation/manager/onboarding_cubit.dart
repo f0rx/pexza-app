@@ -50,6 +50,9 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     _internetConnectionSuscription ??= _connectionChecker.onStatusChange.listen(
       (result) async {
         emit(state.copyWith(
+          isConnected: result == DataConnectionStatus.disconnected
+              ? left(OnBoardingFailure.notConnected())
+              : right(true),
           hasInternet: result == DataConnectionStatus.disconnected
               ? left(OnBoardingFailure.poorInternet())
               : right((await _connectivity.checkConnectivity()) !=
