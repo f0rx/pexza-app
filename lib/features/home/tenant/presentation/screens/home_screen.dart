@@ -22,56 +22,26 @@ import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 class TenantHomeScreen extends StatefulWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => getIt<TenantApartmentCubit>()..all()),
-        BlocProvider(create: (_) => getIt<TenantAssignmentCubit>()..all()),
-      ],
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<TenantApartmentCubit, TenantApartmentState>(
-            listener: (_c, _s) => _s.response.fold(
-              () => null,
-              (either) => BottomAlertDialog.show(
-                context,
-                message: either.fold(
-                  (f) => f.message ?? f.error,
-                  (r) => r.message ?? r.details,
-                ),
-                icon:
-                    either.fold((_) => null, (r) => Icons.check_circle_rounded),
-                iconColor:
-                    either.fold((_) => null, (r) => AppColors.successGreen),
-                shouldIconPulse: either.fold((_) => null, (r) => false),
-                callback: either.fold(
-                  (_) => null,
-                  (r) => (_) => navigator.pop(),
-                ),
-              ),
+    return BlocProvider(
+      create: (_) => getIt<TenantAssignmentCubit>()..all(),
+      child: BlocListener<TenantAssignmentCubit, TenantAssignmentState>(
+        listener: (_c, _s) => _s.response.fold(
+          () => null,
+          (either) => BottomAlertDialog.show(
+            context,
+            message: either.fold(
+              (f) => f.message ?? f.error,
+              (r) => r.message ?? r.details,
+            ),
+            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
+            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
+            shouldIconPulse: either.fold((_) => null, (r) => false),
+            callback: either.fold(
+              (_) => null,
+              (r) => (_) => navigator.pop(),
             ),
           ),
-          BlocListener<TenantAssignmentCubit, TenantAssignmentState>(
-            listener: (_c, _s) => _s.response.fold(
-              () => null,
-              (either) => BottomAlertDialog.show(
-                context,
-                message: either.fold(
-                  (f) => f.message ?? f.error,
-                  (r) => r.message ?? r.details,
-                ),
-                icon:
-                    either.fold((_) => null, (r) => Icons.check_circle_rounded),
-                iconColor:
-                    either.fold((_) => null, (r) => AppColors.successGreen),
-                shouldIconPulse: either.fold((_) => null, (r) => false),
-                callback: either.fold(
-                  (_) => null,
-                  (r) => (_) => navigator.pop(),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
         child: this,
       ),
     );
@@ -137,104 +107,134 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Visibility(
-                    visible: !s.assignments.isEmpty(),
-                    child: SubtitledHeader(
-                      text: "Your Pending Assignments",
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  //
-                  VerticalSpace(height: App.shortest * 0.02),
-                  //
-                  Visibility(
-                    visible: !s.isLoading,
-                    replacement: _ShimmerLayout(count: 1),
-                    child: Visibility(
-                      visible: !s.assignments.isEmpty(),
-                      child: ListView.separated(
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemCount: s.assignments.size,
-                        separatorBuilder: (_, __) => VerticalSpace(
-                          height: App.height * 0.01,
-                        ),
-                        itemBuilder: (context, i) {
-                          final Assignment assignment =
-                              s.assignments.getOrNull(i);
-
-                          return _SectionInfo<Assignment>(
-                            model: assignment,
-                            title: "${assignment?.apartment?.name?.getOrEmpty}",
-                            subtitle: "",
-                            color: assignment?.apartment?.property?.color ??
-                                Colors.teal,
-                            onPressed: (_) {},
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            //
-            BlocBuilder<TenantApartmentCubit, TenantApartmentState>(
-              builder: (c, s) => Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Visibility(
-                    visible: !s.apartments.isEmpty(),
+                    visible: !s.unaccepted.isEmpty(),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        VerticalSpace(height: App.height * 0.05),
-                        //
                         SubtitledHeader(
-                          text: "My Apartments",
+                          text: "Your Pending Assignments",
                           fontWeight: FontWeight.w700,
                         ),
+                        //
+                        VerticalSpace(height: App.shortest * 0.02),
                       ],
                     ),
                   ),
                   //
-                  VerticalSpace(height: App.shortest * 0.02),
-                  //
                   Visibility(
                     visible: !s.isLoading,
-                    replacement: _ShimmerLayout(),
-                    child: Visibility(
-                      visible: !s.apartments.isEmpty(),
-                      replacement: Center(
-                        child: Text(
-                          "No Apartments found!",
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                      ),
-                      child: ListView.separated(
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        itemCount: s.apartments.size,
-                        separatorBuilder: (_, __) => VerticalSpace(
-                          height: App.height * 0.01,
-                        ),
-                        itemBuilder: (context, i) =>
-                            _SectionInfo<TenantApartment>(
-                          model: s.apartments.getOrNull(i),
-                          title:
-                              "${s.apartments.getOrNull(i)?.name?.getOrEmpty}",
-                          subtitle:
-                              "${s.apartments.getOrNull(i)?.property?.street?.getOrEmpty}",
-                          color: s.apartments.getOrNull(i)?.property?.color,
-                          onPressed: (_) =>
-                              navigator.pushTenantApartmentDetailScreen(
-                            apartment: s.apartments.getOrNull(i),
+                    replacement: _ShimmerLayout(count: 1),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Visibility(
+                          visible: !s.unaccepted.isEmpty(),
+                          child: Column(
+                            children: [
+                              ListView.separated(
+                                physics: NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                itemCount: s.unaccepted.size,
+                                separatorBuilder: (_, __) => VerticalSpace(
+                                  height: App.height * 0.01,
+                                ),
+                                itemBuilder: (context, i) {
+                                  final Assignment assignment =
+                                      s.unaccepted.getOrNull(i);
+
+                                  return _SectionInfo<Assignment>(
+                                    model: assignment,
+                                    title:
+                                        "${assignment?.apartment?.name?.getOrEmpty}",
+                                    subtitle:
+                                        "${s.apartments.getOrNull(i)?.property?.street?.getOrNull ?? ''}",
+                                    color: assignment
+                                            ?.apartment?.property?.color ??
+                                        Colors.teal,
+                                    onPressed: (_) async {
+                                      final shouldRefresh = await navigator
+                                          .pushProfileSetupScreen(
+                                              assignment: _);
+                                      if (shouldRefresh != null &&
+                                          shouldRefresh)
+                                        c.read<TenantAssignmentCubit>().all();
+                                    },
+                                  );
+                                },
+                              ),
+                              //
+                              VerticalSpace(height: App.height * 0.05),
+                            ],
                           ),
                         ),
-                      ),
+                        //
+                        ////
+                        //
+                        Visibility(
+                          visible: !s.apartments.isEmpty(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SubtitledHeader(
+                                text: "My Apartments",
+                                fontWeight: FontWeight.w700,
+                              ),
+                              //
+                              VerticalSpace(height: App.shortest * 0.02),
+                            ],
+                          ),
+                        ),
+                        //
+                        Visibility(
+                          visible: !s.isLoading,
+                          replacement: _ShimmerLayout(),
+                          child: Visibility(
+                            visible: !s.apartments.isEmpty(),
+                            replacement: Center(
+                              child: Text(
+                                "No Apartments found!",
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                            ),
+                            child: ListView.separated(
+                              physics: NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemCount: s.apartments.size,
+                              separatorBuilder: (_, __) => VerticalSpace(
+                                height: App.height * 0.01,
+                              ),
+                              itemBuilder: (context, i) =>
+                                  _SectionInfo<TenantApartment>(
+                                model: s.apartments.getOrNull(i),
+                                title:
+                                    "${s.apartments.getOrNull(i)?.name?.getOrNull ?? ''}",
+                                subtitle:
+                                    "${s.apartments.getOrNull(i)?.property?.street?.getOrNull ?? ''}",
+                                color: s.apartments
+                                        .getOrNull(i)
+                                        ?.property
+                                        ?.color ??
+                                    AppColors.random,
+                                onPressed: (current) {
+                                  return navigator
+                                      .pushTenantApartmentDetailScreen(
+                                    apartment: s.apartments.getOrNull(i),
+                                    assignment: s.paired.firstOrNull(
+                                      (e) =>
+                                          e?.apartment?.id?.value ==
+                                          current?.id?.value,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -259,15 +259,15 @@ class _SectionInfo<M> extends StatelessWidget {
     @required this.model,
     @required this.color,
     @required this.title,
-    @required this.subtitle,
-    @required this.onPressed,
+    this.subtitle = '',
+    this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double _itemHeight = App.longest * 0.1;
+    final double _itemHeight =
+        !subtitle.isNullOrBlank ? App.longest * 0.09 : App.longest * 0.065;
     final BorderRadius _radius = BorderRadius.circular(8.0);
-    final int _count = ((App.longest * 0.4) / _itemHeight).ceil();
     final double opacity = 0.3;
 
     return InkWell(
@@ -278,7 +278,7 @@ class _SectionInfo<M> extends StatelessWidget {
         height: _itemHeight,
         padding: EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
         decoration: BoxDecoration(
-          color: color.withOpacity(opacity),
+          color: color?.withOpacity(opacity),
           borderRadius: _radius,
         ),
         child: Row(
@@ -303,19 +303,28 @@ class _SectionInfo<M> extends StatelessWidget {
                       maxLines: 1,
                     ),
                     //
-                    VerticalSpace(height: 6.0),
-                    //
-                    AutoSizeText(
-                      "${subtitle.removeNewLines()}",
-                      softWrap: true,
-                      wrapWords: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.caption.copyWith(
-                            color: Helpers.computeLuminance(
-                                color.withOpacity(opacity)),
-                            fontSize: 14.0,
+                    Visibility(
+                      visible: !subtitle.isNullOrBlank,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          VerticalSpace(height: 6.0),
+                          //
+                          AutoSizeText(
+                            "${subtitle.removeNewLines()}",
+                            softWrap: true,
+                            wrapWords: true,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.caption.copyWith(
+                                  color: Helpers.computeLuminance(
+                                      color?.withOpacity(opacity)),
+                                  fontSize: 14.0,
+                                ),
+                            maxLines: 2,
                           ),
-                      maxLines: 2,
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -342,7 +351,7 @@ class _SectionInfo<M> extends StatelessWidget {
 }
 
 class _ShimmerLayout extends StatelessWidget {
-  static double kDefaultHeight = App.longest * 0.1;
+  static double kDefaultHeight = App.longest * 0.09;
   static int kDefaultCount = (App.longest * 0.4 / kDefaultHeight).ceil();
 
   final double _height;

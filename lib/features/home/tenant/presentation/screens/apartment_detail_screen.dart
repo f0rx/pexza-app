@@ -15,17 +15,19 @@ import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 class TenantApartmentDetailScreen extends StatelessWidget
     with AutoRouteWrapper {
   final TenantApartment apartment;
+  final Assignment assignment;
 
   const TenantApartmentDetailScreen({
     Key key,
-    this.apartment,
+    @required this.apartment,
+    @required this.assignment,
   }) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<TenantApartmentCubit>()..init(),
-      child: BlocConsumer<TenantApartmentCubit, TenantApartmentState>(
+      create: (_) => getIt<TenantAssignmentCubit>()..init(apartment: apartment),
+      child: BlocConsumer<TenantAssignmentCubit, TenantAssignmentState>(
         listener: (c, s) => s.response.fold(
           () => null,
           (either) => BottomAlertDialog.show(
@@ -44,7 +46,7 @@ class TenantApartmentDetailScreen extends StatelessWidget
           ),
         ),
         builder: (c, s) => PortalEntry(
-          visible: c.watch<TenantApartmentCubit>().state.isLoading,
+          visible: c.watch<TenantAssignmentCubit>().state.isLoading,
           portal: App.circularLoadingOverlay,
           child: this,
         ),
@@ -155,13 +157,9 @@ class TenantApartmentDetailScreen extends StatelessWidget
                             color: AppColors.primaryColor.shade400,
                             borderRadius: BorderRadius.circular(8.0),
                             child: InkWell(
-                              onTap: () async {
-                                final shouldRefresh = await navigator
-                                    .pushServiceRequestScreen(assignment: null);
-
-                                if (shouldRefresh != null && shouldRefresh)
-                                  context.read<TenantApartmentCubit>().all();
-                              },
+                              onTap: () => navigator.pushServiceRequestScreen(
+                                assignment: assignment,
+                              ),
                               splashColor: AppColors.primaryColor.shade500,
                               borderRadius: BorderRadius.circular(8.0),
                               child: SizedBox(

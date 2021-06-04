@@ -68,6 +68,9 @@ class LandlordMaintenanceCubit extends Cubit<LandlordMaintenanceState> {
     try {
       MaintenanceDTOList list;
 
+      // Check if user is connected & has good internet
+      await checkInternetAndConnectivity(false);
+
       if (!apartment.isNull)
         list = await _repository.allForApartment(apartment?.id?.value);
       else if (!assignment.isNull)
@@ -82,8 +85,8 @@ class LandlordMaintenanceCubit extends Cubit<LandlordMaintenanceState> {
     } on LandlordFailure catch (e) {
       // Update failure state
       emit(state.copyWith(response: some(left(e))));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -102,7 +105,7 @@ class LandlordMaintenanceCubit extends Cubit<LandlordMaintenanceState> {
 
     try {
       // Check if user is connected & has good internet
-      await checkInternetAndConnectivity(true);
+      await checkInternetAndConnectivity();
 
       final _maintenanceDTO = await _repository.update(
         id?.value,
@@ -116,11 +119,9 @@ class LandlordMaintenanceCubit extends Cubit<LandlordMaintenanceState> {
         ))),
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -136,9 +137,7 @@ class LandlordMaintenanceCubit extends Cubit<LandlordMaintenanceState> {
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.receiveTimeout()),
-        )));
+            response: some(left(LandlordFailure.receiveTimeout()))));
         break;
       case DioErrorType.RESPONSE:
         emit(state.copyWith(
@@ -148,17 +147,13 @@ class LandlordMaintenanceCubit extends Cubit<LandlordMaintenanceState> {
         ));
         break;
       case DioErrorType.SEND_TIMEOUT:
-        emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.timeout()),
-        )));
+        emit(state.copyWith(response: some(left(LandlordFailure.timeout()))));
         break;
       case DioErrorType.DEFAULT:
       default:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.unknown()),
-        )));
+          response: some(left(LandlordFailure.unknown())),
+        ));
     }
   }
 }

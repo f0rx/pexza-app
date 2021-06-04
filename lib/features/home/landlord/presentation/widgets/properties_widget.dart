@@ -8,10 +8,12 @@ import 'package:pexza/widgets/widgets.dart';
 class LandlordProperties extends StatelessWidget {
   final Widget appBar;
   final Widget fab;
+  final VoidCallback addPropertyOnPressed;
 
   LandlordProperties({
     Key key,
     this.appBar,
+    this.addPropertyOnPressed,
     this.fab = const SizedBox(),
   }) : super(key: key);
 
@@ -132,7 +134,7 @@ class LandlordProperties extends StatelessWidget {
                                 //
                                 Flexible(
                                   child: AutoSizeText(
-                                    "Request repair and maintenance service.",
+                                    "Attend to requests, repairs and maintenance services.",
                                     softWrap: true,
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
@@ -155,7 +157,7 @@ class LandlordProperties extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(8.0),
                       child: InkWell(
-                        onTap: () => navigator.pushLandlordAddPropertyScreen(),
+                        onTap: addPropertyOnPressed,
                         splashColor: AppColors.primaryColor.shade500,
                         borderRadius: BorderRadius.circular(8.0),
                         child: SizedBox(
@@ -181,7 +183,7 @@ class LandlordProperties extends StatelessWidget {
                                 //
                                 Flexible(
                                   child: AutoSizeText(
-                                    "Check Rent due date and pay rent your rent.",
+                                    "Click here to Add your new property.",
                                     softWrap: true,
                                     wrapWords: true,
                                     style: TextStyle(

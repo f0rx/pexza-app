@@ -44,19 +44,19 @@ class _$MaintenanceDTODataTearOff {
       @JsonKey(includeIfNull: false)
           AssignmentDTOData assignment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "fixed_at")
+      @JsonKey(includeIfNull: false, name: 'fixed_at')
       @TimestampConverter()
           String fixedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) {
     return _MaintenanceDTOData(
@@ -113,19 +113,19 @@ mixin _$MaintenanceDTOData {
   @JsonKey(includeIfNull: false)
   AssignmentDTOData get assignment;
   @nullable
-  @JsonKey(includeIfNull: false, name: "fixed_at")
+  @JsonKey(includeIfNull: false, name: 'fixed_at')
   @TimestampConverter()
   String get fixedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
 
@@ -166,19 +166,19 @@ abstract class $MaintenanceDTODataCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           AssignmentDTOData assignment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "fixed_at")
+      @JsonKey(includeIfNull: false, name: 'fixed_at')
       @TimestampConverter()
           String fixedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -286,19 +286,19 @@ abstract class _$MaintenanceDTODataCopyWith<$Res>
       @JsonKey(includeIfNull: false)
           AssignmentDTOData assignment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "fixed_at")
+      @JsonKey(includeIfNull: false, name: 'fixed_at')
       @TimestampConverter()
           String fixedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt});
 
@@ -387,19 +387,19 @@ class _$_MaintenanceDTOData extends _MaintenanceDTOData {
       @JsonKey(includeIfNull: false)
           this.assignment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "fixed_at")
+      @JsonKey(includeIfNull: false, name: 'fixed_at')
       @TimestampConverter()
           this.fixedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           this.createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           this.updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           this.deletedAt})
       : super._();
@@ -442,22 +442,22 @@ class _$_MaintenanceDTOData extends _MaintenanceDTOData {
   final AssignmentDTOData assignment;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "fixed_at")
+  @JsonKey(includeIfNull: false, name: 'fixed_at')
   @TimestampConverter()
   final String fixedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   final String createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   final String updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   final String deletedAt;
 
@@ -562,19 +562,19 @@ abstract class _MaintenanceDTOData extends MaintenanceDTOData {
       @JsonKey(includeIfNull: false)
           AssignmentDTOData assignment,
       @nullable
-      @JsonKey(includeIfNull: false, name: "fixed_at")
+      @JsonKey(includeIfNull: false, name: 'fixed_at')
       @TimestampConverter()
           String fixedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "created_at")
+      @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "updated_at")
+      @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
           String updatedAt,
       @nullable
-      @JsonKey(includeIfNull: false, name: "deleted_at")
+      @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
           String deletedAt}) = _$_MaintenanceDTOData;
 
@@ -616,22 +616,22 @@ abstract class _MaintenanceDTOData extends MaintenanceDTOData {
   AssignmentDTOData get assignment;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "fixed_at")
+  @JsonKey(includeIfNull: false, name: 'fixed_at')
   @TimestampConverter()
   String get fixedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "created_at")
+  @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   String get createdAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "updated_at")
+  @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
   String get updatedAt;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, name: "deleted_at")
+  @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
   @override

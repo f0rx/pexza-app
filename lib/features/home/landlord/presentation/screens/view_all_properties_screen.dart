@@ -108,7 +108,7 @@ class _ViewAllPropertiesScreenState extends State<ViewAllPropertiesScreen>
       child: ScaleTransition(
         scale: prop.animatable.animate(_controller),
         child: Container(
-          child: Text("hello"),
+          child: Text("No properties"),
         ),
       ),
     );

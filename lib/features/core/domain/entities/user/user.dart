@@ -6,6 +6,7 @@ import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/domain/entities/role/role.dart';
 import 'package:pexza/features/core/domain/entities/unique_id.dart';
 import 'package:pexza/features/core/domain/entities/user/base_user.dart';
+import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/utils/utils.dart';
 
 import 'auth_provider.dart';
@@ -28,6 +29,7 @@ abstract class User implements _$User, BaseUser {
     @nullable DateTimeField dateOfBirth,
     @nullable bool isEmailVerified,
     @nullable AuthProvider provider,
+    @nullable TenantApartment apartment,
     @nullable Phone phone,
     @nullable Password password,
     @nullable String photo,

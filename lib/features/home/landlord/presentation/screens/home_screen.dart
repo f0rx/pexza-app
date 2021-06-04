@@ -42,52 +42,65 @@ class LandlordHomeScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
-      builder: (c, state) => PortalEntry(
-        visible: c.watch<LandlordPropertyCubit>().state.isLoading,
-        ///// SHOW THIS WHEN LOADING (Without FAB) /////
-        portal: LandlordProperties(
+      builder: (c, state) => Visibility(
+        visible: !c.watch<LandlordPropertyCubit>().state.isLoading &&
+            c.watch<LandlordPropertyCubit>().state.properties.isEmpty(),
+        //////// Replace with Properties screen if NOT EMPTY ///////
+        replacement: LandlordProperties(
           appBar: HomeAppBar(
             onPressed: () => navigator.pushAccountScreen(),
           ),
-        ),
-        child: Visibility(
-          visible: !c.watch<LandlordPropertyCubit>().state.isLoading &&
-              c.watch<LandlordPropertyCubit>().state.properties.isEmpty(),
-          //////// Replace with Properties screen if NOT EMPTY ///////
-          replacement: LandlordProperties(
-            appBar: HomeAppBar(
-              onPressed: () => navigator.pushAccountScreen(),
-            ),
-            fab: FABAddNew(
-              onPressed: () => navigator.pushLandlordAddPropertyScreen(),
+          addPropertyOnPressed: () async {
+            final shouldRefresh =
+                await navigator.pushLandlordAddPropertyScreen();
+
+            if (shouldRefresh != null && shouldRefresh)
+              c.read<LandlordPropertyCubit>().fetchAll();
+          },
+          fab: Visibility(
+            visible: !c.watch<LandlordPropertyCubit>().state.isLoading,
+            child: FABAddNew(
+              onPressed: () async {
+                final shouldRefresh =
+                    await navigator.pushLandlordAddPropertyScreen();
+
+                if (shouldRefresh != null && shouldRefresh)
+                  c.read<LandlordPropertyCubit>().fetchAll();
+              },
               heroTag: Constants.kAddEditPropertyHeroTag,
               tooltip: "Add new Property",
             ),
           ),
-          /////// Empty property screen ////////
-          child: EmptyLandlordProps(
-            appBar: HomeAppBar(
-              onPressed: () => navigator.pushAccountScreen(),
+        ),
+        /////// Empty property screen ////////
+        child: EmptyLandlordProps(
+          appBar: HomeAppBar(
+            onPressed: () => navigator.pushAccountScreen(),
+          ),
+          title: "No Property Listed",
+          description: "You have not listed a property yet. "
+              "Click the button below to add properties.",
+          fab: AvatarGlow(
+            animate: true,
+            glowColor: Helpers.computeLuminance(
+              Theme.of(context).backgroundColor,
             ),
-            title: "No Property Listed",
-            description: "You have not listed a property yet. "
-                "Click the button below to add properties.",
-            fab: AvatarGlow(
-              animate: true,
-              glowColor: Helpers.computeLuminance(
-                Theme.of(context).backgroundColor,
-              ),
-              endRadius: App.shortest * 0.11,
-              duration: const Duration(milliseconds: 1500),
-              repeatPauseDuration: const Duration(milliseconds: 100),
-              repeat: true,
-              showTwoGlows: false,
-              curve: Curves.easeInOutCubic,
-              child: FABAddNew(
-                onPressed: () => navigator.pushLandlordAddPropertyScreen(),
-                heroTag: Constants.kAddEditPropertyHeroTag,
-                tooltip: "Add new Property",
-              ),
+            endRadius: App.shortest * 0.11,
+            duration: const Duration(milliseconds: 1500),
+            repeatPauseDuration: const Duration(milliseconds: 100),
+            repeat: true,
+            showTwoGlows: false,
+            curve: Curves.easeInOutCubic,
+            child: FABAddNew(
+              onPressed: () async {
+                final shouldRefresh =
+                    await navigator.pushLandlordAddPropertyScreen();
+
+                if (shouldRefresh != null && shouldRefresh)
+                  c.read<LandlordPropertyCubit>().fetchAll();
+              },
+              heroTag: Constants.kAddEditPropertyHeroTag,
+              tooltip: "Add new Property",
             ),
           ),
         ),

@@ -28,7 +28,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<LandlordPropertyCubit>()..init(property),
+      create: (_) => getIt<LandlordPropertyCubit>()..init(prop: property),
       child: BlocConsumer<LandlordPropertyCubit, LandlordPropertyState>(
         listener: (c, s) => s.response.fold(
           () => null,
@@ -43,7 +43,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
             shouldIconPulse: either.fold((_) => null, (r) => false),
             callback: either.fold(
               (_) => null,
-              (r) => (_) => navigator.pop(),
+              (r) => r.popRoute ? (_) => navigator.pop(true) : null,
             ),
           ),
         ),

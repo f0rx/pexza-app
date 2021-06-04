@@ -24,6 +24,7 @@ class _$UserTearOff {
       @nullable DateTimeField dateOfBirth,
       @nullable bool isEmailVerified,
       @nullable AuthProvider provider,
+      @nullable TenantApartment apartment,
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
@@ -42,6 +43,7 @@ class _$UserTearOff {
       dateOfBirth: dateOfBirth,
       isEmailVerified: isEmailVerified,
       provider: provider,
+      apartment: apartment,
       phone: phone,
       password: password,
       photo: photo,
@@ -79,6 +81,8 @@ mixin _$User {
   @nullable
   AuthProvider get provider;
   @nullable
+  TenantApartment get apartment;
+  @nullable
   Phone get phone;
   @nullable
   Password get password;
@@ -113,6 +117,7 @@ abstract class $UserCopyWith<$Res> {
       @nullable DateTimeField dateOfBirth,
       @nullable bool isEmailVerified,
       @nullable AuthProvider provider,
+      @nullable TenantApartment apartment,
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
@@ -121,6 +126,8 @@ abstract class $UserCopyWith<$Res> {
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
+
+  $TenantApartmentCopyWith<$Res> get apartment;
 }
 
 /// @nodoc
@@ -142,6 +149,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object dateOfBirth = freezed,
     Object isEmailVerified = freezed,
     Object provider = freezed,
+    Object apartment = freezed,
     Object phone = freezed,
     Object password = freezed,
     Object photo = freezed,
@@ -167,6 +175,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           : isEmailVerified as bool,
       provider:
           provider == freezed ? _value.provider : provider as AuthProvider,
+      apartment: apartment == freezed
+          ? _value.apartment
+          : apartment as TenantApartment,
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
       photo: photo == freezed ? _value.photo : photo as String,
@@ -183,6 +194,16 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       deletedAt:
           deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
+  }
+
+  @override
+  $TenantApartmentCopyWith<$Res> get apartment {
+    if (_value.apartment == null) {
+      return null;
+    }
+    return $TenantApartmentCopyWith<$Res>(_value.apartment, (value) {
+      return _then(_value.copyWith(apartment: value));
+    });
   }
 }
 
@@ -201,6 +222,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @nullable DateTimeField dateOfBirth,
       @nullable bool isEmailVerified,
       @nullable AuthProvider provider,
+      @nullable TenantApartment apartment,
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
@@ -209,6 +231,9 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
+
+  @override
+  $TenantApartmentCopyWith<$Res> get apartment;
 }
 
 /// @nodoc
@@ -231,6 +256,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object dateOfBirth = freezed,
     Object isEmailVerified = freezed,
     Object provider = freezed,
+    Object apartment = freezed,
     Object phone = freezed,
     Object password = freezed,
     Object photo = freezed,
@@ -256,6 +282,9 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           : isEmailVerified as bool,
       provider:
           provider == freezed ? _value.provider : provider as AuthProvider,
+      apartment: apartment == freezed
+          ? _value.apartment
+          : apartment as TenantApartment,
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
       photo: photo == freezed ? _value.photo : photo as String,
@@ -287,6 +316,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       @nullable this.dateOfBirth,
       @nullable this.isEmailVerified,
       @nullable this.provider,
+      @nullable this.apartment,
       @nullable this.phone,
       @nullable this.password,
       @nullable this.photo,
@@ -326,6 +356,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final AuthProvider provider;
   @override
   @nullable
+  final TenantApartment apartment;
+  @override
+  @nullable
   final Phone phone;
   @override
   @nullable
@@ -351,7 +384,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, phone: $phone, password: $password, photo: $photo, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'User(id: $id, role: $role, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, apartment: $apartment, phone: $phone, password: $password, photo: $photo, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -368,6 +401,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('dateOfBirth', dateOfBirth))
       ..add(DiagnosticsProperty('isEmailVerified', isEmailVerified))
       ..add(DiagnosticsProperty('provider', provider))
+      ..add(DiagnosticsProperty('apartment', apartment))
       ..add(DiagnosticsProperty('phone', phone))
       ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('photo', photo))
@@ -407,6 +441,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
             (identical(other.provider, provider) ||
                 const DeepCollectionEquality()
                     .equals(other.provider, provider)) &&
+            (identical(other.apartment, apartment) ||
+                const DeepCollectionEquality()
+                    .equals(other.apartment, apartment)) &&
             (identical(other.phone, phone) ||
                 const DeepCollectionEquality().equals(other.phone, phone)) &&
             (identical(other.password, password) ||
@@ -445,6 +482,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(dateOfBirth) ^
       const DeepCollectionEquality().hash(isEmailVerified) ^
       const DeepCollectionEquality().hash(provider) ^
+      const DeepCollectionEquality().hash(apartment) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(photo) ^
@@ -472,6 +510,7 @@ abstract class _User extends User {
       @nullable DateTimeField dateOfBirth,
       @nullable bool isEmailVerified,
       @nullable AuthProvider provider,
+      @nullable TenantApartment apartment,
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
@@ -508,6 +547,9 @@ abstract class _User extends User {
   @override
   @nullable
   AuthProvider get provider;
+  @override
+  @nullable
+  TenantApartment get apartment;
   @override
   @nullable
   Phone get phone;

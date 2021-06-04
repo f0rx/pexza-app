@@ -25,6 +25,9 @@ abstract class PropertyRepository {
   @GET("/landlord/property/{id}")
   Future<LandlordPropertyDTO> show(@Path("id") int id);
 
+  @GET("/landlord/property/tenants/{id}/list")
+  Future<List<UserDTO>> tenants(@Path("id") int id);
+
   @PUT("/landlord/property/{id}")
   Future<LandlordPropertyDTO> update(
     @Path() int id,

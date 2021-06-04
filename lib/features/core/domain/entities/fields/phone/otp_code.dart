@@ -4,14 +4,13 @@ import 'package:pexza/features/core/domain/failures/field_object/field_object_ex
 import 'package:pexza/features/core/domain/validator/validator.dart';
 
 class OTPCode extends FieldObject<String> {
-  static const PHONE_VERIFICATION_LENGTH = 6;
+  static const CODE_LENGTH = 5;
 
   final Either<FieldObjectException<String>, String> value;
 
   factory OTPCode(String input) {
     assert(input != null);
-    return OTPCode._(
-        Validator.otpCodeValidator(input, max: PHONE_VERIFICATION_LENGTH));
+    return OTPCode._(Validator.otpCodeValidator(input, max: CODE_LENGTH));
   }
 
   const OTPCode._([this.value]);
