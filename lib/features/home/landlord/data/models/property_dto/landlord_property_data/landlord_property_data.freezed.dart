@@ -40,8 +40,8 @@ class _$LandlordPropertyDataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String swatch,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          String primary,
       @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
@@ -87,7 +87,7 @@ class _$LandlordPropertyDataTearOff {
       photo: photo,
       street: street,
       town: town,
-      swatch: swatch,
+      primary: primary,
       state: state,
       landlord: landlord,
       stateId: stateId,
@@ -136,8 +136,8 @@ mixin _$LandlordPropertyData {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get town;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
-  String get swatch;
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+  String get primary;
   @nullable
   @JsonKey(includeIfNull: false)
   StateDTO get state;
@@ -213,8 +213,8 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String swatch,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          String primary,
       @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
@@ -275,7 +275,7 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
     Object photo = freezed,
     Object street = freezed,
     Object town = freezed,
-    Object swatch = freezed,
+    Object primary = freezed,
     Object state = freezed,
     Object landlord = freezed,
     Object stateId = freezed,
@@ -298,7 +298,7 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
       photo: photo == freezed ? _value.photo : photo as String,
       street: street == freezed ? _value.street : street as String,
       town: town == freezed ? _value.town : town as String,
-      swatch: swatch == freezed ? _value.swatch : swatch as String,
+      primary: primary == freezed ? _value.primary : primary as String,
       state: state == freezed ? _value.state : state as StateDTO,
       landlord: landlord == freezed ? _value.landlord : landlord as UserDTO,
       stateId: stateId == freezed ? _value.stateId : stateId as int,
@@ -372,8 +372,8 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String swatch,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          String primary,
       @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
@@ -438,7 +438,7 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
     Object photo = freezed,
     Object street = freezed,
     Object town = freezed,
-    Object swatch = freezed,
+    Object primary = freezed,
     Object state = freezed,
     Object landlord = freezed,
     Object stateId = freezed,
@@ -461,7 +461,7 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
       photo: photo == freezed ? _value.photo : photo as String,
       street: street == freezed ? _value.street : street as String,
       town: town == freezed ? _value.town : town as String,
-      swatch: swatch == freezed ? _value.swatch : swatch as String,
+      primary: primary == freezed ? _value.primary : primary as String,
       state: state == freezed ? _value.state : state as StateDTO,
       landlord: landlord == freezed ? _value.landlord : landlord as UserDTO,
       stateId: stateId == freezed ? _value.stateId : stateId as int,
@@ -512,8 +512,8 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          this.swatch,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          this.primary,
       @nullable
       @JsonKey(includeIfNull: false)
           this.state,
@@ -586,8 +586,8 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final String town;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
-  final String swatch;
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+  final String primary;
   @override
   @nullable
   @JsonKey(includeIfNull: false)
@@ -643,7 +643,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
 
   @override
   String toString() {
-    return 'LandlordPropertyData(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, photo: $photo, street: $street, town: $town, swatch: $swatch, state: $state, landlord: $landlord, stateId: $stateId, country: $country, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordPropertyData(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, photo: $photo, street: $street, town: $town, primary: $primary, state: $state, landlord: $landlord, stateId: $stateId, country: $country, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -666,8 +666,9 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
                 const DeepCollectionEquality().equals(other.street, street)) &&
             (identical(other.town, town) ||
                 const DeepCollectionEquality().equals(other.town, town)) &&
-            (identical(other.swatch, swatch) ||
-                const DeepCollectionEquality().equals(other.swatch, swatch)) &&
+            (identical(other.primary, primary) ||
+                const DeepCollectionEquality()
+                    .equals(other.primary, primary)) &&
             (identical(other.state, state) ||
                 const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.landlord, landlord) ||
@@ -715,7 +716,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
-      const DeepCollectionEquality().hash(swatch) ^
+      const DeepCollectionEquality().hash(primary) ^
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(landlord) ^
       const DeepCollectionEquality().hash(stateId) ^
@@ -765,8 +766,8 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String swatch,
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          String primary,
       @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
@@ -838,8 +839,8 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   String get town;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
-  String get swatch;
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+  String get primary;
   @override
   @nullable
   @JsonKey(includeIfNull: false)

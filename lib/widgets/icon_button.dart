@@ -37,7 +37,7 @@ class AppIconButton extends StatelessWidget {
         elevation: elevation,
         clipBehavior: clipBehavior,
         borderRadius: borderRadius,
-        type: type,
+        type: borderRadius == null ? type : MaterialType.canvas,
         child: InkWell(
           child: Padding(
             child: Center(child: child),

@@ -111,4 +111,42 @@ class _TenantAssignmentRepository implements TenantAssignmentRepository {
     final value = AssignmentDTO.fromJson(_result.data);
     return value;
   }
+
+  @override
+  Future<TenantApartmentDTO> fetchAssocApartment(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/tenant/apartment/$id',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = TenantApartmentDTO.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<LandlordPropertyDTO> fetchAssocProperty(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/tenant/property/$id',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = LandlordPropertyDTO.fromJson(_result.data);
+    return value;
+  }
 }

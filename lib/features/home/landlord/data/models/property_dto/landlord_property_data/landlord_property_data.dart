@@ -28,7 +28,9 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String photo,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String street,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
-    @nullable @JsonKey(includeIfNull: false, defaultValue: '') String swatch,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+        String primary,
     @nullable @JsonKey(includeIfNull: false) StateDTO state,
     @nullable @JsonKey(includeIfNull: false) UserDTO landlord,
     @nullable
@@ -78,9 +80,8 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       );
 
   LandlordProperty get domain {
-    // Get color ===> fwt 508 wed 1pm
     Color _color = AppColors.fromHex(
-      PropertyColor(swatch).getOrNull ??
+      PropertyColor(primary).getOrNull ??
           AppColors.stringHex(
             AppColors.random,
             appendHash: true,

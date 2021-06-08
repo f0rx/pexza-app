@@ -273,7 +273,7 @@ class Router extends RouterBase {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => TenantRentDetailScreen(
           key: args.key,
-          property: args.property,
+          assignment: args.assignment,
         ).wrappedRoute(context),
         settings: data,
         maintainState: true,
@@ -286,7 +286,7 @@ class Router extends RouterBase {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => TenantRentPaymentScreen(
           key: args.key,
-          property: args.property,
+          assignment: args.assignment,
         ).wrappedRoute(context),
         settings: data,
         maintainState: true,
@@ -534,20 +534,20 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
       );
 
   Future<dynamic> pushTenantRentDetailScreen(
-          {Key key, Property property, OnNavigationRejected onReject}) =>
+          {Key key, Assignment assignment, OnNavigationRejected onReject}) =>
       push<dynamic>(
         Routes.tenantRentDetailScreen,
         arguments:
-            TenantRentDetailScreenArguments(key: key, property: property),
+            TenantRentDetailScreenArguments(key: key, assignment: assignment),
         onReject: onReject,
       );
 
   Future<dynamic> pushTenantRentPaymentScreen(
-          {Key key, Property property, OnNavigationRejected onReject}) =>
+          {Key key, Assignment assignment, OnNavigationRejected onReject}) =>
       push<dynamic>(
         Routes.tenantRentPaymentScreen,
         arguments:
-            TenantRentPaymentScreenArguments(key: key, property: property),
+            TenantRentPaymentScreenArguments(key: key, assignment: assignment),
         onReject: onReject,
       );
 
@@ -703,15 +703,15 @@ class TenantApartmentDetailScreenArguments {
 /// TenantRentDetailScreen arguments holder class
 class TenantRentDetailScreenArguments {
   final Key key;
-  final Property property;
-  TenantRentDetailScreenArguments({this.key, this.property});
+  final Assignment assignment;
+  TenantRentDetailScreenArguments({this.key, this.assignment});
 }
 
 /// TenantRentPaymentScreen arguments holder class
 class TenantRentPaymentScreenArguments {
   final Key key;
-  final Property property;
-  TenantRentPaymentScreenArguments({this.key, this.property});
+  final Assignment assignment;
+  TenantRentPaymentScreenArguments({this.key, this.assignment});
 }
 
 /// ServiceRequestScreen arguments holder class

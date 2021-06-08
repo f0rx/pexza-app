@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/tenant/domain/domain.dart';
+import 'package:pexza/utils/utils.dart';
 
 part 'assignment.freezed.dart';
 
@@ -35,6 +36,23 @@ abstract class Assignment implements _$Assignment {
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,
   }) = _Assignment;
+
+  int get inDays => expiresOn.difference(DateTime.now()).inDays;
+
+  int get inMonths => (inDays * 0.0328767).ceil();
+
+  int get inYears => (inDays * 0.00273973).ceil();
+
+  int get payableDuration => plan.fold(
+        monthly: (_) => inMonths,
+        yearly: (_) => inYears,
+      );
+
+  String get rentDuration => inYears > 1
+      ? '$inYears'.padIf(true, ' year'.pluralize(inYears))
+      : inMonths > 1
+          ? '$inMonths'.padIf(true, ' month'.pluralize(inMonths))
+          : '$inDays'.padIf(true, ' day'.pluralize(inDays));
 
   TenantApartment get tenantApartment => this
       .copyWith(

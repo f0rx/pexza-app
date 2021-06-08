@@ -17,20 +17,20 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:pexza/features/auth/data/repositories/access_token_manager.dart'
     as _i3;
 import 'package:pexza/features/auth/data/repositories/auth_facade_impl.dart'
-    as _i30;
-import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart'
-    as _i32;
-import 'package:pexza/features/auth/data/sources/remote/auth_remote_datasource.dart'
     as _i31;
-import 'package:pexza/features/auth/domain/domain.dart' as _i29;
+import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart'
+    as _i33;
+import 'package:pexza/features/auth/data/sources/remote/auth_remote_datasource.dart'
+    as _i32;
+import 'package:pexza/features/auth/domain/domain.dart' as _i30;
 import 'package:pexza/features/auth/presentation/manager/auth/auth_cubit.dart'
-    as _i34;
+    as _i35;
 import 'package:pexza/features/auth/presentation/manager/role/role_cubit.dart'
     as _i13;
 import 'package:pexza/features/auth/presentation/manager/token_verification/token_verification_cubit.dart'
     as _i15;
 import 'package:pexza/features/auth/presentation/manager/watcher/auth_watcher_cubit.dart'
-    as _i33;
+    as _i34;
 import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart'
     as _i18;
 import 'package:pexza/features/home/landlord/data/repositories/maintenance_repository/landlord_maintenance_repository.dart'
@@ -52,14 +52,16 @@ import 'package:pexza/features/home/tenant/data/repositories/apartment/tenant_ap
 import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart'
     as _i16;
 import 'package:pexza/features/home/tenant/data/repositories/maintenance/tenant_maintenance_repository.dart'
-    as _i28;
-import 'package:pexza/features/home/tenant/presentation/managers/tenant_assignment/tenant_assignment_cubit.dart'
+    as _i29;
+import 'package:pexza/features/home/tenant/presentation/managers/tenant_apartment/tenant_apartment_cubit.dart'
     as _i25;
-import 'package:pexza/features/home/tenant/presentation/managers/tenant_maintenance/tenant_maintenance_cubit.dart'
+import 'package:pexza/features/home/tenant/presentation/managers/tenant_assignment/tenant_assignment_cubit.dart'
     as _i27;
+import 'package:pexza/features/home/tenant/presentation/managers/tenant_maintenance/tenant_maintenance_cubit.dart'
+    as _i28;
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart'
     as _i12;
-import 'package:pexza/manager/locator/modules/modules.dart' as _i35;
+import 'package:pexza/manager/locator/modules/modules.dart' as _i36;
 import 'package:pexza/manager/theme/manager/theme_cubit.dart'
     as _i14; // ignore_for_file: unnecessary_lambdas
 
@@ -110,26 +112,30 @@ extension GetItInjectableX on _i1.GetIt {
         get<_i19.PropertyRepository>(),
         get<_i4.Connectivity>(),
         get<_i5.DataConnectionChecker>()));
-    gh.factory<_i25.TenantAssignmentCubit>(() => _i25.TenantAssignmentCubit(
+    gh.factory<_i25.TenantApartmentCubit>(() => _i25.TenantApartmentCubit(
+        get<_i26.TenantApartmentRepository>(),
+        get<_i4.Connectivity>(),
+        get<_i5.DataConnectionChecker>()));
+    gh.factory<_i27.TenantAssignmentCubit>(() => _i27.TenantAssignmentCubit(
         get<_i16.TenantAssignmentRepository>(),
         get<_i26.TenantApartmentRepository>(),
         get<_i4.Connectivity>(),
         get<_i5.DataConnectionChecker>()));
-    gh.factory<_i27.TenantMaintenanceCubit>(() => _i27.TenantMaintenanceCubit(
-        get<_i28.TenantMaintenanceRepository>(),
+    gh.factory<_i28.TenantMaintenanceCubit>(() => _i28.TenantMaintenanceCubit(
+        get<_i29.TenantMaintenanceRepository>(),
         get<_i23.MiscRepository>(),
         get<_i4.Connectivity>(),
         get<_i5.DataConnectionChecker>()));
-    gh.lazySingleton<_i29.AuthFacade>(() => _i30.AuthFacadeImpl(
-        get<_i31.AuthRemoteDatasource>(),
-        get<_i32.AuthLocalDatasource>(),
+    gh.lazySingleton<_i30.AuthFacade>(() => _i31.AuthFacadeImpl(
+        get<_i32.AuthRemoteDatasource>(),
+        get<_i33.AuthLocalDatasource>(),
         get<_i7.FirebaseAnalytics>(),
         get<_i10.FirebaseCrashlytics>()));
-    gh.factory<_i33.AuthWatcherCubit>(
-        () => _i33.AuthWatcherCubit(get<_i29.AuthFacade>()));
-    gh.factory<_i34.AuthCubit>(() => _i34.AuthCubit(get<_i29.AuthFacade>()));
-    gh.singleton<_i32.AuthLocalDatasource>(
-        _i32.AuthLocalDatasource(get<_i3.AccessTokenManager>()));
+    gh.factory<_i34.AuthWatcherCubit>(
+        () => _i34.AuthWatcherCubit(get<_i30.AuthFacade>()));
+    gh.factory<_i35.AuthCubit>(() => _i35.AuthCubit(get<_i30.AuthFacade>()));
+    gh.singleton<_i33.AuthLocalDatasource>(
+        _i33.AuthLocalDatasource(get<_i3.AccessTokenManager>()));
     gh.singleton<_i21.LandlordMaintenanceRepository>(
         _i21.LandlordMaintenanceRepository(get<_i6.Dio>()));
     gh.singleton<_i23.MiscRepository>(_i23.MiscRepository(get<_i6.Dio>()));
@@ -139,16 +145,16 @@ extension GetItInjectableX on _i1.GetIt {
         _i26.TenantApartmentRepository(get<_i6.Dio>()));
     gh.singleton<_i16.TenantAssignmentRepository>(
         _i16.TenantAssignmentRepository(get<_i6.Dio>()));
-    gh.singleton<_i28.TenantMaintenanceRepository>(
-        _i28.TenantMaintenanceRepository(get<_i6.Dio>()));
+    gh.singleton<_i29.TenantMaintenanceRepository>(
+        _i29.TenantMaintenanceRepository(get<_i6.Dio>()));
     gh.singleton<_i18.ApartmentRepository>(
         _i18.ApartmentRepository(get<_i6.Dio>()));
-    gh.singleton<_i31.AuthRemoteDatasource>(
-        _i31.AuthRemoteDatasource(get<_i6.Dio>()));
+    gh.singleton<_i32.AuthRemoteDatasource>(
+        _i32.AuthRemoteDatasource(get<_i6.Dio>()));
     return this;
   }
 }
 
-class _$ServiceModules extends _i35.ServiceModules {}
+class _$ServiceModules extends _i36.ServiceModules {}
 
-class _$Modules extends _i35.Modules {}
+class _$Modules extends _i36.Modules {}

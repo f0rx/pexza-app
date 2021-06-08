@@ -53,18 +53,14 @@ class AppElevatedButton extends StatelessWidget {
     this.elevation = 1.0,
     this.padding,
     BorderRadius borderRadius,
-    OutlinedBorder shape,
+    this.shape,
     this.tapTargetSize = MaterialTapTargetSize.shrinkWrap,
     this.textStyle,
     this.child,
   })  : assert(text != null || child != null),
         opacity = disabled ? 0.6 : 1.0,
-        borderRadius = BorderRadius.circular(Helpers.buttonRadius),
-        shape = RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(Helpers.buttonRadius),
-          ),
-        ),
+        borderRadius =
+            borderRadius ?? BorderRadius.circular(Helpers.buttonRadius),
         super(key: key);
 
   @override

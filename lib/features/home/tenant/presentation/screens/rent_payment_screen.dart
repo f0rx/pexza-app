@@ -9,9 +9,9 @@ import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
-  final Property property;
+  final Assignment assignment;
 
-  const TenantRentPaymentScreen({Key key, this.property}) : super(key: key);
+  const TenantRentPaymentScreen({Key key, this.assignment}) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -30,6 +30,7 @@ class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
             .copyWith(top: App.longest * 0.015),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             AutoSizeText(
               "Renewal Info",
@@ -54,12 +55,15 @@ class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
                   PropertyInfoWidget(
                     leading: "Due Date",
                     trailing: formatDate(
-                        property.dueDate, [dd, ' - ', mm, ' - ', yyyy]),
+                      assignment.expiresOn,
+                      [dd, ' - ', mm, ' - ', yyyy],
+                    ),
                   ),
                   //
                   PropertyInfoWidget(
-                    leading: "Currency",
-                    trailing: property.renewalAmount.getOrEmpty,
+                    leading: "Renewal Amount",
+                    trailing: "${assignment?.country?.currency?.type} "
+                        "${assignment.amount.getOrEmpty}",
                     showDivider: false,
                   ),
                 ],
@@ -80,9 +84,41 @@ class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
             //
             VerticalSpace(height: App.longest * 0.02),
             //
-            Placeholder(
-              fallbackHeight: 60,
-              strokeWidth: 1.0,
+            DropdownFieldWidget(
+              hint: "-- Select Duration --",
+              items: List.generate(
+                50,
+                (index) => index + 1,
+              )
+                  .map<DropdownMenuItem<int>>(
+                    (item) => DropdownMenuItem<int>(
+                      value: item,
+                      child: AutoSizeText(
+                        "$item ${assignment.plan.fold(
+                          monthly: (v) => "month",
+                          yearly: (v) => "year",
+                        )}"
+                            .pluralize(item),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                      ),
+                    ),
+                  )
+                  .toList(),
+              selected: 3,
+              validate: false,
+              error: null,
+              onChanged: (_) {},
+            ),
+            //
+            VerticalSpace(height: App.longest * 0.04),
+            //
+            PropertyInfoWidget(
+              leading: "Total Amount Payable",
+              trailing: "${assignment?.country?.currency?.type} "
+                  "${assignment.payableDuration * (int.tryParse(assignment.amount.getOrNull) ?? 0)}",
+              showDivider: false,
             ),
             //
             VerticalSpace(height: App.longest * 0.04),
