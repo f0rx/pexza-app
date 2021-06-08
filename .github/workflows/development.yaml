@@ -102,6 +102,11 @@ jobs:
             echo "CHANGE_LOG=Custom Workflow dispatch. Please check repo for changelog." >> $GITHUB_ENV
           fi
 
+      - run: |
+          echo ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
+          echo ${{ steps.create_release_tag.outputs.new_tag }}
+          echo ${{ steps.create_release_tag.outputs.previous_tag }}
+
       - name: Calculate new version
         if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
         env:
