@@ -8,8 +8,8 @@ abstract class TenantApartmentState implements _$TenantApartmentState {
   const factory TenantApartmentState({
     @Default(false) bool isLoading,
     @Default(false) bool validate,
-    @Default(KtList.empty()) KtList<TenantApartment> apartments,
     @nullable TenantApartment apartment,
+    @Default(KtList.empty()) KtList<TenantApartment> apartments,
     @Default(const None()) Option<Either<Failure, Success>> response,
   }) = _TenantApartmentState;
 

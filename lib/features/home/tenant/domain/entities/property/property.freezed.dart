@@ -22,7 +22,7 @@ class _$PropertyTearOff {
       @nullable PropertyPlan plan,
       @nullable Country currency,
       @nullable PropertyAmount rentAmount,
-      @nullable PropertyColor color,
+      @nullable PropertyColor<dynamic> color,
       @nullable DateTime dueDate,
       @nullable PropertyAmount renewalAmount}) {
     return _Property(
@@ -63,7 +63,7 @@ mixin _$Property {
   PropertyAmount
       get rentAmount; // Rent Amount (Monthly..calc yearly from monthly)
   @nullable
-  PropertyColor get color; // Renewal Info
+  PropertyColor<dynamic> get color; // Renewal Info
   @nullable
   DateTime get dueDate;
   @nullable
@@ -85,7 +85,7 @@ abstract class $PropertyCopyWith<$Res> {
       @nullable PropertyPlan plan,
       @nullable Country currency,
       @nullable PropertyAmount rentAmount,
-      @nullable PropertyColor color,
+      @nullable PropertyColor<dynamic> color,
       @nullable DateTime dueDate,
       @nullable PropertyAmount renewalAmount});
 
@@ -124,7 +124,7 @@ class _$PropertyCopyWithImpl<$Res> implements $PropertyCopyWith<$Res> {
       rentAmount: rentAmount == freezed
           ? _value.rentAmount
           : rentAmount as PropertyAmount,
-      color: color == freezed ? _value.color : color as PropertyColor,
+      color: color == freezed ? _value.color : color as PropertyColor<dynamic>,
       dueDate: dueDate == freezed ? _value.dueDate : dueDate as DateTime,
       renewalAmount: renewalAmount == freezed
           ? _value.renewalAmount
@@ -156,7 +156,7 @@ abstract class _$PropertyCopyWith<$Res> implements $PropertyCopyWith<$Res> {
       @nullable PropertyPlan plan,
       @nullable Country currency,
       @nullable PropertyAmount rentAmount,
-      @nullable PropertyColor color,
+      @nullable PropertyColor<dynamic> color,
       @nullable DateTime dueDate,
       @nullable PropertyAmount renewalAmount});
 
@@ -197,7 +197,7 @@ class __$PropertyCopyWithImpl<$Res> extends _$PropertyCopyWithImpl<$Res>
       rentAmount: rentAmount == freezed
           ? _value.rentAmount
           : rentAmount as PropertyAmount,
-      color: color == freezed ? _value.color : color as PropertyColor,
+      color: color == freezed ? _value.color : color as PropertyColor<dynamic>,
       dueDate: dueDate == freezed ? _value.dueDate : dueDate as DateTime,
       renewalAmount: renewalAmount == freezed
           ? _value.renewalAmount
@@ -244,7 +244,7 @@ class _$_Property extends _Property {
   final PropertyAmount rentAmount;
   @override // Rent Amount (Monthly..calc yearly from monthly)
   @nullable
-  final PropertyColor color;
+  final PropertyColor<dynamic> color;
   @override // Renewal Info
   @nullable
   final DateTime dueDate;
@@ -318,7 +318,7 @@ abstract class _Property extends Property {
       @nullable PropertyPlan plan,
       @nullable Country currency,
       @nullable PropertyAmount rentAmount,
-      @nullable PropertyColor color,
+      @nullable PropertyColor<dynamic> color,
       @nullable DateTime dueDate,
       @nullable PropertyAmount renewalAmount}) = _$_Property;
 
@@ -345,7 +345,7 @@ abstract class _Property extends Property {
   PropertyAmount get rentAmount;
   @override // Rent Amount (Monthly..calc yearly from monthly)
   @nullable
-  PropertyColor get color;
+  PropertyColor<dynamic> get color;
   @override // Renewal Info
   @nullable
   DateTime get dueDate;

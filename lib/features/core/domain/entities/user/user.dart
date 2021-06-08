@@ -40,6 +40,9 @@ abstract class User implements _$User, BaseUser {
     @nullable DateTime deletedAt,
   }) = _User;
 
+  String get fullName => "${firstName?.getOrEmpty}"
+      .padIf(!firstName.isNullOrBlank, " ${lastName.getOrEmpty}");
+
   factory User.guest() => User(
         id: UniqueId.fromExternal(45),
         firstName: DisplayName("Guest"),

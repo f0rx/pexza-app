@@ -8,6 +8,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/domain/failures/base.dart';
+import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/tenant/domain/domain.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
 import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
@@ -88,6 +89,30 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
       emit(state.copyWith(
         paired: paired?.domain(),
         apartments: apartments,
+      ));
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(
+        response: some(left(e)),
+      ));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
+    }
+
+    toggleLoading();
+  }
+
+  void getApartmentAndProperty(Assignment assignment) async {
+    ///Not needed anymore
+    toggleLoading();
+
+    try {
+      final apartmentDTO = await _repository.fetchAssocApartment(
+        assignment?.apartment?.id?.value,
+      );
+
+      emit(state.copyWith(
+        apartment: apartmentDTO.domain,
+        property: apartmentDTO?.data?.property?.domain,
       ));
     } on LandlordFailure catch (e) {
       emit(state.copyWith(

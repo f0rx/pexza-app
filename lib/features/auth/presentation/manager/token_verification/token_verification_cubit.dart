@@ -93,8 +93,8 @@ class TokenVerificationCubit extends Cubit<TokenVerificationState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -119,8 +119,8 @@ class TokenVerificationCubit extends Cubit<TokenVerificationState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
