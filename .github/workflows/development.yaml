@@ -38,48 +38,48 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Java Environment
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
+      # - name: Set up Java Environment
+      #   uses: actions/setup-java@v1
+      #   with:
+      #     java-version: 1.8
 
-      - name: Prepare NDK dir for caching
-        run: |
-          sudo mkdir -p /usr/local/lib/android/sdk/ndk
-          sudo chmod -R 777 /usr/local/lib/android/sdk/ndk
-          sudo chown -R $USER:$USER /usr/local/lib/android/sdk/ndk
+      # - name: Prepare NDK dir for caching
+      #   run: |
+      #     sudo mkdir -p /usr/local/lib/android/sdk/ndk
+      #     sudo chmod -R 777 /usr/local/lib/android/sdk/ndk
+      #     sudo chown -R $USER:$USER /usr/local/lib/android/sdk/ndk
 
-      - name: Cache Android NDK
-        id: ndk-cache
-        uses: actions/cache@v2
-        with:
-          path: /usr/local/lib/android/sdk/ndk
-          key: ndk-cache-21.0.6113669-v2
+      # - name: Cache Android NDK
+      #   id: ndk-cache
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: /usr/local/lib/android/sdk/ndk
+      #     key: ndk-cache-21.0.6113669-v2
 
-      - name: Install NDK
-        if: steps.ndk-cache.outputs.cache-hit != 'true'
-        run: echo "y" | sudo ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;21.0.6113669"
+      # - name: Install NDK
+      #   if: steps.ndk-cache.outputs.cache-hit != 'true'
+      #   run: echo "y" | sudo ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;21.0.6113669"
 
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v2
-        with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.OS }}-flutter-install-cache-${{ env.FLUTTER_VERSION }}
+      # - name: Cache Flutter dependencies
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: /opt/hostedtoolcache/flutter
+      #     key: ${{ runner.OS }}-flutter-install-cache-${{ env.FLUTTER_VERSION }}
 
-      - name: Set up Flutter Environment
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: "beta"
+      # - name: Set up Flutter Environment
+      #   uses: subosito/flutter-action@v1
+      #   with:
+      #     flutter-version: ${{ env.FLUTTER_VERSION }}
+      #     channel: "beta"
 
-      - name: Run Pre-build scipts
-        run: |
-          flutter pub get
-          # flutter test
+      # - name: Run Pre-build scipts
+      #   run: |
+      #     flutter pub get
+      #     # flutter test
 
-      - name: Build Flutter Apk
-        run: |
-          flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
+      # - name: Build Flutter Apk
+      #   run: |
+      #     flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
 
       - name: Create Release tag
         id: create_release_tag
@@ -124,12 +124,6 @@ jobs:
           custom_tag: ${{ env.BUMP_VERSION}}
           tag_name: ${{ env.BUMP_VERSION }}-prod-release
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Update version bump variables
-      #   if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
-      #   run: |
-      #     echo "BUMP_TAG=${{ steps.bump_tag_version.outputs.new_tag }}" >> $GITHUB_ENV
-      #     echo "BUMP_VERSION=${{ steps.bump_tag_version.outputs.new_version }}" >> $GITHUB_ENV
 
       - name: Push APK to Release Tags
         id: push_apk_to_tag
