@@ -103,20 +103,25 @@ jobs:
           fi
 
       - name: Bump version and push tag
+        env:
+          PREVIOUS_TAG: ${{ steps.create_release_tag.outputs.new_tag }}
         id: bump_tag_version
         if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
         uses: mathieudutour/github-tag-action@v4.5
+        run: |
+          echo ::set-env name=BUMP_VERSION::$(($PREVIOUS_TAG+1))
+          echo "BUMP_TAG=${{ senv.BUMP_VERSION }}" >> $GITHUB_ENV
         with:
           release_branches: .*
-          custom_tag: ${{ steps.create_release_tag.outputs.new_tag + 1 }}
-          tag_name: ${{ steps.create_release_tag.outputs.new_tag }}-prod-release
+          custom_tag: ${{ env.BUMP_VERSION}}
+          tag_name: ${{ env.BUMP_VERSION }}-prod-release
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Update version bump variables
-        if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
-        run: |
-          echo "BUMP_TAG=${{ steps.bump_tag_version.outputs.new_tag }}" >> $GITHUB_ENV
-          echo "BUMP_VERSION=${{ steps.bump_tag_version.outputs.new_version }}" >> $GITHUB_ENV
+      # - name: Update version bump variables
+      #   if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
+      #   run: |
+      #     echo "BUMP_TAG=${{ steps.bump_tag_version.outputs.new_tag }}" >> $GITHUB_ENV
+      #     echo "BUMP_VERSION=${{ steps.bump_tag_version.outputs.new_version }}" >> $GITHUB_ENV
 
       - name: Push APK to Release Tags
         id: push_apk_to_tag
