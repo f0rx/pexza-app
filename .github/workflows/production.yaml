@@ -132,10 +132,10 @@ jobs:
           tag: ${{ env.BUMP_TAG }}
           token: ${{ secrets.GITHUB_TOKEN }}
           body: ${{ env.CHANGE_LOG }}
-          allowUpdates: false
+          allowUpdates: true
           omitName: false
           omitBody: false
-          replacesArtifacts: false
+          replacesArtifacts: true
           artifactErrorsFailBuild: false
 
       - name: Post Action "Push APK to release Tags"
