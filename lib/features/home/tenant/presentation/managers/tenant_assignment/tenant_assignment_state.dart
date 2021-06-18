@@ -8,13 +8,14 @@ abstract class TenantAssignmentState implements _$TenantAssignmentState {
   const factory TenantAssignmentState({
     @Default(false) bool isLoading,
     @Default(false) bool validate,
-    @required BasicTextField<String> code,
-    @Default(KtList.empty()) KtList<Assignment> assignments,
+    @Default(KtList.empty()) KtList<Assignment> unaccepted,
+    @Default(KtList.empty()) KtList<Assignment> paired,
+    @Default(KtList.empty()) KtList<TenantApartment> apartments,
+    @nullable TenantApartment apartment,
     @nullable Assignment assignment,
+    @nullable LandlordProperty property,
     @Default(const None()) Option<Either<Failure, Success>> response,
   }) = _TenantAssignmentState;
 
-  factory TenantAssignmentState.initial() => TenantAssignmentState(
-        code: BasicTextField(""),
-      );
+  factory TenantAssignmentState.initial() => TenantAssignmentState();
 }

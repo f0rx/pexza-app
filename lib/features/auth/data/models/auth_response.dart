@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pexza/features/core/data/models/server_field_errors/server_field_errors.dart';
 import 'package:pexza/features/core/domain/failures/failure.dart';
 import 'package:pexza/manager/serializer/server_field_error_converter.dart';
+import 'package:pexza/utils/utils.dart';
 
 part 'auth_response.freezed.dart';
 part 'auth_response.g.dart';
@@ -34,6 +35,7 @@ abstract class AuthResponse implements _$AuthResponse, Response {
     @JsonKey(ignore: true) String details,
     //
     @Default(true) @JsonKey(ignore: true) bool popRoute,
+    @JsonKey(ignore: true) BottomAlertDialogPosition position,
   }) = _AuthResponse;
 
   T fold<T>({

@@ -8,6 +8,7 @@ class TenantListTile<M> extends StatelessWidget {
   final User tenant;
   final M model;
   final String subtitle;
+  final EdgeInsets padding;
   final Color titleColor;
   final Color subtitleColor;
   final void Function(M) onPressed;
@@ -17,8 +18,9 @@ class TenantListTile<M> extends StatelessWidget {
     @required this.tenant,
     @required this.model,
     this.subtitle = '',
+    this.padding = EdgeInsets.zero,
     this.titleColor,
-    this.subtitleColor,
+    this.subtitleColor = Colors.grey,
     @required this.onPressed,
   }) : super(key: key);
 
@@ -26,6 +28,7 @@ class TenantListTile<M> extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      padding: padding,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.0),
         child: Material(

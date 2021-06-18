@@ -3,20 +3,52 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
+import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/helpers.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
-import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 
 class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
-  final Property property;
+  final Assignment assignment;
 
-  TenantRentDetailScreen({Key key, this.property}) : super(key: key);
+  TenantRentDetailScreen({Key key, this.assignment}) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return this;
+    return BlocProvider(
+      create: (_) => getIt<TenantAssignmentCubit>(),
+      child: BlocConsumer<TenantAssignmentCubit, TenantAssignmentState>(
+        listenWhen: (p, c) =>
+            p.response.getOrElse(() => null) !=
+            c.response.getOrElse(() => null),
+        listener: (c, s) => s.response.fold(
+          () => null,
+          (either) => BottomAlertDialog.init(
+            context,
+            message: either.fold(
+              (f) => f.message ?? f.error,
+              (r) => r.message ?? r.details,
+            ),
+            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
+            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
+            shouldIconPulse: either.fold((_) => null, (r) => false),
+            callback: either.fold(
+              (_) => null,
+              (r) => r.popRoute ? (_) => navigator.pop(true) : null,
+            ),
+          ),
+        ),
+        builder: (c, s) => PortalEntry(
+          visible: c.watch<TenantAssignmentCubit>().state.isLoading,
+          portal: App.circularLoadingOverlay,
+          child: this,
+        ),
+      ),
+    );
   }
 
   @override
@@ -55,26 +87,43 @@ class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   PropertyInfoWidget(
+                    leading: "Apartment",
+                    trailing: "${assignment.apartment?.name?.getOrEmpty}",
+                  ),
+                  //
+                  PropertyInfoWidget(
                     leading: "Property Owner",
-                    trailing: property.owner.getOrEmpty,
+                    trailing: "${assignment.landlord.fullName}",
                   ),
                   //
                   PropertyInfoWidget(
                     leading: "Property Type",
-                    trailing: property.type.getOrEmpty,
+                    trailing:
+                        "${assignment.landlordApartment?.property?.houseType?.getOrEmpty}",
                   ),
                   //
                   PropertyInfoWidget(
                     leading: "Property Location",
-                    trailing: property.location.getOrEmpty,
+                    trailing:
+                        "${assignment.apartment.property?.street?.getOrEmpty}",
                   ),
+                  //
+                  PropertyInfoWidget(
+                    leading: "Payment Plan",
+                    trailing: "${assignment.plan.name}".capitalizeFirst(),
+                  ),
+                  //
                   PropertyInfoWidget(
                     leading: "Rent Duration",
-                    trailing: property.plan.duration,
+                    trailing: !assignment.expired
+                        ? "< ${assignment.rentDuration}"
+                        : "Expired!",
+                    textColor: assignment.expired ? AppColors.errorRed : null,
                   ),
+                  //
                   PropertyInfoWidget(
-                    leading: "Currency",
-                    trailing: property.rentAmount.getOrEmpty,
+                    leading: "Rent Amount",
+                    trailing: "${assignment?.country?.currency?.name}",
                     showDivider: false,
                   ),
                 ],
@@ -106,12 +155,13 @@ class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
                   PropertyInfoWidget(
                     leading: "Due Date",
                     trailing: formatDate(
-                        property.dueDate, [dd, ' - ', mm, ' - ', yyyy]),
+                        assignment.expiresOn, [dd, ' - ', mm, ' - ', yyyy]),
                   ),
                   //
                   PropertyInfoWidget(
-                    leading: "Currency",
-                    trailing: property.renewalAmount.getOrEmpty,
+                    leading: "Renewal Amount",
+                    trailing:
+                        "${assignment?.country?.currency?.type} ${assignment.amount.getOrEmpty}",
                     showDivider: false,
                   ),
                 ],
@@ -121,8 +171,9 @@ class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
             VerticalSpace(height: App.height * 0.04),
             //
             AppElevatedButton(
-              onPressed: () =>
-                  navigator.pushTenantRentPaymentScreen(property: property),
+              onPressed: () => navigator.pushTenantRentPaymentScreen(
+                assignment: assignment,
+              ),
               text: "Renew Now",
             ),
           ],

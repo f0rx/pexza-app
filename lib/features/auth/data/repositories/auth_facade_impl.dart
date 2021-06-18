@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart';
@@ -25,14 +24,12 @@ class AuthFacadeImpl extends AuthFacade {
   final AuthRemoteDatasource _remote;
   final AuthLocalDatasource _local;
   final FirebaseAnalytics _analytics;
-  final FirebaseCrashlytics _crashlytics;
   StreamController<Either<AuthResponse, Option<User>>> __controller;
 
   AuthFacadeImpl(
     this._remote,
     this._local,
     this._analytics,
-    this._crashlytics,
   ) : __controller = StreamController.broadcast();
 
   @override
@@ -366,53 +363,5 @@ class AuthFacadeImpl extends AuthFacade {
 
     // Cache updated user info
     await _local.cacheAuthenticatedUser(dto);
-  }
-
-  Future<Either<AuthResponse, R>> handleFailure<R>({
-    DioError dioError,
-    AuthResponse authResponse,
-    StackTrace trace,
-  }) async {
-    AuthResponse _exception = authResponse;
-
-    switch (dioError?.type) {
-      case DioErrorType.CONNECT_TIMEOUT:
-        _exception = AuthResponse.timeout();
-        break;
-      case DioErrorType.RECEIVE_TIMEOUT:
-        _exception = AuthResponse.receiveTimeout();
-        break;
-      case DioErrorType.RESPONSE:
-        _exception = AuthResponse.fromJson(dioError.response.data).copyWith(
-          code: dioError.response?.data['code'] ?? dioError.response.statusCode,
-        );
-        // Log Exception to Firebase Analytics
-        if (dioError?.response?.data != null)
-          _crashlytics.recordFlutterError(
-            FlutterErrorDetails(
-              exception: dioError?.response?.data,
-              stack: trace,
-            ),
-          );
-        break;
-      case DioErrorType.SEND_TIMEOUT:
-        _exception = AuthResponse.timeout();
-        break;
-      case DioErrorType.DEFAULT:
-      default:
-        _exception = authResponse ??
-            AuthResponse.unknownFailure(message: dioError?.message);
-        if (dioError?.message != null)
-          // Log Inknown Exceptions to Firebase Analytics
-          _crashlytics.recordFlutterError(
-            FlutterErrorDetails(exception: dioError?.message, stack: trace),
-          );
-    }
-
-    // Sink all unrelated auth-failures
-    // propagate any necessary data upwards
-    await sink(left(_exception));
-
-    return left(_exception);
   }
 }

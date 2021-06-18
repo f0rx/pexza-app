@@ -8,7 +8,7 @@ part of country_dto.dart;
 
 _$_CountryDTO _$_$_CountryDTOFromJson(Map<String, dynamic> json) {
   return _$_CountryDTO(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     name: json['name'] as String ?? '',
     phoneCode: json['country_phone_code'] as String ?? '',
     isSupported:

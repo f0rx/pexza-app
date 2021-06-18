@@ -20,7 +20,7 @@ class _$UserDTOTearOff {
   _UserDTO call(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @HiveField(1)
       @nullable
@@ -93,7 +93,10 @@ class _$UserDTOTearOff {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) {
+          String deletedAt,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          BaseApartmentDTO apartment}) {
     return _UserDTO(
       id: id,
       role: role,
@@ -113,6 +116,7 @@ class _$UserDTOTearOff {
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
+      apartment: apartment,
     );
   }
 
@@ -130,7 +134,7 @@ const $UserDTO = _$UserDTOTearOff();
 mixin _$UserDTO {
   @HiveField(0)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @HiveField(1)
   @nullable
@@ -207,6 +211,9 @@ mixin _$UserDTO {
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
+  @nullable
+  @JsonKey(includeIfNull: false)
+  BaseApartmentDTO get apartment;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -220,7 +227,7 @@ abstract class $UserDTOCopyWith<$Res> {
   $Res call(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @HiveField(1)
       @nullable
@@ -293,7 +300,12 @@ abstract class $UserDTOCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          String deletedAt,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          BaseApartmentDTO apartment});
+
+  $BaseApartmentDTOCopyWith<$Res> get apartment;
 }
 
 /// @nodoc
@@ -324,6 +336,7 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
+    Object apartment = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
@@ -351,7 +364,20 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      apartment: apartment == freezed
+          ? _value.apartment
+          : apartment as BaseApartmentDTO,
     ));
+  }
+
+  @override
+  $BaseApartmentDTOCopyWith<$Res> get apartment {
+    if (_value.apartment == null) {
+      return null;
+    }
+    return $BaseApartmentDTOCopyWith<$Res>(_value.apartment, (value) {
+      return _then(_value.copyWith(apartment: value));
+    });
   }
 }
 
@@ -363,7 +389,7 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
   $Res call(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @HiveField(1)
       @nullable
@@ -436,7 +462,13 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          String deletedAt,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          BaseApartmentDTO apartment});
+
+  @override
+  $BaseApartmentDTOCopyWith<$Res> get apartment;
 }
 
 /// @nodoc
@@ -468,6 +500,7 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
+    Object apartment = freezed,
   }) {
     return _then(_UserDTO(
       id: id == freezed ? _value.id : id as int,
@@ -495,6 +528,9 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      apartment: apartment == freezed
+          ? _value.apartment
+          : apartment as BaseApartmentDTO,
     ));
   }
 }
@@ -507,7 +543,7 @@ class _$_UserDTO extends _UserDTO {
   const _$_UserDTO(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @HiveField(1)
       @nullable
@@ -580,7 +616,10 @@ class _$_UserDTO extends _UserDTO {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          this.deletedAt})
+          this.deletedAt,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          this.apartment})
       : super._();
 
   factory _$_UserDTO.fromJson(Map<String, dynamic> json) =>
@@ -589,7 +628,7 @@ class _$_UserDTO extends _UserDTO {
   @override
   @HiveField(0)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @HiveField(1)
@@ -683,10 +722,14 @@ class _$_UserDTO extends _UserDTO {
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   final String deletedAt;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  final BaseApartmentDTO apartment;
 
   @override
   String toString() {
-    return 'UserDTO(id: $id, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'UserDTO(id: $id, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, apartment: $apartment)';
   }
 
   @override
@@ -741,7 +784,10 @@ class _$_UserDTO extends _UserDTO {
                     .equals(other.updatedAt, updatedAt)) &&
             (identical(other.deletedAt, deletedAt) ||
                 const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                    .equals(other.deletedAt, deletedAt)) &&
+            (identical(other.apartment, apartment) ||
+                const DeepCollectionEquality()
+                    .equals(other.apartment, apartment)));
   }
 
   @override
@@ -764,7 +810,8 @@ class _$_UserDTO extends _UserDTO {
       const DeepCollectionEquality().hash(forgotPasswordCodeSentAt) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
-      const DeepCollectionEquality().hash(deletedAt);
+      const DeepCollectionEquality().hash(deletedAt) ^
+      const DeepCollectionEquality().hash(apartment);
 
   @JsonKey(ignore: true)
   @override
@@ -782,7 +829,7 @@ abstract class _UserDTO extends UserDTO {
   const factory _UserDTO(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @HiveField(1)
       @nullable
@@ -855,14 +902,17 @@ abstract class _UserDTO extends UserDTO {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) = _$_UserDTO;
+          String deletedAt,
+      @nullable
+      @JsonKey(includeIfNull: false)
+          BaseApartmentDTO apartment}) = _$_UserDTO;
 
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
 
   @override
   @HiveField(0)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @HiveField(1)
@@ -956,6 +1006,10 @@ abstract class _UserDTO extends UserDTO {
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  BaseApartmentDTO get apartment;
   @override
   @JsonKey(ignore: true)
   _$UserDTOCopyWith<_UserDTO> get copyWith;

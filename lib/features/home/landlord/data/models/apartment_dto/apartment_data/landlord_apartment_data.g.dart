@@ -10,7 +10,7 @@ _$_LandlordApartmentData _$_$_LandlordApartmentDataFromJson(
     Map<String, dynamic> json) {
   $checkKeys(json, disallowNullValues: const ['property_id', 'property']);
   return _$_LandlordApartmentData(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     name: json['name'] as String ?? '',
     status: json['status'] as String ?? '',
     propertyId: const IntegerSerializer().fromJson(json['property_id']),

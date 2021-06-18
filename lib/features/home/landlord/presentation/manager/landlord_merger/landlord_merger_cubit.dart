@@ -132,8 +132,8 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -170,8 +170,8 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -238,8 +238,8 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();

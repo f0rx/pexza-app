@@ -73,6 +73,27 @@ class _PropertyRepository implements PropertyRepository {
   }
 
   @override
+  Future<List<UserDTO>> tenants(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<List<dynamic>>(
+        '/landlord/property/tenants/$id/list',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    var value = _result.data
+        .map((dynamic i) => UserDTO.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<LandlordPropertyDTO> update(id, dto) async {
     ArgumentError.checkNotNull(id, 'id');
     ArgumentError.checkNotNull(dto, 'dto');

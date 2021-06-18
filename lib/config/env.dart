@@ -30,9 +30,12 @@ class BuildEnvironment implements Secrets {
       ? Secrets.WIREDASH_IOS_PROJECT_SECRET
       : Secrets.WIREDASH_ANDROID_PROJECT_SECRET;
 
-  Duration get splashDuration => flavor == BuildFlavor.dev
-      ? const Duration(milliseconds: 600)
-      : const Duration(milliseconds: 1500);
+  String get paystackPublicKey => Secrets.PAYSTACK_TEST_KEY;
+
+  Duration get splashDuration => flavor.fold(
+        dev: () => const Duration(milliseconds: 600),
+        prod: () => const Duration(milliseconds: 1500),
+      );
 
   /// Sets up the top-level [env] getter on the first call only.
   static Future<void> init({@required BuildFlavor flavor}) async {
@@ -45,18 +48,27 @@ class BuildEnvironment implements Secrets {
     // Register Hive Boxes
     HiveBoxes.registerAdapters();
 
-    switch (flavor) {
+    await flavor.fold(dev: () async {
+      await locator(Environment.dev);
+      getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(false);
+    }, prod: () async {
+      await locator(Environment.prod);
+      getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(true);
+    });
+  }
+}
+
+extension BuildFlavorX on BuildFlavor {
+  T fold<T>({
+    T Function() dev,
+    T Function() prod,
+  }) {
+    switch (this) {
       case BuildFlavor.dev:
-        await locator(Environment.dev);
-        getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(false);
-        break;
+        return dev?.call();
       case BuildFlavor.prod:
-        await locator(Environment.prod);
-        getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(true);
-        break;
       default:
-        await locator(Environment.prod);
-        getIt<FirebaseCrashlytics>().setCrashlyticsCollectionEnabled(true);
+        return prod?.call();
     }
   }
 }

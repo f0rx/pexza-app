@@ -19,7 +19,7 @@ class _$LandlordPropertyDataTearOff {
 // ignore: unused_element
   _LandlordPropertyData call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -40,6 +40,9 @@ class _$LandlordPropertyDataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          String primary,
+      @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
@@ -53,16 +56,16 @@ class _$LandlordPropertyDataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           int numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           int numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           int numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           int numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -84,6 +87,7 @@ class _$LandlordPropertyDataTearOff {
       photo: photo,
       street: street,
       town: town,
+      primary: primary,
       state: state,
       landlord: landlord,
       stateId: stateId,
@@ -111,7 +115,7 @@ const $LandlordPropertyData = _$LandlordPropertyDataTearOff();
 /// @nodoc
 mixin _$LandlordPropertyData {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -132,6 +136,9 @@ mixin _$LandlordPropertyData {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get town;
   @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+  String get primary;
+  @nullable
   @JsonKey(includeIfNull: false)
   StateDTO get state;
   @nullable
@@ -145,20 +152,16 @@ mixin _$LandlordPropertyData {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get country;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, name: 'number_of_tenants')
   int get numberOfTenants;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_apartments')
   int get numberOfApartments;
   @nullable
-  @JsonKey(
-      includeIfNull: false,
-      defaultValue: 0,
-      name: 'number_of_available_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
   int get numberOfAvailableApartments;
   @nullable
-  @JsonKey(
-      includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+  @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
   int get numberOfRentedApartment;
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
@@ -185,7 +188,7 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       _$LandlordPropertyDataCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -206,6 +209,9 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          String primary,
+      @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
@@ -219,16 +225,16 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           int numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           int numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           int numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           int numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -265,6 +271,7 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
     Object photo = freezed,
     Object street = freezed,
     Object town = freezed,
+    Object primary = freezed,
     Object state = freezed,
     Object landlord = freezed,
     Object stateId = freezed,
@@ -287,6 +294,7 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
       photo: photo == freezed ? _value.photo : photo as String,
       street: street == freezed ? _value.street : street as String,
       town: town == freezed ? _value.town : town as String,
+      primary: primary == freezed ? _value.primary : primary as String,
       state: state == freezed ? _value.state : state as StateDTO,
       landlord: landlord == freezed ? _value.landlord : landlord as UserDTO,
       stateId: stateId == freezed ? _value.stateId : stateId as int,
@@ -339,7 +347,7 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -360,6 +368,9 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          String primary,
+      @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
@@ -373,16 +384,16 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           int numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           int numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           int numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           int numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -423,6 +434,7 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
     Object photo = freezed,
     Object street = freezed,
     Object town = freezed,
+    Object primary = freezed,
     Object state = freezed,
     Object landlord = freezed,
     Object stateId = freezed,
@@ -445,6 +457,7 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
       photo: photo == freezed ? _value.photo : photo as String,
       street: street == freezed ? _value.street : street as String,
       town: town == freezed ? _value.town : town as String,
+      primary: primary == freezed ? _value.primary : primary as String,
       state: state == freezed ? _value.state : state as StateDTO,
       landlord: landlord == freezed ? _value.landlord : landlord as UserDTO,
       stateId: stateId == freezed ? _value.stateId : stateId as int,
@@ -474,7 +487,7 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
 class _$_LandlordPropertyData extends _LandlordPropertyData {
   const _$_LandlordPropertyData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -495,6 +508,9 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.town,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          this.primary,
+      @nullable
       @JsonKey(includeIfNull: false)
           this.state,
       @nullable
@@ -508,16 +524,16 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           this.numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           this.numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           this.numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           this.numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -538,7 +554,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -566,6 +582,10 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final String town;
   @override
   @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+  final String primary;
+  @override
+  @nullable
   @JsonKey(includeIfNull: false)
   final StateDTO state;
   @override
@@ -583,23 +603,19 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final String country;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, name: 'number_of_tenants')
   final int numberOfTenants;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_apartments')
   final int numberOfApartments;
   @override
   @nullable
-  @JsonKey(
-      includeIfNull: false,
-      defaultValue: 0,
-      name: 'number_of_available_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
   final int numberOfAvailableApartments;
   @override
   @nullable
-  @JsonKey(
-      includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+  @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
   final int numberOfRentedApartment;
   @override
   @nullable
@@ -619,7 +635,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
 
   @override
   String toString() {
-    return 'LandlordPropertyData(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, photo: $photo, street: $street, town: $town, state: $state, landlord: $landlord, stateId: $stateId, country: $country, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'LandlordPropertyData(id: $id, name: $name, propertyType: $propertyType, houseType: $houseType, photo: $photo, street: $street, town: $town, primary: $primary, state: $state, landlord: $landlord, stateId: $stateId, country: $country, numberOfTenants: $numberOfTenants, numberOfApartments: $numberOfApartments, numberOfAvailableApartments: $numberOfAvailableApartments, numberOfRentedApartment: $numberOfRentedApartment, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -642,6 +658,9 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
                 const DeepCollectionEquality().equals(other.street, street)) &&
             (identical(other.town, town) ||
                 const DeepCollectionEquality().equals(other.town, town)) &&
+            (identical(other.primary, primary) ||
+                const DeepCollectionEquality()
+                    .equals(other.primary, primary)) &&
             (identical(other.state, state) ||
                 const DeepCollectionEquality().equals(other.state, state)) &&
             (identical(other.landlord, landlord) ||
@@ -689,6 +708,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(street) ^
       const DeepCollectionEquality().hash(town) ^
+      const DeepCollectionEquality().hash(primary) ^
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(landlord) ^
       const DeepCollectionEquality().hash(stateId) ^
@@ -717,7 +737,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   const _LandlordPropertyData._() : super._();
   const factory _LandlordPropertyData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -738,6 +758,9 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String town,
       @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+          String primary,
+      @nullable
       @JsonKey(includeIfNull: false)
           StateDTO state,
       @nullable
@@ -751,16 +774,16 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           int numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           int numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           int numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           int numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -780,7 +803,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable
@@ -808,6 +831,10 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   String get town;
   @override
   @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+  String get primary;
+  @override
+  @nullable
   @JsonKey(includeIfNull: false)
   StateDTO get state;
   @override
@@ -825,23 +852,19 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   String get country;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, name: 'number_of_tenants')
   int get numberOfTenants;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_apartments')
   int get numberOfApartments;
   @override
   @nullable
-  @JsonKey(
-      includeIfNull: false,
-      defaultValue: 0,
-      name: 'number_of_available_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
   int get numberOfAvailableApartments;
   @override
   @nullable
-  @JsonKey(
-      includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+  @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
   int get numberOfRentedApartment;
   @override
   @nullable

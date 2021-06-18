@@ -87,7 +87,7 @@ class Helpers {
   }
 
   static T optionOf<T>(dynamic _default, dynamic dark, {BuildContext context}) {
-    assert(_default != null);
+    // assert(_default != null);
     assert(dark != null);
     var isDarkMode =
         BlocProvider.of<ThemeCubit>(context ?? App.context).isDarkMode ||

@@ -2,8 +2,11 @@ library tenant_assignment_repository.dart;
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pexza/features/home/landlord/data/models/export.dart';
+import 'package:pexza/features/home/tenant/data/data.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pexza/features/core/data/models/assignment/index.dart';
+import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 
 part 'tenant_assignment_repository.g.dart';
 
@@ -14,7 +17,9 @@ abstract class TenantAssignmentRepository {
   factory TenantAssignmentRepository(Dio dio) = _TenantAssignmentRepository;
 
   @GET("/tenant/assignment")
-  Future<AssignmentDTOList> all();
+  Future<AssignmentDTOList> all({
+    @Query("show") AssignmentQueryParam query,
+  });
 
   @POST("/tenant/assignment/{id}/accept")
   Future<AssignmentDTO> accept(
@@ -30,4 +35,10 @@ abstract class TenantAssignmentRepository {
 
   @GET("/tenant/assignment/{id}")
   Future<AssignmentDTO> show(@Path("id") int id);
+
+  @GET("/tenant/apartment/{id}")
+  Future<TenantApartmentDTO> fetchAssocApartment(@Path("id") int id);
+
+  @GET("/tenant/property/{id}")
+  Future<LandlordPropertyDTO> fetchAssocProperty(@Path("id") int id);
 }

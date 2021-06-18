@@ -17,16 +17,22 @@ class _$TenantAssignmentStateTearOff {
   _TenantAssignmentState call(
       {bool isLoading = false,
       bool validate = false,
-      @required BasicTextField<String> code,
-      KtList<Assignment> assignments = const KtList.empty(),
+      KtList<Assignment> unaccepted = const KtList.empty(),
+      KtList<Assignment> paired = const KtList.empty(),
+      KtList<TenantApartment> apartments = const KtList.empty(),
+      @nullable TenantApartment apartment,
       @nullable Assignment assignment,
+      @nullable LandlordProperty property,
       Option<Either<Failure, Success>> response = const None()}) {
     return _TenantAssignmentState(
       isLoading: isLoading,
       validate: validate,
-      code: code,
-      assignments: assignments,
+      unaccepted: unaccepted,
+      paired: paired,
+      apartments: apartments,
+      apartment: apartment,
       assignment: assignment,
+      property: property,
       response: response,
     );
   }
@@ -40,10 +46,15 @@ const $TenantAssignmentState = _$TenantAssignmentStateTearOff();
 mixin _$TenantAssignmentState {
   bool get isLoading;
   bool get validate;
-  BasicTextField<String> get code;
-  KtList<Assignment> get assignments;
+  KtList<Assignment> get unaccepted;
+  KtList<Assignment> get paired;
+  KtList<TenantApartment> get apartments;
+  @nullable
+  TenantApartment get apartment;
   @nullable
   Assignment get assignment;
+  @nullable
+  LandlordProperty get property;
   Option<Either<Failure, Success>> get response;
 
   @JsonKey(ignore: true)
@@ -58,12 +69,17 @@ abstract class $TenantAssignmentStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool validate,
-      BasicTextField<String> code,
-      KtList<Assignment> assignments,
+      KtList<Assignment> unaccepted,
+      KtList<Assignment> paired,
+      KtList<TenantApartment> apartments,
+      @nullable TenantApartment apartment,
       @nullable Assignment assignment,
+      @nullable LandlordProperty property,
       Option<Either<Failure, Success>> response});
 
+  $TenantApartmentCopyWith<$Res> get apartment;
   $AssignmentCopyWith<$Res> get assignment;
+  $LandlordPropertyCopyWith<$Res> get property;
 }
 
 /// @nodoc
@@ -79,24 +95,45 @@ class _$TenantAssignmentStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object validate = freezed,
-    Object code = freezed,
-    Object assignments = freezed,
+    Object unaccepted = freezed,
+    Object paired = freezed,
+    Object apartments = freezed,
+    Object apartment = freezed,
     Object assignment = freezed,
+    Object property = freezed,
     Object response = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      code: code == freezed ? _value.code : code as BasicTextField<String>,
-      assignments: assignments == freezed
-          ? _value.assignments
-          : assignments as KtList<Assignment>,
+      unaccepted: unaccepted == freezed
+          ? _value.unaccepted
+          : unaccepted as KtList<Assignment>,
+      paired: paired == freezed ? _value.paired : paired as KtList<Assignment>,
+      apartments: apartments == freezed
+          ? _value.apartments
+          : apartments as KtList<TenantApartment>,
+      apartment: apartment == freezed
+          ? _value.apartment
+          : apartment as TenantApartment,
       assignment:
           assignment == freezed ? _value.assignment : assignment as Assignment,
+      property:
+          property == freezed ? _value.property : property as LandlordProperty,
       response: response == freezed
           ? _value.response
           : response as Option<Either<Failure, Success>>,
     ));
+  }
+
+  @override
+  $TenantApartmentCopyWith<$Res> get apartment {
+    if (_value.apartment == null) {
+      return null;
+    }
+    return $TenantApartmentCopyWith<$Res>(_value.apartment, (value) {
+      return _then(_value.copyWith(apartment: value));
+    });
   }
 
   @override
@@ -106,6 +143,16 @@ class _$TenantAssignmentStateCopyWithImpl<$Res>
     }
     return $AssignmentCopyWith<$Res>(_value.assignment, (value) {
       return _then(_value.copyWith(assignment: value));
+    });
+  }
+
+  @override
+  $LandlordPropertyCopyWith<$Res> get property {
+    if (_value.property == null) {
+      return null;
+    }
+    return $LandlordPropertyCopyWith<$Res>(_value.property, (value) {
+      return _then(_value.copyWith(property: value));
     });
   }
 }
@@ -120,13 +167,20 @@ abstract class _$TenantAssignmentStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool validate,
-      BasicTextField<String> code,
-      KtList<Assignment> assignments,
+      KtList<Assignment> unaccepted,
+      KtList<Assignment> paired,
+      KtList<TenantApartment> apartments,
+      @nullable TenantApartment apartment,
       @nullable Assignment assignment,
+      @nullable LandlordProperty property,
       Option<Either<Failure, Success>> response});
 
   @override
+  $TenantApartmentCopyWith<$Res> get apartment;
+  @override
   $AssignmentCopyWith<$Res> get assignment;
+  @override
+  $LandlordPropertyCopyWith<$Res> get property;
 }
 
 /// @nodoc
@@ -144,20 +198,31 @@ class __$TenantAssignmentStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object validate = freezed,
-    Object code = freezed,
-    Object assignments = freezed,
+    Object unaccepted = freezed,
+    Object paired = freezed,
+    Object apartments = freezed,
+    Object apartment = freezed,
     Object assignment = freezed,
+    Object property = freezed,
     Object response = freezed,
   }) {
     return _then(_TenantAssignmentState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      code: code == freezed ? _value.code : code as BasicTextField<String>,
-      assignments: assignments == freezed
-          ? _value.assignments
-          : assignments as KtList<Assignment>,
+      unaccepted: unaccepted == freezed
+          ? _value.unaccepted
+          : unaccepted as KtList<Assignment>,
+      paired: paired == freezed ? _value.paired : paired as KtList<Assignment>,
+      apartments: apartments == freezed
+          ? _value.apartments
+          : apartments as KtList<TenantApartment>,
+      apartment: apartment == freezed
+          ? _value.apartment
+          : apartment as TenantApartment,
       assignment:
           assignment == freezed ? _value.assignment : assignment as Assignment,
+      property:
+          property == freezed ? _value.property : property as LandlordProperty,
       response: response == freezed
           ? _value.response
           : response as Option<Either<Failure, Success>>,
@@ -170,14 +235,18 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
   const _$_TenantAssignmentState(
       {this.isLoading = false,
       this.validate = false,
-      @required this.code,
-      this.assignments = const KtList.empty(),
+      this.unaccepted = const KtList.empty(),
+      this.paired = const KtList.empty(),
+      this.apartments = const KtList.empty(),
+      @nullable this.apartment,
       @nullable this.assignment,
+      @nullable this.property,
       this.response = const None()})
       : assert(isLoading != null),
         assert(validate != null),
-        assert(code != null),
-        assert(assignments != null),
+        assert(unaccepted != null),
+        assert(paired != null),
+        assert(apartments != null),
         assert(response != null),
         super._();
 
@@ -187,21 +256,31 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
   @JsonKey(defaultValue: false)
   @override
   final bool validate;
-  @override
-  final BasicTextField<String> code;
   @JsonKey(defaultValue: const KtList.empty())
   @override
-  final KtList<Assignment> assignments;
+  final KtList<Assignment> unaccepted;
+  @JsonKey(defaultValue: const KtList.empty())
+  @override
+  final KtList<Assignment> paired;
+  @JsonKey(defaultValue: const KtList.empty())
+  @override
+  final KtList<TenantApartment> apartments;
+  @override
+  @nullable
+  final TenantApartment apartment;
   @override
   @nullable
   final Assignment assignment;
+  @override
+  @nullable
+  final LandlordProperty property;
   @JsonKey(defaultValue: const None())
   @override
   final Option<Either<Failure, Success>> response;
 
   @override
   String toString() {
-    return 'TenantAssignmentState(isLoading: $isLoading, validate: $validate, code: $code, assignments: $assignments, assignment: $assignment, response: $response)';
+    return 'TenantAssignmentState(isLoading: $isLoading, validate: $validate, unaccepted: $unaccepted, paired: $paired, apartments: $apartments, apartment: $apartment, assignment: $assignment, property: $property, response: $response)';
   }
 
   @override
@@ -214,14 +293,23 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
             (identical(other.validate, validate) ||
                 const DeepCollectionEquality()
                     .equals(other.validate, validate)) &&
-            (identical(other.code, code) ||
-                const DeepCollectionEquality().equals(other.code, code)) &&
-            (identical(other.assignments, assignments) ||
+            (identical(other.unaccepted, unaccepted) ||
                 const DeepCollectionEquality()
-                    .equals(other.assignments, assignments)) &&
+                    .equals(other.unaccepted, unaccepted)) &&
+            (identical(other.paired, paired) ||
+                const DeepCollectionEquality().equals(other.paired, paired)) &&
+            (identical(other.apartments, apartments) ||
+                const DeepCollectionEquality()
+                    .equals(other.apartments, apartments)) &&
+            (identical(other.apartment, apartment) ||
+                const DeepCollectionEquality()
+                    .equals(other.apartment, apartment)) &&
             (identical(other.assignment, assignment) ||
                 const DeepCollectionEquality()
                     .equals(other.assignment, assignment)) &&
+            (identical(other.property, property) ||
+                const DeepCollectionEquality()
+                    .equals(other.property, property)) &&
             (identical(other.response, response) ||
                 const DeepCollectionEquality()
                     .equals(other.response, response)));
@@ -232,9 +320,12 @@ class _$_TenantAssignmentState extends _TenantAssignmentState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(validate) ^
-      const DeepCollectionEquality().hash(code) ^
-      const DeepCollectionEquality().hash(assignments) ^
+      const DeepCollectionEquality().hash(unaccepted) ^
+      const DeepCollectionEquality().hash(paired) ^
+      const DeepCollectionEquality().hash(apartments) ^
+      const DeepCollectionEquality().hash(apartment) ^
       const DeepCollectionEquality().hash(assignment) ^
+      const DeepCollectionEquality().hash(property) ^
       const DeepCollectionEquality().hash(response);
 
   @JsonKey(ignore: true)
@@ -249,9 +340,12 @@ abstract class _TenantAssignmentState extends TenantAssignmentState {
   const factory _TenantAssignmentState(
       {bool isLoading,
       bool validate,
-      @required BasicTextField<String> code,
-      KtList<Assignment> assignments,
+      KtList<Assignment> unaccepted,
+      KtList<Assignment> paired,
+      KtList<TenantApartment> apartments,
+      @nullable TenantApartment apartment,
       @nullable Assignment assignment,
+      @nullable LandlordProperty property,
       Option<Either<Failure, Success>> response}) = _$_TenantAssignmentState;
 
   @override
@@ -259,12 +353,20 @@ abstract class _TenantAssignmentState extends TenantAssignmentState {
   @override
   bool get validate;
   @override
-  BasicTextField<String> get code;
+  KtList<Assignment> get unaccepted;
   @override
-  KtList<Assignment> get assignments;
+  KtList<Assignment> get paired;
+  @override
+  KtList<TenantApartment> get apartments;
+  @override
+  @nullable
+  TenantApartment get apartment;
   @override
   @nullable
   Assignment get assignment;
+  @override
+  @nullable
+  LandlordProperty get property;
   @override
   Option<Either<Failure, Success>> get response;
   @override

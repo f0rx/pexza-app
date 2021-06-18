@@ -20,7 +20,7 @@ abstract class StateDTO implements _$StateDTO {
   const StateDTO._();
 
   const factory StateDTO({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: true, name: 'is_supported')

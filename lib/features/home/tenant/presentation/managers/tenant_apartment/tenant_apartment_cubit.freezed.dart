@@ -17,14 +17,14 @@ class _$TenantApartmentStateTearOff {
   _TenantApartmentState call(
       {bool isLoading = false,
       bool validate = false,
-      KtList<TenantApartment> apartments = const KtList.empty(),
       @nullable TenantApartment apartment,
+      KtList<TenantApartment> apartments = const KtList.empty(),
       Option<Either<Failure, Success>> response = const None()}) {
     return _TenantApartmentState(
       isLoading: isLoading,
       validate: validate,
-      apartments: apartments,
       apartment: apartment,
+      apartments: apartments,
       response: response,
     );
   }
@@ -38,9 +38,9 @@ const $TenantApartmentState = _$TenantApartmentStateTearOff();
 mixin _$TenantApartmentState {
   bool get isLoading;
   bool get validate;
-  KtList<TenantApartment> get apartments;
   @nullable
   TenantApartment get apartment;
+  KtList<TenantApartment> get apartments;
   Option<Either<Failure, Success>> get response;
 
   @JsonKey(ignore: true)
@@ -55,8 +55,8 @@ abstract class $TenantApartmentStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool validate,
-      KtList<TenantApartment> apartments,
       @nullable TenantApartment apartment,
+      KtList<TenantApartment> apartments,
       Option<Either<Failure, Success>> response});
 
   $TenantApartmentCopyWith<$Res> get apartment;
@@ -75,19 +75,19 @@ class _$TenantApartmentStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object validate = freezed,
-    Object apartments = freezed,
     Object apartment = freezed,
+    Object apartments = freezed,
     Object response = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      apartments: apartments == freezed
-          ? _value.apartments
-          : apartments as KtList<TenantApartment>,
       apartment: apartment == freezed
           ? _value.apartment
           : apartment as TenantApartment,
+      apartments: apartments == freezed
+          ? _value.apartments
+          : apartments as KtList<TenantApartment>,
       response: response == freezed
           ? _value.response
           : response as Option<Either<Failure, Success>>,
@@ -115,8 +115,8 @@ abstract class _$TenantApartmentStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool validate,
-      KtList<TenantApartment> apartments,
       @nullable TenantApartment apartment,
+      KtList<TenantApartment> apartments,
       Option<Either<Failure, Success>> response});
 
   @override
@@ -138,19 +138,19 @@ class __$TenantApartmentStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object validate = freezed,
-    Object apartments = freezed,
     Object apartment = freezed,
+    Object apartments = freezed,
     Object response = freezed,
   }) {
     return _then(_TenantApartmentState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      apartments: apartments == freezed
-          ? _value.apartments
-          : apartments as KtList<TenantApartment>,
       apartment: apartment == freezed
           ? _value.apartment
           : apartment as TenantApartment,
+      apartments: apartments == freezed
+          ? _value.apartments
+          : apartments as KtList<TenantApartment>,
       response: response == freezed
           ? _value.response
           : response as Option<Either<Failure, Success>>,
@@ -163,8 +163,8 @@ class _$_TenantApartmentState extends _TenantApartmentState {
   const _$_TenantApartmentState(
       {this.isLoading = false,
       this.validate = false,
-      this.apartments = const KtList.empty(),
       @nullable this.apartment,
+      this.apartments = const KtList.empty(),
       this.response = const None()})
       : assert(isLoading != null),
         assert(validate != null),
@@ -178,19 +178,19 @@ class _$_TenantApartmentState extends _TenantApartmentState {
   @JsonKey(defaultValue: false)
   @override
   final bool validate;
-  @JsonKey(defaultValue: const KtList.empty())
-  @override
-  final KtList<TenantApartment> apartments;
   @override
   @nullable
   final TenantApartment apartment;
+  @JsonKey(defaultValue: const KtList.empty())
+  @override
+  final KtList<TenantApartment> apartments;
   @JsonKey(defaultValue: const None())
   @override
   final Option<Either<Failure, Success>> response;
 
   @override
   String toString() {
-    return 'TenantApartmentState(isLoading: $isLoading, validate: $validate, apartments: $apartments, apartment: $apartment, response: $response)';
+    return 'TenantApartmentState(isLoading: $isLoading, validate: $validate, apartment: $apartment, apartments: $apartments, response: $response)';
   }
 
   @override
@@ -203,12 +203,12 @@ class _$_TenantApartmentState extends _TenantApartmentState {
             (identical(other.validate, validate) ||
                 const DeepCollectionEquality()
                     .equals(other.validate, validate)) &&
-            (identical(other.apartments, apartments) ||
-                const DeepCollectionEquality()
-                    .equals(other.apartments, apartments)) &&
             (identical(other.apartment, apartment) ||
                 const DeepCollectionEquality()
                     .equals(other.apartment, apartment)) &&
+            (identical(other.apartments, apartments) ||
+                const DeepCollectionEquality()
+                    .equals(other.apartments, apartments)) &&
             (identical(other.response, response) ||
                 const DeepCollectionEquality()
                     .equals(other.response, response)));
@@ -219,8 +219,8 @@ class _$_TenantApartmentState extends _TenantApartmentState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(validate) ^
-      const DeepCollectionEquality().hash(apartments) ^
       const DeepCollectionEquality().hash(apartment) ^
+      const DeepCollectionEquality().hash(apartments) ^
       const DeepCollectionEquality().hash(response);
 
   @JsonKey(ignore: true)
@@ -235,8 +235,8 @@ abstract class _TenantApartmentState extends TenantApartmentState {
   const factory _TenantApartmentState(
       {bool isLoading,
       bool validate,
-      KtList<TenantApartment> apartments,
       @nullable TenantApartment apartment,
+      KtList<TenantApartment> apartments,
       Option<Either<Failure, Success>> response}) = _$_TenantApartmentState;
 
   @override
@@ -244,10 +244,10 @@ abstract class _TenantApartmentState extends TenantApartmentState {
   @override
   bool get validate;
   @override
-  KtList<TenantApartment> get apartments;
-  @override
   @nullable
   TenantApartment get apartment;
+  @override
+  KtList<TenantApartment> get apartments;
   @override
   Option<Either<Failure, Success>> get response;
   @override

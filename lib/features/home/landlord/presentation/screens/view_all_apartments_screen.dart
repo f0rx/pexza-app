@@ -30,7 +30,7 @@ class ViewAllApartmentScreen extends StatelessWidget with AutoRouteWrapper {
       child: BlocListener<LandlordApartmentCubit, LandlordApartmentState>(
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f.message ?? f.error,

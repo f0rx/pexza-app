@@ -4,6 +4,10 @@ import 'package:logger/logger.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
+import 'package:pexza/features/home/tenant/data/data.dart';
+import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart';
+import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
+import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 import 'package:test/test.dart';
 
 import 'fixtures/fixture_reader.dart';
@@ -70,7 +74,7 @@ void main() {
     Logger().wtf(_dto.toJson());
   });
 
-  test('assignment - serialization & deserialization', () {
+  test('assignment - serialization & deserialization', () async {
     String assignmentJson = fixture("assignment.json");
 
     final assignment = AssignmentDTO.fromJson(jsonDecode(assignmentJson));
@@ -82,5 +86,25 @@ void main() {
     Logger().wtf(assignment.domain(true).apartment);
     Logger().wtf(assignment.domain()?.apartment);
     Logger().wtf(_dto.toJson());
+  });
+
+  test('debit card tests', () async {
+    String storeResponse = fixture("store_card_response.json");
+    String verifyResponse = fixture("verify_card_response.json");
+
+    final storeDTO = CardDTO.fromJson(jsonDecode(storeResponse));
+    final verifyDTO = CardVerificationDTO.fromJson(jsonDecode(verifyResponse));
+    final dto = CardDTO.fromDomain(DebitCard(
+      cardNumber: DebitCardNumber('4464666387456733'),
+      meta: InvoiceMeta(description: BasicTextField('My custom card!')),
+    ));
+
+    // Logger().wtf(listDTO.cards[0].toString());
+    // Logger().wtf(storeDTO.domain);
+    // Logger().wtf(verifyDTO.domain.merge(storeDTO.domain));
+    Logger().wtf(dto.toJson());
+
+    // Logger().wtf(assignment.domain()?.apartment);
+    // Logger().wtf(_dto.toJson());
   });
 }

@@ -196,7 +196,7 @@ packages:
       name: clock
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.0-nullsafety.3"
   code_builder:
     dependency: transitive
     description:
@@ -309,6 +309,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.9"
+  device_frame:
+    dependency: transitive
+    description:
+      name: device_frame
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  device_preview:
+    dependency: "direct main"
+    description:
+      path: "device_preview/"
+      ref: "0389ef4ed30eea99caef480aaec5dc242e536dfb"
+      resolved-ref: "0389ef4ed30eea99caef480aaec5dc242e536dfb"
+      url: "git://github.com/Flutter-Fox/flutter_device_preview.git"
+    source: git
+    version: "0.6.2-beta"
   dio:
     dependency: "direct main"
     description:
@@ -475,6 +491,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.1"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_multi_formatter:
     dependency: "direct main"
     description:
@@ -482,6 +503,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.6"
+  flutter_paystack:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: brendan-patch
+      resolved-ref: "0424295360746d48c6be57cfd5f98ca7ade598e8"
+      url: "git://github.com/Flutter-Fox/flutter_paystack.git"
+    source: git
+    version: "1.0.4+1"
   flutter_portal:
     dependency: "direct main"
     description:
@@ -515,6 +545,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "8.12.0"
   freezed:
     dependency: "direct dev"
     description:
@@ -656,12 +693,12 @@ packages:
     source: hosted
     version: "1.1.2"
   intl:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.1"
+    version: "0.17.0-nullsafety.2"
   io:
     dependency: transitive
     description:
@@ -801,7 +838,7 @@ packages:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0"
+    version: "1.8.0-nullsafety.3"
   path_drawing:
     dependency: transitive
     description:
@@ -1107,7 +1144,7 @@ packages:
       name: stack_trace
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.0"
+    version: "1.9.6"
   stream_channel:
     dependency: transitive
     description:

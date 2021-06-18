@@ -77,6 +77,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
     toggleLoading();
 
     try {
+      await checkInternetAndConnectivity();
+
       final aprts = await _repository.all();
 
       emit(state.copyWith(
@@ -87,8 +89,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -101,6 +103,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
     toggleLoading();
 
     try {
+      await checkInternetAndConnectivity();
+
       final aprts = await _repository.allApartmentsForProperty(
         property?.id?.value ?? id?.value,
       );
@@ -113,8 +117,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -153,8 +157,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -177,8 +181,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -219,8 +223,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -234,7 +238,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
 
     try {
       // Check if user is connected & has good internet
-      await checkInternetAndConnectivity();
+      await checkInternetAndConnectivity(true);
 
       Future.wait<void>([
         _repository.delete(apartment?.id?.value ?? id),
@@ -252,8 +256,8 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
       emit(state.copyWith(
         response: some(left(e)),
       ));
-    } on DioError catch (_) {
-      _handleDioFailures(_);
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();

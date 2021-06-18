@@ -17,7 +17,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
   const LandlordPropertyData._();
 
   const factory LandlordPropertyData({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
@@ -28,6 +28,9 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String photo,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String street,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String town,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '', name: 'swatch')
+        String primary,
     @nullable @JsonKey(includeIfNull: false) StateDTO state,
     @nullable @JsonKey(includeIfNull: false) UserDTO landlord,
     @nullable
@@ -36,16 +39,16 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
         int stateId,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String country,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
+    @JsonKey(includeIfNull: false, name: "number_of_tenants")
         int numberOfTenants,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_apartments")
+    @JsonKey(includeIfNull: false, name: "number_of_apartments")
         int numberOfApartments,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_available_apartments")
+    @JsonKey(includeIfNull: false, name: "number_of_available_apartments")
         int numberOfAvailableApartments,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_rented_apartment")
+    @JsonKey(includeIfNull: false, name: "number_of_rented_apartment")
         int numberOfRentedApartment,
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
@@ -77,7 +80,14 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       );
 
   LandlordProperty get domain {
-    Color _color = AppColors.random;
+    Color _color = AppColors.fromHex(
+      PropertyColor(primary).getOrNull ??
+          AppColors.stringHex(
+            AppColors.random,
+            appendHash: true,
+            withAlpha: false,
+          ),
+    );
 
     return LandlordProperty(
       id: UniqueId<int>.fromExternal(id),
@@ -89,14 +99,12 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       town: !town.isNull ? BasicTextField(town) : null,
       street: !street.isNull ? BasicTextField(street) : null,
       photo: LandlordPropertyImage(
-        "https://res.cloudinary.com/anifowosetobi"
-        "/image/upload/v1601500323/user_korsis.png",
+        !photo.isNullOrBlank ? photo : AppAssets.anonymous,
       ),
       state: !state.isNull ? state.domain : null,
       landlord: !landlord.isNull ? landlord.domain : null,
       country: !country.isNull ? BasicTextField(country) : null,
       color: MaterialColor(_color.value, AppColors.swatch(_color)),
-      // image: LandlordPropertyImage(images.random()),
       numberOfTenants:
           !numberOfTenants.isNull ? BasicTextField(numberOfTenants) : null,
       numberOfApartments: !numberOfApartments.isNull

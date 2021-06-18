@@ -10,7 +10,7 @@ _$_TenantApartmentData _$_$_TenantApartmentDataFromJson(
     Map<String, dynamic> json) {
   $checkKeys(json, disallowNullValues: const ['property']);
   return _$_TenantApartmentData(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     name: json['name'] as String ?? '',
     status: json['status'] as String ?? '',
     property: json['property'] == null

@@ -10,7 +10,7 @@ class FABAddNew extends StatelessWidget {
 
   const FABAddNew({
     Key key,
-    @required this.heroTag,
+    this.heroTag,
     this.tooltip = "Add New",
     @required this.onPressed,
     this.child,

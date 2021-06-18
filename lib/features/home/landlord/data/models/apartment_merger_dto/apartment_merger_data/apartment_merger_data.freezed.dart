@@ -19,13 +19,13 @@ class _$ApartmentMergerDataTearOff {
 // ignore: unused_element
   _ApartmentMergerData call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: ApartmentStatus.vacant)
           String status,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int amount,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
@@ -110,13 +110,13 @@ const $ApartmentMergerData = _$ApartmentMergerDataTearOff();
 /// @nodoc
 mixin _$ApartmentMergerData {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: ApartmentStatus.vacant)
   String get status;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get amount;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
@@ -180,13 +180,13 @@ abstract class $ApartmentMergerDataCopyWith<$Res> {
       _$ApartmentMergerDataCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: ApartmentStatus.vacant)
           String status,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int amount,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
@@ -349,13 +349,13 @@ abstract class _$ApartmentMergerDataCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: ApartmentStatus.vacant)
           String status,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int amount,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
@@ -481,13 +481,13 @@ class __$ApartmentMergerDataCopyWithImpl<$Res>
 class _$_ApartmentMergerData extends _ApartmentMergerData {
   const _$_ApartmentMergerData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: ApartmentStatus.vacant)
           this.status,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.amount,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
@@ -545,7 +545,7 @@ class _$_ApartmentMergerData extends _ApartmentMergerData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -553,7 +553,7 @@ class _$_ApartmentMergerData extends _ApartmentMergerData {
   final String status;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int amount;
   @override
   @nullable
@@ -714,13 +714,13 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
   const _ApartmentMergerData._() : super._();
   const factory _ApartmentMergerData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: ApartmentStatus.vacant)
           String status,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int amount,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
@@ -777,7 +777,7 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable
@@ -785,7 +785,7 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
   String get status;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get amount;
   @override
   @nullable

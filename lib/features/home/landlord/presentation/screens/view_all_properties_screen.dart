@@ -21,7 +21,7 @@ class ViewAllPropertiesScreen extends StatefulWidget with AutoRouteWrapper {
       child: BlocListener<LandlordPropertyCubit, LandlordPropertyState>(
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f.message ?? f.error,
@@ -108,7 +108,7 @@ class _ViewAllPropertiesScreenState extends State<ViewAllPropertiesScreen>
       child: ScaleTransition(
         scale: prop.animatable.animate(_controller),
         child: Container(
-          child: Text("hello"),
+          child: Text("No properties"),
         ),
       ),
     );

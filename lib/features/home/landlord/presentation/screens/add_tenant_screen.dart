@@ -36,7 +36,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             c.response.getOrElse(() => null),
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             c,
             message: either.fold(
               (f) => f?.message ?? f?.error,
@@ -127,7 +127,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                   ),
                 ),
                 onFieldSubmitted: (_) =>
-                    FocusScope.of(c).requestFocus(_amountFocus),
+                    FocusScope.of(context).requestFocus(_amountFocus),
               ),
             ),
             //
@@ -333,7 +333,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                             ),
                           ),
                         ),
-                onFieldSubmitted: (_) => FocusScope.of(c).unfocus(),
+                onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
               ),
             ),
             //

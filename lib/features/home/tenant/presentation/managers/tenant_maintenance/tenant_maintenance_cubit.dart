@@ -48,9 +48,7 @@ class TenantMaintenanceCubit extends Cubit<TenantMaintenanceState> {
       ));
 
   void init([Assignment assignment]) async {
-    emit(state.copyWith(
-      assignment: assignment ?? state.assignment,
-    ));
+    emit(state.copyWith(assignment: assignment ?? state.assignment));
 
     // Fetch all available services
     this.getServices();
@@ -81,15 +79,15 @@ class TenantMaintenanceCubit extends Cubit<TenantMaintenanceState> {
     toggleLoading();
 
     try {
+      await checkInternetAndConnectivity();
+
       final _requests = await _repository.all();
 
       emit(state.copyWith(maintenances: _requests.domain()));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -103,7 +101,7 @@ class TenantMaintenanceCubit extends Cubit<TenantMaintenanceState> {
       comment: state.comment,
       service: state.service,
       urgency: state.urgency,
-      assignment: Assignment(id: UniqueId.fromExternal(302)),
+      assignment: state.assignment,
     );
 
     // Validate Input fields
@@ -128,11 +126,9 @@ class TenantMaintenanceCubit extends Cubit<TenantMaintenanceState> {
         ));
       }
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -142,15 +138,15 @@ class TenantMaintenanceCubit extends Cubit<TenantMaintenanceState> {
     toggleLoading();
 
     try {
+      await checkInternetAndConnectivity();
+
       final services = await _miscRepository.fetchServices();
 
       emit(state.copyWith(services: services.domain));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
-    } on DioError catch (e) {
-      _handleDioFailures(e);
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError) _handleDioFailures(_);
     }
 
     toggleLoading();

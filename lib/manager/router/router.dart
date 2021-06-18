@@ -8,6 +8,8 @@ import 'package:pexza/features/auth/presentation/screens/rent_details_screen.dar
 import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
+import 'package:pexza/features/core/presentation/screens/notification_screen.dart';
+import 'package:pexza/features/core/presentation/screens/payment_successful_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_apartment_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_property_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_tenant_screen.dart';
@@ -15,15 +17,19 @@ import 'package:pexza/features/home/landlord/presentation/screens/home_screen.da
 import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_apartment_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_wallet_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/request_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_apartments_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_properties_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/add_new_card_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/confirm_otp_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/apartment_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_payment_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/saved_card_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/service_request_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/splash_screen.dart';
@@ -97,6 +103,27 @@ import 'package:pexza/manager/router/export.dart';
       guards: [AuthGuard],
       maintainState: true,
     ),
+    AdaptiveRoute(
+      page: AddNewCardScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: SavedCardScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: ConfirmOtpScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: PaymentSuccessfulScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+
     //////////////// Landlord Routes ////////////////////////
     AdaptiveRoute(
       page: LandlordHomeScreen,
@@ -164,7 +191,17 @@ import 'package:pexza/manager/router/export.dart';
       guards: [AuthGuard],
       maintainState: true,
     ),
-    //////
+    AdaptiveRoute(
+      page: LandlordWalletScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    ////////////
+    AdaptiveRoute(
+      page: NotificationScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
     AdaptiveRoute(
       cupertinoPageTitle: "Profile",
       page: AccountScreen,

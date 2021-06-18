@@ -9,9 +9,9 @@ part of apartment_merger_data.dart;
 _$_ApartmentMergerData _$_$_ApartmentMergerDataFromJson(
     Map<String, dynamic> json) {
   return _$_ApartmentMergerData(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     status: json['status'] as String,
-    amount: json['amount'] as int ?? 0,
+    amount: json['amount'] as int,
     paymentPlan: json['payment_plan'] as String ?? '',
     tenantEmail: json['tenant_email'] as String,
     apartmentId: const IntegerSerializer().fromJson(json['apartment_id']),

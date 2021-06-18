@@ -15,17 +15,14 @@ abstract class MaintenanceDTOData implements _$MaintenanceDTOData {
   const MaintenanceDTOData._();
 
   const factory MaintenanceDTOData({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String comment,
     @nullable @JsonKey(includeIfNull: false) MaintenanceServiceDTO service,
     @nullable @JsonKey(includeIfNull: false, name: 'service_id') int serviceId,
     @nullable
     @JsonKey(includeIfNull: false, name: 'assignment_id')
         int assignmentId,
-    @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0)
-    @IntegerSerializer()
-        int urgency,
+    @nullable @JsonKey(includeIfNull: false) @IntegerSerializer() int urgency,
     @nullable @JsonKey(includeIfNull: false) String status,
     @nullable @JsonKey(includeIfNull: false) AssignmentDTOData assignment,
     @nullable

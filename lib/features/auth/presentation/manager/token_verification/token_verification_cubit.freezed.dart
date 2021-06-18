@@ -15,15 +15,17 @@ class _$TokenVerificationStateTearOff {
 
 // ignore: unused_element
   _TokenVerificationState call(
-      {@required OTPCode code,
-      bool isLoading = false,
+      {bool isLoading = false,
       bool validate = false,
-      Option<Either<AuthResponse, Unit>> authStatus = const None()}) {
+      @required OTPCode code,
+      @nullable Assignment assignment,
+      Option<Either<Failure, Success>> response = const None()}) {
     return _TokenVerificationState(
-      code: code,
       isLoading: isLoading,
       validate: validate,
-      authStatus: authStatus,
+      code: code,
+      assignment: assignment,
+      response: response,
     );
   }
 }
@@ -34,10 +36,12 @@ const $TokenVerificationState = _$TokenVerificationStateTearOff();
 
 /// @nodoc
 mixin _$TokenVerificationState {
-  OTPCode get code;
   bool get isLoading;
   bool get validate;
-  Option<Either<AuthResponse, Unit>> get authStatus;
+  OTPCode get code;
+  @nullable
+  Assignment get assignment;
+  Option<Either<Failure, Success>> get response;
 
   @JsonKey(ignore: true)
   $TokenVerificationStateCopyWith<TokenVerificationState> get copyWith;
@@ -49,10 +53,13 @@ abstract class $TokenVerificationStateCopyWith<$Res> {
           $Res Function(TokenVerificationState) then) =
       _$TokenVerificationStateCopyWithImpl<$Res>;
   $Res call(
-      {OTPCode code,
-      bool isLoading,
+      {bool isLoading,
       bool validate,
-      Option<Either<AuthResponse, Unit>> authStatus});
+      OTPCode code,
+      @nullable Assignment assignment,
+      Option<Either<Failure, Success>> response});
+
+  $AssignmentCopyWith<$Res> get assignment;
 }
 
 /// @nodoc
@@ -66,19 +73,32 @@ class _$TokenVerificationStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object code = freezed,
     Object isLoading = freezed,
     Object validate = freezed,
-    Object authStatus = freezed,
+    Object code = freezed,
+    Object assignment = freezed,
+    Object response = freezed,
   }) {
     return _then(_value.copyWith(
-      code: code == freezed ? _value.code : code as OTPCode,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      authStatus: authStatus == freezed
-          ? _value.authStatus
-          : authStatus as Option<Either<AuthResponse, Unit>>,
+      code: code == freezed ? _value.code : code as OTPCode,
+      assignment:
+          assignment == freezed ? _value.assignment : assignment as Assignment,
+      response: response == freezed
+          ? _value.response
+          : response as Option<Either<Failure, Success>>,
     ));
+  }
+
+  @override
+  $AssignmentCopyWith<$Res> get assignment {
+    if (_value.assignment == null) {
+      return null;
+    }
+    return $AssignmentCopyWith<$Res>(_value.assignment, (value) {
+      return _then(_value.copyWith(assignment: value));
+    });
   }
 }
 
@@ -90,10 +110,14 @@ abstract class _$TokenVerificationStateCopyWith<$Res>
       __$TokenVerificationStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {OTPCode code,
-      bool isLoading,
+      {bool isLoading,
       bool validate,
-      Option<Either<AuthResponse, Unit>> authStatus});
+      OTPCode code,
+      @nullable Assignment assignment,
+      Option<Either<Failure, Success>> response});
+
+  @override
+  $AssignmentCopyWith<$Res> get assignment;
 }
 
 /// @nodoc
@@ -109,18 +133,21 @@ class __$TokenVerificationStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object code = freezed,
     Object isLoading = freezed,
     Object validate = freezed,
-    Object authStatus = freezed,
+    Object code = freezed,
+    Object assignment = freezed,
+    Object response = freezed,
   }) {
     return _then(_TokenVerificationState(
-      code: code == freezed ? _value.code : code as OTPCode,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
-      authStatus: authStatus == freezed
-          ? _value.authStatus
-          : authStatus as Option<Either<AuthResponse, Unit>>,
+      code: code == freezed ? _value.code : code as OTPCode,
+      assignment:
+          assignment == freezed ? _value.assignment : assignment as Assignment,
+      response: response == freezed
+          ? _value.response
+          : response as Option<Either<Failure, Success>>,
     ));
   }
 }
@@ -128,57 +155,65 @@ class __$TokenVerificationStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_TokenVerificationState extends _TokenVerificationState {
   const _$_TokenVerificationState(
-      {@required this.code,
-      this.isLoading = false,
+      {this.isLoading = false,
       this.validate = false,
-      this.authStatus = const None()})
-      : assert(code != null),
-        assert(isLoading != null),
+      @required this.code,
+      @nullable this.assignment,
+      this.response = const None()})
+      : assert(isLoading != null),
         assert(validate != null),
-        assert(authStatus != null),
+        assert(code != null),
+        assert(response != null),
         super._();
 
-  @override
-  final OTPCode code;
   @JsonKey(defaultValue: false)
   @override
   final bool isLoading;
   @JsonKey(defaultValue: false)
   @override
   final bool validate;
+  @override
+  final OTPCode code;
+  @override
+  @nullable
+  final Assignment assignment;
   @JsonKey(defaultValue: const None())
   @override
-  final Option<Either<AuthResponse, Unit>> authStatus;
+  final Option<Either<Failure, Success>> response;
 
   @override
   String toString() {
-    return 'TokenVerificationState(code: $code, isLoading: $isLoading, validate: $validate, authStatus: $authStatus)';
+    return 'TokenVerificationState(isLoading: $isLoading, validate: $validate, code: $code, assignment: $assignment, response: $response)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _TokenVerificationState &&
-            (identical(other.code, code) ||
-                const DeepCollectionEquality().equals(other.code, code)) &&
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
             (identical(other.validate, validate) ||
                 const DeepCollectionEquality()
                     .equals(other.validate, validate)) &&
-            (identical(other.authStatus, authStatus) ||
+            (identical(other.code, code) ||
+                const DeepCollectionEquality().equals(other.code, code)) &&
+            (identical(other.assignment, assignment) ||
                 const DeepCollectionEquality()
-                    .equals(other.authStatus, authStatus)));
+                    .equals(other.assignment, assignment)) &&
+            (identical(other.response, response) ||
+                const DeepCollectionEquality()
+                    .equals(other.response, response)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(validate) ^
-      const DeepCollectionEquality().hash(authStatus);
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(assignment) ^
+      const DeepCollectionEquality().hash(response);
 
   @JsonKey(ignore: true)
   @override
@@ -190,20 +225,23 @@ class _$_TokenVerificationState extends _TokenVerificationState {
 abstract class _TokenVerificationState extends TokenVerificationState {
   const _TokenVerificationState._() : super._();
   const factory _TokenVerificationState(
-          {@required OTPCode code,
-          bool isLoading,
-          bool validate,
-          Option<Either<AuthResponse, Unit>> authStatus}) =
-      _$_TokenVerificationState;
+      {bool isLoading,
+      bool validate,
+      @required OTPCode code,
+      @nullable Assignment assignment,
+      Option<Either<Failure, Success>> response}) = _$_TokenVerificationState;
 
-  @override
-  OTPCode get code;
   @override
   bool get isLoading;
   @override
   bool get validate;
   @override
-  Option<Either<AuthResponse, Unit>> get authStatus;
+  OTPCode get code;
+  @override
+  @nullable
+  Assignment get assignment;
+  @override
+  Option<Either<Failure, Success>> get response;
   @override
   @JsonKey(ignore: true)
   _$TokenVerificationStateCopyWith<_TokenVerificationState> get copyWith;

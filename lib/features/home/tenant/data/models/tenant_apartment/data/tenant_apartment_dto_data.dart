@@ -16,7 +16,7 @@ abstract class TenantApartmentData implements _$TenantApartmentData {
   const TenantApartmentData._();
 
   const factory TenantApartmentData({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     @nullable @JsonKey(disallowNullValue: true) LandlordPropertyData property,

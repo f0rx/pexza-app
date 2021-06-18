@@ -26,20 +26,23 @@ class LandlordAddApartmentScreen extends StatelessWidget with AutoRouteWrapper {
     return BlocProvider(
       create: (_) => getIt<LandlordApartmentCubit>()..init(apartment, property),
       child: BlocConsumer<LandlordApartmentCubit, LandlordApartmentState>(
+        listenWhen: (p, c) =>
+            p.response.getOrElse(() => null) !=
+            c.response.getOrElse(() => null),
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
-              (f) => f.message ?? f.error,
-              (r) => r.message ?? r.details,
+              (f) => f?.message ?? f?.error,
+              (r) => r?.message ?? r?.details,
             ),
             icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
             iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
             shouldIconPulse: either.fold((_) => null, (r) => false),
             callback: either.fold(
               (_) => null,
-              (r) => (_) => navigator.pop(),
+              (r) => r.popRoute ? (_) => navigator.pop() : null,
             ),
           ),
         ),

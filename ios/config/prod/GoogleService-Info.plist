@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>692870871996-63qg4u376u9ra90mffcbufl5s451l91n.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.692870871996-63qg4u376u9ra90mffcbufl5s451l91n</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>692870871996-9j0m4loibdl2i1g2spr09dhapddfg6vi.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAMy_bHTHOp238ylTr59ZpH_HcVijVRvLQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>692870871996</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.pexza</string>
+	<key>PROJECT_ID</key>
+	<string>pexza-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pexza-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:692870871996:ios:e1b90abe911a4eb29e09b9</string>
+</dict>
+</plist>
