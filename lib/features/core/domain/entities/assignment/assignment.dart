@@ -37,11 +37,14 @@ abstract class Assignment implements _$Assignment {
     @nullable DateTime deletedAt,
   }) = _Assignment;
 
-  int get inDays => expiresOn.difference(DateTime.now()).inDays;
+  bool get expired =>
+      expiresOn != null && DateTime.now().isAfter(expiresOn) ? true : false;
 
-  int get inMonths => (inDays * 0.0328767).ceil();
+  int get inDays => !expired ? expiresOn.difference(DateTime.now()).inDays : 0;
 
-  int get inYears => (inDays * 0.00273973).ceil();
+  int get inMonths => (inDays * 0.0328767).floor();
+
+  int get inYears => (inDays * 0.00273973).floor();
 
   int get payableDuration => plan.fold(
         monthly: (_) => inMonths,

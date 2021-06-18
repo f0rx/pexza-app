@@ -14,7 +14,7 @@ abstract class CountryDTO implements _$CountryDTO {
   const CountryDTO._();
 
   const factory CountryDTO({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: 'country_phone_code')

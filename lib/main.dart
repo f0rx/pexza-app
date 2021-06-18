@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,5 +42,15 @@ void main() async {
     log.e("Error initializing HydratedStorage", e, trace);
   }
 
-  runApp(const Pexza());
+  runApp(DevicePreview(
+    enabled: env.flavor.fold(
+      prod: () => !kReleaseMode,
+      dev: () => true,
+    ),
+    style: DevicePreviewStyle(
+      background: BoxDecoration(color: Colors.transparent),
+      toolBar: DevicePreviewToolBarStyle.light(),
+    ),
+    builder: (context) => const Pexza(),
+  ));
 }

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/models/auth_response.dart';
 import 'package:pexza/features/core/core.dart' hide Response;
+import 'package:pexza/utils/utils.dart';
 
 @singleton
 class AuthRemoteDatasource {
@@ -158,9 +159,16 @@ class AuthRemoteDatasource {
           );
         case DioErrorType.SEND_TIMEOUT:
           return left(AuthResponse.timeout());
-          break;
         case DioErrorType.DEFAULT:
         default:
+          env.flavor.fold(dev: () {
+            log.wtf(e?.error);
+            log.wtf(e?.request?.receiveTimeout);
+            log.wtf(e?.request?.path);
+            log.wtf(e?.response?.data);
+            log.wtf(e?.response?.statusCode);
+            log.wtf(e?.response?.statusMessage);
+          });
           return left(AuthResponse.unknownFailure());
       }
     }

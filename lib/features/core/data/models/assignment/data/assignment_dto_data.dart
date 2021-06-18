@@ -15,7 +15,7 @@ abstract class AssignmentDTOData implements _$AssignmentDTOData {
   const AssignmentDTOData._();
 
   const factory AssignmentDTOData({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable
     @JsonKey(includeIfNull: false, name: "tenant_id")
     @IntegerSerializer()

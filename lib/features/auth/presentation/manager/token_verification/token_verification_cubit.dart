@@ -5,15 +5,11 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart' hide Response;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pexza/features/auth/data/models/auth_response.dart';
-import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/domain/failures/base.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
 import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
 import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart';
-import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
-import 'package:pexza/utils/utils.dart';
 
 part 'token_verification_state.dart';
 part 'token_verification_cubit.freezed.dart';

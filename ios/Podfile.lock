@@ -71,6 +71,8 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.0)
     - PromisesObjC (~> 1.2)
   - Flutter (1.0.0)
+  - flutter_paystack (0.0.1):
+    - Flutter
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -154,6 +156,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_crashlytics (from `.symlinks/plugins/firebase_crashlytics/ios`)
   - Flutter (from `Flutter`)
+  - flutter_paystack (from `.symlinks/plugins/flutter_paystack/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
@@ -197,6 +200,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_crashlytics/ios"
   Flutter:
     :path: Flutter
+  flutter_paystack:
+    :path: ".symlinks/plugins/flutter_paystack/ios"
   google_sign_in:
     :path: ".symlinks/plugins/google_sign_in/ios"
   path_provider:
@@ -224,6 +229,7 @@ SPEC CHECKSUMS:
   FirebaseCrashlytics: d31325312c92e2cb2f0386d589b9aa44e303d99b
   FirebaseInstallations: a58d4f72ec5861840b84df489f2668d970df558a
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  flutter_paystack: 50021637b71e7712780744f69d2843e71b65175d
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   google_sign_in: 6bd214b9c154f881422f5fe27b66aaa7bbd580cc
   GoogleAppMeasurement: 8d3c0aeede16ab7764144b5a4ca8e1d4323841b7

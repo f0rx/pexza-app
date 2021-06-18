@@ -9,7 +9,7 @@ part of landlord_property_data;
 _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     Map<String, dynamic> json) {
   return _$_LandlordPropertyData(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     name: json['name'] as String ?? '',
     propertyType: json['property_type'] as String ?? '',
     houseType: json['house_type'] as String ?? '',
@@ -25,11 +25,10 @@ _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
         : UserDTO.fromJson(json['landlord'] as Map<String, dynamic>),
     stateId: const IntegerSerializer().fromJson(json['state_id']),
     country: json['country'] as String ?? '',
-    numberOfTenants: json['number_of_tenants'] as int ?? 0,
-    numberOfApartments: json['number_of_apartments'] as int ?? 0,
-    numberOfAvailableApartments:
-        json['number_of_available_apartments'] as int ?? 0,
-    numberOfRentedApartment: json['number_of_rented_apartment'] as int ?? 0,
+    numberOfTenants: json['number_of_tenants'] as int,
+    numberOfApartments: json['number_of_apartments'] as int,
+    numberOfAvailableApartments: json['number_of_available_apartments'] as int,
+    numberOfRentedApartment: json['number_of_rented_apartment'] as int,
     createdAt: json['created_at'] as String,
     updatedAt: json['updated_at'] as String,
     deletedAt: json['deleted_at'] as String,

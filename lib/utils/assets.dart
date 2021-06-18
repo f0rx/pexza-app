@@ -18,8 +18,9 @@ mixin AppAssets {
 
   /////////////  SVGS /////////////
   static const String AUTH_SVG_DIR = "$SVG_DIR/auth";
-  static const String LANDLORD_SVG_DIR = "$SVG_DIR/landlord";
   static const String ONBOARDING_SVG_DIR = "$SVG_DIR/onboarding";
+  static const String LANDLORD_SVG_DIR = "$SVG_DIR/landlord";
+  static const String TENANT_SVG_DIR = "$SVG_DIR/tenant";
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
@@ -55,6 +56,13 @@ mixin AppAssets {
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
 
+  static SvgPicture freePick = SvgPicture.asset(
+    '$SVG_DIR/freepick.svg',
+    height: 30,
+    width: 30,
+    fit: BoxFit.contain,
+  );
+
   static SvgPicture wavingHand = SvgPicture.asset(
     '$SVG_DIR/waving_hand.svg',
     height: 18,
@@ -82,5 +90,21 @@ mixin AppAssets {
     height: App.width * 0.35,
     width: App.width * 0.35,
     fit: BoxFit.contain,
+  );
+
+  static SvgPicture eclipse1 = SvgPicture.asset(
+    '$TENANT_SVG_DIR/eclipse1.svg',
+    height: 100,
+    width: 100,
+    fit: BoxFit.cover,
+    color: AppColors.accentColor.shade100,
+  );
+
+  static SvgPicture eclipse2 = SvgPicture.asset(
+    '$TENANT_SVG_DIR/eclipse2.svg',
+    height: 75,
+    width: 75,
+    fit: BoxFit.cover,
+    color: AppColors.accentColor.shade100,
   );
 }

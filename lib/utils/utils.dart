@@ -16,3 +16,4 @@ export 'strings.dart';
 export 'boxes.dart';
 export 'keys.dart';
 export 'dialogs/bottom_alert_dialog.dart';
+export 'input_formatters/masked_input_formatter.dart';

@@ -11,7 +11,6 @@ import 'package:pexza/features/core/domain/failures/base.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/tenant/domain/domain.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
-import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
 import 'package:pexza/features/home/tenant/data/repositories/apartment/tenant_apartment_repository.dart';
 import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart';
 import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
@@ -76,11 +75,12 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
     try {
       await checkInternetAndConnectivity();
 
+      /// Get all assigned apartments / assignments
       final unaccepted = await _repository.all(query: param);
 
       emit(state.copyWith(unaccepted: unaccepted?.domain()));
 
-      ///
+      /// Get only paired assignments
       final paired = await _repository.all(query: AssignmentQueryParam.paired);
 
       final apartments =
@@ -91,9 +91,7 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
         apartments: apartments,
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -102,7 +100,6 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
   }
 
   void getApartmentAndProperty(Assignment assignment) async {
-    ///Not needed anymore
     toggleLoading();
 
     try {
@@ -115,9 +112,7 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
         property: apartmentDTO?.data?.property?.domain,
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -129,15 +124,17 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
     switch (ex?.type) {
       case DioErrorType.CONNECT_TIMEOUT:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.poorInternetConnection()),
-        )));
+          response: some(left(
+            LandlordFailure.poorInternetConnection(),
+          )),
+        ));
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.receiveTimeout()),
-        )));
+          response: some(left(
+            LandlordFailure.receiveTimeout(),
+          )),
+        ));
         break;
       case DioErrorType.RESPONSE:
         emit(state.copyWith(
@@ -148,16 +145,18 @@ class TenantAssignmentCubit extends Cubit<TenantAssignmentState> {
         break;
       case DioErrorType.SEND_TIMEOUT:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.timeout()),
-        )));
+          response: some(left(
+            LandlordFailure.timeout(),
+          )),
+        ));
         break;
       case DioErrorType.DEFAULT:
       default:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.unknown()),
-        )));
+          response: some(left(
+            LandlordFailure.unknown(),
+          )),
+        ));
     }
   }
 }

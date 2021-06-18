@@ -31,7 +31,7 @@ class LandlordAddApartmentScreen extends StatelessWidget with AutoRouteWrapper {
             c.response.getOrElse(() => null),
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f?.message ?? f?.error,

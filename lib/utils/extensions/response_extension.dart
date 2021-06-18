@@ -1,18 +1,14 @@
 import 'package:pexza/features/core/domain/failures/failure.dart';
+import 'package:pexza/utils/utils.dart';
 
 extension ResponseX on Response {
   U fold<U>({
-    U Function() failure,
-    U Function() success,
-    U Function() orElse,
+    U Function(Info) info,
+    U Function(Success) success,
   }) {
-    switch (this.runtimeType) {
-      case Failure:
-        return failure?.call();
-      case Success:
-        return success?.call();
-      default:
-        return orElse?.call();
-    }
+    if (this is Info)
+      return info?.call(this as Info);
+    else
+      return success?.call(this as Success);
   }
 }

@@ -1,6 +1,11 @@
 import 'package:pexza/features/core/data/data.dart';
+import 'package:pexza/utils/utils.dart';
 
-abstract class Response implements Failure, Success {}
+abstract class Response {
+  String get message;
+  String get details;
+  BottomAlertDialogPosition get position;
+}
 
 abstract class Failure with _FailureMixin {
   int get code;
@@ -8,10 +13,15 @@ abstract class Failure with _FailureMixin {
   String get details;
 }
 
-abstract class Success with _SuccessMixin {
+abstract class Success with Response implements _SuccessMixin {
   String get message;
   String get details;
   bool get popRoute;
+}
+
+abstract class Info with Response implements _InfoMixin {
+  String get message;
+  String get details;
 }
 
 mixin _FailureMixin {
@@ -20,6 +30,8 @@ mixin _FailureMixin {
 }
 
 mixin _SuccessMixin {}
+
+mixin _InfoMixin {}
 
 class UnExpectedFailure extends Failure {
   final String message;

@@ -9,6 +9,7 @@ class PropertyInfoWidget extends StatelessWidget {
   final String trailing;
   final bool showDivider;
   final bool isLargeText;
+  final Color textColor;
 
   const PropertyInfoWidget({
     Key key,
@@ -16,6 +17,7 @@ class PropertyInfoWidget extends StatelessWidget {
     this.trailing,
     this.showDivider = true,
     this.isLargeText = false,
+    this.textColor,
   }) : super(key: key);
 
   @override
@@ -61,7 +63,7 @@ class PropertyInfoWidget extends StatelessWidget {
                               child: AutoSizeText(
                                 trailing,
                                 style: TextStyle(
-                                  color: App.theme.accentColor,
+                                  color: textColor ?? App.theme.accentColor,
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
                                 ),

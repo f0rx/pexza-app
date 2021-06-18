@@ -5,6 +5,8 @@ class IntToBoolSerializer implements JsonConverter<bool, dynamic> {
 
   @override
   bool fromJson(dynamic value) {
+    if (value.runtimeType == bool) return value;
+
     final int _value = value == null
         ? null
         : value.runtimeType == int

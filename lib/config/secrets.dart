@@ -5,4 +5,7 @@ mixin Secrets {
 
   static const String WIREDASH_IOS_PROJECT_ID = "";
   static const String WIREDASH_IOS_PROJECT_SECRET = "";
+
+  static const String PAYSTACK_TEST_KEY =
+      "pk_test_39c485b7d1309ad5c61cc2604dc9e7d0b904bff7";
 }

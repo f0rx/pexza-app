@@ -35,6 +35,8 @@ jobs:
     outputs:
       bump_tag: ${{ env.BUMP_TAG }}
       bump_tag_version: ${{ env.BUMP_VERSION }}
+      release_url: ${{ env.RELEASE_URL }}
+      changelog: ${{ env.CHANGE_LOG }}
     steps:
       - name: Fetch Repo HEAD
         uses: actions/checkout@v2
@@ -84,34 +86,64 @@ jobs:
         run: |
           flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
 
-      - name: Bump version and push tag
-        id: bump_tag
+      - name: Create Release tag
+        id: create_release_tag
         if: ${{ github.event.inputs.version == '' }}
         uses: mathieudutour/github-tag-action@v4.5
         with:
           release_branches: .*
+          create_annotated_tag: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Environment variables
         run: |
           if ${{ github.event.inputs.version == '' }}; then
-            echo "BUMP_TAG=${{ steps.bump_tag.outputs.new_tag }}" >> $GITHUB_ENV
-            echo "BUMP_VERSION=${{ steps.bump_tag.outputs.new_version }}" >> $GITHUB_ENV
+            echo "BUMP_TAG=${{ steps.create_release_tag.outputs.new_tag }}" >> $GITHUB_ENV
+            echo "BUMP_VERSION=${{ steps.create_release_tag.outputs.new_version }}" >> $GITHUB_ENV
+            echo "CHANGE_LOG=${{ steps.create_release_tag.outputs.changelog }}" >> $GITHUB_ENV
           else
             echo "BUMP_TAG=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
             echo "BUMP_VERSION=${{ github.event.inputs.version}}" >> $GITHUB_ENV
+            echo "CHANGE_LOG=Custom Workflow dispatch. Please check repo for changelog." >> $GITHUB_ENV
           fi
 
+      - name: Bump version and push tag
+        id: bump_tag_version
+        if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
+        uses: mathieudutour/github-tag-action@v4.5
+        with:
+          release_branches: .*
+          custom_tag: ${{ steps.create_release_tag.outputs.new_tag + 1 }}
+          tag_name: ${{ steps.create_release_tag.outputs.new_tag }}-prod-release
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update version bump variables
+        if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
+        run: |
+          echo "BUMP_TAG=${{ steps.bump_tag_version.outputs.new_tag }}" >> $GITHUB_ENV
+          echo "BUMP_VERSION=${{ steps.bump_tag_version.outputs.new_version }}" >> $GITHUB_ENV
+
       - name: Push APK to Release Tags
+        id: push_apk_to_tag
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/*.apk,build/app/outputs/apk/obfuscation/*"
           name: ${{ env.APP_NAME }}-${{ env.BUMP_VERSION }}
           tag: ${{ env.BUMP_TAG }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          allowUpdates: false
+          body: ${{ env.CHANGE_LOG }}
+          allowUpdates: true
           omitName: false
           omitBody: false
+          replacesArtifacts: true
+          artifactErrorsFailBuild: false
+
+      - name: Post Action "Push APK to release Tags"
+        run: |
+          echo ${{ steps.push_apk_to_tag.outputs.id }}
+          echo ${{ steps.push_apk_to_tag.outputs.html_url }}
+          echo ${{ steps.push_apk_to_tag.outputs.upload_url }}
+          echo "RELEASE_URL=${{ steps.push_apk_to_tag.outputs.html_url }}" >> $GITHUB_ENV
 
   notify:
     runs-on: ubuntu-latest
@@ -126,5 +158,5 @@ jobs:
         env:
           API_KEY: ${{ env.API_KEY }}
           TITLE: Version Bump Notification
-          MESSAGE: Bump Version ${{ needs.build.outputs.bump_tag_version }} available for download at https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
+          MESSAGE: ${{ needs.build.outputs.changelog }}. Download at -> ${{ needs.build.outputs.release_url }}
           LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}

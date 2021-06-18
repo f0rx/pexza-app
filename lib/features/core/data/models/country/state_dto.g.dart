@@ -8,7 +8,7 @@ part of state_dto.dart;
 
 _$_StateDTO _$_$_StateDTOFromJson(Map<String, dynamic> json) {
   return _$_StateDTO(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     name: json['name'] as String ?? '',
     isSupported:
         const IntToBoolSerializer().fromJson(json['is_supported']) ?? true,

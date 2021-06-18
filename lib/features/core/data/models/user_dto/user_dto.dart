@@ -19,7 +19,7 @@ abstract class UserDTO implements _$UserDTO {
   const factory UserDTO({
     @HiveField(0)
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0)
+    @JsonKey(includeIfNull: false)
         int id,
     @HiveField(1)
     @nullable

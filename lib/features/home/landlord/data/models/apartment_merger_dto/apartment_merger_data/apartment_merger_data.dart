@@ -17,11 +17,11 @@ abstract class ApartmentMergerData implements _$ApartmentMergerData {
   const ApartmentMergerData._();
 
   const factory ApartmentMergerData({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: ApartmentStatus.vacant)
         String status,
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int amount,
+    @nullable @JsonKey(includeIfNull: false) int amount,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: 'payment_plan')
         String paymentPlan,

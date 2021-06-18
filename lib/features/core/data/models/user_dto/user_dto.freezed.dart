@@ -20,7 +20,7 @@ class _$UserDTOTearOff {
   _UserDTO call(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @HiveField(1)
       @nullable
@@ -134,7 +134,7 @@ const $UserDTO = _$UserDTOTearOff();
 mixin _$UserDTO {
   @HiveField(0)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @HiveField(1)
   @nullable
@@ -227,7 +227,7 @@ abstract class $UserDTOCopyWith<$Res> {
   $Res call(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @HiveField(1)
       @nullable
@@ -389,7 +389,7 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
   $Res call(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @HiveField(1)
       @nullable
@@ -543,7 +543,7 @@ class _$_UserDTO extends _UserDTO {
   const _$_UserDTO(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @HiveField(1)
       @nullable
@@ -628,7 +628,7 @@ class _$_UserDTO extends _UserDTO {
   @override
   @HiveField(0)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @HiveField(1)
@@ -829,7 +829,7 @@ abstract class _UserDTO extends UserDTO {
   const factory _UserDTO(
       {@HiveField(0)
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @HiveField(1)
       @nullable
@@ -912,7 +912,7 @@ abstract class _UserDTO extends UserDTO {
   @override
   @HiveField(0)
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @HiveField(1)

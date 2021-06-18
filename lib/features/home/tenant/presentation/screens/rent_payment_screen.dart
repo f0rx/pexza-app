@@ -123,9 +123,12 @@ class TenantRentPaymentScreen extends StatelessWidget with AutoRouteWrapper {
             //
             VerticalSpace(height: App.longest * 0.04),
             //
-            AppElevatedButton(
-              onPressed: () {},
-              text: "Pay Rent",
+            Hero(
+              tag: "${Constants.kPayRentTag}",
+              child: AppElevatedButton(
+                onPressed: () => navigator.pushSavedCardScreen(),
+                text: "Pay Rent",
+              ),
             ),
           ],
         ),

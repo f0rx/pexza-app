@@ -26,11 +26,13 @@ class TenantApartmentDetailScreen extends StatelessWidget
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<TenantAssignmentCubit>()..init(apartment: apartment),
-      child: BlocConsumer<TenantAssignmentCubit, TenantAssignmentState>(
+      create: (_) => getIt<TenantAssignmentCubit>()
+        ..init(apartment: apartment)
+        ..getApartmentAndProperty(assignment),
+      child: BlocListener<TenantAssignmentCubit, TenantAssignmentState>(
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f.message ?? f.error,
@@ -41,15 +43,11 @@ class TenantApartmentDetailScreen extends StatelessWidget
             shouldIconPulse: either.fold((_) => null, (r) => false),
             callback: either.fold(
               (_) => null,
-              (r) => (_) => navigator.pop(),
+              (r) => r.popRoute ? (_) => navigator.pop() : null,
             ),
           ),
         ),
-        builder: (c, s) => PortalEntry(
-          visible: c.watch<TenantAssignmentCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
-          child: this,
-        ),
+        child: this,
       ),
     );
   }
@@ -60,6 +58,27 @@ class TenantApartmentDetailScreen extends StatelessWidget
       appBar: Toolbar(title: "${apartment?.name?.getOrEmpty}"),
       body: Stack(
         children: [
+          Positioned(
+            top: 0,
+            right: 0,
+            child: BlocBuilder<TenantAssignmentCubit, TenantAssignmentState>(
+              builder: (c, s) => Visibility(
+                visible: s.isLoading,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 12.0),
+                  child: Center(
+                    child: CircularProgressBar.adaptive(
+                      width: 25.0,
+                      height: 25.0,
+                      strokeWidth: 2.5,
+                      radius: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          //
           Positioned(
             top: 0,
             left: 0,
@@ -107,7 +126,9 @@ class TenantApartmentDetailScreen extends StatelessWidget
                   //
                   Flexible(
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () => navigator.pushTenantRentDetailScreen(
+                        assignment: assignment,
+                      ),
                       borderRadius: BorderRadius.circular(50.0),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -207,46 +228,53 @@ class TenantApartmentDetailScreen extends StatelessWidget
                       HorizontalSpace(width: Helpers.appPadding),
                       //
                       Expanded(
-                        child: Material(
-                          color: AppColors.primaryColor.shade400,
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: InkWell(
-                            onTap: () {},
-                            splashColor: AppColors.primaryColor.shade500,
+                        child: Hero(
+                          tag: "${Constants.kPayRentTag}",
+                          child: Material(
+                            color: AppColors.primaryColor.shade400,
                             borderRadius: BorderRadius.circular(8.0),
-                            child: SizedBox(
-                              height: App.height * 0.2,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Flexible(
-                                      child: AutoSizeText(
-                                        "Pay House Rent",
-                                        maxLines: 1,
-                                        softWrap: true,
-                                        style: TextStyle(
-                                          color: App.theme.accentColor,
-                                          fontSize: 20.0,
+                            child: InkWell(
+                              onTap: () =>
+                                  navigator.pushTenantRentPaymentScreen(
+                                assignment: assignment,
+                              ),
+                              splashColor: AppColors.primaryColor.shade500,
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: SizedBox(
+                                height: App.height * 0.2,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Flexible(
+                                        child: AutoSizeText(
+                                          "Pay House Rent",
+                                          maxLines: 1,
+                                          softWrap: true,
+                                          style: TextStyle(
+                                            color: App.theme.accentColor,
+                                            fontSize: 20.0,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    //
-                                    Flexible(
-                                      child: AutoSizeText(
-                                        "Check Rent due date and pay rent your rent.",
-                                        softWrap: true,
-                                        style: TextStyle(
-                                          color: Colors.grey.shade600,
-                                          fontSize: 15.0,
+                                      //
+                                      Flexible(
+                                        child: AutoSizeText(
+                                          "Check Rent due date and pay rent your rent.",
+                                          softWrap: true,
+                                          style: TextStyle(
+                                            color: Colors.grey.shade600,
+                                            fontSize: 15.0,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

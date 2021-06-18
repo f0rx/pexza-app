@@ -5,6 +5,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -33,6 +34,10 @@ abstract class Modules {
 
   @lazySingleton
   GoogleSignIn get googleSignIn => GoogleSignIn();
+
+  @preResolve
+  Future<PaystackPlugin> get paystackInit =>
+      PaystackPlugin.initialize(publicKey: env.paystackPublicKey);
 }
 
 @module
@@ -98,22 +103,6 @@ class _DioInstance {
           options.headers["Authorization"] =
               getIt<AccessTokenManager>().fetch();
           return options;
-        },
-        onError: (error) async {
-          switch (error.response.statusCode) {
-            case 401:
-            case 403:
-              // dio.interceptors.requestLock.lock();
-              // dio.interceptors.responseLock.lock();
-
-              // await getIt<AuthWatcherCubit>().signOut;
-
-              // dio.interceptors.requestLock.unlock();
-              // dio.interceptors.responseLock.unlock();
-              return error;
-            default:
-              return error;
-          }
         },
       ),
     );
