@@ -139,7 +139,7 @@ dependencies:
   device_preview:
     git:
       url: git://github.com/Flutter-Fox/flutter_device_preview.git
-      ref: hotfix-0.5.5
+      ref: 0389ef4ed30eea99caef480aaec5dc242e536dfb
       path: device_preview/
   # A Flutter plugin for making payments via Paystack Payment Gateway.
   # Fully supports Android and iOS.
