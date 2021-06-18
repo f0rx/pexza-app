@@ -3,7 +3,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/core/data/data.dart';
 import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
 import 'package:pexza/features/home/landlord/presentation/widgets/index.dart';
@@ -19,7 +18,7 @@ class LandlordHomeScreen extends StatelessWidget with AutoRouteWrapper {
       child: BlocListener<LandlordPropertyCubit, LandlordPropertyState>(
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f.message ?? f.error,

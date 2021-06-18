@@ -17,7 +17,7 @@ abstract class BaseApartmentDTO implements _$BaseApartmentDTO {
   const BaseApartmentDTO._();
 
   const factory BaseApartmentDTO({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     @nullable

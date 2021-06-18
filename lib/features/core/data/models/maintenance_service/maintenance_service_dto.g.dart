@@ -9,7 +9,7 @@ part of maintenance_service_dto.dart;
 _$_MaintenanceServiceDTO _$_$_MaintenanceServiceDTOFromJson(
     Map<String, dynamic> json) {
   return _$_MaintenanceServiceDTO(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     name: json['name'] as String ?? '',
     createdAt: json['created_at'] as String,
     updatedAt: json['updated_at'] as String,

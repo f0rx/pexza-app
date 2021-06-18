@@ -19,7 +19,7 @@ class _$TenantApartmentDataTearOff {
 // ignore: unused_element
   _TenantApartmentData call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -66,7 +66,7 @@ const $TenantApartmentData = _$TenantApartmentDataTearOff();
 /// @nodoc
 mixin _$TenantApartmentData {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -102,7 +102,7 @@ abstract class $TenantApartmentDataCopyWith<$Res> {
       _$TenantApartmentDataCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -181,7 +181,7 @@ abstract class _$TenantApartmentDataCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -250,7 +250,7 @@ class __$TenantApartmentDataCopyWithImpl<$Res>
 class _$_TenantApartmentData extends _TenantApartmentData {
   const _$_TenantApartmentData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -280,7 +280,7 @@ class _$_TenantApartmentData extends _TenantApartmentData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -366,7 +366,7 @@ abstract class _TenantApartmentData extends TenantApartmentData {
   const _TenantApartmentData._() : super._();
   const factory _TenantApartmentData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -395,7 +395,7 @@ abstract class _TenantApartmentData extends TenantApartmentData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable

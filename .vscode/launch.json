@@ -8,18 +8,25 @@
       "name": "debug",
       "request": "launch",
       "type": "dart",
+      "program": "lib/main_dev.dart",
       "flutterMode": "debug",
-      "args": ["--flavor", "dev"],
+      "args": [
+        "--flavor",
+        "dev"
+      ],
       "internalConsoleOptions": "openOnFirstSessionStart",
       "showMemoryUsage": true
     },
-
     {
       "name": "prod",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "debug",
-      "args": ["--flavor", "prod"],
+      "program": "lib/main.dart",
+      "flutterMode": "release",
+      "args": [
+        "--flavor",
+        "prod"
+      ],
       "internalConsoleOptions": "openOnFirstSessionStart",
       "showMemoryUsage": true
     }

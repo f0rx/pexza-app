@@ -7,7 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:pexza/features/_404.dart';
 import 'package:pexza/features/auth/presentation/screens/forgot_password_screen.dart';
@@ -19,6 +19,8 @@ import 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 import 'package:pexza/features/auth/presentation/screens/verify_email_screen.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/presentation/screens/export.dart';
+import 'package:pexza/features/core/presentation/screens/notification_screen.dart';
+import 'package:pexza/features/core/presentation/screens/payment_successful_screen.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_apartment_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/add_property_screen.dart';
@@ -27,16 +29,20 @@ import 'package:pexza/features/home/landlord/presentation/screens/home_screen.da
 import 'package:pexza/features/home/landlord/presentation/screens/landl_apartment_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_wallet_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/request_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/tenants_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_apartments_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/view_all_properties_screen.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/add_new_card_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/apartment_detail_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/confirm_otp_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/home_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_detail_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/rent_payment_screen.dart';
+import 'package:pexza/features/home/tenant/presentation/screens/saved_card_screen.dart';
 import 'package:pexza/features/home/tenant/presentation/screens/service_request_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:pexza/features/onboarding/presentation/pages/splash_screen.dart';
@@ -58,6 +64,10 @@ class Routes {
   static const String tenantRentDetailScreen = '/tenant-rent-detail-screen';
   static const String tenantRentPaymentScreen = '/tenant-rent-payment-screen';
   static const String serviceRequestScreen = '/service-request-screen';
+  static const String addNewCardScreen = '/add-new-card-screen';
+  static const String savedCardScreen = '/saved-card-screen';
+  static const String confirmOtpScreen = '/confirm-otp-screen';
+  static const String paymentSuccessfulScreen = '/payment-successful-screen';
   static const String landlordHomeScreen = '/landlord-home-screen';
   static const String viewAllPropertiesScreen = '/view-all-properties-screen';
   static const String viewAllApartmentScreen = '/view-all-apartment-screen';
@@ -77,6 +87,8 @@ class Routes {
       '/landlord-maintenance-request-detail-screen';
   static const String landlordTenantsListingScreen =
       '/landlord-tenants-listing-screen';
+  static const String landlordWalletScreen = '/landlord-wallet-screen';
+  static const String notificationScreen = '/notification-screen';
   static const String accountScreen = '/account-screen';
   static const String editAccountScreen = '/edit-account-screen';
   static const String settingsScreen = '/settings-screen';
@@ -96,6 +108,10 @@ class Routes {
     tenantRentDetailScreen,
     tenantRentPaymentScreen,
     serviceRequestScreen,
+    addNewCardScreen,
+    savedCardScreen,
+    confirmOtpScreen,
+    paymentSuccessfulScreen,
     landlordHomeScreen,
     viewAllPropertiesScreen,
     viewAllApartmentScreen,
@@ -108,6 +124,8 @@ class Routes {
     landlordMaintenanceRequestScreen,
     landlordMaintenanceRequestDetailScreen,
     landlordTenantsListingScreen,
+    landlordWalletScreen,
+    notificationScreen,
     accountScreen,
     editAccountScreen,
     settingsScreen,
@@ -138,6 +156,14 @@ class Router extends RouterBase {
         page: TenantRentPaymentScreen, guards: [AuthGuard]),
     RouteDef(Routes.serviceRequestScreen,
         page: ServiceRequestScreen, guards: [AuthGuard]),
+    RouteDef(Routes.addNewCardScreen,
+        page: AddNewCardScreen, guards: [AuthGuard]),
+    RouteDef(Routes.savedCardScreen,
+        page: SavedCardScreen, guards: [AuthGuard]),
+    RouteDef(Routes.confirmOtpScreen,
+        page: ConfirmOtpScreen, guards: [AuthGuard]),
+    RouteDef(Routes.paymentSuccessfulScreen,
+        page: PaymentSuccessfulScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordHomeScreen,
         page: LandlordHomeScreen, guards: [AuthGuard]),
     RouteDef(Routes.viewAllPropertiesScreen,
@@ -162,6 +188,10 @@ class Router extends RouterBase {
         page: LandlordMaintenanceRequestDetailScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordTenantsListingScreen,
         page: LandlordTenantsListingScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordWalletScreen,
+        page: LandlordWalletScreen, guards: [AuthGuard]),
+    RouteDef(Routes.notificationScreen,
+        page: NotificationScreen, guards: [AuthGuard]),
     RouteDef(Routes.accountScreen, page: AccountScreen),
     RouteDef(Routes.editAccountScreen, page: EditAccountScreen),
     RouteDef(Routes.settingsScreen, page: SettingsScreen),
@@ -299,6 +329,39 @@ class Router extends RouterBase {
           key: args.key,
           assignment: args.assignment,
         ).wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    AddNewCardScreen: (data) {
+      final args = data.getArgs<AddNewCardScreenArguments>(
+        orElse: () => AddNewCardScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            AddNewCardScreen(key: args.key).wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    SavedCardScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const SavedCardScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    ConfirmOtpScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const ConfirmOtpScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    PaymentSuccessfulScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            const PaymentSuccessfulScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -441,6 +504,21 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
+    LandlordWalletScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            const LandlordWalletScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    NotificationScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const NotificationScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
     AccountScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => AccountScreen().wrappedRoute(context),
@@ -562,6 +640,23 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         onReject: onReject,
       );
 
+  Future<dynamic> pushAddNewCardScreen(
+          {Key key, OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.addNewCardScreen,
+        arguments: AddNewCardScreenArguments(key: key),
+        onReject: onReject,
+      );
+
+  Future<dynamic> pushSavedCardScreen() =>
+      push<dynamic>(Routes.savedCardScreen);
+
+  Future<dynamic> pushConfirmOtpScreen() =>
+      push<dynamic>(Routes.confirmOtpScreen);
+
+  Future<dynamic> pushPaymentSuccessfulScreen() =>
+      push<dynamic>(Routes.paymentSuccessfulScreen);
+
   Future<dynamic> pushLandlordHomeScreen() =>
       push<dynamic>(Routes.landlordHomeScreen);
 
@@ -663,6 +758,12 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         onReject: onReject,
       );
 
+  Future<dynamic> pushLandlordWalletScreen() =>
+      push<dynamic>(Routes.landlordWalletScreen);
+
+  Future<dynamic> pushNotificationScreen() =>
+      push<dynamic>(Routes.notificationScreen);
+
   Future<dynamic> pushAccountScreen() => push<dynamic>(Routes.accountScreen);
 
   Future<dynamic> pushEditAccountScreen() =>
@@ -719,6 +820,12 @@ class ServiceRequestScreenArguments {
   final Key key;
   final Assignment assignment;
   ServiceRequestScreenArguments({this.key, @required this.assignment});
+}
+
+/// AddNewCardScreen arguments holder class
+class AddNewCardScreenArguments {
+  final Key key;
+  AddNewCardScreenArguments({this.key});
 }
 
 /// ViewAllApartmentScreen arguments holder class

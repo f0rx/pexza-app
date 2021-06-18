@@ -17,8 +17,13 @@ abstract class FieldObject<T> {
     return false;
   }
 
-  Either<FieldObjectException<dynamic>, Unit> get mapped =>
-      value.fold((l) => left(l), (r) => right(unit));
+  Either<FieldObjectException<dynamic>, Unit> get mapped {
+    if (this == null)
+      return left(FieldObjectException.empty(
+        message: 'Fatal Exception! Null was passed.',
+      ));
+    return value.fold((l) => left(l), (r) => right(unit));
+  }
 
   bool get isValid => value.isRight();
 
@@ -33,7 +38,14 @@ abstract class FieldObject<T> {
 
   T get getOrNull => value.fold((failure) => null, id);
 
-  T get getOrEmpty => value.fold((failure) => T is Iterable ? [] : "", id);
+  T get getOrEmpty => value.fold(
+        (f) => T is Iterable
+            ? []
+            : T is num
+                ? 0
+                : "",
+        id,
+      );
 
   @override
   bool operator ==(other) {

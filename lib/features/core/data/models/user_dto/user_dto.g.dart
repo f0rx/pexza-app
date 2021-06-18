@@ -94,7 +94,7 @@ class UserDTOAdapter extends TypeAdapter<_$_UserDTO> {
 
 _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
   return _$_UserDTO(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     role: json['role'] as String ?? '',
     token: json['token'] as String ?? '',
     firstName: json['first_name'] as String ?? '',

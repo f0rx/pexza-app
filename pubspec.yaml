@@ -32,7 +32,7 @@ dependencies:
   firebase_auth: ^0.20.0
   # A Flutter plugin to use the Google Analytics for Firebase API.
   firebase_analytics: ^7.0.1
-  # Crashlytics helps you to collect analytics and 
+  # Crashlytics helps you to collect analytics and
   # details about crashes and errors that occur in your app.
   firebase_crashlytics: "^0.4.0+1"
   # Google services & Authentication
@@ -75,7 +75,7 @@ dependencies:
   injectable: ^1.0.7
   # provides internationalization
   # and localization facilities
-  intl: ^0.16.1
+  # intl: ^0.16.0
   # A declarative routing solution
   auto_route: ^0.6.9
   # Helpful package for manipulating "overlays":
@@ -132,13 +132,23 @@ dependencies:
   # This library provides a unique widget, WallLayout,
   # rendering into a list children having different shapes.
   flutter_wall_layout: ^1.0.0
-  # formatters for international phone numbers, 
+  # formatters for international phone numbers,
   # credit / debit cards, currencies and a masked formatter
   flutter_multi_formatter: ^1.3.6
+  # Approximate how your app looks and performs on another device.
+  device_preview: ^0.5.5
+  # A Flutter plugin for making payments via Paystack Payment Gateway.
+  # Fully supports Android and iOS.
+  # flutter_paystack: ^1.0.4+1
+  flutter_paystack:
+    git:
+      url: git://github.com/f0rx/flutter_paystack.git
+      ref: brendan-patch
 
 dependency_overrides:
   analyzer: ^0.41.1
   flutter_svg: "0.18.0"
+  intl: "0.17.0-nullsafety.2"
   # dart_style: '>=1.3.13 <=1.3.13'
 
 dev_dependencies:
@@ -180,6 +190,7 @@ flutter:
     - assets/svgs/auth/
     - assets/svgs/onboarding/
     - assets/svgs/landlord/
+    - assets/svgs/tenant/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,5 +1,6 @@
 import 'package:inflection2/inflection2.dart' as I;
 import 'package:intl/intl.dart';
+import 'package:kt_dart/kt.dart' hide nullable;
 
 extension StringX on String {
   /// Capitalize only first letter in string
@@ -96,10 +97,9 @@ extension StringX on String {
   static bool isNumericOnly(String s) => RegExp(r'^\d+$').hasMatch(s);
 
   String pluralize([int quantity = 2, String value]) {
-    assert(quantity >= 0);
+    if (quantity < 0) quantity = 0;
+
     switch (quantity) {
-      case 0:
-        return I.convertToSingular("${value ?? this}");
       case 1:
         return I.convertToSingular("${value ?? this}");
       case 2:
@@ -141,6 +141,18 @@ extension StringX on String {
   }
 
   String removeNewLines() => this.replaceAll("\n", " ");
+
+  String trimWhiteSpaces() => this.trim().replaceAll(" ", "");
+
+  String get formatCardNumber {
+    return "$this".split('').toImmutableList().foldIndexed(
+      '',
+      (i, p, next) {
+        if (i > 0 && i % 4 == 0) return '$p - $next';
+        return "$p$next";
+      },
+    );
+  }
 }
 
 enum Direction {

@@ -3,7 +3,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:kt_dart/kt.dart' hide nullable;
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/manager/locator/locator.dart';
@@ -27,7 +26,7 @@ class TenantHomeScreen extends StatefulWidget with AutoRouteWrapper {
       child: BlocListener<TenantAssignmentCubit, TenantAssignmentState>(
         listener: (_c, _s) => _s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f.message ?? f.error,
@@ -38,7 +37,7 @@ class TenantHomeScreen extends StatefulWidget with AutoRouteWrapper {
             shouldIconPulse: either.fold((_) => null, (r) => false),
             callback: either.fold(
               (_) => null,
-              (r) => (_) => navigator.pop(),
+              (r) => r.popRoute ? (_) => navigator.pop(true) : true,
             ),
           ),
         ),
@@ -118,6 +117,44 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                         ),
                         //
                         VerticalSpace(height: App.shortest * 0.02),
+                        //////
+                        ///
+                        Column(
+                          children: [
+                            ListView.separated(
+                              physics: NeverScrollableScrollPhysics(),
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              itemCount: s.unaccepted.size,
+                              separatorBuilder: (_, __) => VerticalSpace(
+                                height: App.height * 0.01,
+                              ),
+                              itemBuilder: (context, i) {
+                                final Assignment assignment =
+                                    s.unaccepted.getOrNull(i);
+
+                                return _SectionInfo<Assignment>(
+                                  model: assignment,
+                                  title:
+                                      "${assignment?.apartment?.name?.getOrEmpty}",
+                                  subtitle:
+                                      "${s.apartments.getOrNull(i)?.property?.street?.getOrNull ?? ''}",
+                                  color:
+                                      assignment?.apartment?.property?.color ??
+                                          Colors.teal,
+                                  onPressed: (_) async {
+                                    final shouldRefresh = await navigator
+                                        .pushProfileSetupScreen(assignment: _);
+                                    if (shouldRefresh != null && shouldRefresh)
+                                      c.read<TenantAssignmentCubit>().all();
+                                  },
+                                );
+                              },
+                            ),
+                            //
+                            VerticalSpace(height: App.height * 0.05),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -128,50 +165,6 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Visibility(
-                          visible: !s.unaccepted.isEmpty(),
-                          child: Column(
-                            children: [
-                              ListView.separated(
-                                physics: NeverScrollableScrollPhysics(),
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                itemCount: s.unaccepted.size,
-                                separatorBuilder: (_, __) => VerticalSpace(
-                                  height: App.height * 0.01,
-                                ),
-                                itemBuilder: (context, i) {
-                                  final Assignment assignment =
-                                      s.unaccepted.getOrNull(i);
-
-                                  return _SectionInfo<Assignment>(
-                                    model: assignment,
-                                    title:
-                                        "${assignment?.apartment?.name?.getOrEmpty}",
-                                    subtitle:
-                                        "${s.apartments.getOrNull(i)?.property?.street?.getOrNull ?? ''}",
-                                    color: assignment
-                                            ?.apartment?.property?.color ??
-                                        Colors.teal,
-                                    onPressed: (_) async {
-                                      final shouldRefresh = await navigator
-                                          .pushProfileSetupScreen(
-                                              assignment: _);
-                                      if (shouldRefresh != null &&
-                                          shouldRefresh)
-                                        c.read<TenantAssignmentCubit>().all();
-                                    },
-                                  );
-                                },
-                              ),
-                              //
-                              VerticalSpace(height: App.height * 0.05),
-                            ],
-                          ),
-                        ),
-                        //
-                        ////
-                        //
                         Visibility(
                           visible: !s.apartments.isEmpty(),
                           child: Column(
@@ -252,6 +245,7 @@ class _SectionInfo<M> extends StatelessWidget {
   final Color color;
   final String title;
   final String subtitle;
+  final Widget trailing;
   final void Function(M) onPressed;
 
   const _SectionInfo({
@@ -260,6 +254,7 @@ class _SectionInfo<M> extends StatelessWidget {
     @required this.color,
     @required this.title,
     this.subtitle = '',
+    this.trailing,
     this.onPressed,
   }) : super(key: key);
 
@@ -330,16 +325,20 @@ class _SectionInfo<M> extends StatelessWidget {
                 ),
               ),
             ),
-            AppIconButton(
-              padding: EdgeInsets.zero,
-              backgroundColor: Colors.transparent,
-              tooltip: "View Details",
-              elevation: 0.0,
-              child: RotatedBox(
-                quarterTurns: 2,
-                child: Icon(
-                  Icons.keyboard_backspace_rounded,
-                  color: Helpers.computeLuminance(color.withOpacity(opacity)),
+            Visibility(
+              visible: trailing == null,
+              replacement: trailing ?? SizedBox(),
+              child: AppIconButton(
+                padding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                tooltip: "View Details",
+                elevation: 0.0,
+                child: RotatedBox(
+                  quarterTurns: 2,
+                  child: Icon(
+                    Icons.keyboard_backspace_rounded,
+                    color: Helpers.computeLuminance(color.withOpacity(opacity)),
+                  ),
                 ),
               ),
             )
@@ -351,7 +350,7 @@ class _SectionInfo<M> extends StatelessWidget {
 }
 
 class _ShimmerLayout extends StatelessWidget {
-  static double kDefaultHeight = App.longest * 0.09;
+  static double kDefaultHeight = App.longest * 0.085;
   static int kDefaultCount = (App.longest * 0.4 / kDefaultHeight).ceil();
 
   final double _height;

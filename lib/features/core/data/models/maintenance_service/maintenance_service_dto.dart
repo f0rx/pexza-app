@@ -14,7 +14,7 @@ abstract class MaintenanceServiceDTO implements _$MaintenanceServiceDTO {
   const MaintenanceServiceDTO._();
 
   const factory MaintenanceServiceDTO({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")

@@ -19,7 +19,7 @@ class _$MaintenanceDTODataTearOff {
 // ignore: unused_element
   _MaintenanceDTOData call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -34,7 +34,7 @@ class _$MaintenanceDTODataTearOff {
       @JsonKey(includeIfNull: false, name: 'assignment_id')
           int assignmentId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
       @IntegerSerializer()
           int urgency,
       @nullable
@@ -88,7 +88,7 @@ const $MaintenanceDTOData = _$MaintenanceDTODataTearOff();
 /// @nodoc
 mixin _$MaintenanceDTOData {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -103,7 +103,7 @@ mixin _$MaintenanceDTOData {
   @JsonKey(includeIfNull: false, name: 'assignment_id')
   int get assignmentId;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   @IntegerSerializer()
   int get urgency;
   @nullable
@@ -141,7 +141,7 @@ abstract class $MaintenanceDTODataCopyWith<$Res> {
       _$MaintenanceDTODataCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -156,7 +156,7 @@ abstract class $MaintenanceDTODataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, name: 'assignment_id')
           int assignmentId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
       @IntegerSerializer()
           int urgency,
       @nullable
@@ -261,7 +261,7 @@ abstract class _$MaintenanceDTODataCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -276,7 +276,7 @@ abstract class _$MaintenanceDTODataCopyWith<$Res>
       @JsonKey(includeIfNull: false, name: 'assignment_id')
           int assignmentId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
       @IntegerSerializer()
           int urgency,
       @nullable
@@ -362,7 +362,7 @@ class __$MaintenanceDTODataCopyWithImpl<$Res>
 class _$_MaintenanceDTOData extends _MaintenanceDTOData {
   const _$_MaintenanceDTOData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -377,7 +377,7 @@ class _$_MaintenanceDTOData extends _MaintenanceDTOData {
       @JsonKey(includeIfNull: false, name: 'assignment_id')
           this.assignmentId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
       @IntegerSerializer()
           this.urgency,
       @nullable
@@ -409,7 +409,7 @@ class _$_MaintenanceDTOData extends _MaintenanceDTOData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -429,7 +429,7 @@ class _$_MaintenanceDTOData extends _MaintenanceDTOData {
   final int assignmentId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   @IntegerSerializer()
   final int urgency;
   @override
@@ -537,7 +537,7 @@ abstract class _MaintenanceDTOData extends MaintenanceDTOData {
   const _MaintenanceDTOData._() : super._();
   const factory _MaintenanceDTOData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -552,7 +552,7 @@ abstract class _MaintenanceDTOData extends MaintenanceDTOData {
       @JsonKey(includeIfNull: false, name: 'assignment_id')
           int assignmentId,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
       @IntegerSerializer()
           int urgency,
       @nullable
@@ -583,7 +583,7 @@ abstract class _MaintenanceDTOData extends MaintenanceDTOData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable
@@ -603,7 +603,7 @@ abstract class _MaintenanceDTOData extends MaintenanceDTOData {
   int get assignmentId;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   @IntegerSerializer()
   int get urgency;
   @override

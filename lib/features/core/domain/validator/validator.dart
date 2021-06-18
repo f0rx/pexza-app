@@ -1,11 +1,12 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/domain/failures/field_object/field_object_exception.dart';
 import 'package:pexza/utils/utils.dart';
+
+part 'credit_card_validator.dart';
 
 const int MIN_PASSWORD_LENGTH = 6;
 const int MIN_USERNAME_LENGTH = 6;
@@ -18,7 +19,7 @@ const Pattern onlyNumbersPattern = "^[0-9]*\$";
 const Pattern datePattern =
     r"(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)[0-9]{2}";
 
-class Validator {
+class Validator with _ExpiryDateValidator {
   Validator._();
 
   static Either<FieldObjectException<String>, T> isEmpty<T>(dynamic value) {
@@ -35,7 +36,8 @@ class Validator {
   }
 
   static Either<FieldObjectException<String>, String> usernameValidator(
-      String value) {
+    String value,
+  ) {
     String clean = value.trim();
     bool shortUsername = clean.length < MIN_PASSWORD_LENGTH;
 
@@ -49,7 +51,8 @@ class Validator {
   }
 
   static Either<FieldObjectException<String>, String> emailValidator(
-      String email) {
+    String email,
+  ) {
     // Returns the string without any leading and trailing whitespace
     email = email.trim();
 
@@ -188,12 +191,16 @@ class Validator {
     return right(input);
   }
 
-  static Either<FieldObjectException<String>, String> onlyDigits(String input,
-      [String message = INVALID_FIELD_MESSAGE]) {
+  static Either<FieldObjectException<String>, String> onlyDigits(
+    String input, {
+    String pattern = r"^[0-9]+$",
+    String message = INVALID_FIELD_MESSAGE,
+    bool multiline = true,
+  }) {
     String clean = input.trim();
 
     bool containsOnlyDigits =
-        RegExp(r"^[0-9]+$", multiLine: true).hasMatch(clean);
+        RegExp(pattern, multiLine: multiline).hasMatch(clean);
 
     if (!containsOnlyDigits)
       return left(FieldObjectException.invalid(message: message));
@@ -201,49 +208,20 @@ class Validator {
     return right(input);
   }
 
-  static Either<FieldObjectException<String>, String> cardNumber(String input) {
-    String clean = input.trim();
-
-    bool containsOnlyDigits =
-        RegExp(r"^[0-9 ]+$", multiLine: true).hasMatch(clean);
-
-    if (!containsOnlyDigits)
-      return left(FieldObjectException.invalid(message: INVALID_CARD_NUMBER));
-
-    return right(input);
-  }
+  static Either<FieldObjectException<String>, String> cardNumber(
+    String input,
+  ) =>
+      _ExpiryDateValidator.validateCreditCardNumber(input);
 
   static Either<FieldObjectException<String>, String> cardExpiration(
-      String input) {
-    final _input = input.trim();
+    String input,
+  ) =>
+      _ExpiryDateValidator.validateCardExpiryDate(input);
 
-    String toOriginalFormatString(DateTime dateTime) {
-      final y = dateTime.year.toString().padLeft(4, '0');
-      final m = dateTime.month.toString().padLeft(2, '0');
-      final d = dateTime.day.toString().padLeft(2, '0');
-
-      print("toOriginalFormatString =========> $y$m$d");
-      return "$y$m$d";
-    }
-
-    bool isValidDate(String input) {
-      try {
-        final date = DateTime.parse(input);
-        final formattedString = toOriginalFormatString(date);
-
-        print("Input: =========> $input}");
-        print("isValidDate =========> ${input == formattedString}");
-
-        return input == formattedString;
-      } catch (e) {
-        return false;
-      }
-    }
-
-    // if (val)
-
-    return right(input);
-  }
+  static Either<FieldObjectException<String>, String> cardCVV(
+    String input,
+  ) =>
+      _ExpiryDateValidator.validateCardCVV(input);
 
   static Either<FieldObjectException<String>, DateTime> isValidDate(
     DateTime date,

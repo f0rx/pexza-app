@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+enum BottomAlertDialogPosition { top, bottom }
+
 abstract class BottomAlertDialog {
-  static Future<dynamic> show(
+  static Future<Flushbar> init(
     BuildContext context, {
     String message = "Oops! No response.",
     Duration duration,
@@ -12,6 +14,8 @@ abstract class BottomAlertDialog {
     Widget child,
     bool shouldIconPulse = true,
     bool callbackAfterClose = false,
+    bool autoShow = true,
+    BottomAlertDialogPosition position,
     Function(dynamic) callback,
   }) async {
     ArgumentError.checkNotNull(message, 'message');
@@ -32,20 +36,57 @@ abstract class BottomAlertDialog {
       borderRadius: 8.0,
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
       margin: const EdgeInsets.all(8),
-      flushbarPosition: MediaQuery.of(context).viewInsets.bottom == 0
-          ? FlushbarPosition.BOTTOM
-          : FlushbarPosition.TOP,
+      flushbarPosition: position?.fold(position) ??
+          (MediaQuery.of(context).viewInsets.bottom == 0
+              ? FlushbarPosition.BOTTOM
+              : FlushbarPosition.TOP),
       shouldIconPulse: shouldIconPulse ?? true,
       backgroundColor: Theme.of(context).primaryColor,
     );
 
-    if (_bar.isShowing()) _bar?.dismiss();
+    if (autoShow) {
+      if (callbackAfterClose) {
+        await _bar?.show(context)?.then((_) => callback?.call(_));
+      } else {
+        callback?.call(null);
+        await _bar?.show(context);
+      }
+    }
+
+    return _bar;
+  }
+
+  static Future<void> show(
+    BuildContext context,
+    Flushbar bar, {
+    Flushbar old,
+    bool shouldDismissBeforeShow = false,
+    bool callbackAfterClose = false,
+    Function(dynamic) callback,
+  }) async {
+    if (old != null) if (old.isShowing() && shouldDismissBeforeShow)
+      old?.dismiss();
 
     if (callbackAfterClose) {
-      return await _bar?.show(context)?.then((_) => callback?.call(_));
+      await bar?.show(context)?.then((_) => callback?.call(_));
     } else {
       callback?.call(null);
-      return _bar?.show(context);
+      await bar?.show(context);
+    }
+  }
+
+  static Future<void> dismiss(Flushbar bar, dynamic result) =>
+      bar.dismiss(result);
+}
+
+extension XBottomAlertDialogPosition on BottomAlertDialogPosition {
+  FlushbarPosition fold(BottomAlertDialogPosition position) {
+    switch (position) {
+      case BottomAlertDialogPosition.top:
+        return FlushbarPosition.TOP;
+      case BottomAlertDialogPosition.bottom:
+      default:
+        return FlushbarPosition.BOTTOM;
     }
   }
 }

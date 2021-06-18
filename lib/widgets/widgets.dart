@@ -12,3 +12,4 @@ export 'shimmers/rectangle_shimmer.dart';
 export 'shimmers/shimmer_bottom_content.dart';
 export 'shimmers/shimmer_right_content.dart';
 export 'shimmers/shimmer_top_content.dart';
+export 'app_logo.dart';

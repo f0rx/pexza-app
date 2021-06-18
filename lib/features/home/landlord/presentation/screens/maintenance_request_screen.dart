@@ -1,16 +1,12 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:kt_dart/kt.dart' hide nullable;
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
-import 'package:pexza/features/core/data/data.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
 import 'package:pexza/features/home/landlord/presentation/widgets/index.dart';
@@ -21,13 +17,13 @@ class LandlordMaintenanceRequestScreen extends StatefulWidget
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<LandlordMaintenanceCubit>()..all(),
-      child: BlocConsumer<LandlordMaintenanceCubit, LandlordMaintenanceState>(
+      child: BlocListener<LandlordMaintenanceCubit, LandlordMaintenanceState>(
         listenWhen: (p, c) =>
             p.response.getOrElse(() => null) !=
             c.response.getOrElse(() => null),
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f.message ?? f.error,
@@ -42,13 +38,7 @@ class LandlordMaintenanceRequestScreen extends StatefulWidget
             ),
           ),
         ),
-        buildWhen: (p, c) =>
-            p.maintenances.isEmpty() && !c.maintenances.isEmpty(),
-        builder: (c, s) => PortalEntry(
-          visible: c.watch<LandlordMaintenanceCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
-          child: this,
-        ),
+        child: this,
       ),
     );
   }
@@ -112,6 +102,28 @@ class _LandlordMaintenanceRequestScreenState
         panel: _MaintenancePanelBuilder(),
         body: Stack(
           children: [
+            Positioned(
+              top: 0,
+              right: 0,
+              child: BlocBuilder<LandlordMaintenanceCubit,
+                  LandlordMaintenanceState>(
+                builder: (c, s) => Visibility(
+                  visible: s.isLoading,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 12.0),
+                    child: Center(
+                      child: CircularProgressBar.adaptive(
+                        width: 25.0,
+                        height: 25.0,
+                        strokeWidth: 2.5,
+                        radius: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            //
             _MaintenanceBodyBuilder(),
           ],
         ),

@@ -19,7 +19,7 @@ class _$AssignmentDTODataTearOff {
 // ignore: unused_element
   _AssignmentDTOData call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'tenant_id')
@@ -131,7 +131,7 @@ const $AssignmentDTOData = _$AssignmentDTODataTearOff();
 /// @nodoc
 mixin _$AssignmentDTOData {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, name: 'tenant_id')
@@ -218,7 +218,7 @@ abstract class $AssignmentDTODataCopyWith<$Res> {
       _$AssignmentDTODataCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'tenant_id')
@@ -411,7 +411,7 @@ abstract class _$AssignmentDTODataCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'tenant_id')
@@ -567,7 +567,7 @@ class __$AssignmentDTODataCopyWithImpl<$Res>
 class _$_AssignmentDTOData extends _AssignmentDTOData {
   const _$_AssignmentDTOData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'tenant_id')
@@ -648,7 +648,7 @@ class _$_AssignmentDTOData extends _AssignmentDTOData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -852,7 +852,7 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
   const _AssignmentDTOData._() : super._();
   const factory _AssignmentDTOData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'tenant_id')
@@ -932,7 +932,7 @@ abstract class _AssignmentDTOData extends AssignmentDTOData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable

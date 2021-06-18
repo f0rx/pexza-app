@@ -9,7 +9,7 @@ part of base_apartment_dto.dart;
 _$_BaseApartmentDTO _$_$_BaseApartmentDTOFromJson(Map<String, dynamic> json) {
   $checkKeys(json, disallowNullValues: const ['property_id', 'property']);
   return _$_BaseApartmentDTO(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     name: json['name'] as String ?? '',
     status: json['status'] as String ?? '',
     propertyId: const IntegerSerializer().fromJson(json['property_id']),

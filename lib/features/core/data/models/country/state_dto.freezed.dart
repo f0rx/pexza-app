@@ -19,7 +19,7 @@ class _$StateDTOTearOff {
 // ignore: unused_element
   _StateDTO call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -72,7 +72,7 @@ const $StateDTO = _$StateDTOTearOff();
 /// @nodoc
 mixin _$StateDTO {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -112,7 +112,7 @@ abstract class $StateDTOCopyWith<$Res> {
       _$StateDTOCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -194,7 +194,7 @@ abstract class _$StateDTOCopyWith<$Res> implements $StateDTOCopyWith<$Res> {
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -267,7 +267,7 @@ class __$StateDTOCopyWithImpl<$Res> extends _$StateDTOCopyWithImpl<$Res>
 class _$_StateDTO extends _StateDTO {
   const _$_StateDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -302,7 +302,7 @@ class _$_StateDTO extends _StateDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -398,7 +398,7 @@ abstract class _StateDTO extends StateDTO {
   const _StateDTO._() : super._();
   const factory _StateDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -431,7 +431,7 @@ abstract class _StateDTO extends StateDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable

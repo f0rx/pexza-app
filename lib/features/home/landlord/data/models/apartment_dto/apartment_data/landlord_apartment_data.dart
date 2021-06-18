@@ -17,7 +17,7 @@ abstract class LandlordApartmentData implements _$LandlordApartmentData {
   const LandlordApartmentData._();
 
   const factory LandlordApartmentData({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     @nullable

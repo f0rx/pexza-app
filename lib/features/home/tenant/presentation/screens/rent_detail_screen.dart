@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
-import 'package:intl/intl.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
 import 'package:pexza/manager/locator/locator.dart';
@@ -28,7 +27,7 @@ class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
             c.response.getOrElse(() => null),
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f.message ?? f.error,
@@ -116,7 +115,10 @@ class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
                   //
                   PropertyInfoWidget(
                     leading: "Rent Duration",
-                    trailing: "< ${assignment.rentDuration}",
+                    trailing: !assignment.expired
+                        ? "< ${assignment.rentDuration}"
+                        : "Expired!",
+                    textColor: assignment.expired ? AppColors.errorRed : null,
                   ),
                   //
                   PropertyInfoWidget(

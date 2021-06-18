@@ -1,0 +1,34 @@
+{
+    "status": "sucess",
+    "card": {
+        "type": "card",
+        "details": {
+            "some description": "Wrong card",
+            "card_number": "4464666387456733"
+        },
+        "verified": false,
+        "user_id": 335,
+        "updated_at": "2021-06-14T06:46:58.000000Z",
+        "created_at": "2021-06-14T06:46:58.000000Z",
+        "id": 4
+    },
+    "invoice": {
+        "meta": {
+            "is_sample_payment": true,
+            "chargeable_id": 4
+        },
+        "amount": 100,
+        "status": "generated",
+        "invoice_no": "5012dce4-ef6f-4175-a7ab-b1da395e3aea",
+        "updated_at": "2021-06-14T06:46:58.000000Z",
+        "created_at": "2021-06-14T06:46:58.000000Z",
+        "id": 312
+    },
+    "payment_details": {
+        "email": "ejike.br@gmail.com",
+        "amount": 10000,
+        "metadata": {
+            "invoice_no": "5012dce4-ef6f-4175-a7ab-b1da395e3aea"
+        }
+    }
+}

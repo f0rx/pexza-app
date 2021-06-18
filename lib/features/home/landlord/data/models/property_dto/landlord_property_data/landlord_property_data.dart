@@ -17,7 +17,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
   const LandlordPropertyData._();
 
   const factory LandlordPropertyData({
-    @nullable @JsonKey(includeIfNull: false, defaultValue: 0) int id,
+    @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "property_type")
@@ -39,16 +39,16 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
         int stateId,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String country,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_tenants")
+    @JsonKey(includeIfNull: false, name: "number_of_tenants")
         int numberOfTenants,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_apartments")
+    @JsonKey(includeIfNull: false, name: "number_of_apartments")
         int numberOfApartments,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_available_apartments")
+    @JsonKey(includeIfNull: false, name: "number_of_available_apartments")
         int numberOfAvailableApartments,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: 0, name: "number_of_rented_apartment")
+    @JsonKey(includeIfNull: false, name: "number_of_rented_apartment")
         int numberOfRentedApartment,
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")

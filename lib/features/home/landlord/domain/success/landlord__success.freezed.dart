@@ -26,11 +26,14 @@ class _$LandlordSuccessTearOff {
       @JsonKey(ignore: true)
           String details,
       @JsonKey(ignore: true)
-          bool popRoute = true}) {
+          bool popRoute = true,
+      @JsonKey(ignore: true)
+          BottomAlertDialogPosition position}) {
     return _LandlordSuccess(
       message: message,
       details: details,
       popRoute: popRoute,
+      position: position,
     );
   }
 
@@ -54,6 +57,8 @@ mixin _$LandlordSuccess {
   String get details;
   @JsonKey(ignore: true)
   bool get popRoute;
+  @JsonKey(ignore: true)
+  BottomAlertDialogPosition get position;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -73,7 +78,9 @@ abstract class $LandlordSuccessCopyWith<$Res> {
       @JsonKey(ignore: true)
           String details,
       @JsonKey(ignore: true)
-          bool popRoute});
+          bool popRoute,
+      @JsonKey(ignore: true)
+          BottomAlertDialogPosition position});
 }
 
 /// @nodoc
@@ -90,11 +97,15 @@ class _$LandlordSuccessCopyWithImpl<$Res>
     Object message = freezed,
     Object details = freezed,
     Object popRoute = freezed,
+    Object position = freezed,
   }) {
     return _then(_value.copyWith(
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
       popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
+      position: position == freezed
+          ? _value.position
+          : position as BottomAlertDialogPosition,
     ));
   }
 }
@@ -114,7 +125,9 @@ abstract class _$LandlordSuccessCopyWith<$Res>
       @JsonKey(ignore: true)
           String details,
       @JsonKey(ignore: true)
-          bool popRoute});
+          bool popRoute,
+      @JsonKey(ignore: true)
+          BottomAlertDialogPosition position});
 }
 
 /// @nodoc
@@ -133,11 +146,15 @@ class __$LandlordSuccessCopyWithImpl<$Res>
     Object message = freezed,
     Object details = freezed,
     Object popRoute = freezed,
+    Object position = freezed,
   }) {
     return _then(_LandlordSuccess(
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
       popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
+      position: position == freezed
+          ? _value.position
+          : position as BottomAlertDialogPosition,
     ));
   }
 }
@@ -155,7 +172,9 @@ class _$_LandlordSuccess extends _LandlordSuccess {
       @JsonKey(ignore: true)
           this.details,
       @JsonKey(ignore: true)
-          this.popRoute = true})
+          this.popRoute = true,
+      @JsonKey(ignore: true)
+          this.position})
       : assert(popRoute != null),
         super._();
 
@@ -173,10 +192,13 @@ class _$_LandlordSuccess extends _LandlordSuccess {
   @override
   @JsonKey(ignore: true)
   final bool popRoute;
+  @override
+  @JsonKey(ignore: true)
+  final BottomAlertDialogPosition position;
 
   @override
   String toString() {
-    return 'LandlordSuccess(message: $message, details: $details, popRoute: $popRoute)';
+    return 'LandlordSuccess(message: $message, details: $details, popRoute: $popRoute, position: $position)';
   }
 
   @override
@@ -191,7 +213,10 @@ class _$_LandlordSuccess extends _LandlordSuccess {
                     .equals(other.details, details)) &&
             (identical(other.popRoute, popRoute) ||
                 const DeepCollectionEquality()
-                    .equals(other.popRoute, popRoute)));
+                    .equals(other.popRoute, popRoute)) &&
+            (identical(other.position, position) ||
+                const DeepCollectionEquality()
+                    .equals(other.position, position)));
   }
 
   @override
@@ -199,7 +224,8 @@ class _$_LandlordSuccess extends _LandlordSuccess {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(details) ^
-      const DeepCollectionEquality().hash(popRoute);
+      const DeepCollectionEquality().hash(popRoute) ^
+      const DeepCollectionEquality().hash(position);
 
   @JsonKey(ignore: true)
   @override
@@ -223,7 +249,9 @@ abstract class _LandlordSuccess extends LandlordSuccess {
       @JsonKey(ignore: true)
           String details,
       @JsonKey(ignore: true)
-          bool popRoute}) = _$_LandlordSuccess;
+          bool popRoute,
+      @JsonKey(ignore: true)
+          BottomAlertDialogPosition position}) = _$_LandlordSuccess;
 
   factory _LandlordSuccess.fromJson(Map<String, dynamic> json) =
       _$_LandlordSuccess.fromJson;
@@ -239,6 +267,9 @@ abstract class _LandlordSuccess extends LandlordSuccess {
   @override
   @JsonKey(ignore: true)
   bool get popRoute;
+  @override
+  @JsonKey(ignore: true)
+  BottomAlertDialogPosition get position;
   @override
   @JsonKey(ignore: true)
   _$LandlordSuccessCopyWith<_LandlordSuccess> get copyWith;

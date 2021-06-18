@@ -19,7 +19,7 @@ class _$CountryDTOTearOff {
 // ignore: unused_element
   _CountryDTO call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -73,7 +73,7 @@ const $CountryDTO = _$CountryDTOTearOff();
 /// @nodoc
 mixin _$CountryDTO {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -114,7 +114,7 @@ abstract class $CountryDTOCopyWith<$Res> {
       _$CountryDTOCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -191,7 +191,7 @@ abstract class _$CountryDTOCopyWith<$Res> implements $CountryDTOCopyWith<$Res> {
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -268,7 +268,7 @@ class __$CountryDTOCopyWithImpl<$Res> extends _$CountryDTOCopyWithImpl<$Res>
 class _$_CountryDTO extends _CountryDTO {
   const _$_CountryDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -303,7 +303,7 @@ class _$_CountryDTO extends _CountryDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -404,7 +404,7 @@ abstract class _CountryDTO extends CountryDTO {
   const _CountryDTO._() : super._();
   const factory _CountryDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -438,7 +438,7 @@ abstract class _CountryDTO extends CountryDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable

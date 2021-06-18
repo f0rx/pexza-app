@@ -19,7 +19,7 @@ class _$LandlordPropertyDataTearOff {
 // ignore: unused_element
   _LandlordPropertyData call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -56,16 +56,16 @@ class _$LandlordPropertyDataTearOff {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           int numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           int numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           int numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           int numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -115,7 +115,7 @@ const $LandlordPropertyData = _$LandlordPropertyDataTearOff();
 /// @nodoc
 mixin _$LandlordPropertyData {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -152,20 +152,16 @@ mixin _$LandlordPropertyData {
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get country;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, name: 'number_of_tenants')
   int get numberOfTenants;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_apartments')
   int get numberOfApartments;
   @nullable
-  @JsonKey(
-      includeIfNull: false,
-      defaultValue: 0,
-      name: 'number_of_available_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
   int get numberOfAvailableApartments;
   @nullable
-  @JsonKey(
-      includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+  @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
   int get numberOfRentedApartment;
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
@@ -192,7 +188,7 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       _$LandlordPropertyDataCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -229,16 +225,16 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           int numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           int numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           int numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           int numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -351,7 +347,7 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -388,16 +384,16 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           int numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           int numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           int numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           int numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -491,7 +487,7 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
 class _$_LandlordPropertyData extends _LandlordPropertyData {
   const _$_LandlordPropertyData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -528,16 +524,16 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           this.numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           this.numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           this.numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           this.numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -558,7 +554,7 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -607,23 +603,19 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   final String country;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, name: 'number_of_tenants')
   final int numberOfTenants;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_apartments')
   final int numberOfApartments;
   @override
   @nullable
-  @JsonKey(
-      includeIfNull: false,
-      defaultValue: 0,
-      name: 'number_of_available_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
   final int numberOfAvailableApartments;
   @override
   @nullable
-  @JsonKey(
-      includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+  @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
   final int numberOfRentedApartment;
   @override
   @nullable
@@ -745,7 +737,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   const _LandlordPropertyData._() : super._();
   const factory _LandlordPropertyData(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -782,16 +774,16 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @JsonKey(includeIfNull: false, defaultValue: '')
           String country,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+      @JsonKey(includeIfNull: false, name: 'number_of_tenants')
           int numberOfTenants,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_apartments')
           int numberOfApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_available_apartments')
+      @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
           int numberOfAvailableApartments,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+      @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
           int numberOfRentedApartment,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
@@ -811,7 +803,7 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable
@@ -860,23 +852,19 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   String get country;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_tenants')
+  @JsonKey(includeIfNull: false, name: 'number_of_tenants')
   int get numberOfTenants;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0, name: 'number_of_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_apartments')
   int get numberOfApartments;
   @override
   @nullable
-  @JsonKey(
-      includeIfNull: false,
-      defaultValue: 0,
-      name: 'number_of_available_apartments')
+  @JsonKey(includeIfNull: false, name: 'number_of_available_apartments')
   int get numberOfAvailableApartments;
   @override
   @nullable
-  @JsonKey(
-      includeIfNull: false, defaultValue: 0, name: 'number_of_rented_apartment')
+  @JsonKey(includeIfNull: false, name: 'number_of_rented_apartment')
   int get numberOfRentedApartment;
   @override
   @nullable

@@ -30,7 +30,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
             c.response.getOrElse(() => null),
         listener: (c, s) => s.response.fold(
           () => null,
-          (either) => BottomAlertDialog.show(
+          (either) => BottomAlertDialog.init(
             context,
             message: either.fold(
               (f) => f.message ?? f.error,
@@ -121,7 +121,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                     PinInputWidget<TokenVerificationCubit,
                         TokenVerificationState>(
                       length: 5,
-                      autoFocus: true,
+                      // autoFocus: true,
                       validate: context
                           .watch<TokenVerificationCubit>()
                           .state
@@ -205,9 +205,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        // onPressed: context.read<TokenVerificationCubit>().acceptAssignment,
-        onPressed: () =>
-            navigator.pushTenantRentDetailScreen(assignment: assignment),
+        onPressed: context.read<TokenVerificationCubit>().acceptAssignment,
         backgroundColor: Colors.transparent,
         mini: true,
         heroTag: "accept-assignment",

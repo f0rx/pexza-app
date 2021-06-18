@@ -38,7 +38,9 @@ class _$AuthResponseTearOff {
       @JsonKey(ignore: true)
           String details,
       @JsonKey(ignore: true)
-          bool popRoute = true}) {
+          bool popRoute = true,
+      @JsonKey(ignore: true)
+          BottomAlertDialogPosition position}) {
     return _AuthResponse(
       code: code,
       status: status,
@@ -47,6 +49,7 @@ class _$AuthResponseTearOff {
       errors: errors,
       details: details,
       popRoute: popRoute,
+      position: position,
     );
   }
 
@@ -82,6 +85,8 @@ mixin _$AuthResponse {
   String get details; //
   @JsonKey(ignore: true)
   bool get popRoute;
+  @JsonKey(ignore: true)
+  BottomAlertDialogPosition get position;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -113,7 +118,9 @@ abstract class $AuthResponseCopyWith<$Res> {
       @JsonKey(ignore: true)
           String details,
       @JsonKey(ignore: true)
-          bool popRoute});
+          bool popRoute,
+      @JsonKey(ignore: true)
+          BottomAlertDialogPosition position});
 
   $ServerFieldErrorsCopyWith<$Res> get errors;
 }
@@ -135,6 +142,7 @@ class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
     Object errors = freezed,
     Object details = freezed,
     Object popRoute = freezed,
+    Object position = freezed,
   }) {
     return _then(_value.copyWith(
       code: code == freezed ? _value.code : code as int,
@@ -144,6 +152,9 @@ class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
       errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
       details: details == freezed ? _value.details : details as String,
       popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
+      position: position == freezed
+          ? _value.position
+          : position as BottomAlertDialogPosition,
     ));
   }
 
@@ -185,7 +196,9 @@ abstract class _$AuthResponseCopyWith<$Res>
       @JsonKey(ignore: true)
           String details,
       @JsonKey(ignore: true)
-          bool popRoute});
+          bool popRoute,
+      @JsonKey(ignore: true)
+          BottomAlertDialogPosition position});
 
   @override
   $ServerFieldErrorsCopyWith<$Res> get errors;
@@ -210,6 +223,7 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
     Object errors = freezed,
     Object details = freezed,
     Object popRoute = freezed,
+    Object position = freezed,
   }) {
     return _then(_AuthResponse(
       code: code == freezed ? _value.code : code as int,
@@ -219,6 +233,9 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
       errors: errors == freezed ? _value.errors : errors as ServerFieldErrors,
       details: details == freezed ? _value.details : details as String,
       popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
+      position: position == freezed
+          ? _value.position
+          : position as BottomAlertDialogPosition,
     ));
   }
 }
@@ -248,7 +265,9 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
       @JsonKey(ignore: true)
           this.details,
       @JsonKey(ignore: true)
-          this.popRoute = true})
+          this.popRoute = true,
+      @JsonKey(ignore: true)
+          this.position})
       : assert(popRoute != null),
         super._();
 
@@ -282,10 +301,13 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
   @override //
   @JsonKey(ignore: true)
   final bool popRoute;
+  @override
+  @JsonKey(ignore: true)
+  final BottomAlertDialogPosition position;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthResponse(code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details, popRoute: $popRoute)';
+    return 'AuthResponse(code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details, popRoute: $popRoute, position: $position)';
   }
 
   @override
@@ -299,7 +321,8 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('error', error))
       ..add(DiagnosticsProperty('errors', errors))
       ..add(DiagnosticsProperty('details', details))
-      ..add(DiagnosticsProperty('popRoute', popRoute));
+      ..add(DiagnosticsProperty('popRoute', popRoute))
+      ..add(DiagnosticsProperty('position', position));
   }
 
   @override
@@ -322,7 +345,10 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
                     .equals(other.details, details)) &&
             (identical(other.popRoute, popRoute) ||
                 const DeepCollectionEquality()
-                    .equals(other.popRoute, popRoute)));
+                    .equals(other.popRoute, popRoute)) &&
+            (identical(other.position, position) ||
+                const DeepCollectionEquality()
+                    .equals(other.position, position)));
   }
 
   @override
@@ -334,7 +360,8 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(error) ^
       const DeepCollectionEquality().hash(errors) ^
       const DeepCollectionEquality().hash(details) ^
-      const DeepCollectionEquality().hash(popRoute);
+      const DeepCollectionEquality().hash(popRoute) ^
+      const DeepCollectionEquality().hash(position);
 
   @JsonKey(ignore: true)
   @override
@@ -370,7 +397,9 @@ abstract class _AuthResponse extends AuthResponse {
       @JsonKey(ignore: true)
           String details,
       @JsonKey(ignore: true)
-          bool popRoute}) = _$_AuthResponse;
+          bool popRoute,
+      @JsonKey(ignore: true)
+          BottomAlertDialogPosition position}) = _$_AuthResponse;
 
   factory _AuthResponse.fromJson(Map<String, dynamic> json) =
       _$_AuthResponse.fromJson;
@@ -402,6 +431,9 @@ abstract class _AuthResponse extends AuthResponse {
   @override //
   @JsonKey(ignore: true)
   bool get popRoute;
+  @override
+  @JsonKey(ignore: true)
+  BottomAlertDialogPosition get position;
   @override
   @JsonKey(ignore: true)
   _$AuthResponseCopyWith<_AuthResponse> get copyWith;

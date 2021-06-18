@@ -19,7 +19,7 @@ class _$BaseApartmentDTOTearOff {
 // ignore: unused_element
   _BaseApartmentDTO call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -71,7 +71,7 @@ const $BaseApartmentDTO = _$BaseApartmentDTOTearOff();
 /// @nodoc
 mixin _$BaseApartmentDTO {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -111,7 +111,7 @@ abstract class $BaseApartmentDTOCopyWith<$Res> {
       _$BaseApartmentDTOCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -196,7 +196,7 @@ abstract class _$BaseApartmentDTOCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -271,7 +271,7 @@ class __$BaseApartmentDTOCopyWithImpl<$Res>
 class _$_BaseApartmentDTO extends _BaseApartmentDTO {
   const _$_BaseApartmentDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -305,7 +305,7 @@ class _$_BaseApartmentDTO extends _BaseApartmentDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -399,7 +399,7 @@ abstract class _BaseApartmentDTO extends BaseApartmentDTO {
   const _BaseApartmentDTO._() : super._();
   const factory _BaseApartmentDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -432,7 +432,7 @@ abstract class _BaseApartmentDTO extends BaseApartmentDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable

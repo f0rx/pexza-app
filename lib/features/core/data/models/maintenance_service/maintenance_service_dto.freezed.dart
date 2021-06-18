@@ -20,7 +20,7 @@ class _$MaintenanceServiceDTOTearOff {
 // ignore: unused_element
   _MaintenanceServiceDTO call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -59,7 +59,7 @@ const $MaintenanceServiceDTO = _$MaintenanceServiceDTOTearOff();
 /// @nodoc
 mixin _$MaintenanceServiceDTO {
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -89,7 +89,7 @@ abstract class $MaintenanceServiceDTOCopyWith<$Res> {
       _$MaintenanceServiceDTOCopyWithImpl<$Res>;
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -144,7 +144,7 @@ abstract class _$MaintenanceServiceDTOCopyWith<$Res>
   @override
   $Res call(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -198,7 +198,7 @@ class __$MaintenanceServiceDTOCopyWithImpl<$Res>
 class _$_MaintenanceServiceDTO extends _MaintenanceServiceDTO {
   const _$_MaintenanceServiceDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -222,7 +222,7 @@ class _$_MaintenanceServiceDTO extends _MaintenanceServiceDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   final int id;
   @override
   @nullable
@@ -293,7 +293,7 @@ abstract class _MaintenanceServiceDTO extends MaintenanceServiceDTO {
   const _MaintenanceServiceDTO._() : super._();
   const factory _MaintenanceServiceDTO(
       {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: 0)
+      @JsonKey(includeIfNull: false)
           int id,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -316,7 +316,7 @@ abstract class _MaintenanceServiceDTO extends MaintenanceServiceDTO {
 
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: 0)
+  @JsonKey(includeIfNull: false)
   int get id;
   @override
   @nullable

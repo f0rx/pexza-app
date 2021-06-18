@@ -8,7 +8,7 @@ part of assignment_dto_data.dart;
 
 _$_AssignmentDTOData _$_$_AssignmentDTODataFromJson(Map<String, dynamic> json) {
   return _$_AssignmentDTOData(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     tenantId: const IntegerSerializer().fromJson(json['tenant_id']),
     landlordId: const IntegerSerializer().fromJson(json['landlord_id']),
     apartmentId: const IntegerSerializer().fromJson(json['apartment_id']),

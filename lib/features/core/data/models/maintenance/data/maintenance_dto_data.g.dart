@@ -9,7 +9,7 @@ part of maintenance_dto_data.dart;
 _$_MaintenanceDTOData _$_$_MaintenanceDTODataFromJson(
     Map<String, dynamic> json) {
   return _$_MaintenanceDTOData(
-    id: json['id'] as int ?? 0,
+    id: json['id'] as int,
     comment: json['comment'] as String ?? '',
     service: json['service'] == null
         ? null
@@ -17,7 +17,7 @@ _$_MaintenanceDTOData _$_$_MaintenanceDTODataFromJson(
             json['service'] as Map<String, dynamic>),
     serviceId: json['service_id'] as int,
     assignmentId: json['assignment_id'] as int,
-    urgency: const IntegerSerializer().fromJson(json['urgency']) ?? 0,
+    urgency: const IntegerSerializer().fromJson(json['urgency']),
     status: json['status'] as String,
     assignment: json['assignment'] == null
         ? null
