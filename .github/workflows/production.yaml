@@ -3,15 +3,14 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Bump version
+        description: "Specify Bump version"
         required: true
-        default: 1.0.0
+        default: "1.0.0"
 
   push:
     branches:
       - main
       - release
-      - dev
   pull_request:
     branches:
       - main
@@ -19,28 +18,39 @@ on:
     types:
       - opened
       - reopened
-      - closed
       - synchronize
-      - closed
 
 jobs:
-  build:
-    name: Build & Deploy Production APK
-    runs-on: ubuntu-latest
+  setup:
+    name: Setup Build Environment
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
     env:
-      APP_NAME: "Pexza App"
-      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      RELEASE_TYPE: patch
+      FLUTTER_CHANNEL: "beta"
       FLUTTER_VERSION: "1.25.0-8.3.pre"
-    outputs:
-      bump_tag: ${{ env.BUMP_TAG }}
-      bump_tag_version: ${{ env.BUMP_VERSION }}
-      release_url: ${{ env.RELEASE_URL }}
-      changelog: ${{ env.CHANGE_LOG }}
+      FLUTTER_RESTORE_KEY: ${{ matrix.os }}-flutter-install-cache-key-v1
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
     steps:
-      - name: Fetch Repo HEAD
+      - name: Cache Flutter Installation
+        id: flutter-cache
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-flutter-installation
+        with:
+          path: "flutter"
+          key: ${{ env.FLUTTER_RESTORE_KEY }}
+          restore-keys: ${{ env.FLUTTER_RESTORE_KEY }}
+
+      - name: Install Flutter Channel ${{ env.FLUTTER_CHANNEL }}-${{ env.FLUTTER_VERSION }}
+        if: steps.flutter-cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v2
         with:
+          repository: "flutter/flutter"
+          ref: ${{ env.FLUTTER_VERSION }}
+          path: "flutter"
           fetch-depth: 0
 
       - name: Set up Java Environment
@@ -48,115 +58,219 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Prepare NDK dir for caching
+  build:
+    name: Build APK
+    needs: setup
+    runs-on: ${{ matrix.os }}
+    env:
+      APP_NAME: "Pexza"
+      # WORKING_DIRECTORY: "pexza-app"
+      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      FLUTTER_CHANNEL: "beta"
+      FLUTTER_VERSION: "1.25.0-8.3.pre"
+      FLUTTER_RESTORE_KEY: ${{ matrix.os }}-flutter-install-cache-key-v1
+      NDK_RESTORE_KEY: ${{ matrix.os }}-android-ndk-21.0.6113669-v3
+    outputs:
+      armeabi_v7a: ${{ env.ARMEABI_V7A_ARTIFACT }}
+      arm64_v8a: ${{ env.ARM64_V8A_ARTIFACT }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        include:
+          - os: ubuntu-latest
+            flutter_path: "$GITHUB_WORKSPACE/flutter"
+            ndk_path: "/usr/local/lib/android/sdk/ndk"
+    defaults:
+      run:
+        working-directory: pexza-app
+    steps:
+      - name: Checkout to ${{ env.APP_NAME }} Repository
+        uses: actions/checkout@v2
+        with:
+          path: "pexza-app"
+          fetch-depth: 0
+
+      - name: Prepare NDK dir for Cache / Restore
         run: |
           sudo mkdir -p /usr/local/lib/android/sdk/ndk
           sudo chmod -R 777 /usr/local/lib/android/sdk/ndk
           sudo chown -R $USER:$USER /usr/local/lib/android/sdk/ndk
 
-      - name: Cache Android NDK
+      - name: Cache / Restore NDK Installation
         id: ndk-cache
         uses: actions/cache@v2
         with:
-          path: /usr/local/lib/android/sdk/ndk
-          key: ndk-cache-21.0.6113669-v2
+          path: ${{ matrix.ndk_path }}
+          key: ${{ env.NDK_RESTORE_KEY }}
+          restore-keys: ${{ env.NDK_RESTORE_KEY }}
 
       - name: Install NDK
         if: steps.ndk-cache.outputs.cache-hit != 'true'
         run: echo "y" | sudo ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager --install "ndk;21.0.6113669"
 
-      - name: Cache Flutter dependencies
+      - name: Restore Flutter Cache
+        id: flutter-cache
         uses: actions/cache@v2
+        env:
+          cache-name: cache-flutter-installation
         with:
-          path: /opt/hostedtoolcache/flutter
-          key: ${{ runner.OS }}-flutter-install-cache-${{ env.FLUTTER_VERSION }}
+          path: "flutter"
+          key: ${{ env.FLUTTER_RESTORE_KEY }}
+          restore-keys: ${{ env.FLUTTER_RESTORE_KEY }}
 
-      - name: Set up Flutter Environment
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: "beta"
-
-      - name: Run Pre-build scipts
+      - name: Add Flutter to the PATH for Unix
+        if: startsWith(matrix.os, 'macOS') || startsWith(matrix.os, 'ubuntu')
         run: |
+          echo "${{ matrix.flutter_path }}" >> $GITHUB_PATH
+          echo "${{ matrix.flutter_path }}/bin" >> $GITHUB_PATH
+
+      - name: Add Flutter to the PATH for Windows
+        if: startsWith(matrix.os, 'windows')
+        run: echo "${env:GITHUB_WORKSPACE}\flutter\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Pre build Android APK
+        run: |
+          flutter doctor -v
+          flutter format --dry-run .
           flutter pub get
           # flutter test
 
-      - name: Build Flutter Apk
+        # working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: Build Android APK
         run: |
-          flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi --flavor=prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation --dart-define=BUILD_NUMBER=$BUILD_NUMBER --dart-define=BUILD_VERSION=$BUILD_VERSION --dart-define=BUILD_COMMIT=$FCI_COMMIT
+          flutter build apk -t lib/main.dart --release --target-platform android-arm,android-arm64 --split-per-abi  --flavor prod --obfuscate --split-debug-info=./build/app/outputs/apk/obfuscation
 
-      - name: Create Release tag
-        id: create_release_tag
-        if: ${{ github.event.inputs.version == '' }}
-        uses: mathieudutour/github-tag-action@v4.5
+        # working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: Post build Android APK
+        id: post_build_apk
+        run: |
+          echo "ARMEABI_V7A_ARTIFACT=Android-armeabi-v7a-apk-$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+          echo "ARM64_V8A_ARTIFACT=Android-arm64-v8a-apk-$(date +'%Y-%m-%dT%H-%M-%S')" >> $GITHUB_ENV
+
+        # working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: Upload APK (armeabi-v7a arch)
+        uses: actions/upload-artifact@master
         with:
-          release_branches: .*
-          create_annotated_tag: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ env.ARMEABI_V7A_ARTIFACT }}
+          path: pexza-app/**/app-armeabi-v7a*
+          if-no-files-found: warn
+          retention-days: 10
+
+      - name: Upload APK (arm64-v8a arch)
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ env.ARM64_V8A_ARTIFACT }}
+          path: pexza-app/**/app-arm64-v8a*
+          if-no-files-found: warn
+          retention-days: 10
+
+      - name: Upload APK Symbols
+        uses: actions/upload-artifact@master
+        with:
+          name: Obfuscation-symbols
+          path: pexza-app/**/*.symbols
+          if-no-files-found: warn
+          retention-days: 5
+
+  bump_version:
+    name: Bump build version
+    needs: build
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    env:
+      APP_NAME: "Pexza"
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+    outputs:
+      bump_tag: ${{ env.BUMP_TAG }}
+      bump_tag_version: ${{ env.BUMP_VERSION }}
+      release_url: ${{ env.RELEASE_URL }}
+      changelog: ${{ env.CHANGE_LOG }}
+    steps:
+      - name: Checkout to ${{ env.APP_NAME }} Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Download APK (armeabi-v7a arch)
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ needs.build.outputs.armeabi_v7a }}
+
+      - name: Download APK (arm64-v8a arch)
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ needs.build.outputs.arm64_v8a }}
+
+      - name: Move downloaded artifacts to root folder
+        run: |
+          mv build/app/outputs/flutter-apk/*.apk .
+          rm -rf build/
+
+      - name: Get Semantic Version
+        id: semver
+        uses: PaulHatch/semantic-version@v4.0.2
+        with:
+          # A string which, if present in a git commit, indicates that a change represents a
+          # major (breaking) change, supports regular expressions wrapped with '/'
+          major_pattern: "/(Major)|(major)|(MAJOR)/"
+          # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
+          minor_pattern: "/(Minor)|(minor)|(MINOR)/"
+          # A string to determine the format of the version output
+          format: "${major}.${minor}.${patch}-patch+${increment}"
+          # Indicate whether short tags like 'v1' should be supported. If false only full
+          # tags like 'v1.0.0' will be recognized.
+          short_tags: false
 
       - name: Update Environment variables
         run: |
           if ${{ github.event.inputs.version == '' }}; then
-            echo "BUMP_TAG=${{ steps.create_release_tag.outputs.new_tag }}" >> $GITHUB_ENV
-            echo "BUMP_VERSION=${{ steps.create_release_tag.outputs.new_version }}" >> $GITHUB_ENV
-            echo "CHANGE_LOG=${{ steps.create_release_tag.outputs.changelog }}" >> $GITHUB_ENV
+            echo "BUMP_TAG=${{ steps.semver.outputs.version }}" >> $GITHUB_ENV
+            echo "BUMP_VERSION=${{ steps.semver.outputs.version_tag }}" >> $GITHUB_ENV
           else
             echo "BUMP_TAG=v${{ github.event.inputs.version}}" >> $GITHUB_ENV
             echo "BUMP_VERSION=${{ github.event.inputs.version}}" >> $GITHUB_ENV
-            echo "CHANGE_LOG=Custom Workflow dispatch. Please check repo for changelog." >> $GITHUB_ENV
           fi
 
-      - name: Bump version and push tag
-        id: bump_tag_version
-        if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
-        uses: mathieudutour/github-tag-action@v4.5
-        with:
-          release_branches: .*
-          custom_tag: ${{ steps.create_release_tag.outputs.new_tag + 1 }}
-          tag_name: ${{ steps.create_release_tag.outputs.new_tag }}-prod-release
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update version bump variables
-        if: ${{ steps.create_release_tag.outputs.new_tag == steps.create_release_tag.outputs.previous_tag }}
-        run: |
-          echo "BUMP_TAG=${{ steps.bump_tag_version.outputs.new_tag }}" >> $GITHUB_ENV
-          echo "BUMP_VERSION=${{ steps.bump_tag_version.outputs.new_version }}" >> $GITHUB_ENV
-
-      - name: Push APK to Release Tags
+      - name: Push new version to Release Tags
         id: push_apk_to_tag
+        if: ${{ steps.semver.outputs.changed == 'true' }}
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/flutter-apk/*.apk,build/app/outputs/apk/obfuscation/*"
+          artifacts: "*.apk"
           name: ${{ env.APP_NAME }}-${{ env.BUMP_VERSION }}
           tag: ${{ env.BUMP_TAG }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: ${{ env.CHANGE_LOG }}
-          allowUpdates: true
+          token: ${{ env.GITHUB_TOKEN }}
+          allowUpdates: false
           omitName: false
           omitBody: false
-          replacesArtifacts: true
-          artifactErrorsFailBuild: false
 
-      - name: Post Action "Push APK to release Tags"
+      - name: Post push new version to Release Tags
         run: |
-          echo ${{ steps.push_apk_to_tag.outputs.id }}
-          echo ${{ steps.push_apk_to_tag.outputs.html_url }}
-          echo ${{ steps.push_apk_to_tag.outputs.upload_url }}
           echo "RELEASE_URL=${{ steps.push_apk_to_tag.outputs.html_url }}" >> $GITHUB_ENV
 
   notify:
-    runs-on: ubuntu-latest
-    needs: build
+    runs-on: ${{ matrix.os }}
+    needs: bump_version
+    continue-on-error: true
     env:
-      APP_NAME: "Pexza App"
+      APP_NAME: "Pexza"
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       REPOSITORY_NAME: "pexza-app"
       API_KEY: ${{ secrets.ZAPIER_TEAM_API_KEY }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
     steps:
       - name: Send Push Notification
         uses: techulus/push-github-action@1.0.0
         env:
           API_KEY: ${{ env.API_KEY }}
-          TITLE: Version Bump Notification
-          MESSAGE: ${{ needs.build.outputs.changelog }}. Download at -> ${{ needs.build.outputs.release_url }}
-          LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
+          TITLE: Version bump notification
+          MESSAGE: New version available. Download at -> ${{ needs.bump_version.outputs.release_url }}
+          LINK: ${{ needs.bump_version.outputs.release_url }}
