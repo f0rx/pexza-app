@@ -58,8 +58,15 @@ mixin AppAssets {
 
   static SvgPicture freePick = SvgPicture.asset(
     '$SVG_DIR/freepick.svg',
-    height: 30,
-    width: 30,
+    // height: 30,
+    // width: 30,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture posWithdrawal = SvgPicture.asset(
+    '$SVG_DIR/pos_withdrawal.svg',
+    // height: 30,
+    // width: 30,
     fit: BoxFit.contain,
   );
 

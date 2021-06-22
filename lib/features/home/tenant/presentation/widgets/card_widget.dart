@@ -1,16 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 
-class DebitCardWidget extends StatelessWidget {
-  final DebitCard card;
-
-  const DebitCardWidget({
+class CardWidget extends StatelessWidget {
+  const CardWidget({
     Key key,
-    @required this.card,
   }) : super(key: key);
 
   @override
@@ -39,49 +35,44 @@ class DebitCardWidget extends StatelessWidget {
             //
             Positioned.fill(
               child: Padding(
-                padding: EdgeInsets.all(App.shortest * 0.05),
+                padding: EdgeInsets.all(App.shortest * 0.04),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    VerticalSpace(height: App.shortest * 0.1),
+                    VerticalSpace(height: App.shortest * 0.05),
                     //
                     Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Flexible(
                             child: AutoSizeText(
-                              'XXXX - XXXX - XXXX - 5189',
+                              'Wallet Balance',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline6
+                                  .bodyText1
                                   .copyWith(
+                                    fontSize: 16.0,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w600,
                                   ),
                             ),
                           ),
                           //
                           Flexible(
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: AutoSizeText.rich(
-                                TextSpan(children: [
-                                  TextSpan(text: '12'),
-                                  TextSpan(text: ' / '),
-                                  TextSpan(text: '25'),
-                                ]),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2
-                                    .copyWith(
-                                      fontSize: 16.0,
-                                      color: Colors.white,
-                                      letterSpacing: 2.0,
-                                    ),
-                              ),
+                            child: AutoSizeText.rich(
+                              TextSpan(children: [
+                                TextSpan(text: 'NGN'),
+                                TextSpan(text: ' '),
+                                TextSpan(text: '200000000'.asCurrency()),
+                              ]),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  .copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                           ),
                         ],
@@ -89,14 +80,22 @@ class DebitCardWidget extends StatelessWidget {
                     ),
                     //
                     Flexible(
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: AutoSizeText(
-                          'Brendan Ejike Chukwunonso',
-                          style: Theme.of(context).textTheme.headline6.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
+                      child: SizedBox(
+                        width: App.shortest * 0.3,
+                        child: TextButton(
+                          onPressed: () =>
+                              navigator.pushLandlordWithdrawalScreen(),
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            backgroundColor: Colors.white,
+                          ),
+                          child: AutoSizeText(
+                            'Withdraw',
+                            style: Theme.of(context).textTheme.button.copyWith(
+                                  color: AppColors.accentColor,
+                                  fontSize: 15.0,
+                                ),
+                          ),
                         ),
                       ),
                     ),

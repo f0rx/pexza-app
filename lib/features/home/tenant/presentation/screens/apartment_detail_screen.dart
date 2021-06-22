@@ -158,7 +158,10 @@ class TenantApartmentDetailScreen extends StatelessWidget
                 topRight: Radius.circular(40.0),
               ),
               child: Material(
-                color: Colors.white,
+                color: Helpers.optionOf(
+                  Colors.white,
+                  AppColors.secondaryColor.shade400,
+                ),
                 elevation: 2.0,
                 type: MaterialType.card,
                 child: Container(
@@ -175,13 +178,19 @@ class TenantApartmentDetailScreen extends StatelessWidget
                         child: Hero(
                           tag: "${Constants.kCreateRequest}",
                           child: Material(
-                            color: AppColors.primaryColor.shade400,
+                            color: Helpers.optionOf(
+                              AppColors.primaryColor.shade400,
+                              AppColors.secondaryColor,
+                            ),
                             borderRadius: BorderRadius.circular(8.0),
                             child: InkWell(
                               onTap: () => navigator.pushServiceRequestScreen(
                                 assignment: assignment,
                               ),
-                              splashColor: AppColors.primaryColor.shade500,
+                              splashColor: Helpers.optionOf(
+                                AppColors.primaryColor.shade500,
+                                AppColors.secondaryColor.shade600,
+                              ),
                               borderRadius: BorderRadius.circular(8.0),
                               child: SizedBox(
                                 height: App.height * 0.2,
@@ -231,14 +240,20 @@ class TenantApartmentDetailScreen extends StatelessWidget
                         child: Hero(
                           tag: "${Constants.kPayRentTag}",
                           child: Material(
-                            color: AppColors.primaryColor.shade400,
+                            color: Helpers.optionOf(
+                              AppColors.primaryColor.shade400,
+                              AppColors.secondaryColor,
+                            ),
                             borderRadius: BorderRadius.circular(8.0),
                             child: InkWell(
                               onTap: () =>
                                   navigator.pushTenantRentPaymentScreen(
                                 assignment: assignment,
                               ),
-                              splashColor: AppColors.primaryColor.shade500,
+                              splashColor: Helpers.optionOf(
+                                AppColors.primaryColor.shade500,
+                                AppColors.secondaryColor.shade600,
+                              ),
                               borderRadius: BorderRadius.circular(8.0),
                               child: SizedBox(
                                 height: App.height * 0.2,

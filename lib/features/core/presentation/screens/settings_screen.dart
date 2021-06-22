@@ -118,17 +118,43 @@ class SettingsScreen extends StatelessWidget with AutoRouteWrapper {
                 VerticalSpace(height: App.longest * 0.07),
                 //
                 ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: BorderRadius.circular(8.0),
                   child: Material(
                     color: Helpers.optionOf(
                         Colors.white, AppColors.secondaryColor),
-                    child: ListTile(
-                      title: AutoSizeText(
-                        "Log Out",
-                        style: TextStyle(color: AppColors.accentColor),
-                      ),
-                      trailing: Icon(Icons.exit_to_app),
-                      onTap: () => context.read<AuthWatcherCubit>().signOut,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Visibility(
+                          visible: context
+                              .read<AuthWatcherCubit>()
+                              .state
+                              .user
+                              .role
+                              .isLandlord,
+                          child: ListTile(
+                            title: AutoSizeText(
+                              "My Wallet",
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                color: AppColors.accentColor.shade600,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            trailing: Icon(Icons.attach_money_rounded),
+                            onTap: () => navigator.pushLandlordWalletScreen(),
+                          ),
+                        ),
+                        //
+                        ListTile(
+                          title: AutoSizeText(
+                            "Log Out",
+                            style: TextStyle(color: AppColors.accentColor),
+                          ),
+                          trailing: Icon(Icons.exit_to_app),
+                          onTap: () => context.read<AuthWatcherCubit>().signOut,
+                        ),
+                      ],
                     ),
                   ),
                 ),

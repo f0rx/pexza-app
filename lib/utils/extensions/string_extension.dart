@@ -53,8 +53,7 @@ extension StringX on String {
     return init;
   }
 
-  NumberFormat asCurrencyFormat() =>
-      NumberFormat("#,##0.00", Intl.defaultLocale);
+  NumberFormat asCurrencyFormat() => NumberFormat("#,##0", Intl.defaultLocale);
 
   String pad([String pad = '', Direction start = Direction.right]) {
     switch (start) {

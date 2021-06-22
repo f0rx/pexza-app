@@ -23,7 +23,7 @@ class _$PaymentStateTearOff {
       @nullable String reference,
       bool status = false,
       bool verify = false,
-      Widget logo = const PexzaLogo(padding: const EdgeInsets.all(8.0)),
+      Widget logo = const PexzaLogo(padding: EdgeInsets.all(8.0)),
       Either<Failure, Response> response}) {
     return _PaymentState(
       isLoading: isLoading,
@@ -213,7 +213,7 @@ class _$_PaymentState extends _PaymentState {
       @nullable this.reference,
       this.status = false,
       this.verify = false,
-      this.logo = const PexzaLogo(padding: const EdgeInsets.all(8.0)),
+      this.logo = const PexzaLogo(padding: EdgeInsets.all(8.0)),
       this.response})
       : assert(isLoading != null),
         assert(hideEmail != null),
@@ -248,7 +248,7 @@ class _$_PaymentState extends _PaymentState {
   @JsonKey(defaultValue: false)
   @override
   final bool verify;
-  @JsonKey(defaultValue: const PexzaLogo(padding: const EdgeInsets.all(8.0)))
+  @JsonKey(defaultValue: const PexzaLogo(padding: EdgeInsets.all(8.0)))
   @override
   final Widget logo;
   @override //

@@ -50,12 +50,10 @@ class Pexza extends StatelessWidget {
                   initialRoute: Routes.splashScreen,
                   observers: [
                     NavigationHistoryObserver(),
-                    env.flavor.fold(
-                      dev: () => RouteObserver(),
-                      prod: () => FirebaseAnalyticsObserver(
+                    if (env.flavor == BuildFlavor.prod)
+                      FirebaseAnalyticsObserver(
                         analytics: getIt<FirebaseAnalytics>(),
                       ),
-                    ),
                   ],
                   router: Router(),
                   guards: [AuthGuard()],
@@ -68,57 +66,3 @@ class Pexza extends StatelessWidget {
     );
   }
 }
-
-// class Pexza extends StatelessWidget {
-//   /// This is the entry point for Pexza App
-//   const Pexza({Key key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // Precache dependencies & images
-//     Helpers.precache(context);
-
-//     return MultiBlocProvider(
-//       providers: [
-//         BlocProvider<ThemeCubit>(create: (_) => getIt<ThemeCubit>()),
-//         BlocProvider<RoleCubit>(create: (_) => getIt<RoleCubit>()),
-//         BlocProvider<AuthWatcherCubit>(
-//           create: (_) => getIt<AuthWatcherCubit>(),
-//         ),
-//       ],
-//       child: BlocBuilder<ThemeCubit, AppTheme>(
-//         builder: (context, app) => Portal(
-//           child: Wiredash(
-//             projectId: env.kWiredashProjectId,
-//             secret: env.kWiredashSecret,
-//             navigatorKey: App.key,
-//             child: MaterialApp(
-//               title: AppStrings.appName.capitalizeFirst(),
-//               debugShowCheckedModeBanner: false,
-//               theme: app?.themeData() ?? AppTheme.light().themeData(),
-//               darkTheme: AppTheme.dark().themeData(),
-//               locale: DevicePreview.locale(context),
-//               builder: (context, child) => DevicePreview.appBuilder(
-//                 context,
-//                 ExtendedNavigator(
-//                   navigatorKey: App.key,
-//                   initialRoute: Routes.splashScreen,
-//                   observers: [
-//                     NavigationHistoryObserver(),
-//                     env.flavor.fold(
-//                       prod: () => FirebaseAnalyticsObserver(
-//                         analytics: getIt<FirebaseAnalytics>(),
-//                       ),
-//                     ),
-//                   ],
-//                   router: Router(),
-//                   guards: [AuthGuard()],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

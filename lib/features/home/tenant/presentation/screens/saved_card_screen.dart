@@ -52,8 +52,19 @@ class SavedCardScreen extends StatelessWidget with AutoRouteWrapper {
                 (r) => r.fold(
                   success: (val) => val.popRoute
                       ? s.status
-                          ? (_) =>
-                              navigator.popUntilPath(Routes.tenantHomeScreen)
+                          ? (_) => navigator.popAndPush(
+                                Routes.successfulScreen,
+                                arguments: SuccessfulScreenArguments(
+                                  image: AppAssets.freePick,
+                                  title: 'Payment Successful',
+                                  description: "Your payment was successful. "
+                                      "\nPlease check your email "
+                                      "for confirmation and receipt.",
+                                  onPressed: () => navigator.popUntilPath(
+                                    Routes.tenantHomeScreen,
+                                  ),
+                                ),
+                              )
                           : null
                       : null,
                 ),
