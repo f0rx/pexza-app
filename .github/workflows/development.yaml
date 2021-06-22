@@ -174,7 +174,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 5
 
-  bump-version:
+  bump_version:
     name: Bump build version
     if: ${{ github.event.inputs.release == 'true' }}
     needs: build

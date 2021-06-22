@@ -173,7 +173,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 5
 
-  bump-version:
+  bump_version:
     name: Bump build version
     needs: build
     runs-on: ${{ matrix.os }}
@@ -251,14 +251,11 @@ jobs:
 
       - name: Post push new version to Release Tags
         run: |
-          echo ${{ steps.push_apk_to_tag.outputs.id }}
-          echo ${{ steps.push_apk_to_tag.outputs.html_url }}
-          echo ${{ steps.push_apk_to_tag.outputs.upload_url }}
           echo "RELEASE_URL=${{ steps.push_apk_to_tag.outputs.html_url }}" >> $GITHUB_ENV
 
   notify:
     runs-on: ${{ matrix.os }}
-    needs: bump-version
+    needs: bump_version
     continue-on-error: true
     env:
       APP_NAME: "Pexza"
@@ -274,6 +271,6 @@ jobs:
         uses: techulus/push-github-action@1.0.0
         env:
           API_KEY: ${{ env.API_KEY }}
-          TITLE: Version Bump Notification
-          MESSAGE: ${{ needs.build.outputs.changelog }}. Download at -> ${{ needs.build.outputs.release_url }}
-          LINK: https://github.com/f0rx/${{ env.REPOSITORY_NAME }}/releases/tag/${{ needs.build.outputs.bump_tag }}
+          TITLE: Version bump notification
+          MESSAGE: New version available. Download at -> ${{ needs.bump_version.outputs.release_url }}
+          LINK: ${{ needs.bump_version.outputs.release_url }}
