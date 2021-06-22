@@ -22,7 +22,6 @@ abstract class Success with Response implements _SuccessMixin {
 abstract class Info with Response implements _InfoMixin {
   String get message;
   String get details;
-  bool get popRoute;
 }
 
 mixin _FailureMixin {

@@ -1,4 +1,4 @@
-name: Debug workflow
+name: Release Production apk
 on:
   workflow_dispatch:
     inputs:
