@@ -6,11 +6,11 @@ import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
+import 'package:pexza/features/core/data/database/app_database.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/auth/data/repositories/access_token_manager.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
@@ -45,6 +45,11 @@ abstract class ServiceModules {
   @preResolve
   Future<Dio> get dio async => await _DioInstance._instance();
 
+  @preResolve
+  Future<AppDatabase> get database async =>
+      await $FloorAppDatabase.databaseBuilder(AppStrings.database).build();
+  // await $FloorAppDatabase.inMemoryDatabaseBuilder().build();
+
   @lazySingleton
   Connectivity get connectionStatus => Connectivity();
 }
@@ -66,7 +71,7 @@ class _DioInstance {
     final cacheOptions = CacheOptions(
       // A default store is required for interceptor.
       store: BackupCacheStore(
-        primary: DbCacheStore(databaseName: AppStrings.database),
+        primary: DbCacheStore(databaseName: AppStrings.dioDatabase),
         secondary: MemCacheStore(),
       ),
       // Default.

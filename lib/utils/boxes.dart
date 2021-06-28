@@ -4,18 +4,12 @@ import 'package:pexza/utils/utils.dart';
 
 class HiveBoxes {
   // Register Adapter
-  static void registerAdapters() {
-    Hive.registerAdapter(UserDTOAdapter());
-  }
+  static void registerAdapters() {}
 
   /////////////.....// Register boxes here //////////////////
 
   static Future<Box> box() async {
     return await Hive.openBox(Keys.APP_BOX);
-  }
-
-  static Future<Box<UserDTO>> userDTOBox() async {
-    return await Hive.openBox<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
   }
 
   static Future<Box<String>> accessTokenBox() async {

@@ -1,7 +1,15 @@
 targets:
   $default:
     builders:
+      freezed:
+        options:
+          runs_before:
+            - floor_generator
+      floor_generator:
+        options:
+          required_inputs: [".freezed.dart"]
       json_serializable:
         options:
           create_to_json: true
           explicit_to_json: true
+          include_if_null: false
