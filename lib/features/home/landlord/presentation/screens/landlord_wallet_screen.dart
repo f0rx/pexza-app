@@ -24,6 +24,7 @@ class LandlordWalletScreen extends StatelessWidget with AutoRouteWrapper {
             top: 0,
             left: 0,
             right: 0,
+            // bottom: App.height * 0.47,
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: Helpers.appPadding,
@@ -33,6 +34,7 @@ class LandlordWalletScreen extends StatelessWidget with AutoRouteWrapper {
           ),
           //
           Positioned(
+            // top: App.height * 0.25,
             left: 0,
             right: 0,
             bottom: 0,

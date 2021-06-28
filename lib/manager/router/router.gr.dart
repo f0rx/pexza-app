@@ -272,14 +272,8 @@ class Router extends RouterBase {
       );
     },
     VerifyEmailScreen: (data) {
-      final args = data.getArgs<VerifyEmailScreenArguments>(
-        orElse: () => VerifyEmailScreenArguments(),
-      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => VerifyEmailScreen(
-          key: args.key,
-          email: args.email,
-        ).wrappedRoute(context),
+        builder: (context) => const VerifyEmailScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -530,8 +524,12 @@ class Router extends RouterBase {
       );
     },
     LandlordWithdrawalScreen: (data) {
+      final args = data.getArgs<LandlordWithdrawalScreenArguments>(
+        orElse: () => LandlordWithdrawalScreenArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => LandlordWithdrawalScreen().wrappedRoute(context),
+        builder: (context) =>
+            LandlordWithdrawalScreen(key: args.key).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -618,14 +616,8 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushForgotPasswordScreen() =>
       push<dynamic>(Routes.forgotPasswordScreen);
 
-  Future<dynamic> pushVerifyEmailScreen({
-    Key key,
-    EmailAddress email,
-  }) =>
-      push<dynamic>(
-        Routes.verifyEmailScreen,
-        arguments: VerifyEmailScreenArguments(key: key, email: email),
-      );
+  Future<dynamic> pushVerifyEmailScreen() =>
+      push<dynamic>(Routes.verifyEmailScreen);
 
   Future<dynamic> pushTenantHomeScreen() =>
       push<dynamic>(Routes.tenantHomeScreen);
@@ -811,8 +803,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushLandlordWalletScreen() =>
       push<dynamic>(Routes.landlordWalletScreen);
 
-  Future<dynamic> pushLandlordWithdrawalScreen() =>
-      push<dynamic>(Routes.landlordWithdrawalScreen);
+  Future<dynamic> pushLandlordWithdrawalScreen(
+          {Key key, OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordWithdrawalScreen,
+        arguments: LandlordWithdrawalScreenArguments(key: key),
+        onReject: onReject,
+      );
 
   Future<dynamic> pushNotificationScreen() =>
       push<dynamic>(Routes.notificationScreen);
@@ -839,13 +836,6 @@ class ProfileSetupScreenArguments {
   final Key key;
   final Assignment assignment;
   ProfileSetupScreenArguments({this.key, this.assignment});
-}
-
-/// VerifyEmailScreen arguments holder class
-class VerifyEmailScreenArguments {
-  final Key key;
-  final EmailAddress email;
-  VerifyEmailScreenArguments({this.key, this.email});
 }
 
 /// TenantApartmentDetailScreen arguments holder class
@@ -963,4 +953,10 @@ class LandlordTenantsListingScreenArguments {
   final KtList<User> tenants;
   LandlordTenantsListingScreenArguments(
       {this.key, this.property, this.tenants});
+}
+
+/// LandlordWithdrawalScreen arguments holder class
+class LandlordWithdrawalScreenArguments {
+  final Key key;
+  LandlordWithdrawalScreenArguments({this.key});
 }

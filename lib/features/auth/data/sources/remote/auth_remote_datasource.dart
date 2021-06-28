@@ -66,6 +66,20 @@ class AuthRemoteDatasource {
     );
   }
 
+  Future<Response<dynamic>> resendVerificationEmail(String email) async {
+    // Convert data to DTO
+    final UserDTO dto = UserDTO(email: email);
+
+    // Generate Form Data for request
+    final FormData data = FormData.fromMap(dto.toJson());
+
+    // Perform POST request based on role / user_type
+    return _dio.post(
+      EndPoints.RESEND_VERIFICATION,
+      data: data,
+    );
+  }
+
   Future<Response<dynamic>> sendPasswordResetEmail(
     String email,
   ) async {
@@ -155,7 +169,7 @@ class AuthRemoteDatasource {
           return left(
             AuthResponse.fromJson(
               e.response.data,
-            ).copyWith(code: e.response.statusCode),
+            ).copyWith(code: e.response?.data['code'] ?? e.response.statusCode),
           );
         case DioErrorType.SEND_TIMEOUT:
           return left(AuthResponse.timeout());

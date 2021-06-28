@@ -9,8 +9,9 @@ import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dar
 import 'package:pexza/features/auth/data/sources/remote/auth_remote_datasource.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/auth/data/models/auth_response.dart';
-import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/data/data.dart';
+import 'package:pexza/features/core/domain/entities/fields/fields.dart';
+import 'package:pexza/features/core/domain/entities/role/role.dart';
 import 'package:pexza/features/core/domain/entities/user/user.dart';
 import 'package:pexza/features/core/domain/entities/fields/phone/phone.dart';
 import 'package:pexza/features/core/domain/entities/fields/password.dart';
@@ -39,33 +40,26 @@ class AuthFacadeImpl extends AuthFacade {
   @override
   Future<Either<AuthResponse, Option<User>>> get currentUser async {
     // Check if device has good connection
-    final _checkConn = await this.checkHasGoodInternet();
+    final _checkConn = await checkHasGoodInternet();
 
-    Future<Either<AuthResponse, Option<User>>> _left() async {
-      return _local.getCachedUserInfo().fold(
-        () => right(none()),
-        (dto) {
-          try {
-            return right(some(dto.domain));
-          } catch (e) {
-            return handleFailure(
-              authResponse: AuthResponse(
-                message: "User account not verified!",
-                code: AuthResponse.UNVERIFIED,
-                details: dto?.email,
-              ),
-            );
-          }
-        },
+    Future<Either<AuthResponse, Option<User>>> _mapped(
+      AuthResponse failure,
+    ) async {
+      return failure.fold(
+        is1101: () async => left(failure),
+        orElse: () async => (await _local.getCachedUserInfo()).fold(
+          () => right(none()),
+          (dto) => right(some(dto.domain)),
+        ),
       );
     }
 
     return _checkConn.fold(
       // If no internet, return cached user
-      (_) async => _left(),
+      (f) async => _mapped(f),
       // Fetch fresh user data from remote
       (_) async => (await _remote.fetchUserInfo()).fold(
-        (f) async => _left(),
+        (f) async => _mapped(f),
         (dto) => right(some(dto.domain)),
       ),
     );
@@ -88,11 +82,11 @@ class AuthFacadeImpl extends AuthFacade {
   }) async {
     try {
       // Check if device has good connection
-      final _result = await this.checkHasGoodInternet();
+      final _result = await checkHasGoodInternet();
 
-      await _result.fold(
+      final _response = await _result.fold(
         // Re-Throw Exception
-        (f) => throw f,
+        (f) async => throw f,
         // Attempt Registration
         (_) async => await _remote.createUserAccount(UserDTO.fromDomain(User(
           role: role,
@@ -106,14 +100,21 @@ class AuthFacadeImpl extends AuthFacade {
         ))),
       );
 
+      // Get Data Access Object
+      final _registered = RegisteredUserDTO.fromJson(_response.data);
+
       // Automatically Login new User
-      await this.login(email: emailAddress, password: password);
+      await login(
+        email: emailAddress,
+        password: password,
+        registered: _registered.user.copyWith(
+          password: password.getOrNull,
+        ),
+      );
 
       return right(unit);
     } on AuthResponse catch (ex) {
-      return handleFailure(
-        authResponse: ex,
-      );
+      return handleFailure(authResponse: ex);
     } on DioError catch (ex, trace) {
       return handleFailure(dioError: ex, trace: trace);
     }
@@ -123,10 +124,11 @@ class AuthFacadeImpl extends AuthFacade {
   Future<Either<AuthResponse, Unit>> login({
     @required EmailAddress email,
     @required Password password,
+    UserDTO registered,
   }) async {
     try {
       // Check if device has good connection
-      final _result = await this.checkHasGoodInternet();
+      final _result = await checkHasGoodInternet();
 
       final _response = await _result.fold(
         // Re-Throw Exception
@@ -138,24 +140,12 @@ class AuthFacadeImpl extends AuthFacade {
         ),
       );
 
-      /* Cache some temp information about the user
-        trying to signin. We'll use this to verify the user's account
-        and perform other non-sensitive operation
-        that may require the user to signin
-      */
-      await this.getAndCacheUserInfo(UserDTO(
-        email: email.getOrEmpty,
-        password: password.getOrEmpty,
-      ));
-
-      /////////////////////  LOGIN SUCCESSFUL   /////////////////////////////
-
       //// Cache Access token
       _local.cacheUserAccessToken(_response.data);
 
-      // Login was successful, so we get fresh server update
-      // It makes sense that this should be here
-      await this.getAndCacheUserInfo();
+      // If login was successful, fetch updated user creds
+      // Else we'll pass in the initial registration response for caching
+      await getAndCacheUserInfo(registered);
 
       // Log Firebase Analytics Login event
       _analytics.logLogin(loginMethod: "jwt");
@@ -165,9 +155,7 @@ class AuthFacadeImpl extends AuthFacade {
 
       return right(unit);
     } on AuthResponse catch (ex) {
-      return handleFailure(
-        authResponse: ex,
-      );
+      return handleFailure(authResponse: ex);
     } on DioError catch (ex, trace) {
       return handleFailure(dioError: ex, trace: trace);
     }
@@ -175,36 +163,56 @@ class AuthFacadeImpl extends AuthFacade {
 
   @override
   Future<Either<AuthResponse, Unit>> verifyEmailAddress({
-    EmailAddress email,
     EmailTokenField token,
   }) async {
     try {
-      final UserDTO dto = _local.getCachedUserInfo()?.getOrElse(() => null);
-      // Check if device has good connection
-      final _checkConn = await this.checkHasGoodInternet();
+      final UserDTO local =
+          (await _local.getCachedUserInfo())?.getOrElse(() => null);
 
-      _local.signOut(clearAccessToken: true, clearUser: false);
+      // Check if device has good connection
+      final _checkConn = await checkHasGoodInternet();
+
+      await _local.signOut(clearAccessToken: true, clearUser: false);
 
       await _checkConn.fold(
         (f) => throw f,
         (_) => _remote.verifyUserEmailAddress(
-          email.getOrEmpty,
+          local.email,
           token.getOrEmpty,
         ),
       );
 
-      _local.signOut();
+      await _local.signOut();
 
-      await this.login(
-        email: EmailAddress(dto.email),
-        password: Password(dto.password),
+      await login(
+        email: EmailAddress(local.email),
+        password: Password(local.password),
+        registered: local,
       );
 
       return right(unit);
     } on AuthResponse catch (ex) {
-      return handleFailure(
-        authResponse: ex,
+      return handleFailure(authResponse: ex);
+    } on DioError catch (ex, trace) {
+      return handleFailure(dioError: ex, trace: trace);
+    }
+  }
+
+  @override
+  Future<Either<AuthResponse, Unit>> resendVerificationEmail(
+    EmailAddress email,
+  ) async {
+    try {
+      final _checkConn = await checkHasGoodInternet();
+
+      await _checkConn.fold(
+        (f) => throw f,
+        (_) => _remote.resendVerificationEmail(email.getOrNull),
       );
+
+      return right(unit);
+    } on AuthResponse catch (ex) {
+      return handleFailure(authResponse: ex);
     } on DioError catch (ex, trace) {
       return handleFailure(dioError: ex, trace: trace);
     }
@@ -220,7 +228,7 @@ class AuthFacadeImpl extends AuthFacade {
   }) async {
     try {
       // Check if device has good connection
-      final _result = await this.checkHasGoodInternet();
+      final _result = await checkHasGoodInternet();
 
       await _result.fold(
         // Re-Throw Exception
@@ -240,9 +248,7 @@ class AuthFacadeImpl extends AuthFacade {
 
       return right(unit);
     } on AuthResponse catch (ex) {
-      return handleFailure(
-        authResponse: ex,
-      );
+      return handleFailure(authResponse: ex);
     } on DioError catch (ex, trace) {
       return handleFailure(dioError: ex, trace: trace);
     }
@@ -254,7 +260,7 @@ class AuthFacadeImpl extends AuthFacade {
   ) async {
     try {
       // Check if device has good connection
-      final _result = await this.checkHasGoodInternet();
+      final _result = await checkHasGoodInternet();
 
       final _response = await _result.fold(
         // Re-Throw Exception
@@ -285,7 +291,7 @@ class AuthFacadeImpl extends AuthFacade {
   }) async {
     try {
       // Check if device has good connection
-      final _result = await this.checkHasGoodInternet();
+      final _result = await checkHasGoodInternet();
 
       // Reset user's password
       final _response = await _result.fold(
@@ -312,13 +318,13 @@ class AuthFacadeImpl extends AuthFacade {
       await _remote.signOut();
 
       // Delete local user--auth cache
-      _local.signOut();
+      await _local.signOut();
 
       // Notify listeners
       await sink();
     } on DioError catch (_) {
       // Delete local user--auth cache
-      _local.signOut();
+      await _local.signOut();
       return handleFailure(
         authResponse: AuthResponse(message: "Signing out..."),
       );
@@ -348,14 +354,16 @@ class AuthFacadeImpl extends AuthFacade {
 
   Future<void> getAndCacheUserInfo([UserDTO temp]) async {
     UserDTO dto = temp;
+
     if (temp.isNull) {
       // Check if device has good connection
-      final _checkConn = await this.checkHasGoodInternet();
+      final _checkConn = await checkHasGoodInternet();
       // Fetch Updated user info from remote source
       dto = await _checkConn.fold(
-        (f) => throw f,
+        (f) async => throw f,
         (r) async => (await _remote.fetchUserInfo()).fold(
-          (f) => _local.getCachedUserInfo().fold(() => throw f, id),
+          (f) async =>
+              (await _local.getCachedUserInfo()).fold(() => throw f, id),
           id,
         ),
       );

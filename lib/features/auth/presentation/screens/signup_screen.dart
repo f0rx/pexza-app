@@ -21,7 +21,6 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      lazy: true,
       create: (_) => getIt<AuthCubit>(),
       child: BlocConsumer<AuthCubit, AuthState>(
         listenWhen: (p, c) => p.isLoading && !c.isLoading,
@@ -63,6 +62,7 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: Toolbar(),
       body: Container(
         child: Center(
           child: SingleChildScrollView(
