@@ -80,7 +80,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `users` (`id` INTEGER, `role` TEXT, `token` TEXT, `first_name` TEXT, `last_name` TEXT, `email` TEXT, `gender` TEXT, `dob` TEXT, `phone` TEXT, `provider` TEXT, `password` TEXT, `photo` TEXT, `verified_at` INTEGER, `verification_sent_at` TEXT, `forgot_password_code_sent_at` TEXT, `created_at` TEXT, `updated_at` TEXT, `deleted_at` TEXT, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `users` (`id` INTEGER, `balance` INTEGER, `role` TEXT, `token` TEXT, `first_name` TEXT, `last_name` TEXT, `email` TEXT, `gender` TEXT, `dob` TEXT, `phone` TEXT, `provider` TEXT, `password` TEXT, `photo` TEXT, `verified_at` INTEGER, `verification_sent_at` TEXT, `forgot_password_code_sent_at` TEXT, `created_at` TEXT, `updated_at` TEXT, `deleted_at` TEXT, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -102,6 +102,7 @@ class _$FloorUserDAO extends FloorUserDAO {
             'users',
             (_$_FloorUser item) => <String, dynamic>{
                   'id': item.id,
+                  'balance': item.accountBalance,
                   'role': _floorRoleConverter.encode(item.role),
                   'token': item.token,
                   'first_name': item.firstName,
@@ -129,6 +130,7 @@ class _$FloorUserDAO extends FloorUserDAO {
             ['id'],
             (_$_FloorUser item) => <String, dynamic>{
                   'id': item.id,
+                  'balance': item.accountBalance,
                   'role': _floorRoleConverter.encode(item.role),
                   'token': item.token,
                   'first_name': item.firstName,
@@ -156,6 +158,7 @@ class _$FloorUserDAO extends FloorUserDAO {
             ['id'],
             (_$_FloorUser item) => <String, dynamic>{
                   'id': item.id,
+                  'balance': item.accountBalance,
                   'role': _floorRoleConverter.encode(item.role),
                   'token': item.token,
                   'first_name': item.firstName,
@@ -195,6 +198,7 @@ class _$FloorUserDAO extends FloorUserDAO {
     return _queryAdapter.queryList('SELECT * FROM users',
         mapper: (Map<String, dynamic> row) => _$_FloorUser(
             id: row['id'] as int,
+            accountBalance: row['balance'] as int,
             role: _floorRoleConverter.decode(row['role'] as String),
             token: row['token'] as String,
             firstName: row['first_name'] as String,
@@ -228,6 +232,7 @@ class _$FloorUserDAO extends FloorUserDAO {
         isView: false,
         mapper: (Map<String, dynamic> row) => _$_FloorUser(
             id: row['id'] as int,
+            accountBalance: row['balance'] as int,
             role: _floorRoleConverter.decode(row['role'] as String),
             token: row['token'] as String,
             firstName: row['first_name'] as String,
@@ -259,6 +264,7 @@ class _$FloorUserDAO extends FloorUserDAO {
         arguments: <dynamic>[id],
         mapper: (Map<String, dynamic> row) => _$_FloorUser(
             id: row['id'] as int,
+            accountBalance: row['balance'] as int,
             role: _floorRoleConverter.decode(row['role'] as String),
             token: row['token'] as String,
             firstName: row['first_name'] as String,
@@ -289,6 +295,7 @@ class _$FloorUserDAO extends FloorUserDAO {
     return _queryAdapter.query('SELECT * FROM users ORDER BY ID DESC LIMIT 1',
         mapper: (Map<String, dynamic> row) => _$_FloorUser(
             id: row['id'] as int,
+            accountBalance: row['balance'] as int,
             role: _floorRoleConverter.decode(row['role'] as String),
             token: row['token'] as String,
             firstName: row['first_name'] as String,

@@ -10,6 +10,7 @@ _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
   return _$_UserDTO(
     id: json['id'] as int,
     role: json['role'] as String ?? '',
+    balance: json['balance'] as int ?? '',
     token: json['token'] as String ?? '',
     firstName: json['first_name'] as String ?? '',
     lastName: json['last_name'] as String ?? '',
@@ -44,6 +45,7 @@ Map<String, dynamic> _$_$_UserDTOToJson(_$_UserDTO instance) {
 
   writeNotNull('id', instance.id);
   writeNotNull('role', instance.role);
+  writeNotNull('balance', instance.balance);
   writeNotNull('token', instance.token);
   writeNotNull('first_name', instance.firstName);
   writeNotNull('last_name', instance.lastName);

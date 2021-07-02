@@ -1,0 +1,10 @@
+{
+    "account_number": "0057122413",
+    "account_name": "BRENDAN CHUKWUNONSO EJIKE",
+    "bank_id": 3,
+    "bank": {
+        "name": "First City Monument Bank",
+        "country": "NG",
+        "country_full_name": "Nigeria"
+    }
+}

@@ -2,6 +2,7 @@ library user;
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pexza/features/core/domain/entities/entities.dart';
 import 'package:pexza/features/core/domain/entities/fields/fields.dart';
 import 'package:pexza/features/core/domain/entities/role/role.dart';
 import 'package:pexza/features/core/domain/entities/unique_id.dart';
@@ -22,6 +23,7 @@ abstract class User implements _$User, BaseUser {
   const factory User({
     @nullable UniqueId<int> id,
     @nullable Role role,
+    @nullable BasicTextField<int> accountBalance,
     @nullable DisplayName firstName,
     @nullable DisplayName lastName,
     @nullable EmailAddress email,

@@ -29,6 +29,7 @@ import 'package:pexza/features/home/landlord/presentation/screens/home_screen.da
 import 'package:pexza/features/home/landlord/presentation/screens/landl_apartment_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_bank_details_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_wallet_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_withdrawal_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
@@ -88,6 +89,8 @@ class Routes {
       '/landlord-maintenance-request-detail-screen';
   static const String landlordTenantsListingScreen =
       '/landlord-tenants-listing-screen';
+  static const String landlordBankDetailsScreen =
+      '/landlord-bank-details-screen';
   static const String landlordWalletScreen = '/landlord-wallet-screen';
   static const String landlordWithdrawalScreen = '/landlord-withdrawal-screen';
   static const String notificationScreen = '/notification-screen';
@@ -127,6 +130,7 @@ class Routes {
     landlordMaintenanceRequestScreen,
     landlordMaintenanceRequestDetailScreen,
     landlordTenantsListingScreen,
+    landlordBankDetailsScreen,
     landlordWalletScreen,
     landlordWithdrawalScreen,
     notificationScreen,
@@ -193,6 +197,8 @@ class Router extends RouterBase {
         page: LandlordMaintenanceRequestDetailScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordTenantsListingScreen,
         page: LandlordTenantsListingScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordBankDetailsScreen,
+        page: LandlordBankDetailsScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordWalletScreen,
         page: LandlordWalletScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordWithdrawalScreen,
@@ -515,6 +521,17 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
+    LandlordBankDetailsScreen: (data) {
+      final args = data.getArgs<LandlordBankDetailsScreenArguments>(
+        orElse: () => LandlordBankDetailsScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            LandlordBankDetailsScreen(key: args.key).wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
     LandlordWalletScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) =>
@@ -800,6 +817,14 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         onReject: onReject,
       );
 
+  Future<dynamic> pushLandlordBankDetailsScreen(
+          {Key key, OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordBankDetailsScreen,
+        arguments: LandlordBankDetailsScreenArguments(key: key),
+        onReject: onReject,
+      );
+
   Future<dynamic> pushLandlordWalletScreen() =>
       push<dynamic>(Routes.landlordWalletScreen);
 
@@ -953,6 +978,12 @@ class LandlordTenantsListingScreenArguments {
   final KtList<User> tenants;
   LandlordTenantsListingScreenArguments(
       {this.key, this.property, this.tenants});
+}
+
+/// LandlordBankDetailsScreen arguments holder class
+class LandlordBankDetailsScreenArguments {
+  final Key key;
+  LandlordBankDetailsScreenArguments({this.key});
 }
 
 /// LandlordWithdrawalScreen arguments holder class

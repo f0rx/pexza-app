@@ -86,9 +86,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
         apartments: aprts.data.map((e) => e?.domain).toImmutableList(),
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -114,9 +112,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
         apartments: aprts.data.map((e) => e?.domain).toImmutableList(),
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -154,9 +150,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
         ));
       }
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -178,9 +172,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
 
       emit(state.copyWith(apartment: _apartment?.domain));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -220,9 +212,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
         ));
       }
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -253,9 +243,7 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
         ))),
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -290,7 +278,6 @@ class LandlordApartmentCubit extends Cubit<LandlordApartmentState> {
           left(LandlordFailure.timeout()),
         )));
         break;
-      case DioErrorType.DEFAULT:
       default:
         emit(state.copyWith(
             response: some(

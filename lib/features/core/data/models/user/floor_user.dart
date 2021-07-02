@@ -8,6 +8,7 @@ abstract class FloorUser implements _$FloorUser {
   @Entity(tableName: FloorUser.tableName)
   const factory FloorUser({
     @primaryKey int id,
+    @nullable @ColumnInfo(name: 'balance') int accountBalance,
     @nullable Role role,
     @nullable String token,
     @nullable @ColumnInfo(name: 'first_name') String firstName,
@@ -36,6 +37,7 @@ abstract class FloorUser implements _$FloorUser {
   /// Maps the Domain instance to a Data Transfer Object.
   factory FloorUser.fromDTO(UserDTO dto) => FloorUser(
         id: dto?.id,
+        accountBalance: dto.balance,
         role: dto?.role != null ? Role.valueOf(dto.role) : null,
         token: dto?.token,
         firstName: dto?.firstName,
@@ -62,6 +64,7 @@ abstract class FloorUser implements _$FloorUser {
   UserDTO get dto => UserDTO(
         id: id,
         token: token,
+        balance: accountBalance,
         role: role?.name,
         firstName: firstName,
         lastName: lastName,
@@ -84,6 +87,8 @@ abstract class FloorUser implements _$FloorUser {
   User get domain => User(
         id: UniqueId<int>.fromExternal(id),
         role: role,
+        accountBalance:
+            accountBalance != null ? BasicTextField(accountBalance) : null,
         firstName: firstName != null ? DisplayName(firstName) : null,
         lastName: lastName != null ? DisplayName(lastName) : null,
         email: email != null ? EmailAddress(email) : null,

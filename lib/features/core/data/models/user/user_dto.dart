@@ -24,6 +24,9 @@ abstract class UserDTO implements _$UserDTO {
         String role,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
+        int balance,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
         String token,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "first_name")
@@ -99,6 +102,7 @@ abstract class UserDTO implements _$UserDTO {
   User get domain => User(
         id: UniqueId<int>.fromExternal(id),
         role: role != null ? Role.valueOf(role) : null,
+        accountBalance: balance != null ? BasicTextField(balance) : null,
         firstName: firstName != null ? DisplayName(firstName) : null,
         lastName: lastName != null ? DisplayName(lastName) : null,
         email: email != null ? EmailAddress(email) : null,

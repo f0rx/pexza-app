@@ -27,6 +27,9 @@ class _$UserDTOTearOff {
           String role,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
+          int balance,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String token,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
@@ -82,6 +85,7 @@ class _$UserDTOTearOff {
     return _UserDTO(
       id: id,
       role: role,
+      balance: balance,
       token: token,
       firstName: firstName,
       lastName: lastName,
@@ -121,6 +125,9 @@ mixin _$UserDTO {
   @JsonKey(includeIfNull: false, defaultValue: '')
   @RoleConverter()
   String get role;
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  int get balance;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get token;
@@ -198,6 +205,9 @@ abstract class $UserDTOCopyWith<$Res> {
           String role,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
+          int balance,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
           String token,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
@@ -266,6 +276,7 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object role = freezed,
+    Object balance = freezed,
     Object token = freezed,
     Object firstName = freezed,
     Object lastName = freezed,
@@ -287,6 +298,7 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
       role: role == freezed ? _value.role : role as String,
+      balance: balance == freezed ? _value.balance : balance as int,
       token: token == freezed ? _value.token : token as String,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
       lastName: lastName == freezed ? _value.lastName : lastName as String,
@@ -340,6 +352,9 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, defaultValue: '')
       @RoleConverter()
           String role,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String token,
@@ -412,6 +427,7 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object role = freezed,
+    Object balance = freezed,
     Object token = freezed,
     Object firstName = freezed,
     Object lastName = freezed,
@@ -433,6 +449,7 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
     return _then(_UserDTO(
       id: id == freezed ? _value.id : id as int,
       role: role == freezed ? _value.role : role as String,
+      balance: balance == freezed ? _value.balance : balance as int,
       token: token == freezed ? _value.token : token as String,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
       lastName: lastName == freezed ? _value.lastName : lastName as String,
@@ -475,6 +492,9 @@ class _$_UserDTO extends _UserDTO {
       @JsonKey(includeIfNull: false, defaultValue: '')
       @RoleConverter()
           this.role,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          this.balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.token,
@@ -543,6 +563,10 @@ class _$_UserDTO extends _UserDTO {
   @JsonKey(includeIfNull: false, defaultValue: '')
   @RoleConverter()
   final String role;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  final int balance;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -620,7 +644,7 @@ class _$_UserDTO extends _UserDTO {
 
   @override
   String toString() {
-    return 'UserDTO(id: $id, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, apartment: $apartment)';
+    return 'UserDTO(id: $id, role: $role, balance: $balance, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, apartment: $apartment)';
   }
 
   @override
@@ -631,6 +655,9 @@ class _$_UserDTO extends _UserDTO {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.role, role) ||
                 const DeepCollectionEquality().equals(other.role, role)) &&
+            (identical(other.balance, balance) ||
+                const DeepCollectionEquality()
+                    .equals(other.balance, balance)) &&
             (identical(other.token, token) ||
                 const DeepCollectionEquality().equals(other.token, token)) &&
             (identical(other.firstName, firstName) ||
@@ -686,6 +713,7 @@ class _$_UserDTO extends _UserDTO {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(role) ^
+      const DeepCollectionEquality().hash(balance) ^
       const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(firstName) ^
       const DeepCollectionEquality().hash(lastName) ^
@@ -725,6 +753,9 @@ abstract class _UserDTO extends UserDTO {
       @JsonKey(includeIfNull: false, defaultValue: '')
       @RoleConverter()
           String role,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String token,
@@ -791,6 +822,10 @@ abstract class _UserDTO extends UserDTO {
   @JsonKey(includeIfNull: false, defaultValue: '')
   @RoleConverter()
   String get role;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  int get balance;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
