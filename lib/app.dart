@@ -45,18 +45,22 @@ class Pexza extends StatelessWidget {
               locale: DevicePreview.locale(context),
               builder: (context, child) => DevicePreview.appBuilder(
                 context,
-                ExtendedNavigator(
-                  navigatorKey: App.key,
-                  initialRoute: Routes.splashScreen,
-                  observers: [
-                    NavigationHistoryObserver(),
-                    if (env.flavor == BuildFlavor.prod)
-                      FirebaseAnalyticsObserver(
-                        analytics: getIt<FirebaseAnalytics>(),
-                      ),
-                  ],
-                  router: Router(),
-                  guards: [AuthGuard()],
+                ScreenUtilInit(
+                  allowFontScaling: true,
+                  designSize: Size(375, 812),
+                  builder: () => ExtendedNavigator(
+                    navigatorKey: App.key,
+                    initialRoute: Routes.splashScreen,
+                    observers: [
+                      NavigationHistoryObserver(),
+                      if (env.flavor == BuildFlavor.prod)
+                        FirebaseAnalyticsObserver(
+                          analytics: getIt<FirebaseAnalytics>(),
+                        ),
+                    ],
+                    router: Router(),
+                    guards: [AuthGuard()],
+                  ),
                 ),
               ),
             ),

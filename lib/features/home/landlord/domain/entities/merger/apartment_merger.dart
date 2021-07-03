@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
-import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 
 part 'apartment_merger.freezed.dart';
 

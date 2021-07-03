@@ -5,7 +5,6 @@ import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/manager/serializer/serializers.dart';
 import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
-import 'package:pexza/features/home/landlord/domain/entities/fields/index.dart';
 import 'package:pexza/utils/utils.dart';
 
 part 'landlord_apartment_data.g.dart';

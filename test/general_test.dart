@@ -107,4 +107,21 @@ void main() {
     // Logger().wtf(assignment.domain()?.apartment);
     // Logger().wtf(_dto.toJson());
   });
+
+  test('bank account test', () async {
+    String accountData = fixture("bank_account_data.json");
+    String verifyResponse = fixture("bank_account_verification.json");
+    String storeResponse = fixture("bank_account_store.json");
+
+    final _accountResult = AccountDetailDTO.fromJson(jsonDecode(accountData));
+
+    final _verifyResult =
+        AccountVerificationDTO.fromJson(jsonDecode(verifyResponse));
+
+    final _storeResult = BankAccountDTO.fromJson(jsonDecode(storeResponse));
+    // Logger().wtf(accountData);
+    Logger().w(_verifyResult.domain);
+    Logger().i(_storeResult.bankAccount.domain);
+    Logger().wtf(_accountResult.domain);
+  });
 }

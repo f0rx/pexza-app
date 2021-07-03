@@ -1,0 +1,9 @@
+{
+    "status": true,
+    "message": "Account number resolved",
+    "data": {
+        "account_number": "0057122413",
+        "account_name": "BRENDAN CHUKWUNONSO EJIKE",
+        "bank_id": 3
+    }
+}

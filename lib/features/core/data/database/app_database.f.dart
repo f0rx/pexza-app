@@ -18,6 +18,9 @@ class _$FloorUserTearOff {
       {@primaryKey
           int id,
       @nullable
+      @ColumnInfo(name: 'balance')
+          int accountBalance,
+      @nullable
           Role role,
       @nullable
           String token,
@@ -61,6 +64,7 @@ class _$FloorUserTearOff {
           DateTime deletedAt}) {
     return _FloorUser(
       id: id,
+      accountBalance: accountBalance,
       role: role,
       token: token,
       firstName: firstName,
@@ -90,6 +94,9 @@ const $FloorUser = _$FloorUserTearOff();
 mixin _$FloorUser {
   @primaryKey
   int get id;
+  @nullable
+  @ColumnInfo(name: 'balance')
+  int get accountBalance;
   @nullable
   Role get role;
   @nullable
@@ -145,6 +152,9 @@ abstract class $FloorUserCopyWith<$Res> {
       {@primaryKey
           int id,
       @nullable
+      @ColumnInfo(name: 'balance')
+          int accountBalance,
+      @nullable
           Role role,
       @nullable
           String token,
@@ -199,6 +209,7 @@ class _$FloorUserCopyWithImpl<$Res> implements $FloorUserCopyWith<$Res> {
   @override
   $Res call({
     Object id = freezed,
+    Object accountBalance = freezed,
     Object role = freezed,
     Object token = freezed,
     Object firstName = freezed,
@@ -219,6 +230,9 @@ class _$FloorUserCopyWithImpl<$Res> implements $FloorUserCopyWith<$Res> {
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
+      accountBalance: accountBalance == freezed
+          ? _value.accountBalance
+          : accountBalance as int,
       role: role == freezed ? _value.role : role as Role,
       token: token == freezed ? _value.token : token as String,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
@@ -259,6 +273,9 @@ abstract class _$FloorUserCopyWith<$Res> implements $FloorUserCopyWith<$Res> {
   $Res call(
       {@primaryKey
           int id,
+      @nullable
+      @ColumnInfo(name: 'balance')
+          int accountBalance,
       @nullable
           Role role,
       @nullable
@@ -315,6 +332,7 @@ class __$FloorUserCopyWithImpl<$Res> extends _$FloorUserCopyWithImpl<$Res>
   @override
   $Res call({
     Object id = freezed,
+    Object accountBalance = freezed,
     Object role = freezed,
     Object token = freezed,
     Object firstName = freezed,
@@ -335,6 +353,9 @@ class __$FloorUserCopyWithImpl<$Res> extends _$FloorUserCopyWithImpl<$Res>
   }) {
     return _then(_FloorUser(
       id: id == freezed ? _value.id : id as int,
+      accountBalance: accountBalance == freezed
+          ? _value.accountBalance
+          : accountBalance as int,
       role: role == freezed ? _value.role : role as Role,
       token: token == freezed ? _value.token : token as String,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
@@ -373,6 +394,9 @@ class _$_FloorUser extends _FloorUser {
   const _$_FloorUser(
       {@primaryKey
           this.id,
+      @nullable
+      @ColumnInfo(name: 'balance')
+          this.accountBalance,
       @nullable
           this.role,
       @nullable
@@ -420,6 +444,10 @@ class _$_FloorUser extends _FloorUser {
   @override
   @primaryKey
   final int id;
+  @override
+  @nullable
+  @ColumnInfo(name: 'balance')
+  final int accountBalance;
   @override
   @nullable
   final Role role;
@@ -482,7 +510,7 @@ class _$_FloorUser extends _FloorUser {
 
   @override
   String toString() {
-    return 'FloorUser(id: $id, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'FloorUser(id: $id, accountBalance: $accountBalance, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -491,6 +519,9 @@ class _$_FloorUser extends _FloorUser {
         (other is _FloorUser &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.accountBalance, accountBalance) ||
+                const DeepCollectionEquality()
+                    .equals(other.accountBalance, accountBalance)) &&
             (identical(other.role, role) ||
                 const DeepCollectionEquality().equals(other.role, role)) &&
             (identical(other.token, token) ||
@@ -544,6 +575,7 @@ class _$_FloorUser extends _FloorUser {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(accountBalance) ^
       const DeepCollectionEquality().hash(role) ^
       const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(firstName) ^
@@ -573,6 +605,9 @@ abstract class _FloorUser extends FloorUser {
   const factory _FloorUser(
       {@primaryKey
           int id,
+      @nullable
+      @ColumnInfo(name: 'balance')
+          int accountBalance,
       @nullable
           Role role,
       @nullable
@@ -619,6 +654,10 @@ abstract class _FloorUser extends FloorUser {
   @override
   @primaryKey
   int get id;
+  @override
+  @nullable
+  @ColumnInfo(name: 'balance')
+  int get accountBalance;
   @override
   @nullable
   Role get role;
