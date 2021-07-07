@@ -42,7 +42,7 @@ class Pexza extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: app?.themeData() ?? AppTheme.light().themeData(),
               darkTheme: AppTheme.dark().themeData(),
-              locale: DevicePreview.locale(context),
+              locale: env.flavor.fold(dev: () => DevicePreview.locale(context)),
               builder: (context, child) => DevicePreview.appBuilder(
                 context,
                 ScreenUtilInit(

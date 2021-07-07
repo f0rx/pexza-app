@@ -120,9 +120,7 @@ mixin SocialAuthMixin on AuthFacade {
           final authentication = await account.authentication;
 
           try {
-            log.w(
-                "Google authentication successful ==>ID TOKEN: ${authentication.idToken}\n"
-                "ACCESS TOKEN =====> ${authentication.accessToken}");
+            log.w("ACCESS TOKEN =====> ${authentication.accessToken}");
 
             // Fetch AuthCredentials
             final response =

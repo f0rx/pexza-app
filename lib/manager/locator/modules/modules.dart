@@ -34,7 +34,12 @@ abstract class Modules {
   FirebaseCrashlytics get firebaseCrashlytics => FirebaseCrashlytics.instance;
 
   @lazySingleton
-  GoogleSignIn get googleSignIn => GoogleSignIn();
+  GoogleSignIn get googleSignIn => GoogleSignIn(
+      // scopes: [
+      //   'email',
+      //   'https://www.googleapis.com/auth/contacts.readonly',
+      // ],
+      );
 
   @lazySingleton
   FacebookLogin get facebookLogin => FacebookLogin();
