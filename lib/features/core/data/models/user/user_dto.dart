@@ -23,7 +23,7 @@ abstract class UserDTO implements _$UserDTO {
     @RoleConverter()
         String role,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '')
+    @JsonKey(includeIfNull: false)
         int balance,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
