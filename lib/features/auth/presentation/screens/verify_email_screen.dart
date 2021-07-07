@@ -5,29 +5,22 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_portal/flutter_portal.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/auth/presentation/widgets/auth_widgets.dart';
-import 'package:pexza/features/core/domain/entities/fields/fields.dart';
-import 'package:pexza/features/core/domain/entities/user/user.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
-  final EmailAddress email;
-
   const VerifyEmailScreen({
     Key key,
-    this.email,
   }) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      lazy: true,
-      create: (_) => getIt<AuthCubit>()..init(User(email: email)),
-      child: BlocConsumer<AuthCubit, AuthState>(
+      create: (_) => getIt<AuthCubit>()..init(),
+      child: BlocListener<AuthCubit, AuthState>(
         listenWhen: (p, c) => p.isLoading && !c.isLoading,
         listener: (context, state) {
           context.read<AuthCubit>().state.authStatus.fold(
@@ -55,12 +48,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                 ),
               );
         },
-        builder: (context, state) => PortalEntry(
-          visible: context.watch<AuthCubit>().state.isLoading ||
-              context.watch<AuthWatcherCubit>().state.isLoading,
-          portal: App.waveLoadingBar,
-          child: this,
-        ),
+        child: this,
       ),
     );
   }
@@ -68,6 +56,10 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: Toolbar(
+        implyLeading: false,
+        leadingCondition: false,
+      ),
       body: Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -107,7 +99,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                         TextSpan(
                           text:
                               "Before getting started, could you verify your email "
-                              "address by clicking on the link we just emailed to ",
+                              "address by entering the 5 digits code we just emailed to ",
                         ),
                         TextSpan(
                           text: state.emailAddress.getOrEmpty,
@@ -151,11 +143,28 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
               //
               VerticalSpace(height: App.height * 0.05),
               //
-              AppElevatedButton(
-                onPressed: context.read<AuthCubit>().verify,
-                text: "Verify",
-                width: App.width,
-                height: App.shortest * 0.12,
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (c, s) => Visibility(
+                  visible: !s.isLoading,
+                  replacement: SizedBox(
+                    height: App.shortest * 0.12,
+                    width: double.infinity,
+                    child: Center(
+                      child: CircularProgressBar.adaptive(
+                        width: App.width * 0.07,
+                        height: App.width * 0.07,
+                        strokeWidth: 2.5,
+                        radius: 13,
+                      ),
+                    ),
+                  ),
+                  child: AppElevatedButton(
+                    onPressed: context.read<AuthCubit>().verify,
+                    text: "Verify",
+                    width: App.width,
+                    height: App.shortest * 0.12,
+                  ),
+                ),
               ),
               //
               VerticalSpace(height: App.height * 0.05),
@@ -168,7 +177,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                       text: " Resend it.",
                       recognizer: TapGestureRecognizer()
                         ..onTap =
-                            () => print("Resend verification code here!!"),
+                            context.read<AuthCubit>().resendVerificationEmail,
                       style: TextStyle(
                         color: App.theme.accentColor,
                         fontSize: 17.0,
@@ -186,7 +195,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                     text: "Not ${state.emailAddress.getOrEmpty}?",
                     children: [
                       TextSpan(
-                        text: " Log Out!",
+                        text: "\nLog Out!",
                         recognizer: TapGestureRecognizer()
                           ..onTap =
                               () => context.read<AuthWatcherCubit>().signOut,
@@ -197,6 +206,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                       ),
                     ],
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
               //

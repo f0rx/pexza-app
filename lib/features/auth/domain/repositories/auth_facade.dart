@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
@@ -19,6 +20,7 @@ abstract class AuthFacade extends Facade {
   Future<Either<AuthResponse, Unit>> login({
     @required EmailAddress email,
     @required Password password,
+    UserDTO registered,
   });
 
   Future<Either<AuthResponse, Unit>> createAccount({
@@ -45,17 +47,17 @@ abstract class AuthFacade extends Facade {
   //   Password newPassword,
   // });
 
-  Future<Either<AuthResponse, Unit>> googleAuthentication(
-      [Object pendingCredentials]);
+  Future<Either<AuthResponse, Unit>> resendVerificationEmail(
+    EmailAddress email,
+  );
 
-  Future<Either<AuthResponse, Unit>> facebookAuthentication(
-      [Object pendingCredentials]);
+  Future<Either<AuthResponse, Unit>> googleAuthentication();
 
-  Future<Either<AuthResponse, Unit>> twitterAuthentication(
-      [Object pendingCredentials]);
+  Future<Either<AuthResponse, Unit>> facebookAuthentication();
+
+  Future<Either<AuthResponse, Unit>> appleAuthentication();
 
   Future<Either<AuthResponse, Unit>> verifyEmailAddress({
-    EmailAddress email,
     EmailTokenField token,
   });
 
@@ -68,16 +70,20 @@ abstract class AuthFacade extends Facade {
     Password newPassword,
   });
 
-  Future<void> signOut();
+  Future<void> signOut([bool notify]);
 
   Future<Either<AuthResponse, bool>> checkHasGoodInternet() async {
-    try {
-      final _conn = await getIt<DataConnectionChecker>().hasConnection;
-      if (!_conn) throw AuthResponse.poorInternetConnection();
-      return right(_conn);
-    } on AuthResponse catch (e) {
-      return left(e);
-    }
+    final isConnected = (await getIt<Connectivity>().checkConnectivity()) !=
+        ConnectivityResult.none;
+
+    if (!isConnected) return left(AuthResponse.noInternetConnection());
+
+    final hasInternet = await getIt<DataConnectionChecker>().hasConnection;
+
+    if (isConnected && !hasInternet)
+      return left(AuthResponse.poorInternetConnection());
+
+    return right(isConnected && hasInternet);
   }
 
   Future<Either<AuthResponse, R>> handleFailure<R>({
@@ -111,7 +117,7 @@ abstract class AuthFacade extends Facade {
       case DioErrorType.SEND_TIMEOUT:
         _exception = AuthResponse.timeout();
         break;
-      case DioErrorType.DEFAULT:
+      // case DioErrorType.DEFAULT:
       default:
         env.flavor.fold(dev: () {
           log.wtf(dioError?.error);

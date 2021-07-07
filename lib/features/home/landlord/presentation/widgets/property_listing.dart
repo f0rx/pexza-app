@@ -75,7 +75,7 @@ Widget _gridView() {
 }
 
 Widget _listView() {
-  final double _itemHeight = App.longest * 0.09;
+  final double _itemHeight = App.longest * 0.1;
   final BorderRadius _radius = BorderRadius.circular(8.0);
   final int _count = ((App.longest * 0.4) / _itemHeight).ceil();
 
@@ -145,8 +145,10 @@ Widget _listView() {
                 },
                 child: Container(
                   height: _itemHeight,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: App.shortest * 0.05),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: App.shortest * 0.05,
+                    vertical: App.shortest * 0.015,
+                  ),
                   decoration: BoxDecoration(
                     color: state.properties
                         .get(i)
@@ -178,7 +180,7 @@ Widget _listView() {
                                     .headline4
                                     .copyWith(
                                       color: AppColors.accentColor,
-                                      fontSize: 17.0,
+                                      fontSize: 18.0.sp,
                                     ),
                                 maxLines: 1,
                               ),
@@ -206,7 +208,7 @@ Widget _listView() {
                                               Helpers.optionOf(0.5, 0.2),
                                             ),
                                       ),
-                                      fontSize: 14.0,
+                                      fontSize: 14.0.sp,
                                     ),
                                 maxLines: 2,
                               ),

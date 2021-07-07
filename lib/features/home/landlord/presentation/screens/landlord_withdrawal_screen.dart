@@ -9,7 +9,7 @@ import 'package:pexza/widgets/widgets.dart';
 /// A stateless widget to render LandlordWithdrawalScreen.
 class LandlordWithdrawalScreen extends StatelessWidget with AutoRouteWrapper {
   final FocusNode _amountFocus = FocusNode();
-  final FocusNode _accountNumberFoxus = FocusNode();
+  final FocusNode _accountNumberFocus = FocusNode();
 
   LandlordWithdrawalScreen({Key key}) : super(key: key);
 
@@ -35,91 +35,95 @@ class LandlordWithdrawalScreen extends StatelessWidget with AutoRouteWrapper {
               // autovalidateMode: s.validate
               //     ? AutovalidateMode.always
               //     : AutovalidateMode.disabled,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: TextFormField(
-                      maxLines: 1,
-                      enableSuggestions: true,
-                      autocorrect: false,
-                      cursorColor: Theme.of(context).accentColor,
-                      keyboardType: TextInputType.number,
-                      textCapitalization: TextCapitalization.none,
-                      textInputAction: TextInputAction.next,
-                      focusNode: _amountFocus,
-                      decoration: const InputDecoration(labelText: "Amount"),
-                      onChanged: (val) {},
-                      validator: (value) => null,
-                      onFieldSubmitted: (_) => FocusScope.of(context)
-                          .requestFocus(_accountNumberFoxus),
-                    ),
-                  ),
-                  //
-                  VerticalSpace(height: App.shortest * 0.04),
-                  //
-                  DropdownFieldWidget(
-                    hint: "-- Select Bank --",
-                    items: [
-                      'Guarantee Trust Bank',
-                      'Access Bank (Diamond)',
-                      'Kuda Microfinance Bank',
-                      'Wema Bank',
-                      'First Bank',
-                    ]
-                        .map<DropdownMenuItem<String>>(
-                          (item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: AutoSizeText(
-                              "$item",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                            ),
-                          ),
-                        )
-                        .toList(),
-                    selected: 'Guarantee Trust Bank',
-                    onChanged: (val) {},
-                  ),
-                  //
-                  VerticalSpace(height: App.shortest * 0.04),
-                  //
-                  Flexible(
-                    child: TextFormField(
-                      maxLines: 1,
-                      enableSuggestions: true,
-                      autocorrect: false,
-                      cursorColor: Theme.of(context).accentColor,
-                      keyboardType: TextInputType.number,
-                      textCapitalization: TextCapitalization.none,
-                      textInputAction: TextInputAction.done,
-                      focusNode: _accountNumberFoxus,
-                      decoration:
-                          const InputDecoration(labelText: "Account Number"),
-                      onChanged: (val) {},
-                      validator: (value) => null,
-                      onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
-                    ),
-                  ),
-                  //
-                  VerticalSpace(height: App.shortest * 0.15),
-                  //
-                  AppElevatedButton(
-                    onPressed: () => navigator.push(
-                      Routes.successfulScreen,
-                      arguments: SuccessfulScreenArguments(
-                        image: AppAssets.posWithdrawal,
-                        title: 'Withdrawal Successful',
-                        description: "Your withdrawal is successful. "
-                            "\nPlease check your email for "
-                            "confirmation and receipt.",
-                        onPressed: () => navigator.pop(),
+              child: AutofillGroup(
+                onDisposeAction: AutofillContextAction.commit,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: TextFormField(
+                        maxLines: 1,
+                        enableSuggestions: true,
+                        autocorrect: false,
+                        cursorColor: Theme.of(context).accentColor,
+                        keyboardType: TextInputType.number,
+                        textCapitalization: TextCapitalization.none,
+                        textInputAction: TextInputAction.next,
+                        focusNode: _amountFocus,
+                        decoration: const InputDecoration(labelText: "Amount"),
+                        onChanged: (val) {},
+                        validator: (value) => null,
+                        onFieldSubmitted: (_) => FocusScope.of(context)
+                            .requestFocus(_accountNumberFocus),
                       ),
                     ),
-                    text: 'Withdraw',
-                  ),
-                ],
+                    //
+                    VerticalSpace(height: App.shortest * 0.04),
+                    //
+                    DropdownFieldWidget(
+                      hint: "-- Select Bank --",
+                      items: [
+                        'Guarantee Trust Bank',
+                        'Access Bank (Diamond)',
+                        'Kuda Microfinance Bank',
+                        'Wema Bank',
+                        'First Bank',
+                      ]
+                          .map<DropdownMenuItem<String>>(
+                            (item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: AutoSizeText(
+                                "$item",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      selected: 'Guarantee Trust Bank',
+                      onChanged: (val) {},
+                    ),
+                    //
+                    VerticalSpace(height: App.shortest * 0.04),
+                    //
+                    Flexible(
+                      child: TextFormField(
+                        maxLines: 1,
+                        enableSuggestions: true,
+                        autocorrect: false,
+                        cursorColor: Theme.of(context).accentColor,
+                        keyboardType: TextInputType.number,
+                        textCapitalization: TextCapitalization.none,
+                        textInputAction: TextInputAction.done,
+                        focusNode: _accountNumberFocus,
+                        decoration:
+                            const InputDecoration(labelText: "Account Number"),
+                        onChanged: (val) {},
+                        validator: (value) => null,
+                        onFieldSubmitted: (_) =>
+                            FocusScope.of(context).unfocus(),
+                      ),
+                    ),
+                    //
+                    VerticalSpace(height: App.shortest * 0.15),
+                    //
+                    AppElevatedButton(
+                      onPressed: () => navigator.push(
+                        Routes.successfulScreen,
+                        arguments: SuccessfulScreenArguments(
+                          image: AppAssets.posWithdrawal,
+                          title: 'Withdrawal Successful',
+                          description: "Your withdrawal is successful. "
+                              "\nPlease check your email for "
+                              "confirmation and receipt.",
+                          onPressed: () => navigator.pop(),
+                        ),
+                      ),
+                      text: 'Withdraw',
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

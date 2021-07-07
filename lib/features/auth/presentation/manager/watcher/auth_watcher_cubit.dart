@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/models/auth_response.dart';
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
-import 'package:pexza/utils/utils.dart';
 
 part 'auth_watcher_state.dart';
 part 'auth_watcher_cubit.freezed.dart';
@@ -21,13 +20,17 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
 
   AuthWatcherCubit(this._facade) : super(AuthWatcherState.initial());
 
+  void toggleLoading([bool isLoading]) => emit(state.copyWith(
+        isLoading: isLoading ?? !state.isLoading,
+      ));
+
   Future<User> get currentUser async {
     final user = await _facade.currentUser;
     return user?.getOrElse(() => null)?.getOrElse(() => null);
   }
 
   void listenToAuthChanges(Task actions) async {
-    emit(state.copyWith(isLoading: true));
+    toggleLoading();
     // Get current user
     final user = await currentUser;
 
@@ -37,19 +40,23 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
     _authStateChanges ??= _facade.onAuthStateChanged.listen(
       (data) {
         final User _user = data?.getOrElse(() => null)?.getOrElse(() => null);
+
         emit(state.copyWith(
           isAuthenticated: _user != null,
           user: _user,
         ));
 
         actions?.call(data);
+
+        toggleLoading(false);
       },
     );
 
     await _facade.sink();
 
+    toggleLoading();
+
     emit(state.copyWith(
-      isLoading: false,
       isAuthenticated: user != null,
       user: user,
     ));
@@ -59,14 +66,15 @@ class AuthWatcherCubit extends Cubit<AuthWatcherState> {
       await _authStateChanges?.cancel();
 
   Future<void> get signOut async {
-    emit(state.copyWith(isLoading: true));
+    toggleLoading();
 
     await _facade.signOut();
 
     final user = await currentUser;
 
+    toggleLoading();
+
     emit(state.copyWith(
-      isLoading: false,
       isAuthenticated: user != null,
       user: user,
     ));

@@ -60,18 +60,13 @@ class SplashScreen extends StatelessWidget {
                         (_) => null,
                         (_) => BlocProvider.of<AuthWatcherCubit>(App.context)
                             .listenToAuthChanges(
-                          (either) => either.fold(
+                          (either) => either?.fold(
                             (failure) => failure?.fold(
                               orElse: null,
-                              is1101: (email) {
-                                return navigator.pushAndRemoveUntil(
-                                  Routes.verifyEmailScreen,
-                                  (route) => false,
-                                  arguments: VerifyEmailScreenArguments(
-                                    email: EmailAddress(email ?? ""),
-                                  ),
-                                );
-                              },
+                              is1101: () => navigator.pushAndRemoveUntil(
+                                Routes.verifyEmailScreen,
+                                (route) => false,
+                              ),
                             ),
                             (option) => option.fold(
                               () => navigator.pushAndRemoveUntil(

@@ -18,7 +18,6 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      lazy: true,
       create: (_) => getIt<AuthCubit>(),
       child: BlocConsumer<AuthCubit, AuthState>(
         listenWhen: (p, c) => p.isLoading && !c.isLoading,
@@ -60,6 +59,7 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: Toolbar(),
       body: Container(
         child: Center(
           child: SingleChildScrollView(
@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
                   child: SafeArea(
                     child: AutoSizeText(
                       "Login",
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 30.0,
@@ -87,12 +87,17 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
                   ),
                 ),
                 //
-                VerticalSpace(height: App.longest * 0.05),
+                VerticalSpace(height: App.longest * 0.04),
+                //
+                OAuthWidget(apple: true),
+                //
+                VerticalSpace(height: App.longest * 0.02),
                 //
                 Flexible(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: Helpers.descriptionPadding),
+                      horizontal: Helpers.descriptionPadding,
+                    ),
                     child: AutoSizeText(
                       "Please, enter your email and password to log in to your dashboard.",
                       textAlign: TextAlign.center,
@@ -159,7 +164,6 @@ class _LoginForm extends StatelessWidget {
             VerticalSpace(height: App.longest * .04),
             //
             AppElevatedButton(
-              // TODO: Replace with actual implementation
               onPressed: context.read<AuthCubit>().login,
               text: "Login",
               width: App.width,
@@ -175,7 +179,7 @@ class _LoginForm extends StatelessWidget {
                   TextSpan(
                     text: " Sign up.",
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => navigator.pop(),
+                      ..onTap = () => navigator.replace(Routes.signupScreen),
                     style: TextStyle(
                       color: App.theme.accentColor,
                       fontSize: 17.0,

@@ -17,6 +17,7 @@ class _$UserTearOff {
   _User call(
       {@nullable UniqueId<int> id,
       @nullable Role role,
+      @nullable BasicTextField<int> accountBalance,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
@@ -36,6 +37,7 @@ class _$UserTearOff {
     return _User(
       id: id,
       role: role,
+      accountBalance: accountBalance,
       firstName: firstName,
       lastName: lastName,
       email: email,
@@ -66,6 +68,8 @@ mixin _$User {
   UniqueId<int> get id;
   @nullable
   Role get role;
+  @nullable
+  BasicTextField<int> get accountBalance;
   @nullable
   DisplayName get firstName;
   @nullable
@@ -110,6 +114,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {@nullable UniqueId<int> id,
       @nullable Role role,
+      @nullable BasicTextField<int> accountBalance,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
@@ -142,6 +147,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object role = freezed,
+    Object accountBalance = freezed,
     Object firstName = freezed,
     Object lastName = freezed,
     Object email = freezed,
@@ -162,6 +168,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId<int>,
       role: role == freezed ? _value.role : role as Role,
+      accountBalance: accountBalance == freezed
+          ? _value.accountBalance
+          : accountBalance as BasicTextField<int>,
       firstName:
           firstName == freezed ? _value.firstName : firstName as DisplayName,
       lastName: lastName == freezed ? _value.lastName : lastName as DisplayName,
@@ -215,6 +224,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {@nullable UniqueId<int> id,
       @nullable Role role,
+      @nullable BasicTextField<int> accountBalance,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
@@ -249,6 +259,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object role = freezed,
+    Object accountBalance = freezed,
     Object firstName = freezed,
     Object lastName = freezed,
     Object email = freezed,
@@ -269,6 +280,9 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     return _then(_User(
       id: id == freezed ? _value.id : id as UniqueId<int>,
       role: role == freezed ? _value.role : role as Role,
+      accountBalance: accountBalance == freezed
+          ? _value.accountBalance
+          : accountBalance as BasicTextField<int>,
       firstName:
           firstName == freezed ? _value.firstName : firstName as DisplayName,
       lastName: lastName == freezed ? _value.lastName : lastName as DisplayName,
@@ -309,6 +323,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   const _$_User(
       {@nullable this.id,
       @nullable this.role,
+      @nullable this.accountBalance,
       @nullable this.firstName,
       @nullable this.lastName,
       @nullable this.email,
@@ -333,6 +348,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   @override
   @nullable
   final Role role;
+  @override
+  @nullable
+  final BasicTextField<int> accountBalance;
   @override
   @nullable
   final DisplayName firstName;
@@ -384,7 +402,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, apartment: $apartment, phone: $phone, password: $password, photo: $photo, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'User(id: $id, role: $role, accountBalance: $accountBalance, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, apartment: $apartment, phone: $phone, password: $password, photo: $photo, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -394,6 +412,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'User'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('role', role))
+      ..add(DiagnosticsProperty('accountBalance', accountBalance))
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
       ..add(DiagnosticsProperty('email', email))
@@ -422,6 +441,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.role, role) ||
                 const DeepCollectionEquality().equals(other.role, role)) &&
+            (identical(other.accountBalance, accountBalance) ||
+                const DeepCollectionEquality()
+                    .equals(other.accountBalance, accountBalance)) &&
             (identical(other.firstName, firstName) ||
                 const DeepCollectionEquality()
                     .equals(other.firstName, firstName)) &&
@@ -475,6 +497,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(role) ^
+      const DeepCollectionEquality().hash(accountBalance) ^
       const DeepCollectionEquality().hash(firstName) ^
       const DeepCollectionEquality().hash(lastName) ^
       const DeepCollectionEquality().hash(email) ^
@@ -503,6 +526,7 @@ abstract class _User extends User {
   const factory _User(
       {@nullable UniqueId<int> id,
       @nullable Role role,
+      @nullable BasicTextField<int> accountBalance,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
       @nullable EmailAddress email,
@@ -526,6 +550,9 @@ abstract class _User extends User {
   @override
   @nullable
   Role get role;
+  @override
+  @nullable
+  BasicTextField<int> get accountBalance;
   @override
   @nullable
   DisplayName get firstName;

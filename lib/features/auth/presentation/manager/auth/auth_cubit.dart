@@ -5,8 +5,11 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
 import 'package:pexza/features/auth/domain/domain.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
-import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/auth/data/models/auth_response.dart';
+import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/core/data/database/app_database.dart';
+import 'package:pexza/features/core/domain/entities/fields/fields.dart';
+import 'package:pexza/features/core/domain/entities/user/user.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
 
@@ -19,15 +22,19 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit(this._auth) : super(AuthState.initial());
 
-  void init(User user) {
+  void init([User user]) async {
+    var dao = getIt<AppDatabase>().userDAO;
+
+    user = user ?? (await dao.last())?.domain;
+
     emit(state.copyWith(
-      firstName: user.firstName ?? state.firstName,
-      lastName: user.lastName ?? state.lastName,
-      emailAddress: user.email ?? state.emailAddress,
-      phone: user.phone ?? state.phone,
-      gender: user.gender ?? state.gender,
-      dateOfBirth: user.dateOfBirth ?? state.dateOfBirth,
-      password: user.password ?? state.password,
+      firstName: user?.firstName ?? state.firstName,
+      lastName: user?.lastName ?? state.lastName,
+      emailAddress: user?.email ?? state.emailAddress,
+      phone: user?.phone ?? state.phone,
+      gender: user?.gender ?? state.gender,
+      dateOfBirth: user?.dateOfBirth ?? state.dateOfBirth,
+      password: user?.password ?? state.password,
     ));
   }
 
@@ -86,17 +93,13 @@ class AuthCubit extends Cubit<AuthState> {
 
   void onTokenSubmitted(String value) async {
     // Update the state
-    emit(state.copyWith(
-      emailToken: EmailTokenField(value),
-    ));
+    emit(state.copyWith(emailToken: EmailTokenField(value)));
 
     // Perform token submit action
     await verify();
   }
 
-  void countryChanged(Country value) => emit(state.copyWith(
-        region: value,
-      ));
+  void countryChanged(Country value) => emit(state.copyWith(region: value));
 
   void togglePasswordVisibility() => emit(state.copyWith(
         passwordHidden: !state.passwordHidden,
@@ -139,10 +142,8 @@ class AuthCubit extends Cubit<AuthState> {
         password: password,
       );
 
-      // emit auth_status whether authentication fails or not
-      emit(state.copyWith(
-        authStatus: optionOf(failureOrUnit),
-      ));
+      // emit auth_status whether registraion failed or not
+      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
     }
 
     toggleLoadingIndicator();
@@ -168,16 +169,16 @@ class AuthCubit extends Cubit<AuthState> {
         password: password,
       );
 
-      // emit auth_status whether authentication fails or not
-      emit(state.copyWith(
-        authStatus: optionOf(failureOrUnit),
-      ));
+      // emit auth_status whether authentication failed or not
+      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
     }
 
     toggleLoadingIndicator();
   }
 
   void sendPasswordResetLink() async {
+    emit(state.copyWith(authStatus: none()));
+
     toggleLoadingIndicator();
 
     EmailAddress email = state.emailAddress;
@@ -216,16 +217,66 @@ class AuthCubit extends Cubit<AuthState> {
     ));
 
     if (emailAddress.isValid && token.isValid) {
-      failureOrUnit = await _auth.verifyEmailAddress(
-        email: emailAddress,
-        token: token,
-      );
+      failureOrUnit = await _auth.verifyEmailAddress(token: token);
+
+      // emit auth_status whether verification failed or not
+      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+    }
+
+    toggleLoadingIndicator();
+  }
+
+  void resendVerificationEmail() async {
+    toggleLoadingIndicator();
+
+    EmailAddress emailAddress = state.emailAddress;
+    Either<AuthResponse, Unit> failureOrUnit;
+
+    if (emailAddress.isValid) {
+      failureOrUnit = await _auth.resendVerificationEmail(emailAddress);
 
       // emit auth_status whether authentication fails or not
-      emit(state.copyWith(
-        authStatus: optionOf(failureOrUnit),
-      ));
+      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
     }
+
+    toggleLoadingIndicator();
+  }
+
+  void googleAuthentication() async {
+    toggleLoadingIndicator();
+
+    Either<AuthResponse, Unit> failureOrUnit =
+        await _auth.googleAuthentication();
+
+    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+
+    toggleLoadingIndicator();
+  }
+
+  void facebookAuthentication() async {
+    // Pexza DEV.
+    // Email --- sandra_eoxnswa_martinazzison@tfbnw.net
+    // Password --- 7$9j3XW7os&NU@G2#^!6
+    // Pexza Prod
+    // Email --- jackson_vafscqg_riceman@tfbnw.net
+    // Password --- 7$9j3XW7os&NU@G2#^!6=
+    toggleLoadingIndicator();
+
+    Either<AuthResponse, Unit> failureOrUnit =
+        await _auth.facebookAuthentication();
+
+    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+
+    toggleLoadingIndicator();
+  }
+
+  void appleAuthentication() async {
+    toggleLoadingIndicator();
+
+    Either<AuthResponse, Unit> failureOrUnit =
+        await _auth.appleAuthentication();
+
+    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
 
     toggleLoadingIndicator();
   }

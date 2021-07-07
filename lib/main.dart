@@ -25,6 +25,8 @@ void main() async {
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
 
+  // epicazo@athenaworks.io
+
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = getIt<FirebaseCrashlytics>().recordFlutterError;
 

@@ -1,5 +1,6 @@
 export 'error_codes.dart';
-export 'models/user_dto/user_dto.dart';
+export 'models/user/user_dto.dart';
+export 'models/user/registered/registered_user_dto.dart';
 export 'models/server_field_errors/server_field_errors.dart';
 export 'endpoints.dart';
 export 'models/pagination/meta_field.dart';
@@ -12,3 +13,4 @@ export 'models/assignment/index.dart';
 export 'models/maintenance_service/index.dart';
 export 'models/maintenance/index.dart';
 export 'models/base_apartment/base_apartment_dto.dart';
+export 'database/app_database.dart';

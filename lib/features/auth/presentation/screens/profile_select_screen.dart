@@ -112,8 +112,8 @@ class ProfileSelectScreen extends StatelessWidget with AutoRouteWrapper {
     return InkWell(
       splashColor: Colors.black12,
       onTap: () {
-        onPressed();
-        navigator.popAndPush(Routes.signupScreen);
+        onPressed?.call();
+        navigator.pushSignupScreen();
       },
       child: DottedBorder(
         dashPattern: [6, 3, 2, 3],

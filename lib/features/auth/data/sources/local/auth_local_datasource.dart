@@ -2,14 +2,16 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pexza/features/auth/data/models/token_response/token_response.dart';
 import 'package:pexza/features/auth/data/repositories/access_token_manager.dart';
-import 'package:pexza/features/core/core.dart';
+import 'package:pexza/features/core/data/data.dart';
+import 'package:pexza/features/core/data/database/app_database.dart';
 import 'package:pexza/utils/utils.dart';
 
 @singleton
 class AuthLocalDatasource {
   final AccessTokenManager _tokenManager;
+  final AppDatabase _database;
 
-  AuthLocalDatasource(this._tokenManager);
+  AuthLocalDatasource(this._tokenManager, this._database);
 
   Future<void> cacheAuthenticatedUser(
     UserDTO user, {
@@ -18,27 +20,30 @@ class AuthLocalDatasource {
     // Cache Access Token, Token Type & Expiry date
     if (!loginResponse.isNull) cacheUserAccessToken(loginResponse);
 
-    final userBox = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
+    final dao = _database.userDAO;
 
-    // Cache User Info
-    return await userBox.put(Keys.HIVE_USER_KEY, user);
+    await dao.insert(FloorUser.fromDTO(user));
   }
 
-  Option<UserDTO> getCachedUserInfo() {
-    final userBox = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
+  Future<Option<UserDTO>> getCachedUserInfo() async {
+    final dao = _database.userDAO;
 
-    final _result = userBox.get(Keys.HIVE_USER_KEY);
+    final _result = await dao.last();
 
-    return optionOf(_result);
+    return optionOf(_result?.dto);
   }
 
   void cacheUserAccessToken(Map<String, dynamic> response) =>
       _tokenManager.save(responseToken: TokenResponse.fromJson(response));
 
-  void signOut({bool clearAccessToken = true, bool clearUser = true}) {
+  Future<void> signOut({
+    bool clearUser = true,
+    bool clearAccessToken = true,
+  }) async {
     if (clearUser) {
-      final box = App.box<UserDTO>(Keys.HIVE_BOX_USER_DTO_KEY);
-      box.delete(Keys.HIVE_USER_KEY);
+      final dao = _database.userDAO;
+      final users = await dao.all();
+      await dao.deleteAll(users);
     }
 
     if (clearAccessToken) {

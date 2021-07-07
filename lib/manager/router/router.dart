@@ -18,6 +18,7 @@ import 'package:pexza/features/home/landlord/presentation/screens/home_screen.da
 import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_apartment_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_bank_details_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_wallet_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_withdrawal_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
@@ -190,6 +191,11 @@ import 'package:pexza/manager/router/export.dart';
     ),
     AdaptiveRoute(
       page: LandlordTenantsListingScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: LandlordBankDetailsScreen,
       guards: [AuthGuard],
       maintainState: true,
     ),

@@ -1,6 +1,7 @@
 export 'package:pexza/config/env.dart';
 export 'package:pexza/config/secrets.dart';
 export 'package:pexza/manager/router/export.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
 
 export 'app_icons_icons.dart';
 export 'assets.dart';

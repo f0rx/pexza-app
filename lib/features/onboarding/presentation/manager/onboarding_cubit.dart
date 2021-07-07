@@ -30,7 +30,6 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
     // Open all Hive Boxes
     await HiveBoxes.box();
-    await HiveBoxes.userDTOBox();
     await HiveBoxes.accessTokenBox();
 
     _connectivitySubscription?.cancel();

@@ -1,8 +1,9 @@
-import 'package:pexza/features/core/domain/entities/fields/fields.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/domain/entities/unique_id.dart';
 
 abstract class BaseUser {
   UniqueId get id;
+  BasicTextField<int> get accountBalance;
   DisplayName get firstName;
   DisplayName get lastName;
   EmailAddress get email;

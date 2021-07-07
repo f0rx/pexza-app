@@ -4,3 +4,4 @@ export 'landlord_property/property_color.dart';
 export 'landlord_apartment/landlord_apartment.dart';
 export 'fields/index.dart';
 export 'merger/apartment_merger.dart';
+export 'withdrawal/index.dart';

@@ -77,7 +77,7 @@ class _SignUpForm extends StatelessWidget {
                     TextSpan(
                       text: " Login.",
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => navigator.pushLoginScreen(),
+                        ..onTap = () => navigator.replace(Routes.loginScreen),
                       style: TextStyle(
                         color: App.theme.accentColor,
                         fontSize: 17.0,

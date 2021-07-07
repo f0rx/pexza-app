@@ -32,6 +32,7 @@ abstract class BottomAlertDialog {
             style: Theme.of(context).textTheme.bodyText2,
             softWrap: true,
             overflow: TextOverflow.ellipsis,
+            maxLines: 4,
           ),
       borderRadius: 8.0,
       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
