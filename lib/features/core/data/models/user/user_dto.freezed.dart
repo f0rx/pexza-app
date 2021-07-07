@@ -30,9 +30,6 @@ class _$UserDTOTearOff {
           int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
-          int balance,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
           String token,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
@@ -133,9 +130,6 @@ mixin _$UserDTO {
   int get balance;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
-  int get balance;
-  @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
   String get token;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
@@ -211,9 +205,6 @@ abstract class $UserDTOCopyWith<$Res> {
           String role,
       @nullable
       @JsonKey(includeIfNull: false)
-          int balance,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
           int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -366,9 +357,6 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
           int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
-          int balance,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
           String token,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
@@ -509,9 +497,6 @@ class _$_UserDTO extends _UserDTO {
           this.balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
-          this.balance,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
           this.token,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
@@ -581,10 +566,6 @@ class _$_UserDTO extends _UserDTO {
   @override
   @nullable
   @JsonKey(includeIfNull: false)
-  final int balance;
-  @override
-  @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
   final int balance;
   @override
   @nullable
@@ -777,9 +758,6 @@ abstract class _UserDTO extends UserDTO {
           int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
-          int balance,
-      @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
           String token,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '', name: 'first_name')
@@ -847,10 +825,6 @@ abstract class _UserDTO extends UserDTO {
   @override
   @nullable
   @JsonKey(includeIfNull: false)
-  int get balance;
-  @override
-  @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
   int get balance;
   @override
   @nullable
