@@ -13,6 +13,7 @@ part 'auth_response.g.dart';
 @immutable
 abstract class AuthResponse implements _$AuthResponse, Response {
   static const int UNVERIFIED = 1101;
+  static const int INVALID_RECORD = 1103;
 
   const AuthResponse._();
 
@@ -39,15 +40,18 @@ abstract class AuthResponse implements _$AuthResponse, Response {
   }) = _AuthResponse;
 
   T fold<T>({
-    T Function() is404,
+    T Function() is401,
     T Function() is1101,
+    T Function() is1103,
     @required T Function() orElse,
   }) {
     switch (code) {
       case 401:
-        return is404?.call() ?? orElse?.call();
+        return is401?.call() ?? orElse?.call();
       case AuthResponse.UNVERIFIED:
         return is1101?.call() ?? orElse?.call();
+      case AuthResponse.INVALID_RECORD:
+        return is1103?.call() ?? orElse?.call();
       default:
         return (T is Widget) ? SizedBox() as T : orElse?.call();
     }

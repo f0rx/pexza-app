@@ -517,6 +517,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_login_facebook:
+    dependency: "direct main"
+    description:
+      name: flutter_login_facebook
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.5.0"
   flutter_multi_formatter:
     dependency: "direct main"
     description:
@@ -769,6 +776,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.8.0"
+  list_ext:
+    dependency: transitive
+    description:
+      name: list_ext
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   logger:
     dependency: "direct dev"
     description:

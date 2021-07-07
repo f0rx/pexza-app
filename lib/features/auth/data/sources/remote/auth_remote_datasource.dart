@@ -145,6 +145,27 @@ class AuthRemoteDatasource {
     );
   }
 
+  Future<Response<dynamic>> signInWithGoogle(String token) async {
+    // Generate Form Data for request
+    final FormData data = FormData.fromMap({"token": token});
+
+    return _dio.post(EndPoints.GOOGLE_SIGNIN, data: data);
+  }
+
+  Future<Response<dynamic>> signInWithFacebook(String token) async {
+    // Generate Form Data for request
+    final FormData data = FormData.fromMap({"token": token});
+
+    return _dio.post(EndPoints.FACEBOOK_SIGNIN, data: data);
+  }
+
+  Future<Response<dynamic>> signInWithApple(String token) async {
+    // Generate Form Data for request
+    final FormData data = FormData.fromMap({"token": token});
+
+    return _dio.post(EndPoints.APPLE_SIGNIN, data: data);
+  }
+
   Future<dynamic> signOut() async {
     return await _dio.post(EndPoints.LOGOUT);
   }

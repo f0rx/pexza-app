@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
                   child: SafeArea(
                     child: AutoSizeText(
                       "Login",
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 30.0,
@@ -87,12 +87,17 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
                   ),
                 ),
                 //
-                VerticalSpace(height: App.longest * 0.05),
+                VerticalSpace(height: App.longest * 0.04),
+                //
+                OAuthWidget(apple: true),
+                //
+                VerticalSpace(height: App.longest * 0.02),
                 //
                 Flexible(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: Helpers.descriptionPadding),
+                      horizontal: Helpers.descriptionPadding,
+                    ),
                     child: AutoSizeText(
                       "Please, enter your email and password to log in to your dashboard.",
                       textAlign: TextAlign.center,
