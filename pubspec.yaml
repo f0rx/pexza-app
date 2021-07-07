@@ -37,6 +37,10 @@ dependencies:
   firebase_crashlytics: "^0.4.0+1"
   # Google services & Authentication
   google_sign_in: ^4.5.9
+  # Flutter bridge to Sign in with Apple.
+  # Supports login via an Apple ID, as well as
+  # retrieving credentials saved in the user's keychain.
+  sign_in_with_apple: ^2.5.4
   # Customize App font
   google_fonts: ^1.1.1
   # For Facebook authentication
