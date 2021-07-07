@@ -27,6 +27,9 @@ abstract class UserDTO implements _$UserDTO {
         int balance,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
+        int balance,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
         String token,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: "first_name")
