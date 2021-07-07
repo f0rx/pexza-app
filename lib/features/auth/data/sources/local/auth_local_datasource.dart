@@ -22,15 +22,6 @@ class AuthLocalDatasource {
 
     final dao = _database.userDAO;
 
-    // final _all = await dao.all();
-
-    // _all.forEach((el) {
-    //   log.w('User id ====> ${el.id}');
-    //   log.w('User pass ====> ${el.email}');
-    //   log.w('User pass ====> ${el.password}');
-    // });
-
-    // await dao.updateOrInsert(FloorUser.fromDTO(user));
     await dao.insert(FloorUser.fromDTO(user));
   }
 

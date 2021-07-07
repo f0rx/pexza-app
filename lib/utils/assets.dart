@@ -85,12 +85,21 @@ mixin AppAssets {
     fit: BoxFit.contain,
   );
 
-  static SvgPicture facebook = SvgPicture.asset(
-    '$AUTH_SVG_DIR/facebook.svg',
-    height: 23,
-    width: 23,
-    fit: BoxFit.contain,
-  );
+  static SvgPicture facebook([Color color]) => SvgPicture.asset(
+        '$AUTH_SVG_DIR/facebook.svg',
+        height: 23,
+        width: 23,
+        color: color,
+        fit: BoxFit.contain,
+      );
+
+  static SvgPicture apple([Color color]) => SvgPicture.asset(
+        '$AUTH_SVG_DIR/apple.svg',
+        height: 22,
+        width: 22,
+        color: color,
+        fit: BoxFit.contain,
+      );
 
   static SvgPicture lock = SvgPicture.asset(
     '$AUTH_SVG_DIR/lock.svg',

@@ -5,6 +5,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:pexza/features/core/data/database/app_database.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -34,6 +35,9 @@ abstract class Modules {
 
   @lazySingleton
   GoogleSignIn get googleSignIn => GoogleSignIn();
+
+  @lazySingleton
+  FacebookLogin get facebookLogin => FacebookLogin();
 
   @preResolve
   Future<PaystackPlugin> get paystackInit =>

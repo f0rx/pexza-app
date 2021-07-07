@@ -10,7 +10,7 @@ _$_UserDTO _$_$_UserDTOFromJson(Map<String, dynamic> json) {
   return _$_UserDTO(
     id: json['id'] as int,
     role: json['role'] as String ?? '',
-    balance: json['balance'] as int ?? '',
+    balance: json['balance'] as int,
     token: json['token'] as String ?? '',
     firstName: json['first_name'] as String ?? '',
     lastName: json['last_name'] as String ?? '',

@@ -7,9 +7,7 @@ import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({
-    Key key,
-  }) : super(key: key);
+  const CardWidget({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

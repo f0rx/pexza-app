@@ -6,3 +6,5 @@ export 'firstname_field.dart';
 export 'lastname_field.dart';
 export 'email_address_field.dart';
 export 'gender_field.dart';
+export 'date_of_birth_field.dart';
+export 'oauth_widgets.dart';

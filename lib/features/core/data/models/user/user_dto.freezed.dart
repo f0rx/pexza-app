@@ -26,7 +26,7 @@ class _$UserDTOTearOff {
       @RoleConverter()
           String role,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -126,7 +126,7 @@ mixin _$UserDTO {
   @RoleConverter()
   String get role;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   int get balance;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -204,7 +204,7 @@ abstract class $UserDTOCopyWith<$Res> {
       @RoleConverter()
           String role,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -353,7 +353,7 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       @RoleConverter()
           String role,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -493,7 +493,7 @@ class _$_UserDTO extends _UserDTO {
       @RoleConverter()
           this.role,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           this.balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -565,7 +565,7 @@ class _$_UserDTO extends _UserDTO {
   final String role;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   final int balance;
   @override
   @nullable
@@ -754,7 +754,7 @@ abstract class _UserDTO extends UserDTO {
       @RoleConverter()
           String role,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
           int balance,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -824,7 +824,7 @@ abstract class _UserDTO extends UserDTO {
   String get role;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
   int get balance;
   @override
   @nullable

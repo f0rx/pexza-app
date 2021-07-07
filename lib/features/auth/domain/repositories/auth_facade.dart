@@ -20,6 +20,7 @@ abstract class AuthFacade extends Facade {
   Future<Either<AuthResponse, Unit>> login({
     @required EmailAddress email,
     @required Password password,
+    UserDTO registered,
   });
 
   Future<Either<AuthResponse, Unit>> createAccount({
@@ -50,17 +51,11 @@ abstract class AuthFacade extends Facade {
     EmailAddress email,
   );
 
-  Future<Either<AuthResponse, Unit>> googleAuthentication([
-    Object pendingCredentials,
-  ]);
+  Future<Either<AuthResponse, Unit>> googleAuthentication();
 
-  Future<Either<AuthResponse, Unit>> facebookAuthentication([
-    Object pendingCredentials,
-  ]);
+  Future<Either<AuthResponse, Unit>> facebookAuthentication();
 
-  Future<Either<AuthResponse, Unit>> twitterAuthentication([
-    Object pendingCredentials,
-  ]);
+  Future<Either<AuthResponse, Unit>> appleAuthentication();
 
   Future<Either<AuthResponse, Unit>> verifyEmailAddress({
     EmailTokenField token,
@@ -75,7 +70,7 @@ abstract class AuthFacade extends Facade {
     Password newPassword,
   });
 
-  Future<void> signOut();
+  Future<void> signOut([bool notify]);
 
   Future<Either<AuthResponse, bool>> checkHasGoodInternet() async {
     final isConnected = (await getIt<Connectivity>().checkConnectivity()) !=

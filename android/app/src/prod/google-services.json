@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:692870871996:android:adc41caeaf9fb8aa9e09b9",
+        "mobilesdk_app_id": "1:692870871996:android:8d917f80c209e8829e09b9",
         "android_client_info": {
           "package_name": "com.pexza"
         }
       },
       "oauth_client": [
         {
-          "client_id": "692870871996-u9eatm8elbce3rsn92nqso13fvvsfalt.apps.googleusercontent.com",
+          "client_id": "692870871996-4fkpuva94oi3u00rvtbvick9sk9j4tsb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pexza",
-            "certificate_hash": "0ba6c6e7b9dc366fd8502fc7b0d117b9d8b4de06"
+            "certificate_hash": "d893ea602cc9a674c29899fe176249d39046e01e"
           }
         },
         {
@@ -44,12 +44,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:692870871996:android:2e2986f623e324e19e09b9",
+        "mobilesdk_app_id": "1:692870871996:android:60a0edfbf5b3b40e9e09b9",
         "android_client_info": {
           "package_name": "com.pexza.dev"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "692870871996-grvu5vo5jm0c5clqa7ts2jq75op30tjh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pexza.dev",
+            "certificate_hash": "4af4e32a7b610d57c5d7ba07f39a6627414e190e"
+          }
+        },
         {
           "client_id": "692870871996-nbi46sv00b0mrmmisfpruasnv2ob9knt.apps.googleusercontent.com",
           "client_type": 3

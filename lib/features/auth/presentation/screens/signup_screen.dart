@@ -77,7 +77,7 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
                   child: SafeArea(
                     child: AutoSizeText(
                       "Sign Up",
-                      textAlign: TextAlign.left,
+                      textAlign: TextAlign.center,
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 30.0,
@@ -90,12 +90,17 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
                   ),
                 ),
                 //
-                VerticalSpace(height: App.height * 0.05),
+                VerticalSpace(height: App.longest * 0.04),
+                //
+                OAuthWidget(apple: true),
+                //
+                VerticalSpace(height: App.longest * 0.02),
                 //
                 Flexible(
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: Helpers.descriptionPadding),
+                      horizontal: Helpers.descriptionPadding,
+                    ),
                     child: AutoSizeText(
                       "Please, enter your details to onboard yourself into our property management platform.",
                       textAlign: TextAlign.center,
@@ -105,6 +110,7 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
                     ),
                   ),
                 ),
+
                 //
                 VerticalSpace(height: App.height * 0.04),
                 //
