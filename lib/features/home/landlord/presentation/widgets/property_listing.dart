@@ -26,7 +26,7 @@ Widget _gridView() {
   return BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
     builder: (c, state) => PortalEntry(
       visible: c.watch<LandlordPropertyCubit>().state.isLoading,
-      portal: App.waveLoadingBar,
+      portal: App.loadingOverlay(),
       child: Visibility(
         visible: !c.watch<LandlordPropertyCubit>().state.properties.isEmpty(),
         child: Container(
@@ -125,7 +125,7 @@ Widget _listView() {
                             ),
                           ),
                         ),
-                      ).reversed.toList(),
+                      ).toList(),
                     ),
                   ),
                 ),
@@ -134,7 +134,7 @@ Widget _listView() {
           : Hero(
               tag: state.properties.get(i).id.value,
               child: InkWell(
-                splashColor: Colors.grey.shade300,
+                splashColor: Colors.black26,
                 borderRadius: _radius,
                 onTap: () async {
                   await navigator.pushLandlordPropertyDetailScreen(
@@ -153,7 +153,7 @@ Widget _listView() {
                     color: state.properties
                         .get(i)
                         .color
-                        .withOpacity(Helpers.optionOf(0.5, 0.2)),
+                        .withOpacity(Helpers.optionOf(0.3, 0.15)),
                     borderRadius: _radius,
                   ),
                   child: Row(
@@ -179,8 +179,11 @@ Widget _listView() {
                                     .textTheme
                                     .headline4
                                     .copyWith(
-                                      color: AppColors.accentColor,
-                                      fontSize: 18.0.sp,
+                                      color: Helpers.optionOf(
+                                        AppColors.accentColor,
+                                        Colors.white,
+                                      ),
+                                      fontSize: 21.0.sp,
                                     ),
                                 maxLines: 1,
                               ),
@@ -200,15 +203,18 @@ Widget _listView() {
                                     .textTheme
                                     .caption
                                     .copyWith(
-                                      color: Helpers.computeLuminance(
-                                        state.properties
-                                            .get(i)
-                                            .color
-                                            .withOpacity(
-                                              Helpers.optionOf(0.5, 0.2),
-                                            ),
+                                      color: Helpers.optionOf(
+                                        Helpers.computeLuminance(
+                                          state.properties
+                                              .get(i)
+                                              .color
+                                              .withOpacity(
+                                                Helpers.optionOf(0.5, 0.2),
+                                              ),
+                                        ),
+                                        Colors.white70,
                                       ),
-                                      fontSize: 14.0.sp,
+                                      fontSize: 17.0.sp,
                                     ),
                                 maxLines: 2,
                               ),
@@ -225,10 +231,15 @@ Widget _listView() {
                           quarterTurns: 2,
                           child: Icon(
                             Icons.keyboard_backspace_rounded,
-                            color: Helpers.computeLuminance(state.properties
-                                .get(i)
-                                .color
-                                .withOpacity(Helpers.optionOf(0.5, 0.2))),
+                            color: Helpers.optionOf(
+                              Helpers.computeLuminance(
+                                state.properties
+                                    .get(i)
+                                    .color
+                                    .withOpacity(Helpers.optionOf(0.5, 0.2)),
+                              ),
+                              Colors.white70,
+                            ),
                           ),
                         ),
                       )

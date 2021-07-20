@@ -31,21 +31,34 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
       child: BlocConsumer<LandlordMergerCubit, LandlordMergerState>(
         listenWhen: (p, c) =>
             p.response.getOrElse(() => null) !=
-            c.response.getOrElse(() => null),
-        listener: (c, s) => s.response.fold(
+                c.response.getOrElse(() => null) ||
+            (c.response.getOrElse(() => null) != null &&
+                (c.response.getOrElse(() => null).isLeft() &&
+                    c.response.getOrElse(() => null).fold(
+                          (f) => f.foldCode(
+                            is1106: () => p.isLoading != c.isLoading,
+                            orElse: () => false,
+                          ),
+                          (r) => false,
+                        ))),
+        listener: (c, s) => s?.response?.fold(
           () => null,
-          (either) => BottomAlertDialog.init(
-            c,
-            message: either.fold(
-              (f) => f?.message ?? f?.error,
-              (r) => r?.message ?? r?.details,
+          (either) => either?.fold(
+            (f) => f.foldCode(
+              is1106: () async {
+                if (App.currentRoute == Routes.landlordAddTenantScreen &&
+                    !s.isLoading) navigator.pushProfileVerificationScreen();
+              },
+              orElse: () =>
+                  BottomAlertDialog.init(c, message: f.message ?? f.details),
             ),
-            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
-            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
-            shouldIconPulse: either.fold((_) => null, (r) => false),
-            callback: either.fold(
-              (_) => null,
-              (s) => s.popRoute == true ? (_) => navigator.pop() : null,
+            (s) => BottomAlertDialog.init(
+              context,
+              message: s.message ?? s.details,
+              icon: Icons.check_circle_rounded,
+              iconColor: AppColors.successGreen,
+              shouldIconPulse: false,
+              callback: s.popRoute ? (_) => navigator.pop(true) : null,
             ),
           ),
         ),

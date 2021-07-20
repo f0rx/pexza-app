@@ -30,7 +30,7 @@ class _$LandlordPropertyTearOff {
       @nullable BasicTextField<int> numberOfApartments,
       @nullable BasicTextField<int> numberOfAvailableApartments,
       @nullable BasicTextField<int> numberOfRentedApartment,
-      @nullable Animatable<dynamic> animatable,
+      @nullable AnimatableState animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) {
@@ -95,7 +95,7 @@ mixin _$LandlordProperty {
   @nullable
   BasicTextField<int> get numberOfRentedApartment;
   @nullable
-  Animatable<dynamic> get animatable;
+  AnimatableState get animatable;
   @nullable
   DateTime get createdAt;
   @nullable
@@ -128,7 +128,7 @@ abstract class $LandlordPropertyCopyWith<$Res> {
       @nullable BasicTextField<int> numberOfApartments,
       @nullable BasicTextField<int> numberOfAvailableApartments,
       @nullable BasicTextField<int> numberOfRentedApartment,
-      @nullable Animatable<dynamic> animatable,
+      @nullable AnimatableState animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
@@ -201,7 +201,7 @@ class _$LandlordPropertyCopyWithImpl<$Res>
           : numberOfRentedApartment as BasicTextField<int>,
       animatable: animatable == freezed
           ? _value.animatable
-          : animatable as Animatable<dynamic>,
+          : animatable as AnimatableState,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -255,7 +255,7 @@ abstract class _$LandlordPropertyCopyWith<$Res>
       @nullable BasicTextField<int> numberOfApartments,
       @nullable BasicTextField<int> numberOfAvailableApartments,
       @nullable BasicTextField<int> numberOfRentedApartment,
-      @nullable Animatable<dynamic> animatable,
+      @nullable AnimatableState animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
@@ -332,7 +332,7 @@ class __$LandlordPropertyCopyWithImpl<$Res>
           : numberOfRentedApartment as BasicTextField<int>,
       animatable: animatable == freezed
           ? _value.animatable
-          : animatable as Animatable<dynamic>,
+          : animatable as AnimatableState,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -414,7 +414,7 @@ class _$_LandlordProperty extends _LandlordProperty {
   final BasicTextField<int> numberOfRentedApartment;
   @override
   @nullable
-  final Animatable<dynamic> animatable;
+  final AnimatableState animatable;
   @override
   @nullable
   final DateTime createdAt;
@@ -536,7 +536,7 @@ abstract class _LandlordProperty extends LandlordProperty {
       @nullable BasicTextField<int> numberOfApartments,
       @nullable BasicTextField<int> numberOfAvailableApartments,
       @nullable BasicTextField<int> numberOfRentedApartment,
-      @nullable Animatable<dynamic> animatable,
+      @nullable AnimatableState animatable,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) = _$_LandlordProperty;
@@ -588,7 +588,7 @@ abstract class _LandlordProperty extends LandlordProperty {
   BasicTextField<int> get numberOfRentedApartment;
   @override
   @nullable
-  Animatable<dynamic> get animatable;
+  AnimatableState get animatable;
   @override
   @nullable
   DateTime get createdAt;

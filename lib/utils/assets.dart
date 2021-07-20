@@ -55,10 +55,8 @@ mixin AppAssets {
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
-
-  static const List<String> images = [
-    logo,
-    user,
+  ///
+  static const List<String> apartments = [
     apartment1,
     apartment2,
     apartment3,
@@ -67,6 +65,12 @@ mixin AppAssets {
     apartment6,
     apartment7,
     apartment8,
+  ];
+
+  static const List<String> images = [
+    logo,
+    user,
+    ...apartments,
     onBoarding1,
     onBoarding2,
     onBoarding3,

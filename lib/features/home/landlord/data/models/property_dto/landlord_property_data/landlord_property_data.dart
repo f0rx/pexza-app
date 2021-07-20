@@ -1,5 +1,7 @@
 library landlord_property_data;
 
+import 'dart:math' as math;
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:pexza/features/core/core.dart';
@@ -14,8 +16,6 @@ part 'landlord_property_data.freezed.dart';
 @freezed
 @immutable
 abstract class LandlordPropertyData implements _$LandlordPropertyData {
-  const LandlordPropertyData._();
-
   const factory LandlordPropertyData({
     @nullable @JsonKey(includeIfNull: false) int id,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String name,
@@ -64,10 +64,7 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
         String deletedAt,
   }) = _LandlordPropertyData;
 
-  factory LandlordPropertyData.fromJson(Map<String, dynamic> json) =>
-      _$LandlordPropertyDataFromJson(json);
-
-  Map<String, dynamic> toJson() => _$_$_LandlordPropertyDataToJson(this);
+  const LandlordPropertyData._();
 
   factory LandlordPropertyData.fromDomain(LandlordProperty instance) =>
       LandlordPropertyData(
@@ -78,6 +75,11 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
         street: instance.street?.getOrNull,
         stateId: 5,
       );
+
+  factory LandlordPropertyData.fromJson(Map<String, dynamic> json) =>
+      _$LandlordPropertyDataFromJson(json);
+
+  static get _img => math.Random().nextInt(AppAssets.apartments.length);
 
   LandlordProperty get domain {
     Color _color = AppColors.fromHex(
@@ -91,6 +93,10 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
 
     return LandlordProperty(
       id: UniqueId<int>.fromExternal(id),
+      animatable: AnimatableState(
+        2 + math.Random().nextInt(2 - 0),
+        2 + math.Random().nextInt(2 - 0),
+      ),
       name: !name.isNull ? BasicTextField(name) : null,
       propertyType: !propertyType.isNull
           ? LandlordPropertyTypeField(PropertyType.valueOf(propertyType))
@@ -99,7 +105,8 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       town: !town.isNull ? BasicTextField(town) : null,
       street: !street.isNull ? BasicTextField(street) : null,
       photo: LandlordPropertyImage(
-        !photo.isNullOrBlank ? photo : AppAssets.anonymous,
+        // !photo.isNullOrBlank ? photo : AppAssets.anonymous,
+        AppAssets.apartments[_img],
       ),
       state: !state.isNull ? state.domain : null,
       landlord: !landlord.isNull ? landlord.domain : null,
@@ -121,4 +128,6 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
     );
   }
+
+  Map<String, dynamic> toJson() => _$_$_LandlordPropertyDataToJson(this);
 }

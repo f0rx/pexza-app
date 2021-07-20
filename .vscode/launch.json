@@ -12,7 +12,20 @@
       "flutterMode": "debug",
       "args": [
         "--flavor",
-        "dev"
+        "dev",
+      ],
+      "internalConsoleOptions": "openOnFirstSessionStart",
+      "showMemoryUsage": true
+    },
+    {
+      "name": "profile",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_dev.dart",
+      "flutterMode": "profile",
+      "args": [
+        "--flavor",
+        "dev",
       ],
       "internalConsoleOptions": "openOnFirstSessionStart",
       "showMemoryUsage": true

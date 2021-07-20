@@ -40,7 +40,7 @@ class OnBoardingScreen extends StatefulWidget with AutoRouteWrapper {
       ),
       builder: (context, state) => PortalEntry(
         visible: context.watch<AdminUtilsCubit>().state.isLoading,
-        portal: App.waveLoadingBar,
+        portal: App.loadingOverlay(),
         child: this,
       ),
     );

@@ -40,21 +40,12 @@ void throwIfNot(bool condition, Object error) {
 }
 
 class Helpers {
-  static const Duration autoRetrievalTimeout = const Duration(seconds: 40);
-  static const String currency = "₦";
-
-  static Helpers get I => Helpers._();
-  static double buttonRadius = 12.0;
   static double appPadding = App.shortest * 0.06;
-  static double inputBorderRadius = 16.0;
+  static const Duration autoRetrievalTimeout = const Duration(seconds: 40);
+  static double buttonRadius = 12.0;
+  static const String currency = "₦";
   static double descriptionPadding = App.shortest * 0.035;
-  static Future<Directory> get rootDir async =>
-      await getExternalStorageDirectory();
-  static Future<Directory> get cacheDir async => await getTemporaryDirectory();
-  static Future<Directory> get documentsDir async =>
-      await getApplicationDocumentsDirectory();
-  static ScrollPhysics physics = const BouncingScrollPhysics();
-  static Duration willPopTimeout = const Duration(seconds: 3);
+  static double inputBorderRadius = 16.0;
   static Logger logger = Logger(
     filter: env.flavor == BuildFlavor.dev
         ? DevelopmentFilter()
@@ -68,6 +59,103 @@ class Helpers {
       printTime: false,
     )),
   );
+
+  static ScrollPhysics physics = const BouncingScrollPhysics();
+  static Duration willPopTimeout = const Duration(seconds: 3);
+
+  /// Current BuildContext
+  BuildContext _ctx;
+
+  Map<int, GlobalKey<NavigatorState>> _keys = {};
+
+  GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
+  final DateTime today = DateTime.now();
+
+  Helpers._();
+
+  static Helpers get I => Helpers._();
+  static Future<Directory> get rootDir async =>
+      await getExternalStorageDirectory();
+
+  static Future<Directory> get cacheDir async => await getTemporaryDirectory();
+  static Future<Directory> get documentsDir async =>
+      await getApplicationDocumentsDirectory();
+
+  Color get backgroundOverlayColor => App.theme.primaryColor.withOpacity(0.91);
+
+  static Widget circularLoader({
+    double width,
+    double height,
+    double stroke,
+    double radius,
+  }) =>
+      CircularProgressBar.adaptive(
+        width: width ?? App.width * 0.08,
+        height: height ?? App.width * 0.08,
+        strokeWidth: stroke ?? 3.5,
+        radius: radius ?? 14,
+      );
+
+  /// give access to currentContext
+  BuildContext get context => _ctx ?? key.currentContext;
+
+  /// Returns the current route path
+  String get currentRoute => observer.top.settings.name;
+
+  WidgetsBinding get engine => WidgetsBinding.instance;
+
+  /// give access to FocusScope.of(context)
+  FocusNode get focusScope => FocusManager.instance.primaryFocus;
+
+  /// give access to Immutable MediaQuery.of(context).size.height
+  double get height => MediaQuery.of(context).size.height;
+
+  /// give access to Theme.of(context).iconTheme.color
+  Color get iconColor => Theme.of(context).iconTheme.color;
+
+  /// Check if dark mode theme is enable on platform on android Q+
+  bool get isPlatformDarkMode =>
+      (mediaQuery.platformBrightness == Brightness.dark);
+
+  /// give access to Immutable MediaQuery.of(context).size.shortestSide
+  double get longest => MediaQuery.of(context).size.longestSide;
+
+  /// give access to MediaQuery.of(context)
+  MediaQueryData get mediaQuery => MediaQuery.of(context);
+
+  /// give access to current Overlay Context
+  BuildContext get overlayContext => key.currentState.overlay.context;
+
+  /// give access to Immutable MediaQuery.of(context).size.shortestSide
+  double get shortest => MediaQuery.of(context).size.shortestSide;
+
+  /// give access to TextTheme.of(context)
+  TextTheme get textTheme => Theme.of(context).textTheme;
+
+  /// give access to Theme.of(context)
+  ThemeData get theme => Theme.of(context);
+
+  Widget get chasingDots => SpinKitChasingDots(
+        color: Theme.of(context).accentColor,
+        size: 35.0,
+        duration: Duration(milliseconds: 1400),
+      );
+
+  Widget get loadingWave => SpinKitWave(
+        color: Theme.of(context).accentColor,
+        size: 35.0,
+        duration: Duration(milliseconds: 1200),
+        itemCount: 8,
+        type: SpinKitWaveType.center,
+      );
+
+  Widget loadingOverlay([Widget child]) => Container(
+        color: App.theme.primaryColor.withOpacity(0.65),
+        child: Center(child: child ?? chasingDots),
+      );
+
+  /// give access to Immutable MediaQuery.of(context).size.width
+  double get width => MediaQuery.of(context).size.width;
 
   static String writeNotNull(String other) {
     if (other.trim() != null || other.trim().isNotEmpty) {
@@ -129,40 +217,6 @@ class Helpers {
         .invokeMethod<void>('SystemNavigator.pop', animated);
   }
 
-  final DateTime today = DateTime.now();
-
-  Color get backgroundOverlayColor => App.theme.primaryColor.withOpacity(0.91);
-
-  /// Current BuildContext
-  BuildContext _ctx;
-
-  Helpers._();
-
-  Widget get waveLoadingBar => Container(
-        color: App.theme.primaryColor.withOpacity(0.65),
-        child: Center(
-          child: SpinKitWave(
-            color: Theme.of(context).accentColor,
-            size: 30.0,
-            duration: Duration(milliseconds: 1200),
-            type: SpinKitWaveType.center,
-            itemCount: 7,
-          ),
-        ),
-      );
-
-  Widget get circularLoadingOverlay => Container(
-        color: App.theme.primaryColor.withOpacity(0.65),
-        child: Center(
-          child: CircularProgressBar.adaptive(
-            width: width * 0.08,
-            height: width * 0.08,
-            strokeWidth: 3.5,
-            radius: 14,
-          ),
-        ),
-      );
-
   Widget positionedLoader(
     BuildContext context, [
     bool overlay = true,
@@ -202,10 +256,6 @@ class Helpers {
     return key;
   }
 
-  GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
-
-  Map<int, GlobalKey<NavigatorState>> _keys = {};
-
   // Helper method to open a Hive Box
   Box<E> box<E>(String name) => Hive.box(name);
 
@@ -223,48 +273,6 @@ class Helpers {
     }
     return _keys[k];
   }
-
-  /// give access to currentContext
-  BuildContext get context => _ctx ?? key.currentContext;
-
-  /// Returns the current route path
-  String get currentRoute => observer.top.settings.name;
-
-  /// give access to current Overlay Context
-  BuildContext get overlayContext => key.currentState.overlay.context;
-
-  /// give access to Theme.of(context)
-  ThemeData get theme => Theme.of(context);
-
-  /// give access to TextTheme.of(context)
-  TextTheme get textTheme => Theme.of(context).textTheme;
-
-  /// give access to MediaQuery.of(context)
-  MediaQueryData get mediaQuery => MediaQuery.of(context);
-
-  WidgetsBinding get engine => WidgetsBinding.instance;
-
-  /// give access to Theme.of(context).iconTheme.color
-  Color get iconColor => Theme.of(context).iconTheme.color;
-
-  /// give access to FocusScope.of(context)
-  FocusNode get focusScope => FocusManager.instance.primaryFocus;
-
-  /// give access to Immutable MediaQuery.of(context).size.height
-  double get height => MediaQuery.of(context).size.height;
-
-  /// give access to Immutable MediaQuery.of(context).size.width
-  double get width => MediaQuery.of(context).size.width;
-
-  /// give access to Immutable MediaQuery.of(context).size.shortestSide
-  double get shortest => MediaQuery.of(context).size.shortestSide;
-
-  /// give access to Immutable MediaQuery.of(context).size.shortestSide
-  double get longest => MediaQuery.of(context).size.longestSide;
-
-  /// Check if dark mode theme is enable on platform on android Q+
-  bool get isPlatformDarkMode =>
-      (mediaQuery.platformBrightness == Brightness.dark);
 
   /// Push the given [page], and then pop several [pages] in the stack until
   /// [predicate] returns true

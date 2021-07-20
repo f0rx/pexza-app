@@ -13,17 +13,10 @@ import 'package:pexza/widgets/widgets.dart';
 
 class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
   static double inputSpacing = App.longest * 0.015;
-  final FocusNode _nameFocus = FocusNode();
-  final FocusNode _descriptionFocus = FocusNode();
-  final FocusNode _cityFocus = FocusNode();
-  final FocusNode _addressFocus = FocusNode();
 
   final LandlordProperty property;
 
-  LandlordAddPropertyScreen({
-    Key key,
-    this.property,
-  }) : super(key: key);
+  const LandlordAddPropertyScreen({Key key, this.property}) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -49,7 +42,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
         ),
         builder: (c, s) => PortalEntry(
           visible: c.watch<LandlordPropertyCubit>().state.isLoading,
-          portal: App.waveLoadingBar,
+          portal: App.loadingOverlay(),
           child: this,
         ),
       ),
@@ -85,7 +78,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.words,
                 textInputAction: TextInputAction.next,
-                focusNode: _nameFocus,
+                focusNode: LandlordPropertyState.nameFocus,
                 decoration: const InputDecoration(
                   labelText: "Property Name",
                   hintText: "Robbie Barrows And Co House",
@@ -107,8 +100,8 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                             ),
                           ),
                         ),
-                onFieldSubmitted: (_) =>
-                    FocusScope.of(context).requestFocus(_descriptionFocus),
+                onFieldSubmitted: (_) => FocusScope.of(context)
+                    .requestFocus(LandlordPropertyState.descriptionFocus),
               ),
             ),
             //
@@ -167,7 +160,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                 keyboardType: TextInputType.multiline,
                 textCapitalization: TextCapitalization.words,
                 textInputAction: TextInputAction.newline,
-                focusNode: _descriptionFocus,
+                focusNode: LandlordPropertyState.descriptionFocus,
                 decoration: const InputDecoration(
                   labelText: "Basic Description",
                   hintText: "Bungalow with 2 Bedrooms",
@@ -191,8 +184,8 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                             ),
                           ),
                         ),
-                onFieldSubmitted: (_) =>
-                    FocusScope.of(context).requestFocus(_cityFocus),
+                onFieldSubmitted: (_) => FocusScope.of(context)
+                    .requestFocus(LandlordPropertyState.cityFocus),
               ),
             ),
             //
@@ -208,7 +201,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                 keyboardType: TextInputType.text,
                 textCapitalization: TextCapitalization.words,
                 textInputAction: TextInputAction.next,
-                focusNode: _cityFocus,
+                focusNode: LandlordPropertyState.cityFocus,
                 decoration: const InputDecoration(
                   labelText: "City / Town",
                   hintText: "Ikeja, Lagos",
@@ -238,73 +231,73 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                             ),
                           ),
                         ),
-                onFieldSubmitted: (_) =>
-                    FocusScope.of(context).requestFocus(_addressFocus),
+                onFieldSubmitted: (_) => FocusScope.of(context)
+                    .requestFocus(LandlordPropertyState.addressFocus),
               ),
             ),
             //
             VerticalSpace(height: inputSpacing),
             //
             BlocBuilder<LandlordPropertyCubit, LandlordPropertyState>(
-              builder: (c, s) => TextFormField(
-                maxLines: 5,
-                enableSuggestions: true,
-                autocorrect: false,
-                initialValue: s.street.getOrEmpty,
-                cursorColor: Theme.of(context).accentColor,
-                keyboardType: TextInputType.streetAddress,
-                textCapitalization: TextCapitalization.words,
-                textInputAction: TextInputAction.newline,
-                focusNode: _addressFocus,
-                decoration: const InputDecoration(
-                  labelText: "Street / Address",
-                  hintText: "32, Ogunmefun Drive, GRA, Lagos",
-                ),
-                autofillHints: [
-                  AutofillHints.fullStreetAddress,
-                  AutofillHints.postalAddress,
-                  AutofillHints.postalAddressExtended,
-                  AutofillHints.streetAddressLine1,
-                  AutofillHints.streetAddressLine2,
-                  AutofillHints.streetAddressLine3,
-                ],
-                autovalidateMode:
-                    c.watch<LandlordPropertyCubit>().state.validate
-                        ? AutovalidateMode.always
-                        : AutovalidateMode.disabled,
-                onChanged:
-                    c.watch<LandlordPropertyCubit>().proeprtyAddressChanged,
-                validator: (value) =>
-                    c.read<LandlordPropertyCubit>().state.street.value.fold(
-                          (error) => error.message,
-                          (r) => s.response.fold(
-                            () => null,
-                            (_) => _.fold(
-                              (f) => f.errors?.street?.firstOrNull,
-                              (_) => null,
+              builder: (c, s) => Hero(
+                tag: Constants.kAddEditPropertyHeroTag,
+                child: TextFormField(
+                  maxLines: 5,
+                  enableSuggestions: true,
+                  autocorrect: false,
+                  initialValue: s.street.getOrEmpty,
+                  cursorColor: Theme.of(context).accentColor,
+                  keyboardType: TextInputType.streetAddress,
+                  textCapitalization: TextCapitalization.words,
+                  textInputAction: TextInputAction.newline,
+                  focusNode: LandlordPropertyState.addressFocus,
+                  decoration: const InputDecoration(
+                    labelText: "Street / Address",
+                    hintText: "32, Ogunmefun Drive, GRA, Lagos",
+                  ),
+                  autofillHints: [
+                    AutofillHints.fullStreetAddress,
+                    AutofillHints.postalAddress,
+                    AutofillHints.postalAddressExtended,
+                    AutofillHints.streetAddressLine1,
+                    AutofillHints.streetAddressLine2,
+                    AutofillHints.streetAddressLine3,
+                  ],
+                  autovalidateMode:
+                      c.watch<LandlordPropertyCubit>().state.validate
+                          ? AutovalidateMode.always
+                          : AutovalidateMode.disabled,
+                  onChanged:
+                      c.watch<LandlordPropertyCubit>().proeprtyAddressChanged,
+                  validator: (value) =>
+                      c.read<LandlordPropertyCubit>().state.street.value.fold(
+                            (error) => error.message,
+                            (r) => s.response.fold(
+                              () => null,
+                              (_) => _.fold(
+                                (f) => f.errors?.street?.firstOrNull,
+                                (_) => null,
+                              ),
                             ),
                           ),
-                        ),
-                onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+                  onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+                ),
               ),
             ),
             //
             VerticalSpace(height: App.shortest * 0.2),
             //
-            Hero(
-              tag: Constants.kAddEditPropertyHeroTag,
-              child: Visibility(
-                visible: property.isNull,
-                replacement: AppElevatedButton(
-                  text: "Save",
-                  onPressed: () => context
-                      .read<LandlordPropertyCubit>()
-                      .update(property: property),
-                ),
-                child: AppElevatedButton(
-                  text: "Add Property",
-                  onPressed: context.read<LandlordPropertyCubit>().create,
-                ),
+            Visibility(
+              visible: property.isNull,
+              replacement: AppElevatedButton(
+                text: "Save",
+                onPressed: () => context
+                    .read<LandlordPropertyCubit>()
+                    .update(property: property),
+              ),
+              child: AppElevatedButton(
+                text: "Add Property",
+                onPressed: context.read<LandlordPropertyCubit>().create,
               ),
             ),
           ],

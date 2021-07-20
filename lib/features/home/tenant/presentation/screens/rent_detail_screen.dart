@@ -44,7 +44,7 @@ class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
         ),
         builder: (c, s) => PortalEntry(
           visible: c.watch<TenantAssignmentCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
+          portal: App.loadingOverlay(Helpers.circularLoader()),
           child: this,
         ),
       ),
@@ -54,9 +54,7 @@ class TenantRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Toolbar(
-        title: "Rent Details",
-      ),
+      appBar: Toolbar(title: "Rent Details"),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         controller: ScrollController(),

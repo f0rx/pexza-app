@@ -13,7 +13,8 @@ abstract class Failure with _FailureMixin {
   static const int CARD_PAYMENT_FAILED = 1105;
   static const int INVALID_RECORD = 1103;
   static const int NO_SAVED_CARD = 1104;
-  static const int UNVERIFIED = 1101;
+  static const int UNVERIFIED_EMAIL = 1101;
+  static const int UNVERIFIED_ACCOUNT = 1106;
 
   int get code;
   String get details;

@@ -16,7 +16,7 @@ class SettingsScreen extends StatelessWidget with AutoRouteWrapper {
     return BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
       builder: (context, state) => PortalEntry(
         visible: state.isLoading,
-        portal: App.waveLoadingBar,
+        portal: App.loadingOverlay(),
         child: this,
       ),
     );

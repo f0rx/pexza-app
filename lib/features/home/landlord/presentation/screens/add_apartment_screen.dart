@@ -48,7 +48,7 @@ class LandlordAddApartmentScreen extends StatelessWidget with AutoRouteWrapper {
         ),
         builder: (c, state) => PortalEntry(
           visible: c.watch<LandlordApartmentCubit>().state.isLoading,
-          portal: App.waveLoadingBar,
+          portal: App.loadingOverlay(),
           child: this,
         ),
       ),

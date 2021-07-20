@@ -62,35 +62,38 @@ class TenantListTile<M> extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: ListTile(
-                            dense: true,
-                            title: AutoSizeText(
-                              "${tenant?.firstName?.getOrEmpty} ${tenant?.lastName?.getOrEmpty}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline1
-                                  .copyWith(
-                                    fontSize: 16.0,
-                                    color: titleColor,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                              maxLines: 1,
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 10.0),
-                            subtitle: AutoSizeText(
-                              subtitle ?? '',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle2
-                                  .copyWith(
-                                    color: subtitleColor,
-                                  ),
-                              softWrap: true,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                          child: Center(
+                            child: ListTile(
+                              dense: true,
+                              title: AutoSizeText(
+                                "${tenant?.firstName?.getOrEmpty} ${tenant?.lastName?.getOrEmpty}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline1
+                                    .copyWith(
+                                      fontSize: 21.0.sp,
+                                      color: titleColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                maxLines: 1,
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 0.03.sw),
+                              subtitle: AutoSizeText(
+                                subtitle ?? '',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle2
+                                    .copyWith(
+                                      fontSize: 18.sp,
+                                      color: subtitleColor,
+                                    ),
+                                softWrap: true,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
                         ),

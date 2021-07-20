@@ -17,10 +17,11 @@ abstract class PropertyRepository {
   @GET("/landlord/property")
   Future<LandlordPropertyDTOList> all();
 
+  @GET("/landlord/property")
+  Future<LandlordPropertyDTOList> paginate(@Query("page") int page);
+
   @POST("/landlord/property")
-  Future<LandlordPropertyDTO> create(
-    @Body() LandlordPropertyData dto,
-  );
+  Future<LandlordPropertyDTO> create(@Body() LandlordPropertyData dto);
 
   @GET("/landlord/property/{id}")
   Future<LandlordPropertyDTO> show(@Path("id") int id);
@@ -30,7 +31,7 @@ abstract class PropertyRepository {
 
   @PUT("/landlord/property/{id}")
   Future<LandlordPropertyDTO> update(
-    @Path() int id,
+    @Path("id") int id,
     @Body() LandlordPropertyData dto,
   );
 
