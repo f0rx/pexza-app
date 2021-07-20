@@ -16,6 +16,8 @@ class _$LandlordPropertyStateTearOff {
 // ignore: unused_element
   _LandlordPropertyState call(
       {bool isLoading = false,
+      bool isLoadingNextPage = false,
+      bool isAtLastPage = false,
       bool validate = false,
       @required BasicTextField<String> name,
       @required LandlordPropertyTypeField propertyType,
@@ -24,6 +26,7 @@ class _$LandlordPropertyStateTearOff {
       @required BasicTextField<String> town,
       @nullable ProvinceState selectedState,
       @nullable User selectedTenant,
+      @nullable LandlordPropertyDTOList dtoList,
       KtList<ProvinceState> states = const KtList.empty(),
       KtList<User> tenants = const KtList.empty(),
       KtList<LandlordProperty> properties = const KtList.empty(),
@@ -32,6 +35,8 @@ class _$LandlordPropertyStateTearOff {
       Option<Either<Failure, Success>> response = const None()}) {
     return _LandlordPropertyState(
       isLoading: isLoading,
+      isLoadingNextPage: isLoadingNextPage,
+      isAtLastPage: isAtLastPage,
       validate: validate,
       name: name,
       propertyType: propertyType,
@@ -40,6 +45,7 @@ class _$LandlordPropertyStateTearOff {
       town: town,
       selectedState: selectedState,
       selectedTenant: selectedTenant,
+      dtoList: dtoList,
       states: states,
       tenants: tenants,
       properties: properties,
@@ -57,6 +63,8 @@ const $LandlordPropertyState = _$LandlordPropertyStateTearOff();
 /// @nodoc
 mixin _$LandlordPropertyState {
   bool get isLoading;
+  bool get isLoadingNextPage;
+  bool get isAtLastPage;
   bool get validate;
   BasicTextField<String> get name;
   LandlordPropertyTypeField get propertyType;
@@ -67,6 +75,8 @@ mixin _$LandlordPropertyState {
   ProvinceState get selectedState;
   @nullable
   User get selectedTenant;
+  @nullable
+  LandlordPropertyDTOList get dtoList;
   KtList<ProvinceState> get states;
   KtList<User> get tenants;
   KtList<LandlordProperty> get properties;
@@ -86,6 +96,8 @@ abstract class $LandlordPropertyStateCopyWith<$Res> {
       _$LandlordPropertyStateCopyWithImpl<$Res>;
   $Res call(
       {bool isLoading,
+      bool isLoadingNextPage,
+      bool isAtLastPage,
       bool validate,
       BasicTextField<String> name,
       LandlordPropertyTypeField propertyType,
@@ -94,6 +106,7 @@ abstract class $LandlordPropertyStateCopyWith<$Res> {
       BasicTextField<String> town,
       @nullable ProvinceState selectedState,
       @nullable User selectedTenant,
+      @nullable LandlordPropertyDTOList dtoList,
       KtList<ProvinceState> states,
       KtList<User> tenants,
       KtList<LandlordProperty> properties,
@@ -103,6 +116,7 @@ abstract class $LandlordPropertyStateCopyWith<$Res> {
 
   $ProvinceStateCopyWith<$Res> get selectedState;
   $UserCopyWith<$Res> get selectedTenant;
+  $LandlordPropertyDTOListCopyWith<$Res> get dtoList;
   $LandlordPropertyCopyWith<$Res> get property;
 }
 
@@ -118,6 +132,8 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoading = freezed,
+    Object isLoadingNextPage = freezed,
+    Object isAtLastPage = freezed,
     Object validate = freezed,
     Object name = freezed,
     Object propertyType = freezed,
@@ -126,6 +142,7 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
     Object town = freezed,
     Object selectedState = freezed,
     Object selectedTenant = freezed,
+    Object dtoList = freezed,
     Object states = freezed,
     Object tenants = freezed,
     Object properties = freezed,
@@ -135,6 +152,11 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
+      isLoadingNextPage: isLoadingNextPage == freezed
+          ? _value.isLoadingNextPage
+          : isLoadingNextPage as bool,
+      isAtLastPage:
+          isAtLastPage == freezed ? _value.isAtLastPage : isAtLastPage as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
       name: name == freezed ? _value.name : name as BasicTextField<String>,
       propertyType: propertyType == freezed
@@ -152,6 +174,9 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
       selectedTenant: selectedTenant == freezed
           ? _value.selectedTenant
           : selectedTenant as User,
+      dtoList: dtoList == freezed
+          ? _value.dtoList
+          : dtoList as LandlordPropertyDTOList,
       states:
           states == freezed ? _value.states : states as KtList<ProvinceState>,
       tenants: tenants == freezed ? _value.tenants : tenants as KtList<User>,
@@ -190,6 +215,16 @@ class _$LandlordPropertyStateCopyWithImpl<$Res>
   }
 
   @override
+  $LandlordPropertyDTOListCopyWith<$Res> get dtoList {
+    if (_value.dtoList == null) {
+      return null;
+    }
+    return $LandlordPropertyDTOListCopyWith<$Res>(_value.dtoList, (value) {
+      return _then(_value.copyWith(dtoList: value));
+    });
+  }
+
+  @override
   $LandlordPropertyCopyWith<$Res> get property {
     if (_value.property == null) {
       return null;
@@ -209,6 +244,8 @@ abstract class _$LandlordPropertyStateCopyWith<$Res>
   @override
   $Res call(
       {bool isLoading,
+      bool isLoadingNextPage,
+      bool isAtLastPage,
       bool validate,
       BasicTextField<String> name,
       LandlordPropertyTypeField propertyType,
@@ -217,6 +254,7 @@ abstract class _$LandlordPropertyStateCopyWith<$Res>
       BasicTextField<String> town,
       @nullable ProvinceState selectedState,
       @nullable User selectedTenant,
+      @nullable LandlordPropertyDTOList dtoList,
       KtList<ProvinceState> states,
       KtList<User> tenants,
       KtList<LandlordProperty> properties,
@@ -228,6 +266,8 @@ abstract class _$LandlordPropertyStateCopyWith<$Res>
   $ProvinceStateCopyWith<$Res> get selectedState;
   @override
   $UserCopyWith<$Res> get selectedTenant;
+  @override
+  $LandlordPropertyDTOListCopyWith<$Res> get dtoList;
   @override
   $LandlordPropertyCopyWith<$Res> get property;
 }
@@ -246,6 +286,8 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoading = freezed,
+    Object isLoadingNextPage = freezed,
+    Object isAtLastPage = freezed,
     Object validate = freezed,
     Object name = freezed,
     Object propertyType = freezed,
@@ -254,6 +296,7 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
     Object town = freezed,
     Object selectedState = freezed,
     Object selectedTenant = freezed,
+    Object dtoList = freezed,
     Object states = freezed,
     Object tenants = freezed,
     Object properties = freezed,
@@ -263,6 +306,11 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
   }) {
     return _then(_LandlordPropertyState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
+      isLoadingNextPage: isLoadingNextPage == freezed
+          ? _value.isLoadingNextPage
+          : isLoadingNextPage as bool,
+      isAtLastPage:
+          isAtLastPage == freezed ? _value.isAtLastPage : isAtLastPage as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
       name: name == freezed ? _value.name : name as BasicTextField<String>,
       propertyType: propertyType == freezed
@@ -280,6 +328,9 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
       selectedTenant: selectedTenant == freezed
           ? _value.selectedTenant
           : selectedTenant as User,
+      dtoList: dtoList == freezed
+          ? _value.dtoList
+          : dtoList as LandlordPropertyDTOList,
       states:
           states == freezed ? _value.states : states as KtList<ProvinceState>,
       tenants: tenants == freezed ? _value.tenants : tenants as KtList<User>,
@@ -302,6 +353,8 @@ class __$LandlordPropertyStateCopyWithImpl<$Res>
 class _$_LandlordPropertyState extends _LandlordPropertyState {
   const _$_LandlordPropertyState(
       {this.isLoading = false,
+      this.isLoadingNextPage = false,
+      this.isAtLastPage = false,
       this.validate = false,
       @required this.name,
       @required this.propertyType,
@@ -310,6 +363,7 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
       @required this.town,
       @nullable this.selectedState,
       @nullable this.selectedTenant,
+      @nullable this.dtoList,
       this.states = const KtList.empty(),
       this.tenants = const KtList.empty(),
       this.properties = const KtList.empty(),
@@ -317,6 +371,8 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
       @nullable this.property,
       this.response = const None()})
       : assert(isLoading != null),
+        assert(isLoadingNextPage != null),
+        assert(isAtLastPage != null),
         assert(validate != null),
         assert(name != null),
         assert(propertyType != null),
@@ -333,6 +389,12 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
   @JsonKey(defaultValue: false)
   @override
   final bool isLoading;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isLoadingNextPage;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isAtLastPage;
   @JsonKey(defaultValue: false)
   @override
   final bool validate;
@@ -352,6 +414,9 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
   @override
   @nullable
   final User selectedTenant;
+  @override
+  @nullable
+  final LandlordPropertyDTOList dtoList;
   @JsonKey(defaultValue: const KtList.empty())
   @override
   final KtList<ProvinceState> states;
@@ -373,7 +438,7 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
 
   @override
   String toString() {
-    return 'LandlordPropertyState(isLoading: $isLoading, validate: $validate, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, selectedState: $selectedState, selectedTenant: $selectedTenant, states: $states, tenants: $tenants, properties: $properties, apartments: $apartments, property: $property, response: $response)';
+    return 'LandlordPropertyState(isLoading: $isLoading, isLoadingNextPage: $isLoadingNextPage, isAtLastPage: $isAtLastPage, validate: $validate, name: $name, propertyType: $propertyType, houseType: $houseType, street: $street, town: $town, selectedState: $selectedState, selectedTenant: $selectedTenant, dtoList: $dtoList, states: $states, tenants: $tenants, properties: $properties, apartments: $apartments, property: $property, response: $response)';
   }
 
   @override
@@ -383,6 +448,12 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
+            (identical(other.isLoadingNextPage, isLoadingNextPage) ||
+                const DeepCollectionEquality()
+                    .equals(other.isLoadingNextPage, isLoadingNextPage)) &&
+            (identical(other.isAtLastPage, isAtLastPage) ||
+                const DeepCollectionEquality()
+                    .equals(other.isAtLastPage, isAtLastPage)) &&
             (identical(other.validate, validate) ||
                 const DeepCollectionEquality()
                     .equals(other.validate, validate)) &&
@@ -404,6 +475,9 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
             (identical(other.selectedTenant, selectedTenant) ||
                 const DeepCollectionEquality()
                     .equals(other.selectedTenant, selectedTenant)) &&
+            (identical(other.dtoList, dtoList) ||
+                const DeepCollectionEquality()
+                    .equals(other.dtoList, dtoList)) &&
             (identical(other.states, states) ||
                 const DeepCollectionEquality().equals(other.states, states)) &&
             (identical(other.tenants, tenants) ||
@@ -427,6 +501,8 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
+      const DeepCollectionEquality().hash(isLoadingNextPage) ^
+      const DeepCollectionEquality().hash(isAtLastPage) ^
       const DeepCollectionEquality().hash(validate) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(propertyType) ^
@@ -435,6 +511,7 @@ class _$_LandlordPropertyState extends _LandlordPropertyState {
       const DeepCollectionEquality().hash(town) ^
       const DeepCollectionEquality().hash(selectedState) ^
       const DeepCollectionEquality().hash(selectedTenant) ^
+      const DeepCollectionEquality().hash(dtoList) ^
       const DeepCollectionEquality().hash(states) ^
       const DeepCollectionEquality().hash(tenants) ^
       const DeepCollectionEquality().hash(properties) ^
@@ -453,6 +530,8 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
   const _LandlordPropertyState._() : super._();
   const factory _LandlordPropertyState(
       {bool isLoading,
+      bool isLoadingNextPage,
+      bool isAtLastPage,
       bool validate,
       @required BasicTextField<String> name,
       @required LandlordPropertyTypeField propertyType,
@@ -461,6 +540,7 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
       @required BasicTextField<String> town,
       @nullable ProvinceState selectedState,
       @nullable User selectedTenant,
+      @nullable LandlordPropertyDTOList dtoList,
       KtList<ProvinceState> states,
       KtList<User> tenants,
       KtList<LandlordProperty> properties,
@@ -470,6 +550,10 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
 
   @override
   bool get isLoading;
+  @override
+  bool get isLoadingNextPage;
+  @override
+  bool get isAtLastPage;
   @override
   bool get validate;
   @override
@@ -488,6 +572,9 @@ abstract class _LandlordPropertyState extends LandlordPropertyState {
   @override
   @nullable
   User get selectedTenant;
+  @override
+  @nullable
+  LandlordPropertyDTOList get dtoList;
   @override
   KtList<ProvinceState> get states;
   @override

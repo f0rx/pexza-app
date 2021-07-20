@@ -2,11 +2,6 @@ part of 'package:pexza/features/auth/presentation/screens/signup_screen.dart';
 
 class _SignUpForm extends StatelessWidget {
   static double inputSpacing = App.longest * 0.015;
-  final _firstNameFocus = FocusNode();
-  final _lastNameFocus = FocusNode();
-  final _emailAddressFocus = FocusNode();
-  final _passwordFocus = FocusNode();
-  final _phoneNumberFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -18,29 +13,29 @@ class _SignUpForm extends StatelessWidget {
           children: [
             /////////    FIRST NAME FIELD    ////////
             FirstNameField(
-              focus: _firstNameFocus,
-              next: _lastNameFocus,
+              focus: AuthState.firstNameFocus,
+              next: AuthState.lastNameFocus,
             ),
             //
             VerticalSpace(height: inputSpacing),
             /////////    LAST NAME FIELD    ////////
             LastNameField(
-              focus: _lastNameFocus,
-              next: _emailAddressFocus,
+              focus: AuthState.lastNameFocus,
+              next: AuthState.emailAddressFocus,
             ),
             //
             VerticalSpace(height: inputSpacing),
             /////////    EMAIL ADDRESS FIELD    ////////
             EmailAddressField(
-              focus: _emailAddressFocus,
-              next: _phoneNumberFocus,
+              focus: AuthState.emailAddressFocus,
+              next: AuthState.phoneNumberFocus,
             ),
             //
             VerticalSpace(height: inputSpacing),
             /////////    PHONE FIELD    ////////
             PhoneNumberField(
-              focus: _phoneNumberFocus,
-              next: _passwordFocus,
+              focus: AuthState.phoneNumberFocus,
+              next: AuthState.passwordFocus,
             ),
             //
             VerticalSpace(height: inputSpacing),
@@ -55,7 +50,7 @@ class _SignUpForm extends StatelessWidget {
             //
             VerticalSpace(height: inputSpacing),
             /////////    PASSWORD FIELD    ////////
-            PasswordInputField(focus: _passwordFocus),
+            PasswordInputField(focus: AuthState.passwordFocus),
             //
             VerticalSpace(height: App.height * .04),
             //

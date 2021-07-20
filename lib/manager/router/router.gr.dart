@@ -60,6 +60,8 @@ class Routes {
   static const String signupScreen = '/signup-screen';
   static const String forgotPasswordScreen = '/forgot-password-screen';
   static const String verifyEmailScreen = '/verify-email-screen';
+  static const String profileVerificationScreen =
+      '/profile-verification-screen';
   static const String tenantHomeScreen = '/tenant-home-screen';
   static const String tenantApartmentDetailScreen =
       '/tenant-apartment-detail-screen';
@@ -109,6 +111,7 @@ class Routes {
     signupScreen,
     forgotPasswordScreen,
     verifyEmailScreen,
+    profileVerificationScreen,
     tenantHomeScreen,
     tenantApartmentDetailScreen,
     tenantRentDetailScreen,
@@ -155,6 +158,7 @@ class Router extends RouterBase {
     RouteDef(Routes.signupScreen, page: SignupScreen),
     RouteDef(Routes.forgotPasswordScreen, page: ForgotPasswordScreen),
     RouteDef(Routes.verifyEmailScreen, page: VerifyEmailScreen),
+    RouteDef(Routes.profileVerificationScreen, page: ProfileVerificationScreen),
     RouteDef(Routes.tenantHomeScreen,
         page: TenantHomeScreen, guards: [AuthGuard]),
     RouteDef(Routes.tenantApartmentDetailScreen,
@@ -224,7 +228,7 @@ class Router extends RouterBase {
     },
     OnBoardingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => OnBoardingScreen(),
+        builder: (context) => OnBoardingScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -280,6 +284,14 @@ class Router extends RouterBase {
     VerifyEmailScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const VerifyEmailScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    ProfileVerificationScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            const ProfileVerificationScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -347,8 +359,12 @@ class Router extends RouterBase {
         orElse: () => AddNewCardScreenArguments(),
       );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) =>
-            AddNewCardScreen(key: args.key).wrappedRoute(context),
+        builder: (context) => AddNewCardScreen(
+          key: args.key,
+          intended: args.intended,
+          buttonText: args.buttonText,
+          failure: args.failure,
+        ).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -636,6 +652,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushVerifyEmailScreen() =>
       push<dynamic>(Routes.verifyEmailScreen);
 
+  Future<dynamic> pushProfileVerificationScreen() =>
+      push<dynamic>(Routes.profileVerificationScreen);
+
   Future<dynamic> pushTenantHomeScreen() =>
       push<dynamic>(Routes.tenantHomeScreen);
 
@@ -681,10 +700,18 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
       );
 
   Future<dynamic> pushAddNewCardScreen(
-          {Key key, OnNavigationRejected onReject}) =>
+          {Key key,
+          String intended,
+          String buttonText,
+          Failure failure,
+          OnNavigationRejected onReject}) =>
       push<dynamic>(
         Routes.addNewCardScreen,
-        arguments: AddNewCardScreenArguments(key: key),
+        arguments: AddNewCardScreenArguments(
+            key: key,
+            intended: intended,
+            buttonText: buttonText,
+            failure: failure),
         onReject: onReject,
       );
 
@@ -896,7 +923,11 @@ class ServiceRequestScreenArguments {
 /// AddNewCardScreen arguments holder class
 class AddNewCardScreenArguments {
   final Key key;
-  AddNewCardScreenArguments({this.key});
+  final String intended;
+  final String buttonText;
+  final Failure failure;
+  AddNewCardScreenArguments(
+      {this.key, this.intended, this.buttonText, this.failure});
 }
 
 /// SuccessfulScreen arguments holder class

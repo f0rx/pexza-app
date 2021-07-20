@@ -7,11 +7,13 @@ import 'package:pexza/utils/utils.dart';
 class LastNameField extends StatelessWidget {
   final FocusNode focus;
   final FocusNode next;
+  final bool showLabel;
 
   const LastNameField({
     Key key,
     @required this.focus,
     this.next,
+    this.showLabel = true,
   }) : super(key: key);
 
   @override
@@ -28,8 +30,8 @@ class LastNameField extends StatelessWidget {
           textCapitalization: TextCapitalization.words,
           textInputAction: TextInputAction.next,
           focusNode: focus,
-          decoration: const InputDecoration(
-            labelText: "Your Last Name",
+          decoration: InputDecoration(
+            labelText: showLabel ? "Your Last Name" : null,
             hintText: "Doe",
           ),
           autofillHints: [

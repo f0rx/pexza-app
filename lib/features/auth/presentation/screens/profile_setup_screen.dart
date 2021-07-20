@@ -15,10 +15,7 @@ import 'package:pexza/features/core/core.dart';
 class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
   final Assignment assignment;
 
-  const ProfileSetupScreen({
-    Key key,
-    this.assignment,
-  }) : super(key: key);
+  const ProfileSetupScreen({Key key, this.assignment}) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -27,27 +24,44 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
       child: BlocConsumer<TokenVerificationCubit, TokenVerificationState>(
         listenWhen: (p, c) =>
             p.response.getOrElse(() => null) !=
-            c.response.getOrElse(() => null),
-        listener: (c, s) => s.response.fold(
+                c.response.getOrElse(() => null) ||
+            (c.response.getOrElse(() => null) != null &&
+                (c.response.getOrElse(() => null).isLeft() &&
+                    c.response.getOrElse(() => null).fold(
+                          (f) => f.foldCode(
+                            is1104: () => p.isLoading != c.isLoading,
+                            orElse: () => false,
+                          ),
+                          (r) => false,
+                        ))),
+        listener: (c, s) => s?.response?.fold(
           () => null,
-          (either) => BottomAlertDialog.init(
-            context,
-            message: either.fold(
-              (f) => f.message ?? f.error,
-              (r) => r.message ?? r.details,
+          (either) => either?.fold(
+            (f) => f.foldCode(
+              is1104: () async {
+                if (App.currentRoute != Routes.addNewCardScreen && !s.isLoading)
+                  return await navigator.pushAddNewCardScreen(
+                    intended: Routes.profileSetupScreen,
+                    buttonText: "Add this Card",
+                    failure: f,
+                  );
+              },
+              orElse: () =>
+                  BottomAlertDialog.init(c, message: f.message ?? f.details),
             ),
-            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
-            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
-            shouldIconPulse: either.fold((_) => null, (r) => false),
-            callback: either.fold(
-              (_) => null,
-              (r) => r.popRoute ? (_) => navigator.pop(true) : null,
+            (s) => BottomAlertDialog.init(
+              context,
+              message: s.message ?? s.details,
+              icon: Icons.check_circle_rounded,
+              iconColor: AppColors.successGreen,
+              shouldIconPulse: false,
+              callback: s.popRoute ? (_) => navigator.pop(true) : null,
             ),
           ),
         ),
         builder: (c, s) => PortalEntry(
           visible: c.watch<TokenVerificationCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
+          portal: App.loadingOverlay(Helpers.circularLoader()),
           child: this,
         ),
       ),
@@ -129,10 +143,12 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                       keyboardType: TextInputType.text,
                       onChanged:
                           context.read<TokenVerificationCubit>().onChanged,
-                      onSubmitted:
-                          context.read<TokenVerificationCubit>().onSubmitted,
-                      onCompleted:
-                          context.read<TokenVerificationCubit>().onSubmitted,
+                      onSubmitted: context
+                          .read<TokenVerificationCubit>()
+                          .acceptAssignment,
+                      onCompleted: context
+                          .read<TokenVerificationCubit>()
+                          .acceptAssignment,
                       validator: (value, s) => s.code.value.fold(
                         (error) => error.message,
                         (r) => s.response?.fold(

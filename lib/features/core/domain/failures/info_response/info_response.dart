@@ -12,6 +12,8 @@ abstract class InfoResponse implements _$InfoResponse, Info {
   const InfoResponse._();
 
   const factory InfoResponse({
+    @JsonKey(ignore: true) String uuid,
+    @nullable String status,
     @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')

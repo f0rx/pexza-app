@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pexza/features/core/data/kconsts.dart';
 import 'package:pexza/features/home/landlord/presentation/widgets/property_listing.dart';
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
@@ -60,9 +61,7 @@ class LandlordProperties extends StatelessWidget {
             //
             VerticalSpace(height: App.longest * 0.03),
             //
-            const Flexible(
-              child: LandlordPropertyListing(),
-            ),
+            Flexible(child: LandlordPropertyListing()),
             //
             VerticalSpace(height: App.longest * 0.02),
             //
@@ -104,12 +103,15 @@ class LandlordProperties extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Material(
-                      color: Colors.white,
+                      color: Helpers.optionOf(
+                        Colors.white,
+                        AppColors.secondaryColor.shade400,
+                      ),
                       borderRadius: BorderRadius.circular(8.0),
                       child: InkWell(
                         onTap: () =>
                             navigator.pushLandlordMaintenanceRequestScreen(),
-                        splashColor: AppColors.primaryColor.shade500,
+                        splashColor: Colors.black26,
                         borderRadius: BorderRadius.circular(8.0),
                         child: SizedBox(
                           height: App.longest * 0.21,
@@ -137,7 +139,10 @@ class LandlordProperties extends StatelessWidget {
                                     "Attend to requests, repairs and maintenance services.",
                                     softWrap: true,
                                     style: TextStyle(
-                                      color: Colors.grey.shade600,
+                                      color: Helpers.optionOf(
+                                        Colors.grey.shade600,
+                                        Colors.white70,
+                                      ),
                                       fontSize: 14.5,
                                     ),
                                   ),
@@ -153,46 +158,56 @@ class LandlordProperties extends StatelessWidget {
                   HorizontalSpace(width: Helpers.appPadding),
                   //
                   Expanded(
-                    child: Material(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: InkWell(
-                        onTap: addPropertyOnPressed,
-                        splashColor: AppColors.primaryColor.shade500,
+                    child: Hero(
+                      tag: Constants.kAddEditPropertyHeroTag,
+                      child: Material(
+                        color: Helpers.optionOf(
+                          Colors.white,
+                          AppColors.secondaryColor.shade400,
+                        ),
                         borderRadius: BorderRadius.circular(8.0),
-                        child: SizedBox(
-                          height: App.longest * 0.21,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                  child: AutoSizeText(
-                                    "Add Property",
-                                    softWrap: true,
-                                    wrapWords: true,
-                                    style: TextStyle(
-                                      color: App.theme.accentColor,
-                                      fontSize: 18.0,
+                        child: InkWell(
+                          onTap: addPropertyOnPressed,
+                          splashColor: Colors.black26,
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: SizedBox(
+                            height: App.longest * 0.21,
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Flexible(
+                                    child: AutoSizeText(
+                                      "Add Property",
+                                      softWrap: true,
+                                      wrapWords: true,
+                                      style: TextStyle(
+                                        color: App.theme.accentColor,
+                                        fontSize: 18.0,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                //
-                                Flexible(
-                                  child: AutoSizeText(
-                                    "Click here to Add your new property.",
-                                    softWrap: true,
-                                    wrapWords: true,
-                                    style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontSize: 14.5,
+                                  //
+                                  Flexible(
+                                    child: AutoSizeText(
+                                      "Click here to Add your new property.",
+                                      softWrap: true,
+                                      wrapWords: true,
+                                      style: TextStyle(
+                                        color: Helpers.optionOf(
+                                          Colors.grey.shade600,
+                                          Colors.white70,
+                                        ),
+                                        fontSize: 14.5,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -202,6 +217,8 @@ class LandlordProperties extends StatelessWidget {
                 ],
               ),
             ),
+            //
+            VerticalSpace(height: Helpers.appPadding),
           ],
         ),
       ),

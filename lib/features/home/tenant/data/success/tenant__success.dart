@@ -10,9 +10,9 @@ part 'tenant__success.freezed.dart';
 @freezed
 @immutable
 abstract class TenantSuccess implements _$TenantSuccess, Success {
-  const TenantSuccess._();
-
   const factory TenantSuccess({
+    @JsonKey(ignore: true) String uuid,
+    @nullable String status,
     @required
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '')
@@ -21,6 +21,8 @@ abstract class TenantSuccess implements _$TenantSuccess, Success {
     @Default(true) @JsonKey(ignore: true) bool popRoute,
     @JsonKey(ignore: true) BottomAlertDialogPosition position,
   }) = _TenantSuccess;
+
+  const TenantSuccess._();
 
   factory TenantSuccess.fromJson(Map<String, dynamic> json) =>
       _$TenantSuccessFromJson(json);

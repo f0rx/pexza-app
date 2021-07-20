@@ -79,6 +79,10 @@ import 'package:pexza/manager/router/export.dart';
       page: VerifyEmailScreen,
       maintainState: true,
     ),
+    AdaptiveRoute(
+      page: ProfileVerificationScreen,
+      maintainState: true,
+    ),
     //////////////// Tenant Routes ////////////////////////
     AdaptiveRoute(
       page: TenantHomeScreen,

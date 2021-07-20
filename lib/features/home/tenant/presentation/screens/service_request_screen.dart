@@ -45,7 +45,7 @@ class ServiceRequestScreen extends StatelessWidget with AutoRouteWrapper {
         ),
         builder: (c, s) => PortalEntry(
           visible: c.watch<TenantMaintenanceCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
+          portal: App.loadingOverlay(Helpers.circularLoader()),
           child: this,
         ),
       ),

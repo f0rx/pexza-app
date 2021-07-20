@@ -1,6 +1,8 @@
 PODS:
   - another_flushbar (0.0.1):
     - Flutter
+  - "app_settings (3.0.0+1)":
+    - Flutter
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
@@ -138,6 +140,8 @@ PODS:
   - Reachability (3.2)
   - shared_preferences (0.0.1):
     - Flutter
+  - sign_in_with_apple (0.0.1):
+    - Flutter
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
@@ -162,6 +166,7 @@ PODS:
 
 DEPENDENCIES:
   - another_flushbar (from `.symlinks/plugins/another_flushbar/ios`)
+  - app_settings (from `.symlinks/plugins/app_settings/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Firebase/Analytics
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
@@ -174,6 +179,7 @@ DEPENDENCIES:
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - sqlite3_flutter_libs (from `.symlinks/plugins/sqlite3_flutter_libs/ios`)
 
@@ -204,6 +210,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   another_flushbar:
     :path: ".symlinks/plugins/another_flushbar/ios"
+  app_settings:
+    :path: ".symlinks/plugins/app_settings/ios"
   connectivity:
     :path: ".symlinks/plugins/connectivity/ios"
   firebase_analytics:
@@ -226,6 +234,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  sign_in_with_apple:
+    :path: ".symlinks/plugins/sign_in_with_apple/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   sqlite3_flutter_libs:
@@ -233,6 +243,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   another_flushbar: 3bb0a50768cc547ba9dd82cbb92129bf5ca7440c
+  app_settings: d103828c9f5d515c4df9ee754dabd443f7cedcf3
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
   FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3
@@ -264,6 +275,7 @@ SPEC CHECKSUMS:
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  sign_in_with_apple: 34f3f5456a45fd7ac5fb42905e2ad31dae061b4a
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   sqlite3: 8f7d2078ae27778699a622a94b853285793422a2
   sqlite3_flutter_libs: 5651f8ff48e3b44d910863c4ea5916085b1b245f

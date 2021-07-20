@@ -34,6 +34,25 @@ class _PropertyRepository implements PropertyRepository {
   }
 
   @override
+  Future<LandlordPropertyDTOList> paginate(page) async {
+    ArgumentError.checkNotNull(page, 'page');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/landlord/property',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = LandlordPropertyDTOList.fromJson(_result.data);
+    return value;
+  }
+
+  @override
   Future<LandlordPropertyDTO> create(dto) async {
     ArgumentError.checkNotNull(dto, 'dto');
     const _extra = <String, dynamic>{};

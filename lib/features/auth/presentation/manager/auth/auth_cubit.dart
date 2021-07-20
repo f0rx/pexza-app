@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
@@ -168,6 +169,38 @@ class AuthCubit extends Cubit<AuthState> {
         email: email,
         password: password,
       );
+
+      // emit auth_status whether authentication failed or not
+      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+    }
+
+    toggleLoadingIndicator();
+  }
+
+  void updateProfile() async {
+    toggleLoadingIndicator();
+
+    Either<AuthResponse, Unit> failureOrUnit;
+
+    // Start form validation
+    emit(state.copyWith(
+      validate: true,
+      authStatus: none(),
+    ));
+
+    if (state.firstName.isValid &&
+        state.lastName.isValid &&
+        state.phone.isValid &&
+        state.dateOfBirth.isValid &&
+        state.gender.isValid) {
+      // Update user profile
+      // failureOrUnit = await _auth.updateProfile(
+      //   firstName: state.firstName,
+      //   lastName: state.lastName,
+      //   phone: state.phone,
+      //   dob: state.dateOfBirth,
+      //   gender: state.gender,
+      // );
 
       // emit auth_status whether authentication failed or not
       emit(state.copyWith(authStatus: optionOf(failureOrUnit)));

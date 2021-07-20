@@ -36,6 +36,10 @@ class _$CardDataTearOff {
       @IntToBoolSerializer()
           bool verified,
       @nullable
+      @JsonKey(includeIfNull: false, name: 'is_primary')
+      @IntToBoolSerializer()
+          bool primary,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
@@ -53,6 +57,7 @@ class _$CardDataTearOff {
       type: type,
       details: details,
       verified: verified,
+      primary: primary,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -88,6 +93,10 @@ mixin _$CardData {
   @JsonKey(includeIfNull: false)
   @IntToBoolSerializer()
   bool get verified;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'is_primary')
+  @IntToBoolSerializer()
+  bool get primary;
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
@@ -129,6 +138,10 @@ abstract class $CardDataCopyWith<$Res> {
       @IntToBoolSerializer()
           bool verified,
       @nullable
+      @JsonKey(includeIfNull: false, name: 'is_primary')
+      @IntToBoolSerializer()
+          bool primary,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
@@ -159,6 +172,7 @@ class _$CardDataCopyWithImpl<$Res> implements $CardDataCopyWith<$Res> {
     Object type = freezed,
     Object details = freezed,
     Object verified = freezed,
+    Object primary = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -169,6 +183,7 @@ class _$CardDataCopyWithImpl<$Res> implements $CardDataCopyWith<$Res> {
       type: type == freezed ? _value.type : type as String,
       details: details == freezed ? _value.details : details as PaymentMetaDTO,
       verified: verified == freezed ? _value.verified : verified as bool,
+      primary: primary == freezed ? _value.primary : primary as bool,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
@@ -210,6 +225,10 @@ abstract class _$CardDataCopyWith<$Res> implements $CardDataCopyWith<$Res> {
       @IntToBoolSerializer()
           bool verified,
       @nullable
+      @JsonKey(includeIfNull: false, name: 'is_primary')
+      @IntToBoolSerializer()
+          bool primary,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
           String createdAt,
@@ -242,6 +261,7 @@ class __$CardDataCopyWithImpl<$Res> extends _$CardDataCopyWithImpl<$Res>
     Object type = freezed,
     Object details = freezed,
     Object verified = freezed,
+    Object primary = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -252,6 +272,7 @@ class __$CardDataCopyWithImpl<$Res> extends _$CardDataCopyWithImpl<$Res>
       type: type == freezed ? _value.type : type as String,
       details: details == freezed ? _value.details : details as PaymentMetaDTO,
       verified: verified == freezed ? _value.verified : verified as bool,
+      primary: primary == freezed ? _value.primary : primary as bool,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
@@ -281,6 +302,10 @@ class _$_CardData extends _CardData {
       @JsonKey(includeIfNull: false)
       @IntToBoolSerializer()
           this.verified,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'is_primary')
+      @IntToBoolSerializer()
+          this.primary,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
@@ -322,6 +347,11 @@ class _$_CardData extends _CardData {
   final bool verified;
   @override
   @nullable
+  @JsonKey(includeIfNull: false, name: 'is_primary')
+  @IntToBoolSerializer()
+  final bool primary;
+  @override
+  @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
   final String createdAt;
@@ -338,7 +368,7 @@ class _$_CardData extends _CardData {
 
   @override
   String toString() {
-    return 'CardData(id: $id, userId: $userId, type: $type, details: $details, verified: $verified, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'CardData(id: $id, userId: $userId, type: $type, details: $details, verified: $verified, primary: $primary, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -357,6 +387,9 @@ class _$_CardData extends _CardData {
             (identical(other.verified, verified) ||
                 const DeepCollectionEquality()
                     .equals(other.verified, verified)) &&
+            (identical(other.primary, primary) ||
+                const DeepCollectionEquality()
+                    .equals(other.primary, primary)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -376,6 +409,7 @@ class _$_CardData extends _CardData {
       const DeepCollectionEquality().hash(type) ^
       const DeepCollectionEquality().hash(details) ^
       const DeepCollectionEquality().hash(verified) ^
+      const DeepCollectionEquality().hash(primary) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(deletedAt);
@@ -411,6 +445,10 @@ abstract class _CardData extends CardData {
       @JsonKey(includeIfNull: false)
       @IntToBoolSerializer()
           bool verified,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'is_primary')
+      @IntToBoolSerializer()
+          bool primary,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
@@ -448,6 +486,11 @@ abstract class _CardData extends CardData {
   @JsonKey(includeIfNull: false)
   @IntToBoolSerializer()
   bool get verified;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'is_primary')
+  @IntToBoolSerializer()
+  bool get primary;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')

@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:pexza/features/auth/presentation/manager/auth/auth_cubit.dart';
 import 'package:pexza/features/core/domain/entities/field_object.dart';
 import 'package:pexza/features/core/domain/failures/field_object/field_object_exception.dart';
 import 'package:pexza/features/core/domain/validator/validator.dart';
+import 'package:pexza/utils/utils.dart';
 
 class DateTimeField extends FieldObject<DateTime> {
   static const DateTimeField DEFAULT = DateTimeField._(null);
@@ -14,6 +16,10 @@ class DateTimeField extends FieldObject<DateTime> {
           (a) => Validator.isValidDate(a),
         ),
     );
+  }
+
+  bool get isValidDateOfBirth {
+    return this.isNullOrBlank && this.getOrNull.isBefore(AuthState.lastYear);
   }
 
   const DateTimeField._(this.value);

@@ -55,7 +55,7 @@ class ViewAllApartmentScreen extends StatelessWidget with AutoRouteWrapper {
     return BlocBuilder<LandlordApartmentCubit, LandlordApartmentState>(
       builder: (c, s) => PortalEntry(
         visible: s.isLoading,
-        portal: App.circularLoadingOverlay,
+        portal: App.loadingOverlay(Helpers.circularLoader()),
         child: Visibility(
           visible: !s.isLoading && !s.apartments.isEmpty(),
           replacement: EmptyLandlordProps(

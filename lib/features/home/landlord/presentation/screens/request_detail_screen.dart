@@ -46,7 +46,7 @@ class LandlordMaintenanceRequestDetailScreen extends StatelessWidget
             p.maintenances.isEmpty() && !c.maintenances.isEmpty(),
         builder: (c, s) => PortalEntry(
           visible: c.watch<LandlordMaintenanceCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
+          portal: App.loadingOverlay(Helpers.circularLoader()),
           child: this,
         ),
       ),

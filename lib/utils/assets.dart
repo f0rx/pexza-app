@@ -55,18 +55,37 @@ mixin AppAssets {
 
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
+  ///
+  static const List<String> apartments = [
+    apartment1,
+    apartment2,
+    apartment3,
+    apartment4,
+    apartment5,
+    apartment6,
+    apartment7,
+    apartment8,
+  ];
+
+  static const List<String> images = [
+    logo,
+    user,
+    ...apartments,
+    onBoarding1,
+    onBoarding2,
+    onBoarding3,
+    owner,
+    tenant,
+    emptyProps,
+  ];
 
   static SvgPicture freePick = SvgPicture.asset(
     '$SVG_DIR/freepick.svg',
-    // height: 30,
-    // width: 30,
     fit: BoxFit.contain,
   );
 
   static SvgPicture posWithdrawal = SvgPicture.asset(
     '$SVG_DIR/pos_withdrawal.svg',
-    // height: 30,
-    // width: 30,
     fit: BoxFit.contain,
   );
 
@@ -75,6 +94,41 @@ mixin AppAssets {
     height: 18,
     width: 18,
     color: Colors.amberAccent,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture swipeCards = SvgPicture.asset(
+    '$SVG_DIR/different_cards.svg',
+    height: 40,
+    width: 40,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture accHistory = SvgPicture.asset(
+    '$SVG_DIR/profile_acchistory_icon.svg',
+    height: 40,
+    width: 40,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture rentHistory = SvgPicture.asset(
+    '$SVG_DIR/profile_renthistory_icon.svg',
+    height: 40,
+    width: 40,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture profileVerify = SvgPicture.asset(
+    '$SVG_DIR/profile_verification_icon.svg',
+    height: 40,
+    width: 40,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture profileWithdraw = SvgPicture.asset(
+    '$SVG_DIR/profile_withdraw_icon.svg',
+    height: 40,
+    width: 40,
     fit: BoxFit.contain,
   );
 

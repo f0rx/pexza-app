@@ -26,12 +26,16 @@ class TokenVerificationCubit extends Cubit<TokenVerificationState> {
     this._dataConnectionChecker,
   ) : super(TokenVerificationState.initial());
 
-  void toggleLoading([isLoading]) => emit(state.copyWith(
+  void toggleLoading([bool isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
       ));
 
   void init([Assignment assignment]) async => emit(state.copyWith(
         assignment: assignment ?? state.assignment,
+      ));
+
+  void onChanged(String value) => emit(state.copyWith(
+        code: OTPCode(value),
       ));
 
   Future<void> checkInternetAndConnectivity([bool shouldThrow = false]) async {
@@ -59,7 +63,9 @@ class TokenVerificationCubit extends Cubit<TokenVerificationState> {
 
   void resendPairingCode(Assignment assignment) {}
 
-  void acceptAssignment() async {
+  void acceptAssignment([String value]) async {
+    onChanged(value ?? state.code.getOrEmpty);
+
     toggleLoading();
 
     // Validate form errors
@@ -86,11 +92,10 @@ class TokenVerificationCubit extends Cubit<TokenVerificationState> {
         ));
       }
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -98,6 +103,8 @@ class TokenVerificationCubit extends Cubit<TokenVerificationState> {
 
   void rejectAssignment() async {
     toggleLoading();
+
+    emit(state.copyWith(response: none()));
 
     try {
       // Check if user is connected & has good internet
@@ -108,29 +115,20 @@ class TokenVerificationCubit extends Cubit<TokenVerificationState> {
       emit(state.copyWith(
         assignment: _result?.domain(),
         response: some(right(LandlordSuccess(
-          message: "Ok! The assignment was rejected.",
+          message: "Great! That assignment was rejected.",
         ))),
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
   }
 
   void cancelAssignment() {}
-
-  void onSubmitted(String value) => emit(state.copyWith(
-        code: OTPCode(value),
-      ));
-
-  void onChanged(String value) => emit(state.copyWith(
-        code: OTPCode(value),
-      ));
 
   void _handleDioFailures(DioError ex) {
     switch (ex?.type) {
