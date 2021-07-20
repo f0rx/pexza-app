@@ -16,7 +16,7 @@ abstract class BottomAlertDialog {
     bool callbackAfterClose = false,
     bool autoShow = true,
     BottomAlertDialogPosition position,
-    Function(dynamic) callback,
+    void Function(dynamic) callback,
   }) async {
     ArgumentError.checkNotNull(message, 'message');
 

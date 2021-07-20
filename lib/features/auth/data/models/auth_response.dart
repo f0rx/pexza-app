@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/core/data/models/server_field_errors/server_field_errors.dart';
 import 'package:pexza/features/core/domain/failures/failure.dart';
 import 'package:pexza/manager/serializer/server_field_error_converter.dart';
@@ -11,13 +12,14 @@ part 'auth_response.g.dart';
 
 @freezed
 @immutable
-abstract class AuthResponse implements _$AuthResponse, Response {
+abstract class AuthResponse implements _$AuthResponse, Failure, Response {
   static const int UNVERIFIED = 1101;
   static const int INVALID_RECORD = 1103;
 
   const AuthResponse._();
 
   const factory AuthResponse({
+    @JsonKey(ignore: true) String uuid,
     @nullable @JsonKey(includeIfNull: false, defaultValue: 200) int code,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     //
@@ -38,24 +40,6 @@ abstract class AuthResponse implements _$AuthResponse, Response {
     @Default(true) @JsonKey(ignore: true) bool popRoute,
     @JsonKey(ignore: true) BottomAlertDialogPosition position,
   }) = _AuthResponse;
-
-  T fold<T>({
-    T Function() is401,
-    T Function() is1101,
-    T Function() is1103,
-    @required T Function() orElse,
-  }) {
-    switch (code) {
-      case 401:
-        return is401?.call() ?? orElse?.call();
-      case AuthResponse.UNVERIFIED:
-        return is1101?.call() ?? orElse?.call();
-      case AuthResponse.INVALID_RECORD:
-        return is1103?.call() ?? orElse?.call();
-      default:
-        return (T is Widget) ? SizedBox() as T : orElse?.call();
-    }
-  }
 
   T type<T>({
     T Function() isError,

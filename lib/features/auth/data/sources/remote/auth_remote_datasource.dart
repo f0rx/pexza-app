@@ -190,7 +190,9 @@ class AuthRemoteDatasource {
           return left(
             AuthResponse.fromJson(
               e.response.data,
-            ).copyWith(code: e.response?.data['code'] ?? e.response.statusCode),
+            ).copyWith(
+              code: e.response?.data['code'] ?? e?.response?.statusCode,
+            ),
           );
         case DioErrorType.SEND_TIMEOUT:
           return left(AuthResponse.timeout());

@@ -24,15 +24,15 @@ class LandlordWalletScreen extends StatelessWidget with AutoRouteWrapper {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Toolbar(title: 'Wallet'),
-      body: SizedBox(
-        height: double.infinity,
-        child: Stack(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        controller: ScrollController(),
+        physics: Helpers.physics,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: 0.27.sh,
-                maxWidth: double.infinity,
-              ),
+            LimitedBox(
+              maxHeight: 180,
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: Helpers.appPadding,
@@ -41,71 +41,37 @@ class LandlordWalletScreen extends StatelessWidget with AutoRouteWrapper {
               ),
             ),
             //
-            Positioned.fill(
-              top: App.height * 0.25,
-              child: ClipRRect(
-                clipBehavior: Clip.antiAlias,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(36.0),
-                  topRight: Radius.circular(36.0),
-                ),
-                child: Material(
-                  color: Helpers.optionOf(
-                    Colors.white,
-                    AppColors.secondaryColor.shade400,
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(
+                horizontal: Helpers.appPadding,
+                vertical: Helpers.appPadding,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SubtitledHeader(
+                        text: 'Transaction History',
+                        fontSize: 18.0,
+                      ),
+                    ],
                   ),
-                  elevation: 3.0,
-                  type: MaterialType.card,
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Helpers.appPadding,
-                      vertical: Helpers.appPadding,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SubtitledHeader(
-                              text: 'Transaction History',
-                              fontSize: 18.0,
-                            ),
-                            //
-                            InkWell(
-                              onTap: () {},
-                              borderRadius: BorderRadius.circular(50.0),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0,
-                                  vertical: 7.0,
-                                ),
-                                child: SubtitledHeader(
-                                  text: 'See all',
-                                  fontSize: 15.0,
-                                  color: AppColors.accentColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        //
-                        VerticalSpace(height: App.shortest * 0.2),
-                        //
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "No Transaction History..",
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        ),
-                        //
-                        ...[],
-                      ],
+                  //
+                  VerticalSpace(height: App.shortest * 0.2),
+                  //
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "No Transaction History..",
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
-                ),
+                  //
+                  ...[],
+                ],
               ),
             ),
           ],

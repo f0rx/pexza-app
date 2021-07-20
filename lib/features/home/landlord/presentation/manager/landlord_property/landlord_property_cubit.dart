@@ -33,7 +33,7 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     this._dataConnectionChecker,
   ) : super(LandlordPropertyState.initial());
 
-  void toggleLoading([isLoading]) => emit(state.copyWith(
+  void toggleLoading([bool isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
       ));
 
@@ -151,7 +151,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -254,7 +255,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -283,13 +285,15 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         response: some(left(e)),
       ));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
   }
 
   void _handleDioFailures(DioError ex) {
+    log.wtf(ex);
     switch (ex?.type) {
       case DioErrorType.CONNECT_TIMEOUT:
         emit(state.copyWith(
@@ -323,7 +327,6 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
   void _handleMissingKeysException(MissingRequiredKeysException e) {
     print("Loggin unknown error-----");
-    log.wtf(e);
     emit(state.copyWith(
       response: some(left(LandlordFailure.unknown(
         message: e.message,

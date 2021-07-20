@@ -84,9 +84,9 @@ class PinInputWidget<Reactive extends Cubit<State>, State>
           keyboardType: keyboardType,
           beforeTextPaste: (String clipboard) =>
               RegExp(onlyNumbersPattern).hasMatch(clipboard.trim()),
-          onCompleted: onCompleted,
-          onSubmitted: onSubmitted,
-          onChanged: onChanged,
+          onCompleted: (_) => onCompleted?.call(_),
+          onSubmitted: (_) => onSubmitted?.call(_),
+          onChanged: (_) => onChanged?.call(_),
           validator: (_) => validator?.call(_, state),
         );
       },

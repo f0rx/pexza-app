@@ -5,6 +5,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart' hide Response;
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
@@ -129,11 +130,10 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
         currencies: _currDTO?.domain?.toImmutableList(),
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -226,6 +226,8 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
           ApartmentMergerData.fromDomain(_merger),
         );
 
+        emit(state.copyWith(validate: false));
+
         emit(state.copyWith(
           response: some(right(LandlordSuccess(
             message: "${_merger.apartment.name.getOrEmpty} was assigned to "
@@ -235,11 +237,10 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
         ));
       }
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -249,15 +250,17 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
     switch (ex?.type) {
       case DioErrorType.CONNECT_TIMEOUT:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.poorInternetConnection()),
-        )));
+          response: some(left(
+            LandlordFailure.poorInternetConnection(),
+          )),
+        ));
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.receiveTimeout()),
-        )));
+          response: some(left(
+            LandlordFailure.receiveTimeout(),
+          )),
+        ));
         break;
       case DioErrorType.RESPONSE:
         emit(state.copyWith(
@@ -268,16 +271,18 @@ class LandlordMergerCubit extends Cubit<LandlordMergerState> {
         break;
       case DioErrorType.SEND_TIMEOUT:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.timeout()),
-        )));
+          response: some(left(
+            LandlordFailure.timeout(),
+          )),
+        ));
         break;
-      case DioErrorType.DEFAULT:
+      // case DioErrorType.DEFAULT:
       default:
         emit(state.copyWith(
-            response: some(
-          left(LandlordFailure.unknown()),
-        )));
+          response: some(left(
+            LandlordFailure.unknown(),
+          )),
+        ));
     }
   }
 }

@@ -60,7 +60,7 @@ class _ViewAllPropertiesScreenState extends State<ViewAllPropertiesScreen>
 
     // final _bloc = BlocProvider.of<LandlordPropertyCubit>(context);
 
-    // if (!_bloc.state.properties.isEmpty()) _controller.forward();
+    _controller.forward();
   }
 
   @override
@@ -75,42 +75,49 @@ class _ViewAllPropertiesScreenState extends State<ViewAllPropertiesScreen>
         // listenWhen: (p, c) => p.properties.isEmpty() && !c.properties.isEmpty(),
         listenWhen: (p, c) => !p.isLoading && c.isLoading,
         listener: (c, s) => _controller.forward(from: 0.0),
-        builder: (c, s) => WallLayout(
-          layersCount: 3,
-          stonePadding: 6.0,
-          stones: s.properties.isEmpty()
-              ? List.generate(
-                  6,
-                  (i) => _buildEmpty(_PropAnimatable(
-                    index: i,
-                    count: 6,
-                  )),
-                )
-              : s.properties
-                  ?.mapIndexed((i, prop) => _buildStone(
-                        _PropAnimatable(
-                          index: i,
-                          property: prop,
-                          count: s.properties.size,
-                        ),
-                      ))
-                  ?.asList(),
-        ),
+        builder: (c, s) => s.properties.isEmpty()
+            ? _buildEmpty()
+            : WallLayout(
+                layersCount: 3,
+                stonePadding: 6.0,
+                stones: s.properties
+                    ?.mapIndexed((i, prop) => _buildStone(
+                          _PropAnimatable(
+                            index: i,
+                            property: prop,
+                            count: s.properties.size,
+                          ),
+                        ))
+                    ?.asList(),
+              ),
       ),
     );
   }
 
-  Stone _buildEmpty(_PropAnimatable prop) {
-    return Stone(
-      id: prop.index,
-      width: prop.width,
-      height: prop.height,
-      child: ScaleTransition(
-        scale: prop.animatable.animate(_controller),
-        child: Container(
-          child: Text("No properties"),
+  Widget _buildEmpty() {
+    return Wrap(
+      spacing: 0.03.sw,
+      direction: Axis.horizontal,
+      alignment: WrapAlignment.spaceEvenly,
+      children: List.generate(
+        4,
+        (i) => ClipRRect(
+          borderRadius: BorderRadius.circular(12.0),
+          child: ShimmerBottomContent(
+            width: 0.48.sw,
+            height: 0.5.sw,
+            boxColor: Colors.grey.shade400,
+            shimmerBaseColor: Helpers.optionOf(
+              Colors.grey.shade300,
+              Colors.grey.shade600,
+            ),
+            shimmerHighlightColor: Helpers.optionOf(
+              Colors.grey.shade200,
+              Colors.grey.shade500,
+            ),
+          ),
         ),
-      ),
+      ).toList(),
     );
   }
 

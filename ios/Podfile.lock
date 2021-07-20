@@ -1,6 +1,8 @@
 PODS:
   - another_flushbar (0.0.1):
     - Flutter
+  - "app_settings (3.0.0+1)":
+    - Flutter
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
@@ -164,6 +166,7 @@ PODS:
 
 DEPENDENCIES:
   - another_flushbar (from `.symlinks/plugins/another_flushbar/ios`)
+  - app_settings (from `.symlinks/plugins/app_settings/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Firebase/Analytics
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
@@ -207,6 +210,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   another_flushbar:
     :path: ".symlinks/plugins/another_flushbar/ios"
+  app_settings:
+    :path: ".symlinks/plugins/app_settings/ios"
   connectivity:
     :path: ".symlinks/plugins/connectivity/ios"
   firebase_analytics:
@@ -238,6 +243,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   another_flushbar: 3bb0a50768cc547ba9dd82cbb92129bf5ca7440c
+  app_settings: d103828c9f5d515c4df9ee754dabd443f7cedcf3
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
   FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3

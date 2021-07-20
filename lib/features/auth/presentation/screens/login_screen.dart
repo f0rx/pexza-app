@@ -123,9 +123,6 @@ class LoginScreen extends StatelessWidget with AutoRouteWrapper {
 class _LoginForm extends StatelessWidget {
   static double inputSpacing = App.height * 0.015;
 
-  final _emailFocus = FocusNode();
-  final _passwordFocus = FocusNode();
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -133,14 +130,14 @@ class _LoginForm extends StatelessWidget {
         child: Column(
           children: [
             EmailAddressField(
-              focus: _emailFocus,
-              next: _passwordFocus,
+              focus: AuthState.emailAddressFocus,
+              next: AuthState.passwordFocus,
             ),
             //
             VerticalSpace(height: inputSpacing),
             //
             PasswordInputField(
-              focus: _passwordFocus,
+              focus: AuthState.passwordFocus,
               mode: FIELD_VALIDATION.BASIC,
             ),
             //

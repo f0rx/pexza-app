@@ -13,9 +13,7 @@ import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/presentation/manager/index.dart';
 
 class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
-  static double inputSpacing = App.longest * 0.015;
-  final FocusNode _emailAddressFocus = FocusNode();
-  final FocusNode _amountFocus = FocusNode();
+  static final double inputSpacing = App.longest * 0.015;
   final LandlordProperty property;
   final LandlordApartment apartment;
 
@@ -103,7 +101,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                 keyboardType: TextInputType.emailAddress,
                 textCapitalization: TextCapitalization.none,
                 textInputAction: TextInputAction.next,
-                focusNode: _emailAddressFocus,
+                focusNode: LandlordMergerState.emailAddressFocus,
                 decoration: const InputDecoration(
                   labelText: "Tenant's E-mail Address",
                   hintText: EmailAddress.kPlaceholder,
@@ -126,8 +124,8 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                     ),
                   ),
                 ),
-                onFieldSubmitted: (_) =>
-                    FocusScope.of(context).requestFocus(_amountFocus),
+                onFieldSubmitted: (_) => FocusScope.of(context)
+                    .requestFocus(LandlordMergerState.amountFocus),
               ),
             ),
             //
@@ -309,7 +307,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                 keyboardType: TextInputType.number,
                 textCapitalization: TextCapitalization.none,
                 textInputAction: TextInputAction.done,
-                focusNode: _amountFocus,
+                focusNode: LandlordMergerState.amountFocus,
                 decoration: const InputDecoration(
                   labelText: "Amount",
                   prefixIcon: const Icon(Icons.money),

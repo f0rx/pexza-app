@@ -8,6 +8,7 @@ part of landlord__success.dart;
 
 _$_LandlordSuccess _$_$_LandlordSuccessFromJson(Map<String, dynamic> json) {
   return _$_LandlordSuccess(
+    status: json['status'] as String,
     message: json['message'] as String ?? '',
   );
 }
@@ -21,6 +22,7 @@ Map<String, dynamic> _$_$_LandlordSuccessToJson(_$_LandlordSuccess instance) {
     }
   }
 
+  writeNotNull('status', instance.status);
   writeNotNull('message', instance.message);
   return val;
 }

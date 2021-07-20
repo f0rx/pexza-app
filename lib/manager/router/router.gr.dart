@@ -224,7 +224,7 @@ class Router extends RouterBase {
     },
     OnBoardingScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => OnBoardingScreen(),
+        builder: (context) => OnBoardingScreen().wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -347,8 +347,12 @@ class Router extends RouterBase {
         orElse: () => AddNewCardScreenArguments(),
       );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) =>
-            AddNewCardScreen(key: args.key).wrappedRoute(context),
+        builder: (context) => AddNewCardScreen(
+          key: args.key,
+          intended: args.intended,
+          buttonText: args.buttonText,
+          failure: args.failure,
+        ).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -681,10 +685,18 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
       );
 
   Future<dynamic> pushAddNewCardScreen(
-          {Key key, OnNavigationRejected onReject}) =>
+          {Key key,
+          String intended,
+          String buttonText,
+          Failure failure,
+          OnNavigationRejected onReject}) =>
       push<dynamic>(
         Routes.addNewCardScreen,
-        arguments: AddNewCardScreenArguments(key: key),
+        arguments: AddNewCardScreenArguments(
+            key: key,
+            intended: intended,
+            buttonText: buttonText,
+            failure: failure),
         onReject: onReject,
       );
 
@@ -896,7 +908,11 @@ class ServiceRequestScreenArguments {
 /// AddNewCardScreen arguments holder class
 class AddNewCardScreenArguments {
   final Key key;
-  AddNewCardScreenArguments({this.key});
+  final String intended;
+  final String buttonText;
+  final Failure failure;
+  AddNewCardScreenArguments(
+      {this.key, this.intended, this.buttonText, this.failure});
 }
 
 /// SuccessfulScreen arguments holder class

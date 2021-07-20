@@ -18,7 +18,11 @@ class _$TenantSuccessTearOff {
 
 // ignore: unused_element
   _TenantSuccess call(
-      {@required
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
+          String status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
@@ -30,6 +34,8 @@ class _$TenantSuccessTearOff {
       @JsonKey(ignore: true)
           BottomAlertDialogPosition position}) {
     return _TenantSuccess(
+      uuid: uuid,
+      status: status,
       message: message,
       details: details,
       popRoute: popRoute,
@@ -49,6 +55,10 @@ const $TenantSuccess = _$TenantSuccessTearOff();
 
 /// @nodoc
 mixin _$TenantSuccess {
+  @JsonKey(ignore: true)
+  String get uuid;
+  @nullable
+  String get status;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get message;
@@ -71,16 +81,12 @@ abstract class $TenantSuccessCopyWith<$Res> {
           TenantSuccess value, $Res Function(TenantSuccess) then) =
       _$TenantSuccessCopyWithImpl<$Res>;
   $Res call(
-      {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String message,
-      @nullable
-      @JsonKey(ignore: true)
-          String details,
-      @JsonKey(ignore: true)
-          bool popRoute,
-      @JsonKey(ignore: true)
-          BottomAlertDialogPosition position});
+      {@JsonKey(ignore: true) String uuid,
+      @nullable String status,
+      @nullable @JsonKey(includeIfNull: false, defaultValue: '') String message,
+      @nullable @JsonKey(ignore: true) String details,
+      @JsonKey(ignore: true) bool popRoute,
+      @JsonKey(ignore: true) BottomAlertDialogPosition position});
 }
 
 /// @nodoc
@@ -94,12 +100,16 @@ class _$TenantSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object uuid = freezed,
+    Object status = freezed,
     Object message = freezed,
     Object details = freezed,
     Object popRoute = freezed,
     Object position = freezed,
   }) {
     return _then(_value.copyWith(
+      uuid: uuid == freezed ? _value.uuid : uuid as String,
+      status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
       popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
@@ -118,16 +128,12 @@ abstract class _$TenantSuccessCopyWith<$Res>
       __$TenantSuccessCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String message,
-      @nullable
-      @JsonKey(ignore: true)
-          String details,
-      @JsonKey(ignore: true)
-          bool popRoute,
-      @JsonKey(ignore: true)
-          BottomAlertDialogPosition position});
+      {@JsonKey(ignore: true) String uuid,
+      @nullable String status,
+      @nullable @JsonKey(includeIfNull: false, defaultValue: '') String message,
+      @nullable @JsonKey(ignore: true) String details,
+      @JsonKey(ignore: true) bool popRoute,
+      @JsonKey(ignore: true) BottomAlertDialogPosition position});
 }
 
 /// @nodoc
@@ -143,12 +149,16 @@ class __$TenantSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object uuid = freezed,
+    Object status = freezed,
     Object message = freezed,
     Object details = freezed,
     Object popRoute = freezed,
     Object position = freezed,
   }) {
     return _then(_TenantSuccess(
+      uuid: uuid == freezed ? _value.uuid : uuid as String,
+      status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
       popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
@@ -164,7 +174,11 @@ class __$TenantSuccessCopyWithImpl<$Res>
 /// @nodoc
 class _$_TenantSuccess extends _TenantSuccess {
   const _$_TenantSuccess(
-      {@required
+      {@JsonKey(ignore: true)
+          this.uuid,
+      @nullable
+          this.status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.message,
@@ -182,6 +196,12 @@ class _$_TenantSuccess extends _TenantSuccess {
       _$_$_TenantSuccessFromJson(json);
 
   @override
+  @JsonKey(ignore: true)
+  final String uuid;
+  @override
+  @nullable
+  final String status;
+  @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   final String message;
@@ -198,13 +218,17 @@ class _$_TenantSuccess extends _TenantSuccess {
 
   @override
   String toString() {
-    return 'TenantSuccess(message: $message, details: $details, popRoute: $popRoute, position: $position)';
+    return 'TenantSuccess(uuid: $uuid, status: $status, message: $message, details: $details, popRoute: $popRoute, position: $position)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _TenantSuccess &&
+            (identical(other.uuid, uuid) ||
+                const DeepCollectionEquality().equals(other.uuid, uuid)) &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
@@ -222,6 +246,8 @@ class _$_TenantSuccess extends _TenantSuccess {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(uuid) ^
+      const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(details) ^
       const DeepCollectionEquality().hash(popRoute) ^
@@ -241,7 +267,11 @@ class _$_TenantSuccess extends _TenantSuccess {
 abstract class _TenantSuccess extends TenantSuccess {
   const _TenantSuccess._() : super._();
   const factory _TenantSuccess(
-      {@required
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
+          String status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
@@ -256,6 +286,12 @@ abstract class _TenantSuccess extends TenantSuccess {
   factory _TenantSuccess.fromJson(Map<String, dynamic> json) =
       _$_TenantSuccess.fromJson;
 
+  @override
+  @JsonKey(ignore: true)
+  String get uuid;
+  @override
+  @nullable
+  String get status;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')

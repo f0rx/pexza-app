@@ -38,8 +38,10 @@ abstract class AuthFacade extends Facade {
     DisplayName firstName,
     DisplayName lastName,
     Phone phone,
+    DateTimeField dob,
     Gender gender,
-    DateTimeField dateOfBirth,
+    Password currentPassword,
+    Password newPassword,
   });
 
   // Future<Either<AuthResponse, Unit>> changePassword({

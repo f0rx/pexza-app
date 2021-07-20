@@ -72,4 +72,41 @@ class _DebitCardRepository implements DebitCardRepository {
     final value = CardVerificationDTO.fromJson(_result.data);
     return value;
   }
+
+  @override
+  Future<TenantSuccess> primary(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/tenant/card/$id/primary',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = TenantSuccess.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<TenantSuccess> delete(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>('/tenant/card/$id',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'DELETE',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = TenantSuccess.fromJson(_result.data);
+    return value;
+  }
 }

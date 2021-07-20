@@ -393,7 +393,7 @@ class _PropertyDetailBody extends StatelessWidget {
                                   ),
                                 ),
                                 //
-                                Spacer(),
+                                // Spacer(),
                                 //
                                 Flexible(
                                   child: Column(

@@ -17,6 +17,7 @@ class _$DebitCardStateTearOff {
   _DebitCardState call(
       {bool isLoading = false,
       bool validate = false,
+      bool hasShownFailureParam = false,
       @required DebitCardName cardName,
       @required DebitCardNumber cardNumber,
       @required DebitCardExpiryDate expiryDate,
@@ -29,6 +30,7 @@ class _$DebitCardStateTearOff {
     return _DebitCardState(
       isLoading: isLoading,
       validate: validate,
+      hasShownFailureParam: hasShownFailureParam,
       cardName: cardName,
       cardNumber: cardNumber,
       expiryDate: expiryDate,
@@ -50,6 +52,7 @@ const $DebitCardState = _$DebitCardStateTearOff();
 mixin _$DebitCardState {
   bool get isLoading;
   bool get validate;
+  bool get hasShownFailureParam;
   DebitCardName get cardName;
   DebitCardNumber get cardNumber;
   DebitCardExpiryDate get expiryDate;
@@ -73,6 +76,7 @@ abstract class $DebitCardStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool validate,
+      bool hasShownFailureParam,
       DebitCardName cardName,
       DebitCardNumber cardNumber,
       DebitCardExpiryDate expiryDate,
@@ -99,6 +103,7 @@ class _$DebitCardStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object validate = freezed,
+    Object hasShownFailureParam = freezed,
     Object cardName = freezed,
     Object cardNumber = freezed,
     Object expiryDate = freezed,
@@ -112,6 +117,9 @@ class _$DebitCardStateCopyWithImpl<$Res>
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
+      hasShownFailureParam: hasShownFailureParam == freezed
+          ? _value.hasShownFailureParam
+          : hasShownFailureParam as bool,
       cardName:
           cardName == freezed ? _value.cardName : cardName as DebitCardName,
       cardNumber: cardNumber == freezed
@@ -158,6 +166,7 @@ abstract class _$DebitCardStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool validate,
+      bool hasShownFailureParam,
       DebitCardName cardName,
       DebitCardNumber cardNumber,
       DebitCardExpiryDate expiryDate,
@@ -187,6 +196,7 @@ class __$DebitCardStateCopyWithImpl<$Res>
   $Res call({
     Object isLoading = freezed,
     Object validate = freezed,
+    Object hasShownFailureParam = freezed,
     Object cardName = freezed,
     Object cardNumber = freezed,
     Object expiryDate = freezed,
@@ -200,6 +210,9 @@ class __$DebitCardStateCopyWithImpl<$Res>
     return _then(_DebitCardState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
+      hasShownFailureParam: hasShownFailureParam == freezed
+          ? _value.hasShownFailureParam
+          : hasShownFailureParam as bool,
       cardName:
           cardName == freezed ? _value.cardName : cardName as DebitCardName,
       cardNumber: cardNumber == freezed
@@ -231,6 +244,7 @@ class _$_DebitCardState extends _DebitCardState {
   const _$_DebitCardState(
       {this.isLoading = false,
       this.validate = false,
+      this.hasShownFailureParam = false,
       @required this.cardName,
       @required this.cardNumber,
       @required this.expiryDate,
@@ -242,6 +256,7 @@ class _$_DebitCardState extends _DebitCardState {
       this.response = const None()})
       : assert(isLoading != null),
         assert(validate != null),
+        assert(hasShownFailureParam != null),
         assert(cardName != null),
         assert(cardNumber != null),
         assert(expiryDate != null),
@@ -258,6 +273,9 @@ class _$_DebitCardState extends _DebitCardState {
   @JsonKey(defaultValue: false)
   @override
   final bool validate;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool hasShownFailureParam;
   @override
   final DebitCardName cardName;
   @override
@@ -282,7 +300,7 @@ class _$_DebitCardState extends _DebitCardState {
 
   @override
   String toString() {
-    return 'DebitCardState(isLoading: $isLoading, validate: $validate, cardName: $cardName, cardNumber: $cardNumber, expiryDate: $expiryDate, cardCVV: $cardCVV, pin: $pin, description: $description, currentDebitCard: $currentDebitCard, debitCards: $debitCards, response: $response)';
+    return 'DebitCardState(isLoading: $isLoading, validate: $validate, hasShownFailureParam: $hasShownFailureParam, cardName: $cardName, cardNumber: $cardNumber, expiryDate: $expiryDate, cardCVV: $cardCVV, pin: $pin, description: $description, currentDebitCard: $currentDebitCard, debitCards: $debitCards, response: $response)';
   }
 
   @override
@@ -295,6 +313,9 @@ class _$_DebitCardState extends _DebitCardState {
             (identical(other.validate, validate) ||
                 const DeepCollectionEquality()
                     .equals(other.validate, validate)) &&
+            (identical(other.hasShownFailureParam, hasShownFailureParam) ||
+                const DeepCollectionEquality().equals(
+                    other.hasShownFailureParam, hasShownFailureParam)) &&
             (identical(other.cardName, cardName) ||
                 const DeepCollectionEquality()
                     .equals(other.cardName, cardName)) &&
@@ -328,6 +349,7 @@ class _$_DebitCardState extends _DebitCardState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(validate) ^
+      const DeepCollectionEquality().hash(hasShownFailureParam) ^
       const DeepCollectionEquality().hash(cardName) ^
       const DeepCollectionEquality().hash(cardNumber) ^
       const DeepCollectionEquality().hash(expiryDate) ^
@@ -349,6 +371,7 @@ abstract class _DebitCardState extends DebitCardState {
   const factory _DebitCardState(
       {bool isLoading,
       bool validate,
+      bool hasShownFailureParam,
       @required DebitCardName cardName,
       @required DebitCardNumber cardNumber,
       @required DebitCardExpiryDate expiryDate,
@@ -363,6 +386,8 @@ abstract class _DebitCardState extends DebitCardState {
   bool get isLoading;
   @override
   bool get validate;
+  @override
+  bool get hasShownFailureParam;
   @override
   DebitCardName get cardName;
   @override

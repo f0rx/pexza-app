@@ -11,6 +11,7 @@ import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pexza/features/auth/presentation/manager/watcher/auth_watcher_cubit.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/manager/theme/theme.dart';
 import 'package:pexza/utils/utils.dart';
@@ -100,19 +101,18 @@ class Helpers {
   static Color computeLuminance(Color color) =>
       color.computeLuminance() > 0.5 ? Colors.black : Colors.white;
 
+  static bool checkIsBrendan(BuildContext context) {
+    final email = BlocProvider.of<AuthWatcherCubit>(context).state.user?.email;
+    return (email?.getOrEmpty?.caseInsensitiveContains("ejike.br") ?? false) ||
+        (email?.getOrEmpty?.caseInsensitiveContains("forx.anonaddy.com") ??
+            false);
+  }
+
   static Future<void> precache(BuildContext context) async {
     context ??= App.context;
-    await precacheImage(AssetImage(AppAssets.onBoarding1), context);
-    await precacheImage(AssetImage(AppAssets.onBoarding2), context);
-    await precacheImage(AssetImage(AppAssets.onBoarding3), context);
-    await precacheImage(AssetImage(AppAssets.apartment1), context);
-    await precacheImage(AssetImage(AppAssets.apartment2), context);
-    await precacheImage(AssetImage(AppAssets.apartment3), context);
-    await precacheImage(AssetImage(AppAssets.apartment4), context);
-    await precacheImage(AssetImage(AppAssets.apartment5), context);
-    await precacheImage(AssetImage(AppAssets.apartment6), context);
-    await precacheImage(AssetImage(AppAssets.apartment7), context);
-    await precacheImage(AssetImage(AppAssets.apartment8), context);
+    AppAssets.images.forEach(
+      (img) async => await precacheImage(AssetImage(img), context),
+    );
   }
 
   static String hhmmss([Duration duration = Duration.zero]) {
