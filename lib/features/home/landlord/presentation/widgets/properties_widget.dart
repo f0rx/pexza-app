@@ -61,7 +61,7 @@ class LandlordProperties extends StatelessWidget {
             //
             VerticalSpace(height: App.longest * 0.03),
             //
-            const Flexible(child: LandlordPropertyListing()),
+            Flexible(child: LandlordPropertyListing()),
             //
             VerticalSpace(height: App.longest * 0.02),
             //
