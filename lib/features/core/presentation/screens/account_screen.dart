@@ -133,7 +133,7 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                 title: AutoSizeText("Account Verification"),
                 leading: AppAssets.profileVerify,
                 trailing: Icon(Icons.navigate_next_rounded, size: 27),
-                onTap: () {},
+                onTap: () => navigator.pushProfileVerificationScreen(),
               ),
               //
               BlocBuilder<AuthWatcherCubit, AuthWatcherState>(

@@ -97,20 +97,6 @@ class SettingsScreen extends StatelessWidget with AutoRouteWrapper {
                       children: ListTile.divideTiles(
                         context: context,
                         tiles: [
-                          Visibility(
-                            visible: context
-                                .watch<AuthWatcherCubit>()
-                                .state
-                                .user
-                                .role
-                                .isTenant,
-                            child: ListTile(
-                              title: AutoSizeText("My Saved Cards"),
-                              trailing: Icon(Icons.navigate_next_rounded),
-                              onTap: () => navigator.pushSavedCardScreen(),
-                            ),
-                          ),
-                          //
                           SwitchListTile.adaptive(
                             value:
                                 BlocProvider.of<ThemeCubit>(context).isDarkMode,
