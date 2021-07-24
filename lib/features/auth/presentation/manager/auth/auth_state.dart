@@ -28,7 +28,7 @@ abstract class AuthState with _$AuthState {
     @Default(false) bool shouldGlow,
     @Default(false) bool validate,
     @Default(true) bool passwordHidden,
-    @Default(const None()) Option<Either<AuthResponse, Unit>> authStatus,
+    @Default(const None()) Option<Either<AuthResponse, Response>> authStatus,
   }) = _AuthState;
 
   const AuthState._();
@@ -42,7 +42,7 @@ abstract class AuthState with _$AuthState {
         region: Country.NG,
         dateOfBirth: DateTimeField(null),
         passwordConfirmation: Password(""),
-        gender: Gender(GenderType.Male),
+        gender: Gender(GenderType.male),
         emailToken: EmailTokenField(""),
       );
 }

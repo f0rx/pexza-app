@@ -15,11 +15,13 @@ class _$BankAccountDetailTearOff {
 
 // ignore: unused_element
   _BankAccountDetail call(
-      {@nullable BasicTextField<int> bankId,
+      {@nullable UniqueId<int> id,
+      @nullable BasicTextField<int> bankId,
       @nullable BasicTextField<String> accountNumber,
       @nullable BasicTextField<String> accountName,
       @nullable Bank bank}) {
     return _BankAccountDetail(
+      id: id,
       bankId: bankId,
       accountNumber: accountNumber,
       accountName: accountName,
@@ -34,6 +36,8 @@ const $BankAccountDetail = _$BankAccountDetailTearOff();
 
 /// @nodoc
 mixin _$BankAccountDetail {
+  @nullable
+  UniqueId<int> get id;
   @nullable
   BasicTextField<int> get bankId;
   @nullable
@@ -53,7 +57,8 @@ abstract class $BankAccountDetailCopyWith<$Res> {
           BankAccountDetail value, $Res Function(BankAccountDetail) then) =
       _$BankAccountDetailCopyWithImpl<$Res>;
   $Res call(
-      {@nullable BasicTextField<int> bankId,
+      {@nullable UniqueId<int> id,
+      @nullable BasicTextField<int> bankId,
       @nullable BasicTextField<String> accountNumber,
       @nullable BasicTextField<String> accountName,
       @nullable Bank bank});
@@ -72,12 +77,14 @@ class _$BankAccountDetailCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object id = freezed,
     Object bankId = freezed,
     Object accountNumber = freezed,
     Object accountName = freezed,
     Object bank = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed ? _value.id : id as UniqueId<int>,
       bankId: bankId == freezed ? _value.bankId : bankId as BasicTextField<int>,
       accountNumber: accountNumber == freezed
           ? _value.accountNumber
@@ -108,7 +115,8 @@ abstract class _$BankAccountDetailCopyWith<$Res>
       __$BankAccountDetailCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable BasicTextField<int> bankId,
+      {@nullable UniqueId<int> id,
+      @nullable BasicTextField<int> bankId,
       @nullable BasicTextField<String> accountNumber,
       @nullable BasicTextField<String> accountName,
       @nullable Bank bank});
@@ -130,12 +138,14 @@ class __$BankAccountDetailCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object id = freezed,
     Object bankId = freezed,
     Object accountNumber = freezed,
     Object accountName = freezed,
     Object bank = freezed,
   }) {
     return _then(_BankAccountDetail(
+      id: id == freezed ? _value.id : id as UniqueId<int>,
       bankId: bankId == freezed ? _value.bankId : bankId as BasicTextField<int>,
       accountNumber: accountNumber == freezed
           ? _value.accountNumber
@@ -151,12 +161,16 @@ class __$BankAccountDetailCopyWithImpl<$Res>
 /// @nodoc
 class _$_BankAccountDetail extends _BankAccountDetail {
   const _$_BankAccountDetail(
-      {@nullable this.bankId,
+      {@nullable this.id,
+      @nullable this.bankId,
       @nullable this.accountNumber,
       @nullable this.accountName,
       @nullable this.bank})
       : super._();
 
+  @override
+  @nullable
+  final UniqueId<int> id;
   @override
   @nullable
   final BasicTextField<int> bankId;
@@ -172,13 +186,15 @@ class _$_BankAccountDetail extends _BankAccountDetail {
 
   @override
   String toString() {
-    return 'BankAccountDetail(bankId: $bankId, accountNumber: $accountNumber, accountName: $accountName, bank: $bank)';
+    return 'BankAccountDetail(id: $id, bankId: $bankId, accountNumber: $accountNumber, accountName: $accountName, bank: $bank)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _BankAccountDetail &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.bankId, bankId) ||
                 const DeepCollectionEquality().equals(other.bankId, bankId)) &&
             (identical(other.accountNumber, accountNumber) ||
@@ -194,6 +210,7 @@ class _$_BankAccountDetail extends _BankAccountDetail {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(bankId) ^
       const DeepCollectionEquality().hash(accountNumber) ^
       const DeepCollectionEquality().hash(accountName) ^
@@ -208,11 +225,15 @@ class _$_BankAccountDetail extends _BankAccountDetail {
 abstract class _BankAccountDetail extends BankAccountDetail {
   const _BankAccountDetail._() : super._();
   const factory _BankAccountDetail(
-      {@nullable BasicTextField<int> bankId,
+      {@nullable UniqueId<int> id,
+      @nullable BasicTextField<int> bankId,
       @nullable BasicTextField<String> accountNumber,
       @nullable BasicTextField<String> accountName,
       @nullable Bank bank}) = _$_BankAccountDetail;
 
+  @override
+  @nullable
+  UniqueId<int> get id;
   @override
   @nullable
   BasicTextField<int> get bankId;

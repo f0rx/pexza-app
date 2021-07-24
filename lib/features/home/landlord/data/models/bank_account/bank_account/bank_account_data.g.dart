@@ -9,8 +9,9 @@ part of bank_account_data.dart;
 _$_BankAccountData _$_$_BankAccountDataFromJson(Map<String, dynamic> json) {
   return _$_BankAccountData(
     id: json['id'] as int,
-    userId: json['user_id'] as int,
+    userId: const IntegerSerializer().fromJson(json['user_id']),
     type: json['type'] as String ?? '',
+    descriptions: json['descriptions'] as String ?? '',
     details: json['details'] == null
         ? null
         : AccountDetailDTO.fromJson(json['details'] as Map<String, dynamic>),
@@ -30,8 +31,9 @@ Map<String, dynamic> _$_$_BankAccountDataToJson(_$_BankAccountData instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('user_id', instance.userId);
+  writeNotNull('user_id', const IntegerSerializer().toJson(instance.userId));
   writeNotNull('type', instance.type);
+  writeNotNull('descriptions', instance.descriptions);
   writeNotNull('details', instance.details?.toJson());
   writeNotNull('created_at', instance.createdAt);
   writeNotNull('updated_at', instance.updatedAt);

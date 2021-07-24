@@ -16,9 +16,7 @@ import 'package:pexza/widgets/widgets.dart';
 class LandlordBankDetailsScreen extends StatelessWidget with AutoRouteWrapper {
   final FocusNode _accountNumberFocus = FocusNode();
 
-  LandlordBankDetailsScreen({
-    Key key,
-  }) : super(key: key);
+  LandlordBankDetailsScreen({Key key}) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -60,8 +58,12 @@ class LandlordBankDetailsScreen extends StatelessWidget with AutoRouteWrapper {
               (_) => null,
               (r) => r.fold(
                 success: (s) => s.popRoute == true
-                    ? (_) =>
-                        navigator.popAndPush(Routes.landlordWithdrawalScreen)
+                    ? (_) {
+                        do {
+                          navigator.pop(true);
+                        } while (App.currentRoute ==
+                            Routes.landlordBankDetailsScreen);
+                      }
                     : null,
               ),
             ),
@@ -75,7 +77,7 @@ class LandlordBankDetailsScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Toolbar(),
+      appBar: Toolbar(title: 'Add Bank Account'),
       body: Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,

@@ -5,7 +5,7 @@ import 'package:pexza/features/core/domain/failures/field_object/field_object_ex
 import 'package:pexza/features/core/domain/validator/validator.dart';
 
 class Gender extends FieldObject<GenderType> {
-  static const Gender DEFAULT = Gender._(Right(GenderType.Others));
+  static const Gender DEFAULT = Gender._(Right(GenderType.others));
   final Either<FieldObjectException<String>, GenderType> value;
 
   factory Gender(GenderType type) =>

@@ -18,6 +18,9 @@ class _$FloorUserTearOff {
       {@primaryKey
           int id,
       @nullable
+      @ColumnInfo(name: 'verification_status')
+          ProfileVerificationStatus status,
+      @nullable
       @ColumnInfo(name: 'balance')
           int accountBalance,
       @nullable
@@ -48,11 +51,20 @@ class _$FloorUserTearOff {
       @ColumnInfo(name: 'verified_at')
           bool isEmailVerified,
       @nullable
+      @ColumnInfo(name: 'unreadNotifications')
+          int unreadNotifications,
+      @nullable
+      @ColumnInfo(name: 'hasPendingAssignment')
+          bool hasPendingAssignment,
+      @nullable
       @ColumnInfo(name: 'verification_sent_at')
           String verificationCodeSentAt,
       @nullable
       @ColumnInfo(name: 'forgot_password_code_sent_at')
           String forgotPasswordCodeSentAt,
+      @nullable
+      @ColumnInfo(name: 'last_seen_at')
+          DateTime lastSeenAt,
       @nullable
       @ColumnInfo(name: 'created_at')
           DateTime createdAt,
@@ -64,6 +76,7 @@ class _$FloorUserTearOff {
           DateTime deletedAt}) {
     return _FloorUser(
       id: id,
+      status: status,
       accountBalance: accountBalance,
       role: role,
       token: token,
@@ -77,8 +90,11 @@ class _$FloorUserTearOff {
       password: password,
       photo: photo,
       isEmailVerified: isEmailVerified,
+      unreadNotifications: unreadNotifications,
+      hasPendingAssignment: hasPendingAssignment,
       verificationCodeSentAt: verificationCodeSentAt,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt,
+      lastSeenAt: lastSeenAt,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -94,6 +110,9 @@ const $FloorUser = _$FloorUserTearOff();
 mixin _$FloorUser {
   @primaryKey
   int get id;
+  @nullable
+  @ColumnInfo(name: 'verification_status')
+  ProfileVerificationStatus get status;
   @nullable
   @ColumnInfo(name: 'balance')
   int get accountBalance;
@@ -125,11 +144,20 @@ mixin _$FloorUser {
   @ColumnInfo(name: 'verified_at')
   bool get isEmailVerified;
   @nullable
+  @ColumnInfo(name: 'unreadNotifications')
+  int get unreadNotifications;
+  @nullable
+  @ColumnInfo(name: 'hasPendingAssignment')
+  bool get hasPendingAssignment;
+  @nullable
   @ColumnInfo(name: 'verification_sent_at')
   String get verificationCodeSentAt;
   @nullable
   @ColumnInfo(name: 'forgot_password_code_sent_at')
   String get forgotPasswordCodeSentAt;
+  @nullable
+  @ColumnInfo(name: 'last_seen_at')
+  DateTime get lastSeenAt;
   @nullable
   @ColumnInfo(name: 'created_at')
   DateTime get createdAt;
@@ -152,6 +180,9 @@ abstract class $FloorUserCopyWith<$Res> {
       {@primaryKey
           int id,
       @nullable
+      @ColumnInfo(name: 'verification_status')
+          ProfileVerificationStatus status,
+      @nullable
       @ColumnInfo(name: 'balance')
           int accountBalance,
       @nullable
@@ -182,11 +213,20 @@ abstract class $FloorUserCopyWith<$Res> {
       @ColumnInfo(name: 'verified_at')
           bool isEmailVerified,
       @nullable
+      @ColumnInfo(name: 'unreadNotifications')
+          int unreadNotifications,
+      @nullable
+      @ColumnInfo(name: 'hasPendingAssignment')
+          bool hasPendingAssignment,
+      @nullable
       @ColumnInfo(name: 'verification_sent_at')
           String verificationCodeSentAt,
       @nullable
       @ColumnInfo(name: 'forgot_password_code_sent_at')
           String forgotPasswordCodeSentAt,
+      @nullable
+      @ColumnInfo(name: 'last_seen_at')
+          DateTime lastSeenAt,
       @nullable
       @ColumnInfo(name: 'created_at')
           DateTime createdAt,
@@ -209,6 +249,7 @@ class _$FloorUserCopyWithImpl<$Res> implements $FloorUserCopyWith<$Res> {
   @override
   $Res call({
     Object id = freezed,
+    Object status = freezed,
     Object accountBalance = freezed,
     Object role = freezed,
     Object token = freezed,
@@ -222,14 +263,20 @@ class _$FloorUserCopyWithImpl<$Res> implements $FloorUserCopyWith<$Res> {
     Object password = freezed,
     Object photo = freezed,
     Object isEmailVerified = freezed,
+    Object unreadNotifications = freezed,
+    Object hasPendingAssignment = freezed,
     Object verificationCodeSentAt = freezed,
     Object forgotPasswordCodeSentAt = freezed,
+    Object lastSeenAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
+      status: status == freezed
+          ? _value.status
+          : status as ProfileVerificationStatus,
       accountBalance: accountBalance == freezed
           ? _value.accountBalance
           : accountBalance as int,
@@ -248,12 +295,20 @@ class _$FloorUserCopyWithImpl<$Res> implements $FloorUserCopyWith<$Res> {
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
+      unreadNotifications: unreadNotifications == freezed
+          ? _value.unreadNotifications
+          : unreadNotifications as int,
+      hasPendingAssignment: hasPendingAssignment == freezed
+          ? _value.hasPendingAssignment
+          : hasPendingAssignment as bool,
       verificationCodeSentAt: verificationCodeSentAt == freezed
           ? _value.verificationCodeSentAt
           : verificationCodeSentAt as String,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
           ? _value.forgotPasswordCodeSentAt
           : forgotPasswordCodeSentAt as String,
+      lastSeenAt:
+          lastSeenAt == freezed ? _value.lastSeenAt : lastSeenAt as DateTime,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -273,6 +328,9 @@ abstract class _$FloorUserCopyWith<$Res> implements $FloorUserCopyWith<$Res> {
   $Res call(
       {@primaryKey
           int id,
+      @nullable
+      @ColumnInfo(name: 'verification_status')
+          ProfileVerificationStatus status,
       @nullable
       @ColumnInfo(name: 'balance')
           int accountBalance,
@@ -304,11 +362,20 @@ abstract class _$FloorUserCopyWith<$Res> implements $FloorUserCopyWith<$Res> {
       @ColumnInfo(name: 'verified_at')
           bool isEmailVerified,
       @nullable
+      @ColumnInfo(name: 'unreadNotifications')
+          int unreadNotifications,
+      @nullable
+      @ColumnInfo(name: 'hasPendingAssignment')
+          bool hasPendingAssignment,
+      @nullable
       @ColumnInfo(name: 'verification_sent_at')
           String verificationCodeSentAt,
       @nullable
       @ColumnInfo(name: 'forgot_password_code_sent_at')
           String forgotPasswordCodeSentAt,
+      @nullable
+      @ColumnInfo(name: 'last_seen_at')
+          DateTime lastSeenAt,
       @nullable
       @ColumnInfo(name: 'created_at')
           DateTime createdAt,
@@ -332,6 +399,7 @@ class __$FloorUserCopyWithImpl<$Res> extends _$FloorUserCopyWithImpl<$Res>
   @override
   $Res call({
     Object id = freezed,
+    Object status = freezed,
     Object accountBalance = freezed,
     Object role = freezed,
     Object token = freezed,
@@ -345,14 +413,20 @@ class __$FloorUserCopyWithImpl<$Res> extends _$FloorUserCopyWithImpl<$Res>
     Object password = freezed,
     Object photo = freezed,
     Object isEmailVerified = freezed,
+    Object unreadNotifications = freezed,
+    Object hasPendingAssignment = freezed,
     Object verificationCodeSentAt = freezed,
     Object forgotPasswordCodeSentAt = freezed,
+    Object lastSeenAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
   }) {
     return _then(_FloorUser(
       id: id == freezed ? _value.id : id as int,
+      status: status == freezed
+          ? _value.status
+          : status as ProfileVerificationStatus,
       accountBalance: accountBalance == freezed
           ? _value.accountBalance
           : accountBalance as int,
@@ -371,12 +445,20 @@ class __$FloorUserCopyWithImpl<$Res> extends _$FloorUserCopyWithImpl<$Res>
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
+      unreadNotifications: unreadNotifications == freezed
+          ? _value.unreadNotifications
+          : unreadNotifications as int,
+      hasPendingAssignment: hasPendingAssignment == freezed
+          ? _value.hasPendingAssignment
+          : hasPendingAssignment as bool,
       verificationCodeSentAt: verificationCodeSentAt == freezed
           ? _value.verificationCodeSentAt
           : verificationCodeSentAt as String,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
           ? _value.forgotPasswordCodeSentAt
           : forgotPasswordCodeSentAt as String,
+      lastSeenAt:
+          lastSeenAt == freezed ? _value.lastSeenAt : lastSeenAt as DateTime,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -394,6 +476,9 @@ class _$_FloorUser extends _FloorUser {
   const _$_FloorUser(
       {@primaryKey
           this.id,
+      @nullable
+      @ColumnInfo(name: 'verification_status')
+          this.status,
       @nullable
       @ColumnInfo(name: 'balance')
           this.accountBalance,
@@ -425,11 +510,20 @@ class _$_FloorUser extends _FloorUser {
       @ColumnInfo(name: 'verified_at')
           this.isEmailVerified,
       @nullable
+      @ColumnInfo(name: 'unreadNotifications')
+          this.unreadNotifications,
+      @nullable
+      @ColumnInfo(name: 'hasPendingAssignment')
+          this.hasPendingAssignment,
+      @nullable
       @ColumnInfo(name: 'verification_sent_at')
           this.verificationCodeSentAt,
       @nullable
       @ColumnInfo(name: 'forgot_password_code_sent_at')
           this.forgotPasswordCodeSentAt,
+      @nullable
+      @ColumnInfo(name: 'last_seen_at')
+          this.lastSeenAt,
       @nullable
       @ColumnInfo(name: 'created_at')
           this.createdAt,
@@ -444,6 +538,10 @@ class _$_FloorUser extends _FloorUser {
   @override
   @primaryKey
   final int id;
+  @override
+  @nullable
+  @ColumnInfo(name: 'verification_status')
+  final ProfileVerificationStatus status;
   @override
   @nullable
   @ColumnInfo(name: 'balance')
@@ -489,12 +587,24 @@ class _$_FloorUser extends _FloorUser {
   final bool isEmailVerified;
   @override
   @nullable
+  @ColumnInfo(name: 'unreadNotifications')
+  final int unreadNotifications;
+  @override
+  @nullable
+  @ColumnInfo(name: 'hasPendingAssignment')
+  final bool hasPendingAssignment;
+  @override
+  @nullable
   @ColumnInfo(name: 'verification_sent_at')
   final String verificationCodeSentAt;
   @override
   @nullable
   @ColumnInfo(name: 'forgot_password_code_sent_at')
   final String forgotPasswordCodeSentAt;
+  @override
+  @nullable
+  @ColumnInfo(name: 'last_seen_at')
+  final DateTime lastSeenAt;
   @override
   @nullable
   @ColumnInfo(name: 'created_at')
@@ -510,7 +620,7 @@ class _$_FloorUser extends _FloorUser {
 
   @override
   String toString() {
-    return 'FloorUser(id: $id, accountBalance: $accountBalance, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'FloorUser(id: $id, status: $status, accountBalance: $accountBalance, role: $role, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, unreadNotifications: $unreadNotifications, hasPendingAssignment: $hasPendingAssignment, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, lastSeenAt: $lastSeenAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -519,6 +629,8 @@ class _$_FloorUser extends _FloorUser {
         (other is _FloorUser &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
             (identical(other.accountBalance, accountBalance) ||
                 const DeepCollectionEquality()
                     .equals(other.accountBalance, accountBalance)) &&
@@ -552,6 +664,12 @@ class _$_FloorUser extends _FloorUser {
             (identical(other.isEmailVerified, isEmailVerified) ||
                 const DeepCollectionEquality()
                     .equals(other.isEmailVerified, isEmailVerified)) &&
+            (identical(other.unreadNotifications, unreadNotifications) ||
+                const DeepCollectionEquality()
+                    .equals(other.unreadNotifications, unreadNotifications)) &&
+            (identical(other.hasPendingAssignment, hasPendingAssignment) ||
+                const DeepCollectionEquality().equals(
+                    other.hasPendingAssignment, hasPendingAssignment)) &&
             (identical(other.verificationCodeSentAt, verificationCodeSentAt) ||
                 const DeepCollectionEquality().equals(
                     other.verificationCodeSentAt, verificationCodeSentAt)) &&
@@ -560,6 +678,9 @@ class _$_FloorUser extends _FloorUser {
                 const DeepCollectionEquality().equals(
                     other.forgotPasswordCodeSentAt,
                     forgotPasswordCodeSentAt)) &&
+            (identical(other.lastSeenAt, lastSeenAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastSeenAt, lastSeenAt)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -575,6 +696,7 @@ class _$_FloorUser extends _FloorUser {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(accountBalance) ^
       const DeepCollectionEquality().hash(role) ^
       const DeepCollectionEquality().hash(token) ^
@@ -588,8 +710,11 @@ class _$_FloorUser extends _FloorUser {
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(isEmailVerified) ^
+      const DeepCollectionEquality().hash(unreadNotifications) ^
+      const DeepCollectionEquality().hash(hasPendingAssignment) ^
       const DeepCollectionEquality().hash(verificationCodeSentAt) ^
       const DeepCollectionEquality().hash(forgotPasswordCodeSentAt) ^
+      const DeepCollectionEquality().hash(lastSeenAt) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(deletedAt);
@@ -605,6 +730,9 @@ abstract class _FloorUser extends FloorUser {
   const factory _FloorUser(
       {@primaryKey
           int id,
+      @nullable
+      @ColumnInfo(name: 'verification_status')
+          ProfileVerificationStatus status,
       @nullable
       @ColumnInfo(name: 'balance')
           int accountBalance,
@@ -636,11 +764,20 @@ abstract class _FloorUser extends FloorUser {
       @ColumnInfo(name: 'verified_at')
           bool isEmailVerified,
       @nullable
+      @ColumnInfo(name: 'unreadNotifications')
+          int unreadNotifications,
+      @nullable
+      @ColumnInfo(name: 'hasPendingAssignment')
+          bool hasPendingAssignment,
+      @nullable
       @ColumnInfo(name: 'verification_sent_at')
           String verificationCodeSentAt,
       @nullable
       @ColumnInfo(name: 'forgot_password_code_sent_at')
           String forgotPasswordCodeSentAt,
+      @nullable
+      @ColumnInfo(name: 'last_seen_at')
+          DateTime lastSeenAt,
       @nullable
       @ColumnInfo(name: 'created_at')
           DateTime createdAt,
@@ -654,6 +791,10 @@ abstract class _FloorUser extends FloorUser {
   @override
   @primaryKey
   int get id;
+  @override
+  @nullable
+  @ColumnInfo(name: 'verification_status')
+  ProfileVerificationStatus get status;
   @override
   @nullable
   @ColumnInfo(name: 'balance')
@@ -699,12 +840,24 @@ abstract class _FloorUser extends FloorUser {
   bool get isEmailVerified;
   @override
   @nullable
+  @ColumnInfo(name: 'unreadNotifications')
+  int get unreadNotifications;
+  @override
+  @nullable
+  @ColumnInfo(name: 'hasPendingAssignment')
+  bool get hasPendingAssignment;
+  @override
+  @nullable
   @ColumnInfo(name: 'verification_sent_at')
   String get verificationCodeSentAt;
   @override
   @nullable
   @ColumnInfo(name: 'forgot_password_code_sent_at')
   String get forgotPasswordCodeSentAt;
+  @override
+  @nullable
+  @ColumnInfo(name: 'last_seen_at')
+  DateTime get lastSeenAt;
   @override
   @nullable
   @ColumnInfo(name: 'created_at')

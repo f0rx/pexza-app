@@ -132,6 +132,50 @@ mixin AppAssets {
     fit: BoxFit.contain,
   );
 
+  static SvgPicture pdf = SvgPicture.asset(
+    '$SVG_DIR/pdf.svg',
+    height: 40,
+    width: 40,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture docx = SvgPicture.asset(
+    '$SVG_DIR/docs.svg',
+    height: 40,
+    width: 40,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture cameraOutlined = SvgPicture.asset(
+    '$SVG_DIR/camera_outlined.svg',
+    height: 30,
+    width: 30,
+    color: Colors.white,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture cameraColored = SvgPicture.asset(
+    '$SVG_DIR/camera_colored.svg',
+    height: 30,
+    width: 30,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture folderOutlined = SvgPicture.asset(
+    '$SVG_DIR/folder_outlined.svg',
+    height: 30,
+    width: 30,
+    color: Colors.white,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture folderColored = SvgPicture.asset(
+    '$SVG_DIR/folder_colored.svg',
+    height: 30,
+    width: 30,
+    fit: BoxFit.contain,
+  );
+
   static SvgPicture google = SvgPicture.asset(
     '$AUTH_SVG_DIR/google.svg',
     height: 23,

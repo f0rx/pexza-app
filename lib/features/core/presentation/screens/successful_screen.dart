@@ -67,9 +67,9 @@ class SuccessfulScreen extends StatelessWidget with AutoRouteWrapper {
                     child: AutoSizeText(
                       "$description",
                       style: Theme.of(context).textTheme.headline5.copyWith(
-                            fontSize: 17.0,
+                            fontSize: 20.0.sp,
                           ),
-                      maxLines: 3,
+                      // maxLines: 3,
                       softWrap: true,
                       textAlign: TextAlign.center,
                     ),
@@ -86,8 +86,9 @@ class SuccessfulScreen extends StatelessWidget with AutoRouteWrapper {
                   VerticalSpace(height: App.shortest * 0.15),
                   //
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: Helpers.appPadding),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Helpers.appPadding,
+                    ),
                     child: AppElevatedButton(
                       onPressed: onPressed,
                       text: button,

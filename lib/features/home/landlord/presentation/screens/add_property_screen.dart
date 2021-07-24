@@ -95,7 +95,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                           (r) => s.response.fold(
                             () => null,
                             (_) => _.fold(
-                              (f) => f.errors?.name?.firstOrNull,
+                              (f) => f.errors?.name?.firstOrNil,
                               (_) => null,
                             ),
                           ),
@@ -179,7 +179,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                           (r) => s.response.fold(
                             () => null,
                             (_) => _.fold(
-                              (f) => f.errors?.houseType?.firstOrNull,
+                              (f) => f.errors?.houseType?.firstOrNil,
                               (_) => null,
                             ),
                           ),
@@ -226,7 +226,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                           (r) => s.response.fold(
                             () => null,
                             (_) => _.fold(
-                              (f) => f.errors?.town?.firstOrNull,
+                              (f) => f.errors?.town?.firstOrNil,
                               (_) => null,
                             ),
                           ),
@@ -275,7 +275,7 @@ class LandlordAddPropertyScreen extends StatelessWidget with AutoRouteWrapper {
                             (r) => s.response.fold(
                               () => null,
                               (_) => _.fold(
-                                (f) => f.errors?.street?.firstOrNull,
+                                (f) => f.errors?.street?.firstOrNil,
                                 (_) => null,
                               ),
                             ),

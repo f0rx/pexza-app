@@ -12,3 +12,4 @@ export 'bank_account/account_detail/account_detail_dto.dart';
 export 'bank_account/bank_account/bank_account_data.dart';
 export 'bank_account/bank_account/bank_account_dto.dart';
 export 'bank_account/account_verification/account_verification_dto.dart';
+export 'wallet_dto/wallet_dto.dart';

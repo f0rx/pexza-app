@@ -18,6 +18,8 @@ _$_ServerFieldErrors _$_$_ServerFieldErrorsFromJson(Map<String, dynamic> json) {
     password: json['password'] as List,
     token: json['token'] as List,
     code: json['code'] as List,
+    type: json['type'] as List,
+    description: json['description'] as List,
     propertyId: json['property_id'] as List,
     apartmentId: json['apartment_id'] as List,
     propertyType: json['property_type'] as List,
@@ -27,11 +29,15 @@ _$_ServerFieldErrors _$_$_ServerFieldErrorsFromJson(Map<String, dynamic> json) {
     stateId: json['state_id'] as List,
     tenantEmail: json['tenant_email'] as List,
     duration: json['duration'] as List,
+    document: json['document'] as List,
     amount: json['amount'] as List,
     currencyId: json['currency_id'] as List,
     serviceId: json['service_id'] as List,
     assignmentId: json['assignment_id'] as List,
     comment: json['comment'] as List,
+    cardNumber: json['card_number'] as List,
+    accountNumber: json['account_number'] as List,
+    bankId: json['bank_id'] as List,
   );
 }
 
@@ -55,6 +61,8 @@ Map<String, dynamic> _$_$_ServerFieldErrorsToJson(
   writeNotNull('password', instance.password);
   writeNotNull('token', instance.token);
   writeNotNull('code', instance.code);
+  writeNotNull('type', instance.type);
+  writeNotNull('description', instance.description);
   writeNotNull('property_id', instance.propertyId);
   writeNotNull('apartment_id', instance.apartmentId);
   writeNotNull('property_type', instance.propertyType);
@@ -64,10 +72,14 @@ Map<String, dynamic> _$_$_ServerFieldErrorsToJson(
   writeNotNull('state_id', instance.stateId);
   writeNotNull('tenant_email', instance.tenantEmail);
   writeNotNull('duration', instance.duration);
+  writeNotNull('document', instance.document);
   writeNotNull('amount', instance.amount);
   writeNotNull('currency_id', instance.currencyId);
   writeNotNull('service_id', instance.serviceId);
   writeNotNull('assignment_id', instance.assignmentId);
   writeNotNull('comment', instance.comment);
+  writeNotNull('card_number', instance.cardNumber);
+  writeNotNull('account_number', instance.accountNumber);
+  writeNotNull('bank_id', instance.bankId);
   return val;
 }

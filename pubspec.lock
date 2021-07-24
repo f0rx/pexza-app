@@ -367,6 +367,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.2.1"
+  file_picker:
+    dependency: "direct main"
+    description:
+      name: file_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.7"
   firebase:
     dependency: transitive
     description:
@@ -531,6 +538,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.0"
+  flutter_masked_text:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "866f36e108e00d2ea6490714a4eef0b0b1e0a338"
+      url: "git://github.com/f0rx/flutter-masked-text.git"
+    source: git
+    version: "0.8.0"
   flutter_multi_formatter:
     dependency: "direct main"
     description:
@@ -547,6 +563,13 @@ packages:
       url: "git://github.com/Flutter-Fox/flutter_paystack.git"
     source: git
     version: "1.0.4+1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.11"
   flutter_portal:
     dependency: "direct main"
     description:
@@ -713,6 +736,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.19"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.7+22"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.6"
   inflection2:
     dependency: "direct main"
     description:

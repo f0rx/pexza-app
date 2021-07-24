@@ -30,6 +30,7 @@ import 'package:pexza/features/home/landlord/presentation/screens/landl_apartmen
 import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_detail_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_bank_details_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_banks_listing_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_wallet_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_withdrawal_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
@@ -91,6 +92,8 @@ class Routes {
       '/landlord-maintenance-request-detail-screen';
   static const String landlordTenantsListingScreen =
       '/landlord-tenants-listing-screen';
+  static const String landlordBanksListingScreen =
+      '/landlord-banks-listing-screen';
   static const String landlordBankDetailsScreen =
       '/landlord-bank-details-screen';
   static const String landlordWalletScreen = '/landlord-wallet-screen';
@@ -133,6 +136,7 @@ class Routes {
     landlordMaintenanceRequestScreen,
     landlordMaintenanceRequestDetailScreen,
     landlordTenantsListingScreen,
+    landlordBanksListingScreen,
     landlordBankDetailsScreen,
     landlordWalletScreen,
     landlordWithdrawalScreen,
@@ -201,6 +205,8 @@ class Router extends RouterBase {
         page: LandlordMaintenanceRequestDetailScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordTenantsListingScreen,
         page: LandlordTenantsListingScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordBanksListingScreen,
+        page: LandlordBanksListingScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordBankDetailsScreen,
         page: LandlordBankDetailsScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordWalletScreen,
@@ -289,9 +295,13 @@ class Router extends RouterBase {
       );
     },
     ProfileVerificationScreen: (data) {
+      final args =
+          data.getArgs<ProfileVerificationScreenArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) =>
-            const ProfileVerificationScreen().wrappedRoute(context),
+        builder: (context) => ProfileVerificationScreen(
+          key: args.key,
+          intended: args.intended,
+        ).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -537,6 +547,14 @@ class Router extends RouterBase {
         maintainState: true,
       );
     },
+    LandlordBanksListingScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            const LandlordBanksListingScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
     LandlordBankDetailsScreen: (data) {
       final args = data.getArgs<LandlordBankDetailsScreenArguments>(
         orElse: () => LandlordBankDetailsScreenArguments(),
@@ -557,12 +575,13 @@ class Router extends RouterBase {
       );
     },
     LandlordWithdrawalScreen: (data) {
-      final args = data.getArgs<LandlordWithdrawalScreenArguments>(
-        orElse: () => LandlordWithdrawalScreenArguments(),
-      );
+      final args =
+          data.getArgs<LandlordWithdrawalScreenArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) =>
-            LandlordWithdrawalScreen(key: args.key).wrappedRoute(context),
+        builder: (context) => LandlordWithdrawalScreen(
+          key: args.key,
+          account: args.account,
+        ).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -652,8 +671,15 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushVerifyEmailScreen() =>
       push<dynamic>(Routes.verifyEmailScreen);
 
-  Future<dynamic> pushProfileVerificationScreen() =>
-      push<dynamic>(Routes.profileVerificationScreen);
+  Future<dynamic> pushProfileVerificationScreen({
+    Key key,
+    @required String intended,
+  }) =>
+      push<dynamic>(
+        Routes.profileVerificationScreen,
+        arguments:
+            ProfileVerificationScreenArguments(key: key, intended: intended),
+      );
 
   Future<dynamic> pushTenantHomeScreen() =>
       push<dynamic>(Routes.tenantHomeScreen);
@@ -844,6 +870,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         onReject: onReject,
       );
 
+  Future<dynamic> pushLandlordBanksListingScreen() =>
+      push<dynamic>(Routes.landlordBanksListingScreen);
+
   Future<dynamic> pushLandlordBankDetailsScreen(
           {Key key, OnNavigationRejected onReject}) =>
       push<dynamic>(
@@ -856,10 +885,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
       push<dynamic>(Routes.landlordWalletScreen);
 
   Future<dynamic> pushLandlordWithdrawalScreen(
-          {Key key, OnNavigationRejected onReject}) =>
+          {Key key,
+          @required BankAccountDetail account,
+          OnNavigationRejected onReject}) =>
       push<dynamic>(
         Routes.landlordWithdrawalScreen,
-        arguments: LandlordWithdrawalScreenArguments(key: key),
+        arguments:
+            LandlordWithdrawalScreenArguments(key: key, account: account),
         onReject: onReject,
       );
 
@@ -888,6 +920,13 @@ class ProfileSetupScreenArguments {
   final Key key;
   final Assignment assignment;
   ProfileSetupScreenArguments({this.key, this.assignment});
+}
+
+/// ProfileVerificationScreen arguments holder class
+class ProfileVerificationScreenArguments {
+  final Key key;
+  final String intended;
+  ProfileVerificationScreenArguments({this.key, @required this.intended});
 }
 
 /// TenantApartmentDetailScreen arguments holder class
@@ -1020,5 +1059,6 @@ class LandlordBankDetailsScreenArguments {
 /// LandlordWithdrawalScreen arguments holder class
 class LandlordWithdrawalScreenArguments {
   final Key key;
-  LandlordWithdrawalScreenArguments({this.key});
+  final BankAccountDetail account;
+  LandlordWithdrawalScreenArguments({this.key, @required this.account});
 }

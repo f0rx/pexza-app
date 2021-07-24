@@ -44,7 +44,7 @@ class EmailAddressField extends StatelessWidget {
             (_) => context.read<AuthCubit>().state.authStatus.fold(
                   () => null,
                   (_) => _.fold(
-                    (f) => f.errors?.email?.firstOrNull,
+                    (f) => f.errors?.email?.firstOrNil,
                     (_) => null,
                   ),
                 ),

@@ -17,6 +17,7 @@ class _$UserTearOff {
   _User call(
       {@nullable UniqueId<int> id,
       @nullable Role role,
+      @nullable ProfileVerificationStatus verificationStatus,
       @nullable BasicTextField<int> accountBalance,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
@@ -29,14 +30,18 @@ class _$UserTearOff {
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
+      @nullable int unreadNotifications,
+      @nullable bool hasPendingAssignment,
       @nullable DateTime verificationCodeSentAt,
       @nullable DateTime forgotPasswordCodeSentAt,
+      @nullable DateTime lastSeenAt,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) {
     return _User(
       id: id,
       role: role,
+      verificationStatus: verificationStatus,
       accountBalance: accountBalance,
       firstName: firstName,
       lastName: lastName,
@@ -49,8 +54,11 @@ class _$UserTearOff {
       phone: phone,
       password: password,
       photo: photo,
+      unreadNotifications: unreadNotifications,
+      hasPendingAssignment: hasPendingAssignment,
       verificationCodeSentAt: verificationCodeSentAt,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt,
+      lastSeenAt: lastSeenAt,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
@@ -68,6 +76,8 @@ mixin _$User {
   UniqueId<int> get id;
   @nullable
   Role get role;
+  @nullable
+  ProfileVerificationStatus get verificationStatus;
   @nullable
   BasicTextField<int> get accountBalance;
   @nullable
@@ -93,9 +103,15 @@ mixin _$User {
   @nullable
   String get photo;
   @nullable
+  int get unreadNotifications;
+  @nullable
+  bool get hasPendingAssignment;
+  @nullable
   DateTime get verificationCodeSentAt;
   @nullable
   DateTime get forgotPasswordCodeSentAt;
+  @nullable
+  DateTime get lastSeenAt;
   @nullable
   DateTime get createdAt;
   @nullable
@@ -114,6 +130,7 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {@nullable UniqueId<int> id,
       @nullable Role role,
+      @nullable ProfileVerificationStatus verificationStatus,
       @nullable BasicTextField<int> accountBalance,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
@@ -126,8 +143,11 @@ abstract class $UserCopyWith<$Res> {
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
+      @nullable int unreadNotifications,
+      @nullable bool hasPendingAssignment,
       @nullable DateTime verificationCodeSentAt,
       @nullable DateTime forgotPasswordCodeSentAt,
+      @nullable DateTime lastSeenAt,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
@@ -147,6 +167,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object id = freezed,
     Object role = freezed,
+    Object verificationStatus = freezed,
     Object accountBalance = freezed,
     Object firstName = freezed,
     Object lastName = freezed,
@@ -159,8 +180,11 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object phone = freezed,
     Object password = freezed,
     Object photo = freezed,
+    Object unreadNotifications = freezed,
+    Object hasPendingAssignment = freezed,
     Object verificationCodeSentAt = freezed,
     Object forgotPasswordCodeSentAt = freezed,
+    Object lastSeenAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -168,6 +192,9 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as UniqueId<int>,
       role: role == freezed ? _value.role : role as Role,
+      verificationStatus: verificationStatus == freezed
+          ? _value.verificationStatus
+          : verificationStatus as ProfileVerificationStatus,
       accountBalance: accountBalance == freezed
           ? _value.accountBalance
           : accountBalance as BasicTextField<int>,
@@ -190,12 +217,20 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
       photo: photo == freezed ? _value.photo : photo as String,
+      unreadNotifications: unreadNotifications == freezed
+          ? _value.unreadNotifications
+          : unreadNotifications as int,
+      hasPendingAssignment: hasPendingAssignment == freezed
+          ? _value.hasPendingAssignment
+          : hasPendingAssignment as bool,
       verificationCodeSentAt: verificationCodeSentAt == freezed
           ? _value.verificationCodeSentAt
           : verificationCodeSentAt as DateTime,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
           ? _value.forgotPasswordCodeSentAt
           : forgotPasswordCodeSentAt as DateTime,
+      lastSeenAt:
+          lastSeenAt == freezed ? _value.lastSeenAt : lastSeenAt as DateTime,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -224,6 +259,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {@nullable UniqueId<int> id,
       @nullable Role role,
+      @nullable ProfileVerificationStatus verificationStatus,
       @nullable BasicTextField<int> accountBalance,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
@@ -236,8 +272,11 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
+      @nullable int unreadNotifications,
+      @nullable bool hasPendingAssignment,
       @nullable DateTime verificationCodeSentAt,
       @nullable DateTime forgotPasswordCodeSentAt,
+      @nullable DateTime lastSeenAt,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt});
@@ -259,6 +298,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   $Res call({
     Object id = freezed,
     Object role = freezed,
+    Object verificationStatus = freezed,
     Object accountBalance = freezed,
     Object firstName = freezed,
     Object lastName = freezed,
@@ -271,8 +311,11 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object phone = freezed,
     Object password = freezed,
     Object photo = freezed,
+    Object unreadNotifications = freezed,
+    Object hasPendingAssignment = freezed,
     Object verificationCodeSentAt = freezed,
     Object forgotPasswordCodeSentAt = freezed,
+    Object lastSeenAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
@@ -280,6 +323,9 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     return _then(_User(
       id: id == freezed ? _value.id : id as UniqueId<int>,
       role: role == freezed ? _value.role : role as Role,
+      verificationStatus: verificationStatus == freezed
+          ? _value.verificationStatus
+          : verificationStatus as ProfileVerificationStatus,
       accountBalance: accountBalance == freezed
           ? _value.accountBalance
           : accountBalance as BasicTextField<int>,
@@ -302,12 +348,20 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       phone: phone == freezed ? _value.phone : phone as Phone,
       password: password == freezed ? _value.password : password as Password,
       photo: photo == freezed ? _value.photo : photo as String,
+      unreadNotifications: unreadNotifications == freezed
+          ? _value.unreadNotifications
+          : unreadNotifications as int,
+      hasPendingAssignment: hasPendingAssignment == freezed
+          ? _value.hasPendingAssignment
+          : hasPendingAssignment as bool,
       verificationCodeSentAt: verificationCodeSentAt == freezed
           ? _value.verificationCodeSentAt
           : verificationCodeSentAt as DateTime,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
           ? _value.forgotPasswordCodeSentAt
           : forgotPasswordCodeSentAt as DateTime,
+      lastSeenAt:
+          lastSeenAt == freezed ? _value.lastSeenAt : lastSeenAt as DateTime,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
       updatedAt:
@@ -323,6 +377,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   const _$_User(
       {@nullable this.id,
       @nullable this.role,
+      @nullable this.verificationStatus,
       @nullable this.accountBalance,
       @nullable this.firstName,
       @nullable this.lastName,
@@ -335,8 +390,11 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       @nullable this.phone,
       @nullable this.password,
       @nullable this.photo,
+      @nullable this.unreadNotifications,
+      @nullable this.hasPendingAssignment,
       @nullable this.verificationCodeSentAt,
       @nullable this.forgotPasswordCodeSentAt,
+      @nullable this.lastSeenAt,
       @nullable this.createdAt,
       @nullable this.updatedAt,
       @nullable this.deletedAt})
@@ -348,6 +406,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   @override
   @nullable
   final Role role;
+  @override
+  @nullable
+  final ProfileVerificationStatus verificationStatus;
   @override
   @nullable
   final BasicTextField<int> accountBalance;
@@ -386,10 +447,19 @@ class _$_User extends _User with DiagnosticableTreeMixin {
   final String photo;
   @override
   @nullable
+  final int unreadNotifications;
+  @override
+  @nullable
+  final bool hasPendingAssignment;
+  @override
+  @nullable
   final DateTime verificationCodeSentAt;
   @override
   @nullable
   final DateTime forgotPasswordCodeSentAt;
+  @override
+  @nullable
+  final DateTime lastSeenAt;
   @override
   @nullable
   final DateTime createdAt;
@@ -402,7 +472,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, accountBalance: $accountBalance, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, apartment: $apartment, phone: $phone, password: $password, photo: $photo, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'User(id: $id, role: $role, verificationStatus: $verificationStatus, accountBalance: $accountBalance, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, isEmailVerified: $isEmailVerified, provider: $provider, apartment: $apartment, phone: $phone, password: $password, photo: $photo, unreadNotifications: $unreadNotifications, hasPendingAssignment: $hasPendingAssignment, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, lastSeenAt: $lastSeenAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -412,6 +482,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'User'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('role', role))
+      ..add(DiagnosticsProperty('verificationStatus', verificationStatus))
       ..add(DiagnosticsProperty('accountBalance', accountBalance))
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
@@ -424,10 +495,13 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('phone', phone))
       ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('photo', photo))
+      ..add(DiagnosticsProperty('unreadNotifications', unreadNotifications))
+      ..add(DiagnosticsProperty('hasPendingAssignment', hasPendingAssignment))
       ..add(
           DiagnosticsProperty('verificationCodeSentAt', verificationCodeSentAt))
       ..add(DiagnosticsProperty(
           'forgotPasswordCodeSentAt', forgotPasswordCodeSentAt))
+      ..add(DiagnosticsProperty('lastSeenAt', lastSeenAt))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('deletedAt', deletedAt));
@@ -441,6 +515,9 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.role, role) ||
                 const DeepCollectionEquality().equals(other.role, role)) &&
+            (identical(other.verificationStatus, verificationStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.verificationStatus, verificationStatus)) &&
             (identical(other.accountBalance, accountBalance) ||
                 const DeepCollectionEquality()
                     .equals(other.accountBalance, accountBalance)) &&
@@ -473,14 +550,22 @@ class _$_User extends _User with DiagnosticableTreeMixin {
                     .equals(other.password, password)) &&
             (identical(other.photo, photo) ||
                 const DeepCollectionEquality().equals(other.photo, photo)) &&
+            (identical(other.unreadNotifications, unreadNotifications) ||
+                const DeepCollectionEquality()
+                    .equals(other.unreadNotifications, unreadNotifications)) &&
+            (identical(other.hasPendingAssignment, hasPendingAssignment) ||
+                const DeepCollectionEquality().equals(
+                    other.hasPendingAssignment, hasPendingAssignment)) &&
             (identical(other.verificationCodeSentAt, verificationCodeSentAt) ||
                 const DeepCollectionEquality().equals(
                     other.verificationCodeSentAt, verificationCodeSentAt)) &&
-            (identical(
-                    other.forgotPasswordCodeSentAt, forgotPasswordCodeSentAt) ||
+            (identical(other.forgotPasswordCodeSentAt, forgotPasswordCodeSentAt) ||
                 const DeepCollectionEquality().equals(
                     other.forgotPasswordCodeSentAt,
                     forgotPasswordCodeSentAt)) &&
+            (identical(other.lastSeenAt, lastSeenAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastSeenAt, lastSeenAt)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
@@ -497,6 +582,7 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(role) ^
+      const DeepCollectionEquality().hash(verificationStatus) ^
       const DeepCollectionEquality().hash(accountBalance) ^
       const DeepCollectionEquality().hash(firstName) ^
       const DeepCollectionEquality().hash(lastName) ^
@@ -509,8 +595,11 @@ class _$_User extends _User with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(photo) ^
+      const DeepCollectionEquality().hash(unreadNotifications) ^
+      const DeepCollectionEquality().hash(hasPendingAssignment) ^
       const DeepCollectionEquality().hash(verificationCodeSentAt) ^
       const DeepCollectionEquality().hash(forgotPasswordCodeSentAt) ^
+      const DeepCollectionEquality().hash(lastSeenAt) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(deletedAt);
@@ -526,6 +615,7 @@ abstract class _User extends User {
   const factory _User(
       {@nullable UniqueId<int> id,
       @nullable Role role,
+      @nullable ProfileVerificationStatus verificationStatus,
       @nullable BasicTextField<int> accountBalance,
       @nullable DisplayName firstName,
       @nullable DisplayName lastName,
@@ -538,8 +628,11 @@ abstract class _User extends User {
       @nullable Phone phone,
       @nullable Password password,
       @nullable String photo,
+      @nullable int unreadNotifications,
+      @nullable bool hasPendingAssignment,
       @nullable DateTime verificationCodeSentAt,
       @nullable DateTime forgotPasswordCodeSentAt,
+      @nullable DateTime lastSeenAt,
       @nullable DateTime createdAt,
       @nullable DateTime updatedAt,
       @nullable DateTime deletedAt}) = _$_User;
@@ -550,6 +643,9 @@ abstract class _User extends User {
   @override
   @nullable
   Role get role;
+  @override
+  @nullable
+  ProfileVerificationStatus get verificationStatus;
   @override
   @nullable
   BasicTextField<int> get accountBalance;
@@ -588,10 +684,19 @@ abstract class _User extends User {
   String get photo;
   @override
   @nullable
+  int get unreadNotifications;
+  @override
+  @nullable
+  bool get hasPendingAssignment;
+  @override
+  @nullable
   DateTime get verificationCodeSentAt;
   @override
   @nullable
   DateTime get forgotPasswordCodeSentAt;
+  @override
+  @nullable
+  DateTime get lastSeenAt;
   @override
   @nullable
   DateTime get createdAt;

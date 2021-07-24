@@ -42,7 +42,7 @@ void throwIfNot(bool condition, Object error) {
 class Helpers {
   static double appPadding = App.shortest * 0.06;
   static const Duration autoRetrievalTimeout = const Duration(seconds: 40);
-  static double buttonRadius = 12.0;
+  static const double buttonRadius = 12.0;
   static const String currency = "₦";
   static double descriptionPadding = App.shortest * 0.035;
   static double inputBorderRadius = 16.0;
@@ -473,23 +473,21 @@ class Helpers {
     Function(BuildContext, Widget) builder,
     @required void Function(DateTime) onChanged,
   }) async {
-    return showModalBottomSheet(
+    return showCupertinoModalPopup(
       context: context,
-      builder: (BuildContext builder) {
-        return Container(
-          height: MediaQuery.of(context).copyWith().size.height / 3,
-          color: Theme.of(context).primaryColor,
-          child: CupertinoDatePicker(
-            mode: CupertinoDatePickerMode.date,
-            backgroundColor: backgroundColor,
-            onDateTimeChanged: onChanged,
-            initialDateTime: selectedDate,
-            minimumDate: firstDate,
-            maximumDate: lastDate,
-            use24hFormat: use24hFormat,
-          ),
-        );
-      },
+      builder: (context) => Container(
+        height: MediaQuery.of(context).copyWith().size.height / 3,
+        color: Theme.of(context).primaryColor,
+        child: CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.date,
+          backgroundColor: backgroundColor,
+          onDateTimeChanged: onChanged,
+          initialDateTime: selectedDate,
+          minimumDate: firstDate,
+          maximumDate: lastDate,
+          use24hFormat: use24hFormat,
+        ),
+      ),
     );
   }
 

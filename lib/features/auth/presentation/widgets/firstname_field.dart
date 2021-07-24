@@ -48,7 +48,7 @@ class FirstNameField extends StatelessWidget {
             (_) => context.read<AuthCubit>().state.authStatus.fold(
                   () => null,
                   (_) => _.fold(
-                    (f) => f.errors.firstName.firstOrNull,
+                    (f) => f.errors.firstName.firstOrNil,
                     (_) => null,
                   ),
                 ),

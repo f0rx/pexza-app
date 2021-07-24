@@ -132,7 +132,7 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                   (_) => state.authStatus.fold(
                     () => null,
                     (_) => _.fold(
-                      (f) => f.errors?.token?.firstOrNull,
+                      (f) => f.errors?.token?.firstOrNil,
                       (_) => null,
                     ),
                   ),

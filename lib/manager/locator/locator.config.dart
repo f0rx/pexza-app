@@ -36,10 +36,14 @@ import 'package:pexza/features/auth/presentation/manager/watcher/auth_watcher_cu
 import 'package:pexza/features/core/data/database/app_database.dart' as _i4;
 import 'package:pexza/features/core/data/repositories/admin_utils_repository.dart'
     as _i47;
+import 'package:pexza/features/core/data/repositories/profile_verification/profile_verification_repository.dart'
+    as _i33;
 import 'package:pexza/features/core/presentation/managers/admin_utils/admin_utils_cubit.dart'
     as _i46;
 import 'package:pexza/features/core/presentation/managers/payment/payment_cubit.dart'
     as _i15;
+import 'package:pexza/features/core/presentation/managers/profile_verification/profile_verification_cubit.dart'
+    as _i32;
 import 'package:pexza/features/home/landlord/data/repositories/apartment_repository/apartment_repository.dart'
     as _i23;
 import 'package:pexza/features/home/landlord/data/repositories/maintenance_repository/landlord_maintenance_repository.dart'
@@ -48,10 +52,8 @@ import 'package:pexza/features/home/landlord/data/repositories/misc_repository/m
     as _i28;
 import 'package:pexza/features/home/landlord/data/repositories/property_repository/property_repository.dart'
     as _i24;
-import 'package:pexza/features/home/landlord/data/repositories/wallet_repository/wallet_repository.dart'
-    as _i31;
 import 'package:pexza/features/home/landlord/data/repositories/withdrawal_repository/withdrawal_repository.dart'
-    as _i33;
+    as _i31;
 import 'package:pexza/features/home/landlord/presentation/manager/landlord_apartment/landlord_apartment_cubit.dart'
     as _i22;
 import 'package:pexza/features/home/landlord/presentation/manager/landlord_maintenance/landlord_maintenance_cubit.dart'
@@ -60,10 +62,8 @@ import 'package:pexza/features/home/landlord/presentation/manager/landlord_merge
     as _i27;
 import 'package:pexza/features/home/landlord/presentation/manager/landlord_property/landlord_property_cubit.dart'
     as _i29;
-import 'package:pexza/features/home/landlord/presentation/manager/landlord_wallet/landlord_wallet_cubit.dart'
-    as _i30;
 import 'package:pexza/features/home/landlord/presentation/manager/landlord_withdrawal/landlord_withdrawal_cubit.dart'
-    as _i32;
+    as _i30;
 import 'package:pexza/features/home/tenant/data/repositories/apartment/tenant_apartment_repository.dart'
     as _i35;
 import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart'
@@ -82,7 +82,7 @@ import 'package:pexza/features/home/tenant/presentation/managers/tenant_maintena
     as _i37;
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart'
     as _i14;
-import 'package:pexza/manager/locator/modules/modules.dart' as _i49;
+import 'package:pexza/manager/locator/modules/modules.dart' as _i50;
 import 'package:pexza/manager/theme/manager/theme_cubit.dart' as _i19;
 import 'package:sweetsheet/sweetsheet.dart'
     as _i18; // ignore_for_file: unnecessary_lambdas
@@ -141,14 +141,13 @@ extension GetItInjectableX on _i1.GetIt {
         get<_i24.PropertyRepository>(),
         get<_i5.Connectivity>(),
         get<_i6.DataConnectionChecker>()));
-    gh.factory<_i30.LandlordWalletCubit>(() => _i30.LandlordWalletCubit(
-        get<_i31.WalletRepository>(),
+    gh.factory<_i30.LandlordWithdrawalCubit>(() => _i30.LandlordWithdrawalCubit(
+        get<_i31.WithdrawalRepository>(),
         get<_i5.Connectivity>(),
         get<_i6.DataConnectionChecker>()));
-    gh.factory<_i32.LandlordWithdrawalCubit>(() => _i32.LandlordWithdrawalCubit(
-        get<_i33.WithdrawalRepository>(),
-        get<_i5.Connectivity>(),
-        get<_i6.DataConnectionChecker>()));
+    gh.factory<_i32.ProfileVerificationCubit>(() =>
+        _i32.ProfileVerificationCubit(get<_i33.ProfileVerificationRepository>(),
+            get<_i5.Connectivity>(), get<_i6.DataConnectionChecker>()));
     gh.factory<_i34.TenantApartmentCubit>(() => _i34.TenantApartmentCubit(
         get<_i35.TenantApartmentRepository>(),
         get<_i5.Connectivity>(),
@@ -186,6 +185,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i26.LandlordMaintenanceRepository>(
         _i26.LandlordMaintenanceRepository(get<_i7.Dio>()));
     gh.singleton<_i28.MiscRepository>(_i28.MiscRepository(get<_i7.Dio>()));
+    gh.singleton<_i33.ProfileVerificationRepository>(
+        _i33.ProfileVerificationRepository(get<_i7.Dio>()));
     gh.singleton<_i24.PropertyRepository>(
         _i24.PropertyRepository(get<_i7.Dio>()));
     gh.singleton<_i35.TenantApartmentRepository>(
@@ -194,9 +195,8 @@ extension GetItInjectableX on _i1.GetIt {
         _i21.TenantAssignmentRepository(get<_i7.Dio>()));
     gh.singleton<_i38.TenantMaintenanceRepository>(
         _i38.TenantMaintenanceRepository(get<_i7.Dio>()));
-    gh.singleton<_i31.WalletRepository>(_i31.WalletRepository(get<_i7.Dio>()));
-    gh.singleton<_i33.WithdrawalRepository>(
-        _i33.WithdrawalRepository(get<_i7.Dio>()));
+    gh.singleton<_i31.WithdrawalRepository>(
+        _i31.WithdrawalRepository(get<_i7.Dio>()));
     gh.singleton<_i47.AdminUtilsRepository>(
         _i47.AdminUtilsRepository(get<_i7.Dio>()));
     gh.singleton<_i23.ApartmentRepository>(
@@ -209,6 +209,6 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$ServiceModules extends _i49.ServiceModules {}
+class _$ServiceModules extends _i50.ServiceModules {}
 
-class _$Modules extends _i49.Modules {}
+class _$Modules extends _i50.Modules {}

@@ -89,7 +89,7 @@ class ServiceRequestScreen extends StatelessWidget with AutoRouteWrapper {
                 error: s.response?.fold(
                   () => null,
                   (_) => _?.fold(
-                    (f) => f.errors?.serviceId?.firstOrNull,
+                    (f) => f.errors?.serviceId?.firstOrNil,
                     (_) => null,
                   ),
                 ),
@@ -206,7 +206,7 @@ class ServiceRequestScreen extends StatelessWidget with AutoRouteWrapper {
                     (r) => s.response?.fold(
                       () => null,
                       (_) => _?.fold(
-                        (f) => f.errors?.comment?.firstOrNull,
+                        (f) => f.errors?.comment?.firstOrNil,
                         (_) => null,
                       ),
                     ),

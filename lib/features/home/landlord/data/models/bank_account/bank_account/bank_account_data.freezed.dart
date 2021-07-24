@@ -23,10 +23,14 @@ class _$BankAccountDataTearOff {
           int id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'user_id')
+      @IntegerSerializer()
           int userId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String type,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String descriptions,
       @nullable
       @JsonKey(includeIfNull: false)
           AccountDetailDTO details,
@@ -46,6 +50,7 @@ class _$BankAccountDataTearOff {
       id: id,
       userId: userId,
       type: type,
+      descriptions: descriptions,
       details: details,
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -70,10 +75,14 @@ mixin _$BankAccountData {
   int get id;
   @nullable
   @JsonKey(includeIfNull: false, name: 'user_id')
+  @IntegerSerializer()
   int get userId;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get type;
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  String get descriptions;
   @nullable
   @JsonKey(includeIfNull: false)
   AccountDetailDTO get details;
@@ -106,10 +115,14 @@ abstract class $BankAccountDataCopyWith<$Res> {
           int id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'user_id')
+      @IntegerSerializer()
           int userId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String type,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String descriptions,
       @nullable
       @JsonKey(includeIfNull: false)
           AccountDetailDTO details,
@@ -143,6 +156,7 @@ class _$BankAccountDataCopyWithImpl<$Res>
     Object id = freezed,
     Object userId = freezed,
     Object type = freezed,
+    Object descriptions = freezed,
     Object details = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -152,6 +166,9 @@ class _$BankAccountDataCopyWithImpl<$Res>
       id: id == freezed ? _value.id : id as int,
       userId: userId == freezed ? _value.userId : userId as int,
       type: type == freezed ? _value.type : type as String,
+      descriptions: descriptions == freezed
+          ? _value.descriptions
+          : descriptions as String,
       details:
           details == freezed ? _value.details : details as AccountDetailDTO,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
@@ -184,10 +201,14 @@ abstract class _$BankAccountDataCopyWith<$Res>
           int id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'user_id')
+      @IntegerSerializer()
           int userId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String type,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String descriptions,
       @nullable
       @JsonKey(includeIfNull: false)
           AccountDetailDTO details,
@@ -224,6 +245,7 @@ class __$BankAccountDataCopyWithImpl<$Res>
     Object id = freezed,
     Object userId = freezed,
     Object type = freezed,
+    Object descriptions = freezed,
     Object details = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -233,6 +255,9 @@ class __$BankAccountDataCopyWithImpl<$Res>
       id: id == freezed ? _value.id : id as int,
       userId: userId == freezed ? _value.userId : userId as int,
       type: type == freezed ? _value.type : type as String,
+      descriptions: descriptions == freezed
+          ? _value.descriptions
+          : descriptions as String,
       details:
           details == freezed ? _value.details : details as AccountDetailDTO,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
@@ -252,10 +277,14 @@ class _$_BankAccountData extends _BankAccountData {
           this.id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'user_id')
+      @IntegerSerializer()
           this.userId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.type,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          this.descriptions,
       @nullable
       @JsonKey(includeIfNull: false)
           this.details,
@@ -283,11 +312,16 @@ class _$_BankAccountData extends _BankAccountData {
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'user_id')
+  @IntegerSerializer()
   final int userId;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   final String type;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  final String descriptions;
   @override
   @nullable
   @JsonKey(includeIfNull: false)
@@ -310,7 +344,7 @@ class _$_BankAccountData extends _BankAccountData {
 
   @override
   String toString() {
-    return 'BankAccountData(id: $id, userId: $userId, type: $type, details: $details, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'BankAccountData(id: $id, userId: $userId, type: $type, descriptions: $descriptions, details: $details, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -323,6 +357,9 @@ class _$_BankAccountData extends _BankAccountData {
                 const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)) &&
+            (identical(other.descriptions, descriptions) ||
+                const DeepCollectionEquality()
+                    .equals(other.descriptions, descriptions)) &&
             (identical(other.details, details) ||
                 const DeepCollectionEquality()
                     .equals(other.details, details)) &&
@@ -343,6 +380,7 @@ class _$_BankAccountData extends _BankAccountData {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(type) ^
+      const DeepCollectionEquality().hash(descriptions) ^
       const DeepCollectionEquality().hash(details) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
@@ -367,10 +405,14 @@ abstract class _BankAccountData extends BankAccountData {
           int id,
       @nullable
       @JsonKey(includeIfNull: false, name: 'user_id')
+      @IntegerSerializer()
           int userId,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String type,
+      @nullable
+      @JsonKey(includeIfNull: false, defaultValue: '')
+          String descriptions,
       @nullable
       @JsonKey(includeIfNull: false)
           AccountDetailDTO details,
@@ -397,11 +439,16 @@ abstract class _BankAccountData extends BankAccountData {
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'user_id')
+  @IntegerSerializer()
   int get userId;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get type;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, defaultValue: '')
+  String get descriptions;
   @override
   @nullable
   @JsonKey(includeIfNull: false)

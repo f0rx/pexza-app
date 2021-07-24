@@ -144,7 +144,11 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       // emit auth_status whether registraion failed or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit.map(
+          (r) => null,
+        )),
+      ));
     }
 
     toggleLoadingIndicator();
@@ -171,7 +175,11 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       // emit auth_status whether authentication failed or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit.map(
+          (r) => null,
+        )),
+      ));
     }
 
     toggleLoadingIndicator();
@@ -203,7 +211,11 @@ class AuthCubit extends Cubit<AuthState> {
       // );
 
       // emit auth_status whether authentication failed or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit.map(
+          (r) => null,
+        )),
+      ));
     }
 
     toggleLoadingIndicator();
@@ -229,8 +241,7 @@ class AuthCubit extends Cubit<AuthState> {
 
       // emit auth_status
       emit(state.copyWith(
-        //////// TODO: Fix this later
-        authStatus: optionOf(failureOrUnit.map((r) => unit)),
+        authStatus: optionOf(failureOrUnit.map((r) => r)),
       ));
     }
 
@@ -253,7 +264,11 @@ class AuthCubit extends Cubit<AuthState> {
       failureOrUnit = await _auth.verifyEmailAddress(token: token);
 
       // emit auth_status whether verification failed or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit.map(
+          (r) => null,
+        )),
+      ));
     }
 
     toggleLoadingIndicator();
@@ -263,13 +278,13 @@ class AuthCubit extends Cubit<AuthState> {
     toggleLoadingIndicator();
 
     EmailAddress emailAddress = state.emailAddress;
-    Either<AuthResponse, Unit> failureOrUnit;
+    Either<AuthResponse, AuthResponse> failureOrUnit;
 
     if (emailAddress.isValid) {
       failureOrUnit = await _auth.resendVerificationEmail(emailAddress);
 
       // emit auth_status whether authentication fails or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(authStatus: optionOf(failureOrUnit.map((r) => r))));
     }
 
     toggleLoadingIndicator();
@@ -281,7 +296,11 @@ class AuthCubit extends Cubit<AuthState> {
     Either<AuthResponse, Unit> failureOrUnit =
         await _auth.googleAuthentication();
 
-    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+    emit(state.copyWith(
+      authStatus: optionOf(failureOrUnit.map(
+        (r) => null,
+      )),
+    ));
 
     toggleLoadingIndicator();
   }
@@ -298,7 +317,11 @@ class AuthCubit extends Cubit<AuthState> {
     Either<AuthResponse, Unit> failureOrUnit =
         await _auth.facebookAuthentication();
 
-    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+    emit(state.copyWith(
+      authStatus: optionOf(failureOrUnit.map(
+        (r) => null,
+      )),
+    ));
 
     toggleLoadingIndicator();
   }
@@ -309,7 +332,11 @@ class AuthCubit extends Cubit<AuthState> {
     Either<AuthResponse, Unit> failureOrUnit =
         await _auth.appleAuthentication();
 
-    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+    emit(state.copyWith(
+      authStatus: optionOf(failureOrUnit.map(
+        (r) => null,
+      )),
+    ));
 
     toggleLoadingIndicator();
   }

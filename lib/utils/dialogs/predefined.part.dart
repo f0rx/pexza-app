@@ -29,3 +29,36 @@ Future<void> runDatabaseCleanup(BuildContext context) async {
         context.read<AdminUtilsCubit>().wipeDatabase(),
   ).render(context);
 }
+
+Future<T> showAdaptiveBottomSheet<T>(
+  BuildContext context, {
+  @required WidgetBuilder builder,
+  bool isDismissible = true,
+  Color backgroundColor,
+  Color barrierColor,
+  double elevation,
+  bool enableDrag = true,
+  bool isScrollControlled = false,
+  bool useRootNavigator = false,
+}) async {
+  return await Theme.of(context).platform.fold(
+        material: () async => await showModalBottomSheet(
+          context: context,
+          builder: builder,
+          isDismissible: isDismissible,
+          backgroundColor: backgroundColor,
+          barrierColor: barrierColor,
+          elevation: elevation,
+          enableDrag: enableDrag,
+          isScrollControlled: isScrollControlled,
+          useRootNavigator: useRootNavigator,
+        ),
+        cupertino: () async => await showCupertinoModalPopup(
+          context: context,
+          builder: builder,
+          barrierColor: barrierColor,
+          barrierDismissible: isDismissible,
+          useRootNavigator: useRootNavigator,
+        ),
+      );
+}

@@ -49,7 +49,7 @@ abstract class AuthFacade extends Facade {
   //   Password newPassword,
   // });
 
-  Future<Either<AuthResponse, Unit>> resendVerificationEmail(
+  Future<Either<AuthResponse, AuthResponse>> resendVerificationEmail(
     EmailAddress email,
   );
 
