@@ -210,6 +210,8 @@ class AddNewCardScreen extends StatelessWidget with AutoRouteWrapper {
                                 // enabled: !s.isLoading,
                                 // initialValue: "${s.cardCVV.getOrEmpty}",
                                 cursorColor: Theme.of(c).accentColor,
+                                obscureText: true,
+                                obscuringCharacter: "x",
                                 keyboardType: TextInputType.number,
                                 textCapitalization: TextCapitalization.none,
                                 textInputAction: TextInputAction.next,
@@ -305,8 +307,21 @@ class AddNewCardScreen extends StatelessWidget with AutoRouteWrapper {
                     ),
                   ),
                   child: AppElevatedButton(
-                    onPressed: () =>
-                        context.read<DebitCardCubit>().addNewCard(),
+                    onPressed: () {
+                      final isValid =
+                          context.read<DebitCardCubit>().validateFields();
+
+                      if (isValid.isRight())
+                        PopupDialog.confirmation(
+                          title: "Add new card ***"
+                              "${isValid.getOrElse(() => null)?.cardNumber?.getOrNull?.substring(isValid.getOrElse(() => null).cardNumber.getOrEmpty.length - 4)}",
+                          description:
+                              "You will be charged N100 for card validation! "
+                              "This charge will be refunded after validation.",
+                          onPositiveButtonPressed:
+                              context.read<DebitCardCubit>().addNewCard,
+                        ).render(context);
+                    },
                     disabled: s.isLoading,
                     text: buttonText ?? "Continue to Payment",
                   ),
