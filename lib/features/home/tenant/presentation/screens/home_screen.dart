@@ -83,15 +83,12 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
               cursorColor: Theme.of(context).accentColor,
               keyboardType: TextInputType.text,
               textCapitalization: TextCapitalization.none,
-              textInputAction: TextInputAction.done,
+              textInputAction: TextInputAction.search,
               style: TextStyle(fontSize: 17.0),
               decoration: const InputDecoration(
                 hintText: "What do you want to do?",
-                contentPadding: EdgeInsets.only(top: 14.0, bottom: 14.0),
-                prefixIcon: Icon(
-                  Icons.search_sharp,
-                  size: 20.0,
-                ),
+                contentPadding: EdgeInsets.only(top: 12.0, bottom: 12.0),
+                prefixIcon: Icon(Icons.search_sharp, size: 20.0),
               ),
               onChanged: (value) {},
               validator: (value) {},
@@ -133,21 +130,26 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                                 final Assignment assignment =
                                     s.unaccepted.getOrNull(i);
 
-                                return _SectionInfo<Assignment>(
-                                  model: assignment,
-                                  title:
-                                      "${assignment?.apartment?.name?.getOrEmpty}",
-                                  subtitle:
-                                      "${s.apartments.getOrNull(i)?.property?.street?.getOrNull ?? ''}",
-                                  color:
-                                      assignment?.apartment?.property?.color ??
-                                          Colors.teal,
-                                  onPressed: (_) async {
-                                    final shouldRefresh = await navigator
-                                        .pushProfileSetupScreen(assignment: _);
-                                    if (shouldRefresh != null && shouldRefresh)
-                                      c.read<TenantAssignmentCubit>().all();
-                                  },
+                                return Hero(
+                                  tag: "assignment-${assignment.id.value}",
+                                  child: _SectionInfo<Assignment>(
+                                    model: assignment,
+                                    title:
+                                        "${assignment?.apartment?.name?.getOrEmpty}",
+                                    subtitle:
+                                        "${s.apartments.getOrNull(i)?.property?.street?.getOrNull ?? ''}",
+                                    color: assignment
+                                            ?.apartment?.property?.color ??
+                                        Colors.teal,
+                                    onPressed: (a) async {
+                                      final shouldRefresh = await navigator
+                                          .pushProfileSetupScreen(
+                                              assignment: a);
+                                      if (shouldRefresh != null &&
+                                          shouldRefresh)
+                                        c.read<TenantAssignmentCubit>().all();
+                                    },
+                                  ),
                                 );
                               },
                             ),
@@ -193,7 +195,7 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                               ),
                             ),
                             child: ListView.separated(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
                               itemCount: s.apartments.size,
@@ -212,17 +214,15 @@ class _TenantHomeScreenState extends State<TenantHomeScreen>
                                         ?.property
                                         ?.color ??
                                     AppColors.random,
-                                onPressed: (current) {
-                                  return navigator
-                                      .pushTenantApartmentDetailScreen(
-                                    apartment: s.apartments.getOrNull(i),
-                                    assignment: s.paired.firstOrNull(
-                                      (e) =>
-                                          e?.apartment?.id?.value ==
-                                          current?.id?.value,
-                                    ),
-                                  );
-                                },
+                                onPressed: (current) =>
+                                    navigator.pushTenantApartmentDetailScreen(
+                                  apartment: s.apartments.getOrNull(i),
+                                  assignment: s.paired.firstOrNull(
+                                    (e) =>
+                                        e?.apartment?.id?.value ==
+                                        current?.id?.value,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -286,48 +286,54 @@ class _SectionInfo<M> extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    AutoSizeText(
-                      "${title.removeNewLines()}",
-                      softWrap: true,
-                      wrapWords: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headline4.copyWith(
-                            color: AppColors.accentColor,
-                            fontSize: 17.0,
-                          ),
-                      maxLines: 1,
+                    Flexible(
+                      child: AutoSizeText(
+                        "${title.removeNewLines()}",
+                        softWrap: true,
+                        wrapWords: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.headline4.copyWith(
+                              color: AppColors.accentColor,
+                              fontSize: 17.0,
+                            ),
+                        maxLines: 1,
+                      ),
                     ),
                     //
-                    Visibility(
-                      visible: !subtitle.isNullOrBlank,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          VerticalSpace(height: 6.0),
-                          //
-                          AutoSizeText(
-                            "${subtitle.removeNewLines()}",
-                            softWrap: true,
-                            wrapWords: true,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.caption.copyWith(
-                                  color: Helpers.computeLuminance(
-                                      color?.withOpacity(opacity)),
-                                  fontSize: 14.0,
-                                ),
-                            maxLines: 2,
-                          ),
-                        ],
+                    Flexible(
+                      child: Visibility(
+                        visible: !subtitle.isNullOrBlank,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            VerticalSpace(height: 6.0),
+                            //
+                            AutoSizeText(
+                              "${subtitle.removeNewLines()}",
+                              softWrap: true,
+                              wrapWords: true,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style:
+                                  Theme.of(context).textTheme.caption.copyWith(
+                                        color: Helpers.computeLuminance(
+                                            color?.withOpacity(opacity)),
+                                        fontSize: 14.0,
+                                      ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
+            //
             Visibility(
               visible: trailing == null,
-              replacement: trailing ?? SizedBox(),
+              replacement: trailing ?? const SizedBox.shrink(),
               child: AppIconButton(
                 padding: EdgeInsets.zero,
                 backgroundColor: Colors.transparent,
@@ -341,7 +347,7 @@ class _SectionInfo<M> extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -358,19 +364,15 @@ class _ShimmerLayout extends StatelessWidget {
   final int _count;
   final int linesCount;
 
-  _ShimmerLayout({
-    Key key,
-    this.radius = 8.0,
-    this.linesCount = 3,
-    int count,
-  })  : _count = count ?? kDefaultCount,
+  _ShimmerLayout({Key key, this.radius = 8.0, this.linesCount = 3, int count})
+      : _count = count ?? kDefaultCount,
         _height = kDefaultHeight,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       shrinkWrap: true,
       itemCount: _count,
@@ -394,7 +396,7 @@ class _ShimmerLayout extends StatelessWidget {
               Colors.grey.shade500,
             ),
             child: Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

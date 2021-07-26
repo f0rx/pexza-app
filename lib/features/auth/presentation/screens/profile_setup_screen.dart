@@ -85,7 +85,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                   children: [
                     Flexible(
                       child: AutoSizeText(
-                        "Setup Profile",
+                        "Setup your Profile",
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         style: TextStyle(
@@ -135,6 +135,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                     PinInputWidget<TokenVerificationCubit,
                         TokenVerificationState>(
                       length: 5,
+                      heroTag: "assignment-${assignment.id.value}",
                       // autoFocus: true,
                       validate: context
                           .watch<TokenVerificationCubit>()
@@ -194,15 +195,16 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
             child: BlocBuilder<TokenVerificationCubit, TokenVerificationState>(
               builder: (c, s) => SafeArea(
                 child: FloatingActionButton(
-                  onPressed: () async {
-                    final result = await App.showAlertDialog<bool>(
-                      context: c,
-                      barrierDismissible: false,
-                      builder: (_) => _RejectAssignmentAlertDialog(),
-                    );
-                    if (result != null && result)
-                      c.read<TokenVerificationCubit>().rejectAssignment();
-                  },
+                  onPressed: () async => PopupDialog.confirmation(
+                    title: "Reject assignment?",
+                    description: "You're about to reject the assignment. \n"
+                        "We'll inform the landlord this apartment wasn't to your liking.",
+                    colorScheme: PopupAlertDialogColorScheme.danger,
+                    postiveButtonText: "Proceed",
+                    popupIcon: Icons.cancel_sharp,
+                    onPositiveButtonPressed:
+                        c.read<TokenVerificationCubit>().rejectAssignment,
+                  ).render(context),
                   elevation: 0.0,
                   backgroundColor: Colors.transparent,
                   mini: true,
@@ -268,80 +270,6 @@ class _StatusAction extends StatelessWidget {
           child: Icon(icon, color: Colors.white),
         ),
       ),
-    );
-  }
-}
-
-class _RejectAssignmentAlertDialog extends StatelessWidget {
-  const _RejectAssignmentAlertDialog({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      scrollable: false,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      contentPadding: EdgeInsets.only(left: 20.0, right: 20.0, top: 12.0),
-      content: Container(
-        width: App.shortest * 0.5,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.warning, color: Colors.amber),
-                //
-                HorizontalSpace(width: 10.0),
-                //
-                Flexible(
-                  child: AutoSizeText(
-                    "This action cannot be undone!",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: AutoSizeText.rich(
-                TextSpan(children: [
-                  TextSpan(
-                    text: "You're about to reject the assignment. "
-                        "We'll inform the landlord the apartment wasn't to your liking",
-                  ),
-                ]),
-                style: TextStyle(fontSize: 15.0),
-              ),
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        AppElevatedButton(
-          onPressed: () => Navigator.pop(context, true),
-          backgroundColor: AppColors.errorRed,
-          padding: EdgeInsets.zero,
-          borderRadius: BorderRadius.circular(8.0),
-          elevation: 0.0,
-          child: Text('Proceed'),
-        ),
-        //
-        AppElevatedButton(
-          onPressed: () => Navigator.pop(context, false),
-          backgroundColor: Colors.grey.shade300,
-          padding: EdgeInsets.zero,
-          borderRadius: BorderRadius.circular(8.0),
-          elevation: 0.0,
-          child: Text('No', style: TextStyle(color: Colors.black)),
-        ),
-      ],
     );
   }
 }
