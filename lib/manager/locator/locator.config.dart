@@ -82,7 +82,7 @@ import 'package:pexza/features/home/tenant/presentation/managers/tenant_maintena
     as _i37;
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart'
     as _i14;
-import 'package:pexza/manager/locator/modules/modules.dart' as _i50;
+import 'package:pexza/manager/locator/modules/modules.dart' as _i49;
 import 'package:pexza/manager/theme/manager/theme_cubit.dart' as _i19;
 import 'package:sweetsheet/sweetsheet.dart'
     as _i18; // ignore_for_file: unnecessary_lambdas
@@ -209,6 +209,6 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$ServiceModules extends _i50.ServiceModules {}
+class _$ServiceModules extends _i49.ServiceModules {}
 
-class _$Modules extends _i50.Modules {}
+class _$Modules extends _i49.Modules {}

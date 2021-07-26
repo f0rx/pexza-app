@@ -235,9 +235,7 @@ class LandlordWithdrawalCubit extends Cubit<LandlordWithdrawalState> {
         final _result = await _withdrawalRepository
             .withdraw(WalletDTO.fromDomain(state.landlordWallet));
 
-        emit(state.copyWith(
-          response: some(right(_result.copyWith(popRoute: true))),
-        ));
+        emit(state.copyWith(response: some(right(_result))));
       }
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
