@@ -45,6 +45,9 @@ abstract class Modules {
   @lazySingleton
   FacebookLogin get facebookLogin => FacebookLogin();
 
+  @lazySingleton
+  FacebookLogin get facebookLogin => FacebookLogin();
+
   @preResolve
   Future<PaystackPlugin> get paystackInit =>
       PaystackPlugin.initialize(publicKey: env.paystackPublicKey);

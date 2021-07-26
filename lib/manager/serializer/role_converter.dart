@@ -22,3 +22,12 @@ class FloorRoleConverter extends TypeConverter<Role, String> {
   @override
   String encode(Role instance) => instance?.name?.toLowerCase();
 }
+
+class FloorRoleConverter extends TypeConverter<Role, String> {
+  @override
+  Role decode(String value) =>
+      !value.isNullOrBlank ? Role.valueOf(value) : null;
+
+  @override
+  String encode(Role instance) => instance?.name;
+}
