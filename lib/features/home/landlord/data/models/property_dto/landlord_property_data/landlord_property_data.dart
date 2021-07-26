@@ -94,8 +94,8 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     return LandlordProperty(
       id: UniqueId<int>.fromExternal(id),
       animatable: AnimatableState(
-        2 + math.Random().nextInt(2 - 0),
-        2 + math.Random().nextInt(2 - 0),
+        2 + math.Random().nextInt(1 - 0),
+        2 + math.Random().nextInt(1 - 0),
       ),
       name: !name.isNull ? BasicTextField(name) : null,
       propertyType: !propertyType.isNull
