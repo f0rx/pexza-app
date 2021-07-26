@@ -60,6 +60,17 @@
 			</array>
 		</dict>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To upload files from your device, ${APP_DISPLAY_NAME} requires access to Photo Library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To take pictures with your device, ${APP_DISPLAY_NAME} requires access to use Camera.</string>
 	<key>FacebookAppID</key>
 	<string>546207429867667</string>
 	<key>FacebookDisplayName</key>

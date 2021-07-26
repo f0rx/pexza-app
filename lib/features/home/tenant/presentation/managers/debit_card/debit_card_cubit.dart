@@ -149,9 +149,7 @@ class DebitCardCubit extends Cubit<DebitCardState> {
     }
   }
 
-  Future<void> addNewCard() async {
-    toggleLoading();
-
+  Either<bool, DebitCard> validateFields() {
     var _card = DebitCard(
       cardNumber: state.cardNumber,
       cardName: state.cardName,
@@ -161,17 +159,25 @@ class DebitCardCubit extends Cubit<DebitCardState> {
     );
 
     // Validate Input fields
-    emit(state.copyWith(validate: true));
+    emit(state.copyWith(validate: true, currentDebitCard: _card));
+
+    return _card.failures.isNone() ? right(_card) : left(false);
+  }
+
+  Future<void> addNewCard() async {
+    toggleLoading();
+
+    var validated = validateFields();
 
     try {
-      if (_card.failures.isNone()) {
+      if (validated.isRight()) {
         await _verifyDebitCard();
 
         // Check if user is connected & has good internet
         await checkInternetAndConnectivity(true);
 
         final dto = await _repository.store(
-          CardDTO.fromDomain(_card),
+          CardDTO.fromDomain(validated.getOrElse(() => null)),
         );
 
         emit(state.copyWith(

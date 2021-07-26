@@ -15,3 +15,5 @@ export 'models/maintenance/index.dart';
 export 'models/base_apartment/base_apartment_dto.dart';
 export 'database/app_database.dart';
 export 'repositories/admin_utils_repository.dart';
+export 'repositories/profile_verification/profile_verification_repository.dart';
+export 'models/failure/general_failure.dart';

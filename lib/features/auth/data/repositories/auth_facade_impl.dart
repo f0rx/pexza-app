@@ -235,7 +235,7 @@ class AuthFacadeImpl extends AuthFacade
       );
 
       // Update was successful, fetch & cache fresh user data
-      await getAndCacheUserInfo();
+      // await getAndCacheUserInfo();
 
       return right(unit);
     } on AuthResponse catch (ex) {

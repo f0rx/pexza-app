@@ -47,7 +47,10 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
             (f) => f.foldCode(
               is1106: () async {
                 if (App.currentRoute == Routes.landlordAddTenantScreen &&
-                    !s.isLoading) navigator.pushProfileVerificationScreen();
+                    !s.isLoading)
+                  navigator.pushProfileVerificationScreen(
+                    intended: Routes.landlordAddTenantScreen,
+                  );
               },
               orElse: () =>
                   BottomAlertDialog.init(c, message: f.message ?? f.details),
@@ -132,7 +135,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                   (r) => s.response?.fold(
                     () => null,
                     (_) => _?.fold(
-                      (f) => f.errors?.tenantEmail?.firstOrNull,
+                      (f) => f.errors?.tenantEmail?.firstOrNil,
                       (_) => null,
                     ),
                   ),
@@ -168,7 +171,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                 error: s.response?.fold(
                   () => null,
                   (_) => _?.fold(
-                    (f) => f.errors?.propertyId?.firstOrNull,
+                    (f) => f.errors?.propertyId?.firstOrNil,
                     (_) => null,
                   ),
                 ),
@@ -206,7 +209,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                 error: s.response?.fold(
                   () => null,
                   (_) => _?.fold(
-                    (f) => f.errors?.apartmentId?.firstOrNull,
+                    (f) => f.errors?.apartmentId?.firstOrNil,
                     (_) => null,
                   ),
                 ),
@@ -266,7 +269,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                 error: s.response?.fold(
                   () => null,
                   (_) => _?.fold(
-                    (f) => f.errors?.duration?.firstOrNull,
+                    (f) => f.errors?.duration?.firstOrNil,
                     (_) => null,
                   ),
                 ),
@@ -300,7 +303,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                 error: s.response?.fold(
                   () => null,
                   (_) => _?.fold(
-                    (f) => f.errors?.currencyId?.firstOrNull,
+                    (f) => f.errors?.currencyId?.firstOrNil,
                     (_) => null,
                   ),
                 ),
@@ -339,7 +342,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                           (r) => s.response?.fold(
                             () => null,
                             (_) => _?.fold(
-                              (f) => f.errors?.amount?.firstOrNull,
+                              (f) => f.errors?.amount?.firstOrNil,
                               (_) => null,
                             ),
                           ),

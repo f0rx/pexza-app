@@ -30,7 +30,7 @@ class _$AuthStateTearOff {
       bool shouldGlow = false,
       bool validate = false,
       bool passwordHidden = true,
-      Option<Either<AuthResponse, Unit>> authStatus = const None()}) {
+      Option<Either<AuthResponse, Response>> authStatus = const None()}) {
     return _AuthState(
       firstName: firstName,
       lastName: lastName,
@@ -73,7 +73,7 @@ mixin _$AuthState {
   bool get shouldGlow;
   bool get validate;
   bool get passwordHidden;
-  Option<Either<AuthResponse, Unit>> get authStatus;
+  Option<Either<AuthResponse, Response>> get authStatus;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith;
@@ -99,7 +99,7 @@ abstract class $AuthStateCopyWith<$Res> {
       bool shouldGlow,
       bool validate,
       bool passwordHidden,
-      Option<Either<AuthResponse, Unit>> authStatus});
+      Option<Either<AuthResponse, Response>> authStatus});
 
   $CountryCopyWith<$Res> get region;
 }
@@ -162,7 +162,7 @@ class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
           : passwordHidden as bool,
       authStatus: authStatus == freezed
           ? _value.authStatus
-          : authStatus as Option<Either<AuthResponse, Unit>>,
+          : authStatus as Option<Either<AuthResponse, Response>>,
     ));
   }
 
@@ -199,7 +199,7 @@ abstract class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
       bool shouldGlow,
       bool validate,
       bool passwordHidden,
-      Option<Either<AuthResponse, Unit>> authStatus});
+      Option<Either<AuthResponse, Response>> authStatus});
 
   @override
   $CountryCopyWith<$Res> get region;
@@ -264,7 +264,7 @@ class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
           : passwordHidden as bool,
       authStatus: authStatus == freezed
           ? _value.authStatus
-          : authStatus as Option<Either<AuthResponse, Unit>>,
+          : authStatus as Option<Either<AuthResponse, Response>>,
     ));
   }
 }
@@ -341,7 +341,7 @@ class _$_AuthState extends _AuthState {
   final bool passwordHidden;
   @JsonKey(defaultValue: const None())
   @override
-  final Option<Either<AuthResponse, Unit>> authStatus;
+  final Option<Either<AuthResponse, Response>> authStatus;
 
   @override
   String toString() {
@@ -443,7 +443,7 @@ abstract class _AuthState extends AuthState {
       bool shouldGlow,
       bool validate,
       bool passwordHidden,
-      Option<Either<AuthResponse, Unit>> authStatus}) = _$_AuthState;
+      Option<Either<AuthResponse, Response>> authStatus}) = _$_AuthState;
 
   @override
   DisplayName get firstName;
@@ -476,7 +476,7 @@ abstract class _AuthState extends AuthState {
   @override
   bool get passwordHidden;
   @override
-  Option<Either<AuthResponse, Unit>> get authStatus;
+  Option<Either<AuthResponse, Response>> get authStatus;
   @override
   @JsonKey(ignore: true)
   _$AuthStateCopyWith<_AuthState> get copyWith;

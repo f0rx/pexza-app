@@ -20,7 +20,8 @@ class DateOfBirthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!context.read<AuthCubit>().state.dateOfBirth.isValidDateOfBirth)
+    if (context.read<AuthCubit>().state.dateOfBirth?.getOrNull != null &&
+        !context.read<AuthCubit>().state.dateOfBirth.isValidDateOfBirth)
       context.read<AuthCubit>().dateOfBirthChanged(custom);
 
     return BlocBuilder<AuthCubit, AuthState>(
@@ -46,9 +47,11 @@ class DateOfBirthField extends StatelessWidget {
                       errorInvalidText: "That's in the Future",
                       onDateSubmitted:
                           context.read<AuthCubit>().dateOfBirthChanged,
-                      initialDate: s.dateOfBirth.isValidDateOfBirth
-                          ? s.dateOfBirth.value.getOrElse(() => null)
-                          : custom,
+                      initialDate: s.dateOfBirth?.getOrNull == null
+                          ? null
+                          : s.dateOfBirth.isValidDateOfBirth
+                              ? s.dateOfBirth.value.getOrElse(() => null)
+                              : custom,
                     ),
                   ),
                 ),

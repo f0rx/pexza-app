@@ -2,6 +2,7 @@ library bank_account_detail.dart;
 
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/kt.dart' hide nullable;
 import 'package:pexza/features/core/domain/entities/entities.dart';
 import 'package:pexza/features/core/domain/failures/failure.dart';
 import 'package:pexza/features/home/landlord/domain/entities/withdrawal/index.dart';
@@ -14,6 +15,7 @@ abstract class BankAccountDetail implements _$BankAccountDetail {
   const BankAccountDetail._();
 
   const factory BankAccountDetail({
+    @nullable UniqueId<int> id,
     @nullable BasicTextField<int> bankId,
     @nullable BasicTextField<String> accountNumber,
     @nullable BasicTextField<String> accountName,
@@ -36,4 +38,7 @@ abstract class BankAccountDetail implements _$BankAccountDetail {
         (f) => some(f),
         (_) => none(),
       );
+
+  Bank bankFromId(KtList<Bank> banks) =>
+      banks.firstOrNull((i) => i.id.value == bankId.getOrNull);
 }

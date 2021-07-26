@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
+import 'package:pexza/utils/utils.dart';
 
 class GenderField extends StatelessWidget {
   final FocusNode focus;
@@ -30,7 +31,7 @@ class GenderField extends StatelessWidget {
                     (item) => DropdownMenuItem<GenderType>(
                       value: item,
                       child: Text(
-                        item.name,
+                        "${item.name}".capitalizeFirst(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         softWrap: true,
@@ -44,7 +45,7 @@ class GenderField extends StatelessWidget {
                   .state
                   .gender
                   .value
-                  .getOrElse(() => GenderType.Male),
+                  .getOrElse(() => GenderType.male),
               isExpanded: false,
               icon: Icon(Icons.keyboard_arrow_down),
               iconSize: 19.0,

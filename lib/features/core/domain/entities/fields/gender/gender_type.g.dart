@@ -6,17 +6,17 @@ part of 'gender_type.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-const GenderType _$male = const GenderType._('Male');
-const GenderType _$female = const GenderType._('Female');
-const GenderType _$others = const GenderType._('Others');
+const GenderType _$male = const GenderType._('male');
+const GenderType _$female = const GenderType._('female');
+const GenderType _$others = const GenderType._('others');
 
 GenderType _$valueOf(String name) {
   switch (name) {
-    case 'Male':
+    case 'male':
       return _$male;
-    case 'Female':
+    case 'female':
       return _$female;
-    case 'Others':
+    case 'others':
       return _$others;
     default:
       return _$male;

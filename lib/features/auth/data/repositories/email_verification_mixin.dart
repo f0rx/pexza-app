@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:pexza/features/auth/data/models/auth_response.dart';
 import 'package:pexza/features/auth/data/sources/sources.dart';
+import 'package:pexza/features/core/data/models/server_field_errors/server_field_errors.dart';
 import 'package:pexza/features/core/data/models/user/user_dto.dart';
 import 'package:pexza/features/core/domain/entities/entities.dart';
 
@@ -50,18 +51,24 @@ mixin EmailVerificationMixin on AuthFacade {
   }
 
   @override
-  Future<Either<AuthResponse, Unit>> resendVerificationEmail(
+  Future<Either<AuthResponse, AuthResponse>> resendVerificationEmail(
     EmailAddress email,
   ) async {
     try {
       final _checkConn = await checkHasGoodInternet();
 
-      await _checkConn.fold(
+      final _response = await _checkConn.fold(
         (f) => throw f,
-        (_) => remote.resendVerificationEmail(email.getOrNull),
+        (_) => email.value?.fold(
+          (f) => throw AuthResponse(
+            message: f?.message,
+            errors: ServerFieldErrors(email: [f?.message]),
+          ),
+          (_email) => remote.resendVerificationEmail(email.getOrNull),
+        ),
       );
 
-      return right(unit);
+      return right(AuthResponse.fromJson(_response.data));
     } on AuthResponse catch (ex) {
       return handleFailure(authResponse: ex);
     } on DioError catch (ex, trace) {

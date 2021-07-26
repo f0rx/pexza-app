@@ -15,8 +15,8 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		C61F796326958A2F008743AA /* config in Resources */ = {isa = PBXBuildFile; fileRef = C61F796226958A2F008743AA /* config */; };
-		C6BD72D02694803200DFC9AF /* dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6BD72CE2694803200DFC9AF /* dev.plist */; };
-		C6BD72D12694803200DFC9AF /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6BD72CF2694803200DFC9AF /* prod.plist */; };
+		C6542F6826A88E8D00AA4301 /* prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6542F6626A88E8D00AA4301 /* prod.plist */; };
+		C6542F6926A88E8D00AA4301 /* dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6542F6726A88E8D00AA4301 /* dev.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,9 +53,9 @@
 		AEB7639281C0BFDFD1019F04 /* Pods-Runner.profile-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-prod.xcconfig"; sourceTree = "<group>"; };
 		B9EC4A920B22A597EC6CFCA9 /* Pods-Runner.profile-dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile-dev.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile-dev.xcconfig"; sourceTree = "<group>"; };
 		C61F796226958A2F008743AA /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config; sourceTree = "<group>"; };
+		C6542F6626A88E8D00AA4301 /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
+		C6542F6726A88E8D00AA4301 /* dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dev.plist; sourceTree = "<group>"; };
 		C6A9EBC97CDA50AF4E1E1940 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
-		C6BD72CE2694803200DFC9AF /* dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dev.plist; sourceTree = "<group>"; };
-		C6BD72CF2694803200DFC9AF /* prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = prod.plist; sourceTree = "<group>"; };
 		D75D7593674643C901A26A6A /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		E5681917CDCF63A251F8220C /* Pods-Runner.debug-dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-dev.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,8 +122,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
-				C6BD72CE2694803200DFC9AF /* dev.plist */,
-				C6BD72CF2694803200DFC9AF /* prod.plist */,
+				C6542F6726A88E8D00AA4301 /* dev.plist */,
+				C6542F6626A88E8D00AA4301 /* prod.plist */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -209,11 +209,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				C6542F6826A88E8D00AA4301 /* prod.plist in Resources */,
 				C61F796326958A2F008743AA /* config in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
-				C6BD72D02694803200DFC9AF /* dev.plist in Resources */,
-				C6BD72D12694803200DFC9AF /* prod.plist in Resources */,
+				C6542F6926A88E8D00AA4301 /* dev.plist in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

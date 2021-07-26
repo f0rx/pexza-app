@@ -15,7 +15,7 @@ class LandlordWalletScreen extends StatelessWidget with AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<LandlordWalletCubit>(),
+      create: (_) => getIt<LandlordWithdrawalCubit>(),
       child: this,
     );
   }

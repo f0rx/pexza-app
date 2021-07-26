@@ -22,9 +22,13 @@ class _$UserDTOTearOff {
       @JsonKey(includeIfNull: false)
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
+      @ProfileVerificationConverter()
+          ProfileVerificationStatus status,
+      @nullable
+      @JsonKey(includeIfNull: false)
       @RoleConverter()
-          String role,
+          Role role,
       @nullable
       @JsonKey(includeIfNull: false)
           int balance,
@@ -62,11 +66,29 @@ class _$UserDTOTearOff {
       @JsonKey(includeIfNull: false, name: 'email_verified_at', fromJson: UserDTO.isEmailVerifiedFromJson)
           bool isEmailVerified,
       @nullable
+      @JsonKey(includeIfNull: false)
+          BaseApartmentDTO apartment,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+      @TimestampConverter()
           String verificationCodeSentAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+      @TimestampConverter()
           String forgotPasswordCodeSentAt,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'unreadNotifications')
+          int unreadNotifications,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'hasPendingAssignment', defaultValue: false)
+          bool hasPendingAssignment,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'pendingAssignment')
+          List<BaseApartmentDTO> pendingAssignments,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'last_logged_in')
+      @TimestampConverter()
+          String lastSeenAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
@@ -78,12 +100,10 @@ class _$UserDTOTearOff {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt,
-      @nullable
-      @JsonKey(includeIfNull: false)
-          BaseApartmentDTO apartment}) {
+          String deletedAt}) {
     return _UserDTO(
       id: id,
+      status: status,
       role: role,
       balance: balance,
       token: token,
@@ -97,12 +117,16 @@ class _$UserDTOTearOff {
       password: password,
       photo: photo,
       isEmailVerified: isEmailVerified,
+      apartment: apartment,
       verificationCodeSentAt: verificationCodeSentAt,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt,
+      unreadNotifications: unreadNotifications,
+      hasPendingAssignment: hasPendingAssignment,
+      pendingAssignments: pendingAssignments,
+      lastSeenAt: lastSeenAt,
       createdAt: createdAt,
       updatedAt: updatedAt,
       deletedAt: deletedAt,
-      apartment: apartment,
     );
   }
 
@@ -122,9 +146,13 @@ mixin _$UserDTO {
   @JsonKey(includeIfNull: false)
   int get id;
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
+  @ProfileVerificationConverter()
+  ProfileVerificationStatus get status;
+  @nullable
+  @JsonKey(includeIfNull: false)
   @RoleConverter()
-  String get role;
+  Role get role;
   @nullable
   @JsonKey(includeIfNull: false)
   int get balance;
@@ -165,11 +193,30 @@ mixin _$UserDTO {
       fromJson: UserDTO.isEmailVerifiedFromJson)
   bool get isEmailVerified;
   @nullable
+  @JsonKey(includeIfNull: false)
+  BaseApartmentDTO get apartment;
+  @nullable
   @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+  @TimestampConverter()
   String get verificationCodeSentAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+  @TimestampConverter()
   String get forgotPasswordCodeSentAt;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'unreadNotifications')
+  int get unreadNotifications;
+  @nullable
+  @JsonKey(
+      includeIfNull: false, name: 'hasPendingAssignment', defaultValue: false)
+  bool get hasPendingAssignment;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'pendingAssignment')
+  List<BaseApartmentDTO> get pendingAssignments;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'last_logged_in')
+  @TimestampConverter()
+  String get lastSeenAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
@@ -182,9 +229,6 @@ mixin _$UserDTO {
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
-  @nullable
-  @JsonKey(includeIfNull: false)
-  BaseApartmentDTO get apartment;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -200,9 +244,13 @@ abstract class $UserDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
+      @ProfileVerificationConverter()
+          ProfileVerificationStatus status,
+      @nullable
+      @JsonKey(includeIfNull: false)
       @RoleConverter()
-          String role,
+          Role role,
       @nullable
       @JsonKey(includeIfNull: false)
           int balance,
@@ -240,11 +288,29 @@ abstract class $UserDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, name: 'email_verified_at', fromJson: UserDTO.isEmailVerifiedFromJson)
           bool isEmailVerified,
       @nullable
+      @JsonKey(includeIfNull: false)
+          BaseApartmentDTO apartment,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+      @TimestampConverter()
           String verificationCodeSentAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+      @TimestampConverter()
           String forgotPasswordCodeSentAt,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'unreadNotifications')
+          int unreadNotifications,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'hasPendingAssignment', defaultValue: false)
+          bool hasPendingAssignment,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'pendingAssignment')
+          List<BaseApartmentDTO> pendingAssignments,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'last_logged_in')
+      @TimestampConverter()
+          String lastSeenAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
@@ -256,10 +322,7 @@ abstract class $UserDTOCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt,
-      @nullable
-      @JsonKey(includeIfNull: false)
-          BaseApartmentDTO apartment});
+          String deletedAt});
 
   $BaseApartmentDTOCopyWith<$Res> get apartment;
 }
@@ -275,6 +338,7 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
   @override
   $Res call({
     Object id = freezed,
+    Object status = freezed,
     Object role = freezed,
     Object balance = freezed,
     Object token = freezed,
@@ -288,16 +352,23 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
     Object password = freezed,
     Object photo = freezed,
     Object isEmailVerified = freezed,
+    Object apartment = freezed,
     Object verificationCodeSentAt = freezed,
     Object forgotPasswordCodeSentAt = freezed,
+    Object unreadNotifications = freezed,
+    Object hasPendingAssignment = freezed,
+    Object pendingAssignments = freezed,
+    Object lastSeenAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
-    Object apartment = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
-      role: role == freezed ? _value.role : role as String,
+      status: status == freezed
+          ? _value.status
+          : status as ProfileVerificationStatus,
+      role: role == freezed ? _value.role : role as Role,
       balance: balance == freezed ? _value.balance : balance as int,
       token: token == freezed ? _value.token : token as String,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
@@ -313,18 +384,29 @@ class _$UserDTOCopyWithImpl<$Res> implements $UserDTOCopyWith<$Res> {
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
+      apartment: apartment == freezed
+          ? _value.apartment
+          : apartment as BaseApartmentDTO,
       verificationCodeSentAt: verificationCodeSentAt == freezed
           ? _value.verificationCodeSentAt
           : verificationCodeSentAt as String,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
           ? _value.forgotPasswordCodeSentAt
           : forgotPasswordCodeSentAt as String,
+      unreadNotifications: unreadNotifications == freezed
+          ? _value.unreadNotifications
+          : unreadNotifications as int,
+      hasPendingAssignment: hasPendingAssignment == freezed
+          ? _value.hasPendingAssignment
+          : hasPendingAssignment as bool,
+      pendingAssignments: pendingAssignments == freezed
+          ? _value.pendingAssignments
+          : pendingAssignments as List<BaseApartmentDTO>,
+      lastSeenAt:
+          lastSeenAt == freezed ? _value.lastSeenAt : lastSeenAt as String,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
-      apartment: apartment == freezed
-          ? _value.apartment
-          : apartment as BaseApartmentDTO,
     ));
   }
 
@@ -349,9 +431,13 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false)
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
+      @ProfileVerificationConverter()
+          ProfileVerificationStatus status,
+      @nullable
+      @JsonKey(includeIfNull: false)
       @RoleConverter()
-          String role,
+          Role role,
       @nullable
       @JsonKey(includeIfNull: false)
           int balance,
@@ -389,11 +475,29 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       @JsonKey(includeIfNull: false, name: 'email_verified_at', fromJson: UserDTO.isEmailVerifiedFromJson)
           bool isEmailVerified,
       @nullable
+      @JsonKey(includeIfNull: false)
+          BaseApartmentDTO apartment,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+      @TimestampConverter()
           String verificationCodeSentAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+      @TimestampConverter()
           String forgotPasswordCodeSentAt,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'unreadNotifications')
+          int unreadNotifications,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'hasPendingAssignment', defaultValue: false)
+          bool hasPendingAssignment,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'pendingAssignment')
+          List<BaseApartmentDTO> pendingAssignments,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'last_logged_in')
+      @TimestampConverter()
+          String lastSeenAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
@@ -405,10 +509,7 @@ abstract class _$UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt,
-      @nullable
-      @JsonKey(includeIfNull: false)
-          BaseApartmentDTO apartment});
+          String deletedAt});
 
   @override
   $BaseApartmentDTOCopyWith<$Res> get apartment;
@@ -426,6 +527,7 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
   @override
   $Res call({
     Object id = freezed,
+    Object status = freezed,
     Object role = freezed,
     Object balance = freezed,
     Object token = freezed,
@@ -439,16 +541,23 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
     Object password = freezed,
     Object photo = freezed,
     Object isEmailVerified = freezed,
+    Object apartment = freezed,
     Object verificationCodeSentAt = freezed,
     Object forgotPasswordCodeSentAt = freezed,
+    Object unreadNotifications = freezed,
+    Object hasPendingAssignment = freezed,
+    Object pendingAssignments = freezed,
+    Object lastSeenAt = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
     Object deletedAt = freezed,
-    Object apartment = freezed,
   }) {
     return _then(_UserDTO(
       id: id == freezed ? _value.id : id as int,
-      role: role == freezed ? _value.role : role as String,
+      status: status == freezed
+          ? _value.status
+          : status as ProfileVerificationStatus,
+      role: role == freezed ? _value.role : role as Role,
       balance: balance == freezed ? _value.balance : balance as int,
       token: token == freezed ? _value.token : token as String,
       firstName: firstName == freezed ? _value.firstName : firstName as String,
@@ -464,18 +573,29 @@ class __$UserDTOCopyWithImpl<$Res> extends _$UserDTOCopyWithImpl<$Res>
       isEmailVerified: isEmailVerified == freezed
           ? _value.isEmailVerified
           : isEmailVerified as bool,
+      apartment: apartment == freezed
+          ? _value.apartment
+          : apartment as BaseApartmentDTO,
       verificationCodeSentAt: verificationCodeSentAt == freezed
           ? _value.verificationCodeSentAt
           : verificationCodeSentAt as String,
       forgotPasswordCodeSentAt: forgotPasswordCodeSentAt == freezed
           ? _value.forgotPasswordCodeSentAt
           : forgotPasswordCodeSentAt as String,
+      unreadNotifications: unreadNotifications == freezed
+          ? _value.unreadNotifications
+          : unreadNotifications as int,
+      hasPendingAssignment: hasPendingAssignment == freezed
+          ? _value.hasPendingAssignment
+          : hasPendingAssignment as bool,
+      pendingAssignments: pendingAssignments == freezed
+          ? _value.pendingAssignments
+          : pendingAssignments as List<BaseApartmentDTO>,
+      lastSeenAt:
+          lastSeenAt == freezed ? _value.lastSeenAt : lastSeenAt as String,
       createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
       updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
       deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
-      apartment: apartment == freezed
-          ? _value.apartment
-          : apartment as BaseApartmentDTO,
     ));
   }
 }
@@ -489,7 +609,11 @@ class _$_UserDTO extends _UserDTO {
       @JsonKey(includeIfNull: false)
           this.id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
+      @ProfileVerificationConverter()
+          this.status,
+      @nullable
+      @JsonKey(includeIfNull: false)
       @RoleConverter()
           this.role,
       @nullable
@@ -529,11 +653,29 @@ class _$_UserDTO extends _UserDTO {
       @JsonKey(includeIfNull: false, name: 'email_verified_at', fromJson: UserDTO.isEmailVerifiedFromJson)
           this.isEmailVerified,
       @nullable
+      @JsonKey(includeIfNull: false)
+          this.apartment,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+      @TimestampConverter()
           this.verificationCodeSentAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+      @TimestampConverter()
           this.forgotPasswordCodeSentAt,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'unreadNotifications')
+          this.unreadNotifications,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'hasPendingAssignment', defaultValue: false)
+          this.hasPendingAssignment,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'pendingAssignment')
+          this.pendingAssignments,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'last_logged_in')
+      @TimestampConverter()
+          this.lastSeenAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
@@ -545,10 +687,7 @@ class _$_UserDTO extends _UserDTO {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          this.deletedAt,
-      @nullable
-      @JsonKey(includeIfNull: false)
-          this.apartment})
+          this.deletedAt})
       : super._();
 
   factory _$_UserDTO.fromJson(Map<String, dynamic> json) =>
@@ -560,9 +699,14 @@ class _$_UserDTO extends _UserDTO {
   final int id;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
+  @ProfileVerificationConverter()
+  final ProfileVerificationStatus status;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
   @RoleConverter()
-  final String role;
+  final Role role;
   @override
   @nullable
   @JsonKey(includeIfNull: false)
@@ -616,12 +760,36 @@ class _$_UserDTO extends _UserDTO {
   final bool isEmailVerified;
   @override
   @nullable
+  @JsonKey(includeIfNull: false)
+  final BaseApartmentDTO apartment;
+  @override
+  @nullable
   @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+  @TimestampConverter()
   final String verificationCodeSentAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+  @TimestampConverter()
   final String forgotPasswordCodeSentAt;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'unreadNotifications')
+  final int unreadNotifications;
+  @override
+  @nullable
+  @JsonKey(
+      includeIfNull: false, name: 'hasPendingAssignment', defaultValue: false)
+  final bool hasPendingAssignment;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'pendingAssignment')
+  final List<BaseApartmentDTO> pendingAssignments;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'last_logged_in')
+  @TimestampConverter()
+  final String lastSeenAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
@@ -637,14 +805,10 @@ class _$_UserDTO extends _UserDTO {
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   final String deletedAt;
-  @override
-  @nullable
-  @JsonKey(includeIfNull: false)
-  final BaseApartmentDTO apartment;
 
   @override
   String toString() {
-    return 'UserDTO(id: $id, role: $role, balance: $balance, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, apartment: $apartment)';
+    return 'UserDTO(id: $id, status: $status, role: $role, balance: $balance, token: $token, firstName: $firstName, lastName: $lastName, email: $email, gender: $gender, dateOfBirth: $dateOfBirth, phone: $phone, provider: $provider, password: $password, photo: $photo, isEmailVerified: $isEmailVerified, apartment: $apartment, verificationCodeSentAt: $verificationCodeSentAt, forgotPasswordCodeSentAt: $forgotPasswordCodeSentAt, unreadNotifications: $unreadNotifications, hasPendingAssignment: $hasPendingAssignment, pendingAssignments: $pendingAssignments, lastSeenAt: $lastSeenAt, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -653,6 +817,8 @@ class _$_UserDTO extends _UserDTO {
         (other is _UserDTO &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
             (identical(other.role, role) ||
                 const DeepCollectionEquality().equals(other.role, role)) &&
             (identical(other.balance, balance) ||
@@ -686,32 +852,41 @@ class _$_UserDTO extends _UserDTO {
             (identical(other.isEmailVerified, isEmailVerified) ||
                 const DeepCollectionEquality()
                     .equals(other.isEmailVerified, isEmailVerified)) &&
+            (identical(other.apartment, apartment) ||
+                const DeepCollectionEquality()
+                    .equals(other.apartment, apartment)) &&
             (identical(other.verificationCodeSentAt, verificationCodeSentAt) ||
                 const DeepCollectionEquality().equals(
                     other.verificationCodeSentAt, verificationCodeSentAt)) &&
-            (identical(
-                    other.forgotPasswordCodeSentAt, forgotPasswordCodeSentAt) ||
+            (identical(other.forgotPasswordCodeSentAt, forgotPasswordCodeSentAt) ||
                 const DeepCollectionEquality().equals(
                     other.forgotPasswordCodeSentAt,
                     forgotPasswordCodeSentAt)) &&
+            (identical(other.unreadNotifications, unreadNotifications) ||
+                const DeepCollectionEquality()
+                    .equals(other.unreadNotifications, unreadNotifications)) &&
+            (identical(other.hasPendingAssignment, hasPendingAssignment) ||
+                const DeepCollectionEquality().equals(
+                    other.hasPendingAssignment, hasPendingAssignment)) &&
+            (identical(other.pendingAssignments, pendingAssignments) ||
+                const DeepCollectionEquality()
+                    .equals(other.pendingAssignments, pendingAssignments)) &&
+            (identical(other.lastSeenAt, lastSeenAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastSeenAt, lastSeenAt)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
             (identical(other.updatedAt, updatedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedAt, updatedAt)) &&
-            (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)) &&
-            (identical(other.apartment, apartment) ||
-                const DeepCollectionEquality()
-                    .equals(other.apartment, apartment)));
+                const DeepCollectionEquality().equals(other.updatedAt, updatedAt)) &&
+            (identical(other.deletedAt, deletedAt) || const DeepCollectionEquality().equals(other.deletedAt, deletedAt)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(role) ^
       const DeepCollectionEquality().hash(balance) ^
       const DeepCollectionEquality().hash(token) ^
@@ -725,12 +900,16 @@ class _$_UserDTO extends _UserDTO {
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(isEmailVerified) ^
+      const DeepCollectionEquality().hash(apartment) ^
       const DeepCollectionEquality().hash(verificationCodeSentAt) ^
       const DeepCollectionEquality().hash(forgotPasswordCodeSentAt) ^
+      const DeepCollectionEquality().hash(unreadNotifications) ^
+      const DeepCollectionEquality().hash(hasPendingAssignment) ^
+      const DeepCollectionEquality().hash(pendingAssignments) ^
+      const DeepCollectionEquality().hash(lastSeenAt) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
-      const DeepCollectionEquality().hash(deletedAt) ^
-      const DeepCollectionEquality().hash(apartment);
+      const DeepCollectionEquality().hash(deletedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -750,9 +929,13 @@ abstract class _UserDTO extends UserDTO {
       @JsonKey(includeIfNull: false)
           int id,
       @nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
+      @JsonKey(includeIfNull: false)
+      @ProfileVerificationConverter()
+          ProfileVerificationStatus status,
+      @nullable
+      @JsonKey(includeIfNull: false)
       @RoleConverter()
-          String role,
+          Role role,
       @nullable
       @JsonKey(includeIfNull: false)
           int balance,
@@ -790,11 +973,29 @@ abstract class _UserDTO extends UserDTO {
       @JsonKey(includeIfNull: false, name: 'email_verified_at', fromJson: UserDTO.isEmailVerifiedFromJson)
           bool isEmailVerified,
       @nullable
+      @JsonKey(includeIfNull: false)
+          BaseApartmentDTO apartment,
+      @nullable
       @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+      @TimestampConverter()
           String verificationCodeSentAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+      @TimestampConverter()
           String forgotPasswordCodeSentAt,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'unreadNotifications')
+          int unreadNotifications,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'hasPendingAssignment', defaultValue: false)
+          bool hasPendingAssignment,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'pendingAssignment')
+          List<BaseApartmentDTO> pendingAssignments,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'last_logged_in')
+      @TimestampConverter()
+          String lastSeenAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
@@ -806,10 +1007,7 @@ abstract class _UserDTO extends UserDTO {
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt,
-      @nullable
-      @JsonKey(includeIfNull: false)
-          BaseApartmentDTO apartment}) = _$_UserDTO;
+          String deletedAt}) = _$_UserDTO;
 
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
 
@@ -819,9 +1017,14 @@ abstract class _UserDTO extends UserDTO {
   int get id;
   @override
   @nullable
-  @JsonKey(includeIfNull: false, defaultValue: '')
+  @JsonKey(includeIfNull: false)
+  @ProfileVerificationConverter()
+  ProfileVerificationStatus get status;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
   @RoleConverter()
-  String get role;
+  Role get role;
   @override
   @nullable
   @JsonKey(includeIfNull: false)
@@ -875,12 +1078,36 @@ abstract class _UserDTO extends UserDTO {
   bool get isEmailVerified;
   @override
   @nullable
+  @JsonKey(includeIfNull: false)
+  BaseApartmentDTO get apartment;
+  @override
+  @nullable
   @JsonKey(includeIfNull: false, name: 'verification_code_sent_at')
+  @TimestampConverter()
   String get verificationCodeSentAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'forgot_password_code_sent_at')
+  @TimestampConverter()
   String get forgotPasswordCodeSentAt;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'unreadNotifications')
+  int get unreadNotifications;
+  @override
+  @nullable
+  @JsonKey(
+      includeIfNull: false, name: 'hasPendingAssignment', defaultValue: false)
+  bool get hasPendingAssignment;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'pendingAssignment')
+  List<BaseApartmentDTO> get pendingAssignments;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'last_logged_in')
+  @TimestampConverter()
+  String get lastSeenAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
@@ -896,10 +1123,6 @@ abstract class _UserDTO extends UserDTO {
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
   String get deletedAt;
-  @override
-  @nullable
-  @JsonKey(includeIfNull: false)
-  BaseApartmentDTO get apartment;
   @override
   @JsonKey(ignore: true)
   _$UserDTOCopyWith<_UserDTO> get copyWith;

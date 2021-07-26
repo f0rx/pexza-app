@@ -18,9 +18,8 @@ class DateTimeField extends FieldObject<DateTime> {
     );
   }
 
-  bool get isValidDateOfBirth {
-    return this.isNullOrBlank && this.getOrNull.isBefore(AuthState.lastYear);
-  }
+  bool get isValidDateOfBirth =>
+      this.isNullOrBlank && this.getOrNull.isBefore(AuthState.lastYear);
 
   const DateTimeField._(this.value);
 }

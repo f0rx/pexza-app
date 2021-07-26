@@ -19,9 +19,13 @@ abstract class UserDTO implements _$UserDTO {
     @JsonKey(includeIfNull: false)
         int id,
     @nullable
-    @JsonKey(includeIfNull: false, defaultValue: '')
+    @JsonKey(includeIfNull: false)
+    @ProfileVerificationConverter()
+        ProfileVerificationStatus status,
+    @nullable
+    @JsonKey(includeIfNull: false)
     @RoleConverter()
-        String role,
+        Role role,
     @nullable
     @JsonKey(includeIfNull: false)
         int balance,
@@ -63,11 +67,29 @@ abstract class UserDTO implements _$UserDTO {
     )
         bool isEmailVerified,
     @nullable
+    @JsonKey(includeIfNull: false)
+        BaseApartmentDTO apartment,
+    @nullable
     @JsonKey(includeIfNull: false, name: "verification_code_sent_at")
+    @TimestampConverter()
         String verificationCodeSentAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "forgot_password_code_sent_at")
+    @TimestampConverter()
         String forgotPasswordCodeSentAt,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "unreadNotifications")
+        int unreadNotifications,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "hasPendingAssignment", defaultValue: false)
+        bool hasPendingAssignment,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "pendingAssignment")
+        List<BaseApartmentDTO> pendingAssignments,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "last_logged_in")
+    @TimestampConverter()
+        String lastSeenAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
@@ -80,13 +102,10 @@ abstract class UserDTO implements _$UserDTO {
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
         String deletedAt,
-    @nullable
-    @JsonKey(includeIfNull: false)
-        BaseApartmentDTO apartment,
   }) = _UserDTO;
 
   factory UserDTO.fromDomain(User instance) => UserDTO(
-        role: instance.role?.name?.toLowerCase(),
+        role: instance.role,
         firstName: instance.firstName?.getOrNull,
         lastName: instance.lastName?.getOrNull,
         email: instance.email?.getOrNull,
@@ -101,7 +120,7 @@ abstract class UserDTO implements _$UserDTO {
 
   User get domain => User(
         id: UniqueId<int>.fromExternal(id),
-        role: role != null ? Role.valueOf(role) : null,
+        role: role,
         accountBalance: balance != null ? BasicTextField(balance) : null,
         firstName: firstName != null ? DisplayName(firstName) : null,
         lastName: lastName != null ? DisplayName(lastName) : null,

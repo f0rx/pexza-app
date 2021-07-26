@@ -17,6 +17,8 @@ class ServerFieldErrorsSerializer
         password: value != null ? value['password'] : null,
         token: value != null ? value['token'] : null,
         code: value != null ? value['code'] : null,
+        type: value != null ? value['type'] : null,
+        description: value != null ? value['description'] : null,
         propertyId: value != null ? value['property_id'] : null,
         apartmentId: value != null ? value['apartment_id'] : null,
         propertyType: value != null ? value['property_type'] : null,
@@ -25,12 +27,16 @@ class ServerFieldErrorsSerializer
         town: value != null ? value['town'] : null,
         stateId: value != null ? value['state_id'] : null,
         tenantEmail: value != null ? value['tenant_email'] : null,
+        document: value != null ? value['document'] : null,
         duration: value != null ? value['duration'] : null,
         amount: value != null ? value['amount'] : null,
         currencyId: value != null ? value['currency_id'] : null,
         serviceId: value != null ? value['service_id'] : null,
         assignmentId: value != null ? value['assignment_id'] : null,
         comment: value != null ? value['comment'] : null,
+        cardNumber: value != null ? value['card_number'] : null,
+        accountNumber: value != null ? value['account_number'] : null,
+        bankId: value != null ? value['bank_id'] : null,
       );
 
   @override

@@ -133,7 +133,9 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
                 title: AutoSizeText("Account Verification"),
                 leading: AppAssets.profileVerify,
                 trailing: Icon(Icons.navigate_next_rounded, size: 27),
-                onTap: () => navigator.pushProfileVerificationScreen(),
+                onTap: () => navigator.pushProfileVerificationScreen(
+                  intended: Routes.accountScreen,
+                ),
               ),
               //
               BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
@@ -150,9 +152,9 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
               //
               BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
                 builder: (c, s) => Visibility(
-                  visible: s.user.role.isLandlord,
+                  visible: s.user.role.isTenant,
                   child: ListTile(
-                    title: AutoSizeText("Account History"),
+                    title: AutoSizeText("Payment History"),
                     leading: AppAssets.accHistory,
                     trailing: Icon(Icons.navigate_next_rounded, size: 27),
                     onTap: () {},

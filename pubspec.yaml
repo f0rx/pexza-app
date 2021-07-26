@@ -150,6 +150,16 @@ dependencies:
   # A flutter plugin for adapting screen and font size.
   # Let your UI display a reasonable layout on different screen sizes!
   flutter_screenutil: ^4.0.4+1
+  # A Flutter plugin for iOS and Android for picking images from the image library,
+  # and taking new pictures with the camera.
+  image_picker: ^0.6.7+22
+  # A package that allows you to use the native file explorer to pick
+  # single or multiple files, with extensions filtering support.
+  file_picker: ^2.1.7
+  # Masked text input for flutter.
+  flutter_masked_text:
+    git:
+      url: git://github.com/f0rx/flutter-masked-text.git
   # Approximate how your app looks and performs on another device.
   device_preview:
     git:

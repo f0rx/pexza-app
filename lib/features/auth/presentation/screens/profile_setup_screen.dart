@@ -154,7 +154,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                         (r) => s.response?.fold(
                           () => null,
                           (_) => _?.fold(
-                            (f) => f.errors?.code?.firstOrNull,
+                            (f) => f.errors?.code?.firstOrNil,
                             (_) => null,
                           ),
                         ),

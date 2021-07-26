@@ -98,7 +98,7 @@ class LandlordAddApartmentScreen extends StatelessWidget with AutoRouteWrapper {
                           (r) => s.response.fold(
                             () => null,
                             (_) => _.fold(
-                              (f) => f.errors?.name?.firstOrNull,
+                              (f) => f.errors?.name?.firstOrNil,
                               (_) => null,
                             ),
                           ),
