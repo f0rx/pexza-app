@@ -20,6 +20,9 @@ import 'package:pexza/features/home/landlord/presentation/screens/landl_apartmen
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_bank_details_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_banks_listing_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_rent_history_detail_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_rent_history_list_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_rent_history_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_wallet_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_withdrawal_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
@@ -218,6 +221,24 @@ import 'package:pexza/manager/router/export.dart';
       page: LandlordWithdrawalScreen,
       guards: [AuthGuard],
       maintainState: true,
+      fullscreenDialog: true,
+    ),
+    AdaptiveRoute(
+      page: LandlordRentHistoryScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+    ),
+    AdaptiveRoute(
+      page: LandlordRentHistoryListScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+      fullscreenDialog: true,
+    ),
+    AdaptiveRoute(
+      page: LandlordRentHistoryDetailScreen,
+      guards: [AuthGuard],
+      maintainState: true,
+      fullscreenDialog: true,
     ),
     ////////////
     AdaptiveRoute(

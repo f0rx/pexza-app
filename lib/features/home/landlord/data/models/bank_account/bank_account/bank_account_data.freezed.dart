@@ -37,15 +37,15 @@ class _$BankAccountDataTearOff {
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) {
+          DateTime deletedAt}) {
     return _BankAccountData(
       id: id,
       userId: userId,
@@ -89,15 +89,15 @@ mixin _$BankAccountData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  String get createdAt;
+  DateTime get createdAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  String get updatedAt;
+  DateTime get updatedAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  String get deletedAt;
+  DateTime get deletedAt;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -129,15 +129,15 @@ abstract class $BankAccountDataCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          DateTime deletedAt});
 
   $AccountDetailDTOCopyWith<$Res> get details;
 }
@@ -171,9 +171,12 @@ class _$BankAccountDataCopyWithImpl<$Res>
           : descriptions as String,
       details:
           details == freezed ? _value.details : details as AccountDetailDTO,
-      createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
-      updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
-      deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 
@@ -215,15 +218,15 @@ abstract class _$BankAccountDataCopyWith<$Res>
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          DateTime deletedAt});
 
   @override
   $AccountDetailDTOCopyWith<$Res> get details;
@@ -260,9 +263,12 @@ class __$BankAccountDataCopyWithImpl<$Res>
           : descriptions as String,
       details:
           details == freezed ? _value.details : details as AccountDetailDTO,
-      createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
-      updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
-      deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 }
@@ -330,17 +336,17 @@ class _$_BankAccountData extends _BankAccountData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  final String createdAt;
+  final DateTime createdAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  final String updatedAt;
+  final DateTime updatedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  final String deletedAt;
+  final DateTime deletedAt;
 
   @override
   String toString() {
@@ -419,15 +425,15 @@ abstract class _BankAccountData extends BankAccountData {
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) = _$_BankAccountData;
+          DateTime deletedAt}) = _$_BankAccountData;
 
   factory _BankAccountData.fromJson(Map<String, dynamic> json) =
       _$_BankAccountData.fromJson;
@@ -457,17 +463,17 @@ abstract class _BankAccountData extends BankAccountData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  String get createdAt;
+  DateTime get createdAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  String get updatedAt;
+  DateTime get updatedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  String get deletedAt;
+  DateTime get deletedAt;
   @override
   @JsonKey(ignore: true)
   _$BankAccountDataCopyWith<_BankAccountData> get copyWith;

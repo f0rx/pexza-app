@@ -19,27 +19,31 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:pexza/features/auth/data/repositories/access_token_manager.dart'
     as _i3;
 import 'package:pexza/features/auth/data/repositories/auth_facade_impl.dart'
-    as _i40;
-import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart'
     as _i42;
+import 'package:pexza/features/auth/data/sources/local/auth_local_datasource.dart'
+    as _i44;
 import 'package:pexza/features/auth/data/sources/remote/auth_remote_datasource.dart'
-    as _i41;
-import 'package:pexza/features/auth/domain/domain.dart' as _i39;
+    as _i43;
+import 'package:pexza/features/auth/domain/domain.dart' as _i41;
 import 'package:pexza/features/auth/presentation/manager/auth/auth_cubit.dart'
-    as _i48;
+    as _i50;
 import 'package:pexza/features/auth/presentation/manager/role/role_cubit.dart'
     as _i17;
 import 'package:pexza/features/auth/presentation/manager/token_verification/token_verification_cubit.dart'
     as _i20;
 import 'package:pexza/features/auth/presentation/manager/watcher/auth_watcher_cubit.dart'
-    as _i43;
+    as _i45;
 import 'package:pexza/features/core/data/database/app_database.dart' as _i4;
 import 'package:pexza/features/core/data/repositories/admin_utils_repository.dart'
-    as _i47;
+    as _i49;
 import 'package:pexza/features/core/data/repositories/profile_verification/profile_verification_repository.dart'
     as _i33;
+import 'package:pexza/features/core/data/repositories/transaction_history/transaction_history_repository.dart'
+    as _i40;
 import 'package:pexza/features/core/presentation/managers/admin_utils/admin_utils_cubit.dart'
-    as _i46;
+    as _i48;
+import 'package:pexza/features/core/presentation/managers/history/transaction_history_cubit.dart'
+    as _i39;
 import 'package:pexza/features/core/presentation/managers/payment/payment_cubit.dart'
     as _i15;
 import 'package:pexza/features/core/presentation/managers/profile_verification/profile_verification_cubit.dart'
@@ -69,11 +73,11 @@ import 'package:pexza/features/home/tenant/data/repositories/apartment/tenant_ap
 import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart'
     as _i21;
 import 'package:pexza/features/home/tenant/data/repositories/debit_card/debit_card_repository.dart'
-    as _i45;
+    as _i47;
 import 'package:pexza/features/home/tenant/data/repositories/maintenance/tenant_maintenance_repository.dart'
     as _i38;
 import 'package:pexza/features/home/tenant/presentation/managers/debit_card/debit_card_cubit.dart'
-    as _i44;
+    as _i46;
 import 'package:pexza/features/home/tenant/presentation/managers/tenant_apartment/tenant_apartment_cubit.dart'
     as _i34;
 import 'package:pexza/features/home/tenant/presentation/managers/tenant_assignment/tenant_assignment_cubit.dart'
@@ -82,7 +86,7 @@ import 'package:pexza/features/home/tenant/presentation/managers/tenant_maintena
     as _i37;
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart'
     as _i14;
-import 'package:pexza/manager/locator/modules/modules.dart' as _i49;
+import 'package:pexza/manager/locator/modules/modules.dart' as _i51;
 import 'package:pexza/manager/theme/manager/theme_cubit.dart' as _i19;
 import 'package:sweetsheet/sweetsheet.dart'
     as _i18; // ignore_for_file: unnecessary_lambdas
@@ -162,25 +166,30 @@ extension GetItInjectableX on _i1.GetIt {
         get<_i28.MiscRepository>(),
         get<_i5.Connectivity>(),
         get<_i6.DataConnectionChecker>()));
-    gh.lazySingleton<_i39.AuthFacade>(() => _i40.AuthFacadeImpl(
-        get<_i41.AuthRemoteDatasource>(),
-        get<_i42.AuthLocalDatasource>(),
+    gh.factory<_i39.TransactionHistoryCubit>(() => _i39.TransactionHistoryCubit(
+        get<_i40.TransactionHistoryRepository>(),
+        get<_i24.PropertyRepository>(),
+        get<_i5.Connectivity>(),
+        get<_i6.DataConnectionChecker>()));
+    gh.lazySingleton<_i41.AuthFacade>(() => _i42.AuthFacadeImpl(
+        get<_i43.AuthRemoteDatasource>(),
+        get<_i44.AuthLocalDatasource>(),
         get<_i9.FirebaseAnalytics>(),
         get<_i13.GoogleSignIn>(),
         get<_i8.FacebookLogin>()));
-    gh.factory<_i43.AuthWatcherCubit>(
-        () => _i43.AuthWatcherCubit(get<_i39.AuthFacade>()));
-    gh.factory<_i44.DebitCardCubit>(() => _i44.DebitCardCubit(
-        get<_i45.DebitCardRepository>(),
+    gh.factory<_i45.AuthWatcherCubit>(
+        () => _i45.AuthWatcherCubit(get<_i41.AuthFacade>()));
+    gh.factory<_i46.DebitCardCubit>(() => _i46.DebitCardCubit(
+        get<_i47.DebitCardRepository>(),
         get<_i5.Connectivity>(),
         get<_i6.DataConnectionChecker>()));
-    gh.factory<_i46.AdminUtilsCubit>(() => _i46.AdminUtilsCubit(
-        get<_i39.AuthFacade>(),
-        get<_i47.AdminUtilsRepository>(),
+    gh.factory<_i48.AdminUtilsCubit>(() => _i48.AdminUtilsCubit(
+        get<_i41.AuthFacade>(),
+        get<_i49.AdminUtilsRepository>(),
         get<_i5.Connectivity>(),
         get<_i6.DataConnectionChecker>()));
-    gh.factory<_i48.AuthCubit>(() => _i48.AuthCubit(get<_i39.AuthFacade>()));
-    gh.singleton<_i42.AuthLocalDatasource>(_i42.AuthLocalDatasource(
+    gh.factory<_i50.AuthCubit>(() => _i50.AuthCubit(get<_i41.AuthFacade>()));
+    gh.singleton<_i44.AuthLocalDatasource>(_i44.AuthLocalDatasource(
         get<_i3.AccessTokenManager>(), get<_i4.AppDatabase>()));
     gh.singleton<_i26.LandlordMaintenanceRepository>(
         _i26.LandlordMaintenanceRepository(get<_i7.Dio>()));
@@ -195,20 +204,22 @@ extension GetItInjectableX on _i1.GetIt {
         _i21.TenantAssignmentRepository(get<_i7.Dio>()));
     gh.singleton<_i38.TenantMaintenanceRepository>(
         _i38.TenantMaintenanceRepository(get<_i7.Dio>()));
+    gh.singleton<_i40.TransactionHistoryRepository>(
+        _i40.TransactionHistoryRepository(get<_i7.Dio>()));
     gh.singleton<_i31.WithdrawalRepository>(
         _i31.WithdrawalRepository(get<_i7.Dio>()));
-    gh.singleton<_i47.AdminUtilsRepository>(
-        _i47.AdminUtilsRepository(get<_i7.Dio>()));
+    gh.singleton<_i49.AdminUtilsRepository>(
+        _i49.AdminUtilsRepository(get<_i7.Dio>()));
     gh.singleton<_i23.ApartmentRepository>(
         _i23.ApartmentRepository(get<_i7.Dio>()));
-    gh.singleton<_i41.AuthRemoteDatasource>(
-        _i41.AuthRemoteDatasource(get<_i7.Dio>()));
-    gh.singleton<_i45.DebitCardRepository>(
-        _i45.DebitCardRepository(get<_i7.Dio>()));
+    gh.singleton<_i43.AuthRemoteDatasource>(
+        _i43.AuthRemoteDatasource(get<_i7.Dio>()));
+    gh.singleton<_i47.DebitCardRepository>(
+        _i47.DebitCardRepository(get<_i7.Dio>()));
     return this;
   }
 }
 
-class _$ServiceModules extends _i49.ServiceModules {}
+class _$ServiceModules extends _i51.ServiceModules {}
 
-class _$Modules extends _i49.Modules {}
+class _$Modules extends _i51.Modules {}

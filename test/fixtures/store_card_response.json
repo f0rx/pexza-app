@@ -3,32 +3,34 @@
     "card": {
         "type": "card",
         "details": {
-            "some description": "Wrong card",
-            "card_number": "4464666387456733"
+            "description": "Bank Auth Simulation(reusable)",
+            "card_number": "4084080000000409"
         },
         "verified": false,
-        "user_id": 335,
-        "updated_at": "2021-06-14T06:46:58.000000Z",
-        "created_at": "2021-06-14T06:46:58.000000Z",
-        "id": 4
+        "user_id": 333,
+        "updated_at": "2021-08-01T16:40:40.000000Z",
+        "created_at": "2021-08-01T16:40:40.000000Z",
+        "id": 9
     },
     "invoice": {
         "meta": {
             "is_sample_payment": true,
-            "chargeable_id": 4
+            "chargeable_id": 9
         },
         "amount": 100,
+        "base_amount": 100,
+        "charges": 0,
         "status": "generated",
-        "invoice_no": "5012dce4-ef6f-4175-a7ab-b1da395e3aea",
-        "updated_at": "2021-06-14T06:46:58.000000Z",
-        "created_at": "2021-06-14T06:46:58.000000Z",
-        "id": 312
+        "invoice_no": "488471c3-6a0f-4bc4-9014-ef9173d64a8b",
+        "updated_at": "2021-08-01T16:40:40.000000Z",
+        "created_at": "2021-08-01T16:40:40.000000Z",
+        "id": 309
     },
     "payment_details": {
         "email": "ejike.br@gmail.com",
         "amount": 10000,
         "metadata": {
-            "invoice_no": "5012dce4-ef6f-4175-a7ab-b1da395e3aea"
+            "invoice_no": "488471c3-6a0f-4bc4-9014-ef9173d64a8b"
         }
     }
 }

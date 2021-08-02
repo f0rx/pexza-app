@@ -44,23 +44,23 @@ abstract class ApartmentMergerData implements _$ApartmentMergerData {
     @nullable
     @JsonKey(includeIfNull: false, name: "expire_at")
     @TimestampConverter()
-        String expireAt,
+        DateTime expireAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "renewed_at")
     @TimestampConverter()
-        String renewedAt,
+        DateTime renewedAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
-        String createdAt,
+        DateTime createdAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
-        String updatedAt,
+        DateTime updatedAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
-        String deletedAt,
+        DateTime deletedAt,
   }) = _ApartmentMergerData;
 
   factory ApartmentMergerData.fromJson(Map<String, dynamic> json) =>
@@ -87,10 +87,10 @@ abstract class ApartmentMergerData implements _$ApartmentMergerData {
         tenant: !tenant.isNull ? tenant?.domain : null,
         landlord: !landlord.isNull ? landlord?.domain : null,
         apartment: !apartment.isNull ? apartment?.domain : null,
-        expireAt: expireAt != null ? DateTime.tryParse(expireAt) : null,
-        renewedAt: renewedAt != null ? DateTime.tryParse(renewedAt) : null,
-        createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
-        updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
-        deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
+        expireAt: expireAt,
+        renewedAt: renewedAt,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        deletedAt: deletedAt,
       );
 }

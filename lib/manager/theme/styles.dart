@@ -28,6 +28,8 @@ class AppTheme extends HiveObject {
   final BottomSheetThemeData _bottomSheetThemeData;
   final BottomNavigationBarThemeData _bottomNavigationBarTheme;
   final ButtonThemeData _buttonThemeData;
+  final RadioThemeData _radioThemeData;
+  final SwitchThemeData _switchThemeData;
 
   AppTheme._({
     @required this.id,
@@ -49,6 +51,8 @@ class AppTheme extends HiveObject {
     BottomSheetThemeData bottomSheetThemeData,
     BottomNavigationBarThemeData bottomNavigationBarTheme,
     ButtonThemeData buttonThemeData,
+    RadioThemeData radioThemeData,
+    SwitchThemeData switchThemeData,
   })  : _brightness = brightness,
         _accentColorBrightness = accentColorBrightness,
         _primaryColor = primaryColor,
@@ -66,6 +70,8 @@ class AppTheme extends HiveObject {
         _bottomSheetThemeData = bottomSheetThemeData,
         _bottomNavigationBarTheme = bottomNavigationBarTheme,
         _buttonThemeData = buttonThemeData,
+        _radioThemeData = radioThemeData,
+        _switchThemeData = switchThemeData,
         _textTheme = textTheme;
 
   /// Light Theme Configurations
@@ -84,6 +90,7 @@ class AppTheme extends HiveObject {
       splashFactory: InkRipple.splashFactory,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       scaffoldBackgroundColor: AppColors.primaryColor.shade300,
+      // radioThemeData: RadioThemeData(),
       inputTheme: InputDecorationTheme(
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -135,6 +142,13 @@ class AppTheme extends HiveObject {
       accentColor: AppColors.accentColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       // scaffoldBackgroundColor: AppColors.primaryColor.shade600,
+      radioThemeData: RadioThemeData(
+        fillColor: MaterialStateProperty.all(Colors.white70),
+      ),
+      switchThemeData: SwitchThemeData(
+        thumbColor: MaterialStateProperty.all(AppColors.accentColor),
+        trackColor: MaterialStateProperty.all(Colors.white70),
+      ),
       inputTheme: InputDecorationTheme(
         alignLabelWithHint: true,
         floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -182,6 +196,8 @@ class AppTheme extends HiveObject {
       primaryColorLight: this._primaryColorLight,
       toggleableActiveColor: this._toggleableActiveColor,
       inputDecorationTheme: this._textFieldTheme,
+      radioTheme: this._radioThemeData,
+      switchTheme: this._switchThemeData,
       accentColor: this._accentColor,
       splashColor: this._splashColor,
       splashFactory: this._splashFactory,

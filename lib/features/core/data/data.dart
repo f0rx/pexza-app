@@ -17,3 +17,4 @@ export 'database/app_database.dart';
 export 'repositories/admin_utils_repository.dart';
 export 'repositories/profile_verification/profile_verification_repository.dart';
 export 'models/failure/general_failure.dart';
+export 'repositories/transaction_history/transaction_history_repository.dart';

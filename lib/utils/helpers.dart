@@ -60,7 +60,9 @@ class Helpers {
     )),
   );
 
-  static ScrollPhysics physics = const BouncingScrollPhysics();
+  static ScrollPhysics physics = Platform.isIOS || Platform.isMacOS
+      ? const BouncingScrollPhysics()
+      : const ClampingScrollPhysics();
   static Duration willPopTimeout = const Duration(seconds: 3);
 
   /// Current BuildContext

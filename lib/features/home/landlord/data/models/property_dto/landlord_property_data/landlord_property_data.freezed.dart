@@ -70,15 +70,15 @@ class _$LandlordPropertyDataTearOff {
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) {
+          DateTime deletedAt}) {
     return _LandlordPropertyData(
       id: id,
       name: name,
@@ -166,15 +166,15 @@ mixin _$LandlordPropertyData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  String get createdAt;
+  DateTime get createdAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  String get updatedAt;
+  DateTime get updatedAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  String get deletedAt;
+  DateTime get deletedAt;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -239,15 +239,15 @@ abstract class $LandlordPropertyDataCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          DateTime deletedAt});
 
   $StateDTOCopyWith<$Res> get state;
   $UserDTOCopyWith<$Res> get landlord;
@@ -311,9 +311,12 @@ class _$LandlordPropertyDataCopyWithImpl<$Res>
       numberOfRentedApartment: numberOfRentedApartment == freezed
           ? _value.numberOfRentedApartment
           : numberOfRentedApartment as int,
-      createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
-      updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
-      deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 
@@ -398,15 +401,15 @@ abstract class _$LandlordPropertyDataCopyWith<$Res>
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          DateTime deletedAt});
 
   @override
   $StateDTOCopyWith<$Res> get state;
@@ -474,9 +477,12 @@ class __$LandlordPropertyDataCopyWithImpl<$Res>
       numberOfRentedApartment: numberOfRentedApartment == freezed
           ? _value.numberOfRentedApartment
           : numberOfRentedApartment as int,
-      createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
-      updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
-      deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 }
@@ -621,17 +627,17 @@ class _$_LandlordPropertyData extends _LandlordPropertyData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  final String createdAt;
+  final DateTime createdAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  final String updatedAt;
+  final DateTime updatedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  final String deletedAt;
+  final DateTime deletedAt;
 
   @override
   String toString() {
@@ -788,15 +794,15 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) = _$_LandlordPropertyData;
+          DateTime deletedAt}) = _$_LandlordPropertyData;
 
   factory _LandlordPropertyData.fromJson(Map<String, dynamic> json) =
       _$_LandlordPropertyData.fromJson;
@@ -870,17 +876,17 @@ abstract class _LandlordPropertyData extends LandlordPropertyData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  String get createdAt;
+  DateTime get createdAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  String get updatedAt;
+  DateTime get updatedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  String get deletedAt;
+  DateTime get deletedAt;
   @override
   @JsonKey(ignore: true)
   _$LandlordPropertyDataCopyWith<_LandlordPropertyData> get copyWith;

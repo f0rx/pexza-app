@@ -31,6 +31,9 @@ import 'package:pexza/features/home/landlord/presentation/screens/landl_prop_det
 import 'package:pexza/features/home/landlord/presentation/screens/landl_rent_detail.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_bank_details_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_banks_listing_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_rent_history_detail_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_rent_history_list_screen.dart';
+import 'package:pexza/features/home/landlord/presentation/screens/landlord_rent_history_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_wallet_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/landlord_withdrawal_screen.dart';
 import 'package:pexza/features/home/landlord/presentation/screens/maintenance_request_screen.dart';
@@ -98,6 +101,12 @@ class Routes {
       '/landlord-bank-details-screen';
   static const String landlordWalletScreen = '/landlord-wallet-screen';
   static const String landlordWithdrawalScreen = '/landlord-withdrawal-screen';
+  static const String landlordRentHistoryScreen =
+      '/landlord-rent-history-screen';
+  static const String landlordRentHistoryListScreen =
+      '/landlord-rent-history-list-screen';
+  static const String landlordRentHistoryDetailScreen =
+      '/landlord-rent-history-detail-screen';
   static const String notificationScreen = '/notification-screen';
   static const String twoFactorAuthScreen = '/two-factor-auth-screen';
   static const String accountScreen = '/account-screen';
@@ -140,6 +149,9 @@ class Routes {
     landlordBankDetailsScreen,
     landlordWalletScreen,
     landlordWithdrawalScreen,
+    landlordRentHistoryScreen,
+    landlordRentHistoryListScreen,
+    landlordRentHistoryDetailScreen,
     notificationScreen,
     twoFactorAuthScreen,
     accountScreen,
@@ -213,6 +225,12 @@ class Router extends RouterBase {
         page: LandlordWalletScreen, guards: [AuthGuard]),
     RouteDef(Routes.landlordWithdrawalScreen,
         page: LandlordWithdrawalScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordRentHistoryScreen,
+        page: LandlordRentHistoryScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordRentHistoryListScreen,
+        page: LandlordRentHistoryListScreen, guards: [AuthGuard]),
+    RouteDef(Routes.landlordRentHistoryDetailScreen,
+        page: LandlordRentHistoryDetailScreen, guards: [AuthGuard]),
     RouteDef(Routes.notificationScreen,
         page: NotificationScreen, guards: [AuthGuard]),
     RouteDef(Routes.twoFactorAuthScreen,
@@ -567,9 +585,12 @@ class Router extends RouterBase {
       );
     },
     LandlordWalletScreen: (data) {
+      final args = data.getArgs<LandlordWalletScreenArguments>(
+        orElse: () => LandlordWalletScreenArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) =>
-            const LandlordWalletScreen().wrappedRoute(context),
+            LandlordWalletScreen(key: args.key).wrappedRoute(context),
         settings: data,
         maintainState: true,
       );
@@ -583,6 +604,41 @@ class Router extends RouterBase {
           account: args.account,
         ).wrappedRoute(context),
         settings: data,
+        fullscreenDialog: true,
+        maintainState: true,
+      );
+    },
+    LandlordRentHistoryScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            const LandlordRentHistoryScreen().wrappedRoute(context),
+        settings: data,
+        maintainState: true,
+      );
+    },
+    LandlordRentHistoryListScreen: (data) {
+      final args =
+          data.getArgs<LandlordRentHistoryListScreenArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordRentHistoryListScreen(
+          key: args.key,
+          property: args.property,
+        ).wrappedRoute(context),
+        settings: data,
+        fullscreenDialog: true,
+        maintainState: true,
+      );
+    },
+    LandlordRentHistoryDetailScreen: (data) {
+      final args =
+          data.getArgs<LandlordRentHistoryDetailScreenArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => LandlordRentHistoryDetailScreen(
+          key: args.key,
+          history: args.history,
+        ).wrappedRoute(context),
+        settings: data,
+        fullscreenDialog: true,
         maintainState: true,
       );
     },
@@ -881,8 +937,13 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         onReject: onReject,
       );
 
-  Future<dynamic> pushLandlordWalletScreen() =>
-      push<dynamic>(Routes.landlordWalletScreen);
+  Future<dynamic> pushLandlordWalletScreen(
+          {Key key, OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordWalletScreen,
+        arguments: LandlordWalletScreenArguments(key: key),
+        onReject: onReject,
+      );
 
   Future<dynamic> pushLandlordWithdrawalScreen(
           {Key key,
@@ -892,6 +953,31 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         Routes.landlordWithdrawalScreen,
         arguments:
             LandlordWithdrawalScreenArguments(key: key, account: account),
+        onReject: onReject,
+      );
+
+  Future<dynamic> pushLandlordRentHistoryScreen() =>
+      push<dynamic>(Routes.landlordRentHistoryScreen);
+
+  Future<dynamic> pushLandlordRentHistoryListScreen(
+          {Key key,
+          @required LandlordProperty property,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordRentHistoryListScreen,
+        arguments: LandlordRentHistoryListScreenArguments(
+            key: key, property: property),
+        onReject: onReject,
+      );
+
+  Future<dynamic> pushLandlordRentHistoryDetailScreen(
+          {Key key,
+          @required PropertyRentHistory history,
+          OnNavigationRejected onReject}) =>
+      push<dynamic>(
+        Routes.landlordRentHistoryDetailScreen,
+        arguments: LandlordRentHistoryDetailScreenArguments(
+            key: key, history: history),
         onReject: onReject,
       );
 
@@ -1056,9 +1142,29 @@ class LandlordBankDetailsScreenArguments {
   LandlordBankDetailsScreenArguments({this.key});
 }
 
+/// LandlordWalletScreen arguments holder class
+class LandlordWalletScreenArguments {
+  final Key key;
+  LandlordWalletScreenArguments({this.key});
+}
+
 /// LandlordWithdrawalScreen arguments holder class
 class LandlordWithdrawalScreenArguments {
   final Key key;
   final BankAccountDetail account;
   LandlordWithdrawalScreenArguments({this.key, @required this.account});
+}
+
+/// LandlordRentHistoryListScreen arguments holder class
+class LandlordRentHistoryListScreenArguments {
+  final Key key;
+  final LandlordProperty property;
+  LandlordRentHistoryListScreenArguments({this.key, @required this.property});
+}
+
+/// LandlordRentHistoryDetailScreen arguments holder class
+class LandlordRentHistoryDetailScreenArguments {
+  final Key key;
+  final PropertyRentHistory history;
+  LandlordRentHistoryDetailScreenArguments({this.key, @required this.history});
 }

@@ -12,9 +12,11 @@ _$_InvoiceDTO _$_$_InvoiceDTOFromJson(Map<String, dynamic> json) {
     meta: json['meta'] == null
         ? null
         : PaymentMetaDTO.fromJson(json['meta'] as Map<String, dynamic>),
-    assignmentId: json['assignment_id'] as int,
-    amount: json['amount'] as int,
-    duration: json['duration'] as int,
+    assignmentId: const IntegerSerializer().fromJson(json['assignment_id']),
+    amount: const NumSerializer().fromJson(json['amount']),
+    baseAmount: const IntegerSerializer().fromJson(json['base_amount']),
+    charges: const DoubleSerializer().fromJson(json['charges']),
+    duration: const IntegerSerializer().fromJson(json['duration']),
     status: json['status'] as String ?? '',
     invoiceNumber: json['invoice_no'] as String ?? '',
     createdAt: json['created_at'] as String,
@@ -34,9 +36,13 @@ Map<String, dynamic> _$_$_InvoiceDTOToJson(_$_InvoiceDTO instance) {
 
   writeNotNull('id', instance.id);
   writeNotNull('meta', instance.meta?.toJson());
-  writeNotNull('assignment_id', instance.assignmentId);
-  writeNotNull('amount', instance.amount);
-  writeNotNull('duration', instance.duration);
+  writeNotNull(
+      'assignment_id', const IntegerSerializer().toJson(instance.assignmentId));
+  writeNotNull('amount', const NumSerializer().toJson(instance.amount));
+  writeNotNull(
+      'base_amount', const IntegerSerializer().toJson(instance.baseAmount));
+  writeNotNull('charges', const DoubleSerializer().toJson(instance.charges));
+  writeNotNull('duration', const IntegerSerializer().toJson(instance.duration));
   writeNotNull('status', instance.status);
   writeNotNull('invoice_no', instance.invoiceNumber);
   writeNotNull('created_at', instance.createdAt);

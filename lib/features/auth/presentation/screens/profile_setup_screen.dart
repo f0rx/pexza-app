@@ -30,6 +30,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                     c.response.getOrElse(() => null).fold(
                           (f) => f.foldCode(
                             is1104: () => p.isLoading != c.isLoading,
+                            is1106: () => p.isLoading != c.isLoading,
                             orElse: () => false,
                           ),
                           (r) => false,
@@ -46,6 +47,13 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                     failure: f,
                   );
               },
+              is1106: () async {
+                if (App.currentRoute != Routes.profileVerificationScreen &&
+                    !s.isLoading)
+                  return await navigator.pushProfileVerificationScreen(
+                    intended: Routes.profileSetupScreen,
+                  );
+              },
               orElse: () =>
                   BottomAlertDialog.init(c, message: f.message ?? f.details),
             ),
@@ -59,6 +67,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
             ),
           ),
         ),
+        buildWhen: (p, c) => p.isLoading != c.isLoading,
         builder: (c, s) => PortalEntry(
           visible: c.watch<TokenVerificationCubit>().state.isLoading,
           portal: App.loadingOverlay(Helpers.circularLoader()),

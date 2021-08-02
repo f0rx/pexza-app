@@ -27,11 +27,11 @@ abstract class BankDataModel implements _$BankDataModel {
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
-        String updatedAt,
+        DateTime updatedAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
-        String deletedAt,
+        DateTime deletedAt,
   }) = _BankDataModel;
 
   /// Maps the incoming Json to a Data Transfer Object (DTO).
@@ -48,7 +48,7 @@ abstract class BankDataModel implements _$BankDataModel {
         code: !code.isNull ? BasicTextField(code) : null,
         countryCode: !countryCode.isNull ? BasicTextField(countryCode) : null,
         countryName: !countryName.isNull ? BasicTextField(countryName) : null,
-        updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
-        deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
+        updatedAt: updatedAt,
+        deletedAt: deletedAt,
       );
 }

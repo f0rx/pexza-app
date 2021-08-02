@@ -181,7 +181,7 @@ class SavedCardScreen extends StatelessWidget with AutoRouteWrapper {
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(c).textTheme.headline6.merge(
                                 TextStyle(
-                                  fontSize: 17.5,
+                                  fontSize: 21.0.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),

@@ -7,6 +7,10 @@ import 'package:pexza/utils/utils.dart';
 
 class DateTimeField extends FieldObject<DateTime> {
   static const DateTimeField DEFAULT = DateTimeField._(null);
+  static final custom = AuthState.firstYear.add(
+    const Duration(days: 1000),
+  );
+
   final Either<FieldObjectException<String>, DateTime> value;
 
   factory DateTimeField(DateTime input) {
@@ -18,8 +22,22 @@ class DateTimeField extends FieldObject<DateTime> {
     );
   }
 
-  bool get isValidDateOfBirth =>
-      this.isNullOrBlank && this.getOrNull.isBefore(AuthState.lastYear);
-
   const DateTimeField._(this.value);
+
+  DateTime initialDateOfBirth([Function(DateTime) onChanged]) {
+    if (this.isNullOrBlank) return null;
+
+    if (!isValidDateOfBirth) {
+      onChanged?.call(custom);
+      return custom;
+    }
+
+    return this?.getOrNull;
+  }
+
+  /// Note: in this context, returning "true" for null dob works,
+  /// because it means the user hasn't supplied a date
+  bool get isValidDateOfBirth => !this.getOrNull.isNullOrBlank
+      ? this.getOrNull.isBefore(AuthState.lastYear)
+      : true;
 }

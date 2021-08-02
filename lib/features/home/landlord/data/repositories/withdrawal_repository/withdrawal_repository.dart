@@ -1,4 +1,4 @@
-library property_repository.dart;
+library withdrawal_repository.dart;
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -20,9 +20,6 @@ abstract class WithdrawalRepository {
   @GET("/landlord/bank")
   Future<List<BankAccountData>> bankAccounts();
 
-  // @GET("/landlord/withdraw/history")
-  // Future<void> withdrawalHistory();
-
   @GET("/landlord/wallet/balance")
   Future<BankAccountData> walletBalance();
 
@@ -30,9 +27,7 @@ abstract class WithdrawalRepository {
   Future<BankDataModel> getBankById(@Path("id") int id);
 
   @POST("/landlord/bank")
-  Future<BankAccountDTO> storeBankAccount(
-    @Body() AccountDetailDTO dto,
-  );
+  Future<BankAccountDTO> storeBankAccount(@Body() AccountDetailDTO dto);
 
   @POST("/landlord/bank/verify")
   Future<AccountVerificationDTO> verifyBankAccount(

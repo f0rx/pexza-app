@@ -21,7 +21,7 @@ class _$ApartmentMergerTearOff {
       @nullable int duration,
       @nullable PaymentPlan plan,
       @nullable Currency currency,
-      @nullable AmountField amount,
+      @nullable AmountField<num> amount,
       @nullable ApartmentStatus status,
       @nullable User tenant,
       @nullable User landlord,
@@ -69,7 +69,7 @@ mixin _$ApartmentMerger {
   @nullable
   Currency get currency;
   @nullable
-  AmountField get amount;
+  AmountField<num> get amount;
   @nullable
   ApartmentStatus get status;
   @nullable
@@ -103,7 +103,7 @@ abstract class $ApartmentMergerCopyWith<$Res> {
       @nullable int duration,
       @nullable PaymentPlan plan,
       @nullable Currency currency,
-      @nullable AmountField amount,
+      @nullable AmountField<num> amount,
       @nullable ApartmentStatus status,
       @nullable User tenant,
       @nullable User landlord,
@@ -157,7 +157,7 @@ class _$ApartmentMergerCopyWithImpl<$Res>
       duration: duration == freezed ? _value.duration : duration as int,
       plan: plan == freezed ? _value.plan : plan as PaymentPlan,
       currency: currency == freezed ? _value.currency : currency as Currency,
-      amount: amount == freezed ? _value.amount : amount as AmountField,
+      amount: amount == freezed ? _value.amount : amount as AmountField<num>,
       status: status == freezed ? _value.status : status as ApartmentStatus,
       tenant: tenant == freezed ? _value.tenant : tenant as User,
       landlord: landlord == freezed ? _value.landlord : landlord as User,
@@ -228,7 +228,7 @@ abstract class _$ApartmentMergerCopyWith<$Res>
       @nullable int duration,
       @nullable PaymentPlan plan,
       @nullable Currency currency,
-      @nullable AmountField amount,
+      @nullable AmountField<num> amount,
       @nullable ApartmentStatus status,
       @nullable User tenant,
       @nullable User landlord,
@@ -288,7 +288,7 @@ class __$ApartmentMergerCopyWithImpl<$Res>
       duration: duration == freezed ? _value.duration : duration as int,
       plan: plan == freezed ? _value.plan : plan as PaymentPlan,
       currency: currency == freezed ? _value.currency : currency as Currency,
-      amount: amount == freezed ? _value.amount : amount as AmountField,
+      amount: amount == freezed ? _value.amount : amount as AmountField<num>,
       status: status == freezed ? _value.status : status as ApartmentStatus,
       tenant: tenant == freezed ? _value.tenant : tenant as User,
       landlord: landlord == freezed ? _value.landlord : landlord as User,
@@ -345,7 +345,7 @@ class _$_ApartmentMerger extends _ApartmentMerger {
   final Currency currency;
   @override
   @nullable
-  final AmountField amount;
+  final AmountField<num> amount;
   @override
   @nullable
   final ApartmentStatus status;
@@ -456,7 +456,7 @@ abstract class _ApartmentMerger extends ApartmentMerger {
       @nullable int duration,
       @nullable PaymentPlan plan,
       @nullable Currency currency,
-      @nullable AmountField amount,
+      @nullable AmountField<num> amount,
       @nullable ApartmentStatus status,
       @nullable User tenant,
       @nullable User landlord,
@@ -486,7 +486,7 @@ abstract class _ApartmentMerger extends ApartmentMerger {
   Currency get currency;
   @override
   @nullable
-  AmountField get amount;
+  AmountField<num> get amount;
   @override
   @nullable
   ApartmentStatus get status;

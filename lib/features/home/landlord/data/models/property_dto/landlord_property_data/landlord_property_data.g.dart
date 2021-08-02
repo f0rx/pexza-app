@@ -29,9 +29,12 @@ _$_LandlordPropertyData _$_$_LandlordPropertyDataFromJson(
     numberOfApartments: json['number_of_apartments'] as int,
     numberOfAvailableApartments: json['number_of_available_apartments'] as int,
     numberOfRentedApartment: json['number_of_rented_apartment'] as int,
-    createdAt: json['created_at'] as String,
-    updatedAt: json['updated_at'] as String,
-    deletedAt: json['deleted_at'] as String,
+    createdAt:
+        const TimestampConverter().fromJson(json['created_at'] as String),
+    updatedAt:
+        const TimestampConverter().fromJson(json['updated_at'] as String),
+    deletedAt:
+        const TimestampConverter().fromJson(json['deleted_at'] as String),
   );
 }
 
@@ -62,8 +65,11 @@ Map<String, dynamic> _$_$_LandlordPropertyDataToJson(
   writeNotNull(
       'number_of_available_apartments', instance.numberOfAvailableApartments);
   writeNotNull('number_of_rented_apartment', instance.numberOfRentedApartment);
-  writeNotNull('created_at', instance.createdAt);
-  writeNotNull('updated_at', instance.updatedAt);
-  writeNotNull('deleted_at', instance.deletedAt);
+  writeNotNull(
+      'created_at', const TimestampConverter().toJson(instance.createdAt));
+  writeNotNull(
+      'updated_at', const TimestampConverter().toJson(instance.updatedAt));
+  writeNotNull(
+      'deleted_at', const TimestampConverter().toJson(instance.deletedAt));
   return val;
 }

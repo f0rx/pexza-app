@@ -206,6 +206,7 @@ class DebitCardCubit extends Cubit<DebitCardState> {
     } on Failure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
+      log.e(_);
       if (_.runtimeType is DioError || _.runtimeType == DioError)
         _handleDioFailures(_);
     }

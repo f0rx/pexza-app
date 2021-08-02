@@ -28,15 +28,15 @@ abstract class BankAccountData implements _$BankAccountData {
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
-        String createdAt,
+        DateTime createdAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
-        String updatedAt,
+        DateTime updatedAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
-        String deletedAt,
+        DateTime deletedAt,
   }) = _BankAccountData;
 
   /// Maps the incoming Json to a Data Transfer Object (DTO).

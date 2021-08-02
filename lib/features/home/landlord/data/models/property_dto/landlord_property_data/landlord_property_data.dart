@@ -53,15 +53,15 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
-        String createdAt,
+        DateTime createdAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
-        String updatedAt,
+        DateTime updatedAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
-        String deletedAt,
+        DateTime deletedAt,
   }) = _LandlordPropertyData;
 
   const LandlordPropertyData._();
@@ -123,9 +123,9 @@ abstract class LandlordPropertyData implements _$LandlordPropertyData {
       numberOfRentedApartment: !numberOfRentedApartment.isNull
           ? BasicTextField(numberOfRentedApartment)
           : null,
-      createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
-      updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
-      deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      deletedAt: deletedAt,
     );
   }
 
