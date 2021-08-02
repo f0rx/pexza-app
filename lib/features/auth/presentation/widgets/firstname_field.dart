@@ -7,11 +7,13 @@ import 'package:pexza/utils/utils.dart';
 class FirstNameField extends StatelessWidget {
   final FocusNode focus;
   final FocusNode next;
+  final bool showLabel;
 
   const FirstNameField({
     Key key,
     @required this.focus,
     this.next,
+    this.showLabel = true,
   }) : super(key: key);
 
   @override
@@ -28,8 +30,8 @@ class FirstNameField extends StatelessWidget {
           textCapitalization: TextCapitalization.words,
           textInputAction: TextInputAction.next,
           focusNode: focus,
-          decoration: const InputDecoration(
-            labelText: "Your First Name",
+          decoration: InputDecoration(
+            labelText: showLabel ? "Your First Name" : null,
             hintText: "John",
           ),
           autofillHints: [
@@ -46,7 +48,7 @@ class FirstNameField extends StatelessWidget {
             (_) => context.read<AuthCubit>().state.authStatus.fold(
                   () => null,
                   (_) => _.fold(
-                    (f) => f.errors.firstName.firstOrNull,
+                    (f) => f.errors.firstName.firstOrNil,
                     (_) => null,
                   ),
                 ),

@@ -1,6 +1,7 @@
 import 'package:inflection2/inflection2.dart' as I;
 import 'package:intl/intl.dart';
 import 'package:kt_dart/kt.dart' hide nullable;
+import 'package:pexza/utils/utils.dart';
 
 extension StringX on String {
   /// Capitalize only first letter in string
@@ -53,7 +54,24 @@ extension StringX on String {
     return init;
   }
 
-  NumberFormat asCurrencyFormat() => NumberFormat("#,##0", Intl.defaultLocale);
+  NumberFormat asCurrencyFormat({
+    String mask = "#,##0",
+    bool includeSymbol = false,
+    bool decimal = false,
+    String currency,
+    String locale,
+  }) =>
+      Intl.withLocale(
+        locale,
+        () => NumberFormat.currency(
+          name: locale.caseInsensitiveContains("ng")
+              ? Helpers.currency
+              : currency,
+          symbol: includeSymbol ? null : "",
+          customPattern: mask,
+          decimalDigits: decimal ? 2 : 0,
+        ),
+      );
 
   String pad([String pad = '', Direction start = Direction.right]) {
     switch (start) {
@@ -78,7 +96,23 @@ extension StringX on String {
   /// Returns string in currency format
   ///
   /// Example: 50000 => 50,000
-  String asCurrency() => this.asCurrencyFormat().format(int.parse(this));
+  String asCurrency({
+    String mask,
+    bool symbol = false,
+    bool decimal = false,
+    String currency,
+    String locale = "en_NG",
+  }) {
+    if (this == null || this == 'null' || this.isEmpty) return '';
+
+    return asCurrencyFormat(
+            mask: mask,
+            includeSymbol: symbol,
+            currency: currency,
+            decimal: decimal,
+            locale: locale)
+        .format(num.tryParse(this));
+  }
 
   /// Returns only the First character of every word matching _**[pattern]**_ separated by _**[separator]**_
   String onlyInitials({Pattern pattern = " ", String glue = "."}) {

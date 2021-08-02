@@ -18,7 +18,9 @@ class _$AuthResponseTearOff {
 
 // ignore: unused_element
   _AuthResponse call(
-      {@nullable
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
           int code,
       @nullable
@@ -42,6 +44,7 @@ class _$AuthResponseTearOff {
       @JsonKey(ignore: true)
           BottomAlertDialogPosition position}) {
     return _AuthResponse(
+      uuid: uuid,
       code: code,
       status: status,
       message: message,
@@ -65,6 +68,8 @@ const $AuthResponse = _$AuthResponseTearOff();
 
 /// @nodoc
 mixin _$AuthResponse {
+  @JsonKey(ignore: true)
+  String get uuid;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: 200)
   int get code;
@@ -99,7 +104,9 @@ abstract class $AuthResponseCopyWith<$Res> {
           AuthResponse value, $Res Function(AuthResponse) then) =
       _$AuthResponseCopyWithImpl<$Res>;
   $Res call(
-      {@nullable
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
           int code,
       @nullable
@@ -135,6 +142,7 @@ class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
 
   @override
   $Res call({
+    Object uuid = freezed,
     Object code = freezed,
     Object status = freezed,
     Object message = freezed,
@@ -145,6 +153,7 @@ class _$AuthResponseCopyWithImpl<$Res> implements $AuthResponseCopyWith<$Res> {
     Object position = freezed,
   }) {
     return _then(_value.copyWith(
+      uuid: uuid == freezed ? _value.uuid : uuid as String,
       code: code == freezed ? _value.code : code as int,
       status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
@@ -177,7 +186,9 @@ abstract class _$AuthResponseCopyWith<$Res>
       __$AuthResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
           int code,
       @nullable
@@ -216,6 +227,7 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object uuid = freezed,
     Object code = freezed,
     Object status = freezed,
     Object message = freezed,
@@ -226,6 +238,7 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
     Object position = freezed,
   }) {
     return _then(_AuthResponse(
+      uuid: uuid == freezed ? _value.uuid : uuid as String,
       code: code == freezed ? _value.code : code as int,
       status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
@@ -245,7 +258,9 @@ class __$AuthResponseCopyWithImpl<$Res> extends _$AuthResponseCopyWithImpl<$Res>
 /// @nodoc
 class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
   const _$_AuthResponse(
-      {@nullable
+      {@JsonKey(ignore: true)
+          this.uuid,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
           this.code,
       @nullable
@@ -274,6 +289,9 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
   factory _$_AuthResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_AuthResponseFromJson(json);
 
+  @override
+  @JsonKey(ignore: true)
+  final String uuid;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: 200)
@@ -307,7 +325,7 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AuthResponse(code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details, popRoute: $popRoute, position: $position)';
+    return 'AuthResponse(uuid: $uuid, code: $code, status: $status, message: $message, error: $error, errors: $errors, details: $details, popRoute: $popRoute, position: $position)';
   }
 
   @override
@@ -315,6 +333,7 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'AuthResponse'))
+      ..add(DiagnosticsProperty('uuid', uuid))
       ..add(DiagnosticsProperty('code', code))
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('message', message))
@@ -329,6 +348,8 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _AuthResponse &&
+            (identical(other.uuid, uuid) ||
+                const DeepCollectionEquality().equals(other.uuid, uuid)) &&
             (identical(other.code, code) ||
                 const DeepCollectionEquality().equals(other.code, code)) &&
             (identical(other.status, status) ||
@@ -354,6 +375,7 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(uuid) ^
       const DeepCollectionEquality().hash(code) ^
       const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(message) ^
@@ -377,7 +399,9 @@ class _$_AuthResponse extends _AuthResponse with DiagnosticableTreeMixin {
 abstract class _AuthResponse extends AuthResponse {
   const _AuthResponse._() : super._();
   const factory _AuthResponse(
-      {@nullable
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
       @JsonKey(includeIfNull: false, defaultValue: 200)
           int code,
       @nullable
@@ -404,6 +428,9 @@ abstract class _AuthResponse extends AuthResponse {
   factory _AuthResponse.fromJson(Map<String, dynamic> json) =
       _$_AuthResponse.fromJson;
 
+  @override
+  @JsonKey(ignore: true)
+  String get uuid;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: 200)

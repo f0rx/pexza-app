@@ -1,6 +1,7 @@
 library bank_account_data.dart;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pexza/features/core/domain/entities/entities.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/domain/entities/entities.dart';
 import 'package:pexza/manager/serializer/serializers.dart';
@@ -15,21 +16,27 @@ abstract class BankAccountData implements _$BankAccountData {
 
   const factory BankAccountData({
     @nullable @JsonKey(includeIfNull: false) int id,
-    @nullable @JsonKey(includeIfNull: false, name: 'user_id') int userId,
+    @nullable
+    @JsonKey(includeIfNull: false, name: 'user_id')
+    @IntegerSerializer()
+        int userId,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String type,
+    @nullable
+    @JsonKey(includeIfNull: false, defaultValue: '')
+        String descriptions,
     @nullable @JsonKey(includeIfNull: false) AccountDetailDTO details,
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
-        String createdAt,
+        DateTime createdAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
-        String updatedAt,
+        DateTime updatedAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
-        String deletedAt,
+        DateTime deletedAt,
   }) = _BankAccountData;
 
   /// Maps the incoming Json to a Data Transfer Object (DTO).
@@ -40,5 +47,6 @@ abstract class BankAccountData implements _$BankAccountData {
   Map<String, dynamic> toJson() => _$_$_BankAccountDataToJson(this);
 
   /// Maps the Data Transfer Object to a Domain instance.
-  BankAccountDetail get domain => details?.domain;
+  BankAccountDetail get domain => details?.domain
+      ?.copyWith(id: id != null ? UniqueId.fromExternal(id) : null);
 }

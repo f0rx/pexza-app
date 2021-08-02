@@ -8,7 +8,7 @@ extension ListX<T> on Iterable<T> {
     });
   }
 
-  T get firstOrNull {
+  T get firstOrNil {
     try {
       return this.first;
     } catch (e) {

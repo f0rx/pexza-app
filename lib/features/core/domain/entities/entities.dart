@@ -18,3 +18,4 @@ export 'maintenance_service/maintenance_service.dart';
 export 'maintenance/maintenance.dart';
 export 'maintenance/maintenance_status/maintenance_status.dart';
 export 'maintenance/urgency_resolver.dart';
+export 'profile_verification_status/profile_verification_status.dart';

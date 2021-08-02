@@ -48,7 +48,7 @@ class LandlordTenantsListingScreen extends StatefulWidget
         buildWhen: (p, c) => p.tenants.isEmpty() && !c.tenants.isEmpty(),
         builder: (c, s) => PortalEntry(
           visible: c.watch<LandlordPropertyCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
+          portal: App.loadingOverlay(Helpers.circularLoader()),
           child: this,
         ),
       ),

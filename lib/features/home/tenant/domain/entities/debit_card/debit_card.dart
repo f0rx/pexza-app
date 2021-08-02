@@ -39,6 +39,9 @@ abstract class DebitCard implements _$DebitCard {
     /// If card has been verified
     @nullable bool verified,
 
+    /// If this card is the preferred one
+    @nullable bool isPrimary,
+
     /// User that owns this card
     @nullable UniqueId<int> userId,
 

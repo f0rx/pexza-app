@@ -28,6 +28,9 @@ mixin SocialAuthMixin on AuthFacade {
       return _result.fold(
         (f) async => throw f,
         (r) async {
+          return left(AuthResponse.unknownFailure(
+            message: "Sign-in with Facebook coming soon!",
+          ));
           // Clear cached / authenticated user but do not notify UI
           if (await facebookLogin.isLoggedIn) await signOut(false);
 
@@ -108,6 +111,9 @@ mixin SocialAuthMixin on AuthFacade {
       return await _conn.fold(
         (f) => throw f,
         (_) async {
+          return left(AuthResponse.unknownFailure(
+            message: "Sign-in with Google coming soon!",
+          ));
           // Clear cached / authenticated user but do not notify UI
           if (await googleSignIn.isSignedIn()) await signOut(false);
 
@@ -120,9 +126,7 @@ mixin SocialAuthMixin on AuthFacade {
           final authentication = await account.authentication;
 
           try {
-            log.w(
-                "Google authentication successful ==>ID TOKEN: ${authentication.idToken}\n"
-                "ACCESS TOKEN =====> ${authentication.accessToken}");
+            log.w("ACCESS TOKEN =====> ${authentication.accessToken}");
 
             // Fetch AuthCredentials
             final response =

@@ -1,34 +1,36 @@
+library admin_utils_cubit.dart;
+
 import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:dio/dio.dart' hide Response;
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kt_dart/kt.dart' hide nullable;
-import 'package:pexza/features/core/domain/entities/fields/fields.dart';
-import 'package:pexza/features/core/domain/failures/base.dart';
-import 'package:pexza/features/home/landlord/data/repositories/wallet_repository/wallet_repository.dart';
-import 'package:pexza/features/home/landlord/data/repositories/withdrawal_repository/withdrawal_repository.dart';
+import 'package:pexza/features/auth/domain/domain.dart';
+import 'package:pexza/features/core/data/repositories/admin_utils_repository.dart';
+import 'package:pexza/features/core/domain/failures/failure.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
-import 'package:pexza/utils/utils.dart';
+import 'package:pexza/features/home/landlord/domain/success/landlord__success.dart';
 
-part 'landlord_wallet_state.dart';
-part 'landlord_wallet_cubit.freezed.dart';
+part 'admin_utils_state.dart';
+part 'admin_utils_cubit.freezed.dart';
 
 @injectable
-class LandlordWalletCubit extends Cubit<LandlordWalletState> {
+class AdminUtilsCubit extends Cubit<AdminUtilsState> {
+  final AuthFacade _auth;
+  final AdminUtilsRepository _repository;
   final Connectivity _connectivity;
   final DataConnectionChecker _dataConnectionChecker;
-  final WalletRepository _walletRepository;
 
-  LandlordWalletCubit(
-    this._walletRepository,
+  AdminUtilsCubit(
+    this._auth,
+    this._repository,
     this._connectivity,
     this._dataConnectionChecker,
-  ) : super(LandlordWalletState.initial());
+  ) : super(AdminUtilsState.initial());
 
-  void toggleLoading([isLoading]) => emit(state.copyWith(
+  void toggleLoading([bool isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
       ));
 
@@ -53,20 +55,44 @@ class LandlordWalletCubit extends Cubit<LandlordWalletState> {
     }
   }
 
+  void wipeDatabase() async {
+    toggleLoading();
+
+    try {
+      final isLoggedIn = (await _auth.currentUser).fold(
+        (_) => false,
+        (o) => o.isSome(),
+      );
+
+      if (isLoggedIn) await _auth.signOut();
+
+      await _repository.resetDatabase();
+
+      emit(state.copyWith(
+        response: some(right(
+          LandlordSuccess(message: "Database reset was successful!"),
+        )),
+      ));
+    } on Failure catch (e) {
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
+    }
+
+    toggleLoading();
+  }
+
   void _handleDioFailures(DioError ex) {
     switch (ex?.type) {
       case DioErrorType.CONNECT_TIMEOUT:
         emit(state.copyWith(
-          response: some(left(
-            LandlordFailure.poorInternetConnection(),
-          )),
+          response: some(left(LandlordFailure.poorInternetConnection())),
         ));
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
         emit(state.copyWith(
-          response: some(left(
-            LandlordFailure.receiveTimeout(),
-          )),
+          response: some(left(LandlordFailure.receiveTimeout())),
         ));
         break;
       case DioErrorType.RESPONSE:
@@ -78,16 +104,13 @@ class LandlordWalletCubit extends Cubit<LandlordWalletState> {
         break;
       case DioErrorType.SEND_TIMEOUT:
         emit(state.copyWith(
-          response: some(left(
-            LandlordFailure.timeout(),
-          )),
+          response: some(left(LandlordFailure.timeout())),
         ));
         break;
+      // case DioErrorType.DEFAULT:
       default:
         emit(state.copyWith(
-          response: some(left(
-            LandlordFailure.unknown(),
-          )),
+          response: some(left(LandlordFailure.unknown())),
         ));
     }
   }

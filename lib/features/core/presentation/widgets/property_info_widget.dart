@@ -10,6 +10,10 @@ class PropertyInfoWidget extends StatelessWidget {
   final bool showDivider;
   final bool isLargeText;
   final Color textColor;
+  final int maxLeadingLines;
+  final FontWeight leadingFontWeight;
+  final FontWeight trailingFontWeight;
+  final VoidCallback onTrailingPressed;
 
   const PropertyInfoWidget({
     Key key,
@@ -18,6 +22,10 @@ class PropertyInfoWidget extends StatelessWidget {
     this.showDivider = true,
     this.isLargeText = false,
     this.textColor,
+    this.maxLeadingLines = 1,
+    this.leadingFontWeight = FontWeight.w500,
+    this.trailingFontWeight = FontWeight.bold,
+    this.onTrailingPressed,
   }) : super(key: key);
 
   @override
@@ -48,29 +56,33 @@ class PropertyInfoWidget extends StatelessWidget {
                                 color: Helpers.computeLuminance(
                                   Theme.of(context).backgroundColor,
                                 ),
-                                fontSize: 15.0,
+                                fontSize: 20.0.sp,
+                                fontWeight: leadingFontWeight,
                               ),
                               textAlign: TextAlign.start,
-                              wrapWords: false,
-                              softWrap: false,
-                              maxLines: 1,
+                              wrapWords: maxLeadingLines > 1,
+                              softWrap: maxLeadingLines > 1,
+                              maxLines: maxLeadingLines,
                             ),
                           ),
                           //
                           Flexible(
                             child: Visibility(
                               visible: !isLargeText,
-                              child: AutoSizeText(
-                                trailing,
-                                style: TextStyle(
-                                  color: textColor ?? App.theme.accentColor,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
+                              child: InkWell(
+                                onTap: onTrailingPressed,
+                                child: AutoSizeText(
+                                  trailing,
+                                  style: TextStyle(
+                                    color: textColor ?? App.theme.accentColor,
+                                    fontSize: 20.sp,
+                                    fontWeight: trailingFontWeight,
+                                  ),
+                                  wrapWords: true,
+                                  textAlign: TextAlign.end,
+                                  softWrap: true,
+                                  maxLines: 2,
                                 ),
-                                wrapWords: true,
-                                textAlign: TextAlign.end,
-                                softWrap: true,
-                                maxLines: 2,
                               ),
                             ),
                           ),

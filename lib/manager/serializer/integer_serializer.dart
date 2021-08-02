@@ -7,13 +7,11 @@ class IntegerSerializer implements JsonConverter<int, dynamic> {
   int fromJson(dynamic value) {
     return value == null
         ? null
-        : value.runtimeType == int
+        : value is int
             ? value
             : int.tryParse(value);
   }
 
   @override
-  dynamic toJson(int instance) {
-    return instance;
-  }
+  dynamic toJson(int instance) => instance;
 }

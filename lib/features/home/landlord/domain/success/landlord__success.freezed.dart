@@ -18,7 +18,11 @@ class _$LandlordSuccessTearOff {
 
 // ignore: unused_element
   _LandlordSuccess call(
-      {@required
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
+          String status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
@@ -30,6 +34,8 @@ class _$LandlordSuccessTearOff {
       @JsonKey(ignore: true)
           BottomAlertDialogPosition position}) {
     return _LandlordSuccess(
+      uuid: uuid,
+      status: status,
       message: message,
       details: details,
       popRoute: popRoute,
@@ -49,6 +55,10 @@ const $LandlordSuccess = _$LandlordSuccessTearOff();
 
 /// @nodoc
 mixin _$LandlordSuccess {
+  @JsonKey(ignore: true)
+  String get uuid;
+  @nullable
+  String get status;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get message;
@@ -71,16 +81,12 @@ abstract class $LandlordSuccessCopyWith<$Res> {
           LandlordSuccess value, $Res Function(LandlordSuccess) then) =
       _$LandlordSuccessCopyWithImpl<$Res>;
   $Res call(
-      {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String message,
-      @nullable
-      @JsonKey(ignore: true)
-          String details,
-      @JsonKey(ignore: true)
-          bool popRoute,
-      @JsonKey(ignore: true)
-          BottomAlertDialogPosition position});
+      {@JsonKey(ignore: true) String uuid,
+      @nullable String status,
+      @nullable @JsonKey(includeIfNull: false, defaultValue: '') String message,
+      @nullable @JsonKey(ignore: true) String details,
+      @JsonKey(ignore: true) bool popRoute,
+      @JsonKey(ignore: true) BottomAlertDialogPosition position});
 }
 
 /// @nodoc
@@ -94,12 +100,16 @@ class _$LandlordSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object uuid = freezed,
+    Object status = freezed,
     Object message = freezed,
     Object details = freezed,
     Object popRoute = freezed,
     Object position = freezed,
   }) {
     return _then(_value.copyWith(
+      uuid: uuid == freezed ? _value.uuid : uuid as String,
+      status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
       popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
@@ -118,16 +128,12 @@ abstract class _$LandlordSuccessCopyWith<$Res>
       __$LandlordSuccessCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String message,
-      @nullable
-      @JsonKey(ignore: true)
-          String details,
-      @JsonKey(ignore: true)
-          bool popRoute,
-      @JsonKey(ignore: true)
-          BottomAlertDialogPosition position});
+      {@JsonKey(ignore: true) String uuid,
+      @nullable String status,
+      @nullable @JsonKey(includeIfNull: false, defaultValue: '') String message,
+      @nullable @JsonKey(ignore: true) String details,
+      @JsonKey(ignore: true) bool popRoute,
+      @JsonKey(ignore: true) BottomAlertDialogPosition position});
 }
 
 /// @nodoc
@@ -143,12 +149,16 @@ class __$LandlordSuccessCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object uuid = freezed,
+    Object status = freezed,
     Object message = freezed,
     Object details = freezed,
     Object popRoute = freezed,
     Object position = freezed,
   }) {
     return _then(_LandlordSuccess(
+      uuid: uuid == freezed ? _value.uuid : uuid as String,
+      status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
       popRoute: popRoute == freezed ? _value.popRoute : popRoute as bool,
@@ -164,7 +174,11 @@ class __$LandlordSuccessCopyWithImpl<$Res>
 /// @nodoc
 class _$_LandlordSuccess extends _LandlordSuccess {
   const _$_LandlordSuccess(
-      {@required
+      {@JsonKey(ignore: true)
+          this.uuid,
+      @nullable
+          this.status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.message,
@@ -182,6 +196,12 @@ class _$_LandlordSuccess extends _LandlordSuccess {
       _$_$_LandlordSuccessFromJson(json);
 
   @override
+  @JsonKey(ignore: true)
+  final String uuid;
+  @override
+  @nullable
+  final String status;
+  @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   final String message;
@@ -198,13 +218,17 @@ class _$_LandlordSuccess extends _LandlordSuccess {
 
   @override
   String toString() {
-    return 'LandlordSuccess(message: $message, details: $details, popRoute: $popRoute, position: $position)';
+    return 'LandlordSuccess(uuid: $uuid, status: $status, message: $message, details: $details, popRoute: $popRoute, position: $position)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _LandlordSuccess &&
+            (identical(other.uuid, uuid) ||
+                const DeepCollectionEquality().equals(other.uuid, uuid)) &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
@@ -222,6 +246,8 @@ class _$_LandlordSuccess extends _LandlordSuccess {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(uuid) ^
+      const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(details) ^
       const DeepCollectionEquality().hash(popRoute) ^
@@ -241,7 +267,11 @@ class _$_LandlordSuccess extends _LandlordSuccess {
 abstract class _LandlordSuccess extends LandlordSuccess {
   const _LandlordSuccess._() : super._();
   const factory _LandlordSuccess(
-      {@required
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
+          String status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
@@ -256,6 +286,12 @@ abstract class _LandlordSuccess extends LandlordSuccess {
   factory _LandlordSuccess.fromJson(Map<String, dynamic> json) =
       _$_LandlordSuccess.fromJson;
 
+  @override
+  @JsonKey(ignore: true)
+  String get uuid;
+  @override
+  @nullable
+  String get status;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')

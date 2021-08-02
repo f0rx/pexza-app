@@ -1,5 +1,4 @@
 import 'package:pexza/features/core/domain/failures/failure.dart';
-import 'package:pexza/utils/utils.dart';
 
 extension ResponseX on Response {
   U fold<U>({

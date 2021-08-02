@@ -5,9 +5,9 @@ part 'gender_type.g.dart';
 
 class GenderType extends EnumClass {
   @BuiltValueEnumConst(fallback: true)
-  static const GenderType Male = _$male;
-  static const GenderType Female = _$female;
-  static const GenderType Others = _$others;
+  static const GenderType male = _$male;
+  static const GenderType female = _$female;
+  static const GenderType others = _$others;
 
   const GenderType._(String name) : super(name);
 

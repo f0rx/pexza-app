@@ -11,7 +11,7 @@ class RoleConverter implements JsonConverter<Role, String> {
       !value.isNullOrBlank ? Role.valueOf(value) : null;
 
   @override
-  String toJson(Role instance) => instance?.name;
+  String toJson(Role instance) => instance?.name?.toLowerCase();
 }
 
 class FloorRoleConverter extends TypeConverter<Role, String> {
@@ -20,5 +20,5 @@ class FloorRoleConverter extends TypeConverter<Role, String> {
       !value.isNullOrBlank ? Role.valueOf(value) : null;
 
   @override
-  String encode(Role instance) => instance?.name;
+  String encode(Role instance) => instance?.name?.toLowerCase();
 }

@@ -8,6 +8,7 @@ part of tenant__success.dart;
 
 _$_TenantSuccess _$_$_TenantSuccessFromJson(Map<String, dynamic> json) {
   return _$_TenantSuccess(
+    status: json['status'] as String,
     message: json['message'] as String ?? '',
   );
 }
@@ -21,6 +22,7 @@ Map<String, dynamic> _$_$_TenantSuccessToJson(_$_TenantSuccess instance) {
     }
   }
 
+  writeNotNull('status', instance.status);
   writeNotNull('message', instance.message);
   return val;
 }

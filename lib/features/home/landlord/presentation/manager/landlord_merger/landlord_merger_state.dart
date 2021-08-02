@@ -5,6 +5,8 @@ part of 'landlord_merger_cubit.dart';
 abstract class LandlordMergerState implements _$LandlordMergerState {
   static const int kDefaultDuration = 1;
   static const int kMaxDuration = 50;
+  static final FocusNode emailAddressFocus = FocusNode();
+  static final FocusNode amountFocus = FocusNode();
   const LandlordMergerState._();
 
   const factory LandlordMergerState({

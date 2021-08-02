@@ -8,6 +8,9 @@ abstract class FloorUser implements _$FloorUser {
   @Entity(tableName: FloorUser.tableName)
   const factory FloorUser({
     @primaryKey int id,
+    @nullable
+    @ColumnInfo(name: 'verification_status')
+        ProfileVerificationStatus status,
     @nullable @ColumnInfo(name: 'balance') int accountBalance,
     @nullable Role role,
     @nullable String token,
@@ -16,17 +19,24 @@ abstract class FloorUser implements _$FloorUser {
     @nullable String email,
     @nullable String gender,
     @nullable @ColumnInfo(name: 'dob') String dateOfBirth,
-    String phone,
+    @nullable String phone,
     @nullable String provider,
     @nullable String password,
     @nullable String photo,
-    @nullable @ColumnInfo(name: 'verified_at') bool isEmailVerified,
+    @nullable
+    @ColumnInfo(name: 'verified_at', nullable: false)
+        bool isEmailVerified,
+    @nullable @ColumnInfo(name: 'unreadNotifications') int unreadNotifications,
+    @nullable
+    @ColumnInfo(name: 'hasPendingAssignment', nullable: false)
+        bool hasPendingAssignment,
     @nullable
     @ColumnInfo(name: 'verification_sent_at')
         String verificationCodeSentAt,
     @nullable
     @ColumnInfo(name: 'forgot_password_code_sent_at')
         String forgotPasswordCodeSentAt,
+    @nullable @ColumnInfo(name: 'last_seen_at') DateTime lastSeenAt,
     @nullable @ColumnInfo(name: 'created_at') DateTime createdAt,
     @nullable @ColumnInfo(name: 'updated_at') DateTime updatedAt,
     @nullable @ColumnInfo(name: 'deleted_at') DateTime deletedAt,
@@ -37,8 +47,9 @@ abstract class FloorUser implements _$FloorUser {
   /// Maps the Domain instance to a Data Transfer Object.
   factory FloorUser.fromDTO(UserDTO dto) => FloorUser(
         id: dto?.id,
-        accountBalance: dto.balance,
-        role: dto?.role != null ? Role.valueOf(dto.role) : null,
+        status: dto?.status,
+        accountBalance: dto?.balance,
+        role: dto?.role,
         token: dto?.token,
         firstName: dto?.firstName,
         lastName: dto?.lastName,
@@ -52,6 +63,10 @@ abstract class FloorUser implements _$FloorUser {
         photo: dto?.phone,
         forgotPasswordCodeSentAt: dto?.forgotPasswordCodeSentAt,
         verificationCodeSentAt: dto?.verificationCodeSentAt,
+        unreadNotifications: dto?.unreadNotifications,
+        hasPendingAssignment: dto?.hasPendingAssignment,
+        lastSeenAt:
+            dto?.lastSeenAt != null ? DateTime.tryParse(dto?.lastSeenAt) : null,
         createdAt:
             dto?.createdAt != null ? DateTime.tryParse(dto?.createdAt) : null,
         updatedAt:
@@ -63,9 +78,10 @@ abstract class FloorUser implements _$FloorUser {
   /// Maps the Data Transfer Object to a Domain instance.
   UserDTO get dto => UserDTO(
         id: id,
+        status: status,
         token: token,
         balance: accountBalance,
-        role: role?.name,
+        role: role,
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -76,8 +92,11 @@ abstract class FloorUser implements _$FloorUser {
         provider: provider,
         password: password,
         photo: phone,
+        hasPendingAssignment: hasPendingAssignment,
+        unreadNotifications: unreadNotifications,
         forgotPasswordCodeSentAt: forgotPasswordCodeSentAt,
         verificationCodeSentAt: verificationCodeSentAt,
+        lastSeenAt: lastSeenAt?.toIso8601String(),
         createdAt: createdAt?.toIso8601String(),
         updatedAt: updatedAt?.toIso8601String(),
         deletedAt: deletedAt?.toIso8601String(),
@@ -86,6 +105,7 @@ abstract class FloorUser implements _$FloorUser {
   /// Maps the Data Transfer Object to a Domain instance.
   User get domain => User(
         id: UniqueId<int>.fromExternal(id),
+        verificationStatus: status,
         role: role,
         accountBalance:
             accountBalance != null ? BasicTextField(accountBalance) : null,
@@ -103,12 +123,15 @@ abstract class FloorUser implements _$FloorUser {
         provider: provider != null ? AuthProvider.valueOf(provider) : null,
         password: Password.DEFAULT,
         photo: photo,
+        hasPendingAssignment: hasPendingAssignment,
+        unreadNotifications: unreadNotifications,
         forgotPasswordCodeSentAt: !forgotPasswordCodeSentAt.isNullOrBlank
             ? DateTime.tryParse(forgotPasswordCodeSentAt)
             : null,
         verificationCodeSentAt: !verificationCodeSentAt.isNullOrBlank
             ? DateTime.tryParse(verificationCodeSentAt)
             : null,
+        lastSeenAt: lastSeenAt,
         createdAt: createdAt,
         updatedAt: updatedAt,
         deletedAt: deletedAt,

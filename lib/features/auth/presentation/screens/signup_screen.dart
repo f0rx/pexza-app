@@ -52,7 +52,7 @@ class SignupScreen extends StatelessWidget with AutoRouteWrapper {
         },
         builder: (context, state) => PortalEntry(
           visible: context.watch<AuthCubit>().state.isLoading,
-          portal: App.waveLoadingBar,
+          portal: App.loadingOverlay(),
           child: this,
         ),
       ),

@@ -23,6 +23,7 @@ class _$DebitCardTearOff {
       @nullable DebitCardPinField cardPin,
       @nullable InvoiceMeta meta,
       @nullable bool verified,
+      @nullable bool isPrimary,
       @nullable UniqueId<int> userId,
       @nullable Invoice invoice,
       @nullable CardBrand brand,
@@ -44,6 +45,7 @@ class _$DebitCardTearOff {
       cardPin: cardPin,
       meta: meta,
       verified: verified,
+      isPrimary: isPrimary,
       userId: userId,
       invoice: invoice,
       brand: brand,
@@ -97,6 +99,10 @@ mixin _$DebitCard {
   /// If card has been verified
   @nullable
   bool get verified;
+
+  /// If this card is the preferred one
+  @nullable
+  bool get isPrimary;
 
   /// User that owns this card
   @nullable
@@ -163,6 +169,7 @@ abstract class $DebitCardCopyWith<$Res> {
       @nullable DebitCardPinField cardPin,
       @nullable InvoiceMeta meta,
       @nullable bool verified,
+      @nullable bool isPrimary,
       @nullable UniqueId<int> userId,
       @nullable Invoice invoice,
       @nullable CardBrand brand,
@@ -198,6 +205,7 @@ class _$DebitCardCopyWithImpl<$Res> implements $DebitCardCopyWith<$Res> {
     Object cardPin = freezed,
     Object meta = freezed,
     Object verified = freezed,
+    Object isPrimary = freezed,
     Object userId = freezed,
     Object invoice = freezed,
     Object brand = freezed,
@@ -226,6 +234,7 @@ class _$DebitCardCopyWithImpl<$Res> implements $DebitCardCopyWith<$Res> {
           cardPin == freezed ? _value.cardPin : cardPin as DebitCardPinField,
       meta: meta == freezed ? _value.meta : meta as InvoiceMeta,
       verified: verified == freezed ? _value.verified : verified as bool,
+      isPrimary: isPrimary == freezed ? _value.isPrimary : isPrimary as bool,
       userId: userId == freezed ? _value.userId : userId as UniqueId<int>,
       invoice: invoice == freezed ? _value.invoice : invoice as Invoice,
       brand: brand == freezed ? _value.brand : brand as CardBrand,
@@ -286,6 +295,7 @@ abstract class _$DebitCardCopyWith<$Res> implements $DebitCardCopyWith<$Res> {
       @nullable DebitCardPinField cardPin,
       @nullable InvoiceMeta meta,
       @nullable bool verified,
+      @nullable bool isPrimary,
       @nullable UniqueId<int> userId,
       @nullable Invoice invoice,
       @nullable CardBrand brand,
@@ -324,6 +334,7 @@ class __$DebitCardCopyWithImpl<$Res> extends _$DebitCardCopyWithImpl<$Res>
     Object cardPin = freezed,
     Object meta = freezed,
     Object verified = freezed,
+    Object isPrimary = freezed,
     Object userId = freezed,
     Object invoice = freezed,
     Object brand = freezed,
@@ -352,6 +363,7 @@ class __$DebitCardCopyWithImpl<$Res> extends _$DebitCardCopyWithImpl<$Res>
           cardPin == freezed ? _value.cardPin : cardPin as DebitCardPinField,
       meta: meta == freezed ? _value.meta : meta as InvoiceMeta,
       verified: verified == freezed ? _value.verified : verified as bool,
+      isPrimary: isPrimary == freezed ? _value.isPrimary : isPrimary as bool,
       userId: userId == freezed ? _value.userId : userId as UniqueId<int>,
       invoice: invoice == freezed ? _value.invoice : invoice as Invoice,
       brand: brand == freezed ? _value.brand : brand as CardBrand,
@@ -388,6 +400,7 @@ class _$_DebitCard extends _DebitCard {
       @nullable this.cardPin,
       @nullable this.meta,
       @nullable this.verified,
+      @nullable this.isPrimary,
       @nullable this.userId,
       @nullable this.invoice,
       @nullable this.brand,
@@ -442,6 +455,11 @@ class _$_DebitCard extends _DebitCard {
   /// If card has been verified
   @nullable
   final bool verified;
+  @override
+
+  /// If this card is the preferred one
+  @nullable
+  final bool isPrimary;
   @override
 
   /// User that owns this card
@@ -505,7 +523,7 @@ class _$_DebitCard extends _DebitCard {
 
   @override
   String toString() {
-    return 'DebitCard(id: $id, cardName: $cardName, cardNumber: $cardNumber, cardExpiryDate: $cardExpiryDate, cvv: $cvv, cardPin: $cardPin, meta: $meta, verified: $verified, userId: $userId, invoice: $invoice, brand: $brand, subBrand: $subBrand, countryCode: $countryCode, countryName: $countryName, cardType: $cardType, bank: $bank, bankId: $bankId, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'DebitCard(id: $id, cardName: $cardName, cardNumber: $cardNumber, cardExpiryDate: $cardExpiryDate, cvv: $cvv, cardPin: $cardPin, meta: $meta, verified: $verified, isPrimary: $isPrimary, userId: $userId, invoice: $invoice, brand: $brand, subBrand: $subBrand, countryCode: $countryCode, countryName: $countryName, cardType: $cardType, bank: $bank, bankId: $bankId, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -533,6 +551,9 @@ class _$_DebitCard extends _DebitCard {
             (identical(other.verified, verified) ||
                 const DeepCollectionEquality()
                     .equals(other.verified, verified)) &&
+            (identical(other.isPrimary, isPrimary) ||
+                const DeepCollectionEquality()
+                    .equals(other.isPrimary, isPrimary)) &&
             (identical(other.userId, userId) ||
                 const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.invoice, invoice) ||
@@ -578,6 +599,7 @@ class _$_DebitCard extends _DebitCard {
       const DeepCollectionEquality().hash(cardPin) ^
       const DeepCollectionEquality().hash(meta) ^
       const DeepCollectionEquality().hash(verified) ^
+      const DeepCollectionEquality().hash(isPrimary) ^
       const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(invoice) ^
       const DeepCollectionEquality().hash(brand) ^
@@ -608,6 +630,7 @@ abstract class _DebitCard extends DebitCard {
       @nullable DebitCardPinField cardPin,
       @nullable InvoiceMeta meta,
       @nullable bool verified,
+      @nullable bool isPrimary,
       @nullable UniqueId<int> userId,
       @nullable Invoice invoice,
       @nullable CardBrand brand,
@@ -661,6 +684,11 @@ abstract class _DebitCard extends DebitCard {
   /// If card has been verified
   @nullable
   bool get verified;
+  @override
+
+  /// If this card is the preferred one
+  @nullable
+  bool get isPrimary;
   @override
 
   /// User that owns this card

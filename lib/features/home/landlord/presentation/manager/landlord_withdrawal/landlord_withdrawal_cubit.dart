@@ -1,8 +1,12 @@
+library landlord_withdrawal_cubit.dart;
+
 import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart' hide Response;
+import 'package:flutter/widgets.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/kt.dart' hide nullable;
@@ -30,6 +34,10 @@ class LandlordWithdrawalCubit extends Cubit<LandlordWithdrawalState> {
     this._dataConnectionChecker,
   ) : super(LandlordWithdrawalState.initial());
 
+  void init([BankAccountDetail account]) async {
+    bankAccountChanged(account);
+  }
+
   void _toggleLoading([bool isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
       ));
@@ -42,6 +50,9 @@ class LandlordWithdrawalCubit extends Cubit<LandlordWithdrawalState> {
     await verifyAccount(state.accountDetail.accountNumber.getOrEmpty);
   }
 
+  void bankAccountChanged(BankAccountDetail account) async =>
+      emit(state.copyWith(accountDetail: account));
+
   void accountNumberChanged(String value) async {
     emit(state.copyWith(
       accountDetail: state.accountDetail.copyWith(
@@ -53,6 +64,22 @@ class LandlordWithdrawalCubit extends Cubit<LandlordWithdrawalState> {
       value,
       value.length < LandlordWithdrawalState.ACCOUNT_NUMBER_LENMGTH,
     );
+  }
+
+  void walletBalanceChanged(int value) => emit(state.copyWith(
+        landlordWallet: LandlordWallet(balance: BasicTextField(value)),
+      ));
+
+  void amountChanged(String value) {
+    if (state.amountController?.numberValue == null) return;
+
+    emit(state.copyWith(
+      amount: BasicTextField("${state.amountController.numberValue?.ceil()}"),
+      landlordWallet: state.landlordWallet.copyWith(
+        amount: BasicTextField(state.amountController?.numberValue?.ceil()),
+        payableId: BasicTextField(state.accountDetail.id.value),
+      ),
+    ));
   }
 
   Future<void> _checkInternetAndConnectivity([bool shouldThrow = false]) async {
@@ -88,7 +115,28 @@ class LandlordWithdrawalCubit extends Cubit<LandlordWithdrawalState> {
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
+    }
+
+    _toggleLoading();
+  }
+
+  Future<void> fetchBankAccounts() async {
+    _toggleLoading();
+
+    try {
+      await _checkInternetAndConnectivity();
+
+      final _result = await _withdrawalRepository.bankAccounts();
+
+      bankAccountChanged(_result.firstOrNil?.domain);
+      emit(state.copyWith(bankAccounts: _result.immutableList));
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     _toggleLoading();
@@ -132,15 +180,14 @@ class LandlordWithdrawalCubit extends Cubit<LandlordWithdrawalState> {
 
           emit(state.copyWith(
             verified: true,
-            accountDetail: state.accountDetail?.merge(
-              _result.domain,
-            ),
+            accountDetail: state.accountDetail?.merge(_result.domain),
           ));
         }
       } on LandlordFailure catch (e) {
         emit(state.copyWith(response: some(left(e))));
       } catch (_) {
-        if (_.runtimeType is DioError) _handleDioFailures(_);
+        if (_.runtimeType is DioError || _.runtimeType == DioError)
+          _handleDioFailures(_);
       }
 
     _toggleLoading(false);
@@ -169,11 +216,38 @@ class LandlordWithdrawalCubit extends Cubit<LandlordWithdrawalState> {
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     _toggleLoading();
   }
+
+  void withdraw() async {
+    _toggleLoading();
+
+    emit(state.copyWith(validate: true));
+
+    try {
+      if (state.landlordWallet.failures.isNone()) {
+        await _checkInternetAndConnectivity(true);
+
+        final _result = await _withdrawalRepository
+            .withdraw(WalletDTO.fromDomain(state.landlordWallet));
+
+        emit(state.copyWith(response: some(right(_result))));
+      }
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
+    }
+
+    _toggleLoading();
+  }
+
+  void deleteAccount() async {}
 
   void _handleDioFailures(DioError ex) {
     switch (ex?.type) {
@@ -213,4 +287,9 @@ class LandlordWithdrawalCubit extends Cubit<LandlordWithdrawalState> {
         ));
     }
   }
+}
+
+extension _XListBankAccountData on List<BankAccountData> {
+  KtList<BankAccountDetail> get immutableList =>
+      this.map((i) => i.domain).toImmutableList();
 }

@@ -57,12 +57,10 @@ class CardWidget extends StatelessWidget {
                         Flexible(
                           child: AutoSizeText.rich(
                             TextSpan(children: [
-                              TextSpan(text: 'NGN'),
-                              TextSpan(text: ' '),
                               TextSpan(
                                   text:
                                       '${context.read<AuthWatcherCubit>().state.user.accountBalance.getOrEmpty}'
-                                          .asCurrency()),
+                                          .asCurrency(symbol: true)),
                             ]),
                             style:
                                 Theme.of(context).textTheme.headline5.copyWith(
@@ -77,10 +75,10 @@ class CardWidget extends StatelessWidget {
                   //
                   Flexible(
                     child: SizedBox(
-                      width: App.shortest * 0.3,
+                      width: App.shortest * 0.33,
                       child: TextButton(
                         onPressed: () =>
-                            navigator.pushLandlordBankDetailsScreen(),
+                            navigator.pushLandlordBanksListingScreen(),
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
                           backgroundColor: Colors.white,
@@ -89,7 +87,7 @@ class CardWidget extends StatelessWidget {
                           'Withdraw',
                           style: Theme.of(context).textTheme.button.copyWith(
                                 color: AppColors.accentColor,
-                                fontSize: 15.5.sp,
+                                fontSize: 17.5.sp,
                               ),
                         ),
                       ),

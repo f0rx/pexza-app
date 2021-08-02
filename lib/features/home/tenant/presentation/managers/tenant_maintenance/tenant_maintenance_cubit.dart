@@ -128,7 +128,8 @@ class TenantMaintenanceCubit extends Cubit<TenantMaintenanceState> {
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -146,7 +147,8 @@ class TenantMaintenanceCubit extends Cubit<TenantMaintenanceState> {
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();

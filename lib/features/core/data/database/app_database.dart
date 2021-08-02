@@ -14,10 +14,12 @@ part 'app_database.g.dart';
 part 'app_database.f.dart';
 part 'package:pexza/features/core/data/models/user/floor_user.dart';
 
-@TypeConverters([FloorRoleConverter, FloorDateTimeConverter])
-@Database(version: 1, entities: [
-  _$_FloorUser,
+@TypeConverters([
+  FloorRoleConverter,
+  FloorDateTimeConverter,
+  FloorProfileVerificationConverter,
 ])
+@Database(version: 1, entities: [_$_FloorUser])
 abstract class AppDatabase extends FloorDatabase {
   FloorUserDAO get userDAO;
 }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kt_dart/kt.dart' hide nullable;
-import 'package:pexza/features/core/presentation/managers/index.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/features/home/tenant/presentation/managers/debit_card/debit_card_cubit.dart';
 import 'package:pexza/manager/locator/locator.dart';
@@ -17,99 +16,50 @@ class SavedCardScreen extends StatelessWidget with AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => getIt<DebitCardCubit>()..allDebitCards()),
-        BlocProvider(create: (_) => getIt<PaymentCubit>()),
-      ],
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<PaymentCubit, PaymentState>(
-            listenWhen: (p, c) => p.response != c.response,
-            listener: (c, s) => BottomAlertDialog.init(
-              context,
-              message: s.response.fold(
-                (f) => f.message ?? f.error,
-                (r) => r.message ?? r.details,
+    return BlocProvider(
+      create: (_) => getIt<DebitCardCubit>()..allDebitCards(),
+      child: BlocListener<DebitCardCubit, DebitCardState>(
+        listenWhen: (p, c) {
+          final pOrNull = p.response.getOrElse(() => null);
+          final cOrNull = c.response.getOrElse(() => null);
+          final pResponse =
+              p.response.getOrElse(() => null)?.getOrElse(() => null);
+          final cResponse =
+              c.response.getOrElse(() => null)?.getOrElse(() => null);
+          return pOrNull != cOrNull || pResponse?.uuid != cResponse?.uuid;
+        },
+        listener: (c, s) => s.response.fold(
+          () => null,
+          (either) => BottomAlertDialog.init(
+            context,
+            message: either.fold(
+              (f) => f.message ?? f.error,
+              (r) => r.message ?? r.details ?? r.status,
+            ),
+            icon: either.fold(
+              (_) => null,
+              (r) => r.fold(
+                info: (_) => Icons.info_outline_rounded,
+                success: (_) => Icons.check_circle_rounded,
               ),
-              icon: s.response.fold(
-                (_) => null,
-                (r) => r.fold(
-                  info: (_) => Icons.info_outline_rounded,
-                  success: (_) => Icons.check_circle_rounded,
-                ),
+            ),
+            iconColor: either.fold(
+              (_) => null,
+              (r) => r.fold(
+                info: (_) => AppColors.assessmentBlue,
+                success: (_) => AppColors.successGreen,
               ),
-              iconColor: s.response.fold(
-                (_) => null,
-                (r) => r.fold(
-                  info: (_) => AppColors.assessmentBlue,
-                  success: (_) => AppColors.successGreen,
-                ),
-              ),
-              shouldIconPulse: s.response.fold((_) => null, (r) => false),
-              callback: s.response.fold(
-                (_) => null,
-                (r) => r.fold(
-                  success: (val) => val.popRoute
-                      ? s.status
-                          ? (_) => navigator.popAndPush(
-                                Routes.successfulScreen,
-                                arguments: SuccessfulScreenArguments(
-                                  image: AppAssets.freePick,
-                                  title: 'Payment Successful',
-                                  description: "Your payment was successful. "
-                                      "\nPlease check your email "
-                                      "for confirmation and receipt.",
-                                  onPressed: () => navigator.popUntilPath(
-                                    Routes.tenantHomeScreen,
-                                  ),
-                                ),
-                              )
-                          : null
-                      : null,
-                ),
+            ),
+            shouldIconPulse: either.fold((_) => null, (r) => false),
+            callback: either.fold(
+              (_) => null,
+              (r) => r.fold(
+                success: (val) =>
+                    val.popRoute ? (_) => navigator.pop(true) : null,
               ),
             ),
           ),
-          //
-          BlocListener<DebitCardCubit, DebitCardState>(
-            listenWhen: (p, c) =>
-                p.response.getOrElse(() => null) !=
-                c.response.getOrElse(() => null),
-            listener: (c, s) => s.response.fold(
-              () => null,
-              (either) => BottomAlertDialog.init(
-                context,
-                message: either.fold(
-                  (f) => f.message ?? f.error,
-                  (r) => r.message ?? r.details,
-                ),
-                icon: either.fold(
-                  (_) => null,
-                  (r) => r.fold(
-                    info: (_) => Icons.info_outline_rounded,
-                    success: (_) => Icons.check_circle_rounded,
-                  ),
-                ),
-                iconColor: either.fold(
-                  (_) => null,
-                  (r) => r.fold(
-                    info: (_) => AppColors.assessmentBlue,
-                    success: (_) => AppColors.successGreen,
-                  ),
-                ),
-                shouldIconPulse: either.fold((_) => null, (r) => false),
-                callback: either.fold(
-                  (_) => null,
-                  (r) => r.fold(
-                    success: (val) =>
-                        val.popRoute ? (_) => navigator.pop(true) : null,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
         child: this,
       ),
     );
@@ -150,32 +100,66 @@ class SavedCardScreen extends StatelessWidget with AutoRouteWrapper {
                   separatorBuilder: (c, i) => Visibility(
                     visible: s.debitCards.getOrNull(i) != null &&
                         s.debitCards.getOrNull(i).cardNumber.isValid,
-                    child: Divider(
-                      height: 3.0,
-                      thickness: 1.0,
-                    ),
+                    child: Divider(height: 3.0, thickness: 1.0),
                   ),
                   itemBuilder: (context, i) {
                     var card = s.debitCards.getOrNull(i);
 
                     return Visibility(
                       visible: card != null && card.cardNumber.isValid,
-                      child: ListTile(
+                      child: RadioListTile<DebitCard>(
                         dense: true,
-                        trailing: ConstrainedBox(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        groupValue:
+                            s.debitCards.firstOrNull((i) => i.isPrimary),
+                        value: card,
+                        onChanged: (card) async {
+                          context
+                              .read<DebitCardCubit>()
+                              .currentCardChanged(card);
+
+                          await PopupDialog.confirmation(
+                            title: 'Set Primary?',
+                            description: 'Do you want to make '
+                                'this card your Primary card?',
+                            popupIcon: Icons.check,
+                            postiveButtonText: 'Proceed',
+                            negativeButtonText: 'No',
+                            onPositiveButtonPressed:
+                                context.read<DebitCardCubit>().makePrimary,
+                          ).render(c);
+                        },
+                        secondary: ConstrainedBox(
                           constraints: BoxConstraints(
                             maxHeight: 35,
                             maxWidth: 35,
                           ),
                           child: Tooltip(
                             message: 'Delete this card?',
-                            child: IconButton(
-                              onPressed: () => c
-                                  .read<DebitCardCubit>()
-                                  .currentCardChanged(card),
-                              splashRadius: 25,
-                              padding: EdgeInsets.zero,
-                              icon: Icon(Icons.delete_outline_rounded),
+                            child: Visibility(
+                              visible: !card.isPrimary,
+                              child: IconButton(
+                                onPressed: () async {
+                                  context
+                                      .read<DebitCardCubit>()
+                                      .currentCardChanged(card);
+
+                                  await PopupDialog.confirmation(
+                                    title: 'Delete this Card?',
+                                    description:
+                                        'This action is not reversible!',
+                                    popupIcon: Icons.delete_outline_rounded,
+                                    colorScheme:
+                                        PopupAlertDialogColorScheme.danger,
+                                    onPositiveButtonPressed: context
+                                        .read<DebitCardCubit>()
+                                        .deleteCard,
+                                  ).render(c);
+                                },
+                                splashRadius: 25,
+                                padding: EdgeInsets.zero,
+                                icon: Icon(Icons.delete_outline_rounded),
+                              ),
                             ),
                           ),
                         ),
@@ -187,7 +171,7 @@ class SavedCardScreen extends StatelessWidget with AutoRouteWrapper {
                           softWrap: true,
                           wrapWords: true,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.subtitle2,
+                          style: Theme.of(c).textTheme.subtitle2,
                         ),
                         title: AutoSizeText(
                           "${card?.cardNumber?.getOrNull?.formatCardNumber}",
@@ -195,9 +179,9 @@ class SavedCardScreen extends StatelessWidget with AutoRouteWrapper {
                           softWrap: true,
                           wrapWords: true,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.headline6.merge(
+                          style: Theme.of(c).textTheme.headline6.merge(
                                 TextStyle(
-                                  fontSize: 17.5,
+                                  fontSize: 21.0.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -219,23 +203,13 @@ class SavedCardScreen extends StatelessWidget with AutoRouteWrapper {
                   color: Colors.black,
                 ),
               ),
-              child: BlocBuilder<PaymentCubit, PaymentState>(
-                builder: (c, s) => ClipRRect(
-                  borderRadius: BorderRadius.circular(100.0),
-                  child: IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: () async {
-                      final DebitCard newCard =
-                          await navigator.pushAddNewCardScreen();
-
-                      if (newCard != null &&
-                          newCard?.cardNumber?.getOrNull != null) {
-                        context.read<PaymentCubit>().init(newCard);
-                        context.read<PaymentCubit>().pay(c);
-                        // Refresh list
-                        context.read<DebitCardCubit>().allDebitCards();
-                      }
-                    },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () => navigator.pushAddNewCardScreen(
+                    intended: Routes.savedCardScreen,
+                    buttonText: 'Save Card',
                   ),
                 ),
               ),

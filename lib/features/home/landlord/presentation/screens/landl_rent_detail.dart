@@ -12,8 +12,8 @@ class LandlordRentDetailScreen extends StatelessWidget with AutoRouteWrapper {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Text(
-          "Add props screen",
+        child: Center(
+          child: Text("Available in next build"),
         ),
       ),
     );

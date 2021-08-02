@@ -15,10 +15,7 @@ import 'package:pexza/features/core/core.dart';
 class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
   final Assignment assignment;
 
-  const ProfileSetupScreen({
-    Key key,
-    this.assignment,
-  }) : super(key: key);
+  const ProfileSetupScreen({Key key, this.assignment}) : super(key: key);
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -27,27 +24,53 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
       child: BlocConsumer<TokenVerificationCubit, TokenVerificationState>(
         listenWhen: (p, c) =>
             p.response.getOrElse(() => null) !=
-            c.response.getOrElse(() => null),
-        listener: (c, s) => s.response.fold(
+                c.response.getOrElse(() => null) ||
+            (c.response.getOrElse(() => null) != null &&
+                (c.response.getOrElse(() => null).isLeft() &&
+                    c.response.getOrElse(() => null).fold(
+                          (f) => f.foldCode(
+                            is1104: () => p.isLoading != c.isLoading,
+                            is1106: () => p.isLoading != c.isLoading,
+                            orElse: () => false,
+                          ),
+                          (r) => false,
+                        ))),
+        listener: (c, s) => s?.response?.fold(
           () => null,
-          (either) => BottomAlertDialog.init(
-            context,
-            message: either.fold(
-              (f) => f.message ?? f.error,
-              (r) => r.message ?? r.details,
+          (either) => either?.fold(
+            (f) => f.foldCode(
+              is1104: () async {
+                if (App.currentRoute != Routes.addNewCardScreen && !s.isLoading)
+                  return await navigator.pushAddNewCardScreen(
+                    intended: Routes.profileSetupScreen,
+                    buttonText: "Add this Card",
+                    failure: f,
+                  );
+              },
+              is1106: () async {
+                if (App.currentRoute != Routes.profileVerificationScreen &&
+                    !s.isLoading)
+                  return await navigator.pushProfileVerificationScreen(
+                    intended: Routes.profileSetupScreen,
+                  );
+              },
+              orElse: () =>
+                  BottomAlertDialog.init(c, message: f.message ?? f.details),
             ),
-            icon: either.fold((_) => null, (r) => Icons.check_circle_rounded),
-            iconColor: either.fold((_) => null, (r) => AppColors.successGreen),
-            shouldIconPulse: either.fold((_) => null, (r) => false),
-            callback: either.fold(
-              (_) => null,
-              (r) => r.popRoute ? (_) => navigator.pop(true) : null,
+            (s) => BottomAlertDialog.init(
+              context,
+              message: s.message ?? s.details,
+              icon: Icons.check_circle_rounded,
+              iconColor: AppColors.successGreen,
+              shouldIconPulse: false,
+              callback: s.popRoute ? (_) => navigator.pop(true) : null,
             ),
           ),
         ),
+        buildWhen: (p, c) => p.isLoading != c.isLoading,
         builder: (c, s) => PortalEntry(
           visible: c.watch<TokenVerificationCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
+          portal: App.loadingOverlay(Helpers.circularLoader()),
           child: this,
         ),
       ),
@@ -71,7 +94,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                   children: [
                     Flexible(
                       child: AutoSizeText(
-                        "Setup Profile",
+                        "Setup your Profile",
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         style: TextStyle(
@@ -121,6 +144,7 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                     PinInputWidget<TokenVerificationCubit,
                         TokenVerificationState>(
                       length: 5,
+                      heroTag: "assignment-${assignment.id.value}",
                       // autoFocus: true,
                       validate: context
                           .watch<TokenVerificationCubit>()
@@ -129,16 +153,18 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
                       keyboardType: TextInputType.text,
                       onChanged:
                           context.read<TokenVerificationCubit>().onChanged,
-                      onSubmitted:
-                          context.read<TokenVerificationCubit>().onSubmitted,
-                      onCompleted:
-                          context.read<TokenVerificationCubit>().onSubmitted,
+                      onSubmitted: context
+                          .read<TokenVerificationCubit>()
+                          .acceptAssignment,
+                      onCompleted: context
+                          .read<TokenVerificationCubit>()
+                          .acceptAssignment,
                       validator: (value, s) => s.code.value.fold(
                         (error) => error.message,
                         (r) => s.response?.fold(
                           () => null,
                           (_) => _?.fold(
-                            (f) => f.errors?.code?.firstOrNull,
+                            (f) => f.errors?.code?.firstOrNil,
                             (_) => null,
                           ),
                         ),
@@ -178,15 +204,16 @@ class ProfileSetupScreen extends StatelessWidget with AutoRouteWrapper {
             child: BlocBuilder<TokenVerificationCubit, TokenVerificationState>(
               builder: (c, s) => SafeArea(
                 child: FloatingActionButton(
-                  onPressed: () async {
-                    final result = await App.showAlertDialog<bool>(
-                      context: c,
-                      barrierDismissible: false,
-                      builder: (_) => _RejectAssignmentAlertDialog(),
-                    );
-                    if (result != null && result)
-                      c.read<TokenVerificationCubit>().rejectAssignment();
-                  },
+                  onPressed: () async => PopupDialog.confirmation(
+                    title: "Reject assignment?",
+                    description: "You're about to reject the assignment. \n"
+                        "We'll inform the landlord this apartment wasn't to your liking.",
+                    colorScheme: PopupAlertDialogColorScheme.danger,
+                    postiveButtonText: "Proceed",
+                    popupIcon: Icons.cancel_sharp,
+                    onPositiveButtonPressed:
+                        c.read<TokenVerificationCubit>().rejectAssignment,
+                  ).render(context),
                   elevation: 0.0,
                   backgroundColor: Colors.transparent,
                   mini: true,
@@ -252,80 +279,6 @@ class _StatusAction extends StatelessWidget {
           child: Icon(icon, color: Colors.white),
         ),
       ),
-    );
-  }
-}
-
-class _RejectAssignmentAlertDialog extends StatelessWidget {
-  const _RejectAssignmentAlertDialog({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      scrollable: false,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      contentPadding: EdgeInsets.only(left: 20.0, right: 20.0, top: 12.0),
-      content: Container(
-        width: App.shortest * 0.5,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.warning, color: Colors.amber),
-                //
-                HorizontalSpace(width: 10.0),
-                //
-                Flexible(
-                  child: AutoSizeText(
-                    "This action cannot be undone!",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            //
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: AutoSizeText.rich(
-                TextSpan(children: [
-                  TextSpan(
-                    text: "You're about to reject the assignment. "
-                        "We'll inform the landlord the apartment wasn't to your liking",
-                  ),
-                ]),
-                style: TextStyle(fontSize: 15.0),
-              ),
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        AppElevatedButton(
-          onPressed: () => Navigator.pop(context, true),
-          backgroundColor: AppColors.errorRed,
-          padding: EdgeInsets.zero,
-          borderRadius: BorderRadius.circular(8.0),
-          elevation: 0.0,
-          child: Text('Proceed'),
-        ),
-        //
-        AppElevatedButton(
-          onPressed: () => Navigator.pop(context, false),
-          backgroundColor: Colors.grey.shade300,
-          padding: EdgeInsets.zero,
-          borderRadius: BorderRadius.circular(8.0),
-          elevation: 0.0,
-          child: Text('No', style: TextStyle(color: Colors.black)),
-        ),
-      ],
     );
   }
 }

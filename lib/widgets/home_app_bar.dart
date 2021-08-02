@@ -19,9 +19,10 @@ class HomeAppBar extends StatelessWidget {
     Widget icon,
     Color avatarBgColor,
     @required this.onPressed,
-    this.style,
+    TextStyle style,
   })  : avatarBgColor = avatarBgColor ?? AppColors.accentColor.shade50,
         icon = icon ?? AppAssets.wavingHand,
+        style = TextStyle(color: Colors.black),
         super(key: key);
 
   @override

@@ -38,8 +38,10 @@ abstract class AuthFacade extends Facade {
     DisplayName firstName,
     DisplayName lastName,
     Phone phone,
+    DateTimeField dob,
     Gender gender,
-    DateTimeField dateOfBirth,
+    Password currentPassword,
+    Password newPassword,
   });
 
   // Future<Either<AuthResponse, Unit>> changePassword({
@@ -47,7 +49,7 @@ abstract class AuthFacade extends Facade {
   //   Password newPassword,
   // });
 
-  Future<Either<AuthResponse, Unit>> resendVerificationEmail(
+  Future<Either<AuthResponse, AuthResponse>> resendVerificationEmail(
     EmailAddress email,
   );
 

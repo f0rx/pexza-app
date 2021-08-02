@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
@@ -118,10 +119,7 @@ class AuthCubit extends Cubit<AuthState> {
     Either<AuthResponse, Unit> failureOrUnit;
 
     // Enable form validation
-    emit(state.copyWith(
-      validate: true,
-      authStatus: none(),
-    ));
+    emit(state.copyWith(validate: true, authStatus: none()));
 
     if (firstName.isValid &&
         lastName.isValid &&
@@ -143,7 +141,11 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       // emit auth_status whether registraion failed or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit.map(
+          (r) => null,
+        )),
+      ));
     }
 
     toggleLoadingIndicator();
@@ -170,7 +172,47 @@ class AuthCubit extends Cubit<AuthState> {
       );
 
       // emit auth_status whether authentication failed or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit.map(
+          (r) => null,
+        )),
+      ));
+    }
+
+    toggleLoadingIndicator();
+  }
+
+  void updateProfile() async {
+    toggleLoadingIndicator();
+
+    Either<AuthResponse, Unit> failureOrUnit;
+
+    // Start form validation
+    emit(state.copyWith(
+      validate: true,
+      authStatus: none(),
+    ));
+
+    if (state.firstName.isValid &&
+        state.lastName.isValid &&
+        state.phone.isValid &&
+        state.dateOfBirth.isValid &&
+        state.gender.isValid) {
+      // Update user profile
+      // failureOrUnit = await _auth.updateProfile(
+      //   firstName: state.firstName,
+      //   lastName: state.lastName,
+      //   phone: state.phone,
+      //   dob: state.dateOfBirth,
+      //   gender: state.gender,
+      // );
+
+      // emit auth_status whether authentication failed or not
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit.map(
+          (r) => null,
+        )),
+      ));
     }
 
     toggleLoadingIndicator();
@@ -196,8 +238,7 @@ class AuthCubit extends Cubit<AuthState> {
 
       // emit auth_status
       emit(state.copyWith(
-        //////// TODO: Fix this later
-        authStatus: optionOf(failureOrUnit.map((r) => unit)),
+        authStatus: optionOf(failureOrUnit.map((r) => r)),
       ));
     }
 
@@ -220,7 +261,11 @@ class AuthCubit extends Cubit<AuthState> {
       failureOrUnit = await _auth.verifyEmailAddress(token: token);
 
       // emit auth_status whether verification failed or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(
+        authStatus: optionOf(failureOrUnit.map(
+          (r) => null,
+        )),
+      ));
     }
 
     toggleLoadingIndicator();
@@ -230,13 +275,13 @@ class AuthCubit extends Cubit<AuthState> {
     toggleLoadingIndicator();
 
     EmailAddress emailAddress = state.emailAddress;
-    Either<AuthResponse, Unit> failureOrUnit;
+    Either<AuthResponse, AuthResponse> failureOrUnit;
 
     if (emailAddress.isValid) {
       failureOrUnit = await _auth.resendVerificationEmail(emailAddress);
 
       // emit auth_status whether authentication fails or not
-      emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+      emit(state.copyWith(authStatus: optionOf(failureOrUnit.map((r) => r))));
     }
 
     toggleLoadingIndicator();
@@ -248,7 +293,11 @@ class AuthCubit extends Cubit<AuthState> {
     Either<AuthResponse, Unit> failureOrUnit =
         await _auth.googleAuthentication();
 
-    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+    emit(state.copyWith(
+      authStatus: optionOf(failureOrUnit.map(
+        (r) => null,
+      )),
+    ));
 
     toggleLoadingIndicator();
   }
@@ -265,7 +314,11 @@ class AuthCubit extends Cubit<AuthState> {
     Either<AuthResponse, Unit> failureOrUnit =
         await _auth.facebookAuthentication();
 
-    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+    emit(state.copyWith(
+      authStatus: optionOf(failureOrUnit.map(
+        (r) => null,
+      )),
+    ));
 
     toggleLoadingIndicator();
   }
@@ -276,7 +329,11 @@ class AuthCubit extends Cubit<AuthState> {
     Either<AuthResponse, Unit> failureOrUnit =
         await _auth.appleAuthentication();
 
-    emit(state.copyWith(authStatus: optionOf(failureOrUnit)));
+    emit(state.copyWith(
+      authStatus: optionOf(failureOrUnit.map(
+        (r) => null,
+      )),
+    ));
 
     toggleLoadingIndicator();
   }

@@ -23,6 +23,8 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
     @nullable @JsonKey(includeIfNull: false) List<dynamic> password,
     @nullable @JsonKey(includeIfNull: false) List<dynamic> token,
     @nullable @JsonKey(includeIfNull: false) List<dynamic> code,
+    @nullable @JsonKey(includeIfNull: false) List<dynamic> type,
+    @nullable @JsonKey(includeIfNull: false) List<dynamic> description,
     @nullable
     @JsonKey(includeIfNull: false, name: "property_id")
         List<dynamic> propertyId,
@@ -43,9 +45,8 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
     @nullable
     @JsonKey(includeIfNull: false, name: "tenant_email")
         List<dynamic> tenantEmail,
-    @nullable
-    @JsonKey(includeIfNull: false, name: "duration")
-        List<dynamic> duration,
+    @nullable @JsonKey(includeIfNull: false) List<dynamic> duration,
+    @nullable @JsonKey(includeIfNull: false) List<dynamic> document,
     @nullable @JsonKey(includeIfNull: false) List<dynamic> amount,
     @nullable
     @JsonKey(includeIfNull: false, name: "currency_id")
@@ -57,6 +58,15 @@ abstract class ServerFieldErrors implements _$ServerFieldErrors {
     @JsonKey(includeIfNull: false, name: "assignment_id")
         List<dynamic> assignmentId,
     @nullable @JsonKey(includeIfNull: false) List<dynamic> comment,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "card_number")
+        List<dynamic> cardNumber,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "account_number")
+        List<dynamic> accountNumber,
+    @nullable
+    @JsonKey(includeIfNull: false, name: "bank_id")
+        List<dynamic> bankId,
   }) = _ServerFieldErrors;
 
   factory ServerFieldErrors.fromJson(Map<String, dynamic> json) =>

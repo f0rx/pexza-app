@@ -37,6 +37,10 @@ dependencies:
   firebase_crashlytics: "^0.4.0+1"
   # Google services & Authentication
   google_sign_in: ^4.5.9
+  # Flutter bridge to Sign in with Apple.
+  # Supports login via an Apple ID, as well as
+  # retrieving credentials saved in the user's keychain.
+  sign_in_with_apple: ^2.5.4
   # Customize App font
   google_fonts: ^1.1.1
   # For Facebook authentication
@@ -91,6 +95,8 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   # Shimmer Skeleton Library.
   shimmer: ^1.1.2
+  # Show beautiful bottom sheet as confirmation dialog quickly and easily.
+  sweetsheet: ^0.2.0
   # A Flutter package for easy implementation of fluid navigation bar.
   curved_navigation_bar: ^0.3.7
   # A port of Kotlin's Kotlin Standard library for Dart/Flutter projects.
@@ -116,6 +122,8 @@ dependencies:
   # A type conversion dio client
   # generator using source_gen and inspired by Chopper and Retrofit.
   retrofit: ^1.3.4+1
+  # A Flutter plugin for opening iOS and Android phone settings from an app.
+  app_settings: ^4.0.4
   # Floor provides a neat SQLite abstraction for your Flutter applications
   floor: ^0.19.1
   # Pretty Dio logger is a Dio interceptor that logs network calls in a pretty, easy to read format.
@@ -142,6 +150,16 @@ dependencies:
   # A flutter plugin for adapting screen and font size.
   # Let your UI display a reasonable layout on different screen sizes!
   flutter_screenutil: ^4.0.4+1
+  # A Flutter plugin for iOS and Android for picking images from the image library,
+  # and taking new pictures with the camera.
+  image_picker: ^0.6.7+22
+  # A package that allows you to use the native file explorer to pick
+  # single or multiple files, with extensions filtering support.
+  file_picker: ^2.1.7
+  # Masked text input for flutter.
+  flutter_masked_text:
+    git:
+      url: git://github.com/f0rx/flutter-masked-text.git
   # Approximate how your app looks and performs on another device.
   device_preview:
     git:

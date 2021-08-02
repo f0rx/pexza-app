@@ -5,3 +5,5 @@ export 'landlord_apartment/landlord_apartment.dart';
 export 'fields/index.dart';
 export 'merger/apartment_merger.dart';
 export 'withdrawal/index.dart';
+export 'rent/payment_history/landlord_rent_payment_history.dart';
+export 'rent/rent_history/property_rent_history.dart';

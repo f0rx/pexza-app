@@ -26,12 +26,23 @@ class _$InvoiceDTOTearOff {
           PaymentMetaDTO meta,
       @nullable
       @JsonKey(includeIfNull: false, name: 'assignment_id')
+      @IntegerSerializer()
           int assignmentId,
       @nullable
       @JsonKey(includeIfNull: false)
-          int amount,
+      @NumSerializer()
+          num amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'base_amount')
+      @IntegerSerializer()
+          int baseAmount,
       @nullable
       @JsonKey(includeIfNull: false)
+      @DoubleSerializer()
+          double charges,
+      @nullable
+      @JsonKey(includeIfNull: false)
+      @IntegerSerializer()
           int duration,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -56,6 +67,8 @@ class _$InvoiceDTOTearOff {
       meta: meta,
       assignmentId: assignmentId,
       amount: amount,
+      baseAmount: baseAmount,
+      charges: charges,
       duration: duration,
       status: status,
       invoiceNumber: invoiceNumber,
@@ -85,12 +98,23 @@ mixin _$InvoiceDTO {
   PaymentMetaDTO get meta;
   @nullable
   @JsonKey(includeIfNull: false, name: 'assignment_id')
+  @IntegerSerializer()
   int get assignmentId;
   @nullable
   @JsonKey(includeIfNull: false)
-  int get amount;
+  @NumSerializer()
+  num get amount;
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'base_amount')
+  @IntegerSerializer()
+  int get baseAmount;
   @nullable
   @JsonKey(includeIfNull: false)
+  @DoubleSerializer()
+  double get charges;
+  @nullable
+  @JsonKey(includeIfNull: false)
+  @IntegerSerializer()
   int get duration;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -130,12 +154,23 @@ abstract class $InvoiceDTOCopyWith<$Res> {
           PaymentMetaDTO meta,
       @nullable
       @JsonKey(includeIfNull: false, name: 'assignment_id')
+      @IntegerSerializer()
           int assignmentId,
       @nullable
       @JsonKey(includeIfNull: false)
-          int amount,
+      @NumSerializer()
+          num amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'base_amount')
+      @IntegerSerializer()
+          int baseAmount,
       @nullable
       @JsonKey(includeIfNull: false)
+      @DoubleSerializer()
+          double charges,
+      @nullable
+      @JsonKey(includeIfNull: false)
+      @IntegerSerializer()
           int duration,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -173,6 +208,8 @@ class _$InvoiceDTOCopyWithImpl<$Res> implements $InvoiceDTOCopyWith<$Res> {
     Object meta = freezed,
     Object assignmentId = freezed,
     Object amount = freezed,
+    Object baseAmount = freezed,
+    Object charges = freezed,
     Object duration = freezed,
     Object status = freezed,
     Object invoiceNumber = freezed,
@@ -185,7 +222,9 @@ class _$InvoiceDTOCopyWithImpl<$Res> implements $InvoiceDTOCopyWith<$Res> {
       meta: meta == freezed ? _value.meta : meta as PaymentMetaDTO,
       assignmentId:
           assignmentId == freezed ? _value.assignmentId : assignmentId as int,
-      amount: amount == freezed ? _value.amount : amount as int,
+      amount: amount == freezed ? _value.amount : amount as num,
+      baseAmount: baseAmount == freezed ? _value.baseAmount : baseAmount as int,
+      charges: charges == freezed ? _value.charges : charges as double,
       duration: duration == freezed ? _value.duration : duration as int,
       status: status == freezed ? _value.status : status as String,
       invoiceNumber: invoiceNumber == freezed
@@ -223,12 +262,23 @@ abstract class _$InvoiceDTOCopyWith<$Res> implements $InvoiceDTOCopyWith<$Res> {
           PaymentMetaDTO meta,
       @nullable
       @JsonKey(includeIfNull: false, name: 'assignment_id')
+      @IntegerSerializer()
           int assignmentId,
       @nullable
       @JsonKey(includeIfNull: false)
-          int amount,
+      @NumSerializer()
+          num amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'base_amount')
+      @IntegerSerializer()
+          int baseAmount,
       @nullable
       @JsonKey(includeIfNull: false)
+      @DoubleSerializer()
+          double charges,
+      @nullable
+      @JsonKey(includeIfNull: false)
+      @IntegerSerializer()
           int duration,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -269,6 +319,8 @@ class __$InvoiceDTOCopyWithImpl<$Res> extends _$InvoiceDTOCopyWithImpl<$Res>
     Object meta = freezed,
     Object assignmentId = freezed,
     Object amount = freezed,
+    Object baseAmount = freezed,
+    Object charges = freezed,
     Object duration = freezed,
     Object status = freezed,
     Object invoiceNumber = freezed,
@@ -281,7 +333,9 @@ class __$InvoiceDTOCopyWithImpl<$Res> extends _$InvoiceDTOCopyWithImpl<$Res>
       meta: meta == freezed ? _value.meta : meta as PaymentMetaDTO,
       assignmentId:
           assignmentId == freezed ? _value.assignmentId : assignmentId as int,
-      amount: amount == freezed ? _value.amount : amount as int,
+      amount: amount == freezed ? _value.amount : amount as num,
+      baseAmount: baseAmount == freezed ? _value.baseAmount : baseAmount as int,
+      charges: charges == freezed ? _value.charges : charges as double,
       duration: duration == freezed ? _value.duration : duration as int,
       status: status == freezed ? _value.status : status as String,
       invoiceNumber: invoiceNumber == freezed
@@ -307,12 +361,23 @@ class _$_InvoiceDTO extends _InvoiceDTO {
           this.meta,
       @nullable
       @JsonKey(includeIfNull: false, name: 'assignment_id')
+      @IntegerSerializer()
           this.assignmentId,
       @nullable
       @JsonKey(includeIfNull: false)
+      @NumSerializer()
           this.amount,
       @nullable
+      @JsonKey(includeIfNull: false, name: 'base_amount')
+      @IntegerSerializer()
+          this.baseAmount,
+      @nullable
       @JsonKey(includeIfNull: false)
+      @DoubleSerializer()
+          this.charges,
+      @nullable
+      @JsonKey(includeIfNull: false)
+      @IntegerSerializer()
           this.duration,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -348,14 +413,27 @@ class _$_InvoiceDTO extends _InvoiceDTO {
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'assignment_id')
+  @IntegerSerializer()
   final int assignmentId;
   @override
   @nullable
   @JsonKey(includeIfNull: false)
-  final int amount;
+  @NumSerializer()
+  final num amount;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'base_amount')
+  @IntegerSerializer()
+  final int baseAmount;
   @override
   @nullable
   @JsonKey(includeIfNull: false)
+  @DoubleSerializer()
+  final double charges;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  @IntegerSerializer()
   final int duration;
   @override
   @nullable
@@ -383,7 +461,7 @@ class _$_InvoiceDTO extends _InvoiceDTO {
 
   @override
   String toString() {
-    return 'InvoiceDTO(id: $id, meta: $meta, assignmentId: $assignmentId, amount: $amount, duration: $duration, status: $status, invoiceNumber: $invoiceNumber, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'InvoiceDTO(id: $id, meta: $meta, assignmentId: $assignmentId, amount: $amount, baseAmount: $baseAmount, charges: $charges, duration: $duration, status: $status, invoiceNumber: $invoiceNumber, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -399,6 +477,12 @@ class _$_InvoiceDTO extends _InvoiceDTO {
                     .equals(other.assignmentId, assignmentId)) &&
             (identical(other.amount, amount) ||
                 const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.baseAmount, baseAmount) ||
+                const DeepCollectionEquality()
+                    .equals(other.baseAmount, baseAmount)) &&
+            (identical(other.charges, charges) ||
+                const DeepCollectionEquality()
+                    .equals(other.charges, charges)) &&
             (identical(other.duration, duration) ||
                 const DeepCollectionEquality()
                     .equals(other.duration, duration)) &&
@@ -425,6 +509,8 @@ class _$_InvoiceDTO extends _InvoiceDTO {
       const DeepCollectionEquality().hash(meta) ^
       const DeepCollectionEquality().hash(assignmentId) ^
       const DeepCollectionEquality().hash(amount) ^
+      const DeepCollectionEquality().hash(baseAmount) ^
+      const DeepCollectionEquality().hash(charges) ^
       const DeepCollectionEquality().hash(duration) ^
       const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(invoiceNumber) ^
@@ -454,12 +540,23 @@ abstract class _InvoiceDTO extends InvoiceDTO {
           PaymentMetaDTO meta,
       @nullable
       @JsonKey(includeIfNull: false, name: 'assignment_id')
+      @IntegerSerializer()
           int assignmentId,
       @nullable
       @JsonKey(includeIfNull: false)
-          int amount,
+      @NumSerializer()
+          num amount,
+      @nullable
+      @JsonKey(includeIfNull: false, name: 'base_amount')
+      @IntegerSerializer()
+          int baseAmount,
       @nullable
       @JsonKey(includeIfNull: false)
+      @DoubleSerializer()
+          double charges,
+      @nullable
+      @JsonKey(includeIfNull: false)
+      @IntegerSerializer()
           int duration,
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
@@ -494,14 +591,27 @@ abstract class _InvoiceDTO extends InvoiceDTO {
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'assignment_id')
+  @IntegerSerializer()
   int get assignmentId;
   @override
   @nullable
   @JsonKey(includeIfNull: false)
-  int get amount;
+  @NumSerializer()
+  num get amount;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false, name: 'base_amount')
+  @IntegerSerializer()
+  int get baseAmount;
   @override
   @nullable
   @JsonKey(includeIfNull: false)
+  @DoubleSerializer()
+  double get charges;
+  @override
+  @nullable
+  @JsonKey(includeIfNull: false)
+  @IntegerSerializer()
   int get duration;
   @override
   @nullable

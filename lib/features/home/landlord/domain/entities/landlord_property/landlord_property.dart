@@ -1,5 +1,7 @@
 library landlord_property.dart;
 
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:dartz/dartz.dart';
@@ -29,7 +31,7 @@ abstract class LandlordProperty implements _$LandlordProperty {
     @nullable BasicTextField<int> numberOfApartments,
     @nullable BasicTextField<int> numberOfAvailableApartments,
     @nullable BasicTextField<int> numberOfRentedApartment,
-    @nullable Animatable animatable,
+    @nullable AnimatableState animatable,
     @nullable DateTime createdAt,
     @nullable DateTime updatedAt,
     @nullable DateTime deletedAt,
@@ -46,4 +48,22 @@ abstract class LandlordProperty implements _$LandlordProperty {
         (f) => some(f),
         (_) => none(),
       );
+}
+
+class AnimatableState {
+  final int width;
+  final int height;
+
+  const AnimatableState(this.width, this.height);
+
+  Animatable get state => CurveTween(
+        curve: Interval(
+          0.0,
+          math.min(1.0, 0.25 + (width * height).toDouble() / 6.0),
+          // curve: isFirst ? Curves.elasticOut : Curves.easeOutBack,
+        ),
+      );
+
+  @override
+  String toString() => "AnimatableState(width: $width, height: $height)";
 }

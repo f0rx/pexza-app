@@ -3,11 +3,11 @@ import 'package:pexza/features/core/domain/entities/field_object.dart';
 import 'package:pexza/features/core/domain/failures/field_object/field_object_exception.dart';
 import 'package:pexza/features/core/domain/validator/validator.dart';
 
-class AmountField extends FieldObject<int> {
+class AmountField<U extends num> extends FieldObject<U> {
   static const AmountField DEFAULT = AmountField._(Right(0));
-  final Either<FieldObjectException<String>, int> value;
+  final Either<FieldObjectException<String>, U> value;
 
-  factory AmountField(int input) {
+  factory AmountField(U input) {
     assert(input != null);
     return AmountField._(Validator.isEmpty(input));
   }

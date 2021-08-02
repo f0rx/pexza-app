@@ -2,10 +2,15 @@ part of 'auth_cubit.dart';
 
 @freezed
 abstract class AuthState with _$AuthState {
+  static FocusNode confirmPasswordFocus = FocusNode();
   static KtList<Country> countries = KtList.from(Country.list);
+  static FocusNode emailAddressFocus = FocusNode();
+  static FocusNode firstNameFocus = FocusNode();
   static DateTime firstYear = DateTime(1960);
+  static FocusNode lastNameFocus = FocusNode();
   static DateTime lastYear = DateTime(DateTime.now().year - 18);
-  const AuthState._();
+  static FocusNode passwordFocus = FocusNode();
+  static FocusNode phoneNumberFocus = FocusNode();
 
   const factory AuthState({
     @required DisplayName firstName,
@@ -23,8 +28,10 @@ abstract class AuthState with _$AuthState {
     @Default(false) bool shouldGlow,
     @Default(false) bool validate,
     @Default(true) bool passwordHidden,
-    @Default(const None()) Option<Either<AuthResponse, Unit>> authStatus,
+    @Default(const None()) Option<Either<AuthResponse, Response>> authStatus,
   }) = _AuthState;
+
+  const AuthState._();
 
   factory AuthState.initial() => AuthState(
         firstName: DisplayName(""),
@@ -35,7 +42,7 @@ abstract class AuthState with _$AuthState {
         region: Country.NG,
         dateOfBirth: DateTimeField(null),
         passwordConfirmation: Password(""),
-        gender: Gender(GenderType.Male),
+        gender: Gender(GenderType.male),
         emailToken: EmailTokenField(""),
       );
 }

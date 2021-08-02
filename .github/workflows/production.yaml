@@ -256,7 +256,7 @@ jobs:
   notify:
     runs-on: ${{ matrix.os }}
     needs: bump_version
-    continue-on-error: true
+    continue-on-error: false
     env:
       APP_NAME: "Pexza"
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

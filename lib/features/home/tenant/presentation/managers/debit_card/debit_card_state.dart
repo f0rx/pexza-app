@@ -2,11 +2,18 @@ part of 'debit_card_cubit.dart';
 
 @freezed
 abstract class DebitCardState implements _$DebitCardState {
+  static final FocusNode cardNumberFocus = FocusNode();
+  static final FocusNode cardNameFocus = FocusNode();
+  static final FocusNode cardDateFocus = FocusNode();
+  static final FocusNode cardCVVFocus = FocusNode();
+  static final FocusNode cardDescriptionFocus = FocusNode();
+
   const DebitCardState._();
 
   const factory DebitCardState({
     @Default(false) bool isLoading,
     @Default(false) bool validate,
+    @Default(false) bool hasShownFailureParam,
     @required DebitCardName cardName,
     @required DebitCardNumber cardNumber,
     @required DebitCardExpiryDate expiryDate,

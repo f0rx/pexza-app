@@ -15,7 +15,11 @@ class _$InfoResponseTearOff {
 
 // ignore: unused_element
   _InfoResponse call(
-      {@required
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
+          String status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
@@ -25,6 +29,8 @@ class _$InfoResponseTearOff {
       @JsonKey(ignore: true)
           BottomAlertDialogPosition position}) {
     return _InfoResponse(
+      uuid: uuid,
+      status: status,
       message: message,
       details: details,
       position: position,
@@ -38,6 +44,10 @@ const $InfoResponse = _$InfoResponseTearOff();
 
 /// @nodoc
 mixin _$InfoResponse {
+  @JsonKey(ignore: true)
+  String get uuid;
+  @nullable
+  String get status;
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
   String get message;
@@ -57,14 +67,11 @@ abstract class $InfoResponseCopyWith<$Res> {
           InfoResponse value, $Res Function(InfoResponse) then) =
       _$InfoResponseCopyWithImpl<$Res>;
   $Res call(
-      {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String message,
-      @nullable
-      @JsonKey(ignore: true)
-          String details,
-      @JsonKey(ignore: true)
-          BottomAlertDialogPosition position});
+      {@JsonKey(ignore: true) String uuid,
+      @nullable String status,
+      @nullable @JsonKey(includeIfNull: false, defaultValue: '') String message,
+      @nullable @JsonKey(ignore: true) String details,
+      @JsonKey(ignore: true) BottomAlertDialogPosition position});
 }
 
 /// @nodoc
@@ -77,11 +84,15 @@ class _$InfoResponseCopyWithImpl<$Res> implements $InfoResponseCopyWith<$Res> {
 
   @override
   $Res call({
+    Object uuid = freezed,
+    Object status = freezed,
     Object message = freezed,
     Object details = freezed,
     Object position = freezed,
   }) {
     return _then(_value.copyWith(
+      uuid: uuid == freezed ? _value.uuid : uuid as String,
+      status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
       position: position == freezed
@@ -99,14 +110,11 @@ abstract class _$InfoResponseCopyWith<$Res>
       __$InfoResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable
-      @JsonKey(includeIfNull: false, defaultValue: '')
-          String message,
-      @nullable
-      @JsonKey(ignore: true)
-          String details,
-      @JsonKey(ignore: true)
-          BottomAlertDialogPosition position});
+      {@JsonKey(ignore: true) String uuid,
+      @nullable String status,
+      @nullable @JsonKey(includeIfNull: false, defaultValue: '') String message,
+      @nullable @JsonKey(ignore: true) String details,
+      @JsonKey(ignore: true) BottomAlertDialogPosition position});
 }
 
 /// @nodoc
@@ -121,11 +129,15 @@ class __$InfoResponseCopyWithImpl<$Res> extends _$InfoResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object uuid = freezed,
+    Object status = freezed,
     Object message = freezed,
     Object details = freezed,
     Object position = freezed,
   }) {
     return _then(_InfoResponse(
+      uuid: uuid == freezed ? _value.uuid : uuid as String,
+      status: status == freezed ? _value.status : status as String,
       message: message == freezed ? _value.message : message as String,
       details: details == freezed ? _value.details : details as String,
       position: position == freezed
@@ -138,7 +150,11 @@ class __$InfoResponseCopyWithImpl<$Res> extends _$InfoResponseCopyWithImpl<$Res>
 /// @nodoc
 class _$_InfoResponse extends _InfoResponse {
   const _$_InfoResponse(
-      {@required
+      {@JsonKey(ignore: true)
+          this.uuid,
+      @nullable
+          this.status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           this.message,
@@ -149,6 +165,12 @@ class _$_InfoResponse extends _InfoResponse {
           this.position})
       : super._();
 
+  @override
+  @JsonKey(ignore: true)
+  final String uuid;
+  @override
+  @nullable
+  final String status;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')
@@ -163,13 +185,17 @@ class _$_InfoResponse extends _InfoResponse {
 
   @override
   String toString() {
-    return 'InfoResponse(message: $message, details: $details, position: $position)';
+    return 'InfoResponse(uuid: $uuid, status: $status, message: $message, details: $details, position: $position)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _InfoResponse &&
+            (identical(other.uuid, uuid) ||
+                const DeepCollectionEquality().equals(other.uuid, uuid)) &&
+            (identical(other.status, status) ||
+                const DeepCollectionEquality().equals(other.status, status)) &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
@@ -184,6 +210,8 @@ class _$_InfoResponse extends _InfoResponse {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(uuid) ^
+      const DeepCollectionEquality().hash(status) ^
       const DeepCollectionEquality().hash(message) ^
       const DeepCollectionEquality().hash(details) ^
       const DeepCollectionEquality().hash(position);
@@ -197,7 +225,11 @@ class _$_InfoResponse extends _InfoResponse {
 abstract class _InfoResponse extends InfoResponse {
   const _InfoResponse._() : super._();
   const factory _InfoResponse(
-      {@required
+      {@JsonKey(ignore: true)
+          String uuid,
+      @nullable
+          String status,
+      @required
       @nullable
       @JsonKey(includeIfNull: false, defaultValue: '')
           String message,
@@ -207,6 +239,12 @@ abstract class _InfoResponse extends InfoResponse {
       @JsonKey(ignore: true)
           BottomAlertDialogPosition position}) = _$_InfoResponse;
 
+  @override
+  @JsonKey(ignore: true)
+  String get uuid;
+  @override
+  @nullable
+  String get status;
   @override
   @nullable
   @JsonKey(includeIfNull: false, defaultValue: '')

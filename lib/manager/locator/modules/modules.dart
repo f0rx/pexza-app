@@ -15,6 +15,7 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:pexza/features/auth/data/repositories/access_token_manager.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
+import 'package:sweetsheet/sweetsheet.dart';
 
 @module
 abstract class Modules {
@@ -34,7 +35,12 @@ abstract class Modules {
   FirebaseCrashlytics get firebaseCrashlytics => FirebaseCrashlytics.instance;
 
   @lazySingleton
-  GoogleSignIn get googleSignIn => GoogleSignIn();
+  GoogleSignIn get googleSignIn => GoogleSignIn(
+      // scopes: [
+      //   'email',
+      //   'https://www.googleapis.com/auth/contacts.readonly',
+      // ],
+      );
 
   @lazySingleton
   FacebookLogin get facebookLogin => FacebookLogin();
@@ -42,6 +48,9 @@ abstract class Modules {
   @preResolve
   Future<PaystackPlugin> get paystackInit =>
       PaystackPlugin.initialize(publicKey: env.paystackPublicKey);
+
+  @lazySingleton
+  SweetSheet get sweetSheet => SweetSheet();
 }
 
 @module

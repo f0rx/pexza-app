@@ -46,7 +46,7 @@ class LandlordMaintenanceRequestDetailScreen extends StatelessWidget
             p.maintenances.isEmpty() && !c.maintenances.isEmpty(),
         builder: (c, s) => PortalEntry(
           visible: c.watch<LandlordMaintenanceCubit>().state.isLoading,
-          portal: App.circularLoadingOverlay,
+          portal: App.loadingOverlay(Helpers.circularLoader()),
           child: this,
         ),
       ),
@@ -73,11 +73,50 @@ class LandlordMaintenanceRequestDetailScreen extends StatelessWidget
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SubtitledHeader(
-                text: "Request Info",
+              SubtitledHeader(text: "About Property"),
+              //
+              VerticalSpace(height: App.shortest * 0.03),
+              //
+              Container(
+                decoration: BoxDecoration(
+                  color:
+                      Helpers.optionOf(Colors.white, AppColors.secondaryColor),
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    PropertyInfoWidget(
+                      leading: "Property Name",
+                      trailing:
+                          "${maintenance?.assignment?.landlordApartment?.property?.name?.getOrEmpty}",
+                    ),
+                    //
+                    PropertyInfoWidget(
+                      leading: "Property Address",
+                      trailing:
+                          "${maintenance?.assignment?.landlordApartment?.property?.street?.getOrEmpty}",
+                    ),
+                    //
+                    PropertyInfoWidget(
+                      leading: "Apartment Name",
+                      trailing:
+                          "${maintenance?.assignment?.apartment?.name?.getOrEmpty}",
+                    ),
+                    //
+                    PropertyInfoWidget(
+                      leading: "Tenant's Name",
+                      trailing: "${maintenance?.assignment?.tenant?.fullName}",
+                    ),
+                  ],
+                ),
               ),
               //
-              VerticalSpace(height: App.shortest * 0.04),
+              VerticalSpace(height: App.shortest * 0.1),
+              //
+              SubtitledHeader(text: "Request Info"),
+              //
+              VerticalSpace(height: App.shortest * 0.03),
               //
               Container(
                 decoration: BoxDecoration(
@@ -105,13 +144,19 @@ class LandlordMaintenanceRequestDetailScreen extends StatelessWidget
                       leading: "Request Status",
                       trailing:
                           "${maintenance?.status?.name}"?.capitalizeFirst(),
+                      textColor: maintenance.status.fold(
+                        fixed: () => Colors.green,
+                        pending: () => Colors.amber,
+                        unfixed: () => Colors.redAccent,
+                      ),
                     ),
                     //
                     PropertyInfoWidget(
-                      leading: "Comment",
+                      leading: "Comments:",
                       trailing: "${maintenance?.comment?.getOrEmpty}",
                       isLargeText: true,
                       showDivider: false,
+                      leadingFontWeight: FontWeight.w600,
                     ),
                   ],
                 ),
@@ -119,11 +164,9 @@ class LandlordMaintenanceRequestDetailScreen extends StatelessWidget
               //
               VerticalSpace(height: App.shortest * 0.1),
               //
-              SubtitledHeader(
-                text: "Renewal Info",
-              ),
+              SubtitledHeader(text: "Renewal Info"),
               //
-              VerticalSpace(height: App.shortest * 0.04),
+              VerticalSpace(height: App.shortest * 0.03),
               //
               Container(
                 decoration: BoxDecoration(
@@ -150,6 +193,8 @@ class LandlordMaintenanceRequestDetailScreen extends StatelessWidget
                   ],
                 ),
               ),
+              //
+              VerticalSpace(height: App.shortest * 0.2),
             ],
           ),
         ),
@@ -246,12 +291,10 @@ class _StatusAction extends StatelessWidget {
         duration: Duration(milliseconds: 800),
         child: AppIconButton(
           onPressed: onPressed,
+          padding: EdgeInsets.all(8.0),
           tooltip: tooltip ?? '',
           backgroundColor: color,
-          child: Icon(
-            icon,
-            color: Colors.white,
-          ),
+          child: Icon(icon, color: Colors.white),
         ),
       ),
     );

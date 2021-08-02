@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:navigation_history_observer/navigation_history_observer.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
+import 'package:pexza/features/core/presentation/managers/index.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/manager/router/export.dart';
 import 'package:pexza/manager/theme/theme.dart';
@@ -27,6 +28,7 @@ class Pexza extends StatelessWidget {
       providers: [
         BlocProvider<ThemeCubit>(create: (_) => getIt<ThemeCubit>()),
         BlocProvider<RoleCubit>(create: (_) => getIt<RoleCubit>()),
+        BlocProvider<AdminUtilsCubit>(create: (_) => getIt<AdminUtilsCubit>()),
         BlocProvider<AuthWatcherCubit>(
           create: (_) => getIt<AuthWatcherCubit>(),
         ),
@@ -42,7 +44,7 @@ class Pexza extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: app?.themeData() ?? AppTheme.light().themeData(),
               darkTheme: AppTheme.dark().themeData(),
-              locale: DevicePreview.locale(context),
+              locale: env.flavor.fold(dev: () => DevicePreview.locale(context)),
               builder: (context, child) => DevicePreview.appBuilder(
                 context,
                 ScreenUtilInit(

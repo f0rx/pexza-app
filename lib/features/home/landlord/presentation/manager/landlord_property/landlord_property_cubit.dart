@@ -5,6 +5,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart' hide Response;
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart' hide nullable;
@@ -33,7 +34,7 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     this._dataConnectionChecker,
   ) : super(LandlordPropertyState.initial());
 
-  void toggleLoading([isLoading]) => emit(state.copyWith(
+  void toggleLoading([bool isLoading]) => emit(state.copyWith(
         isLoading: isLoading ?? !state.isLoading,
       ));
 
@@ -99,16 +100,17 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     toggleLoading();
 
     try {
+      await checkInternetAndConnectivity();
+
       final props = await _repository.all();
 
       emit(state.copyWith(
-        // response: some(left()),
-        properties: props.data.map((e) => e?.domain).toImmutableList(),
+        response: none(),
+        dtoList: props,
+        properties: props.domain,
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
       if (_.runtimeType is DioError) _handleDioFailures(_);
     }
@@ -151,7 +153,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -254,7 +257,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     } on LandlordFailure catch (e) {
       emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
@@ -279,17 +283,47 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
         ))),
       ));
     } on LandlordFailure catch (e) {
-      emit(state.copyWith(
-        response: some(left(e)),
-      ));
+      emit(state.copyWith(response: some(left(e))));
     } catch (_) {
-      if (_.runtimeType is DioError) _handleDioFailures(_);
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
     }
 
     toggleLoading();
   }
 
+  void nextPage() async {
+    // There's an existing background work, return
+    if (state.isLoadingNextPage) return;
+
+    emit(state.copyWith(isLoadingNextPage: true));
+
+    try {
+      if (state.dtoList.meta.currentPage != state.dtoList.meta.lastPage) {
+        await checkInternetAndConnectivity(true);
+
+        final newProps = await _repository.paginate(
+          state.dtoList.meta.currentPage + 1,
+        );
+
+        emit(state.copyWith(
+          response: none(),
+          dtoList: newProps,
+          properties: state.properties.plus(newProps.domain),
+        ));
+      }
+    } on LandlordFailure catch (e) {
+      emit(state.copyWith(response: some(left(e))));
+    } catch (_) {
+      if (_.runtimeType is DioError || _.runtimeType == DioError)
+        _handleDioFailures(_);
+    }
+
+    emit(state.copyWith(isLoadingNextPage: false));
+  }
+
   void _handleDioFailures(DioError ex) {
+    log.wtf(ex);
     switch (ex?.type) {
       case DioErrorType.CONNECT_TIMEOUT:
         emit(state.copyWith(
@@ -323,7 +357,6 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
   void _handleMissingKeysException(MissingRequiredKeysException e) {
     print("Loggin unknown error-----");
-    log.wtf(e);
     emit(state.copyWith(
       response: some(left(LandlordFailure.unknown(
         message: e.message,

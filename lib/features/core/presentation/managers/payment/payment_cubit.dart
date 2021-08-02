@@ -9,6 +9,7 @@ import 'package:pexza/features/core/domain/failures/failure.dart';
 import 'package:pexza/features/home/tenant/data/data.dart';
 import 'package:pexza/features/home/tenant/data/success/tenant__success.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
+import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 
 part 'payment_state.dart';
@@ -54,15 +55,27 @@ class PaymentCubit extends Cubit<PaymentState> {
         state.chargeableCard?.invoice?.invoiceNo?.value,
       )
       ..putCustomField(
-        'cardholder_name',
+        'Invoice Number',
+        state.chargeableCard?.invoice?.invoiceNo?.value,
+      )
+      ..putCustomField(
+        'Cardholder Name',
         state.chargeableCard?.cardName?.getOrEmpty,
       )
-      ..putCustomField('reference', reference);
+      ..putCustomField('Payment Reference', reference);
   }
 
   Future<void> pay(BuildContext context) async {
     try {
       if (PaystackPlugin.sdkInitialized) {
+        emit(state.copyWith(
+          response: right(InfoResponse(
+            message: "Please do not close this payment "
+                "dialog before transaction is complete!",
+            position: BottomAlertDialogPosition.top,
+          )),
+        ));
+
         CheckoutResponse response = await PaystackPlugin.checkout(
           context,
           method: CheckoutMethod.card,

@@ -127,18 +127,16 @@ class VerifyEmailScreen extends StatelessWidget with AutoRouteWrapper {
                 keyboardType: TextInputType.text,
                 onChanged: context.read<AuthCubit>().onTokenChanged,
                 onCompleted: context.read<AuthCubit>().onTokenSubmitted,
-                validator: (string, _) =>
-                    context.read<AuthCubit>().state.emailToken.value.fold(
-                          (e) => e.message,
-                          (_) =>
-                              context.read<AuthCubit>().state.authStatus.fold(
-                                    () => null,
-                                    (_) => _.fold(
-                                      (f) => f.errors?.token?.firstOrNull,
-                                      (_) => null,
-                                    ),
-                                  ),
-                        ),
+                validator: (string, state) => state.emailToken.value.fold(
+                  (e) => e.message,
+                  (_) => state.authStatus.fold(
+                    () => null,
+                    (_) => _.fold(
+                      (f) => f.errors?.token?.firstOrNil,
+                      (_) => null,
+                    ),
+                  ),
+                ),
               ),
               //
               VerticalSpace(height: App.height * 0.05),

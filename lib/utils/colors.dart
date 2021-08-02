@@ -104,6 +104,8 @@ class AppColors {
   static const Color permissionGreen1 = Color(0xFF138750);
   static const Color permissionGreen2 = Color(0xFF177649);
 
+  static const Color mildGrey = Color(0xFFEEEEEE);
+  static const Color darkGrey = Color(0xFF404040);
   static const Color permissionGrey1 = Color(0xFFB9BABB);
   static const Color permissionGrey2 = Color(0xFF979797);
   static const Color welcomeGrey = Color(0xFF637381);

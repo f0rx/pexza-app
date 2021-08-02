@@ -9,14 +9,18 @@ part of bank_account_data.dart;
 _$_BankAccountData _$_$_BankAccountDataFromJson(Map<String, dynamic> json) {
   return _$_BankAccountData(
     id: json['id'] as int,
-    userId: json['user_id'] as int,
+    userId: const IntegerSerializer().fromJson(json['user_id']),
     type: json['type'] as String ?? '',
+    descriptions: json['descriptions'] as String ?? '',
     details: json['details'] == null
         ? null
         : AccountDetailDTO.fromJson(json['details'] as Map<String, dynamic>),
-    createdAt: json['created_at'] as String,
-    updatedAt: json['updated_at'] as String,
-    deletedAt: json['deleted_at'] as String,
+    createdAt:
+        const TimestampConverter().fromJson(json['created_at'] as String),
+    updatedAt:
+        const TimestampConverter().fromJson(json['updated_at'] as String),
+    deletedAt:
+        const TimestampConverter().fromJson(json['deleted_at'] as String),
   );
 }
 
@@ -30,11 +34,15 @@ Map<String, dynamic> _$_$_BankAccountDataToJson(_$_BankAccountData instance) {
   }
 
   writeNotNull('id', instance.id);
-  writeNotNull('user_id', instance.userId);
+  writeNotNull('user_id', const IntegerSerializer().toJson(instance.userId));
   writeNotNull('type', instance.type);
+  writeNotNull('descriptions', instance.descriptions);
   writeNotNull('details', instance.details?.toJson());
-  writeNotNull('created_at', instance.createdAt);
-  writeNotNull('updated_at', instance.updatedAt);
-  writeNotNull('deleted_at', instance.deletedAt);
+  writeNotNull(
+      'created_at', const TimestampConverter().toJson(instance.createdAt));
+  writeNotNull(
+      'updated_at', const TimestampConverter().toJson(instance.updatedAt));
+  writeNotNull(
+      'deleted_at', const TimestampConverter().toJson(instance.deletedAt));
   return val;
 }

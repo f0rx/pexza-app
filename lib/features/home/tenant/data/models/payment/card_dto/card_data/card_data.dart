@@ -29,6 +29,10 @@ abstract class CardData implements _$CardData {
     @IntToBoolSerializer()
         bool verified,
     @nullable
+    @JsonKey(includeIfNull: false, name: 'is_primary')
+    @IntToBoolSerializer()
+        bool primary,
+    @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
         String createdAt,
@@ -55,6 +59,7 @@ abstract class CardData implements _$CardData {
         userId: !userId.isNull ? UniqueId.fromExternal(userId) : null,
         cardNumber: details?.domain?.cardNumber,
         meta: details?.domain,
+        isPrimary: primary,
         verified: verified,
         createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
         updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,

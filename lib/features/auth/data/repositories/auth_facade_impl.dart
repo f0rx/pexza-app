@@ -23,6 +23,7 @@ import 'package:pexza/features/core/domain/entities/fields/password.dart';
 import 'package:pexza/features/core/domain/entities/fields/gender/gender.dart';
 import 'package:pexza/features/core/domain/entities/fields/email_address.dart';
 import 'package:pexza/features/core/domain/entities/fields/display_name.dart';
+import 'package:pexza/utils/utils.dart';
 
 @LazySingleton(as: AuthFacade)
 class AuthFacadeImpl extends AuthFacade
@@ -53,8 +54,8 @@ class AuthFacadeImpl extends AuthFacade
     Future<Either<AuthResponse, Option<User>>> _mapped(
       AuthResponse failure,
     ) async {
-      return failure.fold(
-        is1101: () async => left(failure),
+      return failure.foldCode(
+        is1101: () => left(failure),
         orElse: () async => (await local.getCachedUserInfo()).fold(
           () => right(none()),
           (dto) => right(some(dto.domain)),
@@ -210,8 +211,10 @@ class AuthFacadeImpl extends AuthFacade
     DisplayName firstName,
     DisplayName lastName,
     Phone phone,
+    DateTimeField dob,
     Gender gender,
-    DateTimeField dateOfBirth,
+    Password currentPassword,
+    Password newPassword,
   }) async {
     try {
       // Check if device has good connection
@@ -226,12 +229,13 @@ class AuthFacadeImpl extends AuthFacade
           lastName: lastName,
           phone: phone,
           gender: gender,
-          dateOfBirth: dateOfBirth,
+          dateOfBirth: dob,
+          // password: currentPassword,
         ))),
       );
 
       // Update was successful, fetch & cache fresh user data
-      await getAndCacheUserInfo();
+      // await getAndCacheUserInfo();
 
       return right(unit);
     } on AuthResponse catch (ex) {

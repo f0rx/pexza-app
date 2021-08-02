@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pexza/features/auth/presentation/manager/manager.dart';
-import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/onboarding/presentation/manager/onboarding_cubit.dart';
 import 'package:pexza/manager/locator/locator.dart';
 import 'package:pexza/utils/utils.dart';
@@ -61,7 +60,7 @@ class SplashScreen extends StatelessWidget {
                         (_) => BlocProvider.of<AuthWatcherCubit>(App.context)
                             .listenToAuthChanges(
                           (either) => either?.fold(
-                            (failure) => failure?.fold(
+                            (failure) => failure?.foldCode(
                               orElse: null,
                               is1101: () => navigator.pushAndRemoveUntil(
                                 Routes.verifyEmailScreen,

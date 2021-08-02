@@ -18,7 +18,9 @@ class _$InvoiceTearOff {
       {@nullable UniqueId<int> id,
       @nullable InvoiceMeta meta,
       @nullable EmailAddress email,
-      @nullable AmountField amount,
+      @nullable AmountField<num> amount,
+      @nullable AmountField<int> baseAmount,
+      @nullable BasicTextField<double> charges,
       @nullable UniqueId<int> duration,
       @nullable UniqueId<int> assignmentId,
       @nullable InvoiceStatus invoiceStatus,
@@ -31,6 +33,8 @@ class _$InvoiceTearOff {
       meta: meta,
       email: email,
       amount: amount,
+      baseAmount: baseAmount,
+      charges: charges,
       duration: duration,
       assignmentId: assignmentId,
       invoiceStatus: invoiceStatus,
@@ -62,7 +66,15 @@ mixin _$Invoice {
 
   /// Amount to charge for invoice
   @nullable
-  AmountField get amount;
+  AmountField<num> get amount;
+
+  /// The actual amount paid for this invoice
+  @nullable
+  AmountField<int> get baseAmount;
+
+  /// Charges for this invoice
+  @nullable
+  BasicTextField<double> get charges;
 
   /// Assignment duration
   @nullable
@@ -104,7 +116,9 @@ abstract class $InvoiceCopyWith<$Res> {
       {@nullable UniqueId<int> id,
       @nullable InvoiceMeta meta,
       @nullable EmailAddress email,
-      @nullable AmountField amount,
+      @nullable AmountField<num> amount,
+      @nullable AmountField<int> baseAmount,
+      @nullable BasicTextField<double> charges,
       @nullable UniqueId<int> duration,
       @nullable UniqueId<int> assignmentId,
       @nullable InvoiceStatus invoiceStatus,
@@ -130,6 +144,8 @@ class _$InvoiceCopyWithImpl<$Res> implements $InvoiceCopyWith<$Res> {
     Object meta = freezed,
     Object email = freezed,
     Object amount = freezed,
+    Object baseAmount = freezed,
+    Object charges = freezed,
     Object duration = freezed,
     Object assignmentId = freezed,
     Object invoiceStatus = freezed,
@@ -142,7 +158,13 @@ class _$InvoiceCopyWithImpl<$Res> implements $InvoiceCopyWith<$Res> {
       id: id == freezed ? _value.id : id as UniqueId<int>,
       meta: meta == freezed ? _value.meta : meta as InvoiceMeta,
       email: email == freezed ? _value.email : email as EmailAddress,
-      amount: amount == freezed ? _value.amount : amount as AmountField,
+      amount: amount == freezed ? _value.amount : amount as AmountField<num>,
+      baseAmount: baseAmount == freezed
+          ? _value.baseAmount
+          : baseAmount as AmountField<int>,
+      charges: charges == freezed
+          ? _value.charges
+          : charges as BasicTextField<double>,
       duration:
           duration == freezed ? _value.duration : duration as UniqueId<int>,
       assignmentId: assignmentId == freezed
@@ -183,7 +205,9 @@ abstract class _$InvoiceCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
       {@nullable UniqueId<int> id,
       @nullable InvoiceMeta meta,
       @nullable EmailAddress email,
-      @nullable AmountField amount,
+      @nullable AmountField<num> amount,
+      @nullable AmountField<int> baseAmount,
+      @nullable BasicTextField<double> charges,
       @nullable UniqueId<int> duration,
       @nullable UniqueId<int> assignmentId,
       @nullable InvoiceStatus invoiceStatus,
@@ -211,6 +235,8 @@ class __$InvoiceCopyWithImpl<$Res> extends _$InvoiceCopyWithImpl<$Res>
     Object meta = freezed,
     Object email = freezed,
     Object amount = freezed,
+    Object baseAmount = freezed,
+    Object charges = freezed,
     Object duration = freezed,
     Object assignmentId = freezed,
     Object invoiceStatus = freezed,
@@ -223,7 +249,13 @@ class __$InvoiceCopyWithImpl<$Res> extends _$InvoiceCopyWithImpl<$Res>
       id: id == freezed ? _value.id : id as UniqueId<int>,
       meta: meta == freezed ? _value.meta : meta as InvoiceMeta,
       email: email == freezed ? _value.email : email as EmailAddress,
-      amount: amount == freezed ? _value.amount : amount as AmountField,
+      amount: amount == freezed ? _value.amount : amount as AmountField<num>,
+      baseAmount: baseAmount == freezed
+          ? _value.baseAmount
+          : baseAmount as AmountField<int>,
+      charges: charges == freezed
+          ? _value.charges
+          : charges as BasicTextField<double>,
       duration:
           duration == freezed ? _value.duration : duration as UniqueId<int>,
       assignmentId: assignmentId == freezed
@@ -252,6 +284,8 @@ class _$_Invoice extends _Invoice {
       @nullable this.meta,
       @nullable this.email,
       @nullable this.amount,
+      @nullable this.baseAmount,
+      @nullable this.charges,
       @nullable this.duration,
       @nullable this.assignmentId,
       @nullable this.invoiceStatus,
@@ -280,7 +314,17 @@ class _$_Invoice extends _Invoice {
 
   /// Amount to charge for invoice
   @nullable
-  final AmountField amount;
+  final AmountField<num> amount;
+  @override
+
+  /// The actual amount paid for this invoice
+  @nullable
+  final AmountField<int> baseAmount;
+  @override
+
+  /// Charges for this invoice
+  @nullable
+  final BasicTextField<double> charges;
   @override
 
   /// Assignment duration
@@ -319,7 +363,7 @@ class _$_Invoice extends _Invoice {
 
   @override
   String toString() {
-    return 'Invoice(id: $id, meta: $meta, email: $email, amount: $amount, duration: $duration, assignmentId: $assignmentId, invoiceStatus: $invoiceStatus, invoiceNo: $invoiceNo, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
+    return 'Invoice(id: $id, meta: $meta, email: $email, amount: $amount, baseAmount: $baseAmount, charges: $charges, duration: $duration, assignmentId: $assignmentId, invoiceStatus: $invoiceStatus, invoiceNo: $invoiceNo, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt)';
   }
 
   @override
@@ -334,6 +378,12 @@ class _$_Invoice extends _Invoice {
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.amount, amount) ||
                 const DeepCollectionEquality().equals(other.amount, amount)) &&
+            (identical(other.baseAmount, baseAmount) ||
+                const DeepCollectionEquality()
+                    .equals(other.baseAmount, baseAmount)) &&
+            (identical(other.charges, charges) ||
+                const DeepCollectionEquality()
+                    .equals(other.charges, charges)) &&
             (identical(other.duration, duration) ||
                 const DeepCollectionEquality()
                     .equals(other.duration, duration)) &&
@@ -364,6 +414,8 @@ class _$_Invoice extends _Invoice {
       const DeepCollectionEquality().hash(meta) ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(amount) ^
+      const DeepCollectionEquality().hash(baseAmount) ^
+      const DeepCollectionEquality().hash(charges) ^
       const DeepCollectionEquality().hash(duration) ^
       const DeepCollectionEquality().hash(assignmentId) ^
       const DeepCollectionEquality().hash(invoiceStatus) ^
@@ -384,7 +436,9 @@ abstract class _Invoice extends Invoice {
       {@nullable UniqueId<int> id,
       @nullable InvoiceMeta meta,
       @nullable EmailAddress email,
-      @nullable AmountField amount,
+      @nullable AmountField<num> amount,
+      @nullable AmountField<int> baseAmount,
+      @nullable BasicTextField<double> charges,
       @nullable UniqueId<int> duration,
       @nullable UniqueId<int> assignmentId,
       @nullable InvoiceStatus invoiceStatus,
@@ -412,7 +466,17 @@ abstract class _Invoice extends Invoice {
 
   /// Amount to charge for invoice
   @nullable
-  AmountField get amount;
+  AmountField<num> get amount;
+  @override
+
+  /// The actual amount paid for this invoice
+  @nullable
+  AmountField<int> get baseAmount;
+  @override
+
+  /// Charges for this invoice
+  @nullable
+  BasicTextField<double> get charges;
   @override
 
   /// Assignment duration
