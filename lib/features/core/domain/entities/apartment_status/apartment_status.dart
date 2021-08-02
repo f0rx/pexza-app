@@ -22,4 +22,28 @@ class ApartmentStatus extends EnumClass {
 
   static Serializer<ApartmentStatus> get serializer =>
       _$apartmentStatusSerializer;
+
+  T fold<T>({
+    T vacant,
+    T assigned,
+    T paired,
+    T occupied,
+    T reject,
+    T Function() orElse,
+  }) {
+    switch (this.name) {
+      case "vacant":
+        return vacant ?? orElse?.call();
+      case "assigned":
+        return assigned ?? orElse?.call();
+      case "paired":
+        return paired ?? orElse?.call();
+      case "occupied":
+        return occupied ?? orElse?.call();
+      case "reject":
+        return reject ?? orElse?.call();
+      default:
+        return orElse?.call();
+    }
+  }
 }

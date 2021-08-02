@@ -18,7 +18,7 @@ class _$LandlordMergerStateTearOff {
       {bool isLoading = false,
       bool validate = false,
       @required EmailAddress email,
-      @required AmountField amount,
+      @required AmountField<num> amount,
       PaymentPlan plan = PaymentPlan.yearly,
       int duration = LandlordMergerState.kDefaultDuration,
       @nullable Currency currency,
@@ -55,7 +55,7 @@ mixin _$LandlordMergerState {
   bool get isLoading;
   bool get validate;
   EmailAddress get email;
-  AmountField get amount;
+  AmountField<num> get amount;
   PaymentPlan get plan;
   int get duration;
   @nullable
@@ -82,7 +82,7 @@ abstract class $LandlordMergerStateCopyWith<$Res> {
       {bool isLoading,
       bool validate,
       EmailAddress email,
-      AmountField amount,
+      AmountField<num> amount,
       PaymentPlan plan,
       int duration,
       @nullable Currency currency,
@@ -127,7 +127,7 @@ class _$LandlordMergerStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
       email: email == freezed ? _value.email : email as EmailAddress,
-      amount: amount == freezed ? _value.amount : amount as AmountField,
+      amount: amount == freezed ? _value.amount : amount as AmountField<num>,
       plan: plan == freezed ? _value.plan : plan as PaymentPlan,
       duration: duration == freezed ? _value.duration : duration as int,
       currency: currency == freezed ? _value.currency : currency as Currency,
@@ -194,7 +194,7 @@ abstract class _$LandlordMergerStateCopyWith<$Res>
       {bool isLoading,
       bool validate,
       EmailAddress email,
-      AmountField amount,
+      AmountField<num> amount,
       PaymentPlan plan,
       int duration,
       @nullable Currency currency,
@@ -244,7 +244,7 @@ class __$LandlordMergerStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       validate: validate == freezed ? _value.validate : validate as bool,
       email: email == freezed ? _value.email : email as EmailAddress,
-      amount: amount == freezed ? _value.amount : amount as AmountField,
+      amount: amount == freezed ? _value.amount : amount as AmountField<num>,
       plan: plan == freezed ? _value.plan : plan as PaymentPlan,
       duration: duration == freezed ? _value.duration : duration as int,
       currency: currency == freezed ? _value.currency : currency as Currency,
@@ -307,7 +307,7 @@ class _$_LandlordMergerState extends _LandlordMergerState {
   @override
   final EmailAddress email;
   @override
-  final AmountField amount;
+  final AmountField<num> amount;
   @JsonKey(defaultValue: PaymentPlan.yearly)
   @override
   final PaymentPlan plan;
@@ -413,7 +413,7 @@ abstract class _LandlordMergerState extends LandlordMergerState {
       {bool isLoading,
       bool validate,
       @required EmailAddress email,
-      @required AmountField amount,
+      @required AmountField<num> amount,
       PaymentPlan plan,
       int duration,
       @nullable Currency currency,
@@ -431,7 +431,7 @@ abstract class _LandlordMergerState extends LandlordMergerState {
   @override
   EmailAddress get email;
   @override
-  AmountField get amount;
+  AmountField<num> get amount;
   @override
   PaymentPlan get plan;
   @override

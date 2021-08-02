@@ -119,7 +119,7 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
             ...[
               BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
                 builder: (c, s) => Visibility(
-                  visible: s.user.role.isLandlord,
+                  visible: s.user?.role?.isLandlord ?? false,
                   child: ListTile(
                     title: AutoSizeText("My Wallet"),
                     leading: AppAssets.profileWithdraw,
@@ -152,7 +152,7 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
               //
               BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
                 builder: (c, s) => Visibility(
-                  visible: s.user.role.isTenant,
+                  visible: s.user?.role?.isTenant ?? false,
                   child: ListTile(
                     title: AutoSizeText("Payment History"),
                     leading: AppAssets.accHistory,
@@ -164,12 +164,12 @@ class AccountScreen extends StatelessWidget with AutoRouteWrapper {
               //
               BlocBuilder<AuthWatcherCubit, AuthWatcherState>(
                 builder: (c, s) => Visibility(
-                  visible: s.user.role.isLandlord,
+                  visible: s.user?.role?.isLandlord ?? false,
                   child: ListTile(
-                    title: AutoSizeText("Rent History"),
+                    title: AutoSizeText("Rent Payment History"),
                     leading: AppAssets.rentHistory,
                     trailing: Icon(Icons.navigate_next_rounded, size: 27),
-                    onTap: () {},
+                    onTap: () => navigator.pushLandlordRentHistoryScreen(),
                   ),
                 ),
               ),

@@ -27,15 +27,15 @@ abstract class LandlordApartmentData implements _$LandlordApartmentData {
     @nullable
     @JsonKey(includeIfNull: false, name: "created_at")
     @TimestampConverter()
-        String createdAt,
+        DateTime createdAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "updated_at")
     @TimestampConverter()
-        String updatedAt,
+        DateTime updatedAt,
     @nullable
     @JsonKey(includeIfNull: false, name: "deleted_at")
     @TimestampConverter()
-        String deletedAt,
+        DateTime deletedAt,
   }) = _LandlordApartmentData;
 
   factory LandlordApartmentData.fromJson(Map<String, dynamic> json) =>
@@ -51,13 +51,13 @@ abstract class LandlordApartmentData implements _$LandlordApartmentData {
 
   LandlordApartment get domain {
     return LandlordApartment(
-      id: UniqueId<int>.fromExternal(id),
+      id: !id.isNull ? UniqueId<int>.fromExternal(id) : null,
       name: !name.isNull ? BasicTextField(name) : null,
       status: !status.isNull ? ApartmentStatus.valueOf(status) : null,
       property: property?.domain,
-      createdAt: createdAt != null ? DateTime.tryParse(createdAt) : null,
-      updatedAt: updatedAt != null ? DateTime.tryParse(updatedAt) : null,
-      deletedAt: deletedAt != null ? DateTime.tryParse(deletedAt) : null,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      deletedAt: deletedAt,
     );
   }
 }

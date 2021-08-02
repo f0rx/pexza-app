@@ -97,6 +97,20 @@ mixin AppAssets {
     fit: BoxFit.contain,
   );
 
+  static SvgPicture transxOut = SvgPicture.asset(
+    '$LANDLORD_SVG_DIR/transx_out.svg',
+    // height: 18,
+    // width: 18,
+    fit: BoxFit.contain,
+  );
+
+  static SvgPicture transxIn = SvgPicture.asset(
+    '$LANDLORD_SVG_DIR/transx_in.svg',
+    // height: 18,
+    // width: 18,
+    fit: BoxFit.contain,
+  );
+
   static SvgPicture swipeCards = SvgPicture.asset(
     '$SVG_DIR/different_cards.svg',
     height: 40,

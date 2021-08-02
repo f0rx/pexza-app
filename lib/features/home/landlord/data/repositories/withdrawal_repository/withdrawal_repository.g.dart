@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of property_repository.dart;
+part of withdrawal_repository.dart;
 
 // **************************************************************************
 // RetrofitGenerator

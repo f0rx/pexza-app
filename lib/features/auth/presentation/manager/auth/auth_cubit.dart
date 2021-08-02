@@ -119,10 +119,7 @@ class AuthCubit extends Cubit<AuthState> {
     Either<AuthResponse, Unit> failureOrUnit;
 
     // Enable form validation
-    emit(state.copyWith(
-      validate: true,
-      authStatus: none(),
-    ));
+    emit(state.copyWith(validate: true, authStatus: none()));
 
     if (firstName.isValid &&
         lastName.isValid &&

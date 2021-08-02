@@ -59,23 +59,23 @@ class _$ApartmentMergerDataTearOff {
       @nullable
       @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
-          String expireAt,
+          DateTime expireAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
-          String renewedAt,
+          DateTime renewedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) {
+          DateTime deletedAt}) {
     return _ApartmentMergerData(
       id: id,
       status: status,
@@ -150,23 +150,23 @@ mixin _$ApartmentMergerData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
-  String get expireAt;
+  DateTime get expireAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
-  String get renewedAt;
+  DateTime get renewedAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  String get createdAt;
+  DateTime get createdAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  String get updatedAt;
+  DateTime get updatedAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  String get deletedAt;
+  DateTime get deletedAt;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -220,23 +220,23 @@ abstract class $ApartmentMergerDataCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
-          String expireAt,
+          DateTime expireAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
-          String renewedAt,
+          DateTime renewedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          DateTime deletedAt});
 
   $CurrencyDTOCopyWith<$Res> get currency;
   $UserDTOCopyWith<$Res> get tenant;
@@ -291,11 +291,15 @@ class _$ApartmentMergerDataCopyWithImpl<$Res>
       apartment: apartment == freezed
           ? _value.apartment
           : apartment as LandlordApartmentData,
-      expireAt: expireAt == freezed ? _value.expireAt : expireAt as String,
-      renewedAt: renewedAt == freezed ? _value.renewedAt : renewedAt as String,
-      createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
-      updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
-      deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      expireAt: expireAt == freezed ? _value.expireAt : expireAt as DateTime,
+      renewedAt:
+          renewedAt == freezed ? _value.renewedAt : renewedAt as DateTime,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 
@@ -389,23 +393,23 @@ abstract class _$ApartmentMergerDataCopyWith<$Res>
       @nullable
       @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
-          String expireAt,
+          DateTime expireAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
-          String renewedAt,
+          DateTime renewedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          DateTime deletedAt});
 
   @override
   $CurrencyDTOCopyWith<$Res> get currency;
@@ -466,11 +470,15 @@ class __$ApartmentMergerDataCopyWithImpl<$Res>
       apartment: apartment == freezed
           ? _value.apartment
           : apartment as LandlordApartmentData,
-      expireAt: expireAt == freezed ? _value.expireAt : expireAt as String,
-      renewedAt: renewedAt == freezed ? _value.renewedAt : renewedAt as String,
-      createdAt: createdAt == freezed ? _value.createdAt : createdAt as String,
-      updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
-      deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      expireAt: expireAt == freezed ? _value.expireAt : expireAt as DateTime,
+      renewedAt:
+          renewedAt == freezed ? _value.renewedAt : renewedAt as DateTime,
+      createdAt:
+          createdAt == freezed ? _value.createdAt : createdAt as DateTime,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 }
@@ -597,27 +605,27 @@ class _$_ApartmentMergerData extends _ApartmentMergerData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
-  final String expireAt;
+  final DateTime expireAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
-  final String renewedAt;
+  final DateTime renewedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  final String createdAt;
+  final DateTime createdAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  final String updatedAt;
+  final DateTime updatedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  final String deletedAt;
+  final DateTime deletedAt;
 
   @override
   String toString() {
@@ -754,23 +762,23 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
       @nullable
       @JsonKey(includeIfNull: false, name: 'expire_at')
       @TimestampConverter()
-          String expireAt,
+          DateTime expireAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'renewed_at')
       @TimestampConverter()
-          String renewedAt,
+          DateTime renewedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'created_at')
       @TimestampConverter()
-          String createdAt,
+          DateTime createdAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) = _$_ApartmentMergerData;
+          DateTime deletedAt}) = _$_ApartmentMergerData;
 
   factory _ApartmentMergerData.fromJson(Map<String, dynamic> json) =
       _$_ApartmentMergerData.fromJson;
@@ -829,27 +837,27 @@ abstract class _ApartmentMergerData extends ApartmentMergerData {
   @nullable
   @JsonKey(includeIfNull: false, name: 'expire_at')
   @TimestampConverter()
-  String get expireAt;
+  DateTime get expireAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'renewed_at')
   @TimestampConverter()
-  String get renewedAt;
+  DateTime get renewedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'created_at')
   @TimestampConverter()
-  String get createdAt;
+  DateTime get createdAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  String get updatedAt;
+  DateTime get updatedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  String get deletedAt;
+  DateTime get deletedAt;
   @override
   @JsonKey(ignore: true)
   _$ApartmentMergerDataCopyWith<_ApartmentMergerData> get copyWith;

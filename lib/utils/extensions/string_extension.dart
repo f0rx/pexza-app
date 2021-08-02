@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:inflection2/inflection2.dart' as I;
 import 'package:intl/intl.dart';
 import 'package:kt_dart/kt.dart' hide nullable;
@@ -105,16 +103,15 @@ extension StringX on String {
     String currency,
     String locale = "en_NG",
   }) {
-    if (this == null || this.isEmpty) return this;
+    if (this == null || this == 'null' || this.isEmpty) return '';
 
-    return this
-        .asCurrencyFormat(
+    return asCurrencyFormat(
             mask: mask,
             includeSymbol: symbol,
             currency: currency,
             decimal: decimal,
             locale: locale)
-        .format(int.parse(this));
+        .format(num.tryParse(this));
   }
 
   /// Returns only the First character of every word matching _**[pattern]**_ separated by _**[separator]**_

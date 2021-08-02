@@ -5,7 +5,8 @@ class TimestampConverter implements JsonConverter<DateTime, String> {
   const TimestampConverter();
 
   @override
-  DateTime fromJson(String value) => DateTime.tryParse(value);
+  DateTime fromJson(String value) =>
+      value != null ? DateTime.tryParse(value) : null;
 
   @override
   String toJson(DateTime instance) =>

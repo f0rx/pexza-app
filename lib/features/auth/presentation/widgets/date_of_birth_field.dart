@@ -9,9 +9,6 @@ import 'package:pexza/widgets/widgets.dart';
 
 class DateOfBirthField extends StatelessWidget {
   final String labelText;
-  static final custom = AuthState.firstYear.add(
-    const Duration(days: 1000),
-  );
 
   const DateOfBirthField({
     Key key,
@@ -20,10 +17,6 @@ class DateOfBirthField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.read<AuthCubit>().state.dateOfBirth?.getOrNull != null &&
-        !context.read<AuthCubit>().state.dateOfBirth.isValidDateOfBirth)
-      context.read<AuthCubit>().dateOfBirthChanged(custom);
-
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (c, s) => Row(
         mainAxisSize: MainAxisSize.min,
@@ -47,11 +40,8 @@ class DateOfBirthField extends StatelessWidget {
                       errorInvalidText: "That's in the Future",
                       onDateSubmitted:
                           context.read<AuthCubit>().dateOfBirthChanged,
-                      initialDate: s.dateOfBirth?.getOrNull == null
-                          ? null
-                          : s.dateOfBirth.isValidDateOfBirth
-                              ? s.dateOfBirth.value.getOrElse(() => null)
-                              : custom,
+                      initialDate: s.dateOfBirth?.initialDateOfBirth(
+                          context.read<AuthCubit>().dateOfBirthChanged),
                     ),
                   ),
                 ),

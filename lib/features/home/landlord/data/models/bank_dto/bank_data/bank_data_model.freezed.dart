@@ -36,11 +36,11 @@ class _$BankDataModelTearOff {
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) {
+          DateTime deletedAt}) {
     return _BankDataModel(
       id: id,
       name: name,
@@ -82,11 +82,11 @@ mixin _$BankDataModel {
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  String get updatedAt;
+  DateTime get updatedAt;
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  String get deletedAt;
+  DateTime get deletedAt;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -117,11 +117,11 @@ abstract class $BankDataModelCopyWith<$Res> {
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          DateTime deletedAt});
 }
 
 /// @nodoc
@@ -151,8 +151,10 @@ class _$BankDataModelCopyWithImpl<$Res>
           countryCode == freezed ? _value.countryCode : countryCode as String,
       countryName:
           countryName == freezed ? _value.countryName : countryName as String,
-      updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
-      deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 }
@@ -183,11 +185,11 @@ abstract class _$BankDataModelCopyWith<$Res>
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt});
+          DateTime deletedAt});
 }
 
 /// @nodoc
@@ -219,8 +221,10 @@ class __$BankDataModelCopyWithImpl<$Res>
           countryCode == freezed ? _value.countryCode : countryCode as String,
       countryName:
           countryName == freezed ? _value.countryName : countryName as String,
-      updatedAt: updatedAt == freezed ? _value.updatedAt : updatedAt as String,
-      deletedAt: deletedAt == freezed ? _value.deletedAt : deletedAt as String,
+      updatedAt:
+          updatedAt == freezed ? _value.updatedAt : updatedAt as DateTime,
+      deletedAt:
+          deletedAt == freezed ? _value.deletedAt : deletedAt as DateTime,
     ));
   }
 }
@@ -282,12 +286,12 @@ class _$_BankDataModel extends _BankDataModel {
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  final String updatedAt;
+  final DateTime updatedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  final String deletedAt;
+  final DateTime deletedAt;
 
   @override
   String toString() {
@@ -361,11 +365,11 @@ abstract class _BankDataModel extends BankDataModel {
       @nullable
       @JsonKey(includeIfNull: false, name: 'updated_at')
       @TimestampConverter()
-          String updatedAt,
+          DateTime updatedAt,
       @nullable
       @JsonKey(includeIfNull: false, name: 'deleted_at')
       @TimestampConverter()
-          String deletedAt}) = _$_BankDataModel;
+          DateTime deletedAt}) = _$_BankDataModel;
 
   factory _BankDataModel.fromJson(Map<String, dynamic> json) =
       _$_BankDataModel.fromJson;
@@ -394,12 +398,12 @@ abstract class _BankDataModel extends BankDataModel {
   @nullable
   @JsonKey(includeIfNull: false, name: 'updated_at')
   @TimestampConverter()
-  String get updatedAt;
+  DateTime get updatedAt;
   @override
   @nullable
   @JsonKey(includeIfNull: false, name: 'deleted_at')
   @TimestampConverter()
-  String get deletedAt;
+  DateTime get deletedAt;
   @override
   @JsonKey(ignore: true)
   _$BankDataModelCopyWith<_BankDataModel> get copyWith;

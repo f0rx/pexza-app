@@ -24,6 +24,7 @@ class _$LandlordWithdrawalStateTearOff {
       @nullable LandlordWallet landlordWallet,
       KtList<Bank> banks = const KtList.empty(),
       KtList<BankAccountDetail> bankAccounts = const KtList.empty(),
+      KtList<WithdrawalHistory> histories = const KtList.empty(),
       Option<Either<Failure, Response>> response = const None()}) {
     return _LandlordWithdrawalState(
       isLoading: isLoading,
@@ -35,6 +36,7 @@ class _$LandlordWithdrawalStateTearOff {
       landlordWallet: landlordWallet,
       banks: banks,
       bankAccounts: bankAccounts,
+      histories: histories,
       response: response,
     );
   }
@@ -57,6 +59,7 @@ mixin _$LandlordWithdrawalState {
   LandlordWallet get landlordWallet;
   KtList<Bank> get banks;
   KtList<BankAccountDetail> get bankAccounts;
+  KtList<WithdrawalHistory> get histories;
   Option<Either<Failure, Response>> get response;
 
   @JsonKey(ignore: true)
@@ -78,6 +81,7 @@ abstract class $LandlordWithdrawalStateCopyWith<$Res> {
       @nullable LandlordWallet landlordWallet,
       KtList<Bank> banks,
       KtList<BankAccountDetail> bankAccounts,
+      KtList<WithdrawalHistory> histories,
       Option<Either<Failure, Response>> response});
 
   $BankAccountDetailCopyWith<$Res> get accountDetail;
@@ -104,6 +108,7 @@ class _$LandlordWithdrawalStateCopyWithImpl<$Res>
     Object landlordWallet = freezed,
     Object banks = freezed,
     Object bankAccounts = freezed,
+    Object histories = freezed,
     Object response = freezed,
   }) {
     return _then(_value.copyWith(
@@ -125,6 +130,9 @@ class _$LandlordWithdrawalStateCopyWithImpl<$Res>
       bankAccounts: bankAccounts == freezed
           ? _value.bankAccounts
           : bankAccounts as KtList<BankAccountDetail>,
+      histories: histories == freezed
+          ? _value.histories
+          : histories as KtList<WithdrawalHistory>,
       response: response == freezed
           ? _value.response
           : response as Option<Either<Failure, Response>>,
@@ -169,6 +177,7 @@ abstract class _$LandlordWithdrawalStateCopyWith<$Res>
       @nullable LandlordWallet landlordWallet,
       KtList<Bank> banks,
       KtList<BankAccountDetail> bankAccounts,
+      KtList<WithdrawalHistory> histories,
       Option<Either<Failure, Response>> response});
 
   @override
@@ -200,6 +209,7 @@ class __$LandlordWithdrawalStateCopyWithImpl<$Res>
     Object landlordWallet = freezed,
     Object banks = freezed,
     Object bankAccounts = freezed,
+    Object histories = freezed,
     Object response = freezed,
   }) {
     return _then(_LandlordWithdrawalState(
@@ -221,6 +231,9 @@ class __$LandlordWithdrawalStateCopyWithImpl<$Res>
       bankAccounts: bankAccounts == freezed
           ? _value.bankAccounts
           : bankAccounts as KtList<BankAccountDetail>,
+      histories: histories == freezed
+          ? _value.histories
+          : histories as KtList<WithdrawalHistory>,
       response: response == freezed
           ? _value.response
           : response as Option<Either<Failure, Response>>,
@@ -240,6 +253,7 @@ class _$_LandlordWithdrawalState implements _LandlordWithdrawalState {
       @nullable this.landlordWallet,
       this.banks = const KtList.empty(),
       this.bankAccounts = const KtList.empty(),
+      this.histories = const KtList.empty(),
       this.response = const None()})
       : assert(isLoading != null),
         assert(verified != null),
@@ -248,6 +262,7 @@ class _$_LandlordWithdrawalState implements _LandlordWithdrawalState {
         assert(amountController != null),
         assert(banks != null),
         assert(bankAccounts != null),
+        assert(histories != null),
         assert(response != null);
 
   @JsonKey(defaultValue: false)
@@ -275,13 +290,16 @@ class _$_LandlordWithdrawalState implements _LandlordWithdrawalState {
   @JsonKey(defaultValue: const KtList.empty())
   @override
   final KtList<BankAccountDetail> bankAccounts;
+  @JsonKey(defaultValue: const KtList.empty())
+  @override
+  final KtList<WithdrawalHistory> histories;
   @JsonKey(defaultValue: const None())
   @override
   final Option<Either<Failure, Response>> response;
 
   @override
   String toString() {
-    return 'LandlordWithdrawalState(isLoading: $isLoading, verified: $verified, validate: $validate, accountDetail: $accountDetail, amount: $amount, amountController: $amountController, landlordWallet: $landlordWallet, banks: $banks, bankAccounts: $bankAccounts, response: $response)';
+    return 'LandlordWithdrawalState(isLoading: $isLoading, verified: $verified, validate: $validate, accountDetail: $accountDetail, amount: $amount, amountController: $amountController, landlordWallet: $landlordWallet, banks: $banks, bankAccounts: $bankAccounts, histories: $histories, response: $response)';
   }
 
   @override
@@ -313,6 +331,9 @@ class _$_LandlordWithdrawalState implements _LandlordWithdrawalState {
             (identical(other.bankAccounts, bankAccounts) ||
                 const DeepCollectionEquality()
                     .equals(other.bankAccounts, bankAccounts)) &&
+            (identical(other.histories, histories) ||
+                const DeepCollectionEquality()
+                    .equals(other.histories, histories)) &&
             (identical(other.response, response) ||
                 const DeepCollectionEquality()
                     .equals(other.response, response)));
@@ -330,6 +351,7 @@ class _$_LandlordWithdrawalState implements _LandlordWithdrawalState {
       const DeepCollectionEquality().hash(landlordWallet) ^
       const DeepCollectionEquality().hash(banks) ^
       const DeepCollectionEquality().hash(bankAccounts) ^
+      const DeepCollectionEquality().hash(histories) ^
       const DeepCollectionEquality().hash(response);
 
   @JsonKey(ignore: true)
@@ -350,6 +372,7 @@ abstract class _LandlordWithdrawalState implements LandlordWithdrawalState {
       @nullable LandlordWallet landlordWallet,
       KtList<Bank> banks,
       KtList<BankAccountDetail> bankAccounts,
+      KtList<WithdrawalHistory> histories,
       Option<Either<Failure, Response>> response}) = _$_LandlordWithdrawalState;
 
   @override
@@ -372,6 +395,8 @@ abstract class _LandlordWithdrawalState implements LandlordWithdrawalState {
   KtList<Bank> get banks;
   @override
   KtList<BankAccountDetail> get bankAccounts;
+  @override
+  KtList<WithdrawalHistory> get histories;
   @override
   Option<Either<Failure, Response>> get response;
   @override

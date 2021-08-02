@@ -13,8 +13,10 @@ _$_BankDataModel _$_$_BankDataModelFromJson(Map<String, dynamic> json) {
     code: json['code'] as String ?? '',
     countryCode: json['country'] as String ?? '',
     countryName: json['country_full_name'] as String ?? '',
-    updatedAt: json['updated_at'] as String,
-    deletedAt: json['deleted_at'] as String,
+    updatedAt:
+        const TimestampConverter().fromJson(json['updated_at'] as String),
+    deletedAt:
+        const TimestampConverter().fromJson(json['deleted_at'] as String),
   );
 }
 
@@ -32,7 +34,9 @@ Map<String, dynamic> _$_$_BankDataModelToJson(_$_BankDataModel instance) {
   writeNotNull('code', instance.code);
   writeNotNull('country', instance.countryCode);
   writeNotNull('country_full_name', instance.countryName);
-  writeNotNull('updated_at', instance.updatedAt);
-  writeNotNull('deleted_at', instance.deletedAt);
+  writeNotNull(
+      'updated_at', const TimestampConverter().toJson(instance.updatedAt));
+  writeNotNull(
+      'deleted_at', const TimestampConverter().toJson(instance.deletedAt));
   return val;
 }

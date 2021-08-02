@@ -1,0 +1,44 @@
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "user_id": "3",
+            "amount": "4468.62",
+            "base_amount": "4381",
+            "charges": "87.62",
+            "status": "confirmed",
+            "payable_id": "1",
+            "reference": "8e914004-ef4e-4f76-979e-e2ab9dd6f6bb",
+            "created_at": "2021-07-30T16:10:06.000000Z",
+            "updated_at": "2021-07-30T16:10:06.000000Z"
+        }
+    ],
+    "first_page_url": "https:\/\/pexzaapp.com\/api\/landlord\/withdraw\/history?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "https:\/\/pexzaapp.com\/api\/landlord\/withdraw\/history?page=1",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Previous",
+            "active": false
+        },
+        {
+            "url": "https:\/\/pexzaapp.com\/api\/landlord\/withdraw\/history?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": null,
+            "label": "Next &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": null,
+    "path": "https:\/\/pexzaapp.com\/api\/landlord\/withdraw\/history",
+    "per_page": 15,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}

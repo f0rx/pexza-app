@@ -6,12 +6,12 @@ import 'package:pexza/features/home/landlord/presentation/widgets/property_listi
 import 'package:pexza/utils/utils.dart';
 import 'package:pexza/widgets/widgets.dart';
 
-class LandlordProperties extends StatelessWidget {
+class LandlordPropertiesWidget extends StatelessWidget {
   final Widget appBar;
   final Widget fab;
   final VoidCallback addPropertyOnPressed;
 
-  LandlordProperties({
+  LandlordPropertiesWidget({
     Key key,
     this.appBar,
     this.addPropertyOnPressed,

@@ -47,7 +47,7 @@ class LandlordHomeScreen extends StatelessWidget with AutoRouteWrapper {
         visible: !c.watch<LandlordPropertyCubit>().state.isLoading &&
             c.watch<LandlordPropertyCubit>().state.properties.isEmpty(),
         //////// Replace with Properties screen if NOT EMPTY ///////
-        replacement: LandlordProperties(
+        replacement: LandlordPropertiesWidget(
           appBar: HomeAppBar(onPressed: () => navigator.pushAccountScreen()),
           addPropertyOnPressed: () async {
             final shouldRefresh =

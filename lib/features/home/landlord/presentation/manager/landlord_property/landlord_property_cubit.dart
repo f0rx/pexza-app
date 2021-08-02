@@ -100,6 +100,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
     toggleLoading();
 
     try {
+      await checkInternetAndConnectivity();
+
       final props = await _repository.all();
 
       emit(state.copyWith(
@@ -298,6 +300,8 @@ class LandlordPropertyCubit extends Cubit<LandlordPropertyState> {
 
     try {
       if (state.dtoList.meta.currentPage != state.dtoList.meta.lastPage) {
+        await checkInternetAndConnectivity(true);
+
         final newProps = await _repository.paginate(
           state.dtoList.meta.currentPage + 1,
         );

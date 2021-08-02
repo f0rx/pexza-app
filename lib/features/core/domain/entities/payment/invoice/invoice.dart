@@ -21,7 +21,13 @@ abstract class Invoice implements _$Invoice {
     @nullable EmailAddress email,
 
     /// Amount to charge for invoice
-    @nullable AmountField amount,
+    @nullable AmountField<num> amount,
+
+    /// The actual amount paid for this invoice
+    @nullable AmountField<int> baseAmount,
+
+    /// Charges for this invoice
+    @nullable BasicTextField<double> charges,
 
     /// Assignment duration
     @nullable UniqueId<int> duration,

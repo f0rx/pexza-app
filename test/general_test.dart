@@ -5,6 +5,7 @@ import 'package:pexza/features/core/core.dart';
 import 'package:pexza/features/home/landlord/data/models/export.dart';
 import 'package:pexza/features/home/landlord/domain/failure/landlord__failure.dart';
 import 'package:pexza/features/home/tenant/data/data.dart';
+import 'package:kt_dart/kt.dart' hide nullable;
 import 'package:pexza/features/home/tenant/data/repositories/assignment/tenant_assignment_repository.dart';
 import 'package:pexza/features/home/tenant/domain/entities/entities.dart';
 import 'package:pexza/features/home/tenant/presentation/managers/index.dart';
@@ -100,8 +101,8 @@ void main() {
     ));
 
     // Logger().wtf(listDTO.cards[0].toString());
-    // Logger().wtf(storeDTO.domain);
-    // Logger().wtf(verifyDTO.domain.merge(storeDTO.domain));
+    Logger().wtf(storeDTO.domain);
+    Logger().wtf(verifyDTO.domain.merge(storeDTO.domain));
     Logger().wtf(dto.toJson());
 
     // Logger().wtf(assignment.domain()?.apartment);
@@ -123,5 +124,20 @@ void main() {
     Logger().w(_verifyResult.domain);
     Logger().i(_storeResult.bankAccount.domain);
     Logger().wtf(_accountResult.domain);
+  });
+
+  test('test landlord property rent history model', () {
+    String rentHistoryData = fixture('landlord_prop_rent_history.json');
+    String withrawalHistoryListData =
+        fixture('withdrawal_history_list_dto.json');
+
+    final _rentHistoryListRes =
+        PropertyRentHistoryListDTO.fromJson(jsonDecode(rentHistoryData));
+
+    final _withdrawalHistoryListRes =
+        WithdrawalHistoryDTO.fromJson(jsonDecode(withrawalHistoryListData));
+
+    Logger().w(_rentHistoryListRes.domain.firstOrNull()?.recentPayment);
+    Logger().i(_withdrawalHistoryListRes.domain);
   });
 }

@@ -30,11 +30,15 @@ _$_ApartmentMergerData _$_$_ApartmentMergerDataFromJson(
         ? null
         : LandlordApartmentData.fromJson(
             json['apartment'] as Map<String, dynamic>),
-    expireAt: json['expire_at'] as String,
-    renewedAt: json['renewed_at'] as String,
-    createdAt: json['created_at'] as String,
-    updatedAt: json['updated_at'] as String,
-    deletedAt: json['deleted_at'] as String,
+    expireAt: const TimestampConverter().fromJson(json['expire_at'] as String),
+    renewedAt:
+        const TimestampConverter().fromJson(json['renewed_at'] as String),
+    createdAt:
+        const TimestampConverter().fromJson(json['created_at'] as String),
+    updatedAt:
+        const TimestampConverter().fromJson(json['updated_at'] as String),
+    deletedAt:
+        const TimestampConverter().fromJson(json['deleted_at'] as String),
   );
 }
 
@@ -62,10 +66,15 @@ Map<String, dynamic> _$_$_ApartmentMergerDataToJson(
   writeNotNull('tenant', instance.tenant?.toJson());
   writeNotNull('landlord', instance.landlord?.toJson());
   writeNotNull('apartment', instance.apartment?.toJson());
-  writeNotNull('expire_at', instance.expireAt);
-  writeNotNull('renewed_at', instance.renewedAt);
-  writeNotNull('created_at', instance.createdAt);
-  writeNotNull('updated_at', instance.updatedAt);
-  writeNotNull('deleted_at', instance.deletedAt);
+  writeNotNull(
+      'expire_at', const TimestampConverter().toJson(instance.expireAt));
+  writeNotNull(
+      'renewed_at', const TimestampConverter().toJson(instance.renewedAt));
+  writeNotNull(
+      'created_at', const TimestampConverter().toJson(instance.createdAt));
+  writeNotNull(
+      'updated_at', const TimestampConverter().toJson(instance.updatedAt));
+  writeNotNull(
+      'deleted_at', const TimestampConverter().toJson(instance.deletedAt));
   return val;
 }

@@ -15,6 +15,7 @@ abstract class LandlordWithdrawalState with _$LandlordWithdrawalState {
     @nullable LandlordWallet landlordWallet,
     @Default(KtList.empty()) KtList<Bank> banks,
     @Default(KtList.empty()) KtList<BankAccountDetail> bankAccounts,
+    @Default(KtList.empty()) KtList<WithdrawalHistory> histories,
     @Default(const None()) Option<Either<Failure, Response>> response,
   }) = _LandlordWithdrawalState;
 

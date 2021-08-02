@@ -75,7 +75,7 @@ class CardWidget extends StatelessWidget {
                   //
                   Flexible(
                     child: SizedBox(
-                      width: App.shortest * 0.3,
+                      width: App.shortest * 0.33,
                       child: TextButton(
                         onPressed: () =>
                             navigator.pushLandlordBanksListingScreen(),
@@ -87,7 +87,7 @@ class CardWidget extends StatelessWidget {
                           'Withdraw',
                           style: Theme.of(context).textTheme.button.copyWith(
                                 color: AppColors.accentColor,
-                                fontSize: 15.5.sp,
+                                fontSize: 17.5.sp,
                               ),
                         ),
                       ),

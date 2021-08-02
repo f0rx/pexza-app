@@ -20,9 +20,15 @@ abstract class InvoiceDTO implements _$InvoiceDTO {
     @nullable @JsonKey(includeIfNull: false) PaymentMetaDTO meta,
     @nullable
     @JsonKey(includeIfNull: false, name: 'assignment_id')
+    @IntegerSerializer()
         int assignmentId,
-    @nullable @JsonKey(includeIfNull: false) int amount,
-    @nullable @JsonKey(includeIfNull: false) int duration,
+    @nullable @JsonKey(includeIfNull: false) @NumSerializer() num amount,
+    @nullable
+    @JsonKey(includeIfNull: false, name: 'base_amount')
+    @IntegerSerializer()
+        int baseAmount,
+    @nullable @JsonKey(includeIfNull: false) @DoubleSerializer() double charges,
+    @nullable @JsonKey(includeIfNull: false) @IntegerSerializer() int duration,
     @nullable @JsonKey(includeIfNull: false, defaultValue: '') String status,
     @nullable
     @JsonKey(includeIfNull: false, defaultValue: '', name: 'invoice_no')
@@ -56,6 +62,8 @@ abstract class InvoiceDTO implements _$InvoiceDTO {
         invoiceStatus: !status.isNull ? InvoiceStatus.valueOf(status) : null,
         meta: meta?.domain,
         amount: !amount.isNull ? AmountField(amount) : null,
+        baseAmount: !baseAmount.isNull ? AmountField(baseAmount) : null,
+        charges: !charges.isNull ? BasicTextField(charges) : null,
         assignmentId:
             !assignmentId.isNull ? UniqueId.fromExternal(assignmentId) : null,
         duration: !duration.isNull ? UniqueId.fromExternal(duration) : null,

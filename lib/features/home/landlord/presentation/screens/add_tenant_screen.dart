@@ -162,6 +162,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
+                          style: TextStyle(fontSize: 20.sp),
                         ),
                       ),
                     )
@@ -200,6 +201,7 @@ class LandlordAddTenantScreen extends StatelessWidget with AutoRouteWrapper {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           softWrap: true,
+                          style: TextStyle(fontSize: 20.sp),
                         ),
                       ),
                     )
