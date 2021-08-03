@@ -8,4 +8,4 @@ flutter_icons:
   # adaptive_icon_foreground: "#ffffff"
   image_path: "assets/images/logo/3.0x/logo.png"
   ios: true
-  remove_alpha_ios: true
+  remove_alpha_ios: false
