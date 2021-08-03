@@ -187,6 +187,7 @@ dev_dependencies:
   bloc_test: any
   logger: ^0.9.4
   flutter_launcher_icons: ^0.8.1
+  flutter_native_splash: ^0.3.2
   # Code Generators
   build_runner: ^1.10.11
   freezed: ^0.12.6
